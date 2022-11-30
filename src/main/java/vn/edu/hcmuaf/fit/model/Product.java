@@ -1,20 +1,35 @@
 package vn.edu.hcmuaf.fit.model;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class Product {
     String id;
     String name;
-    String img;
+    String maLB;
+    String kichThuoc;
+    String khoiLuong;
+    String moTa;
+    String noiDung;
+    List<String> listImg;
     int price;
 
     public Product() {
     }
 
-    public Product(String id, String name, String img, int price) {
+    public Product(String id, String name,String maLB,String kichThuoc, String khoiLuong, String moTa, String noiDung, List<String> listImg, int price) {
         this.id = id;
         this.name = name;
-        this.img = img;
+        this.maLB = maLB;
+        this.kichThuoc=kichThuoc;
+        this.khoiLuong = khoiLuong;
+        this.moTa = moTa;
+        this.noiDung=noiDung;
+        this.listImg = listImg;
         this.price = price;
     }
+
 
 
 
@@ -34,12 +49,8 @@ public class Product {
         this.name = name;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
+    public List<String> getListImg() {
+        return listImg;
     }
 
     public int getPrice() {
@@ -48,5 +59,25 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getKhoiLuong() {
+        return khoiLuong;
+    }
+
+    public String getMaLB() {
+        return maLB;
+    }
+
+    public String getKichThuoc() {
+        return kichThuoc;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public String getNoiDung() {
+        return noiDung;
     }
 }
