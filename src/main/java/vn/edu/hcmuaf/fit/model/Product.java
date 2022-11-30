@@ -7,7 +7,7 @@ import java.util.List;
 public class Product {
     String id;
     String name;
-    String maLB;
+    String loaiBanh;
     String kichThuoc;
     String khoiLuong;
     String moTa;
@@ -18,10 +18,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(String id, String name,String maLB,String kichThuoc, String khoiLuong, String moTa, String noiDung, List<String> listImg, int price) {
+    public Product(String id, String name,String loaiBanh,String kichThuoc, String khoiLuong, String moTa, String noiDung, List<String> listImg, int price) {
         this.id = id;
         this.name = name;
-        this.maLB = maLB;
+        this.loaiBanh = loaiBanh;
         this.kichThuoc=kichThuoc;
         this.khoiLuong = khoiLuong;
         this.moTa = moTa;
@@ -65,8 +65,8 @@ public class Product {
         return khoiLuong;
     }
 
-    public String getMaLB() {
-        return maLB;
+    public String getLoaiBanh() {
+        return loaiBanh;
     }
 
     public String getKichThuoc() {

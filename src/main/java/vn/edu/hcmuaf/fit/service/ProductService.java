@@ -9,17 +9,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ProductService {
-
-
-
-
     public static List<Product> getData(){
         List<Product> list= new LinkedList<Product>();
         Statement statement = DBConnect.getInstall().get();
         Statement stmt = DBConnect.getInstall().get();
         if(statement != null)
             try{
-                ResultSet rs =  statement.executeQuery("SELECT sanpham.MaSP ,sanpham.TenSP,sanpham.MaLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia  from sanpham");
+                ResultSet rs =  statement.executeQuery("SELECT sanpham.MaSP ,sanpham.TenSP,loaibanh.TenLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia  from sanpham, loaibanh where sanpham.MalB = loaibanh.MaLB");
                 while(rs.next()){
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                    List<String> listImg = new LinkedList<String>();
@@ -32,10 +28,7 @@ public class ProductService {
                    }
                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),listImg, rs.getInt(8));
                    list.add(p);
-
-
                 }
-
             }
             catch (SQLException e){
                 throw new RuntimeException(e);
@@ -52,8 +45,8 @@ public class ProductService {
 
         for(Product p: li){
             System.out.print(p.getName()+"\t");
-            System.out.println(p.getNoiDung());
-            System.out.println(p.getKhoiLuong());
+            System.out.println(p.getLoaiBanh());
+
         }
     }
 
