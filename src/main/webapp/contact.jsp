@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
+<html lang="xzz">
+<meta http-equiv="Content-Type" charset="UTF-8">
 
 <head>
     <meta charset="UTF-8">
@@ -56,7 +58,7 @@
             <li><a href="shop-product.jsp">Sản phẩm</a>
                 <ul class="header__menu__dropdown">
             <li><a href="shop-product.jsp">Sản phẩm</a></li>
-            <li><a href="./blog.html">Tin tức</a></li>
+            <li><a href="blog.jsp">Tin tức</a></li>
             <li class="active"><a href="./contact.html">Liên hệ</a></li>
         </ul>
         </ul>
@@ -124,7 +126,7 @@
                         <li><a href="shop-product.jsp">Sản phẩm</a>
                         
                         </li>
-                        <li><a href="./blog.html">Tin tức</a></li>
+                        <li><a href="blog.jsp">Tin tức</a></li>
                         <li class="active"><a href="./contact.html">Liên hệ</a></li>
                     </ul>
                 </nav>

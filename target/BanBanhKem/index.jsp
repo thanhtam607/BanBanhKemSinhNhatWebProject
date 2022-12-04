@@ -16,9 +16,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Roboto:wght@100;300;400;500;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <!-- ==================== -->
 
 
@@ -63,8 +61,8 @@
                 <li><a href="shop-product.jsp">Sản phẩm</a>
                    
                 </li>
-                <li><a href="./blog.html">Tin tức</a></li>
-                <li><a href="./contact.html">Liên hệ</a></li>
+                <li><a href="blog.jsp">Tin tức</a></li>
+                <li><a href="contact.jsp">Liên hệ</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -132,8 +130,8 @@
                             <li><a href="shop-product.jsp">Sản phẩm</a>
                              
                             </li>
-                            <li><a href="./blog.html">Tin tức</a></li>
-                            <li><a href="./contact.html">Liên hệ</a></li>
+                            <li><a href="blog.jsp">Tin tức</a></li>
+                            <li><a href="contact.jsp">Liên hệ</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -430,11 +428,11 @@
                                 <li><i class="fa fa-calendar-o"></i> 22-10-2022</li>
                                
                             </ul>
-                            <h5><a href="blog-details-1.html">Giải mã sức hút của bánh kem hiện đại</a></h5>
+                            <h5><a href="blog-details-1.jsp">Giải mã sức hút của bánh kem hiện đại</a></h5>
                             <p class="text-justify">Trong những bữa tiệc quan trọng bánh kem góp phần mang đến cho không
                                 khí thêm phần hoàn hảo. Sự xuất hiện của bánh kem hiện đại như một bước ngoặt mới...
                             </p>
-                            <a href="blog-details-1.html" class="blog__btn">Xem thêm <span class="arrow_right"></span>
+                            <a href="blog-details-1.jsp" class="blog__btn">Xem thêm <span class="arrow_right"></span>
                             </a>
                         </div>
                     </div>
@@ -449,11 +447,11 @@
                                 <li><i class="fa fa-calendar-o"></i> 22-10-2022</li>
                              
                             </ul>
-                            <h5><a href="blog-details-2.html">Tổng hợp cách bảo quản bánh kem cực đơn giản</a></h5>
+                            <h5><a href="blog-details-2.jsp">Tổng hợp cách bảo quản bánh kem cực đơn giản</a></h5>
                             <p class="text-justify">Các loại bánh kem khi không dùng hết hoặc chưa dùng đến bạn đều phải
                                 bảo quản đúng cách, để giúp bánh giữ nguyên hương vị. Cùng tìm hiểu cách bảo quản bánh
                                 kem cực đơn giản... </p>
-                            <a href="blog-details-2.html" class="blog__btn">Xem thêm <span class="arrow_right"></span>
+                            <a href="blog-details-2.jsp" class="blog__btn">Xem thêm <span class="arrow_right"></span>
                             </a>
                         </div>
                     </div>
@@ -468,11 +466,11 @@
                                 <li><i class="fa fa-calendar-o"></i>22-10-2022</li>
                                 
                             </ul>
-                            <h5><a href="blog-details-3.html">Chọn bánh kem cho những ngày kỷ niệm ý nghĩa</a></h5>
+                            <h5><a href="blog-details-3.jsp">Chọn bánh kem cho những ngày kỷ niệm ý nghĩa</a></h5>
                             <p class="text-justify">Ngày nay, bánh kem không chỉ xuất hiện vào duy nhất sinh nhật mà bất
                                 cứ dịp kỷ niệm nào cũng có thể sử dụng. Cùng tìm hiểu các dịp kỷ niệm ý nghĩa nên sử
                                 dụng bánh kem và cách chọn sao cho phù hợp nhất...</p>
-                            <a href="blog-details-3.html" class="blog__btn">Xem thêm <span class="arrow_right"></span>
+                            <a href="blog-details-3.jsp" class="blog__btn">Xem thêm <span class="arrow_right"></span>
                             </a>
                         </div>
                     </div>

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
+<html lang="xzz">
+<meta http-equiv="Content-Type" charset="UTF-8">
 
 <head>
   <meta charset="UTF-8">
@@ -56,8 +58,8 @@
       <li><a href="shop-product.jsp">Sản phẩm</a>
        
       </li>
-      <li><a href="./blog.html">Tin tức</a></li>
-      <li><a href="./contact.html">Liên hệ</a></li>
+      <li><a href="blog.jsp">Tin tức</a></li>
+      <li><a href="contact.jsp">Liên hệ</a></li>
     </ul>
   </nav>
   <div id="mobile-menu-wrap"></div>
@@ -123,8 +125,8 @@
             <li><a href="shop-product.jsp">Sản phẩm</a>
               
             </li>
-            <li><a href="./blog.html">Tin tức</a></li>
-            <li><a href="./contact.html">Liên hệ</a></li>
+            <li><a href="blog.jsp">Tin tức</a></li>
+            <li><a href="contact.jsp">Liên hệ</a></li>
           </ul>
         </nav>
       </div>
@@ -184,7 +186,7 @@
                       <h2>Chọn bánh kem cho những ngày kỷ niệm ý nghĩa</h2>
                       <div class="breadcrumb__option">
                           <a href="index.jsp">Trang chủ</a>
-                          <a href="./blog.html">Tin tức</a>
+                          <a href="blog.jsp">Tin tức</a>
                           <span>Chọn bánh kem cho những ngày kỷ niệm ý nghĩa</span>
                       </div>
                   </div>
@@ -209,15 +211,15 @@
                   <div class="blog__sidebar__item">
                     <h4>Danh mục</h4>
                     <ul>
-                      <li><a href="./blog.html">Tất cả</a></li>
-                      <li><a href="./blog.html">Đời sống(3)</a></li>
+                      <li><a href="blog.jsp">Tất cả</a></li>
+                      <li><a href="blog.jsp">Đời sống(3)</a></li>
                       <li><a href="./blog-details-3.html">Kỉ niệm(1)</a></li>
                     </ul>
                   </div>
                   <div class="blog__sidebar__item">
                     <h4>Tin mới nhất</h4>
                     <div class="blog__sidebar__recent">
-                      <a href="blog-details-1.html" class="blog__sidebar__recent__item">
+                      <a href="blog-details-1.jsp" class="blog__sidebar__recent__item">
                         <div class="blog__sidebar__recent__item__pic">
                           <img src="img/blog/sidebar/blog1.png" alt="">
                         </div>
@@ -226,7 +228,7 @@
                           <span>22-10-2022</span>
                         </div>
                       </a>
-                      <a href="blog-details-2.html" class="blog__sidebar__recent__item">
+                      <a href="blog-details-2.jsp" class="blog__sidebar__recent__item">
                         <div class="blog__sidebar__recent__item__pic">
                           <img src="img/blog/sidebar/blog2.jpg" alt="">
                         </div>
@@ -235,7 +237,7 @@
                           <span>22-10-2022</span>
                         </div>
                       </a>
-                      <a href="blog-details-3.html" class="blog__sidebar__recent__item">
+                      <a href="blog-details-3.jsp" class="blog__sidebar__recent__item">
                         <div class="blog__sidebar__recent__item__pic">
                           <img src="img/blog/sidebar/blog3.jpg" alt="">
                         </div>
@@ -249,11 +251,11 @@
                   <div class="blog__sidebar__item">
                     <h4>Chủ đề</h4>
                     <div class="blog__sidebar__item__tags">
-                      <a href="./blog.html">Bánh kem</a>
-                      <a href="./blog-details-1.html">Hiện đại</a>
-                      <a href="./blog-details-2.html">Bảo quản bánh</a>
+                      <a href="blog.jsp">Bánh kem</a>
+                      <a href="blog-details-1.jsp">Hiện đại</a>
+                      <a href="blog-details-2.jsp">Bảo quản bánh</a>
                       <a href="./blog-details-3.html">Chọn bánh</a>
-                      <a href="./blog-details-4.html">Ý nghĩa bánh</a>
+                      <a href="blog-details-4.jsp">Ý nghĩa bánh</a>
                     </div>
                   </div>
                 </div>
@@ -331,9 +333,9 @@
                       <li><i class="fa fa-calendar-o"></i> 4/5/2022</li>
                       <li><i class="fa fa-comment-o"></i> 5</li>
                     </ul>
-                    <h5><a href="blog-details-1.html">Giải mã sức hút của bánh kem hiện đại</a></h5>
+                    <h5><a href="blog-details-1.jsp">Giải mã sức hút của bánh kem hiện đại</a></h5>
                     <p class="text-justify">Trong những bữa tiệc quan trọng bánh kem góp phần mang đến cho không khí thêm phần hoàn hảo. Sự xuất hiện của bánh kem hiện đại như một bước ngoặt mới...  </p>
-                    <a href="blog-details-1.html" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
+                    <a href="blog-details-1.jsp" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                   </div>
                 </div>
               </div>
@@ -347,9 +349,9 @@
                       <li><i class="fa fa-calendar-o"></i> 31/7/2022</li>
                       <li><i class="fa fa-comment-o"></i> 6</li>
                     </ul>
-                    <h5><a href="blog-details-2.html">Tổng hợp cách bảo quản bánh kem cực đơn giản</a></h5>
+                    <h5><a href="blog-details-2.jsp">Tổng hợp cách bảo quản bánh kem cực đơn giản</a></h5>
                     <p class="text-justify">Các loại bánh kem khi không dùng hết hoặc chưa dùng đến bạn đều phải bảo quản đúng cách, để giúp bánh giữ nguyên hương vị. Cùng tìm hiểu cách bảo quản bánh kem cực đơn giản... </p>
-                    <a href="blog-details-2.html" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
+                    <a href="blog-details-2.jsp" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                   </div>
                 </div>
               </div>
@@ -363,9 +365,9 @@
                       <li><i class="fa fa-calendar-o"></i>12/10/2022</li>
                       <li><i class="fa fa-comment-o"></i> 4</li>
                     </ul>
-                    <h5><a href="blog-details-3.html">Chọn bánh kem cho những ngày kỷ niệm ý nghĩa</a></h5>
+                    <h5><a href="blog-details-3.jsp">Chọn bánh kem cho những ngày kỷ niệm ý nghĩa</a></h5>
                     <p class="text-justify">Ngày nay, bánh kem không chỉ xuất hiện vào duy nhất sinh nhật mà bất cứ dịp kỷ niệm nào cũng có thể sử dụng. Cùng tìm hiểu các dịp kỷ niệm ý nghĩa nên sử dụng bánh kem và cách chọn sao cho phù hợp nhất...</p>
-                    <a href="blog-details-3.html" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
+                    <a href="blog-details-3.jsp" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                   </div>
                 </div>
               </div>

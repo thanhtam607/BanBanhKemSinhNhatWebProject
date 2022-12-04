@@ -60,8 +60,8 @@
 
                     </ul> -->
                 </li>
-                <li><a href="./blog.html">Tin tức</a></li>
-                <li><a href="./contact.html">Liên hệ</a></li>
+                <li><a href="blog.jsp">Tin tức</a></li>
+                <li><a href="contact.jsp">Liên hệ</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -124,10 +124,10 @@
                         <ul>
                             <li><a href="index.jsp">Trang chủ</a></li>
                             <li><a href="./about.html">Giới thiệu</a></li>
-                            <li class="active"><a href="./shop-product.html">Sản phẩm</a>
+                            <li class="active"><a href="./shop-product.jsp">Sản phẩm</a>
                             </li>
-                            <li><a href="./blog.html">Tin tức</a></li>
-                            <li><a href="./contact.html">Liên hệ</a></li>
+                            <li><a href="blog.jsp">Tin tức</a></li>
+                            <li><a href="contact.jsp">Liên hệ</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -468,7 +468,7 @@
                                     <span class="icon_grid-2x2"></span>
                                     <!-- <span class="icon_ul"></span> -->
                                 </div>
-                            </div>
+                            </div>3
                         </div>
                     </div>
                     <div class="row">
