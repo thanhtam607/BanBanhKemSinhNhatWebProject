@@ -26,7 +26,6 @@ public class DBConnect {
         if (conn == null) return null;
 
         try {
-
             return conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException e) {
             return null;
