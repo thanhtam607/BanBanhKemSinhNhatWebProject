@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
+<html lang="xzz">
+<meta http-equiv="Content-Type" charset="UTF-8">
 
 <head>
     <meta charset="UTF-8">
@@ -41,7 +43,7 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
                 <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
         </div>
@@ -53,12 +55,12 @@
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li><a href="index.jsp">Trang chủ</a></li>
-                <li><a href="./about.html">Giới thiệu</a></li>
+                <li><a href="about.jsp">Giới thiệu</a></li>
                 <li><a href="shop-product.jsp">Sản phẩm</a>
                    
                 </li>
-                <li><a href="./blog.html">Tin tức</a></li>
-                <li><a href="./contact.html">Liên hệ</a></li>
+                <li><a href="blog.jsp">Tin tức</a></li>
+                <li><a href="contact.jsp">Liên hệ</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -120,18 +122,18 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="index.jsp">Trang chủ</a></li>
-                            <li><a href="./about.html">Giới thiệu</a></li>
+                            <li><a href="about.jsp">Giới thiệu</a></li>
                             <li><a href="shop-product.jsp">Sản phẩm</a>
                                 
-                            <li><a href="./blog.html">Tin tức</a></li>
-                            <li><a href="./contact.html">Liên hệ</a></li>
+                            <li><a href="blog.jsp">Tin tức</a></li>
+                            <li><a href="contact.jsp">Liên hệ</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-2">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
                             <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
                     </div>
@@ -307,7 +309,7 @@
                             <li>Tổng tiền <span>1,350,000 VND</span></li>
                             <li>Tổng thanh toán <span>1,350,000 VND</span></li>
                         </ul>
-                        <a href="./checkout.html" class="primary-btn">THANH TOÁN NGAY</a>
+                        <a href="checkout.jsp" class="primary-btn">THANH TOÁN NGAY</a>
                     </div>
                 </div>
             </div>
