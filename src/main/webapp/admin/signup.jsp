@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
+<html lang="xzz">
+<meta http-equiv="Content-Type" charset="UTF-8">
 
 <head>
     <meta charset="utf-8">
@@ -72,7 +74,7 @@
                            
                         </div>
                         <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Đăng ký</button>
-                        <p class="text-center mb-0">Bạn đã có tài khoản? <a href="./signin.html">Đăng nhập</a></p>
+                        <p class="text-center mb-0">Bạn đã có tài khoản? <a href="signin.jsp">Đăng nhập</a></p>
                     </div>
                 </div>
             </div>

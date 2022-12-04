@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
+<html lang="xzz">
+<meta http-equiv="Content-Type" charset="UTF-8">
 
 <head>
     <meta charset="UTF-8">
@@ -41,21 +43,21 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
            
         </div>
         <div class="humberger__menu__widget">
           
             <div class="header__top__right__auth">
-                <a href="./admin/signin.html"><i class="fa fa-user"></i> Đăng nhập</a>
+                <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li><a href="index.jsp">Trang chủ</a></li>
-                <li><a href="./about.html">Giới thiệu</a></li>
+                <li><a href="about.jsp">Giới thiệu</a></li>
                 <li><a href="shop-product.jsp">Sản phẩm</a>
                  
                 </li>
@@ -106,7 +108,7 @@
                             </div>
                             
                             <div class="header__top__right__auth">
-                                <a href="./admin/signin.html"><i class="fa fa-user"></i> Đăng nhập</a>
+                                <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
                             </div>
                         </div>
                     </div>
@@ -125,7 +127,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="index.jsp">Trang chủ</a></li>
-                            <li><a href="./about.html">Giới thiệu</a></li>
+                            <li><a href="about.jsp">Giới thiệu</a></li>
                             <li><a href="shop-product.jsp">Sản phẩm</a>
                                 
                             </li>

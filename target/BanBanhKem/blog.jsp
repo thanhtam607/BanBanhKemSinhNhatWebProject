@@ -4,7 +4,17 @@
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
 <meta http-equiv="Content-Type" charset="UTF-8">
+<<<<<<< HEAD
+<<<<<<<< HEAD:target/BanBanhKem/blog.jsp
 
+========
+>>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog.jsp
+=======
+<<<<<<<< HEAD:src/main/webapp/blog.jsp
+
+========
+>>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog.jsp
+>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b
 
 <head>
     <meta charset="UTF-8">
@@ -45,23 +55,35 @@
     </div>
     <div class="humberger__menu__cart">
         <ul>
-            <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
-            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+            <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="./admin/signin.html"><i class="fa fa-user"></i> Đăng nhập</a>
+            <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
             <li  ><a href="index.jsp">Trang chủ</a></li>
-            <li><a href="./about.html">Giới thiệu</a></li>
+            <li><a href="about.jsp">Giới thiệu</a></li>
             <li><a href="shop-product.jsp">Sản phẩm</a>
                
             </li>
+<<<<<<< HEAD
+<<<<<<<< HEAD:target/BanBanhKem/blog.jsp
             <li class="active"><a href="./blog.jsp">Tin tức</a></li>
+========
+            <li class="active"><a href="./blog.html">Tin tức</a></li>
+>>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog.jsp
+=======
+<<<<<<<< HEAD:src/main/webapp/blog.jsp
+            <li class="active"><a href="./blog.jsp">Tin tức</a></li>
+========
+            <li class="active"><a href="./blog.html">Tin tức</a></li>
+>>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog.jsp
+>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b
             <li><a href="contact.jsp">Liên hệ</a></li>
         </ul>
     </nav>
@@ -106,7 +128,7 @@
             <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                         </div>
                         <div class="header__top__right__auth">
-                            <a href="./admin/signin.html"><i class="fa fa-user"></i>Đăng nhập</a>
+                            <a href="admin/signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
                         </div>
                     </div>
                 </div>
@@ -124,7 +146,7 @@
                 <nav class="header__menu">
                     <ul>
                         <li><a href="index.jsp">Trang chủ</a></li>
-                        <li><a href="./about.html">Giới thiệu</a></li>
+                        <li><a href="about.jsp">Giới thiệu</a></li>
                         <li><a href="shop-product.jsp">Sản phẩm</a>
                             
                         </li>
@@ -136,8 +158,8 @@
             <div class="col-lg-2">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -342,6 +364,10 @@
                                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
                                 <div class="footer__copyright__payment"></div>
                             </div>
+<<<<<<< HEAD
+=======
+                        </div>
+>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b
                     </div>
                 </footer>
     <!-- Footer Section End -->

@@ -40,7 +40,6 @@ public class ProductService {
     }
 
     public static void main(String[] args) {
-//        ProductService productService = new ProductService();
         List<Product> li = ProductService.getData();
 
         for(Product p: li){

@@ -40,23 +40,23 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
         </div>
         <div class="humberger__menu__widget">
 
             <div class="header__top__right__auth">
-                <a href="./admin/signin.html"><i class="fa fa-user"></i> Đăng Nhập </a>
+                <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng Nhập </a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li><a href="index.jsp">Trang chủ</a></li>
-                <li><a href="./about.html">Giới thiệu</a></li>
+                <li><a href="about.jsp">Giới thiệu</a></li>
                 <li class="active"><a href="./shop-product.jsp">Sản phẩm</a>
                     <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Chi tiết sản phẩm</a></li>
+                        <li><a href="shop-details.jsp">Chi tiết sản phẩm</a></li>
 
                     </ul> -->
                 </li>
@@ -105,7 +105,7 @@
                                 <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="./admin/signin.html"><i class="fa fa-user"></i>Đăng nhập</a>
+                                <a href="admin/signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
                             </div>
                         </div>
                     </div>
@@ -123,8 +123,13 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="index.jsp">Trang chủ</a></li>
+<<<<<<< HEAD
                             <li><a href="./about.html">Giới thiệu</a></li>
                             <li class="active"><a href="./shop-product.jsp">Sản phẩm</a>
+=======
+                            <li><a href="about.jsp">Giới thiệu</a></li>
+                            <li class="active"><a href="./shop-product.html">Sản phẩm</a>
+>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b
                             </li>
                             <li><a href="blog.jsp">Tin tức</a></li>
                             <li><a href="contact.jsp">Liên hệ</a></li>
@@ -134,8 +139,8 @@
                 <div class="col-lg-2">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -348,7 +353,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>Bánh hoa</span>
-                                            <h5><a href="./shop-details.html">Bánh cánh đồng hoa</a></h5>
+                                            <h5><a href="shop-details.jsp">Bánh cánh đồng hoa</a></h5>
                                             <div class="product__item__price">300,000 VND <span>360,000 VND</span></div>
                                         </div>
                                     </div>
@@ -366,7 +371,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>Bánh maccaron và socola</span>
-                                            <h5><a href="./shop-details.html">Bánh maccaron hoa hồng</a></h5>
+                                            <h5><a href="shop-details.jsp">Bánh maccaron hoa hồng</a></h5>
                                             <div class="product__item__price">300,000 VND <span>360,000 VND</span></div>
                                         </div>
                                     </div>
@@ -384,7 +389,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>Bánh trái cây</span>
-                                             <h5><a href="./shop-details.html">Bánh kem dứa caramel</a></h5>
+                                             <h5><a href="shop-details.jsp">Bánh kem dứa caramel</a></h5>
                                             <div class="product__item__price">300,000 VND <span>360,000 VND</span></div>
                                         </div>
                                     </div>
@@ -402,7 +407,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>Bánh hoa</span>
-                                             <h5><a href="./shop-details.html">Bánh hoa xanh trang nhã</a></h5>
+                                             <h5><a href="shop-details.jsp">Bánh hoa xanh trang nhã</a></h5>
                                             <div class="product__item__price">300,000 VND <span>360,000 VND</span></div>
                                         </div>
                                     </div>
@@ -420,7 +425,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>Bánh trái cây</span>
-                                             <h5><a href="./shop-details.html">Bánh oreo việt quất</a></h5>
+                                             <h5><a href="shop-details.jsp">Bánh oreo việt quất</a></h5>
                                             <div class="product__item__price">300,000 VND <span>360,000 VND</span></div>
                                         </div>
                                     </div>
@@ -438,7 +443,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>Bánh trái cây</span>
-                                             <h5><a href="./shop-details.html">Bánh kem trái cây hạnh nhân</a></h5>
+                                             <h5><a href="shop-details.jsp">Bánh kem trái cây hạnh nhân</a></h5>
                                             <div class="product__item__price"> 300,000 VND <span>360,000 VND</span></div>
                                         </div>
                                     </div>
@@ -484,7 +489,7 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="./shop-details.html"><%= p.getName()%></a></h6>
+                                    <h6><a href="shop-details.jsp"><%= p.getName()%></a></h6>
                                     <h5><%= p.getPrice()%> VND</h5>
                                 </div>
                             </div>

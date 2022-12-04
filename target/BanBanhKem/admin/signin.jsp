@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
+<html lang="xzz">
+<meta http-equiv="Content-Type" charset="UTF-8">
 
 <head>
     <meta charset="utf-8">
@@ -32,6 +34,7 @@
 </head>
 
 <body>
+
     <div class="container-fluid position-relative d-flex p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-pink position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -41,24 +44,25 @@
         </div>
         <!-- Spinner End -->
 
-
+        <% String error = (String) request.getAttribute("Error");%>
+        <% String uname = request.getParameter("username"); %>
         <!-- Sign In Start -->
         <div class="container-fluid bg_signin_signup">
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                    <div class="bg-pink rounded p-4 p-sm-5 my-4 mx-3">
+                    <form action="/BanBanhKemSinhNhatWebProject/doSignin" method="post" class="bg-pink rounded p-4 p-sm-5 my-4 mx-3">
                         <div>
                             <h2 class="title-sg">Đăng nhập</h2>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <input type="email" class="form-control" name="username" id="floatingInput" value="<%= uname != null ? uname:""%>" placeholder="name@example.com">
                             <label for="floatingInput">Địa chỉ email</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="password" class="form-control pass" id="floatingPassword" placeholder="Password">
+                            <input type="password" class="form-control pass" name="pass" id="floatingPassword" placeholder="Password">
                             <label for="floatingPassword">Mật khẩu</label>
                         </div>
-                        <span id="insertTextHere"></span>
+                        <span id="insertTextHere"><%= error != null ? error:""%></span>
                         <div class="d-flex align-items-center justify-content-between mb-4 mt-4">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input toggle" id="exampleCheck1">
@@ -81,8 +85,8 @@
                             <a href="">Quên mật khẩu?</a>
                         </div>
                         <button type="submit" id="login-button" class="btn btn-primary py-3 w-100 mb-4">Đăng nhập</button>
-                        <p class="text-center mb-0">Bạn chưa có tài khoản? <a href="./signup.html">Đăng ký ngay</a></p>
-                    </div>
+                        <p class="text-center mb-0">Bạn chưa có tài khoản? <a href="signup.jsp">Đăng ký ngay</a></p>
+                    </form>
                 </div>
             </div>
         </div>
@@ -106,37 +110,37 @@
     <script src="./js/main.js"></script>
 
     <!-- LOGIN ADMIN -->
-    <script>
-        document.getElementById('login-button').onclick = function(){
-        var myEmail = document.getElementById("floatingInput").value;
-        var myPass = document.getElementById("floatingPassword").value;
+<%--    <script>--%>
+<%--        document.getElementById('login-button').onclick = function(){--%>
+<%--        var myEmail = document.getElementById("floatingInput").value;--%>
+<%--        var myPass = document.getElementById("floatingPassword").value;--%>
 
-        var listEmail = ["nhom27@gmail.com", "nhom27ltw@gmail.com"];
-        var listPass = ["123", "1234"];
-        var checkU = false;
-        var indexU = 0;
-        for (var i = 0; i < listEmail.length; i++) {
-            if (myEmail == listEmail[i]) {
-                checkU = true;
-                indexU = i;
-                break;
-            } else {
-                checkU = false;
-            }
-        }
-        if (checkU === true) {
-            if (myPass == listPass[indexU]) {
-                window.location.href = "./admin-web.html";
-                return false;
-            } else {
-                document.getElementById("insertTextHere").textContent="*Sai Password";
-            }
-        } else {
-            document.getElementById("insertTextHere").textContent="*Username không hợp lệ hoặc sai";
-        }
-        
-        }
-    </script>
+<%--        var listEmail = ["nhom27@gmail.com", "nhom27ltw@gmail.com"];--%>
+<%--        var listPass = ["123", "1234"];--%>
+<%--        var checkU = false;--%>
+<%--        var indexU = 0;--%>
+<%--        for (var i = 0; i < listEmail.length; i++) {--%>
+<%--            if (myEmail == listEmail[i]) {--%>
+<%--                checkU = true;--%>
+<%--                indexU = i;--%>
+<%--                break;--%>
+<%--            } else {--%>
+<%--                checkU = false;--%>
+<%--            }--%>
+<%--        }--%>
+<%--        if (checkU === true) {--%>
+<%--            if (myPass == listPass[indexU]) {--%>
+<%--                window.location.href = "./admin-web.html";--%>
+<%--                return false;--%>
+<%--            } else {--%>
+<%--                document.getElementById("insertTextHere").textContent="*Sai Password";--%>
+<%--            }--%>
+<%--        } else {--%>
+<%--            document.getElementById("insertTextHere").textContent="*Username không hợp lệ hoặc sai";--%>
+<%--        }--%>
+<%--        --%>
+<%--        }--%>
+<%--    </script>--%>
 </body>
 
 </html>

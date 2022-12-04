@@ -45,20 +45,20 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__auth">
-                <a href="./admin/signin.html"><i class="fa fa-user"></i> Đăng nhập</a>
+                <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="./index.html">Trang chủ</a></li>
-                <li><a href="./about.html">Giới thiệu</a></li>
-                <li><a href="shop-product.jsp">Sản phẩm</a>
+                <li><a href="about.jsp">Giới thiệu</a></li>
+                <li><a href="./ListProduct">Sản phẩm</a>
                    
                 </li>
                 <li><a href="blog.jsp">Tin tức</a></li>
@@ -107,7 +107,7 @@
                                 <a href="https://www.instagram.com/maizecorn1542/" target="blank"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="./admin/signin.html"><i class="fa fa-user"></i>Đăng nhập</a>
+                                <a href="admin/signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
                             </div>
                         </div>
                     </div>
@@ -126,8 +126,8 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="./index.html">Trang chủ</a></li>
-                            <li><a href="./about.html">Giới thiệu</a></li>
-                            <li><a href="shop-product.jsp">Sản phẩm</a>
+                            <li><a href="about.jsp">Giới thiệu</a></li>
+                            <li><a href="./ListProduct">Sản phẩm</a>
                              
                             </li>
                             <li><a href="blog.jsp">Tin tức</a></li>
@@ -138,8 +138,8 @@
                 <div class="col-lg-2">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                                 <div class="p-3" style="max-width: 900px;">
                                     <h4 class="text-white text-uppercase mb-md-3 slogun_slide">Truyền thống & hiện đại</h4>
                                     <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide">Tận hưởng thế giới ngọt ngào của bạn.</h1>
-                                    <a href="shop-product.jsp" class="btn btn_pink py-md-3 px-md-5 mt-2">Đặt bánh ngay <i class="fa fa-hand-o-down"></i></a>
+                                    <a href="./ListProduct" class="btn btn_pink py-md-3 px-md-5 mt-2">Đặt bánh ngay <i class="fa fa-hand-o-down"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -200,7 +200,7 @@
                                 <div class="p-3" style="max-width: 900px;">
                                     <h4 class="text-white text-uppercase mb-md-3 slogun_slide">Truyền thống & hiện đại</h4>
                                     <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide">Không chỉ là bánh ngọt, đây là sự yêu thương.</h1>
-                                    <a href="shop-product.jsp" class="btn btn_pink py-md-3 px-md-5 mt-2">Đặt bánh ngay <i class="fa fa-hand-o-down"></i> </a>
+                                    <a href="./ListProduct" class="btn btn_pink py-md-3 px-md-5 mt-2">Đặt bánh ngay <i class="fa fa-hand-o-down"></i> </a>
                             </div>
                         </div>
                         </div>
@@ -233,7 +233,7 @@
                 <div class="categories__slider owl-carousel">
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/product/B006/banh1.jpg">
-                            <h5><a href="./shop-details.html">Bánh hoa hải đường ngũ sắc</a></h5>
+                            <h5><a href="shop-details.jsp">Bánh hoa hải đường ngũ sắc</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
@@ -248,12 +248,12 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/product/B068/banh1.jpg">
-                            <h5><a href="./shop-details.html">Bánh kem socola</a></h5>
+                            <h5><a href="shop-details.jsp">Bánh kem socola</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/product/B047/banh2.jpg">
-                            <h5><a href="./shop-details.html">Bánh hình con sâu</a></h5>
+                            <h5><a href="shop-details.jsp">Bánh hình con sâu</a></h5>
                         </div>
                     </div>
                 </div>
@@ -291,7 +291,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="./shop-details.html">Bánh sinh nhật</a></h6>
+                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
                             <h5>300,000 VND</h5>
                         </div>
                     </div>
@@ -306,7 +306,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="./shop-details.html">Bánh sinh nhật</a></h6>
+                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
                             <h5>300,000 VND</h5>
                         </div>
                     </div>
@@ -321,7 +321,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="./shop-details.html">Bánh sinh nhật</a></h6>
+                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
                             <h5>300,000 VND</h5>
                         </div>
                     </div>
@@ -336,7 +336,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="./shop-details.html">Bánh sinh nhật</a></h6>
+                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
                             <h5>300,000 VND</h5>
                         </div>
                     </div>
@@ -351,7 +351,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="./shop-details.html">Bánh sinh nhật</a></h6>
+                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
                             <h5>300,000 VND</h5>
                         </div>
                     </div>
@@ -366,7 +366,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="./shop-details.html">Bánh sinh nhật</a></h6>
+                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
                             <h5>300,000 VND</h5>
                         </div>
                     </div>
@@ -381,7 +381,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="./shop-details.html">Bánh sinh nhật</a></h6>
+                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
                             <h5>300,000 VND</h5>
                         </div>
                     </div>
@@ -396,12 +396,12 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="./shop-details.html">Bánh sinh nhật</a></h6>
+                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
                             <h5>300,000 VND</h5>
                         </div>
                     </div>
                 </div>
-                <a href="shop-product.jsp" type="button" class="btn btn_pink py-md-3 px-md-5 mt-2 btn-rm" >Xem tất cả</a>
+                <a href="./ListProduct" type="button" class="btn btn_pink py-md-3 px-md-5 mt-2 btn-rm" >Xem tất cả</a>
             </div>
         </div>
     </section>
