@@ -49,20 +49,18 @@
       <a href="./admin/signin.html"><i class="fa fa-user"></i> Đăng nhập</a>
     </div>
   </div>
-  <nav class="humberger__menu__nav mobile-menu">
-    <ul>
-      <li  ><a href="index.jsp">Trang chủ</a></li>
-      <li><a href="./about.html">Giới thiệu</a></li>
-      <li><a href="shop-product.jsp">Sản phẩm</a>
-        <ul class="header__menu__dropdown">
-      <li><a href="shop-product.jsp">Sản phẩm</a>
-        
-      </li>
-      <li><a href="./blog.html">Tin tức</a></li>
-      <li><a href="./contact.html">Liên hệ</a></li>
-    </ul>
-  </nav>
-  <div id="mobile-menu-wrap"></div>
+  <ul>
+    <li  ><a href="index.jsp">Trang chủ</a></li>
+    <li><a href="./about.html">Giới thiệu</a></li>
+    <li><a href="shop-product.jsp">Sản phẩm</a>
+      <ul class="header__menu__dropdown">
+        <li><a href="shop-product.jsp">Sản phẩm</a>
+
+        </li>
+        <li><a href="./blog.html">Tin tức</a></li>
+        <li><a href="./contact.html">Liên hệ</a></li>
+      </ul>
+      <div id="mobile-menu-wrap"></div>
   <div class="header__top__right__social">
     <a href="https://www.facebook.com/mai.thuan.52438/"><i class="fa fa-facebook"></i></a>
             <a href="https://www.messenger.com/t/100017755062615"><i class="fa fa-comment"></i></a>
