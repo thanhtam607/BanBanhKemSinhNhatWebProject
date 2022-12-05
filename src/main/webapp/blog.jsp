@@ -267,7 +267,8 @@
                                         for(Blog b: list){ %>
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <div class="blog__item">
-                                            <div class="blog__item__pic" data-setbg="<%=b.getListBlog().get(0)%>">
+                                            <div class="blog__item__pic">
+                                                <img src="<%=b.getImg()%>">
                                             </div>
                                             <div class="blog__item__text">
                                                 <ul>

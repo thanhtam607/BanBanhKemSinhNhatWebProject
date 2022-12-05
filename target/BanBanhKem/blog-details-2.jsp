@@ -52,7 +52,7 @@
       <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
     </div>
   </div>
-<<<<<<< HEAD:target/BanBanhKem/blog-details-2.jsp
+<<<<<<< HEAD:src/main/webapp/blog-details-2.jsp
   <ul>
     <li  ><a href="index.jsp">Trang chủ</a></li>
     <li><a href="./about.html">Giới thiệu</a></li>
@@ -80,7 +80,7 @@
     </ul>
   </nav>
   <div id="mobile-menu-wrap"></div>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog-details-2.html
+>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog-details-2.html
   <div class="header__top__right__social">
     <a href="https://www.facebook.com/mai.thuan.52438/"><i class="fa fa-facebook"></i></a>
             <a href="https://www.messenger.com/t/100017755062615"><i class="fa fa-comment"></i></a>
@@ -233,11 +233,11 @@
                     <ul>
                       <li><a href="blog.jsp">Tất cả</a></li>
                       <li><a href="blog.jsp">Đời sống(3)</a></li>
-<<<<<<< HEAD:target/BanBanhKem/blog-details-2.jsp
+<<<<<<< HEAD:src/main/webapp/blog-details-2.jsp
                       <li><a href="blog-details-3.jsp">Kỉ niệm(1)</a></li>
 =======
                       <li><a href="./blog-details-3.html">Kỉ niệm(1)</a></li>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog-details-2.html
+>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog-details-2.html
                     </ul>
                   </div>
                   <div class="blog__sidebar__item">
@@ -276,11 +276,11 @@
                     <h4>Chủ đề</h4>
                     <div class="blog__sidebar__item__tags">
                       <a href="blog.jsp">Bánh kem</a>
-<<<<<<< HEAD:target/BanBanhKem/blog-details-2.jsp
+<<<<<<< HEAD:src/main/webapp/blog-details-2.jsp
                       <a href="blog-details-1.jsp">Hiện đại</a>
 =======
                       <a href="./blog-details-1.html">Hiện đại</a>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog-details-2.html
+>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog-details-2.html
                       <a href="./blog-details-2.html">Bảo quản bánh</a>
                       <a href="blog-details-3.jsp">Chọn bánh</a>
                       <a href="blog-details-4.jsp">Ý nghĩa bánh</a>

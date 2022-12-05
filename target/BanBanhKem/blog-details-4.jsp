@@ -215,11 +215,11 @@
                     <ul>
                       <li><a href="blog.jsp">Tất cả</a></li>
                       <li><a href="blog.jsp">Đời sống(2)</a></li>
-<<<<<<< HEAD:target/BanBanhKem/blog-details-4.jsp
+<<<<<<< HEAD:src/main/webapp/blog-details-4.jsp
                       <li><a href="blog-details-3.jsp">Kỉ niệm(1)</a></li>
 =======
                       <li><a href="./blog-details-3.html">Kỉ niệm(1)</a></li>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog-details-4.html
+>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog-details-4.html
                     </ul>
                   </div>
                   <div class="blog__sidebar__item">
@@ -258,7 +258,7 @@
                     <h4>Chủ đề</h4>
                     <div class="blog__sidebar__item__tags">
                       <a href="blog.jsp">Bánh kem</a>
-<<<<<<< HEAD:target/BanBanhKem/blog-details-4.jsp
+<<<<<<< HEAD:src/main/webapp/blog-details-4.jsp
                       <a href="blog-details-1.jsp">Hiện đại</a>
                       <a href="blog-details-2.jsp">Bảo quản bánh</a>
                       <a href="blog-details-3.jsp">Chọn bánh</a>
@@ -266,7 +266,7 @@
                       <a href="./blog-details-1.html">Hiện đại</a>
                       <a href="./blog-details-2.html">Bảo quản bánh</a>
                       <a href="./blog-details-3.html">Chọn bánh</a>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog-details-4.html
+>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog-details-4.html
                       <a href="./blog-details-4.html">Ý nghĩa bánh</a>
                     </div>
                   </div>

@@ -4,17 +4,7 @@
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
 <meta http-equiv="Content-Type" charset="UTF-8">
-<<<<<<< HEAD
-<<<<<<<< HEAD:target/BanBanhKem/blog.jsp
 
-========
->>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog.jsp
-=======
-<<<<<<<< HEAD:src/main/webapp/blog.jsp
-
-========
->>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog.jsp
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b
 
 <head>
     <meta charset="UTF-8">
@@ -69,21 +59,9 @@
             <li  ><a href="index.jsp">Trang chủ</a></li>
             <li><a href="about.jsp">Giới thiệu</a></li>
             <li><a href="shop-product.jsp">Sản phẩm</a>
-               
+
             </li>
-<<<<<<< HEAD
-<<<<<<<< HEAD:target/BanBanhKem/blog.jsp
             <li class="active"><a href="./blog.jsp">Tin tức</a></li>
-========
-            <li class="active"><a href="./blog.html">Tin tức</a></li>
->>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog.jsp
-=======
-<<<<<<<< HEAD:src/main/webapp/blog.jsp
-            <li class="active"><a href="./blog.jsp">Tin tức</a></li>
-========
-            <li class="active"><a href="./blog.html">Tin tức</a></li>
->>>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog.jsp
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b
             <li><a href="contact.jsp">Liên hệ</a></li>
         </ul>
     </nav>
@@ -289,7 +267,8 @@
                                         for(Blog b: list){ %>
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <div class="blog__item">
-                                            <div class="blog__item__pic" data-setbg="<%=b.getListBlog().get(0)%>">
+                                            <div class="blog__item__pic">
+                                                <img src="<%=b.getImg()%>">
                                             </div>
                                             <div class="blog__item__text">
                                                 <ul>
@@ -364,10 +343,7 @@
                                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
                                 <div class="footer__copyright__payment"></div>
                             </div>
-<<<<<<< HEAD
-=======
                         </div>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b
                     </div>
                 </footer>
     <!-- Footer Section End -->

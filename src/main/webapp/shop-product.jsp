@@ -123,15 +123,10 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="index.jsp">Trang chủ</a></li>
-<<<<<<< HEAD
-                            <li><a href="./about.html">Giới thiệu</a></li>
-                            <li class="active"><a href="./shop-product.jsp">Sản phẩm</a>
-=======
                             <li><a href="about.jsp">Giới thiệu</a></li>
-                            <li class="active"><a href="./shop-product.html">Sản phẩm</a>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b
+                            <li class="active"><a href="./ListProduct">Sản phẩm</a>
                             </li>
-                            <li><a href="blog.jsp">Tin tức</a></li>
+                            <li><a href="./ListBlog">Tin tức</a></li>
                             <li><a href="contact.jsp">Liên hệ</a></li>
                         </ul>
                     </nav>
