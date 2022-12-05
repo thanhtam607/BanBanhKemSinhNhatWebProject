@@ -48,7 +48,7 @@
   </div>
   <div class="humberger__menu__widget">
     <div class="header__top__right__auth">
-      <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
+      <a href="signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
     </div>
   </div>
   <nav class="humberger__menu__nav mobile-menu">
@@ -103,7 +103,7 @@
             <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
             </div>
             <div class="header__top__right__auth">
-              <a href="admin/signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
+              <a href="signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
             </div>
           </div>
         </div>

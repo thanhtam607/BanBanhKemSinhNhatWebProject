@@ -1069,6 +1069,10 @@ ol {
 .latest-product__item__pic {
 	float: left;
 	margin-right: 26px;
+
+}
+.latest-product__item__pic__setWidth {
+	width: 116px;
 }
 
 .latest-product__item__pic img {

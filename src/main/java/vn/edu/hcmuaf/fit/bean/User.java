@@ -7,17 +7,18 @@ public class User implements Serializable {
     private String id;
     private String username;
     private String pass;
-    private String fullname;
+    private String tendn;
 
     public User(){
 
     }
 
-    public User(String id, String username, String pass, String fullname) {
+    public User(String id, String username, String pass, String tendn ) {
         this.id = id;
         this.username = username;
         this.pass = pass;
-        this.fullname = fullname;
+        this.tendn = tendn;
+
     }
 
     public String getId() {
@@ -36,8 +37,8 @@ public class User implements Serializable {
         return pass;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getTendn() {
+        return tendn;
     }
 
     public void setUsername(String username) {
@@ -48,16 +49,17 @@ public class User implements Serializable {
         this.pass = pass;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setTendn(String tendn) {
+        this.tendn = tendn;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
                 ", pass='" + pass + '\'' +
-                ", fullname='" + fullname + '\'' +
+                ", tendn='" + tendn + '\'' +
                 '}';
     }
 }
