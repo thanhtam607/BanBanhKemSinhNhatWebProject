@@ -56,10 +56,10 @@
             <ul>
                 <li><a href="index.jsp">Trang chủ</a></li>
                 <li><a href="about.jsp">Giới thiệu</a></li>
-                <li><a href="shop-product.jsp">Sản phẩm</a>
+                <li><a href="./ListProduct">Sản phẩm</a>
                    
                 </li>
-                <li><a href="blog.jsp">Tin tức</a></li>
+                <li><a href="./ListBlog">Tin tức</a></li>
                 <li><a href="contact.jsp">Liên hệ</a></li>
             </ul>
         </nav>
@@ -123,9 +123,9 @@
                         <ul>
                             <li><a href="index.jsp">Trang chủ</a></li>
                             <li><a href="about.jsp">Giới thiệu</a></li>
-                            <li><a href="shop-product.jsp">Sản phẩm</a>
+                            <li><a href="./ListProduct">Sản phẩm</a>
                                 
-                            <li><a href="blog.jsp">Tin tức</a></li>
+                            <li><a href="./ListBlog">Tin tức</a></li>
                             <li><a href="contact.jsp">Liên hệ</a></li>
                         </ul>
                     </nav>
@@ -287,7 +287,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="shop-product.jsp" class="primary-btn cart-btn">Xem thêm sản phẩm </a>
+                        <a href="./ListProduct" class="primary-btn cart-btn">Xem thêm sản phẩm </a>
                         
                     </div>
                 </div>

@@ -58,10 +58,10 @@
             <ul>
                 <li><a href="index.jsp">Trang chủ</a></li>
                 <li><a href="about.jsp">Giới thiệu</a></li>
-                <li><a href="shop-product.jsp">Sản phẩm</a>
+                <li><a href="./ListProduct">Sản phẩm</a>
                  
                 </li>
-                <li><a href="blog.jsp">Tin tức</a></li>
+                <li><a href="./ListBlog">Tin tức</a></li>
                 <li><a href="contact.jsp">Liên hệ</a></li>
             </ul>
             </ul>
@@ -128,10 +128,10 @@
                         <ul>
                             <li><a href="index.jsp">Trang chủ</a></li>
                             <li><a href="about.jsp">Giới thiệu</a></li>
-                            <li><a href="shop-product.jsp">Sản phẩm</a>
+                            <li><a href="./ListProduct">Sản phẩm</a>
                                 
                             </li>
-                            <li><a href="blog.jsp">Tin tức</a></li>
+                            <li><a href="./ListBlog">Tin tức</a></li>
                             <li><a href="contact.jsp">Liên hệ</a></li>
                         </ul>
                     </nav>
@@ -193,7 +193,7 @@
                         <h2>Bánh cánh đồng hoa</h2>
                         <div class="breadcrumb__option">
                             <a href="index.jsp">Trang chủ</a>
-                            <a href="shop-product.jsp">Sản phẩm</a>
+                            <a href="./ListProduct">Sản phẩm</a>
                             <span>Bánh cánh đồng hoa</span>
                         </div>
                     </div>
@@ -476,4 +476,4 @@
 
 </body>
 
-</ht
+</html>

@@ -56,10 +56,10 @@
             <ul>
                 <li><a href="index.jsp">Trang chủ</a></li>
                 <li class="active"><a href="./about.html">Giới thiệu</a></li>
-                <li><a href="shop-product.jsp">Sản phẩm</a>
+                <li><a href="./ListProduct">Sản phẩm</a>
                   
                 </li>
-                <li><a href="blog.jsp">Tin tức</a></li>
+                <li><a href="./ListBlog">Tin tức</a></li>
                 <li><a href="contact.jsp">Liên hệ</a></li>
             </ul>
         </nav>
@@ -125,10 +125,10 @@
                         <ul>
                             <li ><a href="index.jsp">Trang chủ</a></li>
                             <li class="active"><a href="./about.html">Giới thiệu</a></li>
-                            <li><a href="shop-product.jsp">Sản phẩm</a>
+                            <li><a href="./ListProduct">Sản phẩm</a>
                              
                             </li>
-                            <li><a href="blog.jsp">Tin tức</a></li>
+                            <li><a href="./ListBlog">Tin tức</a></li>
                             <li><a href="contact.jsp">Liên hệ</a></li>
                         </ul>
                     </nav>

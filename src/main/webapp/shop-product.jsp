@@ -54,13 +54,13 @@
             <ul>
                 <li><a href="index.jsp">Trang chủ</a></li>
                 <li><a href="about.jsp">Giới thiệu</a></li>
-                <li class="active"><a href="./shop-product.jsp">Sản phẩm</a>
+                <li class="active"><a href="././ListProduct">Sản phẩm</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="shop-details.jsp">Chi tiết sản phẩm</a></li>
 
                     </ul> -->
                 </li>
-                <li><a href="blog.jsp">Tin tức</a></li>
+                <li><a href="./ListBlog">Tin tức</a></li>
                 <li><a href="contact.jsp">Liên hệ</a></li>
             </ul>
         </nav>

@@ -56,10 +56,10 @@
         <ul>
             <li><a href="index.jsp">Trang chủ</a></li>
             <li><a href="about.jsp">Giới thiệu</a></li>
-            <li><a href="shop-product.jsp">Sản phẩm</a>
+            <li><a href="./ListProduct">Sản phẩm</a>
              
             </li>
-            <li><a href="blog.jsp">Tin tức</a></li>
+            <li><a href="./ListBlog">Tin tức</a></li>
             <li><a href="contact.jsp">Liên hệ</a></li>
         </ul>
     </nav>
@@ -123,10 +123,10 @@
                     <ul>
                         <li><a href="index.jsp">Trang chủ</a></li>
                         <li><a href="about.jsp">Giới thiệu</a></li>
-                        <li><a href="shop-product.jsp">Sản phẩm</a>
+                        <li><a href="./ListProduct">Sản phẩm</a>
                             
                         </li>
-                        <li><a href="blog.jsp">Tin tức</a></li>
+                        <li><a href="./ListBlog">Tin tức</a></li>
                         <li><a href="contact.jsp">Liên hệ</a></li>
                     </ul>
                 </nav>
@@ -188,7 +188,7 @@
                         <h2>Giải mã sức hút của bánh kem hiện đại</h2>
                         <div class="breadcrumb__option">
                             <a href="index.jsp">Trang chủ</a>
-                            <a href="blog.jsp">Tin tức</a>
+                            <a href="./ListBlog">Tin tức</a>
                             <span>Giải mã sức hút của bánh kem hiện đại</span>
                         </div>
                     </div>
@@ -213,13 +213,9 @@
                         <div class="blog__sidebar__item">
                             <h4>Danh mục</h4>
                             <ul>
-                                <li><a href="blog.jsp">Tất cả</a></li>
-                                <li><a href="blog.jsp">Đời sống(3)</a></li>
-<<<<<<< HEAD:src/main/webapp/blog-details-1.jsp
+                                <li><a href="./ListBlog">Tất cả</a></li>
+                                <li><a href="./ListBlog">Đời sống(3)</a></li>
                                 <li><a href="blog-details-3.jsp">Kỉ niệm(1)</a></li>
-=======
-                                <li><a href="./blog-details-3.html">Kỉ niệm(1)</a></li>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog-details-1.html
                             </ul>
                         </div>
                         <div class="blog__sidebar__item">
@@ -257,18 +253,13 @@
                         <div class="blog__sidebar__item">
                             <h4>Chủ đề</h4>
                             <div class="blog__sidebar__item__tags">
-                                <a href="blog.jsp">Bánh kem</a>
-<<<<<<< HEAD:src/main/webapp/blog-details-1.jsp
+                                <a href="./ListBlog">Bánh kem</a>
                                 <a href="./blog-details-1.jsp">Hiện đại</a>
                                 <a href="blog-details-2.jsp">Bảo quản bánh</a>
                                 <a href="blog-details-3.jsp">Chọn bánh</a>
                                 <a href="blog-details-4.jsp">Ý nghĩa bánh</a>
-=======
-                                <a href="./blog-details-1.html">Hiện đại</a>
-                                <a href="./blog-details-2.html">Bảo quản bánh</a>
-                                <a href="./blog-details-3.html">Chọn bánh</a>
-                                <a href="./blog-details-4.html">Ý nghĩa bánh</a>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog-details-1.html
+                            </div>
+                            <div class="blog__sidebar__item__tags">
                             </div>
                         </div>
                     </div>

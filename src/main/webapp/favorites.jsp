@@ -56,10 +56,10 @@
             <ul>
                 <li><a href="index.jsp">Trang chủ</a></li>
                 <li><a href="about.jsp">Giới thiệu</a></li>
-                <li class="active"><a href="shop-product.jsp">Sản phẩm</a>
+                <li class="active"><a href="./ListProduct">Sản phẩm</a>
                    
                 </li>
-                <li><a href="blog.jsp">Tin tức</a></li>
+                <li><a href="./ListBlog">Tin tức</a></li>
                 <li><a href="contact.jsp">Liên hệ</a></li>
             </ul>
         </nav>
@@ -123,10 +123,10 @@
                         <ul>
                             <li><a href="index.jsp">Trang chủ</a></li>
                             <li><a href="about.jsp">Giới thiệu</a></li>
-                            <li class="active"><a href="shop-product.jsp">Sản phẩm</a>
+                            <li class="active"><a href="./ListProduct">Sản phẩm</a>
                                
                             </li>
-                            <li><a href="blog.jsp">Tin tức</a></li>
+                            <li><a href="./ListBlog">Tin tức</a></li>
                             <li><a href="contact.jsp">Liên hệ</a></li>
                         </ul>
                     </nav>
@@ -207,7 +207,7 @@
                         <div class="sidebar__item">
                             <h4>Các Loại Bánh</h4>
                             <ul class="slidebar__loaibanh">
-                                <li class="text__loaibanh"><a href="shop-product.jsp">Tất cả</a></li>
+                                <li class="text__loaibanh"><a href="./ListProduct">Tất cả</a></li>
                                 <li class="text__loaibanh"><a class="text__loaibanh__active" href="./shop-product-banh-hoa.html">Bánh hoa</a></li>
                                 <li class="text__loaibanh"><a href="./shop-product-trang-tri-don-gian.html">Bánh trang trí đơn giản</a></li>
                                 <li class="text__loaibanh"><a href="#">Bánh trang trí hình thú</a></li>

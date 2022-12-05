@@ -39,7 +39,7 @@
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
   <div class="humberger__menu__logo">
-    <a href="#"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+    <a href="#"><img src="./img/logo_web.jpg" alt=""></a>
   </div>
   <div class="humberger__menu__cart">
     <ul>
@@ -52,39 +52,22 @@
       <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
     </div>
   </div>
-<<<<<<< HEAD:src/main/webapp/blog-details-2.jsp
-  <ul>
-    <li  ><a href="index.jsp">Trang chủ</a></li>
-    <li><a href="./about.html">Giới thiệu</a></li>
-    <li><a href="shop-product.jsp">Sản phẩm</a>
-      <ul class="header__menu__dropdown">
-        <li><a href="shop-product.jsp">Sản phẩm</a>
-
-        </li>
-        <li><a href="blog.jsp">Tin tức</a></li>
-        <li><a href="contact.jsp">Liên hệ</a></li>
-      </ul>
-      <div id="mobile-menu-wrap"></div>
-=======
   <nav class="humberger__menu__nav mobile-menu">
     <ul>
-      <li  ><a href="index.jsp">Trang chủ</a></li>
+      <li   ><a href="index.jsp">Trang chủ</a></li>
       <li><a href="about.jsp">Giới thiệu</a></li>
-      <li><a href="shop-product.jsp">Sản phẩm</a>
-        <ul class="header__menu__dropdown">
-      <li><a href="shop-product.jsp">Sản phẩm</a>
-        
+      <li><a href="./ListProduct">Sản phẩm</a>
+
       </li>
-      <li><a href="blog.jsp">Tin tức</a></li>
+      <li><a href="./ListBlog">Tin tức</a></li>
       <li><a href="contact.jsp">Liên hệ</a></li>
     </ul>
   </nav>
   <div id="mobile-menu-wrap"></div>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog-details-2.html
   <div class="header__top__right__social">
     <a href="https://www.facebook.com/mai.thuan.52438/"><i class="fa fa-facebook"></i></a>
-            <a href="https://www.messenger.com/t/100017755062615"><i class="fa fa-comment"></i></a>
-            <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
+    <a href="https://www.messenger.com/t/100017755062615"><i class="fa fa-comment"></i></a>
+    <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
   </div>
   <div class="humberger__menu__contact">
     <ul>
@@ -140,10 +123,10 @@
           <ul>
             <li  ><a href="index.jsp">Trang chủ</a></li>
             <li><a href="about.jsp">Giới thiệu</a></li>
-            <li><a href="shop-product.jsp">Sản phẩm</a>
+            <li><a href="./ListProduct">Sản phẩm</a>
              
             </li>
-            <li><a href="blog.jsp">Tin tức</a></li>
+            <li><a href="./ListBlog">Tin tức</a></li>
             <li><a href="contact.jsp">Liên hệ</a></li>
           </ul>
         </nav>
@@ -206,7 +189,7 @@
                       <h2>Tổng hợp cách bảo quản bánh kem cực đơn giản</h2>
                       <div class="breadcrumb__option">
                           <a href="index.jsp">Trang chủ</a>
-                          <a href="blog.jsp">Tin tức</a>
+                          <a href="./ListBlog">Tin tức</a>
                           <span>Tổng hợp cách bảo quản bánh kem cực đơn giản</span>
                       </div>
                   </div>
@@ -231,13 +214,9 @@
                   <div class="blog__sidebar__item">
                     <h4>Danh mục</h4>
                     <ul>
-                      <li><a href="blog.jsp">Tất cả</a></li>
-                      <li><a href="blog.jsp">Đời sống(3)</a></li>
-<<<<<<< HEAD:src/main/webapp/blog-details-2.jsp
+                      <li><a href="./ListBlog">Tất cả</a></li>
+                      <li><a href="./ListBlog">Đời sống(3)</a></li>
                       <li><a href="blog-details-3.jsp">Kỉ niệm(1)</a></li>
-=======
-                      <li><a href="./blog-details-3.html">Kỉ niệm(1)</a></li>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog-details-2.html
                     </ul>
                   </div>
                   <div class="blog__sidebar__item">
@@ -275,13 +254,9 @@
                   <div class="blog__sidebar__item">
                     <h4>Chủ đề</h4>
                     <div class="blog__sidebar__item__tags">
-                      <a href="blog.jsp">Bánh kem</a>
-<<<<<<< HEAD:src/main/webapp/blog-details-2.jsp
+                      <a href="./ListBlog">Bánh kem</a>
                       <a href="blog-details-1.jsp">Hiện đại</a>
-=======
-                      <a href="./blog-details-1.html">Hiện đại</a>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:target/BanBanhKem/blog-details-2.html
-                      <a href="./blog-details-2.html">Bảo quản bánh</a>
+                      <a href="./blog-details-2.jsp">Bảo quản bánh</a>
                       <a href="blog-details-3.jsp">Chọn bánh</a>
                       <a href="blog-details-4.jsp">Ý nghĩa bánh</a>
                     </div>

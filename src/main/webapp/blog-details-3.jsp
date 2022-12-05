@@ -55,10 +55,10 @@
     <ul>
       <li   ><a href="index.jsp">Trang chủ</a></li>
       <li><a href="about.jsp">Giới thiệu</a></li>
-      <li><a href="shop-product.jsp">Sản phẩm</a>
+      <li><a href="./ListProduct">Sản phẩm</a>
        
       </li>
-      <li><a href="blog.jsp">Tin tức</a></li>
+      <li><a href="./ListBlog">Tin tức</a></li>
       <li><a href="contact.jsp">Liên hệ</a></li>
     </ul>
   </nav>
@@ -122,7 +122,7 @@
           <ul>
             <li   ><a href="index.jsp">Trang chủ</a></li>
             <li><a href="about.jsp">Giới thiệu</a></li>
-            <li><a href="shop-product.jsp">Sản phẩm</a>
+            <li><a href="./ListProduct">Sản phẩm</a>
               
             </li>
             <li><a href="blog.jsp">Tin tức</a></li>
@@ -213,7 +213,7 @@
                     <ul>
                       <li><a href="blog.jsp">Tất cả</a></li>
                       <li><a href="blog.jsp">Đời sống(3)</a></li>
-                      <li><a href="./blog-details-3.html">Kỉ niệm(1)</a></li>
+                      <li><a href="./blog-details-3.jsp">Kỉ niệm(1)</a></li>
                     </ul>
                   </div>
                   <div class="blog__sidebar__item">
@@ -252,14 +252,9 @@
                     <h4>Chủ đề</h4>
                     <div class="blog__sidebar__item__tags">
                       <a href="blog.jsp">Bánh kem</a>
-<<<<<<< HEAD:src/main/webapp/blog-details-3.jsp
                       <a href="blog-details-1.jsp">Hiện đại</a>
                       <a href="blog-details-2.jsp">Bảo quản bánh</a>
-=======
-                      <a href="./blog-details-1.html">Hiện đại</a>
-                      <a href="./blog-details-2.html">Bảo quản bánh</a>
->>>>>>> d6cea1f0d44c529f2a8bf5a841f09534de0a306b:src/main/webapp/blog-details-3.html
-                      <a href="./blog-details-3.html">Chọn bánh</a>
+                      <a href="./blog-details-3.jsp">Chọn bánh</a>
                       <a href="blog-details-4.jsp">Ý nghĩa bánh</a>
                     </div>
                   </div>
