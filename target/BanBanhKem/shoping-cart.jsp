@@ -217,7 +217,7 @@
                             <tbody>
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="img/product/B001/banh1.jpg" alt="" style="max-width: 120px;">
+                                        <img src="img/product/B001/banh1.jpg" alt="" >
                                         <h5>Bánh cánh đồng hoa</h5>
                                     </td>
                                     <td class="shoping__cart__price">
@@ -239,7 +239,7 @@
                                 </tr>
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="img/product/B003/banh1.jpg" alt="" style="max-width: 120px;">
+                                        <img src="img/product/B003/banh1.jpg" alt="" >
                                         <h5>Bánh kem sữa chua xoài hảo hạng</h5>
                                     </td>
                                     <td class="shoping__cart__price">
@@ -261,7 +261,7 @@
                                 </tr>
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="img/product/B002/banh1.jpg" alt="" style="max-width: 120px;">
+                                        <img src="img/product/B002/banh1.jpg" alt="" >
                                         <h5>Bánh dâu tây kem sữa chua Hàn Quốc</h5>
                                     </td>
                                     <td class="shoping__cart__price">
