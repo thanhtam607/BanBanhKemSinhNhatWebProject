@@ -2,6 +2,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -264,7 +265,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                    aria-selected="false">Bình luận<span>(1)</span></a>
+                                    aria-selected="false">Bình luận<span>(<%=p.getComments().size()%>)</span></a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -284,22 +285,15 @@
                             </div>
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6 style="margin-bottom: 10px;">Trần Nhật Linh</h6>
-                                        <i class="fa fa-calendar-o"></i> <span style="font-size: 13px; color: rgb(179, 178, 178);">22-10-2022</span> 
+                                    <%List<Comment> cmtList = p.getComments();
+                                        for(Comment cmt : cmtList){%>
+                                    <h6 style="margin-bottom: 10px;"><%= cmt.getKhachHang()%></h6>
+                                        <i class="fa fa-calendar-o"></i> <span style="font-size: 13px; color: rgb(179, 178, 178);"><%=cmt.getDate()%>></span>
                                         
-                                    <p >Lần đầu đặt bánh ở tiệm này thấy rất hài lòng, cầm chiếc bánh trên tay đi tặng được mọi người khen
-                                        . Rất hài lòng, trang trí sang trọng, đẹp mắt.</p>
+                                    <p ><%=cmt.getBinhLuan()%>></p>
+                                </div>
+                                <%}%>
                                         <div class = "input-comment">
-                                            <div class = "input-item" >
-                                                <span>Tên của bạn:</span>
-                                                <input type="text" placeholder="Nhập họ tên...">
-                                            </div>
-                                            <div class = "input-item" >
-                                                <span>Số điện thoại:</span>
-                                                <input type="text" placeholder="Nhập số điện thoại...">
-                                                
-                                            </div>
-                                        
                                             <div class = "input-item">
                                                 <span>Nhập bình luận:</span>
                                                 <input type="text" placeholder="Viết bình luận..." style = "width:70%;">
@@ -309,7 +303,7 @@
                                             </div>
                                             
                                         </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
