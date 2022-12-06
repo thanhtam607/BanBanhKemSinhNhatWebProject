@@ -53,8 +53,9 @@
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__auth">
-                <a href="signin.jsp"><i class="fa fa-user"></i> </i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
+                <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
             </div>
+
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
@@ -112,6 +113,7 @@
                             <div class="header__top__right__auth">
                                 <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
                             </div>
+
                         </div>
                     </div>
                 </div>

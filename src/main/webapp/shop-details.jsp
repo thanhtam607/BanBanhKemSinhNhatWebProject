@@ -290,7 +290,7 @@
                                     <h6 style="margin-bottom: 10px;"><%= cmt.getKhachHang()%></h6>
                                         <i class="fa fa-calendar-o"></i> <span style="font-size: 13px; color: rgb(179, 178, 178);"><%=cmt.getDate()%>></span>
                                         
-                                    <p ><%=cmt.getBinhLuan()%>></p>
+                                    <p ><%=cmt.getBinhLuan()%></p>
                                 </div>
                                 <%}%>
                                         <div class = "input-comment">

@@ -131,7 +131,7 @@
 <%--        }--%>
 <%--        if (checkU === true) {--%>
 <%--            if (myPass == listPass[indexU]) {--%>
-<%--                window.location.href = "./admin-web.html";--%>
+<%--                window.location.href = "./admin-web.jsp";--%>
 <%--                return false;--%>
 <%--            } else {--%>
 <%--                document.getElementById("insertTextHere").textContent="*Sai Password";--%>

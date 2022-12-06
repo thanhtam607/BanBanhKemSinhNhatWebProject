@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
+<html lang="xzz">
+<meta http-equiv="Content-Type" charset="UTF-8">
 
 <head>
     <meta charset="utf-8">
@@ -44,7 +46,7 @@
     <header class="header">
         <div class="header__content">
             <!-- header logo -->
-            <a href="admin-web.html" class="header__logo">
+            <a href="admin-web.jsp" class="header__logo">
 				<img src="../img/logo_web.jpg" alt="">
 			</a>
             <!-- end header logo -->
@@ -75,7 +77,7 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="admin-web.html" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+                    <a href="admin-web.jsp" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
                     <a href="./list-products.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
                     <a href="./customers.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
                     <a href="./list-blogs.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Blog</a>
