@@ -38,6 +38,15 @@ public class ProductService {
         }
         return  list;
     }
+    public static Product findById( String id){
+        List<Product> list= getData();
+        for(Product p: list){
+            if(p.getId().equals(id)) {
+                return p;
+            }
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         List<Product> li = ProductService.getData();

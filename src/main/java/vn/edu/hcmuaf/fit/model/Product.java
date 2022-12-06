@@ -80,4 +80,5 @@ public class Product {
     public String getNoiDung() {
         return noiDung;
     }
+
 }
