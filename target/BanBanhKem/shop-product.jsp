@@ -208,7 +208,7 @@
                             <h4>Các Loại Bánh</h4>
                             <ul class="slidebar__loaibanh">
                                 <li class="text__loaibanh"><a class="text__loaibanh__active" href="./shop-product.html">Tất cả</a></li>
-                                <li class="text__loaibanh"><a href="./shop-product-banh-hoa.html">Bánh hoa</a></li>
+                                <li class="text__loaibanh"><a href="shop-product-banh-hoa.jsp">Bánh hoa</a></li>
                                 <li class="text__loaibanh"><a href="./shop-product-trang-tri-don-gian.html">Bánh trang trí đơn giản</a></li>
                                 <li class="text__loaibanh"><a href="#">Bánh trang trí hình thú</a></li>
                                 <li class="text__loaibanh"><a href="#">Bánh trái cây</a></li>
@@ -238,26 +238,22 @@
                             <h4>Kích thước</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    Lớn
-                                    <input type="radio" id="large">
+                                    <a href="./Filter1" id="large">Lớn</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
-                                <label for="medium">
-                                    Vừa
-                                    <input type="radio" id="medium">
+                                <label  for="medium">
+                                    <a href="./Filter1" id="medium">Vừa</a>
                                 </label>
                             </div>
-                            <div class="sidebar__item__size">
+                            <div  class="sidebar__item__size">
                                 <label for="small">
-                                    Nhỏ
-                                    <input type="radio" id="small">
+                                    <a href="./Filter1" id="small">Nhỏ</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
-                                    Bé
-                                    <input type="radio" id="tiny">
+                                    <a href="./Filter1" id="tiny">Bé</a>
                                 </label>
                             </div>
                         </div>
