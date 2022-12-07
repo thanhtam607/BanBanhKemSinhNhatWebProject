@@ -20,12 +20,12 @@ public class Signin extends HttpServlet {
         String pass = request.getParameter("pass");
         User user = UserService.getInstance().checkLogin(uname, pass);
         if(user==null){
-            request.setAttribute("Error", "Tên đăng nhập hoặc mật khẩu không đúng!!!");
+            request.setAttribute("Error", "Username or password is incorrect");
             request.getRequestDispatcher("/signin.jsp").forward(request, response);
         }else{
             HttpSession session = request.getSession(true);
             session.setAttribute("auth", user);
-            response.sendRedirect("/BanBanhKemSinhNhatWebProject/index.jsp");
+            response.sendRedirect("admin/admin-web.jsp");
         }
     }
 }

@@ -32,7 +32,7 @@ public class UserService {
     }
     public User checkLogin(String username, String password) {
         List<User> users = JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT admin.ID, admin.USERNAME, admin.PASS, admin.TENDN, admin.ROLE FROM admin WHERE username = ?")
+                h.createQuery("SELECT admin.ID, admin.USERNAME, admin.PASS, admin.TENDN FROM admin WHERE username = ?")
                         .bind(0, username)
                         .mapToBean(User.class)
                         .stream()

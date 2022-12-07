@@ -8,18 +8,17 @@ public class User implements Serializable {
     private String username;
     private String pass;
     private String tendn;
-    private int role;
 
     public User(){
 
     }
 
-    public User(String id, String username, String pass, String tendn, int role) {
+    public User(String id, String username, String pass, String tendn ) {
         this.id = id;
         this.username = username;
         this.pass = pass;
         this.tendn = tendn;
-        this.role = role;
+
     }
 
     public String getId() {
@@ -54,18 +53,6 @@ public class User implements Serializable {
         this.tendn = tendn;
     }
 
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
-
-    public boolean checkRole(int i) {
-        if(this.role == 1) return true;
-        return false;
-    }
     @Override
     public String toString() {
         return "User{" +
@@ -75,6 +62,4 @@ public class User implements Serializable {
                 ", tendn='" + tendn + '\'' +
                 '}';
     }
-
-
 }

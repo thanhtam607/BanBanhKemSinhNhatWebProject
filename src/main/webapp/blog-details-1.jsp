@@ -52,10 +52,6 @@
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
             <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-            <div class="<%= auth != null ? "header__top__right__auth__dropdown":""%>">
-                <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item"><%= auth != null ? "Vào trang quản lí":""%></a>
-                <a href="./signin.jsp" class="dropdown-item"><%= auth != null ? "Đăng xuất":""%></a>
-            </div>
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">
@@ -111,10 +107,6 @@
                         </div>
                         <div class="header__top__right__auth">
                             <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-                            <div class="<%= auth != null ? "header__top__right__auth__dropdown":""%>">
-                                <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item"><%= auth != null ? "Vào trang quản lí":""%></a>
-                                <a href="./signin.jsp" class="dropdown-item"><%= auth != null ? "Đăng xuất":""%></a>
-                            </div>
                         </div>
                     </div>
                 </div>
