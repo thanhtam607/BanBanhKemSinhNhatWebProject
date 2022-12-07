@@ -82,8 +82,11 @@ public class Product {
     public String getNoiDung() {
         return noiDung;
     }
+<<<<<<< HEAD
 
     public List<Comment> getComments() {
         return comments;
     }
+=======
+>>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
 }

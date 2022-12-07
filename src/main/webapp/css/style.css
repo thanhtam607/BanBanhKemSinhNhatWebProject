@@ -1069,7 +1069,7 @@ ol {
 .latest-product__item__pic {
 	float: left;
 	margin-right: 26px;
-	width: 116px;
+	width: 48%;
 }
 
 .latest-product__item__pic img {
@@ -2068,7 +2068,6 @@ ol {
 .shoping__cart__table table tbody tr td.shoping__cart__item img {
 	display: inline-block;
 	margin-right: 25px;
-	width: 120px;
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__item h5 {
@@ -2595,10 +2594,13 @@ ol {
 .blog__sidebar__recent__item__pic {
 	float: left;
 	margin-right: 20px;
+	width: 40%;
+	margin-top: 10px;
 }
 
 .blog__sidebar__recent__item__text {
 	overflow: hidden;
+	margin-top: 10px;
 }
 
 .blog__sidebar__recent__item__text h6 {

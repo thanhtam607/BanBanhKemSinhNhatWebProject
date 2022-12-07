@@ -1,8 +1,5 @@
-<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <!DOCTYPE html>
-<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
-<html lang="xzz">
-<meta http-equiv="Content-Type" charset="UTF-8">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -35,7 +32,6 @@
 </head>
 
 <body>
-<% User auth = (User) session.getAttribute("auth");%>
     <div class="container-fluid position-relative d-flex p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-pink position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -56,16 +52,16 @@
 				<div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
 			</div>
 			<div class="ms-3">
-				<h6 class="mb-0"><%= auth != null ? auth.getTendn():"ADMIN"%></h6>
+				<h6 class="mb-0">Thanh Thùy</h6>
 				<span>Admin</span>
 			</div>
 		</div>
 		<div class="navbar-nav w-100">
-			<a href="admin-web.jsp" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+			<a href="admin-web.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
 			<a href="./list-products.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
 			<a href="./customers.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
 			<a href="./list-blogs.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Blog</a>
-			<a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
+			<a href="./add-product.html" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
 			<a href="./add-blog.html" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm blog</a>
 			<a href="../index.jsp" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
 		</div>
@@ -78,7 +74,7 @@
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-pink navbar-dark sticky-top px-4 py-0">
-                <a href="admin-web.jsp" class="navbar-brand d-flex d-lg-none me-4">
+                <a href="admin-web.html" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">
@@ -116,12 +112,12 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-user icon__user__small"></i>
-                            <span class="d-none d-lg-inline-flex"><%= auth != null ? auth.getTendn():"Đăng nhập"%></span>
+                            <span class="d-none d-lg-inline-flex">Thanh Thùy</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">Thông tin của tôi</a>
                             <a href="#" class="dropdown-item">Cài đặt</a>
-                            <a href="../signin.jsp" class="dropdown-item">Đăng xuất</a>
+                            <a href="../index.jsp" class="dropdown-item">Đăng xuất</a>
                         </div>
                     </div>
                 </div>

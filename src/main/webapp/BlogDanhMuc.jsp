@@ -51,11 +51,7 @@
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-<<<<<<< HEAD
-            <a href="signin.jsp"><i class="fa fa-user"></i> <%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-=======
             <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
->>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">
@@ -110,11 +106,7 @@
             <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                         </div>
                         <div class="header__top__right__auth">
-<<<<<<< HEAD
-                            <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-=======
                             <a href="admin/signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
->>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
                         </div>
                     </div>
                 </div>
@@ -220,7 +212,7 @@
                                         <h4>Danh mục</h4>
                                         <ul>
                                             <li><a href="./ListBlog">Tất cả</a></li>
-                                            <li><a href="#" >Đời sống (3)</a></li>
+                                            <li><a href="BlogDanhMuc?danhmuc=Đời sống" >Đời sống (3)</a></li>
                                             <li><a href="blog-details-3.jsp">Kỷ niệm (1)</a></li>
 
                                         </ul>
@@ -230,7 +222,7 @@
                                         <% List<Blog> list1 = (List<Blog>) request.getAttribute("list");
                                             for(Blog b1: list1){ %>
                                         <div class="blog__sidebar__recent">
-                                            <a href="Blog1?id=<%=b1.getId()%>" class="blog__sidebar__recent__item">
+                                            <a href="BlogDanhMuc?danhmuc=<%=b1.getListdanhmuc().get(0)%>" class="blog__sidebar__recent__item">
                                                 <div class="blog__sidebar__recent__item__pic">
                                                     <img src="<%=b1.getImg()%>" alt="">
                                                 </div>
@@ -267,9 +259,9 @@
                                                 <ul>
                                                     <li><i class="fa fa-calendar-o"></i><%=b.getDate()%></li>
                                                 </ul>
-                                                <h5><a href="Blog1?id=<%=b.getId()%>"><%=b.getCategory()%></a></h5>
+                                                <h5><a href="BlogDanhMuc?danhmuc=<%=b.getListdanhmuc().get(0)%>"><%=b.getCategory()%></a></h5>
                                                 <p class="text-justify"><%=b.getCont()%></p>
-                                                <a href="Blog1?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
+                                                <a href="BlogDanhMuc?danhmuc=<%=b.getListdanhmuc().get(0)%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
                                             </div>
                                         </div>
                                     </div>

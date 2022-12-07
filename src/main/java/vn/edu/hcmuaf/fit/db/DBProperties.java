@@ -32,4 +32,23 @@ public class DBProperties {
     public static void main(String[] args) {
         System.out.println(DBProperties.dbName());
     }
+
+    public static String getDbHost() {
+        return prop.get("db.host").toString();
+    }
+
+    public static String getDbPort() {
+        return prop.get("db.port").toString();
+    }
+    public static String getKichThuoc() {
+        return prop.get("db.KichThuoc").toString();
+    }
+
+    public static String getDbOption() {
+        return prop.get("db.options").toString();
+    }
+
+    public static String getDbName() {
+        return prop.get("db.databaseName").toString();
+    }
 }

@@ -5,9 +5,9 @@ import vn.edu.hcmuaf.fit.model.Comment;
 import vn.edu.hcmuaf.fit.model.Product;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductService {
     public static List<Product> getData(){
@@ -51,15 +51,6 @@ public class ProductService {
         }
         return  list;
     }
-    public static Product findById( String id){
-        List<Product> list= getData();
-        for(Product p: list){
-            if(p.getId().equals(id)) {
-                return p;
-            }
-        }
-        return null;
-    }
 
     public static void main(String[] args) {
         List<Product> li = ProductService.getData();
@@ -70,6 +61,5 @@ public class ProductService {
 
         }
     }
-
 
 }

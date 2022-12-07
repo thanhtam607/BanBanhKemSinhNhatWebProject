@@ -1,7 +1,6 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -28,7 +27,6 @@
 </head>
 
 <body>
-<% User auth = (User) session.getAttribute("auth");%>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -49,7 +47,11 @@
         <div class="humberger__menu__widget">
 
             <div class="header__top__right__auth">
+<<<<<<< HEAD
                 <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%> </a>
+=======
+                <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng Nhập </a>
+>>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -107,7 +109,11 @@
                                 <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__auth">
+<<<<<<< HEAD
                                 <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
+=======
+                                <a href="admin/signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
+>>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
                             </div>
                         </div>
                     </div>
@@ -210,7 +216,7 @@
                             <h4>Các Loại Bánh</h4>
                             <ul class="slidebar__loaibanh">
                                 <li class="text__loaibanh"><a class="text__loaibanh__active" href="./shop-product.html">Tất cả</a></li>
-                                <li class="text__loaibanh"><a href="./shop-product-banh-hoa.html">Bánh hoa</a></li>
+                                <li class="text__loaibanh"><a href="shop-product-banh-hoa.jsp">Bánh hoa</a></li>
                                 <li class="text__loaibanh"><a href="./shop-product-trang-tri-don-gian.html">Bánh trang trí đơn giản</a></li>
                                 <li class="text__loaibanh"><a href="#">Bánh trang trí hình thú</a></li>
                                 <li class="text__loaibanh"><a href="#">Bánh trái cây</a></li>
@@ -240,26 +246,22 @@
                             <h4>Kích thước</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    Lớn
-                                    <input type="radio" id="large">
+                                    <a href="./Filter1" id="large">Lớn</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
-                                <label for="medium">
-                                    Vừa
-                                    <input type="radio" id="medium">
+                                <label  for="medium">
+                                    <a href="./Filter1" id="medium">Vừa</a>
                                 </label>
                             </div>
-                            <div class="sidebar__item__size">
+                            <div  class="sidebar__item__size">
                                 <label for="small">
-                                    Nhỏ
-                                    <input type="radio" id="small">
+                                    <a href="./Filter1" id="small">Nhỏ</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
-                                    Bé
-                                    <input type="radio" id="tiny">
+                                    <a href="./Filter1" id="tiny">Bé</a>
                                 </label>
                             </div>
                         </div>
@@ -269,7 +271,7 @@
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
                                         <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic latest-product__item__pic">
+                                            <div class="latest-product__item__pic">
                                                 <img src="./img/product/B019/banh1.jpg" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
@@ -278,7 +280,7 @@
                                             </div>
                                         </a>
                                         <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic latest-product__item__pic__setWidth ">
+                                            <div class="latest-product__item__pic">
                                                 <img src="./img/product/B022/banh1.jpg" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
@@ -287,7 +289,7 @@
                                             </div>
                                         </a>
                                         <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic latest-product__item__pic__setWidth ">
+                                            <div class="latest-product__item__pic">
                                                 <img src="./img/product/B023/banh1.jpg" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
@@ -298,7 +300,7 @@
                                     </div>
                                     <div class="latest-prdouct__slider__item">
                                         <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic latest-product__item__pic__setWidth ">
+                                            <div class="latest-product__item__pic">
                                                 <img src="./img/product/B024/banh1.jpg" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
@@ -307,7 +309,7 @@
                                             </div>
                                         </a>
                                         <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic latest-product__item__pic__setWidth ">
+                                            <div class="latest-product__item__pic">
                                                 <img src="./img/product/B025/banh1.jpg" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
@@ -316,7 +318,7 @@
                                             </div>
                                         </a>
                                         <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic latest-product__item__pic__setWidth ">
+                                            <div class="latest-product__item__pic">
                                                 <img src="./img/product/B026/banh1.jpg" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
@@ -486,7 +488,7 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="ProductDetail?id=<%=p.getId() %>"><%= p.getName()%></a></h6>
+                                    <h6><a href="shop-details.jsp"><%= p.getName()%></a></h6>
                                     <h5><%= p.getPrice()%> VND</h5>
                                 </div>
                             </div>
