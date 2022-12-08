@@ -60,7 +60,9 @@
             <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
+                <% if(auth.checkRole(1)) { %>
                 <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                <%}%>
                 <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
             </div>
             <%}%>
@@ -123,7 +125,9 @@
                             <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                             <% if(auth != null) { %>
                             <div class="header__top__right__auth__dropdown">
+                                <% if(auth.checkRole(1)) { %>
                                 <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                                <%}%>
                                 <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
                             </div>
                             <%}%>
@@ -311,7 +315,7 @@
                             <div class = "input-comment">
                                 <div class = "input-item">
                                     <span>Nhập bình luận:</span>
-                                    <input type="text" placeholder="Viết bình luận..." style = "width:70%;">
+                                    <input name="data" type="text" placeholder="Viết bình luận..." style = "width:70%;">
                                     <span class="add-comment">
                                         <button type="submit" class="btn-add-comment">Gửi</button>
                                     </span>

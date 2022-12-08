@@ -54,7 +54,9 @@
                 <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                 <% if(auth != null) { %>
                 <div class="header__top__right__auth__dropdown">
+                    <% if(auth.checkRole(1)) { %>
                     <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                    <%}%>
                     <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
                 </div>
                 <%}%>
@@ -115,10 +117,12 @@
                             <div class="header__top__right__auth">
                                 <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                                 <% if(auth != null) { %>
-                                <div class="header__top__right__auth__dropdown">
-                                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
-                                    <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
-                                </div>
+                                    <div class="header__top__right__auth__dropdown">
+                                        <% if(auth.checkRole(1)) { %>
+                                        <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                                        <%}%>
+                                        <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                                    </div>
                                 <%}%>
                             </div>
                         </div>
