@@ -63,7 +63,7 @@ public class User implements Serializable {
     }
 
     public boolean checkRole(int i) {
-        if(this.role == 1) return true;
+        if(this.role == i) return true;
         return false;
     }
 
