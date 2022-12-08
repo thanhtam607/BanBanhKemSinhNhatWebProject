@@ -1,4 +1,3 @@
-<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -33,7 +32,6 @@
 </head>
 
 <body>
-    <% User auth = (User) session.getAttribute("auth");%>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -53,17 +51,16 @@
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__auth">
+<<<<<<< HEAD
                 <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-                <div class="<%= auth != null ? "header__top__right__auth__dropdown":""%>">
-                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item"><%= auth != null ? "Vào trang quản lí":""%></a>
-                    <a href="./signin.jsp" class="dropdown-item"><%= auth != null ? "Đăng xuất":""%></a>
-                </div>
+=======
+                <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
+>>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
             </div>
-
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.jsp">Trang chủ</a></li>
+                <li class="active"><a href="./index.html">Trang chủ</a></li>
                 <li><a href="about.jsp">Giới thiệu</a></li>
                 <li><a href="./ListProduct">Sản phẩm</a>
                    
@@ -113,15 +110,13 @@
                                 <a href="https://www.messenger.com/t/100017755062615" target="blank"><i class="fa fa-comment"></i></a>
                                 <a href="https://www.instagram.com/maizecorn1542/" target="blank"><i class="fa fa-instagram"></i></a>
                             </div>
-
                             <div class="header__top__right__auth">
+<<<<<<< HEAD
                                 <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-                                <div class="<%= auth != null ? "header__top__right__auth__dropdown":""%>">
-                                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item"><%= auth != null ? "Vào trang quản lí":""%></a>
-                                    <a href="./signin.jsp" class="dropdown-item"><%= auth != null ? "Đăng xuất":""%></a>
-                                </div>
+=======
+                                <a href="admin/signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
+>>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -132,13 +127,13 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.jsp"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                        <a href="./index.html"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
                     </div>
                 </div>
                 <div class="col-lg-7 ">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.jsp">Trang chủ</a></li>
+                            <li class="active"><a href="./index.html">Trang chủ</a></li>
                             <li><a href="about.jsp">Giới thiệu</a></li>
                             <li><a href="./ListProduct">Sản phẩm</a>
                              
@@ -500,7 +495,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.jsp"><img src="img/logo_web.jpg" alt=""></a>
+                            <a href="./index.html"><img src="img/logo_web.jpg" alt=""></a>
                         </div>
                         <ul class="mt-5" id="about">
                             <li><i class="fa fa-home"></i> Địa chỉ: Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM</li>

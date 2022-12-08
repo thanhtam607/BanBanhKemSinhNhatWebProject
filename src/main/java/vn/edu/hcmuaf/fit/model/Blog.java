@@ -8,18 +8,23 @@ public class Blog {
     String cont;
     String img;
     String date;
-    String title;
-    List<String> listBlog;
+    List<String> listdanhmuc;
+    List<String> listchude;
+    List<String> listdemuc;
+    List<String> listchitiet;
 
-    public Blog(String id, String category, String cont, String img, String date, String title, List<String> listBlog) {
+    public Blog(String id, String category,   String cont, String img, String date, List<String> listdanhmuc,  List<String> listchude, List<String> listdemuc, List<String> listchitiet) {
         this.id = id;
         this.category = category;
         this.cont = cont;
         this.img = img;
         this.date = date;
-        this.title = title;
-        this.listBlog = listBlog;
+        this.listdanhmuc = listdanhmuc;
+        this.listchude = listchude;
+        this.listdemuc = listdemuc;
+        this.listchitiet = listchitiet;
     }
+
 
     public String getId() {
         return id;
@@ -32,6 +37,11 @@ public class Blog {
     public String getCategory() {
         return category;
     }
+
+
+
+
+
 
     public void setCategory(String category) {
         this.category = category;
@@ -61,19 +71,35 @@ public class Blog {
         this.date = date;
     }
 
-    public String getTitle() {
-        return title;
+    public List<String> getListdanhmuc() {
+        return listdanhmuc;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setListdanhmuc(List<String> listdanhmuc) {
+        this.listdanhmuc = listdanhmuc;
     }
 
-    public List<String> getListBlog() {
-        return listBlog;
+    public List<String> getListchude() {
+        return listchude;
     }
 
-    public void setListBlog(List<String> listBlog) {
-        this.listBlog = listBlog;
+    public void setListchude(List<String> listchude) {
+        this.listchude = listchude;
+    }
+
+    public List<String> getListdemuc() {
+        return listdemuc;
+    }
+
+    public void setListdemuc(List<String> listBlog) {
+        this.listdemuc = listdemuc;
+    }
+
+    public List<String> getListchitiet() {
+        return listchitiet;
+    }
+
+    public void setListchitiet(List<String> listchitiet) {
+        this.listchitiet = listchitiet;
     }
 }

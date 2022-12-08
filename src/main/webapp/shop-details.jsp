@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
+=======
+>>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -34,8 +38,6 @@
 </head>
 
 <body>
-<% User auth = (User) session.getAttribute("auth");%>
-
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -57,11 +59,11 @@
         <div class="humberger__menu__widget">
           
             <div class="header__top__right__auth">
+<<<<<<< HEAD
                 <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-                <div class="<%= auth != null ? "header__top__right__auth__dropdown":""%>">
-                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item"><%= auth != null ? "Vào trang quản lí":""%></a>
-                    <a href="./signin.jsp" class="dropdown-item"><%= auth != null ? "Đăng xuất":""%></a>
-                </div>
+=======
+                <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
+>>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -118,11 +120,11 @@
                             </div>
                             
                             <div class="header__top__right__auth">
+<<<<<<< HEAD
                                 <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-                                <div class="<%= auth != null ? "header__top__right__auth__dropdown":""%>">
-                                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item"><%= auth != null ? "Vào trang quản lí":""%></a>
-                                    <a href="./signin.jsp" class="dropdown-item"><%= auth != null ? "Đăng xuất":""%></a>
-                                </div>
+=======
+                                <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
+>>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
                             </div>
                         </div>
                     </div>
@@ -197,18 +199,18 @@
         </div>
     </section>
     <!-- Hero Section End -->
-<% Product p = (Product) request.getAttribute("getDetail");%>
+
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="./img/banner/breadcrumb.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2><%=p.getName()%></h2>
+                        <h2>Bánh cánh đồng hoa</h2>
                         <div class="breadcrumb__option">
                             <a href="index.jsp">Trang chủ</a>
                             <a href="./ListProduct">Sản phẩm</a>
-                            <span><%=p.getName()%></span>
+                            <span>Bánh cánh đồng hoa</span>
                         </div>
                     </div>
                 </div>
@@ -225,22 +227,28 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                 src="<%=p.getListImg().get(0)%>" alt="">
+                                src="img/product/B001/banh1.jpg" alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
-                            <% for(int i = 0; i<p.getListImg().size();i++){%>
-                            <img data-imgbigurl="<%=p.getListImg().get(i)%>"
-                                 src="<%=p.getListImg().get(i)%>" alt="">
-                            <%}%>
+                            <img data-imgbigurl="img/product/B001/banh2.jpg"
+                                src="img/product/B001/banh2.jpg" alt="">
+                            <img data-imgbigurl="img/product/B001/banh3.jpg"
+                                src="img/product/B001/banh3.jpg" alt="">
+                            <img data-imgbigurl="img/product/B001/banh4.jpg"
+                                src="img/product/B001/banh4.jpg" alt="">
+             
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <h3><%= p.getName()%></h3>
-
-                        <div class="product__details__price"><%= p.getPrice()%> VND</div>
-                        <p><%=p.getNoiDung()%></p>
+                        <h3>Bánh cánh đồng hoa</h3>
+                       
+                        <div class="product__details__price">450,000 VND</div>
+                        <p>Trong những dịp lễ, ngày kỷ niệm hay sinh nhật, không cần một món quà quá khoa trương,
+                             đơn giản chỉ là một chiếc bánh kem được trang trí bằng những bông hoa sắc màu,
+                             bắt mắt cũng khiến bữa tiệc trở nên lung linh mà người nhận thì vui vẻ rồi. 
+                             Bánh thích hợp tặng chị gái, mẹ, cô giáo.</p>
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
@@ -272,42 +280,41 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                    aria-selected="false">Bình luận<span>(1)</span></a>
+                                    aria-selected="false">Bình luận<span>(<%=p.getComments().size()%>)</span></a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Mô tả sản phẩm</h6>
-                                    <p><%=p.getMoTa()%></p>
+                                    <p>Bánh kem phong cách hoa Hàn Quốc, ngon và đẹp, 
+                                        chất lượng luôn tươi mới, nguyên liệu hoàn toàn cao cấp được chọn lọc kỹ càng, 
+                                        đảm bảo an toàn vệ sinh thực phẩm, bảo vệ sức khỏe cho người dùng đó chính là 
+                                        điều mà chúng tôi muốn mang lại cho quý khách hàng.
+                                        Phần hoa của bánh sẽ được làm từ kem bơ, kem tươi tạo nên vị bánh cũng rất ấn tượng, ngọt dịu, không gây ngán.
+                                        Các thợ làm bánh phải bắt từng bông hoa, để cho thật lạnh để hoa đông cứng rồi mới sắp xếp lên bánh cho hài hoà. Vì vậy cần rất nhiều thời gian, 
+                                        sự kiên nhẫn và cả sự khéo léo. Mỗi chiếc bánh thật sự là một tác phẩm nghệ thuật.</p>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Đặc điểm:</h6>
-                                    <p>- Loại bánh: <%=p.getLoaiBanh()%></p>
-                                    <p>- Kích thước: <%=p.getKichThuoc()%></p>
-                                    <p>- Khối lượng: <%=p.getKhoiLuong()%>g</p>
+                                    <p>- Loại bánh: Bánh hoa</p>
+                                    <p>- Kích thước: Vừa</p>
+                                    <p>- Khối lượng: 500g</p>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6 style="margin-bottom: 10px;">Trần Nhật Linh</h6>
-                                        <i class="fa fa-calendar-o"></i> <span style="font-size: 13px; color: rgb(179, 178, 178);">22-10-2022</span> 
+                                    <%List<Comment> cmtList = p.getComments();
+                                        for(Comment cmt : cmtList){%>
+                                    <h6 style="margin-bottom: 10px;"><%= cmt.getKhachHang()%></h6>
+                                        <i class="fa fa-calendar-o"></i> <span style="font-size: 13px; color: rgb(179, 178, 178);"><%=cmt.getDate()%>></span>
                                         
-                                    <p >Lần đầu đặt bánh ở tiệm này thấy rất hài lòng, cầm chiếc bánh trên tay đi tặng được mọi người khen
-                                        . Rất hài lòng, trang trí sang trọng, đẹp mắt.</p>
+                                    <p ><%=cmt.getBinhLuan()%></p>
+                                </div>
+                                <%}%>
                                         <div class = "input-comment">
-                                            <div class = "input-item" >
-                                                <span>Tên của bạn:</span>
-                                                <input type="text" placeholder="Nhập họ tên...">
-                                            </div>
-                                            <div class = "input-item" >
-                                                <span>Số điện thoại:</span>
-                                                <input type="text" placeholder="Nhập số điện thoại...">
-                                                
-                                            </div>
-                                        
                                             <div class = "input-item">
                                                 <span>Nhập bình luận:</span>
                                                 <input type="text" placeholder="Viết bình luận..." style = "width:70%;">
@@ -317,7 +324,7 @@
                                             </div>
                                             
                                         </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>

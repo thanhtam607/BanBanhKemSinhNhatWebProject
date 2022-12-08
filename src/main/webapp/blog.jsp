@@ -1,6 +1,5 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -33,7 +32,6 @@
 </head>
 
 <body>
-<% User auth = (User) session.getAttribute("auth");%>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -53,11 +51,11 @@
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
+<<<<<<< HEAD
             <a href="signin.jsp"><i class="fa fa-user"></i> <%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-            <div class="<%= auth != null ? "header__top__right__auth__dropdown":""%>">
-                <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item"><%= auth != null ? "Vào trang quản lí":""%></a>
-                <a href="./signin.jsp" class="dropdown-item"><%= auth != null ? "Đăng xuất":""%></a>
-            </div>
+=======
+            <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
+>>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">
@@ -112,11 +110,11 @@
             <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                         </div>
                         <div class="header__top__right__auth">
+<<<<<<< HEAD
                             <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-                            <div class="<%= auth != null ? "header__top__right__auth__dropdown":""%>">
-                                <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item"><%= auth != null ? "Vào trang quản lí":""%></a>
-                                <a href="./signin.jsp" class="dropdown-item"><%= auth != null ? "Đăng xuất":""%></a>
-                            </div>
+=======
+                            <a href="admin/signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
+>>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
                         </div>
                     </div>
                 </div>
@@ -138,7 +136,7 @@
                         <li><a href="./ListProduct">Sản phẩm</a>
                             
                         </li>
-                        <li class="active"><a href="./blog.html">Tin tức</a></li>
+                        <li class="active"><a href="./ListBlog">Tin tức</a></li>
                         <li><a href="contact.jsp">Liên hệ</a></li>
                     </ul>
                 </nav>
@@ -221,7 +219,7 @@
                                     <div class="blog__sidebar__item">
                                         <h4>Danh mục</h4>
                                         <ul>
-                                            <li><a href="./blog.html">Tất cả</a></li>
+                                            <li><a href="./ListBlog">Tất cả</a></li>
                                             <li><a href="#" >Đời sống (3)</a></li>
                                             <li><a href="blog-details-3.jsp">Kỷ niệm (1)</a></li>
 
@@ -229,44 +227,29 @@
                                     </div>
                                     <div class="blog__sidebar__item">
                                         <h4>Tin mới nhất</h4>
+                                        <% List<Blog> list1 = (List<Blog>) request.getAttribute("list");
+                                            for(Blog b1: list1){ %>
                                         <div class="blog__sidebar__recent">
-                                            <a href="blog-details-1.jsp" class="blog__sidebar__recent__item">
+                                            <a href="Blog1?id=<%=b1.getId()%>" class="blog__sidebar__recent__item">
                                                 <div class="blog__sidebar__recent__item__pic">
-                                                    <img src="img/blog/sidebar/blog1.png" alt="">
+                                                    <img src="<%=b1.getImg()%>" alt="">
                                                 </div>
                                                 <div class="blog__sidebar__recent__item__text">
-                                                    <h6>Giải mã sức hút của<br /> bánh kem hiện đại</h6>
-                                                    <span>22-10-2022</span>
-                                                </div>
-                                            </a>
-                                            <a href="blog-details-2.jsp" class="blog__sidebar__recent__item">
-                                                <div class="blog__sidebar__recent__item__pic">
-                                                    <img src="img/blog/sidebar/blog2.jpg" alt="">
-                                                </div>
-                                                <div class="blog__sidebar__recent__item__text">
-                                                    <h6>Tổng hợp cách bảo quản <br />bánh kem cực đơn giản</h6>
-                                                    <span>22-10-2022</span>
-                                                </div>
-                                            </a>
-                                            <a href="blog-details-3.jsp" class="blog__sidebar__recent__item">
-                                                <div class="blog__sidebar__recent__item__pic">
-                                                    <img src="img/blog/sidebar/blog3.jpg" alt="">
-                                                </div>
-                                                <div class="blog__sidebar__recent__item__text">
-                                                    <h6>Chọn bánh kem cho những <br />ngày kỷ niệm ý nghĩa</h6>
-                                                    <span>22-10-2022</span>
+                                                    <h6><%=b1.getCategory()%></h6>
+                                                    <span><%=b1.getDate()%></span>
                                                 </div>
                                             </a>
                                         </div>
+                                        <%}%>
                                     </div>
                                     <div class="blog__sidebar__item">
                                         <h4>Chủ đề</h4>
                                         <div class="blog__sidebar__item__tags">
-                                            <a href="./blog.html">Bánh kem</a>
-                                            <a href="blog-details-1.jsp">Hiện đại</a>
-                                            <a href="blog-details-2.jsp">Bảo quản bánh</a>
-                                            <a href="blog-details-3.jsp">Chọn bánh</a>
-                                            <a href="blog-details-4.jsp">Ý nghĩa bánh</a>
+                                            <a href="./ListBlog">Bánh kem</a>
+                                            <a href="Blog1?id=BL01">Hiện đại</a>
+                                            <a href="Blog1?id=BL02">Bảo quản bánh</a>
+                                            <a href="Blog1?id=BL03">Chọn bánh</a>
+                                            <a href="Blog1?id=BL04">Ý nghĩa bánh</a>
                                         </div>
                                     </div>
                                 </div>
@@ -277,16 +260,16 @@
                                         for(Blog b: list){ %>
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <div class="blog__item">
-                                            <div class="blog__item__pic">
+                                                <div class="blog__item__pic">
                                                 <img src="<%=b.getImg()%>">
                                             </div>
                                             <div class="blog__item__text">
                                                 <ul>
                                                     <li><i class="fa fa-calendar-o"></i><%=b.getDate()%></li>
                                                 </ul>
-                                                <h5><a href="blog-details-1.jsp"><%=b.getCategory()%></a></h5>
+                                                <h5><a href="Blog1?id=<%=b.getId()%>"><%=b.getCategory()%></a></h5>
                                                 <p class="text-justify"><%=b.getCont()%></p>
-                                                <a href="blog-details-1.jsp" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
+                                                <a href="Blog1?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
                                             </div>
                                         </div>
                                     </div>

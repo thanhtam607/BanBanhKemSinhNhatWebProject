@@ -38,7 +38,28 @@ public class DBConnect {
         }
 
     }
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        Statement statement = DBConnect.getInstall().get();
+        Statement stmt = DBConnect.getInstall().get();
+        List<User> users = new ArrayList<>();
+        if(statement != null)
+            try{
+                ResultSet rs =  statement.executeQuery("SELECT * from admin ");
+                while(rs.next()){
+                  User user1 = new User(rs.getString(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4));
+                  users.add(user1);
+                }
+                System.out.println(users.toString());
+            }
+            catch (SQLException e){
+                throw new RuntimeException(e);
+            }
+        else{
+            System.out.println("Không có sản phẩm");
+        }
     }
 }

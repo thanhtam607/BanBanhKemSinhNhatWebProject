@@ -1,5 +1,10 @@
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
-<html lang="zxx">
+<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
+<html lang="xzz">
+<meta http-equiv="Content-Type" charset="UTF-8">
+
 
 <head>
     <meta charset="UTF-8">
@@ -47,7 +52,7 @@
         <div class="humberger__menu__widget">
             
             <div class="header__top__right__auth">
-                <a href="signin.jsp"><i class="fa fa-user"></i> Đăng Nhập </a>
+                <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng Nhập </a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -102,7 +107,7 @@
                                 <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
+                                <a href="admin/signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
                             </div>
                         </div>
                     </div>
@@ -231,31 +236,27 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="sidebar__item">
                             <h4>Kích thước</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    Lớn
-                                    <input type="radio" id="large">
+                                    <a href="./Filter1" id="large">Lớn</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
-                                <label for="medium">
-                                    Vừa 
-                                    <input type="radio" id="medium">
+                                <label  for="medium">
+                                    <a href="./Filter1" id="medium">Vừa</a>
                                 </label>
                             </div>
-                            <div class="sidebar__item__size">
+                            <div  class="sidebar__item__size">
                                 <label for="small">
-                                    Nhỏ
-                                    <input type="radio" id="small">
+                                    <a href="./Filter1" id="small">Nhỏ</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
-                                    Bé
-                                    <input type="radio" id="tiny">
+                                    <a href="./Filter1" id="tiny">Bé</a>
                                 </label>
                             </div>
                         </div>
@@ -358,11 +359,11 @@
                         </div>
                     </div>
                     <div class="row">
-                      
-                      
+                        <% List<Product> list1 = (List<Product>) request.getAttribute("list");
+                            for(Product p: list1){ %>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="./img/product/B008/banh1.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="<%=p.getListImg().get(0)%>">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -370,86 +371,12 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="shop-details.jsp">Bánh Sinh Nhật</a></h6>
-                                    <h5>300,000 VND</h5>
+                                    <h6><a href="shop-details.jsp"><%=p.getName()%></a></h6>
+                                    <h5><%=p.getPrice()%></h5>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="./img/product/B009/banh1.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="shop-details.jsp">Bánh Sinh Nhật</a></h6>
-                                    <h5>300,000 VND</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="./img/product/B010/banh1.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="shop-details.jsp">Bánh Sinh Nhật</a></h6>
-                                    <h5>300,000 VND</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="./img/product/B011/banh1.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="shop-details.jsp">Bánh Sinh Nhật</a></h6>
-                                    <h5>300,000 VND</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="./img/product/B001/banh1.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="shop-details.jsp">Bánh Sinh Nhật</a></h6>
-                                    <h5>300,000 VND</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="./img/product/B012/banh1.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="shop-details.jsp">Bánh Sinh Nhật</a></h6>
-                                    <h5>300,000 VND</h5>
-                                </div>
-                            </div>
-                        </div>
+                        <% } %>
                     </div>
                     <div class="product__pagination">
                         <a href="#">1</a>

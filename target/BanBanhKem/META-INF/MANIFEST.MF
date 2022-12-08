@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By: LaptopUSAPro
+<<<<<<< HEAD
+Built-By: tam
+=======
+Built-By: admin
+>>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
 Build-Jdk: Oracle OpenJDK version 19.0.1
 
