@@ -86,20 +86,4 @@ public class Product {
     public List<Comment> getComments() {
         return comments;
     }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", loaiBanh='" + loaiBanh + '\'' +
-                ", kichThuoc='" + kichThuoc + '\'' +
-                ", khoiLuong='" + khoiLuong + '\'' +
-                ", moTa='" + moTa + '\'' +
-                ", noiDung='" + noiDung + '\'' +
-                ", listImg=" + listImg +
-                ", price=" + price +
-                ", comments=" + comments +
-                '}';
-    }
 }
