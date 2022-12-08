@@ -311,7 +311,7 @@
                             <div class = "input-comment">
                                 <div class = "input-item">
                                     <span>Nhập bình luận:</span>
-                                    <input type="text" placeholder="Viết bình luận..." style = "width:70%;">
+                                    <input name="data" type="text" placeholder="Viết bình luận..." style = "width:70%;">
                                     <span class="add-comment">
                                         <button type="submit" class="btn-add-comment">Gửi</button>
                                     </span>

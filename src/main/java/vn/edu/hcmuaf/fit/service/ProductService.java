@@ -58,15 +58,26 @@ public class ProductService {
         }
         return null;
     }
+    public static  void addComment(Comment cmt, String IDUser){
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "insert into Comments values('"+ cmt.getMaSP() + "', '"+ IDUser + "', '"+ cmt.getBinhLuan()+ "', '"+ cmt.getDate() +"');";
 
-    public static void main(String[] args) {
-        List<Product> li = ProductService.getData();
+                try {
+        statement.executeUpdate(sql);
 
-        for(Product p: li){
-            System.out.print(p.getName()+"\t");
-            System.out.println(p.getComments().size());
-
+        } catch (SQLException se) {
+            se.printStackTrace();
         }
+    }
+    public static void main(String[] args) {
+//        List<Product> li = ProductService.getData();
+//
+//        for(Product p: li){
+//            System.out.print(p.getName()+"\t");
+//            System.out.println(p.getComments().size());
+//
+//        }
+        addComment(new Comment("B002", "Thanh Tâm","Bánh mềm mịn vô cùng hòa quyện với  phần kem mịn màng, vị ngọt thanh vừa ăn lại có thêm phần tiramisu khá lạ miệng khiến cho người ăn cảm thấy thích thú.","2022/12/8"), "AD02");
     }
 
 
