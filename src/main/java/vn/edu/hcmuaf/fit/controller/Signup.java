@@ -1,9 +1,13 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.model.Account;
+import vn.edu.hcmuaf.fit.service.UserService;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "Signup", value = "/Signup")
 public class Signup extends HttpServlet {
@@ -13,14 +17,24 @@ public class Signup extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String user = request.getParameter("username");
+        request.setCharacterEncoding("UTF-8");
+        String email = request.getParameter("email");
+        String user = request.getParameter("name");
         String pass = request.getParameter("pass");
         String repass = request.getParameter("repass");
+
         if(!pass.equals(repass)){
             request.getRequestDispatcher("signup.jsp").forward(request,response);
         }
+        else if (!UserService.checkEmail(email)) {
+            request.getRequestDispatcher("signup.jsp").forward(request,response);
+        }
 
-        response.sendRedirect("index.jsp");
+        else {
+            UserService.register(new Account(email, pass, user));
+
+            response.sendRedirect("index.jsp");
+        }
     }
 
 }

@@ -51,7 +51,7 @@
                     <form class="bg-pink rounded p-4 p-sm-5 my-4 mx-3" action="Signup" method="post">
                         <h2 class="title-sg">Đăng ký</h2>
                         <div class="form-floating mb-3">
-                            <input name="username" type="text" class="form-control" id="floatingText" placeholder="jhondoe">
+                            <input name="name" type="text" class="form-control" id="floatingText" placeholder="jhondoe">
                             <label for="floatingText">Tạo tên đăng nhập</label>
                         </div>
                         <div class="form-floating mb-3">
