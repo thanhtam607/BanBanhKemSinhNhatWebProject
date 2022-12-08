@@ -2625,10 +2625,13 @@ ol {
 .blog__sidebar__recent__item__pic {
 	float: left;
 	margin-right: 20px;
+	width: 25%;
+	margin-top: 10px;
 }
 
 .blog__sidebar__recent__item__text {
 	overflow: hidden;
+	margin-top: 10px;
 }
 
 .blog__sidebar__recent__item__text h6 {

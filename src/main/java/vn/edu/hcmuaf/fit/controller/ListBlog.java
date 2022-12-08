@@ -1,9 +1,7 @@
 package vn.edu.hcmuaf.fit.controller;
 
-import vn.edu.hcmuaf.fit.model.Blog;
-import vn.edu.hcmuaf.fit.model.Product;
+import vn.edu.hcmuaf.fit.bean.Blog;
 import vn.edu.hcmuaf.fit.service.BlogService;
-import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

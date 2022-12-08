@@ -91,8 +91,6 @@ public class UserService {
 
         if(stm!= null) {
             try {
-
-
                     String ID = "AD" + (list.size() + 1);
                     String sql = "insert into taikhoan values ('" + ID + "', '" + acc.getEmail() + "', '" + hashPassword(acc.getPassword())  + "', '" + acc.getName() + "'," + acc.getRole()+");";
                     stm.executeUpdate(sql);

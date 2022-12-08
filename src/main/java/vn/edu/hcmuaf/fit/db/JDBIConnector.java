@@ -2,7 +2,7 @@ package vn.edu.hcmuaf.fit.db;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.jdbi.v3.core.Jdbi;
-import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.bean.Blog;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -38,11 +38,16 @@ public class JDBIConnector {
     }
 
     public static void main(String[] args) {
-        List<User> users = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from admin")
-                    .mapToBean(User.class).stream().collect(Collectors.toList());
+//        List<User> users = JDBIConnector.get().withHandle(handle -> {
+//            return handle.createQuery("select * from admin")
+//                    .mapToBean(User.class).stream().collect(Collectors.toList());
+//        });
+//        System.out.println(users);
+        List<Blog> blog = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from blog")
+                    .mapToBean(Blog.class).stream().collect(Collectors.toList());
         });
-        System.out.println(users);
+        System.out.println(blog);
     }
 }
 

@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.Blog" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <!DOCTYPE html>
@@ -226,8 +226,8 @@
                                         <h4>Danh mục</h4>
                                         <ul>
                                             <li><a href="./ListBlog">Tất cả</a></li>
-                                            <li><a href="#" >Đời sống (3)</a></li>
-                                            <li><a href="blog-details-3.jsp">Kỷ niệm (1)</a></li>
+                                            <li><a href="BlogDanhMuc?danhmuc=Đời sống" >Đời sống (3)</a></li>
+                                            <li><a href="BlogDanhMuc?danhmuc=Kỉ niệm">Kỷ niệm (1)</a></li>
 
                                         </ul>
                                     </div>

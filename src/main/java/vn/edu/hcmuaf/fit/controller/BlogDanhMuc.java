@@ -1,6 +1,6 @@
 package vn.edu.hcmuaf.fit.controller;
 
-import vn.edu.hcmuaf.fit.model.Blog;
+import vn.edu.hcmuaf.fit.bean.Blog;
 import vn.edu.hcmuaf.fit.service.BlogService;
 
 import javax.servlet.*;
@@ -13,10 +13,8 @@ import java.util.List;
 public class BlogDanhMuc extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Blog> list = BlogService.FindByDanhMuc(request.getParameter("danhmuc"));
+        List<Blog> list = BlogService.getDanhMuc(request.getParameter("danhmuc"));
         request.setAttribute("list", list);
-        List<Blog> list1 = BlogService.getData();
-        request.setAttribute("list", list1);
         request.getRequestDispatcher("BlogDanhMuc.jsp").forward(request,response);
     }
 
