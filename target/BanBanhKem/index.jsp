@@ -1,7 +1,9 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.Blog" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -59,15 +61,17 @@
                 <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                 <% if(auth != null) { %>
                 <div class="header__top__right__auth__dropdown">
+                    <% if(auth.checkRole(1)) { %>
                     <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
-                    <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                    <%}%>
+                    <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                 </div>
                 <%}%>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.jsp">Trang chủ</a></li>
+                <li class="active"><a href="./Index">Trang chủ</a></li>
                 <li><a href="about.jsp">Giới thiệu</a></li>
                 <li><a href="./ListProduct">Sản phẩm</a>
                    
@@ -119,11 +123,12 @@
                             </div>
                             <div class="header__top__right__auth">
                                 <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
-
                                 <% if(auth != null) { %>
                                 <div class="header__top__right__auth__dropdown">
+                                    <% if(auth.checkRole(1)) { %>
                                     <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
-                                    <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                                    <%}%>
+                                    <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                                 </div>
                                 <%}%>
 
@@ -139,13 +144,13 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.jsp"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                        <a href="./Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
                     </div>
                 </div>
                 <div class="col-lg-7 ">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.jsp">Trang chủ</a></li>
+                            <li class="active"><a href="./Index">Trang chủ</a></li>
                             <li><a href="about.jsp">Giới thiệu</a></li>
                             <li><a href="./ListProduct">Sản phẩm</a>
                              
@@ -251,31 +256,14 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
+                    <% List<Product> list1 = (List<Product>) request.getAttribute("list");
+                        for(Product p: list1){ %>
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/product/B006/banh1.jpg">
-                            <h5><a href="shop-details.jsp">Bánh hoa hải đường ngũ sắc</a></h5>
+                        <div class="categories__item set-bg" data-setbg="<%=p.getListImg().get(0)%>">
+                            <h5><a href="shop-details.jsp"><%=p.getName()%></a></h5>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/product/B020/banh1.jpg">
-                            <h5><a href="#">Bánh hoa tulip</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/product/B074/banh1.jpg">
-                            <h5><a href="#">Bánh chữ T</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/product/B068/banh1.jpg">
-                            <h5><a href="shop-details.jsp">Bánh kem socola</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/product/B047/banh2.jpg">
-                            <h5><a href="shop-details.jsp">Bánh hình con sâu</a></h5>
-                        </div>
-                    </div>
+                    <%}%>
                 </div>
             </div>
         </div>
@@ -289,21 +277,19 @@
                 <div class="col-lg-12">
                     <div class="featured__controls">
                         <div class="section-title">
-                            <h2>Danh Sách Sản Phẩm</h2>
+                            <h2>Sản Phẩm Mới</h2>
                         </div>
-                        <ul>
-                            <li class="active" data-filter="*">Tất cả</li>
-                            <li data-filter=".traditional">Truyền thống</li>
-                            <li data-filter=".modern">Hiện đại</li>
-                            <li data-filter=".lover">Người yêu</li>
-                        </ul>
                     </div>
                 </div>
             </div>
             <div class="row featured__filter">
+                <% List<Product> list = (List<Product>) request.getAttribute("list");
+                    list = ProductService.sanPhamMoi();
+                    for(Product p1: list){ %>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix traditional lover">
+                    <span class="icon-km icon-sale"></span>
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/product/B012/banh1.jpg">
+                        <div class="featured__item__pic set-bg" data-setbg="<%=p1.getListImg().get(0)%>">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -311,116 +297,12 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
-                            <h5>300,000 VND</h5>
+                            <h6><a href="ProductDetail?id=<%=p1.getId() %>"><%=p1.getName()%></a></h6>
+                            <h5><%=p1.getPrice()%> VND</h5>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix traditional">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/product/B013/banh1.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
-                            <h5>300,000 VND</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix traditional">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/product/B014/banh2.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
-                            <h5>300,000 VND</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix traditional lover">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/product/B015/banh1.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
-                            <h5>300,000 VND</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix lover modern">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/product/B016/banh1.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
-                            <h5>300,000 VND</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix lover modern">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/product/B017/banh1.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
-                            <h5>300,000 VND</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix modern">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/product/B018/banh1.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
-                            <h5>300,000 VND</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix modern">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/product/B019/banh1.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.jsp">Bánh sinh nhật</a></h6>
-                            <h5>300,000 VND</h5>
-                        </div>
-                    </div>
-                </div>
+                <%}%>
                 <a href="./ListProduct" type="button" class="btn btn_pink py-md-3 px-md-5 mt-2 btn-rm" >Xem tất cả</a>
             </div>
         </div>
@@ -439,7 +321,7 @@
             </div>
             <div class="row">
                 <% List<Blog> list2 = (List<Blog>) request.getAttribute("list");
-                    list2 = BlogService.getDanhMuc("Đời sống");
+                    list2 = BlogService.getDanhMuc("Đời Sống");
                     for(Blog b2: list2){ %>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
@@ -470,7 +352,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.jsp"><img src="img/logo_web.jpg" alt=""></a>
+                            <a href="./Index"><img src="img/logo_web.jpg" alt=""></a>
                         </div>
                         <ul class="mt-5" id="about">
                             <li><i class="fa fa-home"></i> Địa chỉ: Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM</li>

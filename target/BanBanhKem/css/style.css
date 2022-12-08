@@ -99,7 +99,18 @@ p {
 	line-height: 26px;
 	margin: 0 0 15px 0;
 }
-
+.icon-sale {
+	background: url("../img/Icon/new.png") no-repeat;
+	width: 72px;
+	height: 67px;
+}
+.icon-km {
+	position: absolute;
+	top: 5px;
+	left: 20px;
+	display: block;
+	z-index: 10;
+}
 img {
 	max-width: 100%;
 }

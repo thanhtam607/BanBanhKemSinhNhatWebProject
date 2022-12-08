@@ -67,7 +67,7 @@
 			<a href="./list-blogs.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Blog</a>
 			<a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
 			<a href="./add-blog.html" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm blog</a>
-			<a href="../index.jsp" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
+			<a href="./Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
 		</div>
 	</nav>
     </div>
@@ -119,9 +119,9 @@
                             <span class="d-none d-lg-inline-flex"><%= auth != null ? auth.getTentk():"Đăng nhập"%></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">Thông tin của tôi</a>
-                            <a href="#" class="dropdown-item">Cài đặt</a>
-                            <a href="../signin.jsp" class="dropdown-item">Đăng xuất</a>
+<%--                            <a href="#" class="dropdown-item">Thông tin của tôi</a>--%>
+<%--                            <a href="#" class="dropdown-item">Cài đặt</a>--%>
+                            <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                         </div>
                     </div>
                 </div>

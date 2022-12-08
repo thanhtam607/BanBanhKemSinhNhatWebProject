@@ -53,15 +53,17 @@
             <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
+                <% if(auth.checkRole(1)) { %>
                 <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
-                <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                <%}%>
+                <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
             </div>
             <%}%>
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li><a href="index.jsp">Trang chủ</a></li>
+            <li><a href="./Index">Trang chủ</a></li>
             <li><a href="about.jsp">Giới thiệu</a></li>
             <li><a href="./ListProduct">Sản phẩm</a>
                 <ul class="header__menu__dropdown">
@@ -115,8 +117,10 @@
                             <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                             <% if(auth != null) { %>
                             <div class="header__top__right__auth__dropdown">
+                                <% if(auth.checkRole(1)) { %>
                                 <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
-                                <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                                <%}%>
+                                <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                             </div>
                             <%}%>
                         </div>
@@ -129,13 +133,13 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="index.jsp"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                    <a href="./Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7">
                 <nav class="header__menu">
                     <ul>
-                        <li><a href="index.jsp">Trang chủ</a></li>
+                        <li><a href="./Index">Trang chủ</a></li>
                         <li><a href="about.jsp">Giới thiệu</a></li>
                         <li><a href="./ListProduct">Sản phẩm</a>
                         
@@ -198,7 +202,7 @@
                     <div class="breadcrumb__text">
                         <h2>Liên hệ</h2>
                         <div class="breadcrumb__option">
-                            <a href="index.jsp">Trang chủ</a>
+                            <a href="./Index">Trang chủ</a>
                             <span>Liên hệ chúng tôi</span>
                         </div>
                     </div>
@@ -290,7 +294,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="footer__about">
                     <div class="footer__about__logo">
-                        <a href="index.jsp"><img src="img/logo_web.jpg" alt=""></a>
+                        <a href="./Index"><img src="img/logo_web.jpg" alt=""></a>
                     </div>
                     <ul class="mt-5" id="about">
                         <li><font size = "4"><i  class="fa fa-home"></i></font> Địa chỉ: Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM</li>
