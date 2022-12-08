@@ -1,20 +1,12 @@
 package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.bean.User;
-import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
-import vn.edu.hcmuaf.fit.model.Blog;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class UserService {
@@ -30,10 +22,10 @@ public class UserService {
         }
         return instance;
     }
-    public User checkLogin(String username, String password) {
+    public User checkLogin(String email, String password) {
         List<User> users = JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT admin.ID, admin.USERNAME, admin.PASS, admin.TENDN FROM admin WHERE username = ?")
-                        .bind(0, username)
+                h.createQuery("SELECT taikhoan.ID, taikhoan.email, taikhoan.PASS, taikhoan.tentk, taikhoan.ROLE FROM taikhoan WHERE email = ?")
+                        .bind(0, email)
                         .mapToBean(User.class)
                         .stream()
                         .collect(Collectors.toList())
@@ -41,7 +33,7 @@ public class UserService {
         if (users.size() != 1) return null;
         User user = users.get(0);
         if (!user.getPass().equals(hashPassword(password))
-                ||!user.getUsername().equals(username)) return null;
+                ||!user.getEmail().equals(email)) return null;
         return user;
     }
     public String hashPassword(String password) {
@@ -64,7 +56,7 @@ public class UserService {
     }
     public static void main(String[] args) {
         UserService userService = new UserService();
-//       System.out.println(userService.checkLogin("thanhthuy@gmail.com", "123").toString());
+       System.out.println(userService.checkLogin("thanhthuy@gmail.com", "123").toString());
 //       System.out.println(userService.hashPassword("123"));
 //       System.out.println(userService.hashPassword("456"));
 //       System.out.println(userService.hashPassword("789"));

@@ -5,32 +5,21 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     private String id;
-    private String username;
+    private String email;
     private String pass;
-<<<<<<< HEAD
-    private String tendn;
-=======
-    private String fullname;
->>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
+    private String tentk;
+    private int role;
 
     public User(){
 
     }
 
-<<<<<<< HEAD
-    public User(String id, String username, String pass, String tendn ) {
+    public User(String id, String email, String pass, String tentk, int role) {
         this.id = id;
-        this.username = username;
+        this.email = email;
         this.pass = pass;
-        this.tendn = tendn;
-
-=======
-    public User(String id, String username, String pass, String fullname) {
-        this.id = id;
-        this.username = username;
-        this.pass = pass;
-        this.fullname = fullname;
->>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
+        this.tentk = tentk;
+        this.role = role;
     }
 
     public String getId() {
@@ -41,36 +30,51 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPass() {
         return pass;
     }
 
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public void setPass(String pass) {
         this.pass = pass;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public String getTentk() {
+        return tentk;
+    }
+
+    public void setTentk(String tentk) {
+        this.tentk = tentk;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    public boolean checkRole(int i) {
+        if(this.role == 1) return true;
+        return false;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "id='" + id + '\'' +
+                ", email='" + email + '\'' +
                 ", pass='" + pass + '\'' +
-                ", fullname='" + fullname + '\'' +
+                ", tentk='" + tentk + '\'' +
+                ", role=" + role +
                 '}';
     }
 }

@@ -38,6 +38,7 @@
 </head>
 
 <body>
+<% User auth = (User) session.getAttribute("auth");%>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -59,11 +60,13 @@
         <div class="humberger__menu__widget">
           
             <div class="header__top__right__auth">
-<<<<<<< HEAD
-                <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-=======
-                <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
->>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
+                <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                <% if(auth != null) { %>
+                <div class="header__top__right__auth__dropdown">
+                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                    <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                </div>
+                <%}%>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -120,11 +123,13 @@
                             </div>
                             
                             <div class="header__top__right__auth">
-<<<<<<< HEAD
-                                <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-=======
-                                <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
->>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
+                                <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                                <% if(auth != null) { %>
+                                <div class="header__top__right__auth__dropdown">
+                                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                                    <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                                </div>
+                                <%}%>
                             </div>
                         </div>
                     </div>
@@ -304,14 +309,16 @@
                                     <p>- Khối lượng: 500g</p>
                                 </div>
                             </div>
+
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
+
                                 <div class="product__details__tab__desc">
                                     <%List<Comment> cmtList = p.getComments();
                                         for(Comment cmt : cmtList){%>
-                                    <h6 style="margin-bottom: 10px;"><%= cmt.getKhachHang()%></h6>
+                                    <h6 style="margin-bottom: 10px;"><%= cmt.getkhachhang()%></h6>
                                         <i class="fa fa-calendar-o"></i> <span style="font-size: 13px; color: rgb(179, 178, 178);"><%=cmt.getDate()%>></span>
-                                        
                                     <p ><%=cmt.getBinhLuan()%></p>
+
                                 </div>
                                 <%}%>
                                         <div class = "input-comment">
@@ -322,9 +329,8 @@
                                                     <button type="submit" class="btn-add-comment">Gửi</button>
                                                 </span>
                                             </div>
-                                            
-                                        </div>
 
+                                        </div>
                             </div>
                         </div>
                     </div>

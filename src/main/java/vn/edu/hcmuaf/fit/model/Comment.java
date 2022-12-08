@@ -2,12 +2,12 @@ package vn.edu.hcmuaf.fit.model;
 
 public class Comment {
     String maSP;
-    String khachHang;
+    String khachhang;
     String binhLuan;
     String date;
-    public Comment(String maSP, String khachHang, String binhLuan, String date){
+    public Comment(String maSP, String khachhang, String binhLuan, String date){
         this.maSP = maSP;
-        this.khachHang = khachHang;
+        this.khachhang = khachhang;
         this.binhLuan = binhLuan;
         this.date = date;
     }
@@ -16,8 +16,8 @@ public class Comment {
         return maSP;
     }
 
-    public String getKhachHang() {
-        return khachHang;
+    public String getkhachhang() {
+        return khachhang;
     }
 
     public String getBinhLuan() {
@@ -26,5 +26,31 @@ public class Comment {
 
     public String getDate() {
         return date;
+    }
+
+    public void setMaSP(String maSP) {
+        this.maSP = maSP;
+    }
+
+    public void setkhachhang(String khachhang) {
+        this.khachhang = khachhang;
+    }
+
+    public void setBinhLuan(String binhLuan) {
+        this.binhLuan = binhLuan;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "maSP='" + maSP + '\'' +
+                ", khachhang='" + khachhang + '\'' +
+                ", binhLuan='" + binhLuan + '\'' +
+                ", date='" + date + '\'' +
+                '}';
     }
 }

@@ -1,5 +1,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -32,6 +33,7 @@
 </head>
 
 <body>
+<% User auth = (User) session.getAttribute("auth");%>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -51,11 +53,13 @@
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-<<<<<<< HEAD
-            <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-=======
-            <a href="admin/signin.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
->>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
+            <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+            <% if(auth != null) { %>
+            <div class="header__top__right__auth__dropdown">
+                <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+            </div>
+            <%}%>
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">
@@ -110,11 +114,13 @@
                             <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                         </div>
                         <div class="header__top__right__auth">
-<<<<<<< HEAD
-                            <a href="signin.jsp"><i class="fa fa-user"></i><%= auth != null ? auth.getTendn():"Đăng nhập"%></a>
-=======
-                            <a href="admin/signin.jsp"><i class="fa fa-user"></i>Đăng nhập</a>
->>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
+                            <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                            <% if(auth != null) { %>
+                            <div class="header__top__right__auth__dropdown">
+                                <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                                <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                            </div>
+                            <%}%>
                         </div>
                     </div>
                 </div>

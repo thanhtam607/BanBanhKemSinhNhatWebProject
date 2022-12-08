@@ -82,11 +82,24 @@ public class Product {
     public String getNoiDung() {
         return noiDung;
     }
-<<<<<<< HEAD
 
     public List<Comment> getComments() {
         return comments;
     }
-=======
->>>>>>> 6de3a3d494fd80bca9023a891e32f5d134106bb5
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", loaiBanh='" + loaiBanh + '\'' +
+                ", kichThuoc='" + kichThuoc + '\'' +
+                ", khoiLuong='" + khoiLuong + '\'' +
+                ", moTa='" + moTa + '\'' +
+                ", noiDung='" + noiDung + '\'' +
+                ", listImg=" + listImg +
+                ", price=" + price +
+                ", comments=" + comments +
+                '}';
+    }
 }
