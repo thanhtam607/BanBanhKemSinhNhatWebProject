@@ -15,7 +15,6 @@ public class Signup extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -23,15 +22,12 @@ public class Signup extends HttpServlet {
         String user = request.getParameter("name");
         String pass = request.getParameter("pass");
         String repass = request.getParameter("repass");
-
         if(!pass.equals(repass)){
             request.getRequestDispatcher("signup.jsp").forward(request,response);
         }
         else if (!UserService.checkEmail(email)) {
             request.getRequestDispatcher("signup.jsp").forward(request,response);
         }
-
-
         else {
             User newUser = new User(email, pass, user);
             UserService.register(newUser);
@@ -47,5 +43,4 @@ public class Signup extends HttpServlet {
             response.sendRedirect(url);
         }
     }
-
 }

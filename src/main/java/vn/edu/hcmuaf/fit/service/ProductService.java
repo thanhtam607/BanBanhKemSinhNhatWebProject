@@ -60,14 +60,19 @@ public class ProductService {
     }
     public static  void addComment(Comment cmt, String IDUser){
         Statement statement = DBConnect.getInstall().get();
-        String sql = "insert into Comments values('"+ cmt.getMaSP() + "', '"+ IDUser + "', '"+ cmt.getBinhLuan()+ "', '"+ cmt.getDate() +"');";
 
+        String sql = "insert into Comments(MaSP, ID,BinhLuan, NgayBL) values('"+ cmt.getMaSP() + "', '"+ IDUser + "', '"+ cmt.getBinhLuan()+ "', '"+ cmt.getDate() +"');";
                 try {
         statement.executeUpdate(sql);
 
         } catch (SQLException se) {
             se.printStackTrace();
         }
+    }
+    public static Comment getLastComment(String idProduct){
+        Product p = findById(idProduct);
+        List<Comment> list = p.getComments();
+        return list.get(list.size()-1);
     }
     public static void main(String[] args) {
 //        List<Product> li = ProductService.getData();
@@ -77,7 +82,8 @@ public class ProductService {
 //            System.out.println(p.getComments().size());
 //
 //        }
-        addComment(new Comment("B002", "Thanh Tâm","Bánh mềm mịn vô cùng hòa quyện với  phần kem mịn màng, vị ngọt thanh vừa ăn lại có thêm phần tiramisu khá lạ miệng khiến cho người ăn cảm thấy thích thú.","2022/12/8"), "AD02");
+        System.out.println(getLastComment("B001").getBinhLuan());
+       // addComment(new Comment("B002", "Thanh Tâm","Bánh mềm mịn vô cùng hòa quyện với  phần kem mịn màng, vị ngọt thanh vừa ăn lại có thêm phần tiramisu khá lạ miệng khiến cho người ăn cảm thấy thích thú.","2022/12/8"), "AD02");
     }
 
 

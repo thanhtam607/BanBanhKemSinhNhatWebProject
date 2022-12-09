@@ -53,6 +53,16 @@ public class UserService {
             return null;
         }
     }
+    public static User findById(String Id){
+        List<User> list = getListAcc();
+        for (User u: list) {
+            if(Id.equals(u.getId())){
+                return u;
+            }
+
+        }
+        return null;
+    }
 
     public static List<User> getListAcc(){
         List<User> list = new ArrayList<User>();
