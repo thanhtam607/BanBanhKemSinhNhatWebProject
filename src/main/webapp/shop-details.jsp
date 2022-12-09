@@ -124,7 +124,7 @@
                         </div>
 
                         <div class="header__top__right__auth">
-                            <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                            <a  href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                             <% if(auth != null) { %>
                             <div class="header__top__right__auth__dropdown">
                                 <% if(auth.checkRole(1)) { %>
@@ -247,10 +247,10 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
-                <div class="product__details__text">
+                <div class="product__details__text" >
                     <h3><%= pro.getName()%></h3>
 
-                    <div class="product__details__price"><%= pro.getPrice() %> VND</div>
+                    <div class="product__details__price"><%= pro.getPrice()%> VND</div>
                     <p><%= pro.getNoiDung()%></p>
                     <div class="product__details__quantity">
                         <div class="quantity">
@@ -283,14 +283,14 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                               aria-selected="false">Bình luận<span>(<%= pro.getComments().size()%>)</span></a>
+                               aria-selected="false">Bình luận(<span id="qt-cmt"><%= pro.getComments().size()%></span>)</a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="product__details__tab__desc">
                                 <h6>Mô tả sản phẩm</h6>
-                                <p><%= pro.getMoTa()%>/p>
+                                <p><%= pro.getMoTa()%></p>
                             </div>
                         </div>
                         <div class="tab-pane" id="tabs-2" role="tabpanel">
@@ -304,22 +304,24 @@
 
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
 
-                            <div class="product__details__tab__desc">
+                            <div class="product__details__tab__desc" id="list-comments">
                                 <%List<Comment> cmtList = pro.getComments();
                                     for(Comment cmt : cmtList){%>
+                                <div class="comment">
                                 <h6 style="margin-bottom: 10px;"><%= cmt.getkhachhang()%></h6>
                                 <i class="fa fa-calendar-o"></i> <span style="font-size: 13px; color: rgb(179, 178, 178);"><%=cmt.getDate()%></span>
                                 <p ><%=cmt.getBinhLuan()%></p>
+                                </div>
 
-                            </div>
                             <%}%>
+                            </div>
                             <% if(auth!= null){%>
                             <div class = "input-comment">
-                                <div class = "input-item">
+                                <div class = "input-item" >
                                     <span>Nhập bình luận:</span>
-                                    <input name="data" type="text" placeholder="Viết bình luận..." style = "width:70%;">
+                                    <input id="comment" type="text" placeholder="Viết bình luận..." style = "width:70%;">
                                     <span class="add-comment">
-                                        <button type="submit" class="btn-add-comment">Gửi</button>
+                                        <button onclick="sendC()"  type="submit" class="btn-add-comment"  >Gửi</button>
                                     </span>
                                 </div>
                                 <%}%>
@@ -468,10 +470,12 @@
         </div>
     </div>
 </footer>
+<%session.setAttribute("idProduct", pro.getId()); %>
 <!-- Footer Section End -->
 <!-- back to top btn -->
 <a href="#" class="btn-to-top back-to-top"><i class="fa fa-angle-double-up"></i></a>
 <!-- Js Plugins -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.nice-select.min.js"></script>
@@ -480,6 +484,37 @@
 <script src="js/mixitup.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
+<script>
+
+    var soluong = parseInt(<%=pro.getComments().size()%>);
+    document.getElementById("qt-cmt").innerHTML= soluong;
+    function sendC(){
+
+        var newComment = document.getElementById("comment").value;
+
+        var today = new Date();
+        var date = today.getFullYear() + "-" + (today.getMonth()+1)+"-"+ today.getDate()+" "+ today.getHours()+":"+today.getMinutes()+":"+ today.getSeconds();
+       var urlc= "AddComment?date=" + date+"&cmt=" + newComment ;
+
+
+        $.ajax({
+            url: urlc,
+            type: "POST",
+
+            success: function (response){
+                var comment = document.getElementById("list-comments");
+
+                comment.innerHTML += response;
+                soluong++;
+                console.log(soluong);
+                document.getElementById("qt-cmt").innerHTML= soluong;
+                document.getElementById("comment").value=null;
+            }
+        });
+
+
+    }
+</script>
 
 
 </body>
