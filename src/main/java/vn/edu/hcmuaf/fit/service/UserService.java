@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 public class UserService {
     private static UserService instance;
 
-
     private UserService() {
     }
 
@@ -53,15 +52,25 @@ public class UserService {
             return null;
         }
     }
+    public static User findById(String Id){
+        List<User> list = getListAcc();
+        for (User u: list) {
+            if(Id.equals(u.getId())){
+                return u;
+            }
 
-    public static List<Account> getListAcc(){
-        List<Account> list = new ArrayList<Account>();
+        }
+        return null;
+    }
+
+    public static List<User> getListAcc(){
+        List<User> list = new ArrayList<User>();
         Statement statement = DBConnect.getInstall().get();
         if(statement !=null){
             try{
-                ResultSet rsAcc = statement.executeQuery("select EMAIL, PASS, TENTK from taikhoan;");
+                ResultSet rsAcc = statement.executeQuery("select ID, EMAIL, PASS, TENTK, ROLE from taikhoan;");
                 while(rsAcc.next()){
-                    list.add(new Account(rsAcc.getString(1), rsAcc.getString(2), rsAcc.getString(3)));
+                    list.add(new User(rsAcc.getString(1), rsAcc.getString(2), rsAcc.getString(3), rsAcc.getString(4), rsAcc.getInt(5)));
                 }
             }
             catch (SQLException e){
@@ -75,9 +84,9 @@ public class UserService {
 
     }
     public static boolean checkEmail(String email){
-        List<Account> list = getListAcc();
+        List<User> list = getListAcc();
         List<String> listEmail = new ArrayList<String>();
-        for(Account a : list){
+        for(User a : list){
             listEmail.add(a.getEmail());
         }
         if (!listEmail.contains(email)) {
@@ -85,19 +94,15 @@ public class UserService {
         }
         return false;
     }
-    public static void register(Account acc){
+    public static void register(User acc){
         Statement stm = DBConnect.getInstall().get();
-        List<Account> list = getListAcc();
-
+        List<User> list = getListAcc();
+        String ID = "AD" + (list.size() + 1);
+        acc.setId(ID);
         if(stm!= null) {
             try {
-                    String ID = "AD" + (list.size() + 1);
-                    String sql = "insert into taikhoan values ('" + ID + "', '" + acc.getEmail() + "', '" + hashPassword(acc.getPassword())  + "', '" + acc.getName() + "'," + acc.getRole()+");";
-                    stm.executeUpdate(sql);
-
-
-
-
+                String sql = "insert into taikhoan values ('" + ID + "', '" + acc.getEmail() + "', '" + hashPassword(acc.getPass())  + "', '" + acc.getTentk() + "'," + acc.getRole()+");";
+                stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }

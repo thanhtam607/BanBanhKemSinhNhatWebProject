@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Account;
 import vn.edu.hcmuaf.fit.service.UserService;
 
@@ -14,7 +15,6 @@ public class Signup extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -22,7 +22,6 @@ public class Signup extends HttpServlet {
         String user = request.getParameter("name");
         String pass = request.getParameter("pass");
         String repass = request.getParameter("repass");
-
         if(!pass.equals(repass)){
             request.getRequestDispatcher("signup.jsp").forward(request,response);
         }
@@ -31,10 +30,18 @@ public class Signup extends HttpServlet {
         }
 
         else {
-            UserService.register(new Account(email, pass, user));
-
-            response.sendRedirect("index.jsp");
+            User newUser = new User(email, pass, user);
+            UserService.register(newUser);
+            String url = null;
+            if(request.getParameter("save-login") != null){
+                HttpSession session = request.getSession(true);
+                session.setAttribute("auth", newUser);
+                url = "index.jsp";
+            }
+            else{
+                url = "signin.jsp";
+            }
+            response.sendRedirect(url);
         }
     }
-
 }

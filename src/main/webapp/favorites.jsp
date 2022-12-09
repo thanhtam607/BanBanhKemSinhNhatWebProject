@@ -1,4 +1,5 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -45,7 +46,8 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <%Order order = (Order) session.getAttribute("order");%>
+                <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
             </ul>
         </div>
         <div class="humberger__menu__widget">
@@ -153,7 +155,7 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
                         </ul>
                     </div>
                 </div>

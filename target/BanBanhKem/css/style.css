@@ -1955,6 +1955,7 @@ ol {
 	color: #6f6f6f;
 	cursor: pointer;
 	display: inline-block;
+	line-height: 40px;
 }
 
 .product__details__tab {
