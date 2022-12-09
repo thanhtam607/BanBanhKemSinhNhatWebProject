@@ -28,6 +28,7 @@ public class Signup extends HttpServlet {
         else if (!UserService.checkEmail(email)) {
             request.getRequestDispatcher("signup.jsp").forward(request,response);
         }
+
         else {
             User newUser = new User(email, pass, user);
             UserService.register(newUser);

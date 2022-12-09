@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 public class UserService {
     private static UserService instance;
 
-
     private UserService() {
     }
 
@@ -102,8 +101,8 @@ public class UserService {
         acc.setId(ID);
         if(stm!= null) {
             try {
-                    String sql = "insert into taikhoan values ('" + ID + "', '" + acc.getEmail() + "', '" + hashPassword(acc.getPass())  + "', '" + acc.getTentk() + "'," + acc.getRole()+");";
-                    stm.executeUpdate(sql);
+                String sql = "insert into taikhoan values ('" + ID + "', '" + acc.getEmail() + "', '" + hashPassword(acc.getPass())  + "', '" + acc.getTentk() + "'," + acc.getRole()+");";
+                stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }
