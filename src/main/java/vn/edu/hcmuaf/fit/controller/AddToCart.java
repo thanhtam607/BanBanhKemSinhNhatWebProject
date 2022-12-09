@@ -1,7 +1,9 @@
 package vn.edu.hcmuaf.fit.controller;
 
+//import com.sun.org.apache.xpath.internal.operations.Or;
 import vn.edu.hcmuaf.fit.bean.User;
-import vn.edu.hcmuaf.fit.model.Cart;
+import vn.edu.hcmuaf.fit.model.ItemProductInCart;
+import vn.edu.hcmuaf.fit.model.Order;
 import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
@@ -15,39 +17,66 @@ import java.util.HashMap;
 public class AddToCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String maSP = request.getParameter("masp");
-        Product product = ProductService.findById(maSP);
-
-//        int solgmua = Integer.parseInt(request.getParameter("solgmua"));
-        HttpSession session = request.getSession();
-        Cart cart = (Cart) session.getAttribute("cart");
+        HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
-        if(auth != null){
-            HashMap<String, Product> listP = new HashMap<>();
+        int solgmua = 1;
+        if(auth != null) {
+            if (request.getParameter("masp") != null) {
+                String maSP = request.getParameter("masp");
+                Product product = ProductService.findById(maSP);
+                if (product != null) {
+                    if (request.getParameter("solgmua") != null) {
+                        solgmua = Integer.parseInt(request.getParameter("solgmua"));
+                    }
 
-            if(cart == null){
-                cart = new Cart();
-                listP.put(maSP, product);
-                cart.setData(listP);
+                    if (session.getAttribute("order") == null) {
+                        Order order = new Order();
+                        HashMap<String, ItemProductInCart> listItems = new HashMap<>();
+                        ItemProductInCart item = new ItemProductInCart();
+                        item.setSoLgMua(solgmua);
+                        item.setSp(product);
+                        item.setPrice(product.getPrice());
+                        listItems.put(maSP, item);
+                        order.setData(listItems);
+                        order.setUser(auth);
+                        session.setAttribute("order", order);
+
+                    } else {
+                        Order order = (Order) session.getAttribute("order");
+                        HashMap<String, ItemProductInCart> listItems = order.getData();
+                        ItemProductInCart item = listItems.get(maSP);
+                        if(item != null){
+                            item.quantityUp(solgmua);
+                        }else{
+                            item = new ItemProductInCart();
+                            item.setSp(product);
+                            item.setSoLgMua(solgmua);
+                            item.setPrice(product.getPrice());
+                            listItems.put(maSP, item);
+                        }
+                        session.setAttribute("order", order);
+
+                    }
+                }
+//                response.sendRedirect("/BanBanhKemSinhNhatWebProject/shoping-cart.jsp");
+                response.sendRedirect(request.getContextPath() + "/CartController");
+
+
+//                Order o = (Order) session.getAttribute("order");
+//                for(ItemProductInCart item: o.list()){
+//                response.getWriter().println(item.getSp().getName());
+//                response.getWriter().println(item.getSoLgMua());
+//
+//                }
+
+
+//                response.getWriter().println(o.list().size() + " :size");
+//                response.getWriter().println(o.list().size());
             }
-            if(cart.get(maSP) != null){
-                cart.setData(listP);
-                cart.put(maSP, 1);
-//                cart.list().add(product);
-                response.sendRedirect("/BanBanhKemSinhNhatWebProject/shoping-cart.jsp");
-            }else{
-                Product p = ProductService.findById(maSP);
-//                cart.list().add(p);
-                cart.setData(listP);
-                if(p != null) cart.put(p);
-                response.sendRedirect("/BanBanhKemSinhNhatWebProject/shoping-cart.jsp");
-            }
-            session.setAttribute("cart", cart);
-        }
-        else{
+        }else{
             response.sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");
         }
+
     }
 
     @Override
