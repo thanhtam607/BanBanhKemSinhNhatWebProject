@@ -1,14 +1,15 @@
 package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.db.DBConnect;
-import vn.edu.hcmuaf.fit.model.Blog;
-import vn.edu.hcmuaf.fit.model.Product;
+import vn.edu.hcmuaf.fit.bean.Blog;
+import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BlogService {
     public static List<Blog> getData() {
@@ -57,26 +58,27 @@ public class BlogService {
         }
         return null;
     }
-    public static List<Blog> FindByDanhMuc(String danhmuc) {
+    public static List<Blog> getDanhMuc(String danhmuc) {
         List<Blog> list = getData();
         List<Blog> rs = new LinkedList<>();
         for(Blog b : list){
-                if (b.getListdanhmuc().get(0).equals(danhmuc)) {
-                    rs.add(b);
-                }
+            if (b.getListdanhmuc().get(0).equals(danhmuc)) {
+                rs.add(b);
+            }
         }
         return rs;
     }
 
 
+
     public static void main(String[] args) {
-        List<Blog> li = BlogService.getData();
+            List<Blog> li = BlogService.getData();
 //        for(Blog b: li){
 //            System.out.print(b.getCategory()+"\t");
 //            System.out.println(b.getTitle());
 //
 //        }
-        List<Blog> l = BlogService.FindByDanhMuc("Đời sống");
+        List<Blog> l = BlogService.getDanhMuc("Đời sống");
         for(Blog b: l) {
             System.out.println(b.getId());
         }

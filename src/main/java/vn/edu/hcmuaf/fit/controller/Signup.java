@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Account;
 import vn.edu.hcmuaf.fit.service.UserService;
 
@@ -31,10 +32,18 @@ public class Signup extends HttpServlet {
         }
 
         else {
-            Account ac = new Account(email, pass, user);
-            UserService.register(ac);
-//            request.setAttribute("auth", ac);
-            response.sendRedirect("/BanBanhKemSinhNhatWebProject/index.jsp");
+            User newUser = new User(email, pass, user);
+            UserService.register(newUser);
+            String url = null;
+            if(request.getParameter("save-login") != null){
+                HttpSession session = request.getSession(true);
+                session.setAttribute("auth", newUser);
+                url = "index.jsp";
+            }
+            else{
+                url = "signin.jsp";
+            }
+            response.sendRedirect(url);
         }
     }
 

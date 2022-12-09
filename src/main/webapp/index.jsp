@@ -1,4 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.Blog" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -438,63 +441,26 @@
                 </div>
             </div>
             <div class="row">
+                <% List<Blog> list2 = (List<Blog>) request.getAttribute("list");
+                    list2 = BlogService.getDanhMuc("Đời sống");
+                    for(Blog b2: list2){ %>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="img/blog/blog1.jpg" alt="">
+                            <img src="<%=b2.getImg()%>" alt="">
                         </div>
                         <div class="blog__item__text">
                             <ul>
-                                <li><i class="fa fa-calendar-o"></i> 22-10-2022</li>
-                               
+                                <li><i class="fa fa-calendar-o"></i><%=b2.getDate()%></li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
                             </ul>
-                            <h5><a href="blog-details-1.jsp">Giải mã sức hút của bánh kem hiện đại</a></h5>
-                            <p class="text-justify">Trong những bữa tiệc quan trọng bánh kem góp phần mang đến cho không
-                                khí thêm phần hoàn hảo. Sự xuất hiện của bánh kem hiện đại như một bước ngoặt mới...
-                            </p>
-                            <a href="blog-details-1.jsp" class="blog__btn">Xem thêm <span class="arrow_right"></span>
-                            </a>
+                            <h5><a href="Blog1?id=<%=b2.getId()%>"><%=b2.getCategory()%></a></h5>
+                            <p class="text-justify"><%=b2.getCont()%></p>
+                            <a href="Blog1?id=<%=b2.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog2.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> 22-10-2022</li>
-                             
-                            </ul>
-                            <h5><a href="blog-details-2.jsp">Tổng hợp cách bảo quản bánh kem cực đơn giản</a></h5>
-                            <p class="text-justify">Các loại bánh kem khi không dùng hết hoặc chưa dùng đến bạn đều phải
-                                bảo quản đúng cách, để giúp bánh giữ nguyên hương vị. Cùng tìm hiểu cách bảo quản bánh
-                                kem cực đơn giản... </p>
-                            <a href="blog-details-2.jsp" class="blog__btn">Xem thêm <span class="arrow_right"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog3.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i>22-10-2022</li>
-                                
-                            </ul>
-                            <h5><a href="blog-details-3.jsp">Chọn bánh kem cho những ngày kỷ niệm ý nghĩa</a></h5>
-                            <p class="text-justify">Ngày nay, bánh kem không chỉ xuất hiện vào duy nhất sinh nhật mà bất
-                                cứ dịp kỷ niệm nào cũng có thể sử dụng. Cùng tìm hiểu các dịp kỷ niệm ý nghĩa nên sử
-                                dụng bánh kem và cách chọn sao cho phù hợp nhất...</p>
-                            <a href="blog-details-3.jsp" class="blog__btn">Xem thêm <span class="arrow_right"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <%}%>
             </div>
         </div>
     </section>

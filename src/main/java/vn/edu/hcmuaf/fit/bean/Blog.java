@@ -1,8 +1,9 @@
-package vn.edu.hcmuaf.fit.model;
+package vn.edu.hcmuaf.fit.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Blog {
+public class Blog implements Serializable {
     String id;
     String category;
     String cont;
@@ -101,5 +102,20 @@ public class Blog {
 
     public void setListchitiet(List<String> listchitiet) {
         this.listchitiet = listchitiet;
+    }
+
+    @Override
+    public String toString() {
+        return "Blog{" +
+                "id='" + id + '\'' +
+                ", category='" + category + '\'' +
+                ", cont='" + cont + '\'' +
+                ", img='" + img + '\'' +
+                ", date='" + date + '\'' +
+                ", listdanhmuc=" + listdanhmuc +
+                ", listchude=" + listchude +
+                ", listdemuc=" + listdemuc +
+                ", listchitiet=" + listchitiet +
+                '}';
     }
 }
