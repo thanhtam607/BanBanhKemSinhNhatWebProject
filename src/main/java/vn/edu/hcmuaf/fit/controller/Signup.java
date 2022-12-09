@@ -31,9 +31,10 @@ public class Signup extends HttpServlet {
         }
 
         else {
-            UserService.register(new Account(email, pass, user));
-
-            response.sendRedirect("index.jsp");
+            Account ac = new Account(email, pass, user);
+            UserService.register(ac);
+//            request.setAttribute("auth", ac);
+            response.sendRedirect("/BanBanhKemSinhNhatWebProject/index.jsp");
         }
     }
 

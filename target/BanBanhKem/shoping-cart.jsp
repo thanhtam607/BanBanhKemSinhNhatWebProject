@@ -1,4 +1,10 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Cart" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Collection" %>
+<%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -46,7 +52,7 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="./shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
         </div>
         <div class="humberger__menu__widget">
@@ -57,7 +63,7 @@
                     <% if(auth.checkRole(1)) { %>
                     <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                     <%}%>
-                    <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                    <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                 </div>
                 <%}%>
             </div>
@@ -120,7 +126,7 @@
                                     <% if(auth.checkRole(1)) { %>
                                     <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                                     <%}%>
-                                    <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                                    <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                                 </div>
                                 <%}%>
                             </div>
@@ -152,7 +158,7 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="./shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -231,72 +237,81 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <%
+                                Cart cart = (Cart) request.getAttribute("cart");
+                                List<Product> listItems = (List<Product>) cart.list();
+//                                int i = 0;
+                                for(Product p: listItems){
+
+
+                            %>
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="img/product/B001/banh1.jpg" alt="" style="max-width: 120px;">
-                                        <h5>Bánh cánh đồng hoa</h5>
+                                        <img src="<%= p.getListImg().get(0)%>" alt="">
+                                        <h5><%= p.getName() %></h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        450,000 VND
+                                        <%= p.getPrice() %> VND
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input class = "qty" type="number" value="1">
+                                                <input class = "qty" type="number" name="solgmua" value="<%=1%>">
                                             </div>
                                         </div>
                                     </td>
                                     <td class="shoping__cart__total">
-                                        450,000 VND
+                                        <%= p.giaSanPhamTrongGioHang() %> VND
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close"></span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="img/product/B003/banh1.jpg" alt="" style="max-width: 120px;">
-                                        <h5>Bánh kem sữa chua xoài hảo hạng</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        450,000 VND
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        450,000 VND
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="img/product/B002/banh1.jpg" alt="" style="max-width: 120px;">
-                                        <h5>Bánh dâu tây kem sữa chua Hàn Quốc</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        450,000 VND
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        450,000 VND
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
+                            <%}%>
+<%--                                <tr>--%>
+<%--                                    <td class="shoping__cart__item">--%>
+<%--                                        <img src="img/product/B003/banh1.jpg" alt="" >--%>
+<%--                                        <h5>Bánh kem sữa chua xoài hảo hạng</h5>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="shoping__cart__price">--%>
+<%--                                        450,000 VND--%>
+<%--                                    </td>--%>
+<%--                                    <td class="shoping__cart__quantity">--%>
+<%--                                        <div class="quantity">--%>
+<%--                                            <div class="pro-qty">--%>
+<%--                                                <input type="text" value="1">--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="shoping__cart__total">--%>
+<%--                                        450,000 VND--%>
+<%--                                    </td>--%>
+<%--                                    <td class="shoping__cart__item__close">--%>
+<%--                                        <span class="icon_close"></span>--%>
+<%--                                    </td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <td class="shoping__cart__item">--%>
+<%--                                        <img src="img/product/B002/banh1.jpg" alt="" >--%>
+<%--                                        <h5>Bánh dâu tây kem sữa chua Hàn Quốc</h5>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="shoping__cart__price">--%>
+<%--                                        450,000 VND--%>
+<%--                                    </td>--%>
+<%--                                    <td class="shoping__cart__quantity">--%>
+<%--                                        <div class="quantity">--%>
+<%--                                            <div class="pro-qty">--%>
+<%--                                                <input type="text" value="1">--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="shoping__cart__total">--%>
+<%--                                        450,000 VND--%>
+<%--                                    </td>--%>
+<%--                                    <td class="shoping__cart__item__close">--%>
+<%--                                        <span class="icon_close"></span>--%>
+<%--                                    </td>--%>
+<%--                                </tr>--%>
                             </tbody>
                         </table>
                     </div>

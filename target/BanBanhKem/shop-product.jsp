@@ -55,7 +55,7 @@
                     <% if(auth.checkRole(1)) { %>
                     <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                     <%}%>
-                    <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                    <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                 </div>
                 <%}%>
             </div>
@@ -121,7 +121,7 @@
                                     <% if(auth.checkRole(1)) { %>
                                     <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                                     <%}%>
-                                    <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                                    <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                                 </div>
                                 <%}%>
                             </div>
@@ -494,7 +494,7 @@
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="AddToCart?masp=<%=p.getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
