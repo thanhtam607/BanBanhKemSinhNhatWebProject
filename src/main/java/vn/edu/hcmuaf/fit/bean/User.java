@@ -21,6 +21,13 @@ public class User implements Serializable {
         this.tentk = tentk;
         this.role = role;
     }
+    public User(String email, String pass, String tentk ){
+        this.id = null;
+        this.email = email;
+        this.pass = pass;
+        this.tentk =tentk;
+        this.role=0;
+    }
 
     public String getId() {
         return id;

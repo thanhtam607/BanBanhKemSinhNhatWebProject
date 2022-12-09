@@ -56,7 +56,7 @@
                   <% if(auth.checkRole(1)) { %>
                   <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                   <%}%>
-                  <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                  <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
               </div>
               <%}%>
           </div>
@@ -119,7 +119,7 @@
                                   <% if(auth.checkRole(1)) { %>
                                   <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                                   <%}%>
-                                  <a href="./signin.jsp" class="dropdown-item">Đăng xuất</a>
+                                  <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                               </div>
                               <%}%>
                           </div>
