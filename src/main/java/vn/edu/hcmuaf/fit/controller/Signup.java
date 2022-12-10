@@ -23,9 +23,11 @@ public class Signup extends HttpServlet {
         String pass = request.getParameter("pass");
         String repass = request.getParameter("repass");
         if(!pass.equals(repass)){
+            request.setAttribute("Error", "Mật khẩu nhập lại không khớp!");
             request.getRequestDispatcher("signup.jsp").forward(request,response);
         }
         else if (!UserService.checkEmail(email)) {
+            request.setAttribute("Error", "Email đã được sử dụng!!");
             request.getRequestDispatcher("signup.jsp").forward(request,response);
         }
 
