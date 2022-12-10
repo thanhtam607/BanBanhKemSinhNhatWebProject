@@ -36,7 +36,7 @@ public class Signup extends HttpServlet {
             if(request.getParameter("save-login") != null){
                 HttpSession session = request.getSession(true);
                 session.setAttribute("auth", newUser);
-                url = "index.jsp";
+                url = "./Index";
             }
             else{
                 url = "signin.jsp";

@@ -2020,10 +2020,7 @@ ol {
 .product__details__tab .product__details__tab__desc p {
 	color: #666666;
 }
-.input-comment{
-	border:1px solid  #7f7f7f;
-	
-}
+
 .info-input{
 	display: flex;
 }
@@ -2031,6 +2028,13 @@ ol {
 	font-weight: 600;
 	color: #818181;
 	margin: 20px;
+	text-align: center;
+}
+.input-item input{
+	width: 85%;
+	border-radius: 20px;
+	border: solid #ff96b7;
+	height: 45px;
 }
 .add-comment{
 	width: auto;
@@ -2042,7 +2046,7 @@ ol {
 	color: white; 
 	border: none; 
 	font-weight: 600;
-	padding: 4px 15px;
+	padding: 6px 18px;
 }
 .add-comment:hover .btn-add-comment{
 	background-color: #828282;

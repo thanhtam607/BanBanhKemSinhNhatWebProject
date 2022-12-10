@@ -317,9 +317,8 @@
                             </div>
                             <% if(auth!= null){%>
                             <div class = "input-comment">
-                                <div class = "input-item" >
-                                    <span>Nhập bình luận:</span>
-                                    <input id="comment" type="text" placeholder="Viết bình luận..." style = "width:70%;">
+                                <div class = "input-item">
+                                    <input id="comment" type="text" placeholder="   Viết bình luận...">
                                     <span class="add-comment">
                                         <button onclick="sendC()"  type="submit" class="btn-add-comment"  >Gửi</button>
                                     </span>
