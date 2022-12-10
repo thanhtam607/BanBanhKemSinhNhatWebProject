@@ -1,5 +1,7 @@
 package vn.edu.hcmuaf.fit.model;
 
+import java.text.NumberFormat;
+
 public class ItemProductInCart {
     private String masp;
     private int soLgMua;
@@ -79,5 +81,10 @@ public class ItemProductInCart {
                 ", price=" + price +
                 ", order=" + order +
                 '}';
+    }
+    public static String formatNum(double num){
+        NumberFormat vn = NumberFormat.getInstance();
+        String result = vn.format(num);
+        return result;
     }
 }

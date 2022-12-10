@@ -250,7 +250,7 @@
                 <div class="product__details__text" >
                     <h3><%= pro.getName()%></h3>
 
-                    <div class="product__details__price"><%= pro.getPrice()%> VND</div>
+                    <div class="product__details__price"><%= pro.formatNum(pro.getPrice())%> VND</div>
                     <p><%= pro.getNoiDung()%></p>
                     <div class="product__details__quantity">
                         <div class="quantity">

@@ -254,7 +254,7 @@
                                     </h5>
                                 </td>
                                 <td class="shoping__cart__price">
-                                    <%=entry.getValue().getSp().getPrice()%> VND
+                                    <%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND
                                 </td>
                                 <td class="shoping__cart__quantity">
                                     <div class="quantity">
@@ -265,7 +265,7 @@
                                     </div>
                                 </td>
                                 <td class="shoping__cart__total">
-                                    <%=entry.getValue().giaSanPhamTrongGioHang()%> VND
+                                    <%=entry.getValue().formatNum(entry.getValue().giaSanPhamTrongGioHang()) %> VND
                                 </td>
                                 <td class="shoping__cart__item__close">
                                     <span class="icon_close"></span>

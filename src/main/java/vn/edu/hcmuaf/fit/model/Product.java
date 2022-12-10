@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.model;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class Product {
@@ -104,5 +105,15 @@ public class Product {
                 ", price=" + price +
                 ", comments=" + comments +
                 '}';
+    }
+
+    public static String formatNum(int price){
+        NumberFormat vn = NumberFormat.getInstance();
+        String result = vn.format(price);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(formatNum(1234567));
     }
 }

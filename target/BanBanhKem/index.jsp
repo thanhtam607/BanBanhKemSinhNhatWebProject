@@ -270,7 +270,7 @@
                             </div>
                             <div class="featured__item__text">
                                 <h6><a href="ProductDetail?id=<%=p.getId() %>"><%=p.getName()%></a></h6>
-                                <h5><%=p.getPrice()%> VND</h5>
+                                <h5><%=p.formatNum(p.getPrice()) %> VND</h5>
                             </div>
                         </div>
                     </div>
@@ -309,7 +309,7 @@
                         </div>
                         <div class="featured__item__text">
                             <h6><a href="ProductDetail?id=<%=p1.getId() %>"><%=p1.getName()%></a></h6>
-                            <h5><%=p1.getPrice()%> VND</h5>
+                            <h5><%= p1.formatNum(p1.getPrice())%> VND</h5>
                         </div>
                     </div>
                 </div>
