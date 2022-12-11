@@ -256,11 +256,22 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
-                    <% List<Product> list1 = (List<Product>) request.getAttribute("list");
+                    <% List<Product> list1 = (List<Product>) request.getAttribute("listBanChay");
                         for(Product p: list1){ %>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="<%=p.getListImg().get(0)%>">
-                            <h5><a href="shop-details.jsp"><%=p.getName()%></a></h5>
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix traditional lover">
+                        <span class="icon-km icon-sale"></span>
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="<%=p.getListImg().get(0)%>">
+                                <ul class="featured__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="ProductDetail?id=<%=p.getId() %>"><%=p.getName()%></a></h6>
+                                <h5><%=p.formatNum(p.getPrice()) %> VND</h5>
+                            </div>
                         </div>
                     </div>
                     <%}%>
@@ -283,8 +294,8 @@
                 </div>
             </div>
             <div class="row featured__filter">
-                <% List<Product> list = (List<Product>) request.getAttribute("list");
-                    list = ProductService.sanPhamMoi();
+                <% List<Product> list = (List<Product>) request.getAttribute("listNewProduct");
+
                     for(Product p1: list){ %>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix traditional lover">
                     <span class="icon-km icon-sale"></span>
@@ -298,7 +309,7 @@
                         </div>
                         <div class="featured__item__text">
                             <h6><a href="ProductDetail?id=<%=p1.getId() %>"><%=p1.getName()%></a></h6>
-                            <h5><%=p1.getPrice()%> VND</h5>
+                            <h5><%= p1.formatNum(p1.getPrice())%> VND</h5>
                         </div>
                     </div>
                 </div>
@@ -321,8 +332,8 @@
             </div>
             <div class="row">
                 <% List<Blog> list2 = (List<Blog>) request.getAttribute("list");
-                    list2 = BlogService.getDanhMuc("Đời Sống");
-                    for(Blog b2: list2){ %>
+                    for(int i = 0; i<3;i++){
+                        Blog b2 = list2.get(i);%>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">

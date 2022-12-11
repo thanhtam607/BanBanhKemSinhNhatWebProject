@@ -23,9 +23,11 @@ public class Signup extends HttpServlet {
         String pass = request.getParameter("pass");
         String repass = request.getParameter("repass");
         if(!pass.equals(repass)){
+            request.setAttribute("Error", "Mật khẩu nhập lại không khớp!");
             request.getRequestDispatcher("signup.jsp").forward(request,response);
         }
         else if (!UserService.checkEmail(email)) {
+            request.setAttribute("Error", "Email đã được sử dụng!!");
             request.getRequestDispatcher("signup.jsp").forward(request,response);
         }
 
@@ -36,7 +38,7 @@ public class Signup extends HttpServlet {
             if(request.getParameter("save-login") != null){
                 HttpSession session = request.getSession(true);
                 session.setAttribute("auth", newUser);
-                url = "index.jsp";
+                url = "./Index";
             }
             else{
                 url = "signin.jsp";

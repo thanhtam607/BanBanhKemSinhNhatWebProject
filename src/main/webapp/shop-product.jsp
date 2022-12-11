@@ -242,8 +242,8 @@
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                     data-min="50" data-max="1000">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
-                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
+<%--                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>--%>
+<%--                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>--%>
                                 </div>
                                 <div class="range-slider">
                                     <div class="price-input">
@@ -501,7 +501,7 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="ProductDetail?id=<%=p.getId() %>"><%= p.getName()%></a></h6>
-                                    <h5><%= p.getPrice()%> VND</h5>
+                                    <h5><%= p.formatNum(p.getPrice())%> VND</h5>
                                 </div>
                             </div>
                         </div>

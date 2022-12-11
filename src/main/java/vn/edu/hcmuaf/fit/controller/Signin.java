@@ -26,7 +26,7 @@ public class Signin extends HttpServlet {
         }else{
             HttpSession session = request.getSession(true);
             session.setAttribute("auth", user);
-            response.sendRedirect("/BanBanhKemSinhNhatWebProject/index.jsp");
+            response.sendRedirect("/BanBanhKemSinhNhatWebProject/Index");
         }
     }
 }

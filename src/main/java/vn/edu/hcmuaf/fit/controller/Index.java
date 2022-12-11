@@ -20,9 +20,9 @@ public class Index extends HttpServlet {
         List<Blog> list = BlogService.getData();
         request.setAttribute("list", list);
         List<Product> list1 = ProductService.sanPhamBanChay();
-        request.setAttribute("list", list1);
+        request.setAttribute("listBanChay", list1);
         List<Product> list2 = ProductService.sanPhamMoi();
-        request.setAttribute("list", list1);
+        request.setAttribute("listNewProduct", list2);
         request.getRequestDispatcher("index.jsp").forward(request,response);
     }
 

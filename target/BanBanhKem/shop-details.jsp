@@ -250,7 +250,7 @@
                 <div class="product__details__text" >
                     <h3><%= pro.getName()%></h3>
 
-                    <div class="product__details__price"><%= pro.getPrice()%> VND</div>
+                    <div class="product__details__price"><%= pro.formatNum(pro.getPrice())%> VND</div>
                     <p><%= pro.getNoiDung()%></p>
                     <div class="product__details__quantity">
                         <div class="quantity">
@@ -317,9 +317,8 @@
                             </div>
                             <% if(auth!= null){%>
                             <div class = "input-comment">
-                                <div class = "input-item" >
-                                    <span>Nhập bình luận:</span>
-                                    <input id="comment" type="text" placeholder="Viết bình luận..." style = "width:70%;">
+                                <div class = "input-item">
+                                    <input id="comment" type="text" placeholder="   Viết bình luận...">
                                     <span class="add-comment">
                                         <button onclick="sendC()"  type="submit" class="btn-add-comment"  >Gửi</button>
                                     </span>
@@ -485,38 +484,25 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
 <script>
-
     var soluong = parseInt(<%=pro.getComments().size()%>);
     document.getElementById("qt-cmt").innerHTML= soluong;
     function sendC(){
-
         var newComment = document.getElementById("comment").value;
-
         var today = new Date();
         var date = today.getFullYear() + "-" + (today.getMonth()+1)+"-"+ today.getDate()+" "+ today.getHours()+":"+today.getMinutes()+":"+ today.getSeconds();
        var urlc= "AddComment?date=" + date+"&cmt=" + newComment ;
-
-
         $.ajax({
             url: urlc,
             type: "POST",
-
             success: function (response){
                 var comment = document.getElementById("list-comments");
-
                 comment.innerHTML += response;
                 soluong++;
-                console.log(soluong);
                 document.getElementById("qt-cmt").innerHTML= soluong;
                 document.getElementById("comment").value=null;
             }
         });
-
-
     }
 </script>
-
-
 </body>
-
 </html>
