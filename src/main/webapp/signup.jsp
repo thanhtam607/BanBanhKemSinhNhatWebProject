@@ -43,7 +43,7 @@
         </div>
         <!-- Spinner End -->
 
-
+        <% String error = (String) request.getAttribute("Error");%>
         <!-- Sign Up Start -->
         <div class="container-fluid bg_signin_signup">
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
@@ -66,6 +66,7 @@
                             <input name="repass" type="password" class="form-control" id="floatingPassword1" placeholder="Password">
                             <label for="floatingPassword">Nhập lại mật khẩu</label>
                         </div>
+                        <span id="insertTextHere"><%= error != null ? error:""%></span>
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <div class="form-check">
                                 <input name="save-login" type="checkbox" class="form-check-input" id="exampleCheck1">

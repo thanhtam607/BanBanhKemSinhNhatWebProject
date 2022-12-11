@@ -1,15 +1,13 @@
 package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.db.DBConnect;
-import vn.edu.hcmuaf.fit.bean.Blog;
-import vn.edu.hcmuaf.fit.db.JDBIConnector;
+import vn.edu.hcmuaf.fit.model.Blog;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BlogService {
     public static List<Blog> getData() {

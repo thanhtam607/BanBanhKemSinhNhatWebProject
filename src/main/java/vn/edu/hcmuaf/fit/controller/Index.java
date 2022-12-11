@@ -1,7 +1,9 @@
-package vn.edu.hcmuaf.fit.controller.mod;
+package vn.edu.hcmuaf.fit.controller;
 
-import vn.edu.hcmuaf.fit.bean.Blog;
+import vn.edu.hcmuaf.fit.model.Blog;
+import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.service.BlogService;
+import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -17,6 +19,10 @@ public class Index extends HttpServlet {
         request.setAttribute("blog", b);
         List<Blog> list = BlogService.getData();
         request.setAttribute("list", list);
+        List<Product> list1 = ProductService.sanPhamBanChay();
+        request.setAttribute("listBanChay", list1);
+        List<Product> list2 = ProductService.sanPhamMoi();
+        request.setAttribute("listNewProduct", list2);
         request.getRequestDispatcher("index.jsp").forward(request,response);
     }
 

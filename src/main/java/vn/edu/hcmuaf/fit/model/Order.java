@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.model;
 
 import vn.edu.hcmuaf.fit.bean.User;
 
+import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -106,5 +107,10 @@ public class Order {
                 ", note='" + note + '\'' +
                 ", data=" + data +
                 '}';
+    }
+    public static String formatNum(double num){
+        NumberFormat vn = NumberFormat.getInstance();
+        String result = vn.format(num);
+        return result;
     }
 }

@@ -72,7 +72,7 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li><a href="index.jsp">Trang chủ</a></li>
+            <li><a href="./Index">Trang chủ</a></li>
             <li><a href="about.jsp">Giới thiệu</a></li>
             <li><a href="./ListProduct">Sản phẩm</a>
 
@@ -144,13 +144,13 @@
             <div class="col-lg-3">
                 <div class="header__logo">
 
-                    <a href="index.jsp"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                    <a href="./Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7">
                 <nav class="header__menu">
                     <ul>
-                        <li><a href="index.jsp">Trang chủ</a></li>
+                        <li><a href="./Index">Trang chủ</a></li>
                         <li><a href="about.jsp">Giới thiệu</a></li>
                         <li><a href="./ListProduct">Sản phẩm</a>
 
@@ -216,7 +216,7 @@
                 <div class="breadcrumb__text">
                     <h2><%= pro.getName()%></h2>
                     <div class="breadcrumb__option">
-                        <a href="index.jsp">Trang chủ</a>
+                        <a href="./Index">Trang chủ</a>
                         <a href="./ListProduct">Sản phẩm</a>
                         <span><%= pro.getName()%></span>
                     </div>
@@ -250,7 +250,7 @@
                 <div class="product__details__text" >
                     <h3><%= pro.getName()%></h3>
 
-                    <div class="product__details__price"><%= pro.getPrice()%> VND</div>
+                    <div class="product__details__price"><%= pro.formatNum(pro.getPrice())%> VND</div>
                     <p><%= pro.getNoiDung()%></p>
                     <div class="product__details__quantity">
                         <div class="quantity">
@@ -317,9 +317,8 @@
                             </div>
                             <% if(auth!= null){%>
                             <div class = "input-comment">
-                                <div class = "input-item" >
-                                    <span>Nhập bình luận:</span>
-                                    <input id="comment" type="text" placeholder="Viết bình luận..." style = "width:70%;">
+                                <div class = "input-item">
+                                    <input id="comment" type="text" placeholder="   Viết bình luận...">
                                     <span class="add-comment">
                                         <button onclick="sendC()"  type="submit" class="btn-add-comment"  >Gửi</button>
                                     </span>
@@ -418,7 +417,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="footer__about">
                     <div class="footer__about__logo">
-                        <a href="index.jsp"><img src="img/logo_web.jpg" alt=""></a>
+                        <a href="./Index"><img src="img/logo_web.jpg" alt=""></a>
                     </div>
                     <ul class="mt-5" id="about">
                         <li><font size = "4"><i  class="fa fa-home"></i></font> Địa chỉ: Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM</li>
@@ -485,38 +484,25 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
 <script>
-
     var soluong = parseInt(<%=pro.getComments().size()%>);
     document.getElementById("qt-cmt").innerHTML= soluong;
     function sendC(){
-
         var newComment = document.getElementById("comment").value;
-
         var today = new Date();
         var date = today.getFullYear() + "-" + (today.getMonth()+1)+"-"+ today.getDate()+" "+ today.getHours()+":"+today.getMinutes()+":"+ today.getSeconds();
        var urlc= "AddComment?date=" + date+"&cmt=" + newComment ;
-
-
         $.ajax({
             url: urlc,
             type: "POST",
-
             success: function (response){
                 var comment = document.getElementById("list-comments");
-
                 comment.innerHTML += response;
                 soluong++;
-                console.log(soluong);
                 document.getElementById("qt-cmt").innerHTML= soluong;
                 document.getElementById("comment").value=null;
             }
         });
-
-
     }
 </script>
-
-
 </body>
-
 </html>

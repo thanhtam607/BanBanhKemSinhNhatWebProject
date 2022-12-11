@@ -64,7 +64,7 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li><a href="index.jsp">Trang chủ</a></li>
+                <li><a href="./Index">Trang chủ</a></li>
                 <li><a href="about.jsp">Giới thiệu</a></li>
                 <li class="active"><a href="././ListProduct">Sản phẩm</a>
                     <ul class="header__menu__dropdown">
@@ -136,13 +136,13 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="index.jsp"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                        <a href="./Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="index.jsp">Trang chủ</a></li>
+                            <li><a href="./Index">Trang chủ</a></li>
                             <li><a href="about.jsp">Giới thiệu</a></li>
                             <li class="active"><a href="./ListProduct">Sản phẩm</a>
                             </li>
@@ -207,7 +207,7 @@
                     <div class="breadcrumb__text">
                         <h2>Sản phẩm</h2>
                         <div class="breadcrumb__option">
-                            <a href="index.jsp">Trang Chủ</a>
+                            <a href="./Index">Trang Chủ</a>
                             <span>Sản Phẩm</span>
                         </div>
                     </div>
@@ -242,8 +242,8 @@
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                     data-min="50" data-max="1000">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
+<%--                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>--%>
+<%--                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>--%>
                                 </div>
                                 <div class="range-slider">
                                     <div class="price-input">
@@ -501,7 +501,7 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="ProductDetail?id=<%=p.getId() %>"><%= p.getName()%></a></h6>
-                                    <h5><%= p.getPrice()%> VND</h5>
+                                    <h5><%= p.formatNum(p.getPrice())%> VND</h5>
                                 </div>
                             </div>
                         </div>
@@ -526,7 +526,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="index.jsp"><img src="img/logo_web.jpg" alt=""></a>
+                            <a href="./Index"><img src="img/logo_web.jpg" alt=""></a>
                         </div>
                         <ul class="mt-5" id="about">
                             <li><font size = "4"><i  class="fa fa-home"></i></font> Địa chỉ: Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM</li>

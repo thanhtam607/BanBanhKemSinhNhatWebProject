@@ -65,10 +65,10 @@
       </div>
       <nav class="humberger__menu__nav mobile-menu">
           <ul>
-              <li><a href="index.jsp">Trang chủ</a></li>
+              <li><a href="./Index">Trang chủ</a></li>
               <li><a href="about.jsp">Giới thiệu</a></li>
               <li><a href="./ListProduct">Sản phẩm</a>
-                 
+
               </li>
               <li><a href="./ListBlog">Tin tức</a></li>
               <li><a href="contact.jsp">Liên hệ</a></li>
@@ -92,9 +92,9 @@
   <!-- Header Section Begin -->
   <header class="header">
     <!-- rang cua -->
-       
+
     <div class="rang_cua"></div>
-      
+
     <!-- rang cua -->
       <div class="header__top">
           <div class="container">
@@ -134,16 +134,16 @@
           <div class="row">
               <div class="col-lg-3">
                   <div class="header__logo">
-                      <a href="index.jsp"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                      <a href="./Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
                   </div>
               </div>
               <div class="col-lg-7">
                   <nav class="header__menu">
                       <ul>
-                          <li><a href="index.jsp">Trang chủ</a></li>
+                          <li><a href="./Index">Trang chủ</a></li>
                           <li><a href="about.jsp">Giới thiệu</a></li>
                           <li><a href="./ListProduct">Sản phẩm</a>
-                              
+
                           </li>
                           <li><a href="./ListBlog">Tin tức</a></li>
                           <li><a href="contact.jsp">Liên hệ</a></li>
@@ -175,7 +175,7 @@
                 <div class="hero__search">
                     <div class="hero__search__form ">
                         <form action="#" >
-                          
+
                             <input type="text" placeholder="Bạn cần bánh gì nè?">
                             <button type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
                         </form>
@@ -206,7 +206,7 @@
                     <div class="breadcrumb__text">
                         <h2>Thanh Toán</h2>
                         <div class="breadcrumb__option">
-                            <a href="index.jsp">Trang Chủ</a>
+                            <a href="./Index">Trang Chủ</a>
                             <span>Thanh Toán</span>
                         </div>
                     </div>
@@ -221,7 +221,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h6><span class="icon_tag_alt"></span> Bạn có voucher? Sử dụng ngay <a href="#">tại đây</a> 
+                    <h6><span class="icon_tag_alt"></span> Bạn có voucher? Sử dụng ngay <a href="#">tại đây</a>
                     </h6>
                 </div>
             </div>
@@ -323,7 +323,7 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                         
+
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
                                        Thanh Toán Khi Nhận Hàng
@@ -355,7 +355,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="index.jsp"><img src="img/logo_web.jpg" alt=""></a>
+                            <a href="./Index"><img src="img/logo_web.jpg" alt=""></a>
                         </div>
                         <ul class="mt-5" id="about">
                             <li><font size = "4"><i  class="fa fa-home"></i></font> Địa chỉ: Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM</li>
