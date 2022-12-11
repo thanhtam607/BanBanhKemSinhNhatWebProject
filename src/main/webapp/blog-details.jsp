@@ -140,7 +140,7 @@
                 <div class="header__logo">
                     <a href="./Index"><img src="img/logo_web.jpg" alt="" class="header__logo_img"></a>
                 </div>
-            </div>
+            </div>`
             <div class="col-lg-7">
                 <nav class="header__menu">
                     <ul>
@@ -347,7 +347,6 @@
                                     <div class="blog__item__text">
                                         <ul>
                                             <li><i class="fa fa-calendar-o"></i><%=b2.getDate()%></li>
-                                            <li><i class="fa fa-comment-o"></i> 5</li>
                                         </ul>
                                         <h5><a href="blog-details.jsp"><%=b2.getCategory()%></a></h5>
                                         <p class="text-justify"><%=b2.getCont()%></p>

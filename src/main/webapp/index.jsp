@@ -4,6 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -53,7 +54,8 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <%Order order = (Order) session.getAttribute("order");%>
+                <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
             </ul>
         </div>
         <div class="humberger__menu__widget">
@@ -71,7 +73,7 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./Index">Trang chủ</a></li>
+                <li class="active"><a href="/BanBanhKemSinhNhatWebProject/Index">Trang chủ</a></li>
                 <li><a href="about.jsp">Giới thiệu</a></li>
                 <li><a href="./ListProduct">Sản phẩm</a>
                    
@@ -144,13 +146,13 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                        <a href="/BanBanhKemSinhNhatWebProject/Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
                     </div>
                 </div>
                 <div class="col-lg-7 ">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./Index">Trang chủ</a></li>
+                            <li class="active"><a href="/BanBanhKemSinhNhatWebProject/Index">Trang chủ</a></li>
                             <li><a href="about.jsp">Giới thiệu</a></li>
                             <li><a href="./ListProduct">Sản phẩm</a>
                              
@@ -164,7 +166,7 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -342,7 +344,6 @@
                         <div class="blog__item__text">
                             <ul>
                                 <li><i class="fa fa-calendar-o"></i><%=b2.getDate()%></li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
                             </ul>
                             <h5><a href="Blog1?id=<%=b2.getId()%>"><%=b2.getCategory()%></a></h5>
                             <p class="text-justify"><%=b2.getCont()%></p>
@@ -363,7 +364,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./Index"><img src="img/logo_web.jpg" alt=""></a>
+                            <a href="/BanBanhKemSinhNhatWebProject/Index"><img src="img/logo_web.jpg" alt=""></a>
                         </div>
                         <ul class="mt-5" id="about">
                             <li><i class="fa fa-home"></i> Địa chỉ: Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM</li>

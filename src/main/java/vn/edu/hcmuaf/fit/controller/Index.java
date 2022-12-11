@@ -23,7 +23,7 @@ public class Index extends HttpServlet {
         request.setAttribute("listBanChay", list1);
         List<Product> list2 = ProductService.sanPhamMoi();
         request.setAttribute("listNewProduct", list2);
-        request.getRequestDispatcher("index.jsp").forward(request,response);
+        request.getRequestDispatcher("/index.jsp").forward(request,response);
     }
 
     @Override
