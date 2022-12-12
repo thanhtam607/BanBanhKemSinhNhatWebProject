@@ -300,8 +300,8 @@
                 <div class="shoping__checkout">
                     <h5>Tổng cộng</h5>
                     <ul>
-                        <li>Tổng tiền <span><%= order.totalMoney(order)%> VND</span></li>
-                        <li>Tổng thanh toán <span><%= order.totalMoney(order)%> VND</span></li>
+                        <li>Tổng tiền <span><%= order.formatNum(order.totalMoney(order))%> VND</span></li>
+                        <li>Tổng thanh toán <span><%= order.formatNum(order.totalMoney(order))%> VND</span></li>
                     </ul>
                     <a href="checkout.jsp" class="primary-btn">THANH TOÁN NGAY</a>
                 </div>

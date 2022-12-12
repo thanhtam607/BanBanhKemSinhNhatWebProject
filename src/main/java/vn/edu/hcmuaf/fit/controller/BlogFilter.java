@@ -9,13 +9,13 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "BlogDanhMuc", value = "/BlogDanhMuc")
-public class BlogDanhMuc extends HttpServlet {
+@WebServlet(name = "BlogFilter", value = "/BlogFilter")
+public class BlogFilter extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Blog> list = BlogService.getDanhMuc(request.getParameter("danhmuc"));
-        request.setAttribute("list", list);
-        request.getRequestDispatcher("BlogDanhMuc.jsp").forward(request,response);
+        List<Blog> listcd = BlogService.getChuDe(request.getParameter("chude"));
+        request.setAttribute("list", listcd);
+        request.getRequestDispatcher("BlogFilter.jsp").forward(request,response);
     }
 
     @Override

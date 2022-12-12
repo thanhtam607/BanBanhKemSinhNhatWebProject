@@ -108,6 +108,11 @@ public class Order {
                 ", data=" + data +
                 '}';
     }
+    public static String formatNum(int price){
+        NumberFormat vn = NumberFormat.getInstance();
+        String result = vn.format(price);
+        return result;
+    }
     public static String formatNum(double num){
         NumberFormat vn = NumberFormat.getInstance();
         String result = vn.format(num);

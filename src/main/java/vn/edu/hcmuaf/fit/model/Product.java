@@ -7,7 +7,7 @@ public class Product {
     String id;
     String name;
     String loaiBanh;
-    String kichThuoc;
+     List<String> kichThuoc;
     String khoiLuong;
     String moTa;
     String noiDung;
@@ -20,11 +20,11 @@ public class Product {
     }
 
 
-    public Product(String id, String name, String loaiBanh, String kichThuoc, String khoiLuong, String moTa, String noiDung, List<String> listImg, int price, List<Comment> comments) {
+    public Product(String id, String name, String loaiBanh, List<String> kichThuoc, String khoiLuong, String moTa, String noiDung, List<String> listImg, int price, List<Comment> comments) {
         this.id = id;
         this.name = name;
         this.loaiBanh = loaiBanh;
-        this.kichThuoc=kichThuoc;
+        this.kichThuoc= kichThuoc;
         this.khoiLuong = khoiLuong;
         this.moTa = moTa;
         this.noiDung=noiDung;
@@ -75,8 +75,12 @@ public class Product {
         return loaiBanh;
     }
 
-    public String getKichThuoc() {
+    public List<String> getKichThuoc() {
         return kichThuoc;
+    }
+
+    public void setKichThuoc(List<String> kichThuoc) {
+        this.kichThuoc = kichThuoc;
     }
 
     public String getMoTa() {

@@ -266,8 +266,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="contact__form__title">
-                        <h2>Để lại cảm nhận của bạn</h2>
+                    <div class="section-title">
+                        <h2>ĐỂ LẠI CẢM NHẬN CỦA BẠN</h2>
                     </div>
                 </div>
             </div>

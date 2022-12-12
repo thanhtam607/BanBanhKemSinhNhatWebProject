@@ -1,6 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -251,22 +252,22 @@
                             <h4>Kích thước</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    <a href="./Filter1" id="large">Lớn</a>
+                                    <a href="ProductFilter?size=Lớn" id="large">Lớn</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label  for="medium">
-                                    <a href="./Filter1" id="medium">Vừa</a>
+                                    <a href="ProductFilter?size=Vừa" id="medium">Vừa</a>
                                 </label>
                             </div>
                             <div  class="sidebar__item__size">
                                 <label for="small">
-                                    <a href="./Filter1" id="small">Nhỏ</a>
+                                    <a href="ProductFilter?size=Nhỏ" id="small">Nhỏ</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
-                                    <a href="./Filter1" id="tiny">Bé</a>
+                                    <a href="ProductFilter?size=Bé" id="tiny">Bé</a>
                                 </label>
                             </div>
                         </div>
@@ -339,10 +340,12 @@
                 </div>
                 <div class="col-lg-9 col-md-7">
                     <div class="product__discount product__discount_page_detail">
+                        <% List<Product> lists = (List<Product>) request.getAttribute("list");
+                        for (Product p : lists) {%>
                         <div class="section-title product__discount__title">
-                            <h2>Bánh Hoa</h2>
+                            <h2>Kích thước: <%=p.getKichThuoc().get(1)%></h2>
                         </div>
-                       
+                        <% break;} %>
                     </div>
                     <div class="filter__item filter__item__page__detail">
                         <div class="row">
@@ -357,9 +360,13 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
+                                <% List<Product> listc = (List<Product>) request.getAttribute("list");
+                                    for (Product p : listc) {
+                                        int rs = listc.size();%>
                                 <div class="filter__found">
-                                    <h6><span>6</span> Sản phẩm</h6>
+                                    <h6><span><%=rs%></span> Sản phẩm</h6>
                                 </div>
+                                <% break;}%>
                             </div>
                             <div class="col-lg-4 col-md-3">
                                 <div class="filter__option">
@@ -369,8 +376,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <% List<Product> list1 = (List<Product>) request.getAttribute("list");
-                            for(Product p: list1){ %>
+                        <% List<Product> list = (List<Product>) request.getAttribute("list");
+                            for(Product p: list){ %>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<%=p.getListImg().get(0)%>">
@@ -382,7 +389,7 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="shop-details.jsp"><%=p.getName()%></a></h6>
-                                    <h5><%=p.getPrice()%></h5>
+                                    <h5><%=p.formatNum(p.getPrice())%> VND</h5>
                                 </div>
                             </div>
                         </div>

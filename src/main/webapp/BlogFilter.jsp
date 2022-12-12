@@ -224,7 +224,7 @@
                                 <div class="blog__sidebar">
                                     <div class="blog__sidebar__search">
                                         <form action="#">
-                                            <input type="text" placeholder="Tìm kiếm...">
+                                            <input type="text" placeholder="Tin tức bạn cần tìm?">
                                             <button type="submit"><span class="icon_search"></span></button>
                                         </form>
                                     </div>
@@ -232,8 +232,8 @@
                                         <h4>Danh mục</h4>
                                         <ul>
                                             <li><a href="./ListBlog">Tất cả</a></li>
-                                            <li><a href="BlogDanhMuc?danhmuc=Đời sống">Đời sống (3)</a></li>
-                                            <li><a href="BlogDanhMuc?danhmuc=Kỉ niệm">Kỷ niệm (1)</a></li>
+                                            <li><a href="BlogF1?danhmuc=Đời Sống">Đời Sống (3)</a></li>
+                                            <li><a href="BlogF1?danhmuc=Kỉ niệm">Kỷ niệm (1)</a></li>
 
                                         </ul>
                                     </div>
@@ -258,10 +258,11 @@
                                         <h4>Chủ đề</h4>
                                         <div class="blog__sidebar__item__tags">
                                             <a href="./ListBlog">Bánh kem</a>
-                                            <a href="Blog1?id=BL01">Hiện đại</a>
-                                            <a href="Blog1?id=BL02">Bảo quản bánh</a>
-                                            <a href="Blog1?id=BL03">Chọn bánh</a>
-                                            <a href="Blog1?id=BL04">Ý nghĩa bánh</a>
+                                            <a href="BlogFilter?chude=Hiện đại">Hiện đại</a>
+                                            <a href="BlogFilter?chude=Bảo quản bánh">Bảo quản bánh</a>
+                                            <a href="BlogFilter?chude=Chọn bánh">Chọn bánh</a>
+                                            <a href="BlogFilter?chude=Ý nghĩa bánh">Ý nghĩa bánh</a>
+                                            <a href="BlogFilter?chude=Khác">Khác</a>
                                         </div>
                                     </div>
                                 </div>

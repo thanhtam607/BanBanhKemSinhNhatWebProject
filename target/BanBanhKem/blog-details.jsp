@@ -40,7 +40,6 @@
 <div id="preloder">
     <div class="loader"></div>
 </div>
-
 <!-- Humberger Begin -->
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
@@ -55,6 +54,7 @@
         </ul>
     </div>
     <div class="humberger__menu__widget">
+
         <div class="header__top__right__auth">
             <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
             <% if(auth != null) { %>
@@ -72,10 +72,11 @@
             <li><a href="./Index">Trang chủ</a></li>
             <li><a href="about.jsp">Giới thiệu</a></li>
             <li><a href="./ListProduct">Sản phẩm</a>
-             
+
             </li>
             <li><a href="./ListBlog">Tin tức</a></li>
             <li><a href="contact.jsp">Liên hệ</a></li>
+        </ul>
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -86,8 +87,8 @@
     </div>
     <div class="humberger__menu__contact">
         <ul>
-            <li><i class="fa fa-envelope"></i> tiembanhhanhphuc@gmail.com</li>
-            <li>Miễn phí giao hàng nội thành TP HCM</li>
+            <li><i class="fa fa-envelope"></i>tiembanhhanhphuc@gmail.com</li>
+            <li>Miễn phí giao hàng nội thành TP.HCM</li>
         </ul>
     </div>
 </div>
@@ -96,30 +97,31 @@
 <!-- Header Section Begin -->
 <header class="header">
     <!-- rang cua -->
-       
+
     <div class="rang_cua"></div>
-      
+
     <!-- rang cua -->
     <div class="header__top">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-6">
                     <div class="header__top__left">
                         <ul>
-                            <li><i class="fa fa-envelope"></i> tiembanhhanhphuc@gmail.com</li>
-                            <li>Miễn phí giao hàng nội thành TP HCM</li>
+                            <li><i class="fa fa-envelope"></i>tiembanhhanhphuc@gmail.com</li>
+                            <li>Miễn phí giao hàng nội thành TP.HCM</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-6">
                     <div class="header__top__right">
                         <div class="header__top__right__social">
                             <a href="https://www.facebook.com/mai.thuan.52438/"><i class="fa fa-facebook"></i></a>
                             <a href="https://www.messenger.com/t/100017755062615"><i class="fa fa-comment"></i></a>
                             <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                         </div>
+
                         <div class="header__top__right__auth">
-                            <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                            <a  href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                             <% if(auth != null) { %>
                             <div class="header__top__right__auth__dropdown">
                                 <% if(auth.checkRole(1)) { %>
@@ -138,7 +140,8 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="./Index"><img src="img/logo_web.jpg" alt="" class="header__logo_img"></a>
+
+                    <a href="./Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7">
@@ -146,9 +149,7 @@
                     <ul>
                         <li><a href="./Index">Trang chủ</a></li>
                         <li><a href="about.jsp">Giới thiệu</a></li>
-                        <li><a href="./ListProduct">Sản phẩm</a>
-                            
-                        </li>
+                        <li><a href="./ListProduct">Sản phẩm</a></li>
                         <li><a href="./ListBlog">Tin tức</a></li>
                         <li><a href="contact.jsp">Liên hệ</a></li>
                     </ul>
@@ -157,9 +158,10 @@
             <div class="col-lg-2">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                         <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -169,6 +171,7 @@
     </div>
 </header>
 <!-- Header Section End -->
+
 
  <!-- Hero Section Begin -->
  <section class="hero">
@@ -229,7 +232,7 @@
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
                             <form action="#">
-                                <input type="text" placeholder="Tìm kiếm...">
+                                <input type="text" placeholder="Tin tức bạn cần tìm?">
                                 <button type="submit"><span class="icon_search"></span></button>
                             </form>
                         </div>
@@ -237,8 +240,8 @@
                             <h4>Danh mục</h4>
                             <ul>
                                 <li><a href="./ListBlog">Tất cả</a></li>
-                                <li><a href="BlogDanhMuc?danhmuc=Đời sống" >Đời sống (3)</a></li>
-                                <li><a href="BlogDanhMuc?danhmuc=Kỉ niệm">Kỷ niệm (1)</a></li>
+                                <li><a href="BlogF1?danhmuc=Đời Sống" >Đời sống (3)</a></li>
+                                <li><a href="BlogF1?danhmuc=Kỉ niệm">Kỷ niệm (1)</a></li>
                             </ul>
                         </div>
                         <div class="blog__sidebar__item">
@@ -262,10 +265,11 @@
                             <h4>Chủ đề</h4>
                             <div class="blog__sidebar__item__tags">
                                 <a href="./ListBlog">Bánh kem</a>
-                                <a href="Blog1?id=BL01">Hiện đại</a>
-                                <a href="Blog1?id=BL02">Bảo quản bánh</a>
-                                <a href="Blog1?id=BL03">Chọn bánh</a>
-                                <a href="Blog1?id=BL04">Ý nghĩa bánh</a>
+                                <a href="BlogFilter?chude=Hiện đại">Hiện đại</a>
+                                <a href="BlogFilter?chude=Bảo quản bánh">Bảo quản bánh</a>
+                                <a href="BlogFilter?chude=Chọn bánh">Chọn bánh</a>
+                                <a href="BlogFilter?chude=Ý nghĩa bánh">Ý nghĩa bánh</a>
+                                <a href="BlogFilter?chude=Khác">Khác</a>
                             </div>
                             <div class="blog__sidebar__item__tags">
                             </div>
@@ -337,7 +341,7 @@
                         </div>
                         <div class="row">
                             <% List<Blog> list2 = (List<Blog>) request.getAttribute("list");
-                              list2 = BlogService.getDanhMuc("Đời sống");
+                              list2 = BlogService.getDanhMuc("Đời Sống");
                                 for(Blog b2: list2){ %>
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <div class="blog__item">
@@ -347,7 +351,6 @@
                                     <div class="blog__item__text">
                                         <ul>
                                             <li><i class="fa fa-calendar-o"></i><%=b2.getDate()%></li>
-                                            <li><i class="fa fa-comment-o"></i> 5</li>
                                         </ul>
                                         <h5><a href="blog-details.jsp"><%=b2.getCategory()%></a></h5>
                                         <p class="text-justify"><%=b2.getCont()%></p>
