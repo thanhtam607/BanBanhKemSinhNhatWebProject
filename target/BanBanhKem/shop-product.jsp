@@ -282,62 +282,33 @@
                                 <h4>Top Bán Chạy</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
+                                        <% List<Product> listspbc = (List<Product>) request.getAttribute("listspbc");
+                                           for(int i = 0; i<3;i++){
+                                                Product pro = listspbc.get(i);%>
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="./img/product/B019/banh1.jpg" alt="">
+                                                <img src="<%=pro.getListImg().get(0)%>" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>200,000 VND</span>
+                                                <h6 class=""><%=pro.getName()%></h6>
+                                                <span><%=pro.formatNum(pro.getPrice())%> VND</span>
                                             </div>
-                                        </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B022/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>250,000 VND</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B023/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
-                                            </div>
-                                        </a>
+                                          </a>
+                                        <% } %>
                                     </div>
                                     <div class="latest-prdouct__slider__item">
+                                        <%for(int i = 3; i<6;i++){
+                                        Product proR = listspbc.get(i);%>
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="./img/product/B024/banh1.jpg" alt="">
+                                                <img src="<%=proR.getListImg().get(0)%>" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
+                                                <h6 class=""><%=proR.getName()%></h6>
+                                                <span><%=proR.formatNum(proR.getPrice())%> VND</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B025/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B026/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
-                                            </div>
-                                        </a>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -484,12 +455,12 @@
                                     <span class="icon_grid-2x2"></span>
                                     <!-- <span class="icon_ul"></span> -->
                                 </div>
-                            </div>3
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <% List<Product> list = (List<Product>) request.getAttribute("list");
-                            for(Product p: list){ %>
+                            for(Product p: list) { %>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<%=p.getListImg().get(0)%>">

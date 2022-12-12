@@ -240,22 +240,22 @@
                             <h4>Danh mục</h4>
                             <ul>
                                 <li><a href="./ListBlog">Tất cả</a></li>
-                                <li><a href="BlogF1?danhmuc=Đời Sống" >Đời sống (3)</a></li>
-                                <li><a href="BlogF1?danhmuc=Kỉ niệm">Kỷ niệm (1)</a></li>
+                                <li><a href="BlogDanhMuc?danhmuc=Đời Sống" >Đời sống (3)</a></li>
+                                <li><a href="BlogDanhMuc?danhmuc=Kỉ niệm">Kỷ niệm (1)</a></li>
                             </ul>
                         </div>
                         <div class="blog__sidebar__item">
                             <h4>Tin mới nhất</h4>
-                            <%List<Blog> list1 = (List<Blog>) request.getAttribute("list");
-                                for(Blog b1: list1){ %>
+                            <%List<Blog> list = (List<Blog>) request.getAttribute("list");
+                                for(Blog menublog: list){ %>
                             <div class="blog__sidebar__recent">
-                                <a href="Blog1?id=<%=b1.getId()%>" class="blog__sidebar__recent__item">
+                                <a href="BlogDetails?id=<%=menublog.getId()%>" class="blog__sidebar__recent__item">
                                     <div class="blog__sidebar__recent__item__pic">
-                                        <img src="<%=b1.getImg()%>" alt="">
+                                        <img src="<%=menublog.getImg()%>" alt="">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
-                                        <h6><%=b1.getCategory()%></h6>
-                                        <span><%=b1.getDate()%></span>
+                                        <h6><%=menublog.getCategory()%></h6>
+                                        <span><%=menublog.getDate()%></span>
                                     </div>
                                 </a>
                             </div>
@@ -265,11 +265,11 @@
                             <h4>Chủ đề</h4>
                             <div class="blog__sidebar__item__tags">
                                 <a href="./ListBlog">Bánh kem</a>
-                                <a href="BlogFilter?chude=Hiện đại">Hiện đại</a>
-                                <a href="BlogFilter?chude=Bảo quản bánh">Bảo quản bánh</a>
-                                <a href="BlogFilter?chude=Chọn bánh">Chọn bánh</a>
-                                <a href="BlogFilter?chude=Ý nghĩa bánh">Ý nghĩa bánh</a>
-                                <a href="BlogFilter?chude=Khác">Khác</a>
+                                <a href="BlogChuDe?chude=Hiện đại">Hiện đại</a>
+                                <a href="BlogChuDe?chude=Bảo quản bánh">Bảo quản bánh</a>
+                                <a href="BlogChuDe?chude=Chọn bánh">Chọn bánh</a>
+                                <a href="BlogChuDe?chude=Ý nghĩa bánh">Ý nghĩa bánh</a>
+                                <a href="BlogChuDe?chude=Khác">Khác</a>
                             </div>
                             <div class="blog__sidebar__item__tags">
                             </div>
@@ -277,7 +277,6 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7 order-md-1 order-1">
-
                     <div class="blog__details__text">
                         <h3 class="text-center cochu-blog"><%= b.getCategory()%></h3>
                         <img src="<%=b.getImg()%>" alt="" class = "image-blog">
@@ -332,7 +331,6 @@
                 <section class="from-blog spad">
                     <div class="container">
                         <div class="row">
-
                             <div class="col-lg-12">
                                 <div class="section-title from-blog__title">
                                     <h2>Bảng tin</h2>
@@ -340,21 +338,21 @@
                             </div>
                         </div>
                         <div class="row">
-                            <% List<Blog> list2 = (List<Blog>) request.getAttribute("list");
-                              list2 = BlogService.getDanhMuc("Đời Sống");
-                                for(Blog b2: list2){ %>
+                            <%List<Blog> listhotblog = (List<Blog>) request.getAttribute("list");
+                                for(int i = 0; i<3;i++){
+                                    Blog bloghot = listhotblog.get(i);%>
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
-                                        <img src="<%=b2.getImg()%>" alt="">
+                                        <img src="<%=bloghot.getImg()%>" alt="">
                                     </div>
                                     <div class="blog__item__text">
                                         <ul>
-                                            <li><i class="fa fa-calendar-o"></i><%=b2.getDate()%></li>
+                                            <li><i class="fa fa-calendar-o"></i><%=bloghot.getDate()%></li>
                                         </ul>
-                                        <h5><a href="blog-details.jsp"><%=b2.getCategory()%></a></h5>
-                                        <p class="text-justify"><%=b2.getCont()%></p>
-                                        <a href="Blog1?id=<%=b2.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
+                                        <h5><a href="blog-details.jsp"><%=bloghot.getCategory()%></a></h5>
+                                        <p class="text-justify"><%=bloghot.getCont()%></p>
+                                        <a href="BlogDetails?id=<%=bloghot.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                                     </div>
                                 </div>
                             </div>

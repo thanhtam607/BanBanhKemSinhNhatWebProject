@@ -232,8 +232,8 @@
                                         <h4>Danh mục</h4>
                                         <ul>
                                             <li><a href="./ListBlog">Tất cả</a></li>
-                                            <li><a href="BlogF1?danhmuc=Đời Sống">Đời Sống (3)</a></li>
-                                            <li><a href="BlogF1?danhmuc=Kỉ niệm">Kỷ niệm (1)</a></li>
+                                            <li><a href="BlogDanhMuc?danhmuc=Đời Sống">Đời Sống (3)</a></li>
+                                            <li><a href="BlogDanhMuc?danhmuc=Kỉ niệm">Kỷ niệm (1)</a></li>
 
                                         </ul>
                                     </div>
@@ -242,7 +242,7 @@
                                         <% List<Blog> list1 = (List<Blog>) request.getAttribute("list");
                                             for(Blog b1: list1){ %>
                                         <div class="blog__sidebar__recent">
-                                            <a href="Blog1?id=<%=b1.getId()%>" class="blog__sidebar__recent__item">
+                                            <a href="BlogDetails?id=<%=b1.getId()%>" class="blog__sidebar__recent__item">
                                                 <div class="blog__sidebar__recent__item__pic">
                                                     <img src="<%=b1.getImg()%>" alt="">
                                                 </div>
@@ -258,11 +258,11 @@
                                         <h4>Chủ đề</h4>
                                         <div class="blog__sidebar__item__tags">
                                             <a href="./ListBlog">Bánh kem</a>
-                                            <a href="BlogFilter?chude=Hiện đại">Hiện đại</a>
-                                            <a href="BlogFilter?chude=Bảo quản bánh">Bảo quản bánh</a>
-                                            <a href="BlogFilter?chude=Chọn bánh">Chọn bánh</a>
-                                            <a href="BlogFilter?chude=Ý nghĩa bánh">Ý nghĩa bánh</a>
-                                            <a href="BlogFilter?chude=Khác">Khác</a>
+                                            <a href="BlogChuDe?chude=Hiện đại">Hiện đại</a>
+                                            <a href="BlogChuDe?chude=Bảo quản bánh">Bảo quản bánh</a>
+                                            <a href="BlogChuDe?chude=Chọn bánh">Chọn bánh</a>
+                                            <a href="BlogChuDe?chude=Ý nghĩa bánh">Ý nghĩa bánh</a>
+                                            <a href="BlogChuDe?chude=Khác">Khác</a>
                                         </div>
                                     </div>
                                 </div>
@@ -280,9 +280,9 @@
                                                 <ul>
                                                     <li><i class="fa fa-calendar-o"></i><%=b.getDate()%></li>
                                                 </ul>
-                                                <h5><a href="Blog1?id=<%=b.getId()%>"><%=b.getCategory()%></a></h5>
+                                                <h5><a href="BlogDetails?id=<%=b.getId()%>"><%=b.getCategory()%></a></h5>
                                                 <p class="text-justify"><%=b.getCont()%></p>
-                                                <a href="Blog1?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
+                                                <a href="BlogDetails?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
                                             </div>
                                         </div>
                                     </div>

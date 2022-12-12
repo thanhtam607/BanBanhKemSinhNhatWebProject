@@ -297,7 +297,6 @@
             </div>
             <div class="row featured__filter">
                 <% List<Product> list = (List<Product>) request.getAttribute("listNewProduct");
-
                     for(Product p1: list){ %>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix traditional lover">
                     <span class="icon-km icon-sale"></span>
@@ -345,9 +344,9 @@
                             <ul>
                                 <li><i class="fa fa-calendar-o"></i><%=b2.getDate()%></li>
                             </ul>
-                            <h5><a href="Blog1?id=<%=b2.getId()%>"><%=b2.getCategory()%></a></h5>
+                            <h5><a href="BlogDetails?id=<%=b2.getId()%>"><%=b2.getCategory()%></a></h5>
                             <p class="text-justify"><%=b2.getCont()%></p>
-                            <a href="Blog1?id=<%=b2.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
+                            <a href="BlogDetails?id=<%=b2.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                         </div>
                     </div>
                 </div>
