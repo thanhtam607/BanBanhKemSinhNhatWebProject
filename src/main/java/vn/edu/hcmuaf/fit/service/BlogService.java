@@ -66,7 +66,16 @@ public class BlogService {
         }
         return rs;
     }
-
+    public static List<Blog> getChuDe(String chude) {
+        List<Blog> list = getData();
+        List<Blog> rs = new LinkedList<>();
+        for(Blog b : list){
+            if (b.getListchude().get(0).equals(chude)) {
+                rs.add(b);
+            }
+        }
+        return rs;
+    }
 
 
     public static void main(String[] args) {
@@ -76,7 +85,7 @@ public class BlogService {
 //            System.out.println(b.getTitle());
 //
 //        }
-        List<Blog> l = BlogService.getDanhMuc("Đời sống");
+        List<Blog> l = BlogService.getDanhMuc("Đời Sống");
         for(Blog b: l) {
             System.out.println(b.getId());
         }

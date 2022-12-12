@@ -258,22 +258,22 @@
                             <h4>Kích thước</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    <a href="./Filter1" id="large">Lớn</a>
+                                    <a href="./ProductFilter?size=Lớn" id="large">Lớn</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label  for="medium">
-                                    <a href="./Filter1" id="medium">Vừa</a>
+                                    <a href="./ProductFilter?size=Vừa" id="medium">Vừa</a>
                                 </label>
                             </div>
                             <div  class="sidebar__item__size">
                                 <label for="small">
-                                    <a href="./Filter1" id="small">Nhỏ</a>
+                                    <a href="./ProductFilter?size=Nhỏ" id="small">Nhỏ</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
-                                    <a href="./Filter1" id="tiny">Bé</a>
+                                    <a href="./ProductFilter?size=Bé" id="tiny">Bé</a>
                                 </label>
                             </div>
                         </div>

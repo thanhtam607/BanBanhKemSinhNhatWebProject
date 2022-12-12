@@ -54,7 +54,6 @@
             <%Order order = (Order) session.getAttribute("order");%>
             <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
         </ul>
-
     </div>
     <div class="humberger__menu__widget">
 
@@ -152,9 +151,7 @@
                     <ul>
                         <li><a href="./Index">Trang chủ</a></li>
                         <li><a href="about.jsp">Giới thiệu</a></li>
-                        <li><a href="./ListProduct">Sản phẩm</a>
-
-                        </li>
+                        <li><a href="./ListProduct">Sản phẩm</a></li>
                         <li><a href="./ListBlog">Tin tức</a></li>
                         <li><a href="contact.jsp">Liên hệ</a></li>
                     </ul>
@@ -241,7 +238,6 @@
                         <% for (String img : pro.getListImg()){%>
                         <img data-imgbigurl="<%= img%>"
                              src="<%= img%>" alt="">
-
                         <%}%>
                     </div>
                 </div>
@@ -264,8 +260,6 @@
                     <ul>
                         <li><b>Tình trạng</b> <span>Còn hàng</span></li>
                         <li><b>Giao hàng</b> <span>Giao ngay trong ngày</span></li>
-
-
                         </li>
                     </ul>
                 </div>
