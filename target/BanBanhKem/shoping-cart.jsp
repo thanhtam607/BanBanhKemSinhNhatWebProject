@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
 <%@ page import="java.util.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <html lang="xzz">
@@ -50,14 +51,15 @@
     </div>
     <div class="humberger__menu__cart">
         <ul>
-            <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+            <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
+            <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
             <%Order order = (Order) session.getAttribute("order");%>
-            <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
+            <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk() : "Đăng nhập"%>
+            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk() : "Đăng nhập"%>
             </a>
             <% if (auth != null) { %>
             <div class="header__top__right__auth__dropdown">
@@ -121,7 +123,7 @@
                             <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                         </div>
                         <div class="header__top__right__auth">
-                            <a href="signin.jsp"><i
+                            <a href="<%=auth == null ?"signin.jsp":""%>"><i
                                     class="fa fa-user"></i></i><%= auth != null ? auth.getTentk() : "Đăng nhập"%>
                             </a>
                             <% if (auth != null) { %>
@@ -162,8 +164,8 @@
             <div class="col-lg-2">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
+                        <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+                        <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -247,30 +249,30 @@
                         <%
                             for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
                         %>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="<%=entry.getValue().getSp().getListImg().get(0)%>" alt="">
-                                    <h5><%=entry.getValue().getSp().getName()%>
-                                    </h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    <%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input class="qty" type="number" name="solgmua" value="<%=entry.getValue().getSoLgMua()%>">
-<%--                                            <span class="dec qtybtn" name="solgmua" ><%=entry.getValue().getSoLgMua()%></span>--%>
-                                        </div>
+                        <tr>
+                            <td class="shoping__cart__item">
+                                <img src="<%=entry.getValue().getSp().getListImg().get(0)%>" alt="">
+                                <h5><%=entry.getValue().getSp().getName()%>
+                                </h5>
+                            </td>
+                            <td class="shoping__cart__price">
+                                <%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND
+                            </td>
+                            <td class="shoping__cart__quantity">
+                                <div class="quantity">
+                                    <div class="pro-qty">
+                                        <input class="qty" name="solgmua"
+                                               value="<%=entry.getValue().getSoLgMua()%>">
                                     </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    <%=entry.getValue().formatNum(entry.getValue().giaSanPhamTrongGioHang()) %> VND
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                            <td class="shoping__cart__total">
+                                <%=entry.getValue().formatNum(entry.getValue().giaSanPhamTrongGioHang()) %> VND
+                            </td>
+                            <td class="shoping__cart__item__close">
+                                <span class="icon_close"></span>
+                            </td>
+                        </tr>
                         <%}%>
                         </tbody>
 
@@ -281,7 +283,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="./ListProduct" class="primary-btn cart-btn">Xem thêm sản phẩm </a>
+                    <a href="./ListProduct" class="primary-btn cart-btn">Tiếp tục mua hàng</a>
 
                 </div>
             </div>
@@ -300,8 +302,8 @@
                 <div class="shoping__checkout">
                     <h5>Tổng cộng</h5>
                     <ul>
-                        <li>Tổng tiền <span><%= order.formatNum(order.totalMoney(order))%> VND</span></li>
-                        <li>Tổng thanh toán <span><%= order.formatNum(order.totalMoney(order))%> VND</span></li>
+                        <li>Tổng tiền <span><%= order.formatNum(order.totalMoney())%> VND</span></li>
+                        <li>Tổng thanh toán <span><%= order.formatNum(order.totalMoney())%> VND</span></li>
                     </ul>
                     <a href="checkout.jsp" class="primary-btn">THANH TOÁN NGAY</a>
                 </div>

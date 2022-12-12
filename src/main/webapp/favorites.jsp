@@ -1,5 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -45,15 +47,16 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
+                <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct():"0"%></span></a></li>
                 <%Order order = (Order) session.getAttribute("order");%>
-                <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
+                <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
             </ul>
         </div>
         <div class="humberger__menu__widget">
             
             <div class="header__top__right__auth">
-                <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                 <% if(auth != null) { %>
                 <div class="header__top__right__auth__dropdown">
                     <% if(auth.checkRole(1)) { %>
@@ -116,7 +119,7 @@
                                 <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                                <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                                 <% if(auth != null) { %>
                                 <div class="header__top__right__auth__dropdown">
                                     <% if(auth.checkRole(1)) { %>
@@ -154,8 +157,8 @@
                 <div class="col-lg-2">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
+                            <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct():"0"%></span></a></li>
+                            <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -369,7 +372,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>1</span> Sản phẩm</h6>
+                                    <h6><span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span> Sản phẩm</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -380,25 +383,28 @@
                         </div>
                     </div>
                     <div class="row">
+                        <% for(ItemProductInCart fav: listFavorite.list()){
+                        %>
                           <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="./img/product/B008/banh1.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="<%=fav.getSp().getListImg().get(0)%>">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+<%--                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="AddToCart?masp=<%=fav.getSp().getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="./shop-details.jsp">Bánh Sinh Nhật</a></h6>
-                                    <h5>300,000 VND</h5>
+                                    <h6><a href="./shop-details.jsp"><%=fav.getSp().getName()%></a></h6>
+                                    <h5><%= fav.getSp().formatNum(fav.getSp().getPrice())%> VND</h5>
                                 </div>
                             </div>
                         </div>
+                        <%}%>
                     </div>
                     <div class="product__pagination">
                         <a href="#">1</a>
-                        <!-- <a href="#"><i class="fa fa-long-arrow-right"></i></a> -->
+                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
                     </div>
                 </div>
             </div>

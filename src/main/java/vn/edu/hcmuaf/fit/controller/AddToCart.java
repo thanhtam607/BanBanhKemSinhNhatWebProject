@@ -27,6 +27,7 @@ public class AddToCart extends HttpServlet {
                 if (product != null) {
                     if (request.getParameter("solgmua") != null) {
                         solgmua = Integer.parseInt(request.getParameter("solgmua"));
+                        request.setAttribute("solgmua", solgmua);
                     }
 
                     if (session.getAttribute("order") == null) {
@@ -58,20 +59,9 @@ public class AddToCart extends HttpServlet {
 
                     }
                 }
-//                response.sendRedirect("/BanBanhKemSinhNhatWebProject/shoping-cart.jsp");
                 response.sendRedirect(request.getContextPath() + "/CartController");
 
 
-//                Order o = (Order) session.getAttribute("order");
-//                for(ItemProductInCart item: o.list()){
-//                response.getWriter().println(item.getSp().getName());
-//                response.getWriter().println(item.getSoLgMua());
-//
-//                }
-
-
-//                response.getWriter().println(o.list().size() + " :size");
-//                response.getWriter().println(o.list().size());
             }
         }else{
             response.sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");

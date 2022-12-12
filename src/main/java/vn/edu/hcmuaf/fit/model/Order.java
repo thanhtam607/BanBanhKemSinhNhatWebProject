@@ -33,30 +33,15 @@ public class Order {
         this.data = data;
     }
 
-//    public int put(ItemProductInCart item) {
-//        if (data.containsKey(item.getId())) {
-//            data.get(item.getId()).quantityUp();
-//        } else {
-//            data.put(item.getId(), item);
-//        }
-//        return data.get(item.getId()).getSolgMua();
-//    }
-
-//    public int put(String id, int solgMua) {
-//        if (data.containsKey(id)) {
-//            data.get(id).quantityUp(solgMua);
-//        }
-//        return data.get(id).getSolgMua();
-//    }
 
     public boolean remove(String id) {
         return data.remove(id) == null;
     }
 
 
-    public double totalMoney(Order o) {
+    public double totalMoney() {
         this.priceTotal = 0;
-        for (ItemProductInCart p : o.list()) {
+        for (ItemProductInCart p : list()) {
             this.priceTotal += p.giaSanPhamTrongGioHang();
         }
         return this.priceTotal;
@@ -108,14 +93,17 @@ public class Order {
                 ", data=" + data +
                 '}';
     }
-    public static String formatNum(int price){
-        NumberFormat vn = NumberFormat.getInstance();
-        String result = vn.format(price);
-        return result;
-    }
+
     public static String formatNum(double num){
         NumberFormat vn = NumberFormat.getInstance();
         String result = vn.format(num);
         return result;
+    }
+    public int totalProduct(){
+        int total = 0;
+        for (ItemProductInCart i: list()){
+            total+= i.getSoLgMua();
+        }
+        return total ;
     }
 }

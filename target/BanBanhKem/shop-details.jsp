@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -50,15 +51,16 @@
     </div>
     <div class="humberger__menu__cart">
         <ul>
-            <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+            <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
+            <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
             <%Order order = (Order) session.getAttribute("order");%>
-            <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
+            <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
 
         <div class="header__top__right__auth">
-            <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
                 <% if(auth.checkRole(1)) { %>
@@ -123,7 +125,7 @@
                         </div>
 
                         <div class="header__top__right__auth">
-                            <a  href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                            <a  href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                             <% if(auth != null) { %>
                             <div class="header__top__right__auth__dropdown">
                                 <% if(auth.checkRole(1)) { %>
@@ -160,10 +162,9 @@
             <div class="col-lg-2">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
+                        <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+                        <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
-
                 </div>
             </div>
         </div>
