@@ -4,6 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -478,7 +479,8 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>12</span> Sản phẩm</h6>
+                                    <% List<Product> list = (List<Product>) request.getAttribute("list"); %>
+                                    <h6><span><%=list.size()%></span> Sản phẩm</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -490,8 +492,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <% List<Product> list = (List<Product>) request.getAttribute("list");
-                            for(Product p: list){ %>
+                        <% for(Product p: list){ %>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<%=p.getListImg().get(0)%>">
@@ -510,9 +511,11 @@
                         <% } %>
                     </div>
                     <div class="product__pagination">
-                        <a class="product__pagination__page2" href="#">1</a>
-                        <a href="./shop-product-1.html">2</a>
-                        <a href="#">3</a>
+                        <%  int tag = (int) request.getAttribute("tag");
+                            int endPage = (int) request.getAttribute("endPage");
+                            for(int i = 1; i <= endPage ; i++){ %>
+                        <a class="<%=tag == i?"product__pagination__page2":""%>" href="ListProduct?page=<%=i%>"><%=i%></a>
+                        <%}%>
                         <a href="#"><i class="fa fa-long-arrow-right"></i></a>
                     </div>
                 </div>

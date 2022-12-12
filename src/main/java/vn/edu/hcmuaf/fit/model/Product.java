@@ -15,7 +15,6 @@ public class Product {
     int price;
     List<Comment> comments;
 
-
     public Product() {
     }
 

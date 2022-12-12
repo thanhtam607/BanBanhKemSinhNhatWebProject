@@ -13,9 +13,25 @@ import java.util.List;
 public class ListProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> list = ProductService.getData();
+        String numPage = request.getParameter("page");
+        if(numPage == null){
+            numPage = "1";
+        }
+        int page = Integer.parseInt(numPage);
+
+        int totalProduct = ProductService.getToTalProduct();
+        int endPage = totalProduct / 15;
+        if(totalProduct % 15 != 0){
+            endPage++;
+        }
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("tag", page);
+
+        List<Product> list = ProductService.getPaginationPage(page);
         request.setAttribute("list", list);
+
         request.getRequestDispatcher("shop-product.jsp").forward(request,response);
+
 
     }
 
