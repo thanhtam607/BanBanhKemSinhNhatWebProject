@@ -253,27 +253,31 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="sidebar__item">
                             <h4>Kích thước</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    <a href="./ProductFilter?size=Lớn" id="large">Lớn</a>
+                                    Lớn
+                                    <input type="radio" id="large">
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
-                                <label  for="medium">
-                                    <a href="./ProductFilter?size=Vừa" id="medium">Vừa</a>
+                                <label for="medium">
+                                    Vừa 
+                                    <input type="radio" id="medium">
                                 </label>
                             </div>
-                            <div  class="sidebar__item__size">
+                            <div class="sidebar__item__size">
                                 <label for="small">
-                                    <a href="./ProductFilter?size=Nhỏ" id="small">Nhỏ</a>
+                                    Nhỏ
+                                    <input type="radio" id="small">
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
-                                    <a href="./ProductFilter?size=Bé" id="tiny">Bé</a>
+                                    Bé
+                                    <input type="radio" id="tiny">
                                 </label>
                             </div>
                         </div>
@@ -450,12 +454,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="row">
+                <div class="col-lg-12">
                     <div class="footer__copyright">
                         <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Bản quyền &copy;<script>document.write(new Date().getFullYear());</script> thuộc Nhóm 27 | Lập trình web thầy Phan Đình Long <i class="fa fa-heart" aria-hidden="true"> </i> Khoa CNTT - ĐH Nông Lâm TP HCM</a>
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <div class="footer__copyright__payment"></div>
+                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
                     </div>
                 </div>
             </div>
