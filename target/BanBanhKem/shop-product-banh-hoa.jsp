@@ -344,7 +344,6 @@
                         for (Product p : lists) {%>
                         <div class="section-title product__discount__title">
                             <h2>Kích thước: <%=p.getKichThuoc().get(1)%></h2>
-
                         </div>
                         <% break;} %>
                     </div>
@@ -361,9 +360,13 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
+                                <% List<Product> listc = (List<Product>) request.getAttribute("list");
+                                    for (Product p : listc) {
+                                        int rs = listc.size();%>
                                 <div class="filter__found">
-                                    <h6><span>6</span> Sản phẩm</h6>
+                                    <h6><span><%=rs%></span> Sản phẩm</h6>
                                 </div>
+                                <% break;}%>
                             </div>
                             <div class="col-lg-4 col-md-3">
                                 <div class="filter__option">
@@ -386,7 +389,7 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="shop-details.jsp"><%=p.getName()%></a></h6>
-                                    <h5><%=p.getPrice()%></h5>
+                                    <h5><%=p.formatNum(p.getPrice())%> VND</h5>
                                 </div>
                             </div>
                         </div>
