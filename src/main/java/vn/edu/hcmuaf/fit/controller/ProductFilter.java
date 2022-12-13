@@ -21,8 +21,8 @@ public class ProductFilter extends HttpServlet {
             listFilter = ProductService.findByType(request.getParameter("filter"));
         }
         if(listFilter.isEmpty()){
-            listFilter = ProductService.findByName(request.getParameter("key"));
-            title= "Kết quả tìm kiếm '" + request.getParameter("key")+"'";
+            listFilter = ProductService.findByName(request.getParameter("search"));
+            title= "Kết quả tìm kiếm '" + request.getParameter("search")+"'";
         }
         request.setAttribute("listFilter", listFilter);
         request.setAttribute("title",title);
