@@ -3,6 +3,9 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.LoaiBanh" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -43,15 +46,16 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
+                <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
                 <%Order order = (Order) session.getAttribute("order");%>
-                <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
+                <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
             </ul>
         </div>
         <div class="humberger__menu__widget">
 
             <div class="header__top__right__auth">
-                <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                 <% if(auth != null) { %>
                 <div class="header__top__right__auth__dropdown">
                     <% if(auth.checkRole(1)) { %>
@@ -117,7 +121,7 @@
                                 <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                                <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                                 <% if(auth != null) { %>
                                 <div class="header__top__right__auth__dropdown">
                                     <% if(auth.checkRole(1)) { %>
@@ -154,8 +158,8 @@
                 <div class="col-lg-2">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
+                            <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+                            <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -228,12 +232,10 @@
                             <h4>Các Loại Bánh</h4>
                             <ul class="slidebar__loaibanh">
                                 <li class="text__loaibanh"><a class="text__loaibanh__active" href="./shop-product.html">Tất cả</a></li>
-                                <li class="text__loaibanh"><a href="shop-product-banh-hoa.jsp">Bánh hoa</a></li>
-                                <li class="text__loaibanh"><a href="./shop-product-trang-tri-don-gian.html">Bánh trang trí đơn giản</a></li>
-                                <li class="text__loaibanh"><a href="#">Bánh trang trí hình thú</a></li>
-                                <li class="text__loaibanh"><a href="#">Bánh trái cây</a></li>
-                                <li class="text__loaibanh"><a href="#">Bánh hoa mousse</a></li>
-
+                                <%List<LoaiBanh> ListType = ProductService.getListType();
+                                    for(LoaiBanh lb: ListType){%>
+                                <li class="text__loaibanh"><a href="ProductFilter?title = <%=lb.getTenLB()%>&filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
+                                <%}%>
                             </ul>
                         </div>
                         <div class="sidebar__item">
@@ -258,22 +260,22 @@
                             <h4>Kích thước</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    <a href="./ProductFilter?size=Lớn" id="large">Lớn</a>
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước lớn &filter=Lớn" id="large">Lớn</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label  for="medium">
-                                    <a href="./ProductFilter?size=Vừa" id="medium">Vừa</a>
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước vừa &filter=Vừa" id="medium">Vừa</a>
                                 </label>
                             </div>
                             <div  class="sidebar__item__size">
                                 <label for="small">
-                                    <a href="./ProductFilter?size=Nhỏ" id="small">Nhỏ</a>
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước nhỏ &filter=Nhỏ" id="small">Nhỏ</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
-                                    <a href="./ProductFilter?size=Bé" id="tiny">Bé</a>
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước bé &filter=Bé" id="tiny">Bé</a>
                                 </label>
                             </div>
                         </div>
@@ -282,33 +284,62 @@
                                 <h4>Top Bán Chạy</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
-                                        <% List<Product> listspbc = (List<Product>) request.getAttribute("listspbc");
-                                           for(int i = 0; i<3;i++){
-                                                Product pro = listspbc.get(i);%>
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="<%=pro.getListImg().get(0)%>" alt="">
+                                                <img src="./img/product/B019/banh1.jpg" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6 class=""><%=pro.getName()%></h6>
-                                                <span><%=pro.formatNum(pro.getPrice())%> VND</span>
-                                            </div>
-                                          </a>
-                                        <% } %>
-                                    </div>
-                                    <div class="latest-prdouct__slider__item">
-                                        <%for(int i = 3; i<6;i++){
-                                        Product proR = listspbc.get(i);%>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="<%=proR.getListImg().get(0)%>" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6 class=""><%=proR.getName()%></h6>
-                                                <span><%=proR.formatNum(proR.getPrice())%> VND</span>
+                                                <h6>Bánh Sinh Nhật</h6>
+                                                <span>200,000 VND</span>
                                             </div>
                                         </a>
-                                        <% } %>
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src="./img/product/B022/banh1.jpg" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>Bánh Sinh Nhật</h6>
+                                                <span>250,000 VND</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src="./img/product/B023/banh1.jpg" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>Bánh Sinh Nhật</h6>
+                                                <span>300,000 VND</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="latest-prdouct__slider__item">
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src="./img/product/B024/banh1.jpg" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>Bánh Sinh Nhật</h6>
+                                                <span>300,000 VND</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src="./img/product/B025/banh1.jpg" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>Bánh Sinh Nhật</h6>
+                                                <span>300,000 VND</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src="./img/product/B026/banh1.jpg" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>Bánh Sinh Nhật</h6>
+                                                <span>300,000 VND</span>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -328,8 +359,8 @@
                                             data-setbg="./img/product/B001/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -346,8 +377,8 @@
                                             data-setbg="./img/product/B067/banh2.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -364,8 +395,8 @@
                                             data-setbg="./img/product/B026/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -382,8 +413,8 @@
                                             data-setbg="./img/product/B012/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -400,8 +431,8 @@
                                             data-setbg="././img/product/B021/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -418,8 +449,8 @@
                                             data-setbg="./img/product/B022/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -447,7 +478,8 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>12</span> Sản phẩm</h6>
+                                    <% List<Product> list = (List<Product>) request.getAttribute("list"); %>
+                                    <h6><span><%=list.size()%></span> Sản phẩm</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -455,18 +487,17 @@
                                     <span class="icon_grid-2x2"></span>
                                     <!-- <span class="icon_ul"></span> -->
                                 </div>
-                            </div>
+                            </div>3
                         </div>
                     </div>
                     <div class="row">
-                        <% List<Product> list = (List<Product>) request.getAttribute("list");
-                            for(Product p: list) { %>
+                        <% for(Product p: list){ %>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<%=p.getListImg().get(0)%>">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>
+                                         
                                         <li><a href="AddToCart?masp=<%=p.getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
@@ -479,9 +510,11 @@
                         <% } %>
                     </div>
                     <div class="product__pagination">
-                        <a class="product__pagination__page2" href="#">1</a>
-                        <a href="./shop-product-1.html">2</a>
-                        <a href="#">3</a>
+                        <%  int tag = (int) request.getAttribute("tag");
+                            int endPage = (int) request.getAttribute("endPage");
+                            for(int i = 1; i <= endPage ; i++){ %>
+                        <a class="<%=tag == i?"product__pagination__page2":""%>" href="ListProduct?page=<%=i%>"><%=i%></a>
+                        <%}%>
                         <a href="#"><i class="fa fa-long-arrow-right"></i></a>
                     </div>
                 </div>

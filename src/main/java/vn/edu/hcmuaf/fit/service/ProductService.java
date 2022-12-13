@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.service;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.Blog;
 import vn.edu.hcmuaf.fit.model.Comment;
+import vn.edu.hcmuaf.fit.model.LoaiBanh;
 import vn.edu.hcmuaf.fit.model.Product;
 
 import java.sql.*;
@@ -67,7 +68,7 @@ public class ProductService {
         Statement stmt1 = DBConnect.getInstall().get();
         if(statement != null)
             try{
-                ResultSet rs =  statement.executeQuery("SELECT sanpham.MaSP, sanpham.TenSP, sanpham.MaLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia FROM sanpham, cthd WHERE sanpham.MaSP = cthd.MASP GROUP BY MASP ORDER BY COUNT(CTHD.MASP) DESC, cthd.SL DESC LIMIT 10;");
+                ResultSet rs =  statement.executeQuery("SELECT sanpham.MaSP, sanpham.TenSP, sanpham.MaLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia FROM sanpham, cthd WHERE sanpham.MaSP = cthd.MASP GROUP BY MASP ORDER BY COUNT(CTHD.MASP) DESC, cthd.SL DESC LIMIT 5;");
                 while(rs.next()){
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
@@ -142,7 +143,7 @@ public class ProductService {
         Statement statement = DBConnect.getInstall().get();
 
         String sql = "insert into Comments(MaSP, ID,BinhLuan, NgayBL) values('"+ cmt.getMaSP() + "', '"+ IDUser + "', '"+ cmt.getBinhLuan()+ "', '"+ cmt.getDate() +"');";
-                try {
+        try {
         statement.executeUpdate(sql);
 
         } catch (SQLException se) {
@@ -154,7 +155,7 @@ public class ProductService {
         List<Comment> list = p.getComments();
         return list.get(list.size()-1);
     }
-    public static List<Product> getSize(String kichthuoc) {
+    public static List<Product> findBySize(String kichthuoc) {
         List<Product> list = getData();
         List<Product> rs = new LinkedList<>();
         for(Product p : list){
@@ -164,6 +165,32 @@ public class ProductService {
         }
         return rs;
     }
+    public static int getToTalProduct(){
+        return getData().size();
+    }
+    public static List<Product> getPaginationPage(int page){
+        List<Product> data = getData();
+        List<Product> result = new ArrayList<>();
+        int begin = (page-1)*15;
+        int endList = begin+15;
+        if(begin > data.size() - 15) {
+            endList = data.size();
+        }
+        for(int i = begin; i < endList; i++){
+        result.add(data.get(i));
+        }
+//        0 15 30 45 60 75 90
+        return result;
+    }
+    public static List<LoaiBanh> getListType() throws SQLException {
+        List<LoaiBanh> res = new ArrayList<>();
+        Statement stm = DBConnect.getInstall().get();
+        ResultSet rs = stm.executeQuery("SELECT MALB, TenLB FROM loaibanh;");
+        while (rs.next()){
+            res.add(new LoaiBanh(rs.getString(1),rs.getString(2)));
+        }
+        return res;
+    }
     public static void main(String[] args) {
 //        List<Product> li = ProductService.getData();
 //        for(Product p: li){
@@ -171,8 +198,9 @@ public class ProductService {
 //            System.out.println(p.getComments().size());
 //
 //        }
-        System.out.println(getLastComment("B001").getBinhLuan());
-       // addComment(new Comment("B002", "Thanh Tâm","Bánh mềm mịn vô cùng hòa quyện với  phần kem mịn màng, vị ngọt thanh vừa ăn lại có thêm phần tiramisu khá lạ miệng khiến cho người ăn cảm thấy thích thú.","2022/12/8"), "AD02");
+//        System.out.println(getLastComment("B001").getBinhLuan());
+//       System.out.println(getPaginationPage(1).toString());
+        // addComment(new Comment("B002", "Thanh Tâm","Bánh mềm mịn vô cùng hòa quyện với  phần kem mịn màng, vị ngọt thanh vừa ăn lại có thêm phần tiramisu khá lạ miệng khiến cho người ăn cảm thấy thích thú.","2022/12/8"), "AD02");
     }
 
 
