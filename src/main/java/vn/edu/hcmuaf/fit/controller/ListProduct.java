@@ -15,8 +15,6 @@ public class ListProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> list = ProductService.getData();
         request.setAttribute("list", list);
-        List<Product> listspbc = ProductService.sanPhamBanChay();
-        request.setAttribute("listspbc", listspbc);
         request.getRequestDispatcher("shop-product.jsp").forward(request,response);
 
     }

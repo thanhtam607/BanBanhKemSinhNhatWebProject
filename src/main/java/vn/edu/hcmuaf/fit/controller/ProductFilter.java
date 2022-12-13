@@ -19,6 +19,8 @@ public class ProductFilter extends HttpServlet {
         if(listFilter.isEmpty()){
             listFilter = ProductService.findByType(request.getParameter("filter"));
         }
+        List<Product> listspbc = ProductService.sanPhamBanChay();
+        request.setAttribute("listspbc", listspbc);
         String title = request.getParameter("title");
         request.setAttribute("listFilter", listFilter);
         request.setAttribute("title",title);
