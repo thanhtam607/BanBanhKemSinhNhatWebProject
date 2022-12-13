@@ -16,6 +16,9 @@ public class ProductFilter extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> listFilter = ProductService.findBySize(request.getParameter("filter"));
+        if(listFilter.isEmpty()){
+            listFilter = ProductService.findByType(request.getParameter("filter"));
+        }
         String title = request.getParameter("title");
         request.setAttribute("listFilter", listFilter);
         request.setAttribute("title",title);
