@@ -4,10 +4,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
-<<<<<<< HEAD
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
-=======
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
+<%@ page import="vn.edu.hcmuaf.fit.model.LoaiBanh" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -234,12 +232,10 @@
                             <h4>Các Loại Bánh</h4>
                             <ul class="slidebar__loaibanh">
                                 <li class="text__loaibanh"><a class="text__loaibanh__active" href="./shop-product.html">Tất cả</a></li>
-                                <li class="text__loaibanh"><a href="shop-product-banh-hoa.jsp">Bánh hoa</a></li>
-                                <li class="text__loaibanh"><a href="./shop-product-trang-tri-don-gian.html">Bánh trang trí đơn giản</a></li>
-                                <li class="text__loaibanh"><a href="#">Bánh trang trí hình thú</a></li>
-                                <li class="text__loaibanh"><a href="#">Bánh trái cây</a></li>
-                                <li class="text__loaibanh"><a href="#">Bánh hoa mousse</a></li>
-
+                                <%List<LoaiBanh> ListType = ProductService.getListType();
+                                    for(LoaiBanh lb: ListType){%>
+                                <li class="text__loaibanh"><a href="ProductFilter?title = <%=lb.getTenLB()%>&filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
+                                <%}%>
                             </ul>
                         </div>
                         <div class="sidebar__item">
@@ -264,22 +260,22 @@
                             <h4>Kích thước</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    <a href="./Filter1" id="large">Lớn</a>
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước lớn &filter=Lớn" id="large">Lớn</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label  for="medium">
-                                    <a href="./Filter1" id="medium">Vừa</a>
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước vừa &filter=Vừa" id="medium">Vừa</a>
                                 </label>
                             </div>
                             <div  class="sidebar__item__size">
                                 <label for="small">
-                                    <a href="./Filter1" id="small">Nhỏ</a>
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước nhỏ &filter=Nhỏ" id="small">Nhỏ</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
-                                    <a href="./Filter1" id="tiny">Bé</a>
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước bé &filter=Bé" id="tiny">Bé</a>
                                 </label>
                             </div>
                         </div>
@@ -363,12 +359,8 @@
                                             data-setbg="./img/product/B001/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
-=======
-                                                <%-- <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -385,12 +377,8 @@
                                             data-setbg="./img/product/B067/banh2.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
-=======
-                                                <%-- <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -407,12 +395,8 @@
                                             data-setbg="./img/product/B026/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
-=======
-                                                <%-- <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -429,12 +413,8 @@
                                             data-setbg="./img/product/B012/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
-=======
-                                                <%-- <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -451,12 +431,8 @@
                                             data-setbg="././img/product/B021/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
-=======
-                                                <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -473,12 +449,8 @@
                                             data-setbg="./img/product/B022/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
-<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
-=======
-                                                <%-- <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>

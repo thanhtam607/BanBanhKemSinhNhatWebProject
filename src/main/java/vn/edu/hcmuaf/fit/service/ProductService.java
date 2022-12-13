@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.service;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.Blog;
 import vn.edu.hcmuaf.fit.model.Comment;
+import vn.edu.hcmuaf.fit.model.LoaiBanh;
 import vn.edu.hcmuaf.fit.model.Product;
 
 import java.sql.*;
@@ -154,7 +155,7 @@ public class ProductService {
         List<Comment> list = p.getComments();
         return list.get(list.size()-1);
     }
-    public static List<Product> getSize(String kichthuoc) {
+    public static List<Product> findBySize(String kichthuoc) {
         List<Product> list = getData();
         List<Product> rs = new LinkedList<>();
         for(Product p : list){
@@ -180,6 +181,15 @@ public class ProductService {
         }
 //        0 15 30 45 60 75 90
         return result;
+    }
+    public static List<LoaiBanh> getListType() throws SQLException {
+        List<LoaiBanh> res = new ArrayList<>();
+        Statement stm = DBConnect.getInstall().get();
+        ResultSet rs = stm.executeQuery("SELECT MALB, TenLB FROM loaibanh;");
+        while (rs.next()){
+            res.add(new LoaiBanh(rs.getString(1),rs.getString(2)));
+        }
+        return res;
     }
     public static void main(String[] args) {
 //        List<Product> li = ProductService.getData();

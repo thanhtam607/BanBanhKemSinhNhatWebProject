@@ -123,11 +123,8 @@
                         </div>
 
                         <div class="header__top__right__auth">
-<<<<<<< HEAD
                             <a  href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
-=======
-                            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
+
                             <% if(auth != null) { %>
                             <div class="header__top__right__auth__dropdown">
                                 <% if(auth.checkRole(1)) { %>

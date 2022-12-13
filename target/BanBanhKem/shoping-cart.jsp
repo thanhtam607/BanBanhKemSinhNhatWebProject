@@ -259,16 +259,32 @@
                                 <%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND
                             </td>
                             <td class="shoping__cart__quantity">
+                                <script>
+                                    var soluong = parseInt(<%=entry.getValue().getSoLgMua()%>);
+                                    document.getElementById("solgSP").innerHTML= soluong;
+                                    function themSolgSP(){
+                                        var newSlg = document.getElementById("solgSP").value;
+                                        var today = new Date();
+                                        var date = today.getFullYear() + "-" + (today.getMonth()+1)+"-"+ today.getDate()+" "+ today.getHours()+":"+today.getMinutes()+":"+ today.getSeconds();
+                                        var urlc= "AddToCart?masp=<%=entry.getValue().getSp().getId()%>";
+                                        $.ajax({
+                                            url: urlc,
+                                            type: "POST",
+                                            success: function (response){
+                                                var comment = document.getElementById("list-comments");
+                                                comment.innerHTML += response;
+                                                soluong++;
+                                                document.getElementById("qt-cmt").innerHTML= soluong;
+                                                document.getElementById("comment").value=null;
+                                            }
+                                        });
+                                    }
+                                </script>
                                 <div class="quantity">
                                     <div class="pro-qty">
-<<<<<<< HEAD
                                         <%String slg = String.valueOf(entry.getValue().getSoLgMua());%>
-                                        <input class="qty" name="solgmua"
+                                        <input id="solgSP" class="qty" name="solgmua"
                                                value="<%= slg != null ? slg:"1"%>">
-=======
-                                        <input class="qty" name="solgmua"
-                                               value="<%=entry.getValue().getSoLgMua()%>">
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                     </div>
                                 </div>
                             </td>
@@ -281,6 +297,7 @@
                         </tr>
                         <%}%>
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -288,11 +305,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-<<<<<<< HEAD
                     <a href="./ListProduct" class="primary-btn cart-btn">Tiếp tục mua hàng</a>
-=======
-                    <a href="./ListProduct" class="primary-btn cart-btn">Tiếp tục mua hàng </a>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
 
                 </div>
             </div>
