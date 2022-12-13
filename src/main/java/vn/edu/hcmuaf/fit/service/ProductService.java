@@ -200,6 +200,26 @@ public class ProductService {
         }
         return res;
     }
+    public static List<Product> findByName(String key)  {
+        List<Product> res = new ArrayList<Product>();
+        List<String> listId = new ArrayList<String>();
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "select MASP FROM sanpham where TenSP like \"%"+ key +"%\"; ";
+        try {
+        ResultSet rs = stm.executeQuery(sql);
+        while (rs.next()){
+            listId.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        for(Product p: getData()){
+            if(listId.contains(p.getId())){
+                res.add(p);
+            }
+        }
+        return res;
+    }
     public static void main(String[] args) throws SQLException {
 //        List<Product> li = ProductService.getData();
 //        for(Product p: li){

@@ -16,10 +16,14 @@ public class ProductFilter extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> listFilter = ProductService.findBySize(request.getParameter("filter"));
+        String title = request.getParameter("title");
         if(listFilter.isEmpty()){
             listFilter = ProductService.findByType(request.getParameter("filter"));
         }
-        String title = request.getParameter("title");
+        if(listFilter.isEmpty()){
+            listFilter = ProductService.findByName(request.getParameter("key"));
+            title= "Kết quả tìm kiếm '" + request.getParameter("key")+"'";
+        }
         request.setAttribute("listFilter", listFilter);
         request.setAttribute("title",title);
         request.getRequestDispatcher("product-Filter.jsp").forward(request,response);
