@@ -27,6 +27,7 @@ public class AddToCart extends HttpServlet {
                 if (product != null) {
                     if (request.getParameter("solgmua") != null) {
                         solgmua = Integer.parseInt(request.getParameter("solgmua"));
+                        request.setAttribute("solgmua", solgmua);
                     }
 
                     if (session.getAttribute("order") == null) {

@@ -10,8 +10,10 @@ public class SignOut extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     HttpSession session = request.getSession(false);
-    session.invalidate();
-    response.sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");
+        if(session != null){
+            session.invalidate();
+            response.sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");
+        }
     }
 
     @Override
