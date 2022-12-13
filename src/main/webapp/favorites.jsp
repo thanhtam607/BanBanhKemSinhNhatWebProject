@@ -1,12 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
-<<<<<<< HEAD
 <%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
-=======
-<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -162,11 +157,7 @@
                 <div class="col-lg-2">
                     <div class="header__cart">
                         <ul>
-<<<<<<< HEAD
                             <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct():"0"%></span></a></li>
-=======
-                            <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li><li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct():"0"%></span></a></li>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                             <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                         </ul>
                     </div>
@@ -394,19 +385,11 @@
                     <div class="row">
                         <% for(ItemProductInCart fav: listFavorite.list()){
                         %>
-<<<<<<< HEAD
                           <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<%=fav.getSp().getListImg().get(0)%>">
                                     <ul class="product__item__pic__hover">
 <%--                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
-=======
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="<%=fav.getSp().getListImg().get(0)%>">
-                                    <ul class="product__item__pic__hover">
-                                        <%--                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                         <li><a href="AddToCart?masp=<%=fav.getSp().getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>

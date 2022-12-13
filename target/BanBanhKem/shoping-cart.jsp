@@ -259,41 +259,14 @@
                                 <%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND
                             </td>
                             <td class="shoping__cart__quantity">
-<<<<<<< HEAD
-                                <form action="AddToCart?masp=<%=entry.getValue().getSp().getId()%>" method="post" class="quantity">
+<%--                                <form action="AddToCart?masp=<%=entry.getValue().getSp().getId()%>" method="post" class="quantity">--%>
+                                <div class="quantity">
                                     <div class="pro-qty">
                                         <input id="solgSP" class="qty" name="solgmua"
                                                value="<%=entry.getValue().getSoLgMua()%>">
-=======
-                                <script>
-                                    var soluong = parseInt(<%=entry.getValue().getSoLgMua()%>);
-                                    document.getElementById("solgSP").innerHTML= soluong;
-                                    function themSolgSP(){
-                                        var newSlg = document.getElementById("solgSP").value;
-                                        var today = new Date();
-                                        var date = today.getFullYear() + "-" + (today.getMonth()+1)+"-"+ today.getDate()+" "+ today.getHours()+":"+today.getMinutes()+":"+ today.getSeconds();
-                                        var urlc= "AddToCart?masp=<%=entry.getValue().getSp().getId()%>";
-                                        $.ajax({
-                                            url: urlc,
-                                            type: "POST",
-                                            success: function (response){
-                                                var comment = document.getElementById("list-comments");
-                                                comment.innerHTML += response;
-                                                soluong++;
-                                                document.getElementById("qt-cmt").innerHTML= soluong;
-                                                document.getElementById("comment").value=null;
-                                            }
-                                        });
-                                    }
-                                </script>
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <%String slg = String.valueOf(entry.getValue().getSoLgMua());%>
-                                        <input id="solgSP" class="qty" name="solgmua"
-                                               value="<%= slg != null ? slg:"1"%>">
->>>>>>> 5d526fa11f07c5a1dd2015c6c0735491d8dc1ab0
                                     </div>
-                                </form>
+                                </div>
+<%--                                </form>--%>
                             </td>
                             <td class="shoping__cart__total">
                                 <%=entry.getValue().formatNum(entry.getValue().giaSanPhamTrongGioHang()) %> VND

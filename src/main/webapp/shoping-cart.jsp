@@ -259,12 +259,14 @@
                                 <%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND
                             </td>
                             <td class="shoping__cart__quantity">
-                                <form action="AddToCart?masp=<%=entry.getValue().getSp().getId()%>" method="post" class="quantity">
+<%--                                <form action="AddToCart?masp=<%=entry.getValue().getSp().getId()%>" method="post" class="quantity">--%>
+                                <div class="quantity">
                                     <div class="pro-qty">
                                         <input id="solgSP" class="qty" name="solgmua"
                                                value="<%=entry.getValue().getSoLgMua()%>">
                                     </div>
-                                </form>
+                                </div>
+<%--                                </form>--%>
                             </td>
                             <td class="shoping__cart__total">
                                 <%=entry.getValue().formatNum(entry.getValue().giaSanPhamTrongGioHang()) %> VND
