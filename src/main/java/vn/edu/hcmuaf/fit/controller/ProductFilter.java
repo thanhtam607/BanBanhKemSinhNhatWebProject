@@ -15,9 +15,14 @@ import java.util.List;
 public class ProductFilter extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> list = ProductService.getSize(request.getParameter("size"));
-        request.setAttribute("list", list);
-        request.getRequestDispatcher("/shop-product-banh-hoa.jsp").forward(request,response);
+        List<Product> listFilter = ProductService.findBySize(request.getParameter("filter"));
+        if(listFilter.isEmpty()){
+            listFilter = ProductService.findByType(request.getParameter("filter"));
+        }
+        String title = request.getParameter("title");
+        request.setAttribute("listFilter", listFilter);
+        request.setAttribute("title",title);
+        request.getRequestDispatcher("product-Filter.jsp").forward(request,response);
     }
 
     @Override
