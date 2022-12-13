@@ -261,8 +261,9 @@
                             <td class="shoping__cart__quantity">
                                 <div class="quantity">
                                     <div class="pro-qty">
+                                        <%String slg = String.valueOf(entry.getValue().getSoLgMua());%>
                                         <input class="qty" name="solgmua"
-                                               value="<%=entry.getValue().getSoLgMua()%>">
+                                               value="<%= slg != null ? slg:"1"%>">
                                     </div>
                                 </div>
                             </td>

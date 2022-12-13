@@ -252,12 +252,14 @@
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <input type="text" value="1">
+                                <% String slg = request.getParameter("solgmua");%>
+                                <input type="text" name="solgmua"
+                                       value="<%= slg != null ? slg:"1"%>">
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="primary-btn">Thêm vào giỏ hàng</a>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    <a href="AddToCart?masp=<%=pro.getId()%>" class="primary-btn">Thêm vào giỏ hàng</a>
+                    <a href="AddToFavorite?masp=<%=pro.getId()%>" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <ul>
                         <li><b>Tình trạng</b> <span>Còn hàng</span></li>
                         <li><b>Giao hàng</b> <span>Giao ngay trong ngày</span></li>

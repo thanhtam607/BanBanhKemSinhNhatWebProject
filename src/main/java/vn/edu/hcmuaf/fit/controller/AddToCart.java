@@ -19,16 +19,19 @@ public class AddToCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
-        int solgmua = 1;
+        String solg = request.getParameter("solgmua");
+        if(solg == null){
+            solg = "1";
+        }
+        int solgmua = Integer.parseInt(solg);
         if(auth != null) {
             if (request.getParameter("masp") != null) {
                 String maSP = request.getParameter("masp");
                 Product product = ProductService.findById(maSP);
                 if (product != null) {
-                    if (request.getParameter("solgmua") != null) {
-                        solgmua = Integer.parseInt(request.getParameter("solgmua"));
-                        request.setAttribute("solgmua", solgmua);
-                    }
+//                    if (request.getParameter("solgmua") != null) {
+//                         solgmua = Integer.parseInt(request.getParameter("solgmua"));
+//                    }
 
                     if (session.getAttribute("order") == null) {
                         Order order = new Order();

@@ -39,11 +39,6 @@ public class Blog implements Serializable {
         return category;
     }
 
-
-
-
-
-
     public void setCategory(String category) {
         this.category = category;
     }

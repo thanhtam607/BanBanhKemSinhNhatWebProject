@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.model;
 
 import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class Product {
     String id;
