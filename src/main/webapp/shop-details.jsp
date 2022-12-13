@@ -252,9 +252,8 @@
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <% String slg = request.getParameter("solgmua");%>
                                 <input type="text" name="solgmua"
-                                       value="<%= slg != null ? slg:"1"%>">
+                                       value="1">
                             </div>
                         </div>
                     </div>

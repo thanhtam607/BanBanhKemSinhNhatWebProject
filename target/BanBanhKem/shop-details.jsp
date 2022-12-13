@@ -125,11 +125,7 @@
                         </div>
 
                         <div class="header__top__right__auth">
-<<<<<<< HEAD
                             <a  href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
-=======
-                            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
->>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                             <% if(auth != null) { %>
                             <div class="header__top__right__auth__dropdown">
                                 <% if(auth.checkRole(1)) { %>
@@ -256,9 +252,8 @@
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <% String slg = request.getParameter("solgmua");%>
                                 <input type="text" name="solgmua"
-                                       value="<%= slg != null ? slg:"1"%>">
+                                       value="1">
                             </div>
                         </div>
                     </div>
