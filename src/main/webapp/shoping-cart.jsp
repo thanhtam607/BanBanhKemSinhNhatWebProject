@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
 <%@ page import="java.util.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <html lang="xzz">
@@ -50,14 +51,15 @@
     </div>
     <div class="humberger__menu__cart">
         <ul>
-            <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+            <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
+            <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
             <%Order order = (Order) session.getAttribute("order");%>
-            <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
+            <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk() : "Đăng nhập"%>
+            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
             </a>
             <% if (auth != null) { %>
             <div class="header__top__right__auth__dropdown">
@@ -300,8 +302,8 @@
                 <div class="shoping__checkout">
                     <h5>Tổng cộng</h5>
                     <ul>
-                        <li>Tổng tiền <span><%= order.formatNum(order.totalMoney(order))%> VND</span></li>
-                        <li>Tổng thanh toán <span><%= order.formatNum(order.totalMoney(order))%> VND</span></li>
+                        <li>Tổng tiền <span><%= order.formatNum(order.totalMoney())%> VND</span></li>
+                        <li>Tổng thanh toán <span><%= order.formatNum(order.totalMoney())%> VND</span></li>
                     </ul>
                     <a href="checkout.jsp" class="primary-btn">THANH TOÁN NGAY</a>
                 </div>
