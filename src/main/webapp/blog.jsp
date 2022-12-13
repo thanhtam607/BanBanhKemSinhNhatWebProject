@@ -158,6 +158,7 @@
                     <ul>
                         <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
                         <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+
                     </ul>
                 </div>
             </div>
@@ -178,9 +179,9 @@
                 <div class="hero__search">
                     <div class="hero__search__form ">
                         <form action="#" >
-                          
-                            <input type="text" placeholder="Bạn cần bánh gì nè?">
-                            <button type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
+
+                            <input name="key" type="text" placeholder="Bạn cần bánh gì nè?">
+                            <button href="ProductFilter" type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
                         </form>
                     </div>
 
