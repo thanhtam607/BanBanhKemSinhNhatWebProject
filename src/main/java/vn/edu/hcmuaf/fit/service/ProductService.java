@@ -191,11 +191,20 @@ public class ProductService {
         }
         return res;
     }
-    public static void main(String[] args) {
+    public static List<Product> findByType(String type){
+        List<Product> res = new ArrayList<Product>();
+        for(Product p : getData()){
+            if(p.getLoaiBanh().equals(type)){
+                res.add(p);
+            }
+        }
+        return res;
+    }
+    public static void main(String[] args) throws SQLException {
 //        List<Product> li = ProductService.getData();
 //        for(Product p: li){
 //            System.out.print(p.getName()+"\t");
-//            System.out.println(p.getComments().size());
+            System.out.println(getListType().size());
 //
 //        }
 //        System.out.println(getLastComment("B001").getBinhLuan());

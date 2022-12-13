@@ -225,7 +225,7 @@
                                 <li class="text__loaibanh"><a href="./ListProduct">Tất cả</a></li>
                                 <%List<LoaiBanh> ListType = ProductService.getListType();
                                     for(LoaiBanh lb: ListType){%>
-                                <li class="text__loaibanh"><a href="ProductFilter?title = <%=lb.getTenLB()%>&filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
+                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getTenLB()%> &filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
                                 <%}%>
 
                             </ul>
