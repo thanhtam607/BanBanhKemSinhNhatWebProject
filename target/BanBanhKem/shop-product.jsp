@@ -4,7 +4,10 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+<<<<<<< HEAD
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
+=======
+>>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -360,8 +363,12 @@
                                             data-setbg="./img/product/B001/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
+<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
+=======
+                                                <%-- <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+>>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -378,8 +385,12 @@
                                             data-setbg="./img/product/B067/banh2.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
+<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
+=======
+                                                <%-- <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+>>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -396,8 +407,12 @@
                                             data-setbg="./img/product/B026/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
+<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
+=======
+                                                <%-- <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+>>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -414,8 +429,12 @@
                                             data-setbg="./img/product/B012/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
+<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
+=======
+                                                <%-- <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+>>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -432,8 +451,12 @@
                                             data-setbg="././img/product/B021/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
+<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
+=======
+                                                <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+>>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -450,8 +473,12 @@
                                             data-setbg="./img/product/B022/banh1.jpg">
                                             <div class="product__discount__percent">-20%</div>
                                             <ul class="product__item__pic__hover">
+<<<<<<< HEAD
 <%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
 
+=======
+                                                <%-- <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
+>>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>

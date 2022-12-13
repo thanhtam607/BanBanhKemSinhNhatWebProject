@@ -39,11 +39,12 @@ public class AddToFavorite extends HttpServlet {
                     }else {
                         FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");
                         HashMap<String, ItemProductInCart> listItems = listFavorite.getData();
-                           ItemProductInCart item = new ItemProductInCart();
-                            item.setSp(product);
-                            item.setMasp(maSP);
-                            item.setPrice(product.getPrice());
-                            listItems.put(maSP, item);
+
+                        ItemProductInCart item = new ItemProductInCart();
+                        item.setSp(product);
+                        item.setMasp(maSP);
+                        item.setPrice(product.getPrice());
+                        listItems.put(maSP, item);
                         session.setAttribute("listFavorite", listFavorite);
                     }
                 }

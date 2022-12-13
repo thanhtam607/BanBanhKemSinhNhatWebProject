@@ -1,7 +1,12 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
+<<<<<<< HEAD
 <%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+=======
+<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
+>>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -157,7 +162,11 @@
                 <div class="col-lg-2">
                     <div class="header__cart">
                         <ul>
+<<<<<<< HEAD
                             <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct():"0"%></span></a></li>
+=======
+                            <li><a href="./favorites.html"><i class="fa fa-heart"></i> <span>1</span></a></li><li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct():"0"%></span></a></li>
+>>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                             <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                         </ul>
                     </div>
@@ -385,11 +394,19 @@
                     <div class="row">
                         <% for(ItemProductInCart fav: listFavorite.list()){
                         %>
+<<<<<<< HEAD
                           <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<%=fav.getSp().getListImg().get(0)%>">
                                     <ul class="product__item__pic__hover">
 <%--                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+=======
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="<%=fav.getSp().getListImg().get(0)%>">
+                                    <ul class="product__item__pic__hover">
+                                        <%--                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+>>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                         <li><a href="AddToCart?masp=<%=fav.getSp().getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
@@ -463,9 +480,9 @@
                 <div class="col-lg-12">
                     <div class="footer__copyright">
                         <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            Bản quyền &copy;<script>document.write(new Date().getFullYear());</script> thuộc Nhóm 27 | Lập trình web thầy Phan Đình Long <i class="fa fa-heart" aria-hidden="true"> </i> Khoa CNTT - ĐH Nông Lâm TP HCM</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
+                        <div class="footer__copyright__payment"></div>
                     </div>
                 </div>
             </div>

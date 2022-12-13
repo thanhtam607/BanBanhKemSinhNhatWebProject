@@ -93,7 +93,6 @@ public class Order {
                 ", data=" + data +
                 '}';
     }
-
     public static String formatNum(double num){
         NumberFormat vn = NumberFormat.getInstance();
         String result = vn.format(num);

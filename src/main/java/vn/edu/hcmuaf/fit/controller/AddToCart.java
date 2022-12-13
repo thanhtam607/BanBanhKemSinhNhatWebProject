@@ -33,6 +33,7 @@ public class AddToCart extends HttpServlet {
 //                         solgmua = Integer.parseInt(request.getParameter("solgmua"));
 //                    }
 
+
                     if (session.getAttribute("order") == null) {
                         Order order = new Order();
                         HashMap<String, ItemProductInCart> listItems = new HashMap<>();

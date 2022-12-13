@@ -158,6 +158,10 @@
                     <ul>
                         <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
                         <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+<<<<<<< HEAD
+=======
+                    </ul>
+>>>>>>> 61fb7931c256943a1d7c9c6e60c787a22be18f0b
                     </ul>
                 </div>
             </div>

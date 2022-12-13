@@ -14,6 +14,7 @@ public class SignOut extends HttpServlet {
         session.invalidate();
         response.sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");
     }
+
     }
 
     @Override

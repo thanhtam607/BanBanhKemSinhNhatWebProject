@@ -76,3 +76,4 @@ public class FavoriteProduct {
         return this.data.size() ;
     }
 }
+
