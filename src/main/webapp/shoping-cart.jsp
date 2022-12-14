@@ -185,11 +185,10 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form ">
-                        <form action="#">
+                        <form action="#" >
 
-                            <input type="text" placeholder="Bạn cần bánh gì nè?">
-                            <button type="submit" class="site-btn"><i class="fa fa-search"></i> <span
-                                    class="text_search">TÌM KIẾM</span></button>
+                            <input name="key" type="text" placeholder="Bạn cần bánh gì nè?">
+                            <button href="ProductFilter" type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
                         </form>
                     </div>
 
@@ -249,6 +248,7 @@
                         <%
                             for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
                         %>
+<<<<<<< HEAD
                             <tr>
                                 <td class="shoping__cart__item">
                                     <img src="<%=entry.getValue().getSp().getListImg().get(0)%>" alt="">
@@ -273,6 +273,32 @@
                                     <span class="icon_close"></span>
                                 </td>
                             </tr>
+=======
+                        <tr>
+                            <td class="shoping__cart__item">
+                                <img src="<%=entry.getValue().getSp().getListImg().get(0)%>" alt="">
+                                <h5><%=entry.getValue().getSp().getName()%>
+                                </h5>
+                            </td>
+                            <td class="shoping__cart__price">
+                                <%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND
+                            </td>
+                            <td class="shoping__cart__quantity">
+                                <form action="AddToCart?masp=<%=entry.getValue().getSp().getId()%>" method="post" class="quantity">
+                                    <div class="pro-qty">
+                                        <input id="solgSP" class="qty" name="solgmua"
+                                               value="<%=entry.getValue().getSoLgMua()%>">
+                                    </div>
+                                </form>
+                            </td>
+                            <td class="shoping__cart__total">
+                                <%=entry.getValue().formatNum(entry.getValue().giaSanPhamTrongGioHang()) %> VND
+                            </td>
+                            <td class="shoping__cart__item__close">
+                                <span class="icon_close"></span>
+                            </td>
+                        </tr>
+>>>>>>> c4a7ee2a9dfb943f78ba11c3e7d3d10b0ad6d41d
                         <%}%>
                         </tbody>
 

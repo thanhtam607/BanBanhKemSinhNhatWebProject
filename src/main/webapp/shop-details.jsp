@@ -184,8 +184,8 @@
                     <div class="hero__search__form ">
                         <form action="#" >
 
-                            <input type="text" placeholder="Bạn cần bánh gì nè?">
-                            <button type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
+                            <input name="key" type="text" placeholder="Bạn cần bánh gì nè?">
+                            <button href="ProductFilter" type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
                         </form>
                     </div>
 
@@ -251,7 +251,12 @@
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
+<<<<<<< HEAD
                                 <input type="text" value="1">
+=======
+                                <input type="text" name="solgmua"
+                                       value="1">
+>>>>>>> c4a7ee2a9dfb943f78ba11c3e7d3d10b0ad6d41d
                             </div>
                         </div>
                     </div>
