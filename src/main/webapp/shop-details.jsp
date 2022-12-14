@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -340,8 +341,9 @@
             </div>
         </div>
         <div class="row">
-               <% String type = pro.getLoaiBanh(); %>
-               <%  List<Product> listproduct = (List<Product>) request.getAttribute(type);
+            <% String type = pro.getLoaiBanh(); %>
+            <% List<Product> listproduct = (List<Product>) request.getAttribute("splq");
+            listproduct = ProductService.findByType(type);
              for(Product product : listproduct){ %>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
@@ -353,7 +355,7 @@
                     </div>
                     <div class="product__item__text">
                         <h6><a href="#"><%=product.getName()%></a></h6>
-                        <h5><%=product.formatNum(product.getPrice())%></h5>
+                        <h5><%=product.formatNum(product.getPrice())%> VND</h5>
                     </div>
                 </div>
             </div>
