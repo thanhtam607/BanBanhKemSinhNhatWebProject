@@ -3,7 +3,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -51,16 +50,15 @@
     </div>
     <div class="humberger__menu__cart">
         <ul>
-            <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
-            <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+            <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
             <%Order order = (Order) session.getAttribute("order");%>
-            <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+            <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
 
         <div class="header__top__right__auth">
-            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+            <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
                 <% if(auth.checkRole(1)) { %>
@@ -125,7 +123,7 @@
                         </div>
 
                         <div class="header__top__right__auth">
-                            <a  href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                            <a  href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                             <% if(auth != null) { %>
                             <div class="header__top__right__auth__dropdown">
                                 <% if(auth.checkRole(1)) { %>
@@ -162,9 +160,10 @@
             <div class="col-lg-2">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
-                        <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -185,8 +184,8 @@
                     <div class="hero__search__form ">
                         <form action="#" >
 
-                            <input type="text" placeholder="Bạn cần bánh gì nè?">
-                            <button type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
+                            <input name="key" type="text" placeholder="Bạn cần bánh gì nè?">
+                            <button href="ProductFilter" type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
                         </form>
                     </div>
 
@@ -257,8 +256,8 @@
                             </div>
                         </div>
                     </div>
-                    <a href="AddToCart?masp=<%=pro.getId()%>" class="primary-btn">Thêm vào giỏ hàng</a>
-                    <a href="AddToFavorite?masp=<%=pro.getId()%>" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    <a href="#" class="primary-btn">Thêm vào giỏ hàng</a>
+                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <ul>
                         <li><b>Tình trạng</b> <span>Còn hàng</span></li>
                         <li><b>Giao hàng</b> <span>Giao ngay trong ngày</span></li>
@@ -341,66 +340,24 @@
             </div>
         </div>
         <div class="row">
+               <% String type = pro.getLoaiBanh(); %>
+               <%  List<Product> listproduct = (List<Product>) request.getAttribute(type);
+             for(Product product : listproduct){ %>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/B002/banh1.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="<%=product.getListImg().get(0)%>">
                         <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a href="AddToFavorite?masp=<%=product.getId()%>"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="AddToCart?masp=<%=product.getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#">Bánh hoa hồng kem dâu tây</a></h6>
-                        <h5>450,000 VND</h5>
+                        <h6><a href="#"><%=product.getName()%></a></h6>
+                        <h5><%=product.formatNum(product.getPrice())%></h5>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/B003/banh1.jpg">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Bánh hoa hồng nhật</a></h6>
-                        <h5>420,000 VND</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/B004/banh1.jpg">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Bánh hoa linh lang</a></h6>
-                        <h5>250,000 VND</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/B005/banh1.jpg">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Bánh hoa kiểu Anh sang trọng</a></h6>
-                        <h5>330,000 VND</h5>
-                    </div>
-                </div>
-            </div>
+            <% } %>
         </div>
     </div>
 </section>

@@ -15,6 +15,8 @@ import java.util.List;
 public class ProductFilter extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product> listHotProduct = ProductService.sanPhamBanChay();
+        request.setAttribute("listBanChay", listHotProduct);
         List<Product> listFilter = ProductService.findBySize(request.getParameter("filter"));
         String title = request.getParameter("title");
         if(listFilter.isEmpty()){

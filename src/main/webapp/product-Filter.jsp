@@ -275,7 +275,7 @@
                             <div class="latest-product__text">
                                 <h4>Top Bán Chạy</h4>
                                 <div class="latest-product__slider owl-carousel">
-                                    <% List<Product> listhotproducts = (List<Product>) request.getAttribute("listspbc"); %>
+                                    <% List<Product> listhotproducts = (List<Product>) request.getAttribute("listBanChay"); %>
                                     <div class="latest-prdouct__slider__item">
                                         <% for(int i = 0; i<3;i++){
                                             Product productL = listhotproducts.get(i);%>
@@ -289,8 +289,8 @@
                                             </div>
                                         </a>
                                         <% } %>
-                                        </a>
                                     </div>
+                                        </a>
                                     <div class="latest-prdouct__slider__item">
                                         <% for(int i = 3; i<6;i++){
                                             Product productR = listhotproducts.get(i);%>
@@ -304,11 +304,11 @@
                                             </div>
                                         </a>
                                         <% } %>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                        </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
                     <div class="product__discount product__discount_page_detail">

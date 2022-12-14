@@ -251,12 +251,8 @@
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
-<<<<<<< HEAD
-                                <input type="text" value="1">
-=======
                                 <input type="text" name="solgmua"
                                        value="1">
->>>>>>> c4a7ee2a9dfb943f78ba11c3e7d3d10b0ad6d41d
                             </div>
                         </div>
                     </div>
@@ -344,66 +340,24 @@
             </div>
         </div>
         <div class="row">
+               <% String type = pro.getLoaiBanh(); %>
+               <%  List<Product> listproduct = (List<Product>) request.getAttribute(type);
+             for(Product product : listproduct){ %>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/B002/banh1.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="<%=product.getListImg().get(0)%>">
                         <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a href="AddToFavorite?masp=<%=product.getId()%>"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="AddToCart?masp=<%=product.getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#">Bánh hoa hồng kem dâu tây</a></h6>
-                        <h5>450,000 VND</h5>
+                        <h6><a href="#"><%=product.getName()%></a></h6>
+                        <h5><%=product.formatNum(product.getPrice())%></h5>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/B003/banh1.jpg">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Bánh hoa hồng nhật</a></h6>
-                        <h5>420,000 VND</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/B004/banh1.jpg">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Bánh hoa linh lang</a></h6>
-                        <h5>250,000 VND</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/B005/banh1.jpg">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Bánh hoa kiểu Anh sang trọng</a></h6>
-                        <h5>330,000 VND</h5>
-                    </div>
-                </div>
-            </div>
+            <% } %>
         </div>
     </div>
 </section>
