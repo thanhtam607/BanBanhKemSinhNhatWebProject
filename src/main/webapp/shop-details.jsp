@@ -4,6 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.LoaiBanh" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -212,7 +213,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2><%= pro.getName()%></h2>
+                    <h2><%=pro.getName()%></h2>
                     <div class="breadcrumb__option">
                         <a href="./Index">Trang chủ</a>
                         <a href="./ListProduct">Sản phẩm</a>
@@ -344,6 +345,7 @@
             <% String type = pro.getLoaiBanh(); %>
             <% List<Product> listproduct = (List<Product>) request.getAttribute("splq");
             listproduct = ProductService.findByType(type);
+            if (listproduct.size() < 4) {
              for(Product product : listproduct){ %>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
@@ -354,12 +356,35 @@
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#"><%=product.getName()%></a></h6>
+                        <h6><a href="ProductDetail?id=<%=product.getId() %>"><%=product.getName()%></a></h6>
                         <h5><%=product.formatNum(product.getPrice())%> VND</h5>
                     </div>
                 </div>
             </div>
-            <% } %>
+            <% }
+            } else {
+                for(int i = 0; i < 4; i++ ){
+              Product product1 = listproduct.get(i);%>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="<%=product1.getListImg().get(0)%>">
+                        <ul class="product__item__pic__hover">
+                            <li><a href="AddToFavorite?masp=<%=product1.getId()%>"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="AddToCart?masp=<%=product1.getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="ProductDetail?id=<%=product1.getId() %>"><%=product1.getName()%></a></h6>
+                        <h5><%=product1.formatNum(product1.getPrice())%> VND</h5>
+                    </div>
+                </div>
+            </div>
+            <% }
+            }%>
+            <%List<LoaiBanh> ListType = ProductService.getListType();
+                for(LoaiBanh lb: ListType){%>
+            <a href="ProductFilter?title=<%=lb.getTenLB()%> &filter=<%=lb.getTenLB()%>" type="button" class="btn btn_pink py-md-3 px-md-5 mt-2 btn-rm" >Xem nhiều hơn</a>
+            <% break;} %>
         </div>
     </div>
 </section>
