@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.LoaiBanh" %>
+
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -510,7 +511,7 @@
                         <% } %>
                     </div>
                     <div class="product__pagination">
-                        <%  int tag = (int) request.getAttribute("tag");
+                        <% int tag = (int) request.getAttribute("tag");
                             int endPage = (int) request.getAttribute("endPage");
                             for(int i = 1; i <= endPage ; i++){ %>
                         <a class="<%=tag == i?"product__pagination__page2":""%>" href="ListProduct?page=<%=i%>"><%=i%></a>
