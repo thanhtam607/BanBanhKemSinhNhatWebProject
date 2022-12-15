@@ -18,7 +18,7 @@ public class ListProduct extends HttpServlet {
             numPage = "1";
         }
         int page = Integer.parseInt(numPage);
-
+        List<Product> list = ProductService.getPaginationPageOwn(page);
         int totalProduct = ProductService.getToTalProduct();
         int endPage = totalProduct / 15;
         if(totalProduct % 15 != 0){
@@ -26,9 +26,8 @@ public class ListProduct extends HttpServlet {
         }
         request.setAttribute("endPage", endPage);
         request.setAttribute("tag", page);
-
-        List<Product> list = ProductService.getPaginationPage(page);
         request.setAttribute("list", list);
+
 
         request.getRequestDispatcher("shop-product.jsp").forward(request,response);
 

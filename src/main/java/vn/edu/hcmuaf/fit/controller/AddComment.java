@@ -26,7 +26,7 @@ public class AddComment extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             String cmt = request.getParameter("cmt");
             HttpSession session = request.getSession(true);
-            String maSp = (String) session.getAttribute("idProduct") ;
+            String maSp = (String) session.getAttribute("idProduct");
             String date = request.getParameter("date");
 //          String userID = request.getParameter("userId");
             User user =(User) session.getAttribute("auth");

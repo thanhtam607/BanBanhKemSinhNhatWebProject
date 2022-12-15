@@ -260,7 +260,7 @@
                                 <td class="shoping__cart__quantity">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <input class="qty" name="solgmua" value="<%=entry.getValue().getSoLgMua()%>">
+                                            <input class="qty" value="<%=order!= null ? entry.getValue().getSoLgMua():"0"%>">
 <%--                                            <span class="dec qtybtn" name="solgmua" ><%=entry.getValue().getSoLgMua()%></span>--%>
                                         </div>
                                     </div>

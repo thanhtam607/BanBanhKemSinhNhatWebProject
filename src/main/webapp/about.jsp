@@ -55,7 +55,7 @@
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__auth">
-                <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                 <% if(auth != null) { %>
                 <div class="header__top__right__auth__dropdown">
                     <% if(auth.checkRole(1)) { %>
@@ -119,7 +119,7 @@
                                 <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                                <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                                 <% if(auth != null) { %>
                                     <div class="header__top__right__auth__dropdown">
                                         <% if(auth.checkRole(1)) { %>

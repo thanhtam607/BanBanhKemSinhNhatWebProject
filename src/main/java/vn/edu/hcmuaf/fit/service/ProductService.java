@@ -168,7 +168,7 @@ public class ProductService {
     public static int getToTalProduct(){
         return getData().size();
     }
-    public static List<Product> getPaginationPage(int page){
+    public static List<Product> getPaginationPageOwn(int page){
         List<Product> data = getData();
         List<Product> result = new ArrayList<>();
         int begin = (page-1)*15;
@@ -182,6 +182,7 @@ public class ProductService {
 //        0 15 30 45 60 75 90
         return result;
     }
+
     public static List<LoaiBanh> getListType() throws SQLException {
         List<LoaiBanh> res = new ArrayList<>();
         Statement stm = DBConnect.getInstall().get();

@@ -58,7 +58,7 @@
     <div class="humberger__menu__widget">
 
         <div class="header__top__right__auth">
-            <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
                 <% if(auth.checkRole(1)) { %>
@@ -123,7 +123,7 @@
                         </div>
 
                         <div class="header__top__right__auth">
-                            <a  href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                            <a  href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
                             <% if(auth != null) { %>
                             <div class="header__top__right__auth__dropdown">
                                 <% if(auth.checkRole(1)) { %>
@@ -250,14 +250,14 @@
                     <p><%= pro.getNoiDung()%></p>
                     <div class="product__details__quantity">
                         <div class="quantity">
-                            <div class="pro-qty">
+                            <div class="pro-qty" >
                                 <input type="text" name="solgmua"
                                        value="1">
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="primary-btn">Thêm vào giỏ hàng</a>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    <a href="AddToCart?masp=<%=pro.getId()%>"  class="primary-btn">Thêm vào giỏ hàng</a>
+                    <a href="AddToFavorite?masp=<%=pro.getId()%>"  class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <ul>
                         <li><b>Tình trạng</b> <span>Còn hàng</span></li>
                         <li><b>Giao hàng</b> <span>Giao ngay trong ngày</span></li>

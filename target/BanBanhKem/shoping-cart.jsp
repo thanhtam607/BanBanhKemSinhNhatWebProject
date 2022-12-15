@@ -164,8 +164,8 @@
             <div class="col-lg-2">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="/BanBanhKemSinhNhatWebProject/CartController"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.getData().size():"0"%></span></a></li>
+                        <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+                        <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -260,7 +260,7 @@
                                 <td class="shoping__cart__quantity">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <input class="qty" name="solgmua" value="<%=entry.getValue().getSoLgMua()%>">
+                                            <input class="qty" value="<%=order!= null ? entry.getValue().getSoLgMua():"0"%>">
 <%--                                            <span class="dec qtybtn" name="solgmua" ><%=entry.getValue().getSoLgMua()%></span>--%>
                                         </div>
                                     </div>

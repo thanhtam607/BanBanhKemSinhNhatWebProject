@@ -56,7 +56,6 @@
         </ul>
     </div>
     <div class="humberger__menu__widget">
-
         <div class="header__top__right__auth">
             <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
             <% if(auth != null) { %>
@@ -163,7 +162,6 @@
                         <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
                         <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
-
                 </div>
             </div>
         </div>

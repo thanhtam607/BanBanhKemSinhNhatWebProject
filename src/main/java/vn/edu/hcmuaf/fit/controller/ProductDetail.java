@@ -16,6 +16,9 @@ public class ProductDetail extends HttpServlet {
         List<Product> listsplq = ProductService.findByType("type");
         request.setAttribute("splq", listsplq);
         Product product = ProductService.findById(request.getParameter("id"));
+        String a = request.getParameter("solgmua");
+        request.setAttribute("solgmua", a);
+        System.out.println(a);
         request.setAttribute("getDetail", product);
         request.getRequestDispatcher("shop-details.jsp").forward(request,response);
     }
