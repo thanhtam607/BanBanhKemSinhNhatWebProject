@@ -2156,7 +2156,14 @@ ol {
 	color: #b2b2b2;
 	cursor: pointer;
 }
-
+.remove_prod_style{
+	font-size: 24px;
+	color: #b2b2b2;
+}
+.remove_prod_style:hover{
+	color: #ff96b7;
+	font-weight: 600;
+}
 .shoping__cart__table table tbody tr td.shoping__cart__quantity {
 	width: 225px;
 }

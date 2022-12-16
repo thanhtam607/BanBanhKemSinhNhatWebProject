@@ -245,8 +245,7 @@
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty" >
-                                <input type="text" name="solgmua"
-                                       value="1">
+                                <input type="text" name="solgspmua" value="1">
                             </div>
                         </div>
                     </div>

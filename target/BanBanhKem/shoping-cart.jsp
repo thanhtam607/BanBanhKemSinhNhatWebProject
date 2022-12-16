@@ -145,11 +145,11 @@
             <div class="col-lg-7 ">
                 <nav class="header__menu">
                     <ul>
-                        <li class=""><a href="/Index">Trang chủ</a></li>
+                        <li class=""><a href="/BanBanhKemSinhNhatWebProject/Index">Trang chủ</a></li>
                         <li class=""><a href="about.jsp">Giới thiệu</a></li>
-                        <li class=""><a href="/ListProduct">Sản phẩm</a></li>
-                        <li class=""><a href="/ListBlog">Tin tức</a></li>
-                        <li class=""><a href="/contact.jsp">Liên hệ</a></li>
+                        <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListProduct">Sản phẩm</a></li>
+                        <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListBlog">Tin tức</a></li>
+                        <li class=""><a href="contact.jsp">Liên hệ</a></li>
                     </ul>
                 </nav>
             </div>
@@ -253,7 +253,7 @@
                                 <td class="shoping__cart__quantity">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <input class="qty" value="<%=order!= null ? entry.getValue().getSoLgMua():"0"%>">
+                                            <input class="qty" name="solgmua" value="<%=entry.getValue().getSoLgMua()%>">
 <%--                                            <span class="dec qtybtn" name="solgmua" ><%=entry.getValue().getSoLgMua()%></span>--%>
                                         </div>
                                     </div>
@@ -261,8 +261,8 @@
                                 <td class="shoping__cart__total">
                                     <%=entry.getValue().formatNum(entry.getValue().giaSanPhamTrongGioHang()) %> VND
                                 </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
+                                <td class="shoping__cart__item__close" >
+                                    <span ><a href="RemoveToCart?masp=<%=entry.getValue().getSp().getId()%>" class="remove_prod_style icon_close" ></a></span>
                                 </td>
                             </tr>
 

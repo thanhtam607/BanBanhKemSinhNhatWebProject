@@ -19,17 +19,15 @@ public class AddToCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
-        String solg = request.getParameter("solgmua");
-        if(solg == null){
-            solg = "1";
-        }
-        int solgmua = Integer.parseInt(solg);
-
+        int solgmua = 1;
         if(auth != null) {
             if (request.getParameter("masp") != null) {
                 String maSP = request.getParameter("masp");
                 Product product = ProductService.findById(maSP);
                 if (product != null) {
+                    if(request.getParameter("solgmua") != null){
+                        solgmua = Integer.parseInt(request.getParameter("solgmua"));
+                    }
                     if (session.getAttribute("order") == null) {
                         Order order = new Order();
                         HashMap<String, ItemProductInCart> listItems = new HashMap<>();
@@ -47,7 +45,7 @@ public class AddToCart extends HttpServlet {
                         HashMap<String, ItemProductInCart> listItems = order.getData();
                         ItemProductInCart item = listItems.get(maSP);
                         if(item != null){
-                            item.quantityUp(solgmua);
+                            item.quantityUp();
                         }else{
                             item = new ItemProductInCart();
                             item.setSp(product);
@@ -59,7 +57,7 @@ public class AddToCart extends HttpServlet {
 
                     }
                 }
-//                response.sendRedirect("/BanBanhKemSinhNhatWebProject/shoping-cart.jsp");
+//                request.getRequestDispatcher("/shoping-cart.jsp").forward(request, response);
                 response.sendRedirect(request.getContextPath() + "/CartController");
 
 

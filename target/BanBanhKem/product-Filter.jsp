@@ -362,7 +362,7 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="shop-details.jsp"><%=p.getName()%></a></h6>
+                                    <h6><a href="ProductDetail?id=<%=p.getId()%>"><%=p.getName()%></a></h6>
                                     <h5><%=p.getPrice()%></h5>
                                 </div>
                             </div>

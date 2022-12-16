@@ -29,6 +29,7 @@ public class ProductFilter extends HttpServlet {
 
         request.setAttribute("listFilter", listFilter);
         request.setAttribute("title",title);
+
         request.getRequestDispatcher("product-Filter.jsp").forward(request,response);
     }
 

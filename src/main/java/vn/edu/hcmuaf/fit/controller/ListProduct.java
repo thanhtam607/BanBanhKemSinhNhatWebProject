@@ -46,7 +46,6 @@ public class ListProduct extends HttpServlet {
         request.setAttribute("list", list);
         request.getRequestDispatcher("shop-product.jsp").forward(request,response);
 
-
     }
 
     @Override
