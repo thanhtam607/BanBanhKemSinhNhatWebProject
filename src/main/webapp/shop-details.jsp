@@ -309,7 +309,7 @@
                                 <div class = "input-item">
                                     <input id="comment" type="text" placeholder="   Viết bình luận...">
                                     <span class="add-comment">
-                                        <button onclick="sendC()"  type="submit" class="btn-add-comment"  >Gửi</button>
+                                        <button onclick="sendC()"  type="submit" class="btn btn-add-comment" >Gửi</button>
                                     </span>
                                 </div>
                                 <%}%>

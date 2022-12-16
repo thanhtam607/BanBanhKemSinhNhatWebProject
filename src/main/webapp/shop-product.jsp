@@ -6,6 +6,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.LoaiBanh" %>
+<%@ page import="com.mysql.cj.Session" %>
+<%@ page import="java.util.ArrayList" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -460,16 +462,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="filter__item">
+                    <form class="filter__item" >
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
                                     <span>Sắp Xếp</span>
-                                    <select>
-                                        <option value="0">Mặc định</option>
-                                        <option value="0">Giá từ cao tới thấp</option>
-                                        <option value="0">Giá từ thấp đến cao</option>
+                                    <select id="sortValue" name="sortValue"  >
+                                        <%List<String> listOption = new ArrayList<String>();
+                                        listOption.add("Mặc định");
+                                        listOption.add("Giá từ thấp đến cao");
+                                        listOption.add("Giá từ cao đến thấp");
+                                        for(String s: listOption){
+                                            String val = request.getParameter("sortValue");
+                                        if(s.equals(val)){%>
+                                            <option href="ListProduct?sortValue=<%=val%>" selected="true" value="<%=val%>>"><%=val%></option>
+                                        <%}
+                                        else{%>
+                                        <option href="ListProduct?sortValue=<%=s%>" value="<%=s%>"><%=s%></option>
+                                        <%}%>
+                                        <%}%>
                                     </select>
+
+
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
@@ -480,12 +494,15 @@
                             </div>
                             <div class="col-lg-4 col-md-3">
                                 <div class="filter__option">
-                                    <span class="icon_grid-2x2"></span>
+                                    <input  class="btn" type="submit" value="Lọc" style="color: white; background-color: #ff96b7; font-weight: 600">
+<%--                                    <span class="icon_grid-2x2"></span>--%>
                                     <!-- <span class="icon_ul"></span> -->
                                 </div>
-                            </div>3
+                            </div>
+
                         </div>
-                    </div>
+                    </form>
+
                     <div class="row">
                         <% for(Product p: list){ %>
                         <div class="col-lg-4 col-md-6 col-sm-6">
@@ -509,7 +526,7 @@
                         <% int tag = (int) request.getAttribute("tag");
                             int endPage = (int) request.getAttribute("endPage");
                             for(int i = 1; i <= endPage ; i++){ %>
-                        <a class="<%=tag == i?"product__pagination__page2":""%>" href="ListProduct?page=<%=i%>"><%=i%></a>
+                        <a class="<%=tag == i?"product__pagination__page2":""%>" href="ListProduct?sortValue=<%= request.getParameter("sortValue")%>&page=<%=i%>"><%=i%></a>
                         <%}%>
                         <a href="#"><i class="fa fa-long-arrow-right"></i></a>
                     </div>
@@ -521,6 +538,7 @@
 
 <jsp:include page="footer.jsp"></jsp:include>
     <!-- Js Plugins -->
+
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nice-select.min.js"></script>
@@ -529,7 +547,6 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-
 
 
 </body>
