@@ -526,7 +526,7 @@
                             for(int i = 1; i <= endPage ; i++){ %>
                         <a class="<%=tag == i?"product__pagination__page2":""%>" href="ListProduct?sortValue=<%= request.getParameter("sortValue")%>&page=<%=i%>"><%=i%></a>
                         <%}%>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+<%--                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>--%>
                     </div>
                 </div>
             </div>

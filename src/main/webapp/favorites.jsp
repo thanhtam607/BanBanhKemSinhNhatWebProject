@@ -397,10 +397,10 @@
                         </div>
                         <%}%>
                     </div>
-                    <div class="product__pagination">
-                        <a href="#">1</a>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                    </div>
+<%--                    <div class="product__pagination">--%>
+<%--                        <a href="#">1</a>--%>
+<%--                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>--%>
+<%--                    </div>--%>
                 </div>
             </div>
         </div>

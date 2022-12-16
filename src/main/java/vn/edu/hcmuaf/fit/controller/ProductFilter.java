@@ -27,10 +27,24 @@ public class ProductFilter extends HttpServlet {
             listFilter = ProductService.findByName(request.getParameter("key"));
             title= "Kết quả tìm kiếm '" + request.getParameter("key")+"'";
         }
+        //================================= phan trang ================================
 
+        String numPage = request.getParameter("pageName");
+        if(numPage == null){
+            numPage = "1";
+        }
+        int page = Integer.parseInt(numPage);
+
+        int endPageFilter = listFilter.size() / 15;
+        if(listFilter.size() % 15 != 0){
+            endPageFilter++;
+        }
+        request.setAttribute("endPageFt", endPageFilter);
+        request.setAttribute("tagPage", page);
+        List<Product> listF = ProductService.getPaginationPageOwn(page, listFilter);
+//================================= phan trang ================================
         request.setAttribute("listFilter", listFilter);
         request.setAttribute("title",title);
-
         request.getRequestDispatcher("product-Filter.jsp").forward(request,response);
     }
 

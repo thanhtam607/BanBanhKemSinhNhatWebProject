@@ -41,6 +41,7 @@ public class ListProduct extends HttpServlet {
         if(totalProduct % 15 != 0){
             endPage++;
         }
+
         request.setAttribute("endPage", endPage);
         request.setAttribute("tag", page);
         request.setAttribute("list", list);
