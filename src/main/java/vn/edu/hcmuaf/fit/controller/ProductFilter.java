@@ -19,6 +19,7 @@ public class ProductFilter extends HttpServlet {
         request.setAttribute("listBanChay", listHotProduct);
         List<Product> listFilter = ProductService.findBySize(request.getParameter("filter"));
         String title = request.getParameter("title");
+
         if(listFilter.isEmpty()){
             listFilter = ProductService.findByType(request.getParameter("filter"));
         }

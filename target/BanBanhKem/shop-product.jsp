@@ -467,7 +467,7 @@
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
                                     <span>Sắp Xếp</span>
-                                    <select id="sortValue" name="sortValue"  >
+                                    <select id="sortValue" name="sortValue" >
                                         <%List<String> listOption = new ArrayList<String>();
                                         listOption.add("Mặc định");
                                         listOption.add("Giá từ thấp đến cao");
@@ -482,8 +482,6 @@
                                         <%}%>
                                         <%}%>
                                     </select>
-
-
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
@@ -494,7 +492,7 @@
                             </div>
                             <div class="col-lg-4 col-md-3">
                                 <div class="filter__option">
-                                    <input  class="btn" type="submit" value="Lọc" style="color: white; background-color: #ff96b7; font-weight: 600">
+                                    <input  class="btn" type="submit" value="Lọc">
 <%--                                    <span class="icon_grid-2x2"></span>--%>
                                     <!-- <span class="icon_ul"></span> -->
                                 </div>

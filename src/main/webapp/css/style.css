@@ -1690,6 +1690,16 @@ ol {
 .filter__option span:hover {
 	color: #ff96b7;
 }
+.filter__option input{
+	color: #FFFFFF;
+	background-color: #ff96b7;
+	font-weight: 600;
+}
+.filter__option button{
+	color: #FFFFFF;
+	background-color: #ff96b7;
+	font-weight: 600;
+}
 
 .product__item {
 	margin-bottom: 50px;

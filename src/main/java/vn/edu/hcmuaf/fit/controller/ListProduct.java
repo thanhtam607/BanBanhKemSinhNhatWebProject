@@ -30,7 +30,7 @@ public class ListProduct extends HttpServlet {
             else{
                 listPro = ProductService.getData();
             }
-        };
+        }
         if(numPage == null){
             numPage = "1";
         }
