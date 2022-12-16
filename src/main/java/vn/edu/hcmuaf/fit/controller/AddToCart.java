@@ -24,10 +24,6 @@ public class AddToCart extends HttpServlet {
             solg = "1";
         }
         int solgmua = Integer.parseInt(solg);
-//        if (request.getParameter("solgmua") != null) {
-//            solgmua = Integer.parseInt(request.getParameter("solgmua"));
-//            request.setAttribute("solgmua", solgmua);
-//        }
 
         if(auth != null) {
             if (request.getParameter("masp") != null) {
@@ -67,16 +63,6 @@ public class AddToCart extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/CartController");
 
 
-//                Order o = (Order) session.getAttribute("order");
-//                for(ItemProductInCart item: o.list()){
-//                response.getWriter().println(item.getSp().getName());
-//                response.getWriter().println(item.getSoLgMua());
-//
-//                }
-
-
-//                response.getWriter().println(o.list().size() + " :size");
-//                response.getWriter().println(o.list().size());
             }
         }else{
             response.sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");
@@ -86,6 +72,5 @@ public class AddToCart extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    response.getWriter().println("hello");
     }
 }

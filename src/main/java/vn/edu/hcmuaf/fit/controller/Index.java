@@ -15,6 +15,8 @@ import java.util.List;
 public class Index extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nameSerlet = "Index";
+        request.setAttribute("nameSerlet", nameSerlet);
         Blog b = BlogService.findById(request.getParameter("id"));
         request.setAttribute("blog", b);
         List<Blog> list = BlogService.getData();

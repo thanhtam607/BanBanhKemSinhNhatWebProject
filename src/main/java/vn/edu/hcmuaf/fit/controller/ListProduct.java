@@ -27,8 +27,6 @@ public class ListProduct extends HttpServlet {
         request.setAttribute("endPage", endPage);
         request.setAttribute("tag", page);
         request.setAttribute("list", list);
-
-
         request.getRequestDispatcher("shop-product.jsp").forward(request,response);
 
 
