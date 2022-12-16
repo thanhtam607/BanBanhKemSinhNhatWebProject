@@ -273,20 +273,24 @@
                     </div>
                 </div>
             </div>
-            <form action="#">
+           <form>
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Tên của bạn...">
+                        <input  id="yourName" type="text" placeholder="Tên của bạn...">
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Email của bạn...">
+                        <input  id="yourEmail" type="text" placeholder="Email của bạn...">
                     </div>
                     <div class="col-lg-12 text-center">
-                        <textarea placeholder="Bạn nghĩ sao về shop?"></textarea>
-                        <button type="submit" class="site-btn">Gửi cảm nhận!</button>
+                        <textarea  id="feedback" placeholder="Bạn nghĩ sao về shop?"></textarea>
+
+                    </div>
+                    <div class="col-lg-12 text-center">
+                    <input  type="hidden"  id="date">
+                    <button type="submit" onclick="sendFb()" class="site-btn">Gửi cảm nhận!</button>
                     </div>
                 </div>
-            </form>
+           </form>
         </div>
     </div>
     <!-- Contact Form End -->
@@ -350,6 +354,7 @@
 </footer>
 <!-- Footer Section End -->
     <!-- Js Plugins -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nice-select.min.js"></script>
@@ -358,7 +363,25 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-
+    <script>
+        function sendFb(){
+            var newFeedback = document.getElementById("feedback").value;
+            var yourName = document.getElementById("yourName").value;
+            var yourEmail= document.getElementById("yourEmail").value;
+            var today = new Date();
+            var date = today.getFullYear() + "-" + (today.getMonth()+1)+"-"+ today.getDate()+" "+ today.getHours()+":"+today.getMinutes()+":"+ today.getSeconds();
+            var urlc= "AddFeedback?yourName="+ yourName+"&yourEmail="+ yourEmail+"&date=" + date+"&feedback=" + newFeedback ;
+            $.ajax({
+                url: urlc,
+                type: "POST",
+                success: function (){
+                    document.getElementById("yourName").value=null;
+                    document.getElementById("yourEmail").value=null;
+                    document.getElementById("feebback").value=null;
+                }
+            });
+        }
+    </script>
 
 
 </body>
