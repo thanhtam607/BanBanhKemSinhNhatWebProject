@@ -283,63 +283,35 @@
                             <div class="latest-product__text">
                                 <h4>Top Bán Chạy</h4>
                                 <div class="latest-product__slider owl-carousel">
+                                    <% List<Product> listhotproducts = (List<Product>) request.getAttribute("listBanChay"); %>
                                     <div class="latest-prdouct__slider__item">
-                                        <a href="#" class="latest-product__item">
+                                        <% for(int i = 0; i<3;i++){
+                                            Product productL = listhotproducts.get(i);%>
+                                        <a href="ProductDetail?id=<%=productL.getId() %>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="./img/product/B019/banh1.jpg" alt="">
+                                                <img src="<%=productL.getListImg().get(0)%>" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>200,000 VND</span>
+                                                <h6><%=productL.getName()%></h6>
+                                                <span><%=productL.formatNum(productL.getPrice())%> VND</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B022/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>250,000 VND</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B023/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
-                                            </div>
-                                        </a>
+                                        <% } %>
                                     </div>
+                                    </a>
                                     <div class="latest-prdouct__slider__item">
-                                        <a href="#" class="latest-product__item">
+                                        <% for(int i = 3; i<6;i++){
+                                            Product productR = listhotproducts.get(i);%>
+                                        <a href="ProductDetail?id=<%=productR.getId() %>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="./img/product/B024/banh1.jpg" alt="">
+                                                <img src="<%=productR.getListImg().get(0)%>" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
+                                                <h6><%=productR.getName()%></h6>
+                                                <span><%=productR.formatNum(productR.getPrice())%> VND</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B025/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B026/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
-                                            </div>
-                                        </a>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
