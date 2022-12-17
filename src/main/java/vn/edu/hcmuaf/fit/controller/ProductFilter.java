@@ -19,6 +19,7 @@ public class ProductFilter extends HttpServlet {
         request.setAttribute("listBanChay", listHotProduct);
         List<Product> listFilter = ProductService.findBySize(request.getParameter("filter"));
         String title = request.getParameter("title");
+
         if(listFilter.isEmpty()){
             listFilter = ProductService.findByType(request.getParameter("filter"));
         }
@@ -26,8 +27,35 @@ public class ProductFilter extends HttpServlet {
             listFilter = ProductService.findByName(request.getParameter("key"));
             title= "Kết quả tìm kiếm '" + request.getParameter("key")+"'";
         }
-        request.setAttribute("listFilter", listFilter);
-        request.setAttribute("title",title);
+        String sort = request.getParameter("sortValue");
+        if(sort != null ){
+            if(sort.equals("Giá từ thấp đến cao") ) {
+
+                listFilter.sort((Product o1, Product o2) -> o1.getPrice() - o2.getPrice());
+            }
+            if(sort.equals("Giá từ cao đến thấp") ){
+                listFilter.sort((Product o1, Product o2) -> o2.getPrice() - o1.getPrice());
+            }
+
+        }
+        //================================= phan trang ================================
+
+        String numPage = request.getParameter("pageName");
+        if(numPage == null){
+            numPage = "1";
+        }
+        int page = Integer.parseInt(numPage);
+        List<Product> listF = ProductService.getPaginationPageOwn(page, listFilter);
+        int endPageFilter = listFilter.size() / 15;
+        if(listFilter.size() % 15 != 0){
+            endPageFilter++;
+        }
+        request.setAttribute("endPageFt", endPageFilter);
+        request.setAttribute("tagPage", page);
+        request.setAttribute("sortValue", sort);
+//================================= phan trang ================================
+        request.setAttribute("tile", title);
+        request.setAttribute("listFilter", listF);
         request.getRequestDispatcher("product-Filter.jsp").forward(request,response);
     }
 

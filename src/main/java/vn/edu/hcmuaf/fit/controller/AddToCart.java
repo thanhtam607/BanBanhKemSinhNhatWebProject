@@ -25,11 +25,9 @@ public class AddToCart extends HttpServlet {
                 String maSP = request.getParameter("masp");
                 Product product = ProductService.findById(maSP);
                 if (product != null) {
-                    if (request.getParameter("solgmua") != null) {
+                    if(request.getParameter("solgmua") != null){
                         solgmua = Integer.parseInt(request.getParameter("solgmua"));
-                        request.setAttribute("solgmua", solgmua);
                     }
-
                     if (session.getAttribute("order") == null) {
                         Order order = new Order();
                         HashMap<String, ItemProductInCart> listItems = new HashMap<>();
@@ -47,7 +45,7 @@ public class AddToCart extends HttpServlet {
                         HashMap<String, ItemProductInCart> listItems = order.getData();
                         ItemProductInCart item = listItems.get(maSP);
                         if(item != null){
-                            item.quantityUp(solgmua);
+                            item.quantityUp();
                         }else{
                             item = new ItemProductInCart();
                             item.setSp(product);
@@ -59,20 +57,10 @@ public class AddToCart extends HttpServlet {
 
                     }
                 }
-//                response.sendRedirect("/BanBanhKemSinhNhatWebProject/shoping-cart.jsp");
+//                request.getRequestDispatcher("/shoping-cart.jsp").forward(request, response);
                 response.sendRedirect(request.getContextPath() + "/CartController");
 
 
-//                Order o = (Order) session.getAttribute("order");
-//                for(ItemProductInCart item: o.list()){
-//                response.getWriter().println(item.getSp().getName());
-//                response.getWriter().println(item.getSoLgMua());
-//
-//                }
-
-
-//                response.getWriter().println(o.list().size() + " :size");
-//                response.getWriter().println(o.list().size());
             }
         }else{
             response.sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");
@@ -82,6 +70,5 @@ public class AddToCart extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    response.getWriter().println("hello");
     }
 }

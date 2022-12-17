@@ -3,6 +3,9 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.LoaiBanh" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -49,18 +52,24 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
+                <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+                <%Order order = (Order) session.getAttribute("order");%>
+                <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
             </ul>
         </div>
         <div class="humberger__menu__widget">
             
             <div class="header__top__right__auth">
-                <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
-                <div class="<%= auth != null ? "header__top__right__auth__dropdown":""%>">
-                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item"><%= auth != null ? "Vào trang quản lí":""%></a>
-                    <a href="./signin.jsp" class="dropdown-item"><%= auth != null ? "Đăng xuất":""%></a>
+                <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                <% if(auth != null) { %>
+                <div class="header__top__right__auth__dropdown">
+                    <% if(auth.checkRole(1)) { %>
+                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                    <%}%>
+                    <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                 </div>
+                <%}%>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -115,11 +124,15 @@
                                 <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="signin.jsp"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
-                                <div class="<%= auth != null ? "header__top__right__auth__dropdown":""%>">
-                                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item"><%= auth != null ? "Vào trang quản lí":""%></a>
-                                    <a href="./signin.jsp" class="dropdown-item"><%= auth != null ? "Đăng xuất":""%></a>
+                                <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+                                <% if(auth != null) { %>
+                                <div class="header__top__right__auth__dropdown">
+                                    <% if(auth.checkRole(1)) { %>
+                                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                                    <%}%>
+                                    <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                                 </div>
+                                <%}%>
                             </div>
                         </div>
                     </div>
@@ -149,8 +162,8 @@
                 <div class="col-lg-2">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="favorites.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+                            <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -172,7 +185,7 @@
                         <div class="hero__search__form ">
                             <form action="#" >
                               
-                                <input name="key" type="text" placeholder="Bạn cần bánh gì nè?">
+                                <input name="key" id="search" type="text" placeholder="Bạn cần bánh gì nè?">
                                 <button href="ProductFilter" type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
                             </form>
                         </div>
@@ -304,29 +317,38 @@
                                             </div>
                                         </a>
                                         <% } %>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                        </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
                     <div class="product__discount product__discount_page_detail">
-                        <% List<Product> listFilter = (List<Product>) request.getAttribute("listFilter");
-                        %>
+                        <% List<Product> listFilter = (List<Product>) request.getAttribute("listFilter");%>
                         <div class="section-title product__discount__title">
-                            <h2><%= request.getAttribute("title")%></h2>
+                            <h2><%= request.getParameter("title")%></h2>
                         </div>
                     </div>
-                    <div class="filter__item filter__item__page__detail">
+                    <div class="filter__item" >
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort ">
                                     <span>Sắp Xếp</span>
-                                    <select>
-                                        <option value="0">Mặc định</option>
-                                        <option value="0">Giá từ cao tới thấp</option>
-                                        <option value="0">Giá từ thấp đến cao</option>
+                                    <select id="sort" name="sortValue">
+                                        <%List<String> listOption = new ArrayList<String>();
+                                        listOption.add("Mặc định");
+                                        listOption.add("Giá từ thấp đến cao");
+                                        listOption.add("Giá từ cao đến thấp");
+                                        String val = request.getParameter("sortValue");
+                                        for(String s: listOption){
+                                        if(s.equals(val)){%>
+                                        <option selected="true" value="<%=val%>>"><%=val%></option>
+                                            <%}
+                                        else{%>
+                                        <option value="<%=s%>"><%=s%></option>
+                                            <%}%>
+                                            <%}%>
                                     </select>
                                 </div>
                             </div>
@@ -337,103 +359,46 @@
                             </div>
                             <div class="col-lg-4 col-md-3">
                                 <div class="filter__option">
-                                    <span class="icon_grid-2x2"></span>
+                                    <button class="btn" type="submit" onclick="sortProduct()">Lọc</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <%
-                            for(Product p: listFilter){ %>
+                    <div class="row" id="list-pro">
+                        <%for(Product p: listFilter){ %>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<%=p.getListImg().get(0)%>">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="AddToCart?masp=<%=p.getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="shop-details.jsp"><%=p.getName()%></a></h6>
-                                    <h5><%=p.getPrice()%></h5>
+
+                                    <h6><a href="ProductDetail?id=<%=p.getId() %>"><%=p.getName()%></a></h6>
+                                    <h5><%= p.formatNum(p.getPrice())%> VND</h5>
+
                                 </div>
                             </div>
                         </div>
                         <% } %>
                     </div>
                     <div class="product__pagination">
-<%--                        <a href="#">1</a>--%>
-                        <!-- <a href="#"><i class="fa fa-long-arrow-right"></i></a> -->
+                        <% int tag = (int) request.getAttribute("tagPage");
+                            int endPage = (int) request.getAttribute("endPageFt");
+                            for(int i = 1; i <= endPage ; i++){ %>
+                        <a class="<%=tag == i?"product__pagination__page2":""%>" onclick="changeHref(<%=i%>)"><%=i%></a>
+                        <%}%>
                     </div>
                 </div>
+                </div>
             </div>
-        </div>
+
     </section>
     <!-- Product Section End -->
 
-    <!-- Footer Section Begin -->
-    <footer class="footer spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="index"><img src="img/logo_web.jpg" alt=""></a>
-                        </div>
-                        <ul class="mt-5" id="about">
-                            <li><font size = "4"><i  class="fa fa-home"></i></font> Địa chỉ: Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM</li>
-                            <li><i class="fa fa-phone"></i> SĐT: +84 987654321</li>
-                            <li><i class="fa fa-send-o"></i> Mail: tiembanhhanhphuc@gmail.com</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                    <div class="footer__widget">
-                        <h6>Giờ mở cửa</h6>
-                        <ul>
-                            <li><a href="#">T2 - T6</a></li>
-                            <li><a href="#">T7 & CN</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">08:00 sáng - 22:00 tối</a></li>
-                            <li><a href="#">13:00 chiều - 18:00 tối</a></li>
-                        </ul><br><br>
-                        <p class="cake-footer"><h5 class="freecake text-animation">Thưởng thức bánh miễn phí</h5><a class ="fontsize-14">Thứ sáu hàng tuần tại cửa hàng vào lúc 14h00-14h30</a></p>
-                        <img src = "img/footer/img-footer.jpeg">    
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Theo dõi bảng tin của chúng tôi</h6>
-                        <p>Nhận thông tin cập nhật e-mail về sản phẩm mới nhất và các ưu đãi đặc biệt của chúng tôi.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Địa chỉ email của bạn...">
-                            <button type="submit" class="site-btn">Đăng ký</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="https://www.facebook.com/mai.thuan.52438/"><i class="fa fa-facebook"></i></a>
-            <a href="https://www.messenger.com/t/100017755062615"><i class="fa fa-comment"></i></a>
-            <a href="https://www.instagram.com/maizecorn1542/"><i class="fa fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Bản quyền &copy;<script>document.write(new Date().getFullYear());</script> thuộc Nhóm 27 | Lập trình web thầy Phan Đình Long <i class="fa fa-heart" aria-hidden="true"> </i> Khoa CNTT - ĐH Nông Lâm TP HCM</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <div class="footer__copyright__payment"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
-    <!-- back to top btn -->
-    <a href="#" class="btn-to-top back-to-top"><i class="fa fa-angle-double-up"></i></a>
+<jsp:include page="footer.jsp"></jsp:include>
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -443,8 +408,36 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<%session.setAttribute("filter", request.getParameter("filter"));%>
+
+<script>
+
+    function sortProduct(){
+        var sort = document.getElementById("sort").value ;
+        var key = document.getElementById("search").value;
+
+        var urlP= "Sort?sortValue=" + sort+"&key="+ key ;
+        $.ajax({
+            url: urlP,
+            type: "POST",
+            success: function (response){
+               var productS = document.getElementById("list-pro");
+                productS.innerHTML = response;
+            }
+        });
+    }
 
 
+</script>
+<script>
+    function changeHref(index){
+        var sort = document.getElementById("sort").value ;
+        var key = document.getElementById("search").value;
+        var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key;
+        location.href=url;
+    }
+</script>
 
 </body>
 

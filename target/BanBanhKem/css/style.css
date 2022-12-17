@@ -1690,6 +1690,16 @@ ol {
 .filter__option span:hover {
 	color: #ff96b7;
 }
+.filter__option input{
+	color: #FFFFFF;
+	background-color: #ff96b7;
+	font-weight: 600;
+}
+.filter__option button{
+	color: #FFFFFF;
+	background-color: #ff96b7;
+	font-weight: 600;
+}
 
 .product__item {
 	margin-bottom: 50px;
@@ -2156,7 +2166,14 @@ ol {
 	color: #b2b2b2;
 	cursor: pointer;
 }
-
+.remove_prod_style{
+	font-size: 24px;
+	color: #b2b2b2;
+}
+.remove_prod_style:hover{
+	color: #ff96b7;
+	font-weight: 600;
+}
 .shoping__cart__table table tbody tr td.shoping__cart__quantity {
 	width: 225px;
 }
