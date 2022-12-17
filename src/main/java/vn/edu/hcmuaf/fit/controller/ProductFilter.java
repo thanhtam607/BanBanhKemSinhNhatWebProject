@@ -17,6 +17,10 @@ public class ProductFilter extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> listHotProduct = ProductService.sanPhamBanChay();
         request.setAttribute("listBanChay", listHotProduct);
+        float p1 = Float.parseFloat(request.getParameter("p1"));
+        float p2 = Float.parseFloat(request.getParameter("p2"));
+        List<Product> filterprice = ProductService.filterByPrice(p1, p2);
+        request.setAttribute("listprice", filterprice);
         List<Product> listFilter = ProductService.findBySize(request.getParameter("filter"));
         String title = request.getParameter("title");
 

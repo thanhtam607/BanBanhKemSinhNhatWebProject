@@ -256,6 +256,11 @@
                                     <div class="price-input">
                                         <input type="text" id="minamount">
                                         <input type="text" id="maxamount">
+                                        <div class="sidebar__item__size">
+                                            <label >
+                                                <a href="ProductFilter">Lọc</a>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -432,8 +437,7 @@
 </script>
 <script>
     function changeHref(index){
-
-        let sort = document.getElementById("sort").value ;
+        var sort = document.getElementById("sort").value ;
         var key = document.getElementById("search").value;
         var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key;
         location.href=url;
