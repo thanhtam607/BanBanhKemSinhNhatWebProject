@@ -27,6 +27,17 @@ public class ProductFilter extends HttpServlet {
             listFilter = ProductService.findByName(request.getParameter("key"));
             title= "Kết quả tìm kiếm '" + request.getParameter("key")+"'";
         }
+        String sort = request.getParameter("sortValue");
+        if(sort != null ){
+            if(sort.equals("Giá từ thấp đến cao") ) {
+
+                listFilter.sort((Product o1, Product o2) -> o1.getPrice() - o2.getPrice());
+            }
+            if(sort.equals("Giá từ cao đến thấp") ){
+                listFilter.sort((Product o1, Product o2) -> o2.getPrice() - o1.getPrice());
+            }
+
+        }
         //================================= phan trang ================================
 
         String numPage = request.getParameter("pageName");
@@ -34,17 +45,17 @@ public class ProductFilter extends HttpServlet {
             numPage = "1";
         }
         int page = Integer.parseInt(numPage);
-
+        List<Product> listF = ProductService.getPaginationPageOwn(page, listFilter);
         int endPageFilter = listFilter.size() / 15;
         if(listFilter.size() % 15 != 0){
             endPageFilter++;
         }
         request.setAttribute("endPageFt", endPageFilter);
         request.setAttribute("tagPage", page);
-        List<Product> listF = ProductService.getPaginationPageOwn(page, listFilter);
+        request.setAttribute("sortValue", sort);
 //================================= phan trang ================================
-        request.setAttribute("listFilter", listFilter);
-        request.setAttribute("title",title);
+        request.setAttribute("tile", title);
+        request.setAttribute("listFilter", listF);
         request.getRequestDispatcher("product-Filter.jsp").forward(request,response);
     }
 

@@ -43,8 +43,23 @@ public class Sort extends HttpServlet {
             }
 
         }
+        String numPage = request.getParameter("pageName");
+        if(numPage == null){
+            numPage = "1";
+        }
+        int page = Integer.parseInt(numPage);
+        List<Product> listF = ProductService.getPaginationPageOwn(page, listFilter);
+        int endPageFilter = listFilter.size() / 15;
+        if(listFilter.size() % 15 != 0){
+            endPageFilter++;
+        }
+        request.setAttribute("endPageFt", endPageFilter);
+        request.setAttribute("tagPage", page);
+        request.setAttribute("sortValue", sort);
+
+
         PrintWriter out = response.getWriter();
-        for(Product p: listFilter) {
+        for(Product p: listF) {
             String img = p.getListImg().get(0);
             out.println("<div class=\"col-lg-4 col-md-6 col-sm-6\">\n" +
                     "                            <div class=\"product__item\">\n" +

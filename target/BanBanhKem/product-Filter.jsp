@@ -327,7 +327,7 @@
                     <div class="product__discount product__discount_page_detail">
                         <% List<Product> listFilter = (List<Product>) request.getAttribute("listFilter");%>
                         <div class="section-title product__discount__title">
-                            <h2><%= request.getAttribute("title")%></h2>
+                            <h2><%= request.getParameter("title")%></h2>
                         </div>
                     </div>
                     <div class="filter__item" >
@@ -335,7 +335,7 @@
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort ">
                                     <span>Sắp Xếp</span>
-                                    <select id="sort" >
+                                    <select id="sort" name="sortValue">
                                         <%List<String> listOption = new ArrayList<String>();
                                         listOption.add("Mặc định");
                                         listOption.add("Giá từ thấp đến cao");
@@ -343,7 +343,7 @@
                                         String val = request.getParameter("sortValue");
                                         for(String s: listOption){
                                         if(s.equals(val)){%>
-                                        <option  selected="true" value="<%=val%>>"><%=val%></option>
+                                        <option selected="true" value="<%=val%>>"><%=val%></option>
                                             <%}
                                         else{%>
                                         <option value="<%=s%>"><%=s%></option>
@@ -388,7 +388,7 @@
                         <% int tag = (int) request.getAttribute("tagPage");
                             int endPage = (int) request.getAttribute("endPageFt");
                             for(int i = 1; i <= endPage ; i++){ %>
-                        <a class="<%=tag == i?"product__pagination__page2":""%>" href="ProductFilter?pageName=<%=i%>"><%=i%></a>
+                        <a class="<%=tag == i?"product__pagination__page2":""%>" onclick="changeHref(<%=i%>)"><%=i%></a>
                         <%}%>
                     </div>
                 </div>
@@ -409,7 +409,8 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<%session.setAttribute("filter", request.getParameter("filter")); %>
+<%session.setAttribute("filter", request.getParameter("filter"));%>
+
 <script>
 
     function sortProduct(){
@@ -426,8 +427,18 @@
             }
         });
     }
-</script>
 
+
+</script>
+<script>
+    function changeHref(index){
+
+        let sort = document.getElementById("sort").value ;
+        var key = document.getElementById("search").value;
+        var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key;
+        location.href=url;
+    }
+</script>
 
 </body>
 

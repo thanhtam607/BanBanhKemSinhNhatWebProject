@@ -16,20 +16,15 @@ public class ListProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String numPage = request.getParameter("page");
         String sort = request.getParameter("sortValue");
-        List<Product> listPro = new ArrayList<Product>();
-        if(sort == null ) {
-            listPro = ProductService.getData();
-        }
-        else{
-            if(sort.equals("Giá từ thấp đến cao") ){
+        List<Product> listPro = ProductService.getData();
+        if(sort != null ){
+            if(sort.equals("Giá từ thấp đến cao") ) {
+                listPro.sort((Product o1, Product o2) -> o1.getPrice() - o2.getPrice());
+            }
+            if(sort.equals("Giá từ cao đến thấp") ){
+                listPro.sort((Product o1, Product o2) -> o2.getPrice() - o1.getPrice());
+            }
 
-                listPro = ProductService.sortByPrice("ASC");}
-            else if(sort.equals("Giá từ cao đến thấp") ){
-                listPro = ProductService.sortByPrice("DESC");
-            }
-            else{
-                listPro = ProductService.getData();
-            }
         }
         if(numPage == null){
             numPage = "1";
