@@ -19,7 +19,7 @@ public class AddToCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
-        int solgmua = 1;
+        int solgmua = Integer.parseInt(request.getParameter("soluong"));
         if(auth != null) {
             if (request.getParameter("masp") != null) {
                 String maSP = request.getParameter("masp");
@@ -28,8 +28,9 @@ public class AddToCart extends HttpServlet {
                     if(request.getParameter("solgmua") != null){
                         solgmua = Integer.parseInt(request.getParameter("solgmua"));
                     }
+                    Order order = new Order();
                     if (session.getAttribute("order") == null) {
-                        Order order = new Order();
+
                         HashMap<String, ItemProductInCart> listItems = new HashMap<>();
                         ItemProductInCart item = new ItemProductInCart();
                         item.setSoLgMua(solgmua);
@@ -41,7 +42,7 @@ public class AddToCart extends HttpServlet {
                         session.setAttribute("order", order);
 
                     } else {
-                        Order order = (Order) session.getAttribute("order");
+                         order = (Order) session.getAttribute("order");
                         HashMap<String, ItemProductInCart> listItems = order.getData();
                         ItemProductInCart item = listItems.get(maSP);
                         if(item != null){
@@ -58,14 +59,12 @@ public class AddToCart extends HttpServlet {
                     }
                 }
 //                request.getRequestDispatcher("/shoping-cart.jsp").forward(request, response);
-                response.sendRedirect(request.getContextPath() + "/CartController");
+
 
 
             }
-        }else{
-            response.sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");
         }
-
+            response.sendRedirect("shoping-cart.jsp");
     }
 
     @Override

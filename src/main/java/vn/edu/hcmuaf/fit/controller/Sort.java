@@ -65,8 +65,13 @@ public class Sort extends HttpServlet {
                     "                            <div class=\"product__item\">\n" +
                     "                               <div class=\"product__item__pic set-bg\" data-setbg=\""+img+ "\" style=\"background-image: url("+img+");\">\n" +
                     "                                    <ul class=\"product__item__pic__hover\">\n" +
-                    "                                        <li><a href=\"AddToFavorite?masp="+p.getId()+"\"><i class=\"fa fa-heart\"></i></a></li>\n" +
-                    "                                        <li><a href=\"AddToCart?masp="+p.getId()+"\"><i class=\"fa fa-shopping-cart\"></i></a></li>\n" +
+                    "                                       <% if(auth==null){%>\n"+
+                    "                                          <li><a onclick=\"notLogged()\"><i class=\"fa fa-heart\"></i></a></li>\n"+
+                    "                                           <li><a onclick=\"notLogged()\"><i class=\"fa fa-shopping-cart\"></i></a></li>\n"+
+                    "                                            <%} else{%>\n"+
+                    "                                             <li><a href=\"AddToFavorite?masp="+p.getId()+"><i class=\"fa fa-heart\"></i></a></li>\n"+
+
+                    "                                        <li><a onclick=\"addToCartI('"+p.getId()+"')\"><i class=\"fa fa-shopping-cart\"></i></a></li>\n" +
                     "                                    </ul>\n" +
                     "                                </div>\n" +
                     "                                <div class=\"product__item__text\">\n" +

@@ -50,7 +50,7 @@ public class AddToFavorite extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/favorites.jsp");
             }
         }else{
-            response.sendRedirect(request.getContextPath() +"/signin.jsp");
+            response.sendRedirect(request.getContextPath() +"/favorites.jsp");
         }
 
     }

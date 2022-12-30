@@ -58,7 +58,7 @@
             <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
             <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
             <%Order order = (Order) session.getAttribute("order");%>
-            <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro"><%= order != null ? order.totalProduct():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
@@ -161,7 +161,7 @@
                 <div class="header__cart">
                     <ul>
                         <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
-                        <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro1"><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -259,9 +259,13 @@
                         <div class="featured__item">
                             <div class="featured__item__pic set-bg" data-setbg="<%=p.getListImg().get(0)%>">
                                 <ul class="featured__item__pic__hover">
+                                    <%if(auth==null){%>
+                                    <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
+                                    <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <% } else{ %>
                                     <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>
-
-                                    <li><a href="AddToCart?masp=<%=p.getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a onclick="addToCartI('<%=p.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <%}%>
                                 </ul>
                             </div>
                             <div class="featured__item__text">
@@ -297,9 +301,13 @@
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="<%=p1.getListImg().get(0)%>">
                             <ul class="featured__item__pic__hover">
+                                <%if(auth==null){%>
+                                <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
+                                <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
+                                <% } else{ %>
                                 <li><a href="AddToFavorite?masp=<%=p1.getId()%>"><i class="fa fa-heart"></i></a></li>
-
-                                <li><a href="AddToCart?masp=<%=p1.getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li><a onclick="addToCartI('<%=p1.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+                                <%}%>
                             </ul>
                         </div>
                         <div class="featured__item__text">
@@ -360,3 +368,6 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
