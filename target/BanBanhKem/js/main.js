@@ -246,5 +246,44 @@ $('.back-to-top').click(function () {
     $('html, body').animate({scrollTop: 0}, 1000, 'easeInOutExpo');
     return false;
 });
+/*-------------------
+   notification
+  --------------------- */
 
-   
+function notLogged(){
+    Swal.fire({
+        text:'Đăng nhập để tiếp tục!',
+        icon: 'error',
+        showCancelButton: true,
+        cancelButtonText:'Thoát',
+        confirmButtonText: 'Đăng nhập',
+        confirmButtonColor: '#ff96b7'}).then((result) => {
+            if (result.isConfirmed) {
+                location.href = "signin.jsp";}
+        }
+    );
+};
+
+/*-------------------
+   addToCart
+  --------------------- */
+function addToCartI(id){
+
+    var qty = 1;
+
+    var url  ="AddToCart?masp=" +id+"&soluong="+ qty;
+    var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (){
+            console.log(id);
+            totalPro+=1;
+            document.getElementById("totalPro").innerHTML=totalPro.toString();
+            Swal.fire({
+                text:'Thêm sản phẩm thành công!',
+                icon: 'success',
+                confirmButtonColor: '#ff96b7'});
+        }
+    });
+};

@@ -235,8 +235,8 @@
             <p class="text-center font-weight-bold" style="opacity: .6;">Giỏ hàng của bạn trống</p>
         </div>
         <div class="col-lg-12">
-            <div class="shoping__cart__btns">
-                <a href="./ListProduct" class="primary-btn cart-btn">Xem thêm sản phẩm </a>
+            <div class="shoping__cart__btns" style="text-align: center">
+                <a href="./ListProduct" class="primary-btn cart-btn" >Xem thêm sản phẩm </a>
 
             </div>
         </div>
@@ -338,7 +338,9 @@
 <script src="js/mixitup.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

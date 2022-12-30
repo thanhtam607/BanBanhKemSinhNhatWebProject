@@ -50,7 +50,7 @@
             <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
             <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
             <%Order order = (Order) session.getAttribute("order");%>
-            <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
@@ -153,7 +153,7 @@
                 <div class="header__cart">
                     <ul>
                         <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
-                        <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -167,7 +167,7 @@
 </header>
 <!-- Header Section End -->
     <!-- Hero Section Begin -->
-    <section class="hero hero-normal">
+<section class="hero hero-normal">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3"></div>
@@ -189,11 +189,12 @@
                                 <h5>+84 987654321</h5>
                                 <span>Mở cửa từ 8h - 22h</span>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+</section>
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -258,7 +259,9 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 
