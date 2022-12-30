@@ -229,7 +229,7 @@ public class ProductService {
         return res;
     }
 
-    public static List<Product> filterByPrice(float pricemin, float pricemax) {
+    public static List<Product> filterByPrice(int pricemin, int pricemax) {
         List<Product> res = new ArrayList<Product>();
         List<String> listId = new ArrayList<String>();
         Statement stm = DBConnect.getInstall().get();
