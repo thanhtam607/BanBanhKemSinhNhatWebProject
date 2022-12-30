@@ -528,42 +528,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    function notLogged(){
-        Swal.fire({
-            text:'Đăng nhập để tiếp tục!',
-            icon: 'error',
-            showCancelButton: true,
-            cancelButtonText:'Thoát',
-            confirmButtonText: 'Đăng nhập',
-            confirmButtonColor: '#ff96b7'}).then((result) => {
-            if (result.isConfirmed) {
-                location.href = "signin.jsp";}
-            }
-        );
-    };
 
-    function addToCartI(id){
-
-        var qty = 1;
-
-        var url  ="AddToCart?masp=" +id+"&soluong="+ qty;
-        var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
-        $.ajax({
-            url: url,
-            type: "GET",
-            success: function (){
-                console.log(id);
-                totalPro+=1;
-                document.getElementById("totalPro").innerHTML=totalPro.toString();
-                Swal.fire({
-                    text:'Thêm sản phẩm thành công!',
-                    icon: 'success',
-                    confirmButtonColor: '#ff96b7'});
-            }
-        });
-    };
-</script>
 
 </body>
 
