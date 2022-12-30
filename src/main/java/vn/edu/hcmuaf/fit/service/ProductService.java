@@ -229,22 +229,33 @@ public class ProductService {
         return res;
     }
 
-    public static List<Product> filterByPrice(float p1, float p2) {
-        List<Product> list = getData();
-        List<Product> rs = new LinkedList<>();
-        for (Product pro : list) {
-            if (pro.getPrice() >= p1 && pro.getPrice() <= p2) {
-                rs.add(pro);
+    public static List<Product> filterByPrice(float pricemin, float pricemax) {
+        List<Product> res = new ArrayList<Product>();
+        List<String> listId = new ArrayList<String>();
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "select MASP FROM sanpham where Gia BETWEEN " + pricemin +  " AND  " + pricemax;
+        try {
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                listId.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        for (Product p : getData()) {
+            if (listId.contains(p.getId())) {
+                res.add(p);
             }
         }
-        return rs;
+        return res;
     }
 
 
+
     public static void main(String[] args) throws SQLException {
-        List<Product> li = ProductService.filterByPrice(100000, 300000);
+        List<Product> li = ProductService.filterByPrice(600000, 1000000);
                for(Product p: li){
-            System.out.print(p.getName()+"\n");
+            System.out.println(p.getPrice());
 //          System.out.println(getListType().size());
            }
 //        System.out.println(getLastComment("B001").getBinhLuan());

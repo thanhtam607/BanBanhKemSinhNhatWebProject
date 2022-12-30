@@ -21,7 +21,6 @@ function myFunction() {
 'use strict';
 
 (function ($) {
-
     /*------------------
         Preloader
     --------------------*/

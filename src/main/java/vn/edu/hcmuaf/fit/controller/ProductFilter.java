@@ -17,13 +17,19 @@ public class ProductFilter extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> listHotProduct = ProductService.sanPhamBanChay();
         request.setAttribute("listBanChay", listHotProduct);
-        float p1 = Float.parseFloat(request.getParameter("p1"));
-        float p2 = Float.parseFloat(request.getParameter("p2"));
-        List<Product> filterprice = ProductService.filterByPrice(p1, p2);
-        request.setAttribute("listprice", filterprice);
+        String p_min = request.getParameter("pricemin");
+        String p_max = request.getParameter("pricemax");
+       if(p_min == null || p_max == null) {
+            p_min = "50000";
+            p_max = "1000000";
+       }
+            int min = Integer.parseInt(p_min);
+            int max = Integer.parseInt(p_max);
+            List<Product> filterprice = ProductService.filterByPrice(min, max);
+            request.setAttribute("listprice", filterprice);
+
         List<Product> listFilter = ProductService.findBySize(request.getParameter("filter"));
         String title = request.getParameter("title");
-
         if(listFilter.isEmpty()){
             listFilter = ProductService.findByType(request.getParameter("filter"));
         }
@@ -40,6 +46,10 @@ public class ProductFilter extends HttpServlet {
             if(sort.equals("Giá từ cao đến thấp") ){
                 listFilter.sort((Product o1, Product o2) -> o2.getPrice() - o1.getPrice());
             }
+//              if(listFilter.isEmpty()){
+//                listFilter = ProductService.filterByPrice(min, max);
+//                title= "Lọc theo giá'" + min + "-->"+ max + "'";
+//            }
 
         }
         //================================= phan trang ================================

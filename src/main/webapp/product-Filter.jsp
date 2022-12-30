@@ -258,7 +258,7 @@
                                         <input type="text" id="maxamount">
                                         <div class="sidebar__item__size">
                                             <label >
-                                                <a href="ProductFilter?">Lọc</a>
+                                                <span type="button" class="blog__btn" onclick="FilterbyPrice()">Lọc</span>
                                             </label>
                                         </div>
                                     </div>
@@ -370,8 +370,8 @@
                         </div>
                     </div>
                     <div class="row" id="list-pro">
-                        <%for(Product p: listFilter){ %>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        <%for(Product p: listFilter){%>
+                        <div class="col-lg-4 col-md-6 col-sm-6" id = "product-items">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<%=p.getListImg().get(0)%>">
                                     <ul class="product__item__pic__hover">
@@ -380,10 +380,8 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-
                                     <h6><a href="ProductDetail?id=<%=p.getId() %>"><%=p.getName()%></a></h6>
-                                    <h5><%= p.formatNum(p.getPrice())%> VND</h5>
-
+                                    <h5 id="price"><%= p.formatNum(p.getPrice())%> VND</h5>
                                 </div>
                             </div>
                         </div>
@@ -421,7 +419,6 @@
     function sortProduct(){
         var sort = document.getElementById("sort").value ;
         var key = document.getElementById("search").value;
-
         var urlP= "Sort?sortValue=" + sort+"&key="+ key ;
         $.ajax({
             url: urlP,
@@ -439,11 +436,20 @@
     function changeHref(index){
         var sort = document.getElementById("sort").value ;
         var key = document.getElementById("search").value;
-        var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key;
+       var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key;
         location.href=url;
     }
 </script>
-
+<script>
+    function FilterbyPrice(){
+        var pr1 = document.getElementById("minamount").value;
+        var pr2 = document.getElementById("maxamount").value;
+        var p1 = parseInt(pr1)*1000;
+        var p2 = parseInt(pr2)*1000;
+        var url = "ProductFilter?pricemin=" + p1 +"&pricemax="+ p2;
+        location.href=url;
+    }
+</script>
 </body>
 
 </html>

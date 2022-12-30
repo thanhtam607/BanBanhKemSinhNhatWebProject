@@ -286,7 +286,7 @@
                                 <h6>Đặc điểm:</h6>
                                 <p>- Loại bánh: <%= pro.getLoaiBanh()%></p>
                                 <p>- Kích thước: <%= pro.getKichThuoc()%></p>
-                                <p>- Khối lượng: <%= pro.getKhoiLuong()%>g</p>
+                                <p>- Khối lượng: <%= pro.getKhoiLuong()%></p>
                             </div>
                         </div>
 
