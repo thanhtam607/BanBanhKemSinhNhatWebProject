@@ -16,6 +16,7 @@ public class Order {
     private HashMap<String, ItemProductInCart> data;
     public Order() {
 
+
     }
     public Order(HashMap<String, ItemProductInCart> data) {
         this.data = data;

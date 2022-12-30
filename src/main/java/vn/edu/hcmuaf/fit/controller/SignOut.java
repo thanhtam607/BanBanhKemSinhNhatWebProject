@@ -12,7 +12,7 @@ public class SignOut extends HttpServlet {
     HttpSession session = request.getSession(false);
         if(session != null){
             session.invalidate();
-            response.sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");
+            response.sendRedirect("/BanBanhKemSinhNhatWebProject/Index");
         }
     }
 

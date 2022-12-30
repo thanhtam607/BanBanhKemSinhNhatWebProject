@@ -53,8 +53,14 @@
         <ul>
             <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
             <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
-            <%Order order = (Order) session.getAttribute("order");%>
-            <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+            <%Order order = (Order) session.getAttribute("order");
+            int status=0 ;
+            if(session.getAttribute("order")==null ||order.list().isEmpty()){
+                status=1;
+            }else{
+                status=0;
+            }%>
+            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
@@ -157,7 +163,7 @@
                 <div class="header__cart">
                     <ul>
                         <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
-                        <li><a href="<%= order != null ? "/BanBanhKemSinhNhatWebProject/CartController":""%>"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -223,6 +229,18 @@
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
     <div class="container">
+        <%if(status==1){%>
+        <div class="cartEmpty">
+            <img src="./img/null.png" alt="Giỏ hàng của bạn đang trống" class="d-block m-auto" width="250" />
+            <p class="text-center font-weight-bold" style="opacity: .6;">Giỏ hàng của bạn trống</p>
+        </div>
+        <div class="col-lg-12">
+            <div class="shoping__cart__btns" style="text-align: center">
+                <a href="./ListProduct" class="primary-btn cart-btn" >Xem thêm sản phẩm </a>
+
+            </div>
+        </div>
+        <%}else{%>
         <div class="row">
 
             <div class="col-lg-12">
@@ -238,8 +256,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%
-                            for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
+                        <% for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
                         %>
                             <tr>
                                 <td class="shoping__cart__item">
@@ -267,6 +284,7 @@
                             </tr>
 
                         <%}%>
+
                         </tbody>
 
                     </table>
@@ -291,6 +309,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Tổng cộng</h5>
@@ -301,7 +320,9 @@
                     <a href="checkout.jsp" class="primary-btn">THANH TOÁN NGAY</a>
                 </div>
             </div>
+
         </div>
+        <%}%>
     </div>
 </section>
 <!-- Shoping Cart Section End -->

@@ -258,7 +258,7 @@
                                         <input type="text" id="maxamount">
                                         <div class="sidebar__item__size">
                                             <label >
-                                                <a href="ProductFilter">Lọc</a>
+                                                <a href="ProductFilter?">Lọc</a>
                                             </label>
                                         </div>
                                     </div>
