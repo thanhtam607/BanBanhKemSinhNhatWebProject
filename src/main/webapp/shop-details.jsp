@@ -52,7 +52,7 @@
             <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
             <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
             <%Order order = (Order) session.getAttribute("order");%>
-            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro"><%= order != null ? order.totalProduct():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
@@ -155,7 +155,7 @@
                 <div class="header__cart">
                     <ul>
                         <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
-                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro1"><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -245,13 +245,18 @@
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty" >
-                                <input type="text" name="solgspmua" value="1">
+                                <input id="qty" type="text"  value="1">
                             </div>
                         </div>
                     </div>
-                    <a href="AddToCart?masp=<%=pro.getId()%>"  class="primary-btn">Thêm vào giỏ hàng</a>
+                    <% if(auth==null){%>
+                    <a onclick="notLogged()" class="primary-btn" style="color: #FFFFFF">Thêm vào giỏ hàng</a>
+                    <a onclick="notLogged()"  class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    <%} else{%>
+                    <a onclick="addToCart('<%= pro.getId()%>')" class="primary-btn" style="color: #FFFFFF">Thêm vào giỏ hàng</a>
                     <a href="AddToFavorite?masp=<%=pro.getId()%>"  class="heart-icon"><span class="icon_heart_alt"></span></a>
-                    <ul>
+                    <%}%>
+                     <ul>
                         <li><b>Tình trạng</b> <span>Còn hàng</span></li>
                         <li><b>Giao hàng</b> <span>Giao ngay trong ngày</span></li>
                         </li>
@@ -342,8 +347,13 @@
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="<%=product.getListImg().get(0)%>">
                         <ul class="product__item__pic__hover">
+                            <% if(auth==null){%>
+                            <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
+                            <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
+                            <%} else{%>
                             <li><a href="AddToFavorite?masp=<%=product.getId()%>"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="AddToCart?masp=<%=product.getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a onclick="addToCartI('<%=product.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+                            <%}%>
                         </ul>
                     </div>
                     <div class="product__item__text">
@@ -360,9 +370,13 @@
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="<%=product1.getListImg().get(0)%>">
                         <ul class="product__item__pic__hover">
+                            <% if(auth==null){%>
+                            <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
+                            <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
+                            <%} else{%>
                             <li><a href="AddToFavorite?masp=<%=product1.getId()%>"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="AddToCart?masp=<%=product1.getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
+                            <li><a onclick="addToCartI('<%=product1.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+                            <%}%></ul>
                     </div>
                     <div class="product__item__text">
                         <h6><a href="ProductDetail?id=<%=product1.getId() %>"><%=product1.getName()%></a></h6>
@@ -417,6 +431,28 @@
             }
         });
     }
+    function addToCart(id){
+
+        var qty =parseInt(document.getElementById("qty").value) ;
+
+        var url  ="AddToCart?masp=" +id+"&soluong="+ qty;
+        var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function (){
+
+                totalPro+=qty;
+                console.log(totalPro);
+                document.getElementById("totalPro").innerHTML=totalPro.toString();
+                document.getElementById("totalPro1").innerHTML=totalPro.toString();
+                Swal.fire({
+                    text:'Thêm sản phẩm thành công!',
+                    icon: 'success',
+                    confirmButtonColor: '#ff96b7'});
+            }
+        });
+    };
 </script>
 </body>
 </html>

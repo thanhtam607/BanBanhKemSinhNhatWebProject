@@ -280,6 +280,7 @@ function addToCartI(id){
             console.log(id);
             totalPro+=1;
             document.getElementById("totalPro").innerHTML=totalPro.toString();
+            document.getElementById("totalPro1").innerHTML=totalPro.toString();
             Swal.fire({
                 text:'Thêm sản phẩm thành công!',
                 icon: 'success',
