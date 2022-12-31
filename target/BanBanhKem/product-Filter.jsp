@@ -247,7 +247,7 @@
                             <h4>Giá (VND)</h4>
                             <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                    data-min="50" data-max="1000">
+                                    data-min="50000" data-max="1000000">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                                     <span tabindex="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
                                     <span tabindex="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
@@ -420,13 +420,15 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <%session.setAttribute("filter", request.getParameter("filter"));%>
-
+<%session.setAttribute("min", request.getParameter("pricemin"));%>
+<%session.setAttribute("max", request.getParameter("pricemax"));%>
 <script>
 
     function sortProduct(){
         var sort = document.getElementById("sort").value ;
         var key = document.getElementById("search").value;
-        var urlP= "Sort?sortValue=" + sort+"&key="+ key ;
+
+        var urlP= "Sort?sortValue=" + sort+"&key="+ key;
         $.ajax({
             url: urlP,
             type: "POST",
@@ -443,19 +445,12 @@
     function changeHref(index){
         var sort = document.getElementById("sort").value ;
         var key = document.getElementById("search").value;
-       var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key;
+       var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key+"&pricemin=" + <%=request.getParameter("pricemin")%> +"&pricemax=" + <%=request.getParameter("pricemax")%>;
         location.href=url;
     }
 </script>
 <script>
-    function FilterbyPrice(){
-        var pr1 = document.getElementById("minamount").value;
-        var pr2 = document.getElementById("maxamount").value;
-        var p1 = parseInt(pr1)*1000;
-        var p2 = parseInt(pr2)*1000;
-        var url = "ProductFilter?pricemin=" + p1 +"&pricemax="+ p2;
-        location.href=url;
-    }
+
 </script>
 </body>
 
