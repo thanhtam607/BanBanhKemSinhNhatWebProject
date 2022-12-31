@@ -183,9 +183,9 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form ">
-                            <form action="#" >
+                            <form action="ProductFilter" method="get" >
                               
-                                <input name="key" id="search" type="text" placeholder="Bạn cần bánh gì nè?">
+                                <input name="search" id="search" type="text" placeholder="Bạn cần bánh gì nè?">
                                 <button href="ProductFilter" type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
                             </form>
                         </div>
@@ -213,11 +213,11 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Bánh hoa</h2>
+                        <h2><%=request.getAttribute("title")%></h2>
                         <div class="breadcrumb__option">
                             <a href="./Index">Trang Chủ</a>
                             <a href="./ListProduct">Sản phẩm</a>
-                            <span>Bánh hoa</span>
+                            <span><%=request.getAttribute("title")%></span>
                         </div>
                     </div>
                 </div>
@@ -332,7 +332,7 @@
                     <div class="product__discount product__discount_page_detail">
                         <% List<Product> listFilter = (List<Product>) request.getAttribute("listFilter");%>
                         <div class="section-title product__discount__title">
-                            <h2><%= request.getParameter("title")%></h2>
+                            <h2><%= request.getAttribute("title")%></h2>
                         </div>
                     </div>
                     <div class="filter__item" >
@@ -422,13 +422,14 @@
 <%session.setAttribute("filter", request.getParameter("filter"));%>
 <%session.setAttribute("min", request.getParameter("pricemin"));%>
 <%session.setAttribute("max", request.getParameter("pricemax"));%>
+<%session.setAttribute("search", request.getParameter("search"));%>
 <script>
 
     function sortProduct(){
         var sort = document.getElementById("sort").value ;
-        var key = document.getElementById("search").value;
 
-        var urlP= "Sort?sortValue=" + sort+"&key="+ key;
+
+        var urlP= "Sort?sortValue=" + sort;
         $.ajax({
             url: urlP,
             type: "POST",
@@ -445,7 +446,7 @@
     function changeHref(index){
         var sort = document.getElementById("sort").value ;
         var key = document.getElementById("search").value;
-       var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key+"&pricemin=" + <%=request.getParameter("pricemin")%> +"&pricemax=" + <%=request.getParameter("pricemax")%>;
+       var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&search="+ key+"&pricemin=" + <%=request.getParameter("pricemin")%> +"&pricemax=" + <%=request.getParameter("pricemax")%>;
         location.href=url;
     }
 </script>

@@ -26,14 +26,14 @@ public class Sort extends HttpServlet {
         String filter = session.getAttribute("filter").toString();
         List<Product> listFilter = ProductService.findBySize(filter);
 
-        String key = request.getParameter("key");
+
         String sort = request.getParameter("sortValue");
 
         if(listFilter.isEmpty()){
             listFilter = ProductService.findByType(filter);
         }
         if(listFilter.isEmpty()){
-            listFilter = ProductService.findByName(request.getParameter("key"));
+            listFilter = ProductService.findByName(session.getAttribute("search").toString());
 
         }
         if(listFilter.isEmpty()){
@@ -76,6 +76,7 @@ public class Sort extends HttpServlet {
         request.setAttribute("endPageFt", endPageFilter);
         request.setAttribute("tagPage", page);
         request.setAttribute("sortValue", sort);
+
         User auth = (User) session.getAttribute("auth");
 
 
@@ -110,6 +111,6 @@ public class Sort extends HttpServlet {
                     "                        </div>"
             );
         }
-        request.getRequestDispatcher("product-Filter.jsp").forward(request,response);
+
     }
 }

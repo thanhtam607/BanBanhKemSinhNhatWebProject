@@ -173,9 +173,8 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form ">
-                        <form action="#" >
-
-                            <input name="key" type="text" placeholder="Bạn cần bánh gì nè?">
+                        <form action="ProductFilter" method="get">
+                            <input name="search" type="text" placeholder="Bạn cần bánh gì nè?">
                             <button href="ProductFilter" type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
                         </form>
                     </div>
