@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.List;
 
 @WebServlet(name = "ProductFilter", value = "/ProductFilter")
@@ -23,12 +24,15 @@ public class ProductFilter extends HttpServlet {
 
         List<Product> listFilter = ProductService.findBySize(request.getParameter("filter"));
         String title = request.getParameter("title");
+
         if(listFilter.isEmpty()){
             listFilter = ProductService.findByType(request.getParameter("filter"));
         }
+
         if(listFilter.isEmpty()){
-            listFilter = ProductService.findByName(request.getParameter("key"));
-            title= "Kết quả tìm kiếm '" + request.getParameter("key")+"'";
+            listFilter = ProductService.findByName(request.getParameter("search"));
+            title= "Kết quả tìm kiếm '" + request.getParameter("search")+"'";
+
         }
         int min=0;
         int max=10000000;
@@ -40,7 +44,10 @@ public class ProductFilter extends HttpServlet {
         }
         if(listFilter.isEmpty()){
             listFilter = ProductService.filterByPrice(min, max);
+            NumberFormat vn = NumberFormat.getInstance();
+            title= "Giá từ "+ vn.format(min)+" VND -> " + vn.format(max)+" VND";
         }
+
         String sort = request.getParameter("sortValue");
         if(sort != null ){
             if(sort.equals("Giá từ thấp đến cao") ) {
