@@ -257,7 +257,7 @@
                                         <input type="text" id="minamount">
                                         <input type="text" id="maxamount">
                                         <div class="sidebar__item__size">
-                                            <label >
+                                            <label class="filterprice">
                                                 <span type="button" class="blog__btn" onclick="FilterbyPrice()">Lọc</span>
                                             </label>
                                         </div>
@@ -449,9 +449,7 @@
         location.href=url;
     }
 </script>
-<script>
 
-</script>
 </body>
 
 </html>

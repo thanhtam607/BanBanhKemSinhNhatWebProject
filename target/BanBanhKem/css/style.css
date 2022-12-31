@@ -207,6 +207,9 @@ ol {
 	background: #ff96b7;
 	letter-spacing: 2px;
 }
+.filterprice {
+	margin-right: -200px;
+}
 
 .site-btn {
 	font-size: 14px;
