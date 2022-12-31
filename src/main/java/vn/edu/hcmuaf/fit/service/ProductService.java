@@ -19,7 +19,7 @@ public class ProductService {
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT sanpham.MaSP ,sanpham.TenSP,loaibanh.TenLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia  from sanpham, loaibanh where sanpham.MalB = loaibanh.MaLB");
+                ResultSet rs = statement.executeQuery("SELECT distinct sanpham.MaSP ,sanpham.TenSP,loaibanh.TenLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia  from sanpham, loaibanh, giamgia where sanpham.MalB = loaibanh.MaLB");
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
@@ -62,14 +62,14 @@ public class ProductService {
         return null;
     }
 
-    public static List<Product> sanPhamBanChay() {
+    public static List<Product> getHotProduct() {
         List<Product> list = new LinkedList<Product>();
         Statement statement = DBConnect.getInstall().get();
         Statement stmt = DBConnect.getInstall().get();
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT sanpham.MaSP, sanpham.TenSP, sanpham.MaLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia FROM sanpham, cthd WHERE sanpham.MaSP = cthd.MASP GROUP BY MASP ORDER BY COUNT(CTHD.MASP) DESC, cthd.SL DESC LIMIT 10;");
+                ResultSet rs = statement.executeQuery("SELECT sanpham.MaSP, sanpham.TenSP, sanpham.MaLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia FROM sanpham, cthd WHERE sanpham.MaSP = cthd.MASP GROUP BY MASP ORDER BY COUNT(CTHD.MASP) DESC, cthd.SL DESC;");
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
@@ -101,14 +101,14 @@ public class ProductService {
         return list;
     }
 
-    public static List<Product> sanPhamMoi() {
+    public static List<Product> getNewProduct() {
         List<Product> list = new LinkedList<Product>();
         Statement statement = DBConnect.getInstall().get();
         Statement stmt = DBConnect.getInstall().get();
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT sanpham.MaSP, sanpham.TenSP, sanpham.MaLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia FROM sanpham ORDER BY MaSP DESC LIMIT 8;");
+                ResultSet rs = statement.executeQuery("SELECT sanpham.MaSP, sanpham.TenSP, sanpham.MaLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia FROM sanpham ORDER BY MaSP DESC ;");
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
@@ -139,7 +139,6 @@ public class ProductService {
         }
         return list;
     }
-
     public static void addComment(Comment cmt, String IDUser) {
         Statement statement = DBConnect.getInstall().get();
 
@@ -251,11 +250,10 @@ public class ProductService {
     }
 
 
-
     public static void main(String[] args) throws SQLException {
-        List<Product> li = ProductService.filterByPrice(600000, 1000000);
+        List<Product> li = ProductService.getHotProduct();
                for(Product p: li){
-            System.out.println(p.getPrice());
+            System.out.println(p.getId());
 //          System.out.println(getListType().size());
            }
 //        System.out.println(getLastComment("B001").getBinhLuan());

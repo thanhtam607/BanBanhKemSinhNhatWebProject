@@ -1,13 +1,10 @@
 
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.LoaiBanh" %>
 <%@ page import="com.mysql.cj.Session" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -252,7 +249,7 @@
                                         <input type="text" id="minamount">
                                         <input type="text" id="maxamount">
                                         <div class="sidebar__item__size">
-                                            <label >
+                                            <label class="filterprice">
                                                 <span type="button" class="blog__btn" onclick="FilterbyPrice()">Lọc</span>
                                             </label>
                                         </div>
@@ -329,115 +326,34 @@
                             <h2>Khuyến Mãi</h2>
                         </div>
                         <div class="row">
+                            <% List<ProductDiscount> listdiscount = (List<ProductDiscount>) request.getAttribute("listdiscount");%>
                             <div class="product__discount__slider owl-carousel">
+                                <% for(ProductDiscount pd : listdiscount){
+                                int price = (int) (pd.getPrice() - pd.getPrice()*pd.getDiscount());
+                                int discount = (int) (pd.getDiscount()*100);%>
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg"
-                                            data-setbg="./img/product/B001/banh1.jpg">
-                                            <div class="product__discount__percent">-20%</div>
+                                            data-setbg="<%=pd.getListImg().get(0)%>">
+                                            <div class="product__discount__percent">-<%=discount%>%</div>
                                             <ul class="product__item__pic__hover">
-<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
-
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <%if(auth==null){%>
+                                        <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
+                                        <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
+                                       <% } else{ %>
+                                        <li><a href="AddToFavorite?masp=<%=pd.getId()%>"><i class="fa fa-heart"></i></a></li>
+                                        <li><a onclick="addToCartI('<%=pd.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+                                   <%}%>
                                             </ul>
                                         </div>
                                         <div class="product__discount__item__text">
-                                            <span>Bánh hoa</span>
-                                            <h5><a href="shop-details.jsp">Bánh cánh đồng hoa</a></h5>
-                                            <div class="product__item__price">300,000 VND <span>360,000 VND</span></div>
+                                            <span><%=pd.getType()%></span>
+                                            <h5><a href="ProductDetail?id=<%=pd.getId()%>"><%=pd.getName()%></a></h5>
+                                            <div class="product__item__price"><%=pd.formatNum(price)%> VND<span><%=pd.formatNum(pd.getPrice())%> VND</span></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="./img/product/B067/banh2.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
-
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Bánh maccaron và socola</span>
-                                            <h5><a href="shop-details.jsp">Bánh maccaron hoa hồng</a></h5>
-                                            <div class="product__item__price">300,000 VND <span>360,000 VND</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="./img/product/B026/banh1.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
-
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Bánh trái cây</span>
-                                             <h5><a href="shop-details.jsp">Bánh kem dứa caramel</a></h5>
-                                            <div class="product__item__price">300,000 VND <span>360,000 VND</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="./img/product/B012/banh1.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
-
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Bánh hoa</span>
-                                             <h5><a href="shop-details.jsp">Bánh hoa xanh trang nhã</a></h5>
-                                            <div class="product__item__price">300,000 VND <span>360,000 VND</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="././img/product/B021/banh1.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
-
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Bánh trái cây</span>
-                                             <h5><a href="shop-details.jsp">Bánh oreo việt quất</a></h5>
-                                            <div class="product__item__price">300,000 VND <span>360,000 VND</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="./img/product/B022/banh1.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-<%--                                                <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>--%>
-
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Bánh trái cây</span>
-                                             <h5><a href="shop-details.jsp">Bánh kem trái cây hạnh nhân</a></h5>
-                                            <div class="product__item__price"> 300,000 VND <span>360,000 VND</span></div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <% } %>
                             </div>
                         </div>
                     </div>
@@ -454,7 +370,7 @@
                                         for(String s: listOption){
                                             String val = request.getParameter("sortValue");
                                         if(s.equals(val)){%>
-                                            <option href="ListProduct?sortValue=<%=val%>" selected="true" value="<%=val%>>"><%=val%></option>
+                                            <option href="ListProduct?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></option>
                                         <%}
                                         else{%>
                                         <option href="ListProduct?sortValue=<%=s%>" value="<%=s%>"><%=s%></option>
@@ -486,8 +402,6 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<%=p.getListImg().get(0)%>">
                                     <ul class="product__item__pic__hover">
-
-
                                         <%if(auth==null){%>
                                         <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
                                         <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
@@ -498,7 +412,7 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="ProductDetail?id=<%=p.getId() %>"><%= p.getName()%></a></h6>
+                                    <h6><a href="ProductDetail?id=<%=p.getId()%>"><%= p.getName()%></a></h6>
                                     <h5><%= p.formatNum(p.getPrice())%> VND</h5>
                                 </div>
                             </div>

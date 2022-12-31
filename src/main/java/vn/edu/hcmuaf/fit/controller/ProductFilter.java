@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductFilter extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> listHotProduct = ProductService.sanPhamBanChay();
+        List<Product> listHotProduct = ProductService.getHotProduct();
         request.setAttribute("listBanChay", listHotProduct);
         String p_min = request.getParameter("pricemin");
         String p_max = request.getParameter("pricemax");

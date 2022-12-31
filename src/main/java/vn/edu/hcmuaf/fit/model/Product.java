@@ -14,8 +14,6 @@ public class Product {
     List<String> listImg;
     int price;
     List<Comment> comments;
-
-
     public Product() {
     }
 
@@ -94,6 +92,7 @@ public class Product {
     public List<Comment> getComments() {
         return comments;
     }
+
 
     @Override
     public String toString() {

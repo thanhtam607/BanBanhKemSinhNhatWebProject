@@ -340,20 +340,20 @@
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort ">
                                     <span>Sắp Xếp</span>
-                                    <select id="sort" name="sortValue">
+                                    <select id="sortValue" name="sortValue" >
                                         <%List<String> listOption = new ArrayList<String>();
-                                        listOption.add("Mặc định");
-                                        listOption.add("Giá từ thấp đến cao");
-                                        listOption.add("Giá từ cao đến thấp");
-                                        String val = request.getParameter("sortValue");
-                                        for(String s: listOption){
-                                        if(s.equals(val)){%>
-                                        <option selected="true" value="<%=val%>>"><%=val%></option>
-                                            <%}
+                                            listOption.add("Mặc định");
+                                            listOption.add("Giá từ thấp đến cao");
+                                            listOption.add("Giá từ cao đến thấp");
+                                            for(String s: listOption){
+                                                String val = request.getParameter("sortValue");
+                                                if(s.equals(val)){%>
+                                        <option href="ListProduct?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></option>
+                                        <%}
                                         else{%>
-                                        <option value="<%=s%>"><%=s%></option>
-                                            <%}%>
-                                            <%}%>
+                                        <option href="ListProduct?sortValue=<%=s%>" value="<%=s%>"><%=s%></option>
+                                        <%}%>
+                                        <%}%>
                                     </select>
                                 </div>
                             </div>

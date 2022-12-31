@@ -1,6 +1,10 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.model.Blog;
 import vn.edu.hcmuaf.fit.model.Product;
+import vn.edu.hcmuaf.fit.model.ProductDiscount;
+import vn.edu.hcmuaf.fit.service.BlogService;
+import vn.edu.hcmuaf.fit.service.ProductDiscountService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
@@ -14,16 +18,8 @@ import java.util.List;
 public class ListProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String p_min = request.getParameter("pricemin");
-//        String p_max = request.getParameter("pricemax");
-//        if(p_min == null || p_max == null) {
-//           p_min = "50000";
-//           p_max = "1000000";
-//        }
-//            int min = Integer.parseInt(p_min);
-//            int max = Integer.parseInt(p_max);
-//            List<Product> filterprice = ProductService.filterByPrice(min, max);
-//            request.setAttribute("listprice", filterprice);
+        List<ProductDiscount> listdiscount = ProductDiscountService.getDiscountProduct();
+        request.setAttribute("listdiscount", listdiscount);
         String numPage = request.getParameter("page");
         String sort = request.getParameter("sortValue");
         List<Product> listPro = ProductService.getData();
@@ -50,7 +46,7 @@ public class ListProduct extends HttpServlet {
         request.setAttribute("endPage", endPage);
         request.setAttribute("tag", page);
         request.setAttribute("list", list);
-        List<Product> listHotProduct = ProductService.sanPhamBanChay();
+        List<Product> listHotProduct = ProductService.getHotProduct();
         request.setAttribute("listBanChay", listHotProduct);
         request.getRequestDispatcher("shop-product.jsp").forward(request,response);
 
