@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
@@ -56,22 +57,30 @@ public class Sort extends HttpServlet {
         request.setAttribute("endPageFt", endPageFilter);
         request.setAttribute("tagPage", page);
         request.setAttribute("sortValue", sort);
+        User auth = (User) session.getAttribute("auth");
+
 
 
         PrintWriter out = response.getWriter();
         for(Product p: listF) {
             String img = p.getListImg().get(0);
+            String s=null;
+            if(auth==null){
+                s= "<li><a onclick=\"notLogged()\"><i class=\"fa fa-heart\"></i></a></li>\n"+
+                        "    <li><a onclick=\"notLogged()\"><i class=\"fa fa-shopping-cart\"></i></a></li>\n";
+            }
+            else{
+                s= "  <li><a href=\"AddToFavorite?masp="+p.getId()+"><i class=\"fa fa-heart\"></i></a></li>\n"+
+
+                        "  <li><a onclick=\"addToCartI('"+p.getId()+"')\"><i class=\"fa fa-shopping-cart\"></i></a></li>\n" ;
+            }
+
+
             out.println("<div class=\"col-lg-4 col-md-6 col-sm-6\">\n" +
                     "                            <div class=\"product__item\">\n" +
                     "                               <div class=\"product__item__pic set-bg\" data-setbg=\""+img+ "\" style=\"background-image: url("+img+");\">\n" +
                     "                                    <ul class=\"product__item__pic__hover\">\n" +
-                    "                                       <% if(auth==null){%>\n"+
-                    "                                          <li><a onclick=\"notLogged()\"><i class=\"fa fa-heart\"></i></a></li>\n"+
-                    "                                           <li><a onclick=\"notLogged()\"><i class=\"fa fa-shopping-cart\"></i></a></li>\n"+
-                    "                                            <%} else{%>\n"+
-                    "                                             <li><a href=\"AddToFavorite?masp="+p.getId()+"><i class=\"fa fa-heart\"></i></a></li>\n"+
-
-                    "                                        <li><a onclick=\"addToCartI('"+p.getId()+"')\"><i class=\"fa fa-shopping-cart\"></i></a></li>\n" +
+                                                            s+
                     "                                    </ul>\n" +
                     "                                </div>\n" +
                     "                                <div class=\"product__item__text\">\n" +
