@@ -524,7 +524,7 @@
         var pr2 = document.getElementById("maxamount").value;
         var p1 = parseInt(pr1)*1000;
         var p2 = parseInt(pr2)*1000;
-        var url = "ProductFilter?pricemin=" + p1 +"&pricemax="+ p2;
+        var url = "ProductFilter?title= Lọc theo giá từ " + p1 + " VND đến " + p2 + " VND &pricemin=" + p1 +"&pricemax="+ p2;
         location.href=url;
     }
 </script>

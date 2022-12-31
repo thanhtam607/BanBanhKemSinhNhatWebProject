@@ -184,7 +184,6 @@
                     <div class="hero__search">
                         <div class="hero__search__form ">
                             <form action="#" >
-                              
                                 <input name="key" id="search" type="text" placeholder="Bạn cần bánh gì nè?">
                                 <button href="ProductFilter" type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
                             </form>
@@ -332,7 +331,7 @@
                     <div class="product__discount product__discount_page_detail">
                         <% List<Product> listFilter = (List<Product>) request.getAttribute("listFilter");%>
                         <div class="section-title product__discount__title">
-                            <h2><%= request.getParameter("title")%></h2>
+                            <h2><%=request.getParameter("title")%></h2>
                         </div>
                     </div>
                     <div class="filter__item" >
@@ -443,7 +442,11 @@
     function changeHref(index){
         var sort = document.getElementById("sort").value ;
         var key = document.getElementById("search").value;
-       var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key;
+        var title = <%=request.getParameter("title")%>;
+        if(title == null){
+            title  = "Lọc theo kết quả tìm kiếm";
+        }
+       var url = "ProductFilter?title="+ title + "&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key;
         location.href=url;
     }
 </script>
@@ -453,7 +456,7 @@
         var pr2 = document.getElementById("maxamount").value;
         var p1 = parseInt(pr1)*1000;
         var p2 = parseInt(pr2)*1000;
-        var url = "ProductFilter?pricemin=" + p1 +"&pricemax="+ p2;
+        var url = "ProductFilter?title= Lọc theo giá từ " + p1 + " VND đến " + p2 + " VND &pricemin=" + p1 +"&pricemax="+ p2;
         location.href=url;
     }
 </script>

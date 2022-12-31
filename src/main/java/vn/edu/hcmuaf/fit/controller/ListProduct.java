@@ -14,16 +14,16 @@ import java.util.List;
 public class ListProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String p_min = request.getParameter("pricemin");
-        String p_max = request.getParameter("pricemax");
-        if(p_min == null || p_max == null) {
-           p_min = "50000";
-           p_max = "1000000";
-        }
-            int min = Integer.parseInt(p_min);
-            int max = Integer.parseInt(p_max);
-            List<Product> filterprice = ProductService.filterByPrice(min, max);
-            request.setAttribute("listprice", filterprice);
+//        String p_min = request.getParameter("pricemin");
+//        String p_max = request.getParameter("pricemax");
+//        if(p_min == null || p_max == null) {
+//           p_min = "50000";
+//           p_max = "1000000";
+//        }
+//            int min = Integer.parseInt(p_min);
+//            int max = Integer.parseInt(p_max);
+//            List<Product> filterprice = ProductService.filterByPrice(min, max);
+//            request.setAttribute("listprice", filterprice);
         String numPage = request.getParameter("page");
         String sort = request.getParameter("sortValue");
         List<Product> listPro = ProductService.getData();

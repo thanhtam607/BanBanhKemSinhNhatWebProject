@@ -25,9 +25,6 @@ public class ProductFilter extends HttpServlet {
        }
             int min = Integer.parseInt(p_min);
             int max = Integer.parseInt(p_max);
-            List<Product> filterprice = ProductService.filterByPrice(min, max);
-            request.setAttribute("listprice", filterprice);
-
         List<Product> listFilter = ProductService.findBySize(request.getParameter("filter"));
         String title = request.getParameter("title");
         if(listFilter.isEmpty()){
@@ -35,21 +32,19 @@ public class ProductFilter extends HttpServlet {
         }
         if(listFilter.isEmpty()){
             listFilter = ProductService.findByName(request.getParameter("key"));
-            title= "Kết quả tìm kiếm '" + request.getParameter("key")+"'";
+                title = "Kết quả tìm kiếm '" + request.getParameter("key") + "'";
+        }
+        if(listFilter.isEmpty()){
+            listFilter = ProductService.filterByPrice(min, max);
         }
         String sort = request.getParameter("sortValue");
         if(sort != null ){
             if(sort.equals("Giá từ thấp đến cao") ) {
-
                 listFilter.sort((Product o1, Product o2) -> o1.getPrice() - o2.getPrice());
             }
             if(sort.equals("Giá từ cao đến thấp") ){
                 listFilter.sort((Product o1, Product o2) -> o2.getPrice() - o1.getPrice());
             }
-//              if(listFilter.isEmpty()){
-//                listFilter = ProductService.filterByPrice(min, max);
-//                title= "Lọc theo giá'" + min + "-->"+ max + "'";
-//            }
 
         }
         //================================= phan trang ================================
