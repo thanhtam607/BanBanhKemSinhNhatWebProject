@@ -319,3 +319,15 @@ function removeCart(id){
 
 
 }
+/*-------------------
+   FIND BY PRICE
+  --------------------- */
+function FilterbyPrice(){
+    var pr1 = document.getElementById("minamount").value;
+    var pr2 = document.getElementById("maxamount").value;
+    var p1 = parseInt(pr1);
+    var p2 = parseInt(pr2);
+    var title = "Giá từ " + p1.toLocaleString('vi-VN')+" VND đến "+ p2.toLocaleString('vi-VN')+" VND";
+    var url = "ProductFilter?pricemin=" + p1 +"&pricemax="+ p2+"&title="+ title;
+    location.href=url;
+}

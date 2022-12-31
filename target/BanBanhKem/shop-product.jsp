@@ -242,7 +242,7 @@
                             <h4>Giá (VNĐ)</h4>
                             <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                    data-min="50" data-max="1000">
+                                    data-min="50000" data-max="1000000">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
 <%--                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>--%>
 <%--                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>--%>
@@ -518,16 +518,7 @@
         </div>
     </section>
     <!-- Product Section End -->
-<script>
-    function FilterbyPrice(){
-        var pr1 = document.getElementById("minamount").value;
-        var pr2 = document.getElementById("maxamount").value;
-        var p1 = parseInt(pr1)*1000;
-        var p2 = parseInt(pr2)*1000;
-        var url = "ProductFilter?title= Lọc theo giá từ " + p1 + " VND đến " + p2 + " VND &pricemin=" + p1 +"&pricemax="+ p2;
-        location.href=url;
-    }
-</script>
+
 <jsp:include page="footer.jsp"></jsp:include>
     <!-- Js Plugins -->
 

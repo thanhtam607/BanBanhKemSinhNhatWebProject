@@ -25,6 +25,8 @@ public class Sort extends HttpServlet {
         HttpSession session = request.getSession(true);
         String filter = session.getAttribute("filter").toString();
         List<Product> listFilter = ProductService.findBySize(filter);
+
+        String key = request.getParameter("key");
         String sort = request.getParameter("sortValue");
 
         if(listFilter.isEmpty()){
@@ -34,6 +36,23 @@ public class Sort extends HttpServlet {
             listFilter = ProductService.findByName(request.getParameter("key"));
 
         }
+        if(listFilter.isEmpty()){
+
+            String p_min = session.getAttribute("pricemin").toString();
+            String p_max = session.getAttribute("pricemax").toString();
+
+            int min=0;
+            int max=10000000;
+            if(p_min != null){
+                min = Integer.parseInt(p_min);
+            }
+            if( p_max != null) {
+                max=Integer.parseInt(p_max);
+            }
+
+            listFilter = ProductService.filterByPrice(min, max);
+        }
+
         if(sort != null ){
             if(sort.equals("Giá từ thấp đến cao") ) {
 
@@ -64,7 +83,7 @@ public class Sort extends HttpServlet {
         PrintWriter out = response.getWriter();
         for(Product p: listF) {
             String img = p.getListImg().get(0);
-            String s=null;
+            String s = null;
             if(auth==null){
                 s= "<li><a onclick=\"notLogged()\"><i class=\"fa fa-heart\"></i></a></li>\n"+
                         "    <li><a onclick=\"notLogged()\"><i class=\"fa fa-shopping-cart\"></i></a></li>\n";
@@ -91,6 +110,6 @@ public class Sort extends HttpServlet {
                     "                        </div>"
             );
         }
-
+        request.getRequestDispatcher("product-Filter.jsp").forward(request,response);
     }
 }

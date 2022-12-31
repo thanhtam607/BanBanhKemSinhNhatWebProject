@@ -19,12 +19,8 @@ public class ProductFilter extends HttpServlet {
         request.setAttribute("listBanChay", listHotProduct);
         String p_min = request.getParameter("pricemin");
         String p_max = request.getParameter("pricemax");
-       if(p_min == null || p_max == null) {
-            p_min = "50000";
-            p_max = "1000000";
-       }
-            int min = Integer.parseInt(p_min);
-            int max = Integer.parseInt(p_max);
+
+
         List<Product> listFilter = ProductService.findBySize(request.getParameter("filter"));
         String title = request.getParameter("title");
         if(listFilter.isEmpty()){
@@ -32,7 +28,15 @@ public class ProductFilter extends HttpServlet {
         }
         if(listFilter.isEmpty()){
             listFilter = ProductService.findByName(request.getParameter("key"));
-                title = "Kết quả tìm kiếm '" + request.getParameter("key") + "'";
+            title= "Kết quả tìm kiếm '" + request.getParameter("key")+"'";
+        }
+        int min=0;
+        int max=10000000;
+        if(p_min != null){
+            min = Integer.parseInt(p_min);
+        }
+        if( p_max != null) {
+           max=Integer.parseInt(p_max);
         }
         if(listFilter.isEmpty()){
             listFilter = ProductService.filterByPrice(min, max);
@@ -45,6 +49,7 @@ public class ProductFilter extends HttpServlet {
             if(sort.equals("Giá từ cao đến thấp") ){
                 listFilter.sort((Product o1, Product o2) -> o2.getPrice() - o1.getPrice());
             }
+
 
         }
         //================================= phan trang ================================
@@ -63,7 +68,7 @@ public class ProductFilter extends HttpServlet {
         request.setAttribute("tagPage", page);
         request.setAttribute("sortValue", sort);
 //================================= phan trang ================================
-        request.setAttribute("tile", title);
+        request.setAttribute("title", title);
         request.setAttribute("listFilter", listF);
         request.getRequestDispatcher("product-Filter.jsp").forward(request,response);
     }

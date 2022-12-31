@@ -184,6 +184,7 @@
                     <div class="hero__search">
                         <div class="hero__search__form ">
                             <form action="#" >
+                              
                                 <input name="key" id="search" type="text" placeholder="Bạn cần bánh gì nè?">
                                 <button href="ProductFilter" type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
                             </form>
@@ -246,7 +247,7 @@
                             <h4>Giá (VND)</h4>
                             <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                    data-min="50" data-max="1000">
+                                    data-min="50000" data-max="1000000">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                                     <span tabindex="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
                                     <span tabindex="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
@@ -331,7 +332,7 @@
                     <div class="product__discount product__discount_page_detail">
                         <% List<Product> listFilter = (List<Product>) request.getAttribute("listFilter");%>
                         <div class="section-title product__discount__title">
-                            <h2><%=request.getParameter("title")%></h2>
+                            <h2><%= request.getParameter("title")%></h2>
                         </div>
                     </div>
                     <div class="filter__item" >
@@ -419,13 +420,15 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <%session.setAttribute("filter", request.getParameter("filter"));%>
-
+<%session.setAttribute("min", request.getParameter("pricemin"));%>
+<%session.setAttribute("max", request.getParameter("pricemax"));%>
 <script>
 
     function sortProduct(){
         var sort = document.getElementById("sort").value ;
         var key = document.getElementById("search").value;
-        var urlP= "Sort?sortValue=" + sort+"&key="+ key ;
+
+        var urlP= "Sort?sortValue=" + sort+"&key="+ key;
         $.ajax({
             url: urlP,
             type: "POST",
@@ -442,23 +445,12 @@
     function changeHref(index){
         var sort = document.getElementById("sort").value ;
         var key = document.getElementById("search").value;
-        var title = <%=request.getParameter("title")%>;
-        if(title == null){
-            title  = "Lọc theo kết quả tìm kiếm";
-        }
-       var url = "ProductFilter?title="+ title + "&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key;
+       var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&key="+ key+"&pricemin=" + <%=request.getParameter("pricemin")%> +"&pricemax=" + <%=request.getParameter("pricemax")%>;
         location.href=url;
     }
 </script>
 <script>
-    function FilterbyPrice(){
-        var pr1 = document.getElementById("minamount").value;
-        var pr2 = document.getElementById("maxamount").value;
-        var p1 = parseInt(pr1)*1000;
-        var p2 = parseInt(pr2)*1000;
-        var url = "ProductFilter?title= Lọc theo giá từ " + p1 + " VND đến " + p2 + " VND &pricemin=" + p1 +"&pricemax="+ p2;
-        location.href=url;
-    }
+
 </script>
 </body>
 
