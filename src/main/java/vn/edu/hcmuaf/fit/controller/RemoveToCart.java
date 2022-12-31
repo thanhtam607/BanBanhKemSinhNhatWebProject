@@ -19,23 +19,23 @@ public class RemoveToCart extends HttpServlet {
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
         Order order = (Order) session.getAttribute("order");
-        if(auth != null) {
+
+        if (auth != null) {
             if (request.getParameter("masp") != null) {
                 String maSP = request.getParameter("masp");
                 Product product = ProductService.findById(maSP);
                 if (product != null) {
-                    if(order.getData().containsKey(maSP)){
+                    if (order.getData().containsKey(maSP)) {
                         order.getData().remove(maSP);
                     }
 //                session.setAttribute("order", order);
                 }
-                request.getRequestDispatcher("/shoping-cart.jsp").forward(request, response);
-            }
-        }else{
-            response.sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");
-        }
-    }
 
+
+            }
+        }
+        response.sendRedirect("shoping-cart.jsp");
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

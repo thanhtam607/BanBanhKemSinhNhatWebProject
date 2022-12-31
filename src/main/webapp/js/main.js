@@ -222,10 +222,10 @@ function myFunction() {
             var newVal = parseFloat(oldValue) + 1;
         } else {
             // Don't allow decrementing below zero
-            if (oldValue > 0) {
+            if (oldValue > 1) {
                 var newVal = parseFloat(oldValue) - 1;
             } else {
-                newVal = 0;
+                newVal = 1;
             }
         }
         $button.parent().find('input').val(newVal);
@@ -276,7 +276,6 @@ function addToCartI(id){
         url: url,
         type: "GET",
         success: function (){
-            console.log(id);
             totalPro+=1;
             document.getElementById("totalPro").innerHTML=totalPro.toString();
             document.getElementById("totalPro1").innerHTML=totalPro.toString();
@@ -287,3 +286,36 @@ function addToCartI(id){
         }
     });
 };
+// xóa cart
+function removeCart(id){
+
+    var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
+    var qty = parseInt(document.getElementById('qty'+id).value);
+    var url = "RemoveToCart?masp="+id;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (){
+            totalPro-=qty;
+            document.getElementById("totalPro").innerHTML=totalPro.toString();
+            document.getElementById("totalPro1").innerHTML=totalPro.toString();
+            document.getElementById(id).remove();
+            if(totalPro == 0){
+                document.getElementById("container-cart").remove();
+                document.getElementById("shoping-cart").outerHTML=" <div class=\"cartEmpty\" name=\"cartEmpty\">\n" +
+                    "            <img src=\"./img/null.png\" alt=\"Giỏ hàng của bạn đang trống\" class=\"d-block m-auto\" width=\"250\" />\n" +
+                    "            <p class=\"text-center font-weight-bold\" style=\"opacity: .6;\">Giỏ hàng của bạn trống</p>\n" +
+                    "        </div>\n" +
+                    "        <div class=\"col-lg-12\">\n" +
+                    "            <div class=\"shoping__cart__btns\" style=\"text-align: center\">\n" +
+                    "                <a href=\"./ListProduct\" class=\"primary-btn cart-btn\" >Xem thêm sản phẩm </a>\n" +
+                    "\n" +
+                    "            </div>\n" +
+                    "        </div>";
+
+            }
+        }
+    });
+
+
+}

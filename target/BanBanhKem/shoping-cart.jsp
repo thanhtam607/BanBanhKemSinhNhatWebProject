@@ -60,7 +60,7 @@
             }else{
                 status=0;
             }%>
-            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro"><%= order != null ? order.totalProduct():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
@@ -163,7 +163,7 @@
                 <div class="header__cart">
                     <ul>
                         <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
-                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro1"><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -227,10 +227,10 @@
 <!-- Breadcrumb Section End -->
 
 <!-- Shoping Cart Section Begin -->
-<section class="shoping-cart spad">
-    <div class="container">
+<section class="shoping-cart spad" id="shoping-cart">
+    <div class="container" id="container-cart">
         <%if(status==1){%>
-        <div class="cartEmpty">
+        <div class="cartEmpty" name="cartEmpty">
             <img src="./img/null.png" alt="Giỏ hàng của bạn đang trống" class="d-block m-auto" width="250" />
             <p class="text-center font-weight-bold" style="opacity: .6;">Giỏ hàng của bạn trống</p>
         </div>
@@ -241,7 +241,7 @@
             </div>
         </div>
         <%}else{%>
-        <div class="row">
+        <div  class="row">
 
             <div class="col-lg-12">
                 <div class="shoping__cart__table">
@@ -257,9 +257,10 @@
                         </thead>
                         <tbody>
                         <% for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
+                            String idQty ="qty"+ entry.getValue().getSp().getId();
                         %>
-                            <tr>
-                                <td class="shoping__cart__item">
+                            <tr id="<%=entry.getValue().getSp().getId()%>">
+                                <td  class="shoping__cart__item">
                                     <img src="<%=entry.getValue().getSp().getListImg().get(0)%>" alt="">
                                     <h5><%=entry.getValue().getSp().getName()%>
                                     </h5>
@@ -270,7 +271,7 @@
                                 <td class="shoping__cart__quantity">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <input class="qty" name="solgmua" value="<%=entry.getValue().getSoLgMua()%>">
+                                            <input id="<%=idQty%>" class="qty" name="solgmua" value="<%=entry.getValue().getSoLgMua()%>">
 <%--                                            <span class="dec qtybtn" name="solgmua" ><%=entry.getValue().getSoLgMua()%></span>--%>
                                         </div>
                                     </div>
@@ -279,7 +280,7 @@
                                     <%=entry.getValue().formatNum(entry.getValue().giaSanPhamTrongGioHang()) %> VND
                                 </td>
                                 <td class="shoping__cart__item__close" >
-                                    <span ><a href="RemoveToCart?masp=<%=entry.getValue().getSp().getId()%>" class="remove_prod_style icon_close" ></a></span>
+                                    <span ><a onclick="removeCart('<%=entry.getValue().getSp().getId()%>')" class="remove_prod_style icon_close" ></a></span>
                                 </td>
                             </tr>
 
