@@ -283,7 +283,7 @@ function addToCartI(id){
             document.getElementById("totalPro").innerHTML=totalPro.toString();
             document.getElementById("totalPro1").innerHTML=totalPro.toString();
             Swal.fire({
-                text:'Thêm sản phẩm thành công!',
+                text:'Sản phẩm đã được thêm vào giỏ hàng!',
                 icon: 'success',
                 confirmButtonColor: '#ff96b7'});
         }
@@ -371,5 +371,38 @@ function updateCart(id){
 
             }
         });
+
+};
+/*-------------------
+       add to favorites
+   --------------------- */
+function addToFav(id){
+    var url = "AddToFavorite?masp="+ id;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function () {
+            Swal.fire({
+                text:'Sản phẩm đã được thêm vào danh mục yêu thích!',
+                icon: 'success',
+                confirmButtonColor: '#ff96b7'});
+        }
+    });
+
+};
+
+
+function removeToFav(id){
+    var url = "RemoveFavorites?masp="+ id;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function () {
+            Swal.fire({
+                text:'Sản phẩm đã được xóa khỏi danh mục yêu thích!',
+                icon: 'error',
+                confirmButtonColor: '#ff96b7'});
+        }
+    });
 
 };

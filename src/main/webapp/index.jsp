@@ -264,7 +264,7 @@
                                     <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
                                     <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
                                     <% } else{ %>
-                                    <li><a href="AddToFavorite?masp=<%=p.getId()%>"><i class="fa fa-heart"></i></a></li>
+                                    <li><a onclick="addToFav('<%=p.getId()%>')"><i class="fa fa-heart"></i></a></li>
                                     <li><a onclick="addToCartI('<%=p.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
                                     <%}%>
                                 </ul>
@@ -307,7 +307,7 @@
                                 <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
                                 <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
                                 <% } else{ %>
-                                <li><a href="AddToFavorite?masp=<%=p1.getId()%>"><i class="fa fa-heart"></i></a></li>
+                                <li><a onclick="addToFav('<%=p1.getId()%>')"><i class="fa fa-heart"></i></a></li>
                                 <li><a onclick="addToCartI('<%=p1.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
                                 <%}%>
                             </ul>

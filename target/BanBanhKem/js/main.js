@@ -218,7 +218,6 @@ function myFunction() {
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
         var newVal=parseInt(oldValue);
-        console.log(newVal);
         if ($button.hasClass('inc')) {
             newVal +=1;
         }
@@ -344,7 +343,7 @@ function updateCart(id){
         var url = "UpdateCart?masp=" + id + "&soluong=" + newQty;
         var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
         var item = document.getElementsByClassName("cart-item");
-    console.log(id);
+
         $.ajax({
             url: url,
             type: "POST",

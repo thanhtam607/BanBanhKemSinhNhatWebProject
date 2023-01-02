@@ -1,7 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -225,57 +225,57 @@
                         <div class="sidebar__item">
                             <h4>Các Loại Bánh</h4>
                             <ul class="slidebar__loaibanh">
-                                <li class="text__loaibanh"><a href="./ListProduct">Tất cả</a></li>
-                                <li class="text__loaibanh"><a class="text__loaibanh__active" href="shop-product-banh-hoa.jsp">Bánh hoa</a></li>
-                                <li class="text__loaibanh"><a href="./shop-product-trang-tri-don-gian.html">Bánh trang trí đơn giản</a></li>
-                                <li class="text__loaibanh"><a href="#">Bánh trang trí hình thú</a></li>
-                                <li class="text__loaibanh"><a href="#">Bánh trái cây</a></li>
-                                <li class="text__loaibanh"><a href="#">Bánh hoa mousse</a></li>
-
+                                <li class="text__loaibanh"><a class="text__loaibanh__active" href="/ListProduct">Tất cả</a></li>
+                                <%
+                                    List<LoaiBanh> ListType = ProductService.getListType();
+                                    for(LoaiBanh lb: ListType){%>
+                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getTenLB()%>&filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
+                                <%}%>
                             </ul>
                         </div>
                         <div class="sidebar__item">
-                            <h4>Giá (VND)</h4>
+                            <h4>Giá (VNĐ)</h4>
                             <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                    data-min="50" data-max="1000">
+                                     data-min="50000" data-max="1000000">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
+                                    <%--                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>--%>
+                                    <%--                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>--%>
                                 </div>
                                 <div class="range-slider">
                                     <div class="price-input">
                                         <input type="text" id="minamount">
                                         <input type="text" id="maxamount">
+                                        <div class="sidebar__item__size">
+                                            <label class="filterprice">
+                                                <span type="button" class="blog__btn" onclick="FilterbyPrice()">Lọc</span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="sidebar__item">
                             <h4>Kích thước</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    Lớn
-                                    <input type="radio" id="large">
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước lớn &filter=Lớn" id="large">Lớn</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
-                                <label for="medium">
-                                    Vừa 
-                                    <input type="radio" id="medium">
+                                <label  for="medium">
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước vừa &filter=Vừa" id="medium">Vừa</a>
                                 </label>
                             </div>
-                            <div class="sidebar__item__size">
+                            <div  class="sidebar__item__size">
                                 <label for="small">
-                                    Nhỏ
-                                    <input type="radio" id="small">
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước nhỏ &filter=Nhỏ" id="small">Nhỏ</a>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
-                                    Bé
-                                    <input type="radio" id="tiny">
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước bé &filter=Bé" id="tiny">Bé</a>
                                 </label>
                             </div>
                         </div>
@@ -283,63 +283,35 @@
                             <div class="latest-product__text">
                                 <h4>Top Bán Chạy</h4>
                                 <div class="latest-product__slider owl-carousel">
+                                    <% List<Product> listhotproducts = (List<Product>) request.getAttribute("listBanChay"); %>
                                     <div class="latest-prdouct__slider__item">
-                                        <a href="#" class="latest-product__item">
+                                        <% for(int i = 0; i<3;i++){
+                                            Product productL = listhotproducts.get(i);%>
+                                        <a href="ProductDetail?id=<%=productL.getId() %>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="./img/product/B019/banh1.jpg" alt="">
+                                                <img src="<%=productL.getListImg().get(0)%>" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>200,000 VND</span>
+                                                <h6><%=productL.getName()%></h6>
+                                                <span><%=productL.formatNum(productL.getPrice())%> VND</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B022/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>250,000 VND</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B023/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
-                                            </div>
-                                        </a>
+                                        <% } %>
                                     </div>
+                                    </a>
                                     <div class="latest-prdouct__slider__item">
-                                        <a href="#" class="latest-product__item">
+                                        <% for(int i = 3; i<6;i++){
+                                            Product productR = listhotproducts.get(i);%>
+                                        <a href="ProductDetail?id=<%=productR.getId() %>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="./img/product/B024/banh1.jpg" alt="">
+                                                <img src="<%=productR.getListImg().get(0)%>" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
+                                                <h6><%=productR.getName()%></h6>
+                                                <span><%=productR.formatNum(productR.getPrice())%> VND</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B025/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="./img/product/B026/banh1.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Bánh Sinh Nhật</h6>
-                                                <span>300,000 VND</span>
-                                            </div>
-                                        </a>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -384,8 +356,13 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<%=fav.getSp().getListImg().get(0)%>">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="RemoveFavorites?masp=<%=fav.getSp().getId()%>"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="AddToCart?masp=<%=fav.getSp().getId()%>"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <%if(auth==null){%>
+                                        <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
+                                        <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <% } else{ %>
+                                        <li><a onclick="removeToFav('<%=fav.getSp().getId()%>')"><i class="fa fa-heart"></i></a></li>
+                                        <li><a onclick="addToCartI('<%=fav.getSp().getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <%}%>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
