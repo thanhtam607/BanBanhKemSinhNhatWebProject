@@ -213,22 +213,26 @@ function myFunction() {
 		Quantity change
 	--------------------- */
     var proQty = $('.pro-qty');
-    proQty.prepend('<span class="dec qtybtn">-</span>');
-    proQty.append('<span class="inc qtybtn">+</span>');
+
     proQty.on('click', '.qtybtn', function () {
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
+        var newVal=parseInt(oldValue);
+        console.log(newVal);
         if ($button.hasClass('inc')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
+            newVal +=1;
+        }
+        else {
             // Don't allow decrementing below zero
             if (oldValue > 1) {
-                var newVal = parseFloat(oldValue) - 1;
+                newVal-=1;
             } else {
                 newVal = 1;
             }
         }
+        console.log(newVal);
         $button.parent().find('input').val(newVal);
+
     });
 
 })(jQuery);
@@ -331,3 +335,42 @@ function FilterbyPrice(){
     var url = "ProductFilter?pricemin=" + p1 +"&pricemax="+ p2+"&title="+ title;
     location.href=url;
 }
+/*-------------------
+  update cart
+  --------------------- */
+
+function updateCart(id){
+        var newQty = parseInt(document.getElementById('qty'+id).value)+1;
+        var url = "UpdateCart?masp=" + id + "&soluong=" + newQty;
+        var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
+        var item = document.getElementsByClassName("cart-item");
+    console.log(id);
+        $.ajax({
+            url: url,
+            type: "POST",
+            success: function () {
+                var total = 0;
+                totalPro = 0;
+                var totalMoney = 0;
+
+                for(var i=0; i<item.length;i++) {
+                    var row = item[i];
+                var price = parseInt(row.getElementsByClassName("price")[0].value);
+                var qty = parseInt(row.getElementsByClassName("qty")[0].value);
+
+                totalPro+= qty;
+                total = (price * qty);
+                totalMoney += total;
+
+                row.getElementsByClassName("shoping__cart__total")[0].innerHTML = total.toLocaleString('vi-VN') + " VND";
+
+                }
+                document.getElementById("totalPro").innerHTML = totalPro.toString();
+                document.getElementById("totalPro1").innerHTML = totalPro.toString();
+                document.getElementById("totalMoney").innerHTML = totalMoney.toLocaleString('vi-VN') + " VND";
+                document.getElementById("payment").innerHTML = totalMoney.toLocaleString('vi-VN') + " VND";
+
+            }
+        });
+
+};

@@ -258,24 +258,29 @@
                         <% for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
                             String idQty ="qty"+ entry.getValue().getSp().getId();
                         %>
-                            <tr id="<%=entry.getValue().getSp().getId()%>">
+
+                            <tr id="<%=entry.getValue().getSp().getId()%>" class="cart-item">
+
                                 <td  class="shoping__cart__item">
                                     <img src="<%=entry.getValue().getSp().getListImg().get(0)%>" alt="">
                                     <h5><%=entry.getValue().getSp().getName()%>
                                     </h5>
+                                    <input id="idProduct" type="text" value="<%=entry.getValue().getSp().getId()%>" style="display: none">
                                 </td>
                                 <td class="shoping__cart__price">
+                                    <input class="price" type="number" value="<%=entry.getValue().getSp().getPrice()%>" style="display: none">
                                     <%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND
                                 </td>
-                                <td class="shoping__cart__quantity">
+                                <td class="shoping__cart__quantity" >
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <input id="<%=idQty%>" class="qty" name="solgmua" value="<%=entry.getValue().getSoLgMua()%>">
-<%--                                            <span class="dec qtybtn" name="solgmua" ><%=entry.getValue().getSoLgMua()%></span>--%>
+                                            <span class="dec qtybtn" onclick="updateCart('<%=entry.getValue().getSp().getId()%>">-</span>
+                                            <input id="<%=idQty%>" class="qty" name="solgmua" value="<%=entry.getValue().getSoLgMua()%>" onchange="updateCart('<%=entry.getValue().getSp().getId()%>')" >
+                                            <span class="inc qtybtn" onclick="updateCart('<%=entry.getValue().getSp().getId()%>')">+</span>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="shoping__cart__total">
+                                <td  class="shoping__cart__total">
                                     <%=entry.getValue().formatNum(entry.getValue().giaSanPhamTrongGioHang()) %> VND
                                 </td>
                                 <td class="shoping__cart__item__close" >
@@ -314,8 +319,8 @@
                 <div class="shoping__checkout">
                     <h5>Tổng cộng</h5>
                     <ul>
-                        <li>Tổng tiền <span><%= order.formatNum(order.totalMoney())%> VND</span></li>
-                        <li>Tổng thanh toán <span><%= order.formatNum(order.totalMoney())%> VND</span></li>
+                        <li>Tổng tiền <span id="totalMoney"><%= order.formatNum(order.totalMoney())%> VND</span></li>
+                        <li>Tổng thanh toán <span id="payment"><%= order.formatNum(order.totalMoney())%> VND</span></li>
                     </ul>
                     <a href="checkout.jsp" class="primary-btn">THANH TOÁN NGAY</a>
                 </div>

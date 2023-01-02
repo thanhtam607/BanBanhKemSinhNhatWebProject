@@ -60,9 +60,7 @@ public class ItemProductInCart {
         this.price = price;
     }
 
-    public void quantityUp() {
-        this.soLgMua++;
-    }
+
     public void quantityUp(int solg) {
         setSoLgMua(this.soLgMua + solg);
     }

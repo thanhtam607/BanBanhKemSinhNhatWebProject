@@ -46,7 +46,7 @@ public class AddToCart extends HttpServlet {
                         HashMap<String, ItemProductInCart> listItems = order.getData();
                         ItemProductInCart item = listItems.get(maSP);
                         if(item != null){
-                            item.quantityUp();
+                            item.quantityUp(solgmua);
                         }else{
                             item = new ItemProductInCart();
                             item.setSp(product);
