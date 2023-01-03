@@ -291,15 +291,29 @@ function addToCartI(id){
 };
 // xóa cart
 function removeCart(id){
-
     var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
     var qty = parseInt(document.getElementById('qty'+id).value);
+    var priceR = parseInt(document.getElementById("price"+id).value);
     var url = "RemoveToCart?masp="+id;
     $.ajax({
         url: url,
         type: "GET",
         success: function (){
             totalPro-=qty;
+            var totalMoney = 0;
+            var item = document.getElementsByClassName("cart-item");
+            for(var i=0; i<item.length;i++) {
+                var row = item[i];
+                var price = parseInt(row.getElementsByClassName("price")[0].value);
+                var qty1 = parseInt(row.getElementsByClassName("qty")[0].value);
+                totalMoney += (price * qty1);
+
+            }
+            totalMoney-=(priceR*qty);
+            console.log(totalMoney);
+            document.getElementById("totalMoney").innerHTML = totalMoney.toLocaleString('vi-VN') + " VND";
+            document.getElementById("payment").innerHTML = totalMoney.toLocaleString('vi-VN') + " VND";
+
             document.getElementById("totalPro").innerHTML=totalPro.toString();
             document.getElementById("totalPro1").innerHTML=totalPro.toString();
             document.getElementById(id).remove();
@@ -317,6 +331,7 @@ function removeCart(id){
                     "        </div>";
 
             }
+
         }
     });
 

@@ -276,13 +276,13 @@
                                     <input id="idProduct" type="text" value="<%=entry.getValue().getSp().getId()%>" style="display: none">
                                 </td>
                                 <td class="shoping__cart__price">
-                                    <input class="price" type="number" value="<%=entry.getValue().getSp().getPrice()%>" style="display: none">
+                                    <input id="<%="price"+entry.getValue().getSp().getId() %>" class="price" type="number" value="<%=entry.getValue().getSp().getPrice()%>" style="display: none">
                                     <%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND
                                 </td>
                                 <td class="shoping__cart__quantity" >
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <span class="dec qtybtn" onclick="updateCart('<%=entry.getValue().getSp().getId()%>">-</span>
+                                            <span class="dec qtybtn" onclick="updateCart('<%=entry.getValue().getSp().getId()%>')">-</span>
                                             <input id="<%=idQty%>" class="qty" name="solgmua" value="<%=entry.getValue().getSoLgMua()%>" onchange="updateCart('<%=entry.getValue().getSp().getId()%>')" >
                                             <span class="inc qtybtn" onclick="updateCart('<%=entry.getValue().getSp().getId()%>')">+</span>
                                         </div>
