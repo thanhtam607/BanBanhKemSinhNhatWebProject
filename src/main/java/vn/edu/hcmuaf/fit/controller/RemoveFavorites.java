@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "RemoveFavorites", value = "/RemoveFavorites")
 public class RemoveFavorites extends HttpServlet {
@@ -17,23 +18,24 @@ public class RemoveFavorites extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
+        List<Product> listHotProduct = ProductService.getHotProduct();
+        request.setAttribute("listBanChay", listHotProduct);
         FavoriteProduct favoriteProduct = (FavoriteProduct) session.getAttribute("listFavorite");
-        if(auth != null) {
+        if (auth != null) {
             if (request.getParameter("masp") != null) {
                 String maSP = request.getParameter("masp");
                 Product product = ProductService.findById(maSP);
                 if (product != null) {
-                    if(favoriteProduct.getData().containsKey(maSP)){
+                    if (favoriteProduct.getData().containsKey(maSP)) {
                         favoriteProduct.getData().remove(maSP);
                     }
                 }
-                request.getRequestDispatcher("/favorites.jsp").forward(request, response);
-            }
-        }else{
-            response.sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");
-        }
-    }
 
+            }
+        }
+            response.sendRedirect("Favorite");
+//        request.getRequestDispatcher("favorites.jsp").forward(request, response);
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

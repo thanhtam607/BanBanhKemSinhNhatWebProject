@@ -12,47 +12,69 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
-@WebServlet(name = "AddToFavorite", value = "/AddToFavorite")
+@WebServlet(name = "AddToFavorite", value = "/Favorite")
 public class AddToFavorite extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
+        List<Product> listHotProduct = ProductService.getHotProduct();
+        request.setAttribute("listBanChay", listHotProduct);
+
         if(auth != null) {
             if (request.getParameter("masp") != null) {
                 String maSP = request.getParameter("masp");
                 Product product = ProductService.findById(maSP);
+                FavoriteProduct listFavorite = new FavoriteProduct();
+                HashMap<String, ItemProductInCart> listItems = new HashMap<>();
+
+                ItemProductInCart item = new ItemProductInCart();
+                listFavorite.setData(listItems);
                 if (product != null) {
+                    item.setSp(product);
+                    item.setMasp(maSP);
+                    item.setPrice(product.getPrice());
+
                     if (session.getAttribute("listFavorite") == null) {
-                        FavoriteProduct listLove = new FavoriteProduct();
-                        HashMap<String, ItemProductInCart> listItems = new HashMap<>();
-                        ItemProductInCart item = new ItemProductInCart();
-                        item.setMasp(maSP);
-                        item.setSp(product);
-                        item.setPrice(product.getPrice());
+
                         listItems.put(maSP, item);
-                        listLove.setData(listItems);
-                        listLove.setUser(auth);
-                        session.setAttribute("listFavorite", listLove);
+                        listFavorite.setData(listItems);
+                        listFavorite.setUser(auth);
+
 
                     }else {
-                        FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");
-                        HashMap<String, ItemProductInCart> listItems = listFavorite.getData();
-                        ItemProductInCart item = new ItemProductInCart();
-                        item.setSp(product);
-                        item.setMasp(maSP);
-                        item.setPrice(product.getPrice());
+                        listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");
+                        listItems = listFavorite.getData();
                         listItems.put(maSP, item);
-                        session.setAttribute("listFavorite", listFavorite);
+
                     }
+
                 }
-                response.sendRedirect(request.getContextPath() + "/favorites.jsp");
+                session.setAttribute("listFavorite", listFavorite);
+
+
             }
-        }else{
-            response.sendRedirect(request.getContextPath() +"/favorites.jsp");
+
         }
 
+        if(session.getAttribute("listFavorite")!=null){
+            FavoriteProduct list = (FavoriteProduct) session.getAttribute("listFavorite");
+            if(list.list().isEmpty()){
+                response.sendRedirect("ListProduct");
+            }
+            else {
+                request.getRequestDispatcher("favorites.jsp").forward(request, response);
+            }
+        }
+
+        else{
+
+            response.sendRedirect("ListProduct");
+        }
+
+//        response.sendRedirect("favorites.jsp");
     }
 
     @Override

@@ -1,7 +1,10 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
-<%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
+<%@ page import="java.util.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -47,8 +50,12 @@
     </div>
     <div class="humberger__menu__cart">
         <ul>
-            <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");%>
-            <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+            <% FavoriteProduct listFavorite = (FavoriteProduct) session.getAttribute("listFavorite");
+                if(auth==null){%>
+            <li><a onclick="notLogged()"><i class="fa fa-heart"></i> <span ><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+            <% }else {%>
+            <li><a href="Favorite"><i class="fa fa-heart"></i> <span id="totalFav"><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+            <%}%>
             <%Order order = (Order) session.getAttribute("order");%>
             <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro"><%= order != null ? order.totalProduct():"0"%></span></a></li>
         </ul>
@@ -152,13 +159,16 @@
             <div class="col-lg-2">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="<%= listFavorite != null ? "/favorites.jsp":""%>"><i class="fa fa-heart"></i> <span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+                        <%if(auth==null){%>
+                        <li><a onclick="notLogged()"><i class="fa fa-heart"></i> <span ><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+                        <% }else {%>
+                        <li><a href="Favorite"><i class="fa fa-heart"></i> <span id="totalFav1"><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+
+                        <%}%>
                         <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro1"><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
                 </div>
             </div>
-
-
         </div>
         <div class="humberger__open">
             <i class="fa fa-bars"></i>
@@ -179,7 +189,6 @@
                                 <button href="ProductFilter" type="submit" class="site-btn"><i class="fa fa-search"></i> <span class="text_search">TÌM KIẾM</span></button>
                             </form>
                         </div>
-
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
                                 <i class="fa fa-phone"></i>
@@ -191,7 +200,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </section>
@@ -206,7 +214,7 @@
                         <h2>Yêu thích</h2>
                         <div class="breadcrumb__option">
                             <a href="./Index">Trang Chủ</a>
-                            
+
                             <span>Yêu thích</span>
                         </div>
                     </div>
@@ -225,22 +233,22 @@
                         <div class="sidebar__item">
                             <h4>Các Loại Bánh</h4>
                             <ul class="slidebar__loaibanh">
-                                <li class="text__loaibanh"><a class="text__loaibanh__active" href="/ListProduct">Tất cả</a></li>
-                                <%
-                                    List<LoaiBanh> ListType = ProductService.getListType();
+                                <li class="text__loaibanh"><a href="./ListProduct">Tất cả</a></li>
+                                <%List<LoaiBanh> ListType = ProductService.getListType();
                                     for(LoaiBanh lb: ListType){%>
-                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getTenLB()%>&filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
+                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getTenLB()%> &filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
                                 <%}%>
+
                             </ul>
                         </div>
                         <div class="sidebar__item">
-                            <h4>Giá (VNĐ)</h4>
+                            <h4>Giá (VND)</h4>
                             <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                      data-min="50000" data-max="1000000">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                    <%--                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>--%>
-                                    <%--                                    <span tab./Index="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>--%>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all vnd-state-default"></span>
                                 </div>
                                 <div class="range-slider">
                                     <div class="price-input">
@@ -323,23 +331,15 @@
                         <div class="section-title product__discount__title">
                             <h2>Danh mục yêu thích</h2>
                         </div>
-                       
                     </div>
                     <div class="filter__item filter__item__page__detail">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
-                                <div class="filter__sort ">
-                                    <span>Sắp Xếp</span>
-                                    <select>
-                                        <option value="0">Mặc định</option>
-                                        <option value="0">Giá từ cao tới thấp</option>
-                                        <option value="0">Giá từ thấp đến cao</option>
-                                    </select>
-                                </div>
+
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span> Sản phẩm</h6>
+                                    <h6><span id="totalFav2"><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span> Sản phẩm</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -349,10 +349,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <% for(ItemProductInCart fav: listFavorite.list()){
+                    <div class="row" id="favorites">
+
+                        <%
+                            if( listFavorite.list().isEmpty()||listFavorite==null){%>
+                        <div class="col-lg-4 col-md-6 col-sm-6"></div>
+                           <%}else{
+                            for(ItemProductInCart fav: listFavorite.list()){
+                                String id = "fav"+fav.getSp().getId();
                         %>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6" id="<%=id%>">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<%=fav.getSp().getListImg().get(0)%>">
                                     <ul class="product__item__pic__hover">
@@ -371,8 +377,9 @@
                                 </div>
                             </div>
                         </div>
-                        <%}%>
+
                     </div>
+                    <%}}%>
 <%--                    <div class="product__pagination">--%>
 <%--                        <a href="#">1</a>--%>
 <%--                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>--%>
@@ -393,9 +400,9 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </body>

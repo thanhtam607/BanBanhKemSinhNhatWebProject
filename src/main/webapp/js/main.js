@@ -377,16 +377,23 @@ function updateCart(id){
        add to favorites
    --------------------- */
 function addToFav(id){
-    var url = "AddToFavorite?masp="+ id;
+    var url = "Favorite?masp="+ id;
+    console.log(id);
+    var totalFav = parseInt(document.getElementById("totalFav").innerHTML);
     $.ajax({
         url: url,
         type: "GET",
         success: function () {
+            totalFav+=1;
             Swal.fire({
                 text:'Sản phẩm đã được thêm vào danh mục yêu thích!',
                 icon: 'success',
                 confirmButtonColor: '#ff96b7'});
+            document.getElementById("totalFav").innerHTML=totalFav.toString();
+            document.getElementById("totalFav1").innerHTML=totalFav.toString();
+            document.getElementById("totalFav2").innerHTML=totalFav.toString();
         }
+
     });
 
 };
@@ -394,14 +401,17 @@ function addToFav(id){
 
 function removeToFav(id){
     var url = "RemoveFavorites?masp="+ id;
+    var totalFav = parseInt(document.getElementById("totalFav").innerHTML);
     $.ajax({
         url: url,
         type: "GET",
         success: function () {
-            Swal.fire({
-                text:'Sản phẩm đã được xóa khỏi danh mục yêu thích!',
-                icon: 'error',
-                confirmButtonColor: '#ff96b7'});
+            totalFav-=1;
+
+            document.getElementById("fav"+id).remove();
+            document.getElementById("totalFav").innerHTML=totalFav.toString();
+            document.getElementById("totalFav1").innerHTML=totalFav.toString();
+            document.getElementById("totalFav2").innerHTML=totalFav.toString();
         }
     });
 
