@@ -265,6 +265,19 @@ function notLogged(){
         }
     );
 };
+function removeAllCart(){
+    Swal.fire({
+        text:'Bạn có chắc muốn xóa tất cả sản phẩm trong giỏ hàng?',
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText:'Hủy',
+        confirmButtonText: 'Xác nhận',
+        confirmButtonColor: '#ff96b7'}).then((result) => {
+            if (result.isConfirmed) {
+                removeAll()}
+        }
+    );
+};
 
 /*-------------------
    addToCart
@@ -333,6 +346,39 @@ function removeCart(id){
             }
 
         }
+    });
+
+
+}
+function removeAll(){
+    var item = document.getElementsByClassName("cart-item");
+    for(var i=0; i<item.length;i++) {
+        var row = item[i];
+        var id = row.getElementsByClassName("idPro")[0].value;
+        removeCart(id);
+    }
+    $.ajax({
+        success: function (){
+
+
+            document.getElementById("totalPro").innerHTML="0";
+            document.getElementById("totalPro1").innerHTML="0";
+
+            document.getElementById("container-cart").remove();
+            document.getElementById("shoping-cart").outerHTML=" <div class=\"cartEmpty\" name=\"cartEmpty\">\n" +
+                    "            <img src=\"./img/null.png\" alt=\"Giỏ hàng của bạn đang trống\" class=\"d-block m-auto\" width=\"250\" />\n" +
+                    "            <p class=\"text-center font-weight-bold\" style=\"opacity: .6;\">Giỏ hàng của bạn trống</p>\n" +
+                    "        </div>\n" +
+                    "        <div class=\"col-lg-12\">\n" +
+                    "            <div class=\"shoping__cart__btns\" style=\"text-align: center\">\n" +
+                    "                <a href=\"./ListProduct\" class=\"primary-btn cart-btn\" >Xem thêm sản phẩm </a>\n" +
+                    "\n" +
+                    "            </div>\n" +
+                    "        </div>";
+
+            }
+
+
     });
 
 

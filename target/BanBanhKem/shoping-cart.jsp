@@ -247,11 +247,13 @@
 
             </div>
         </div>
-        <%}else{%>
-        <div  class="row">
-
+        <%}else {%>
+        <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__table">
+                    <div style="width: 95%; text-align: right; margin-bottom: 20px">
+                    <button class="btn " onclick="removeAllCart()" style="background-color: #ff96b7; color: white;text-decoration: underline; font-style: italic; font-weight: 500;">Xóa tất cả</button>
+                    </div>
                     <table>
                         <thead>
                         <tr>
@@ -266,14 +268,12 @@
                         <% for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
                             String idQty ="qty"+ entry.getValue().getSp().getId();
                         %>
-
                             <tr id="<%=entry.getValue().getSp().getId()%>" class="cart-item">
-
                                 <td  class="shoping__cart__item">
                                     <img src="<%=entry.getValue().getSp().getListImg().get(0)%>" alt="">
                                     <h5><%=entry.getValue().getSp().getName()%>
                                     </h5>
-                                    <input id="idProduct" type="text" value="<%=entry.getValue().getSp().getId()%>" style="display: none">
+                                    <input class="idPro" id="idProduct" type="text" value="<%=entry.getValue().getSp().getId()%>" style="display: none">
                                 </td>
                                 <td class="shoping__cart__price">
                                     <input id="<%="price"+entry.getValue().getSp().getId() %>" class="price" type="number" value="<%=entry.getValue().getSp().getPrice()%>" style="display: none">
@@ -304,6 +304,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
