@@ -477,3 +477,97 @@ function removeToFav(id){
     });
 
 };
+/*-------------------
+   check email
+  --------------------- */
+function  checkEmail(x) {
+    var atposition = x.indexOf("@");
+    var dotposition = x.lastIndexOf(".");
+    if (atposition < 1 || dotposition < (atposition + 2)
+        || (dotposition + 2) >= x.length) {
+        return false;
+    }
+        return true;
+}
+/*-------------------
+   forgot password
+  --------------------- */
+async function forgotPassword() {
+    const {value: email} = await Swal.fire({
+        title: 'Quên mật khẩu',
+        input: 'email',
+        inputLabel: 'Email của bạn:',
+        inputPlaceholder: 'Nhập email của bạn...',
+        confirmButtonColor: '#ff96b7',
+        showCancelButton: true,
+        cancelButtonText:'Hủy',
+        confirmButtonText:'Tiếp tục',
+        inputValidator: (value) => {
+            return new Promise((resolve) => {
+                if (!checkEmail(value)) {
+                    resolve('Email không hợp lệ!')
+
+                } else {
+                    resolve();
+                }
+            })
+        }
+    })
+    if(email){
+        var url="ForgotPassword?email="+ email.toString();
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: async function (response) {
+                if (parseInt(response) ===1) {
+                    document.getElementById("insertTextHere").innerText = "Tài khoản không tồn tại!";
+                }
+                else {
+                    const {value: code} = await Swal.fire({
+                        title: 'Xác minh tài khoản',
+                        input: 'number',
+                        inputLabel: 'Mã xác nhận',
+                        inputPlaceholder: 'Nhập mã xác nhận...',
+                        confirmButtonColor: '#ff96b7',
+                        confirmButtonText:'Xác nhận',
+                    })
+                    checkCode(parseInt(code), parseInt(response), email);
+
+                }
+            }
+        });
+
+    }
+
+}
+
+async function checkCode(c1, c2, email) {
+    if (c1 === c2) {
+        const {value: pass} = await Swal.fire({
+            title: 'Đặt lại mật khẩu',
+            input: 'password',
+            inputLabel: 'Mật khẩu',
+            inputPlaceholder: 'Nhập mật khẩu mới...',
+            confirmButtonColor: '#ff96b7',
+            confirmButtonText: 'Xong',
+        })
+        if(pass){
+                var url = "UpdatePassword?password="+pass+"&email="+ email;
+            $.ajax({
+                url:url ,
+                type: "GET",
+                success: function () {
+                    Swal.fire({
+                        text:'Đổi mật khẩu thành công!',
+                        icon: 'success',
+                        confirmButtonColor: '#ff96b7'});
+                }
+            });
+        }
+    }else{
+        Swal.fire({
+            text:'Mã xác nhận không đúng!',
+            icon: 'error',
+            confirmButtonColor: '#ff96b7'});
+    }
+}
