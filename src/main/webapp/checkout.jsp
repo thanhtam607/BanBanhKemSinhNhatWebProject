@@ -1,6 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -50,7 +52,7 @@
             <%if(auth==null){%>
             <li><a onclick="notLogged()"><i class="fa fa-heart"></i> <span ><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
             <% }else {%>
-            <li><a href="Favorite"><i class="fa fa-heart"></i> <span id="totalFav1"><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
+            <li><a href="Favorite"><i class="fa fa-heart"></i> <span id="totalFav"><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
 
             <%}%>
             <%Order order = (Order) session.getAttribute("order");%>
@@ -235,7 +237,7 @@
             </div>
             <div class="checkout__form">
                 <h4>Thông Tin Thanh Toán</h4>
-                <form action="#">
+                <form action="/BanBanhKemSinhNhatWebProject/AddNewOrder" method="get">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
@@ -318,19 +320,26 @@
                                 <h4>Đơn hàng</h4>
                                 <div class="checkout__order__products">Sản Phẩm <span>Tổng</span></div>
                                 <ul>
-                                    <li>Bánh Cánh Đồng Hoa <span>450,000 VNĐ</span></li>
-                                    <li>Bánh kem sữa chua...<span>450,000 VNĐ</span></li>
-                                    <li>Bánh dâu tây kem sữa...<span>450,000 VNĐ</span></li>
+                                    <% for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
+                                        String idQty ="qty"+ entry.getValue().getSp().getId();
+                                    %>
+                                    <li>
+                                        <span style="float: left" class="breaklineNamePro"><%=entry.getValue().getSp().getName()%> </span>
+                                        <span ><%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND</span>
+                                    </li>
+                                    <%}%>
+<%--
                                 </ul>
-                                <div class="checkout__order__subtotal">Tạm tính <span>1,350,000 VNĐ</span></div>
-                                <div class="checkout__order__total">Tổng <span>1,350,000 VNĐ</span></div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="acc-or">
-                                        Tạo Tài Khoản?
-                                        <input type="checkbox" id="acc-or">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
+                                <div class="checkout__order__subtotal">Tạm tính <span><%= order.formatNum(order.totalMoney())%> VND</span></div>
+                                <div class="checkout__order__total">Tổng <span><%= order.formatNum(order.totalMoney())%> VND</span></div>
+
+<%--                                <div class="checkout__input__checkbox">--%>
+<%--                                    <label for="acc-or">--%>
+<%--                                        Tạo Tài Khoản?--%>
+<%--                                        <input type="checkbox" id="acc-or">--%>
+<%--                                        <span class="checkmark"></span>--%>
+<%--                                    </label>--%>
+<%--                                </div>--%>
 
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
@@ -346,7 +355,7 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <button type="submit" class="site-btn">ĐẶT HÀNG</button>
+                                <button type="submit" class="site-btn" >ĐẶT HÀNG</button>
                             </div>
                         </div>
                     </div>

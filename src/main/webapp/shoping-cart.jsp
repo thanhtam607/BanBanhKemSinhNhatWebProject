@@ -252,7 +252,7 @@
             <div class="col-lg-12">
                 <div class="shoping__cart__table">
                     <div style="width: 100%; text-align: right; margin-bottom: 20px">
-                    <button class="btn" onclick="removeAllCart()" style="background-color: #ff96b7; color: white;text-decoration: underline; font-style: italic; font-weight: 500;">
+                    <button class="btn" onclick="removeAllCart()" style="background-color: #ff96b7; color: white; font-style: italic; font-weight: 500;">
                         Xóa tất cả
                     </button>
                     </div>

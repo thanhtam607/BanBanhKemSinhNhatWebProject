@@ -13,11 +13,24 @@ public class Order {
     private String buyDate;
     private double priceTotal;
     private String note;
+    private int trangthai;
     private HashMap<String, ItemProductInCart> data;
     public Order() {
 
 
     }
+
+    public Order(String id, User user, String buyDate, double priceTotal, String note,
+                 int trangthai, HashMap<String, ItemProductInCart> data) {
+        this.id = id;
+        this.user = user;
+        this.buyDate = buyDate;
+        this.priceTotal = priceTotal;
+        this.note = note;
+        this.trangthai = trangthai;
+        this.data = data;
+    }
+
     public Order(HashMap<String, ItemProductInCart> data) {
         this.data = data;
     }
@@ -34,21 +47,6 @@ public class Order {
         this.data = data;
     }
 
-//    public int put(ItemProductInCart item) {
-//        if (data.containsKey(item.getId())) {
-//            data.get(item.getId()).quantityUp();
-//        } else {
-//            data.put(item.getId(), item);
-//        }
-//        return data.get(item.getId()).getSolgMua();
-//    }
-
-//    public int put(String id, int solgMua) {
-//        if (data.containsKey(id)) {
-//            data.get(id).quantityUp(solgMua);
-//        }
-//        return data.get(id).getSolgMua();
-//    }
 
     public boolean remove(String id) {
         return data.remove(id) == null;
@@ -98,6 +96,14 @@ public class Order {
         this.note = note;
     }
 
+    public int getTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(int trangthai) {
+        this.trangthai = trangthai;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -119,6 +125,6 @@ public class Order {
         for (ItemProductInCart i: list()){
             total+= i.getSoLgMua();
         }
-        return total ;
+        return total;
     }
 }

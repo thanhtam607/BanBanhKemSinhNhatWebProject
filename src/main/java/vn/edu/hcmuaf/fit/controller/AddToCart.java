@@ -39,6 +39,7 @@ public class AddToCart extends HttpServlet {
                         listItems.put(maSP, item);
                         order.setData(listItems);
                         order.setUser(auth);
+                        order.setTrangthai(0);
                         session.setAttribute("order", order);
 
                     } else {
