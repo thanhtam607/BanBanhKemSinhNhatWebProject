@@ -428,13 +428,13 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <%session.setAttribute("filter", request.getParameter("filter"));%>
-<%session.setAttribute("min", request.getParameter("pricemin"));%>
-<%session.setAttribute("max", request.getParameter("pricemax"));%>
+<%session.setAttribute("pricemin", request.getParameter("pricemin"));%>
+<%session.setAttribute("pricemax", request.getParameter("pricemax"));%>
 <%session.setAttribute("search", request.getParameter("search"));%>
 <script>
 
     function sortProduct(){
-        var sort = document.getElementById("sort").value ;
+        var sort = document.getElementById("sortValue").value ;
 
 
         var urlP= "Sort?sortValue=" + sort;
@@ -452,7 +452,7 @@
 </script>
 <script>
     function changeHref(index){
-        var sort = document.getElementById("sort").value ;
+        var sort = document.getElementById("sortValue").value ;
         var key = document.getElementById("search").value;
        var url = "ProductFilter?title=<%=request.getParameter("title")%>&filter=<%=request.getParameter("filter")%>&sortValue="+sort+"&pageName="+index+"&search="+ key+"&pricemin=" + <%=request.getParameter("pricemin")%> +"&pricemax=" + <%=request.getParameter("pricemax")%>;
         location.href=url;

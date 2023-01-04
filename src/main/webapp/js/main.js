@@ -325,7 +325,7 @@ function removeCart(id){
             totalMoney-=(priceR*qty);
             console.log(totalMoney);
             document.getElementById("totalMoney").innerHTML = totalMoney.toLocaleString('vi-VN') + " VND";
-            document.getElementById("payment").innerHTML = totalMoney.toLocaleString('vi-VN') + " VND";
+
 
             document.getElementById("totalPro").innerHTML=totalPro.toString();
             document.getElementById("totalPro1").innerHTML=totalPro.toString();

@@ -23,36 +23,34 @@ public class Sort extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(true);
-        String filter = session.getAttribute("filter").toString();
-        List<Product> listFilter = ProductService.findBySize(filter);
 
 
         String sort = request.getParameter("sortValue");
 
-        if(listFilter.isEmpty()){
-            listFilter = ProductService.findByType(filter);
-        }
-        if(listFilter.isEmpty()){
-            listFilter = ProductService.findByName(session.getAttribute("search").toString());
+        List<Product> listFilter = ProductService.getData();
 
-        }
-        if(listFilter.isEmpty()){
+        if(session.getAttribute("filter")!=null){
+            String filter = session.getAttribute("filter").toString();
+            listFilter = ProductService.findBySize(filter);
+            if(listFilter.isEmpty()){
+                listFilter = ProductService.findByType(filter);
 
-            String p_min = session.getAttribute("pricemin").toString();
-            String p_max = session.getAttribute("pricemax").toString();
-
-            int min=0;
-            int max=10000000;
-            if(p_min != null){
-                min = Integer.parseInt(p_min);
             }
-            if( p_max != null) {
-                max=Integer.parseInt(p_max);
-            }
-
-            listFilter = ProductService.filterByPrice(min, max);
         }
+        if(session.getAttribute("filter")==null) {
+            if (session.getAttribute("search")!= null) {
+                listFilter = ProductService.findByName(session.getAttribute("search").toString());
 
+            }
+            if (session.getAttribute("search")== null){
+
+                if (session.getAttribute("pricemin") != null && session.getAttribute("pricemax") != null){
+                    String p_min = session.getAttribute("pricemin").toString();
+                    String p_max = session.getAttribute("pricemax").toString();
+                    listFilter = ProductService.filterByPrice(Integer.parseInt(p_min), Integer.parseInt(p_max));
+                }
+            }
+        }
         if(sort != null ){
             if(sort.equals("Giá từ thấp đến cao") ) {
 
@@ -76,11 +74,7 @@ public class Sort extends HttpServlet {
         request.setAttribute("endPageFt", endPageFilter);
         request.setAttribute("tagPage", page);
         request.setAttribute("sortValue", sort);
-
         User auth = (User) session.getAttribute("auth");
-
-
-
         PrintWriter out = response.getWriter();
         for(Product p: listF) {
             String img = p.getListImg().get(0);
@@ -112,5 +106,7 @@ public class Sort extends HttpServlet {
             );
         }
 
+
     }
+
 }

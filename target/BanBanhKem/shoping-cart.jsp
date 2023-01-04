@@ -251,8 +251,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__table">
-                    <div style="width: 95%; text-align: right; margin-bottom: 20px">
-                    <button class="btn " onclick="removeAllCart()" style="background-color: #ff96b7; color: white;text-decoration: underline; font-style: italic; font-weight: 500;">Xóa tất cả</button>
+                    <div style="width: 100%; text-align: right; margin-bottom: 20px">
+                    <button class="btn" onclick="removeAllCart()" style="background-color: #ff96b7; color: white;text-decoration: underline; font-style: italic; font-weight: 500;">
+                        Xóa tất cả
+                    </button>
                     </div>
                     <table>
                         <thead>
@@ -306,31 +308,22 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <div class="shoping__cart__btns">
                     <a href="./ListProduct" class="primary-btn cart-btn">Xem thêm sản phẩm </a>
 
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Mã giảm giá</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Nhập mã giảm giá của bạn...">
-                            <button type="submit" class="site-btn">Xong</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+
 
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Tổng cộng</h5>
+                    <hr>
                     <ul>
-                        <li>Tổng tiền <span id="totalMoney"><%= order.formatNum(order.totalMoney())%> VND</span></li>
-                        <li>Tổng thanh toán <span id="payment"><%= order.formatNum(order.totalMoney())%> VND</span></li>
+                        <li>Tổng thanh toán:<span id="totalMoney"><%= order.formatNum(order.totalMoney())%> VND</span></li>
                     </ul>
+                    <hr>
                     <a href="checkout.jsp" class="primary-btn">THANH TOÁN NGAY</a>
                 </div>
             </div>
