@@ -1,4 +1,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.receipt" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -61,7 +63,7 @@
 			</div>
 		</div>
 		<div class="navbar-nav w-100">
-			<a href="admin-web.jsp" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+			<a href="./ListReceipt_Admin" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
 			<a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
 			<a href="customers.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
 			<a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Blog</a>
@@ -78,7 +80,7 @@
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-pink navbar-dark sticky-top px-4 py-0">
-                <a href="admin-web.jsp" class="navbar-brand d-flex d-lg-none me-4">
+                <a href="./ListReceipt_Admin" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">
@@ -181,14 +183,14 @@
                 <div class="bg-pink text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Bán gần đây</h6>
-                        <a href="">Xem tất cả</a>
+                        <a href="./ListReceipt_full_Admin">Xem tất cả</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
                                 <tr class="text-black">
                                     <th scope="col">STT</th>
-                                    <th scope="col">Ngày</th>
+                                    <th scope="col">Ngày đặt hàng</th>
                                     <th scope="col">Khách hàng</th>
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Thành tiền</th>
@@ -196,72 +198,24 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <% List<receipt> receiptList = (List<receipt>) request.getAttribute("listreceipt");
+                                for(int i = 0; i < 5; i++){
+                                    receipt rc = receiptList.get(i);%>
                                 <tr>
-                                    <td>1</td>
-                                    <td>22/10/22</td>
-                                    <td>Thanh Thùy</td>
-                                    <td>TP.HCM</td>
-                                    <td>500,000</td>
+                                    <td><%=i+1%></td>
+                                    <td><%=rc.getDate()%></td>
+                                    <td><%=rc.getName()%></td>
+                                    <td><%=rc.getAddress()%></td>
+                                    <td><%=rc.formatNum(rc.getTotal())%> VND</td>
                                     
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>22/10/22</td>
-                                    <td>Thanh Thùy</td>
-                                    <td>TP.HCM</td>
-                                    <td>500,000</td>
-                                  
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>22/10/22</td>
-                                    <td>Thanh Thùy</td>
-                                    <td>TP.HCM</td>
-                                    <td>500,000</td>
-                                   
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>22/10/22</td>
-                                    <td>Thanh Thùy</td>
-                                    <td>TP.HCM</td>
-                                    <td>500,000</td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>22/10/22</td>
-                                    <td>Thanh Thùy</td>
-                                    <td>TP.HCM</td>
-                                    <td>500,000</td>
-                               
                                 </tr>
                             </tbody>
+                            <% } %>
                         </table>
                     </div>
                 </div>
             </div>
             <!-- Recent Sales End -->
-
-            <!-- Sales Chart Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-xl-12">
-                        <div class="bg-pink text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Doanh thu theo tháng</h6>
-                            </div>
-                            <canvas id="worldwide-sales"></canvas>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            <!-- Sales Chart End -->
-
-
-           
-
 
             <!-- Widgets Start -->
           
