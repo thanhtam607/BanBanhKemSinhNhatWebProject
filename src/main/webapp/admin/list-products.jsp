@@ -1,7 +1,10 @@
-<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.ProductDetails" %>
 <!DOCTYPE html>
-<html lang="en">
-
+<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
+<html lang="xzz">
+<meta http-equiv="Content-Type" charset="UTF-8">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -78,10 +81,10 @@
 			<a href="admin-web.jsp" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
 			<a href="./ListProduct_Admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
 			<a href="customers.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-            <a href="list-blogs.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Blog</a>
+            <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Blog</a>
 			<a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
 			<a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm blog</a>
-            <a href="../index.jsp" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
+            <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
 			<!--  -->
 		</div>
 	</nav>
@@ -96,8 +99,8 @@
                 <div class="col-12">
                     <div class="main__title">
                         <h2>Danh sách sản phẩm</h2>
-
-                        <span class="main__title-stat">100 sản phẩm</span>
+                        <% List<Product> productList = (List<Product>) request.getAttribute("listpro");%>
+                        <span class="main__title-stat"><%=productList.size()%> sản phẩm</span>
 
                         <div class="main__title-wrap">
                             <!-- filter sort -->
@@ -144,44 +147,43 @@
                                     <th>Ngày sản xuất</th>
                                     <th>Ngày hết hạn</th>
                                     <th>Tồn kho</th>
-                                    <th>Ngày tạo</th>
                                     <th>Tùy chọn</th>
                                 </tr>
                             </thead>
-
+                             <% for(int i = 0; i < productList.size(); i++) {
+                                  Product pro = productList.get(i);%>
                             <tbody>
-                               
                                 <tr>
                                     <td>
-                                        <div class="main__table-text">1</div>
+                                        <div class="main__table-text"><%=i+1%></div>
                                     </td>
                                     <td>
                                         <div class="main__user">
                                             <div class="main__meta">
-                                                <h3>Bánh cánh đồng hoa</h3>
+                                                <h3><%=pro.getName()%></h3>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text">Bánh hoa</div>
+                                        <div class="main__table-text"><%=pro.getLoaiBanh()%></div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text">450000</div>
+                                        <div class="main__table-text"><%=pro.formatNum(pro.getPrice())%></div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text">1</div>
+                                        <div class="main__table-text"><%=pro.getComments().size()%></div>
+                                    </td>
+                                    <%List<ProductDetails> Listpd = pro.getListpd();
+                                        for(ProductDetails pds : Listpd){%>
+                                    <td>
+                                        <div class="main__table-text"><%=pds.getMfg()%></div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text">6/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">9/10/2022</div>
+                                        <div class="main__table-text"><%=pds.getOod()%></div>
                                         <td>
-                                            <div class="main__table-text main__table-text--green">15</div>
+                                            <div class="main__table-text main__table-text--green"><%=pds.getInventory()%></div>
                                         </td>
-                                        <td>
-                                            <div class="main__table-text">6/10/2022</div>
-                                        </td>
+                                    <% } %>
                                         <td>
                                             <div class="main__table-btns">
                                                 <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
@@ -195,431 +197,9 @@
                                                 </a>
                                             </div>
                                     </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">2</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__user">
-                                              
-                                            <div class="main__meta">
-                                                <h3>Bánh cánh đồng hoa</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">Bánh hoa</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">450000</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">1</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">6/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">9/10/2022</div>
-                                        <td>
-                                            <div class="main__table-text main__table-text--green">15</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">6/10/2022</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
-                                                <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </div>
-                                    </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">3</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__user">
-                                              
-                                            <div class="main__meta">
-                                                <h3>Bánh cánh đồng hoa</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">Bánh hoa</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">450000</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">1</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">6/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">9/10/2022</div>
-                                        <td>
-                                            <div class="main__table-text main__table-text--green">15</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">6/10/2022</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
-                                                <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </div>
-                                    </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">4</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__user">
-                                              
-                                            <div class="main__meta">
-                                                <h3>Bánh cánh đồng hoa</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">Bánh hoa</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">450000</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">1</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">6/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">9/10/2022</div>
-                                        <td>
-                                            <div class="main__table-text main__table-text--green">15</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">6/10/2022</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
-                                                <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </div>
-                                    </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">5</div>
-                                    </td> 
-                                    <td>
-                                        <div class="main__user">
-                                              
-                                            <div class="main__meta">
-                                                <h3>Bánh cánh đồng hoa</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">Bánh hoa</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">450000</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">1</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">6/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">9/10/2022</div>
-                                        <td>
-                                            <div class="main__table-text main__table-text--green">15</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">6/10/2022</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
-                                                <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </div>
-                                    </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">6</div>
-                                    </td> 
-                                    <td>
-                                        <div class="main__user">
-                                              
-                                            <div class="main__meta">
-                                                <h3>Bánh cánh đồng hoa</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">Bánh hoa</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">450000</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">1</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">6/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">9/10/2022</div>
-                                        <td>
-                                            <div class="main__table-text main__table-text--green">15</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">24/10/2022</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
-                                                <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </div>
-                                    </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">7</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__user">
-                                          
-                                            <div class="main__meta">
-                                                <h3>Bánh cánh đồng hoa</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">Bánh hoa</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">450000</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">1</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">6/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">9/10/2022</div>
-                                        <td>
-                                            <div class="main__table-text main__table-text--green">15</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">6/10/2022</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
-                                                <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </div>
-                                    </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">8</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__user">
-                                            <div class="main__meta">
-                                                <h3>Bánh cánh đồng hoa</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">Bánh hoa</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">450000</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">1</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">6/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">9/10/2022</div>
-                                        <td>
-                                            <div class="main__table-text main__table-text--green">15</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">6/10/2022</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
-                                                <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </div>
-                                    </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">9</div>
-                                    </td>   
-                                    <td>
-                                        <div class="main__user">
-                                              
-                                            <div class="main__meta">
-                                                <h3>Bánh cánh đồng hoa</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">Bánh hoa</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">450000</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">1</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">6/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">9/10/2022</div>
-                                        <td>
-                                            <div class="main__table-text main__table-text--green">15</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">6/10/2022</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
-                                                <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </div>
-                                    </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">10</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__user">
-                                          
-                                            <div class="main__meta">
-                                                <h3>Bánh cánh đồng hoa</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">Bánh hoa</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">450000</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">1</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">6/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">9/10/2022</div>
-                                        <td>
-                                            <div class="main__table-text main__table-text--green">15</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">6/10/2022</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
-                                                <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </div>
-                                    </td>
-                                    
                                 </tr>
                             </tbody>
+                            <% } %>
                         </table>
                     </div>
                 </div>
@@ -628,7 +208,7 @@
                 <!-- paginator -->
                 <div class="col-12">
                     <div class="paginator-wrap">
-                        <span>10/100 sản phẩm</span>
+                        <span><%=productList.size()%>/<%=productList.size()%> sản phẩm</span>
 
                         <ul class="paginator">
                             <li class="paginator__item paginator__item--prev">

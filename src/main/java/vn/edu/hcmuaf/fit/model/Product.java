@@ -14,11 +14,12 @@ public class Product {
     List<String> listImg;
     int price;
     List<Comment> comments;
+    List<ProductDetails> listpd;
     public Product() {
     }
 
 
-    public Product(String id, String name, String loaiBanh, List<String> kichThuoc, String khoiLuong, String moTa, String noiDung, List<String> listImg, int price, List<Comment> comments) {
+    public Product(String id, String name, String loaiBanh, List<String> kichThuoc, String khoiLuong, String moTa, String noiDung, List<String> listImg, int price, List<Comment> comments,  List<ProductDetails> listpd) {
         this.id = id;
         this.name = name;
         this.loaiBanh = loaiBanh;
@@ -29,6 +30,7 @@ public class Product {
         this.listImg = listImg;
         this.price = price;
         this.comments = comments;
+        this.listpd =listpd;
     }
 
 
@@ -93,6 +95,13 @@ public class Product {
         return comments;
     }
 
+    public List<ProductDetails> getListpd() {
+        return listpd;
+    }
+
+    public void setListpd(List<ProductDetails> listpd) {
+        this.listpd = listpd;
+    }
 
     @Override
     public String toString() {
