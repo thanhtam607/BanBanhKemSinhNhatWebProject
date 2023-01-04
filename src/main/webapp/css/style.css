@@ -3830,3 +3830,11 @@ font-size: 24px;
 		display: none;
 	}
 }
+/*ten sp xuong dong*/
+.breaklineNamePro{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+	width: 180px;
+}

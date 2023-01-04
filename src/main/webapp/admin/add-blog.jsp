@@ -64,7 +64,7 @@
            <!-- Sidebar Start -->
            <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-pink navbar-dark">
-              
+
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
                         <i class="fa fa-user icon__user"></i>

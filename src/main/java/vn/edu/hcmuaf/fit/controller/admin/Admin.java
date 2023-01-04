@@ -18,7 +18,7 @@ public class Admin extends HttpServlet {
             response.sendRedirect("../signin.jsp");
             return;
         }
-        response.sendRedirect("/BanBanhKemSinhNhatWebProject/admin/admin-web.jsp");
+        response.sendRedirect("/BanBanhKemSinhNhatWebProject/admin/ListReceipt_Admin");
     }
 
     @Override
