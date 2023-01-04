@@ -1,3 +1,5 @@
+<%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,12 +78,12 @@
 		</div>
 		<div class="navbar-nav w-100">
 			<a href="admin-web.jsp" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
-			<a href="list-products.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
+			<a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
 			<a href="customers.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-			<a href="./list-blogs.html" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Blog</a>
+			<a href="./ListBlog-admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Blog</a>
 			<a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
 			<a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm blog</a>
-            <a href="../index.jsp" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
+            <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
 			<!--  -->
 		</div>
 	</nav>
@@ -89,6 +91,7 @@
     <!-- Sidebar End -->
 
     <!-- main content -->
+    <% List<Blog> blogList = (List<Blog>) request.getAttribute("list");%>
     <main class="main bg-white">
         <div class="container-fluid bg-white">
             <div class="row">
@@ -96,9 +99,7 @@
                 <div class="col-12">
                     <div class="main__title">
                         <h2>Danh sách tin tức</h2>
-
-                        <span class="main__title-stat">4</span>
-
+                        <span class="main__title-stat"><%=blogList.size()%></span>
                         <div class="main__title-wrap">
                             <!-- filter sort -->
                             <div class="filter" id="filter__sort">
@@ -144,29 +145,30 @@
                                     <th>Tùy chọn</th>
                                 </tr>
                             </thead>
-
+   <% for (int i = 0; i < blogList.size(); i++) {
+   Blog blog = blogList.get(i) ; %>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <div class="main__table-text">1</div>
+                                        <div class="main__table-text"><%=i+1%></div>
                                     </td>
                                     <td>
                                         <div class="main__user">
                                            
                                             <div class="main__meta">
-                                                <h3>Giải mã sức hút của bánh kem hiện đại</h3>
+                                                <h3><%=blog.getCategory()%></h3>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text">Đời sống</div>
+                                        <div class="main__table-text"><%=blog.getListdanhmuc().get(0)%></div>
                                     </td>
                                     
                                     <td>
                                         <div class="main__table-text main__table-text--green">Đã phê duyệt</div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text">22/10/2022</div>
+                                        <div class="main__table-text"><%=blog.getDate()%></div>
                                     </td>
                                     <td>
                                         <div class="main__table-btns">
@@ -182,118 +184,8 @@
                                         </div>
                                 </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">2</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__user">
-                                            
-                                            <div class="main__meta">
-                                                <h3>Tổng hợp cách bảo quản bánh kem cực đơn giản</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">Đời sống</div>
-                                    </td>
-                                    
-                                    <td>
-                                        <div class="main__table-text main__table-text--green">Đã phê duyệt</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">22/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-btns">
-                                            <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                <i class="fa fa-lock"></i>
-                                            </a>
-                                            <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </div>
-                                </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">3</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__user">
-                                            
-                                            <div class="main__meta">
-                                                <h3>Chọn bánh kem cho những ngày kỷ niệm ý nghĩa</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">Kỷ niệm</div>
-                                    </td>
-                                    
-                                    <td>
-                                            <div class="main__table-text main__table-text--green">Đã phê duyệt</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">22/10/2022</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
-                                                <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </div>
-                                    </td>
-                                    
-                                </tr>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="main__table-text">4</div>
-                                </td>
-                                <td>
-                                    <div class="main__user">
-                                        
-                                        <div class="main__meta">
-                                            <h3>Tại sao sinh nhật lại quan trọng đến thế?</h3>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main__table-text">Đời sống</div>
-                                </td>
-                                
-                                <td>
-                                        <div class="main__table-text main__table-text--green">Đã phê duyệt</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">22/10/2022</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-btns">
-                                            <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                <i class="fa fa-lock"></i>
-                                            </a>
-                                            <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </div>
-                                </td>
-                                
-                            </tr>
                             </tbody>
+                            <% } %>
                         </table>
                     </div>
                 </div>
@@ -302,7 +194,7 @@
                 <!-- paginator -->
                 <div class="col-12">
                     <div class="paginator-wrap">
-                        <span>4/4 Bài viết</span>
+                        <span><%=blogList.size()%>/<%=blogList.size()%> Bài viết</span>
 
                         <ul class="paginator">
                             <li class="paginator__item paginator__item--prev">

@@ -1,10 +1,7 @@
 package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.db.DBConnect;
-import vn.edu.hcmuaf.fit.model.Blog;
-import vn.edu.hcmuaf.fit.model.Comment;
-import vn.edu.hcmuaf.fit.model.LoaiBanh;
-import vn.edu.hcmuaf.fit.model.Product;
+import vn.edu.hcmuaf.fit.model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,6 +14,7 @@ public class ProductService {
         Statement statement = DBConnect.getInstall().get();
         Statement stmt = DBConnect.getInstall().get();
         Statement stmt1 = DBConnect.getInstall().get();
+        Statement stmt2 = DBConnect.getInstall().get();
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT distinct sanpham.MaSP ,sanpham.TenSP,loaibanh.TenLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia  from sanpham, loaibanh, giamgia where sanpham.MalB = loaibanh.MaLB");
@@ -26,6 +24,8 @@ public class ProductService {
                     List<String> listkt = new LinkedList<>();
                     ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
+                    ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
+                    List<ProductDetails> listpd = new LinkedList<>();
                     String s1 = rs.getString(1);
                     while (rsImg.next()) {
                         String s2 = rsImg.getString(1);
@@ -40,7 +40,13 @@ public class ProductService {
                             listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4)));
                         }
                     }
-                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), listkt, rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts);
+                    while (rspd.next()) {
+                        String s2 = rspd.getString(1);
+                        if (s1.equals(s2)) {
+                            listpd.add(new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5)));
+                        }
+                    }
+                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), listkt, rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, listpd);
                     list.add(p);
                 }
             } catch (SQLException e) {
@@ -67,6 +73,7 @@ public class ProductService {
         Statement statement = DBConnect.getInstall().get();
         Statement stmt = DBConnect.getInstall().get();
         Statement stmt1 = DBConnect.getInstall().get();
+        Statement stmt2 = DBConnect.getInstall().get();
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT sanpham.MaSP, sanpham.TenSP, sanpham.MaLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia FROM sanpham, cthd WHERE sanpham.MaSP = cthd.MASP GROUP BY MASP ORDER BY COUNT(CTHD.MASP) DESC, cthd.SL DESC;");
@@ -76,6 +83,8 @@ public class ProductService {
                     List<String> listkt = new LinkedList<>();
                     ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
+                    ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
+                    List<ProductDetails> listpd = new LinkedList<>();
                     String s1 = rs.getString(1);
                     while (rsImg.next()) {
                         String s2 = rsImg.getString(1);
@@ -89,7 +98,13 @@ public class ProductService {
                             listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4)));
                         }
                     }
-                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), listkt, rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts);
+                    while (rspd.next()) {
+                        String s2 = rspd.getString(1);
+                        if (s1.equals(s2)) {
+                            listpd.add(new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5)));
+                        }
+                    }
+                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), listkt, rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, listpd);
                     list.add(p);
                 }
             } catch (SQLException e) {
@@ -106,6 +121,7 @@ public class ProductService {
         Statement statement = DBConnect.getInstall().get();
         Statement stmt = DBConnect.getInstall().get();
         Statement stmt1 = DBConnect.getInstall().get();
+        Statement stmt2 = DBConnect.getInstall().get();
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT sanpham.MaSP, sanpham.TenSP, sanpham.MaLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia FROM sanpham ORDER BY MaSP DESC ;");
@@ -115,6 +131,8 @@ public class ProductService {
                     List<String> listkt = new LinkedList<>();
                     ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
+                    ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
+                    List<ProductDetails> listpd = new LinkedList<>();
                     String s1 = rs.getString(1);
                     while (rsImg.next()) {
                         String s2 = rsImg.getString(1);
@@ -128,7 +146,13 @@ public class ProductService {
                             listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4)));
                         }
                     }
-                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), listkt, rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts);
+                    while (rspd.next()) {
+                        String s2 = rspd.getString(1);
+                        if (s1.equals(s2)) {
+                            listpd.add(new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5)));
+                        }
+                    }
+                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), listkt, rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, listpd);
                     list.add(p);
                 }
             } catch (SQLException e) {
