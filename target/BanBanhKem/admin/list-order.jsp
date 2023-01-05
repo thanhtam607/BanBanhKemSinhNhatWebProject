@@ -213,14 +213,14 @@
                 <option  value="value04">Giao hàng thành công</option>
               </select> &ensp; <a class="main__table-btn main__table-btn--edit">
                   <i id="icon1" class="fa fa-envelope-open"></i>
-                  <i  id="icon2" class="fa fa-cube"></i>
+                  <i id="icon2" class="fa fa-cube"></i>
                   <i id="icon3"  class="fa fa-bus"></i>
                   <i id="icon4"  class="fa fa-check-circle"></i>
               </a>
               </td>
             </tr>
             </tbody>
-            <% } %>
+              <% } %>
           </table>
         </div>
       </div>
@@ -254,7 +254,40 @@
   <!-- Back to Top -->
   <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 </div>
+<script>
+  <% for(int i = 0; i < receiptList.size(); i++){
+    receipt rct = receiptList.get(i);%>
+    function changeIcon() {
+    var x = document.getElementById('value');
+    var y1 = document.getElementById('icon1');
+    var y2 = document.getElementById('icon2');
+    var y3 = document.getElementById('icon3');
+    var y4 = document.getElementById('icon4');
 
+    if (x.value === 'value01') {
+      y1.style.color = '#0edc29';
+      y2.style.color = '#a49a9d';
+      y3.style.color = '#a49a9d';
+      y4.style.color = '#a49a9d';
+    } else if (x.value === 'value02') {
+      y2.style.color = '#0edc29';
+      y1.style.color = '#a49a9d';
+      y3.style.color = '#a49a9d';
+      y4.style.color = '#a49a9d';
+    } else if (x.value === 'value03') {
+      y3.style.color = '#0edc29';
+      y2.style.color = '#a49a9d';
+      y1.style.color = '#a49a9d';
+      y4.style.color = '#a49a9d';
+    } else {
+      y4.style.color = '#0edc29';
+      y2.style.color = '#a49a9d';
+      y3.style.color = '#a49a9d';
+      y1.style.color = '#a49a9d';
+    }
+  }
+  <% } %>
+  </script>
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
