@@ -193,6 +193,7 @@
               <th scope="col">Khách hàng</th>
               <th scope="col">Địa chỉ</th>
               <th scope="col">Thành tiền</th>
+              <th scope="col">Trạng thái đơn hàng</th>
             </tr>
             </thead>
             <% List<receipt> receiptList = (List<receipt>) request.getAttribute("listreceipt-full");
@@ -205,6 +206,18 @@
               <td><%=rc.getName()%></td>
               <td><%=rc.getAddress()%></td>
               <td><%=rc.formatNum(rc.getTotal())%> VND</td>
+              <td><select id="value" onclick="changeIcon()">
+                <option  value="value01">Chờ xác nhận</option>
+                <option  value="value02">Đang chuẩn bị</option>
+                <option  value="value03">Đang vận chuyển</option>
+                <option  value="value04">Giao hàng thành công</option>
+              </select> &ensp; <a class="main__table-btn main__table-btn--edit">
+                  <i id="icon1" class="fa fa-envelope-open"></i>
+                  <i id="icon2" class="fa fa-cube"></i>
+                  <i id="icon3"  class="fa fa-bus"></i>
+                  <i id="icon4"  class="fa fa-check-circle"></i>
+              </a>
+              </td>
             </tr>
             </tbody>
             <% } %>

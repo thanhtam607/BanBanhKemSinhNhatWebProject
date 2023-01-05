@@ -1,3 +1,33 @@
+// changeIcon
+function changeIcon() {
+    var x = document.getElementById('value');
+    var y1 = document.getElementById('icon1');
+    var y2 = document.getElementById('icon2');
+    var y3 = document.getElementById('icon3');
+    var y4 = document.getElementById('icon4');
+
+    if (x.value === 'value01') {
+        y1.style.color = '#0edc29';
+        y2.style.color = '#a49a9d';
+        y3.style.color = '#a49a9d';
+        y4.style.color = '#a49a9d';
+    } else if (x.value === 'value02') {
+        y2.style.color = '#0edc29';
+        y1.style.color = '#a49a9d';
+        y3.style.color = '#a49a9d';
+        y4.style.color = '#a49a9d';
+    } else if (x.value === 'value03') {
+        y3.style.color = '#0edc29';
+        y2.style.color = '#a49a9d';
+        y1.style.color = '#a49a9d';
+        y4.style.color = '#a49a9d';
+    } else {
+        y4.style.color = '#0edc29';
+        y2.style.color = '#a49a9d';
+        y3.style.color = '#a49a9d';
+        y1.style.color = '#a49a9d';
+    }
+}
 (function ($) {
     "use strict";
 

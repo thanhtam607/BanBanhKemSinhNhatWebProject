@@ -194,6 +194,7 @@
                                     <th scope="col">Khách hàng</th>
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Thành tiền</th>
+                                    <th scope="col">Trạng thái đơn hàng</th>
                                    
                                 </tr>
                             </thead>
@@ -207,6 +208,25 @@
                                     <td><%=rc.getName()%></td>
                                     <td><%=rc.getAddress()%></td>
                                     <td><%=rc.formatNum(rc.getTotal())%> VND</td>
+                                    <td><select>
+                                        <option value="value01">Chờ xác nhận</option>
+                                        <option value="value02">Đang chuẩn bị</option>
+                                        <option value="value03">Đang vận chuyển</option>
+                                        <option value="value04">Giao hàng thành công</option>
+                                    </select> &ensp;
+                                        <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
+                                            <i class="fa fa-envelope-open"></i>
+                                        </a> &ensp;
+                                        <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
+                                            <i class="fa fa-cube"></i>
+                                        </a> &ensp;
+                                        <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+                                            <i class="fa fa-bus"></i>
+                                        </a> &ensp;
+                                        <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+                                            <i class="fa fa-check-circle"></i>
+                                        </a>
+                                    </td>
                                     
                                 </tr>
                             </tbody>
