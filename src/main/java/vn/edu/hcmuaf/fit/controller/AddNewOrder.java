@@ -32,7 +32,7 @@ public class AddNewOrder extends HttpServlet {
         OrderService.addCTHD(order);
 
 
-        response.sendRedirect("checkout.jsp");
+        response.sendRedirect("order.jsp");
     }
 
     @Override
