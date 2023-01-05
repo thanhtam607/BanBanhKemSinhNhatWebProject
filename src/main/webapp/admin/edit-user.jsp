@@ -1,4 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,17 +84,20 @@
         <div class="navbar-nav w-100">
             <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
             <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
-            <a href="./customers.jsp" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-            <a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Blog</a>
+            <a href="./ListCustomer" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
+            <a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+            <a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
             <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-            <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm blog</a>
+            <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
             <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
             <!--  -->
         </div>
     </nav>
 </div>
 <!-- Sidebar End -->
-
+<%Customer customer = (Customer) request.getAttribute("customer");
+    List<Receipt> receipts = (List<Receipt>) request.getAttribute("listR");
+%>
     <!-- main content -->
     <main class="main">
         <div class="container-fluid">
@@ -114,8 +120,8 @@
                             </div>
                             <!-- or red -->
                             <div class="profile__meta profile__meta--green">
-                                <h3>John Doe <span>(Approved)</span></h3>
-                                <span>HotFlix ID: 23562</span>
+                                <h3><%=customer.getTENKH()%> <span>(Approved)</span></h3>
+                                <span> ID: <%=customer.getMAKH()%></span>
                             </div>
                         </div>
                         <!-- end profile user -->
@@ -166,7 +172,7 @@
                 <!-- end profile -->
 
                 <!-- content tabs -->
-                <div class="tab-content" id="myTabContent">
+                <div class="tab-content bg-pink" id="myTabContent">
                     <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
                         <div class="col-12">
                             <div class="row">
@@ -175,12 +181,12 @@
                                     <form action="#" class="form form--profile">
                                         <div class="row row--form">
                                             <div class="col-12">
-                                                <h4 class="form__title">Profile details</h4>
+                                                <h4 class="form__title">Thông tin tài khoản</h4>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="username">Username</label>
+                                                    <label class="form__label" for="username">Tên tài khoản</label>
                                                     <input id="username" type="text" name="username" class="form__input" placeholder="User 123">
                                                 </div>
                                             </div>
@@ -194,15 +200,15 @@
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="firstname">First Name</label>
-                                                    <input id="firstname" type="text" name="firstname" class="form__input" placeholder="John">
+                                                    <label class="form__label" for="firstname">Họ</label>
+                                                    <input id="firstname" type="text" name="firstname" class="form__input" placeholder="Nguyễn Văn">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="lastname">Last Name</label>
-                                                    <input id="lastname" type="text" name="lastname" class="form__input" placeholder="Doe">
+                                                    <label class="form__label" for="lastname">Tên</label>
+                                                    <input id="lastname" type="text" name="lastname" class="form__input" placeholder="Bình">
                                                 </div>
                                             </div>
 
@@ -219,10 +225,10 @@
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="rights">Rights</label>
+                                                    <label class="form__label" for="rights">Phân Quyền</label>
                                                     <select class="js-example-basic-single" id="rights">
-														<option value="User">User</option>
-														<option value="Moderator">Moderator</option>
+														<option value="User">Thường</option>
+<%--														<option value="Moderator">Moderator</option>--%>
 														<option value="Admin">Admin</option>
 													</select>
                                                 </div>
@@ -237,40 +243,40 @@
                                 <!-- end details form -->
 
                                 <!-- password form -->
-                                <div class="col-12 col-lg-6">
-                                    <form action="#" class="form form--profile">
-                                        <div class="row row--form">
-                                            <div class="col-12">
-                                                <h4 class="form__title">Change password</h4>
-                                            </div>
+<%--                                <div class="col-12 col-lg-6">--%>
+<%--                                    <form action="#" class="form form--profile">--%>
+<%--                                        <div class="row row--form">--%>
+<%--                                            <div class="col-12">--%>
+<%--                                                <h4 class="form__title">Đổi Mật Khẩu</h4>--%>
+<%--                                            </div>--%>
 
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="oldpass">Old Password</label>
-                                                    <input id="oldpass" type="password" name="oldpass" class="form__input">
-                                                </div>
-                                            </div>
+<%--                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">--%>
+<%--                                                <div class="form__group">--%>
+<%--                                                    <label class="form__label" for="oldpass">Old Password</label>--%>
+<%--                                                    <input id="oldpass" type="password" name="oldpass" class="form__input">--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
 
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="newpass">New Password</label>
-                                                    <input id="newpass" type="password" name="newpass" class="form__input">
-                                                </div>
-                                            </div>
+<%--                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">--%>
+<%--                                                <div class="form__group">--%>
+<%--                                                    <label class="form__label" for="newpass">New Password</label>--%>
+<%--                                                    <input id="newpass" type="password" name="newpass" class="form__input">--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
 
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="confirmpass">Confirm New Password</label>
-                                                    <input id="confirmpass" type="password" name="confirmpass" class="form__input">
-                                                </div>
-                                            </div>
+<%--                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">--%>
+<%--                                                <div class="form__group">--%>
+<%--                                                    <label class="form__label" for="confirmpass">Confirm New Password</label>--%>
+<%--                                                    <input id="confirmpass" type="password" name="confirmpass" class="form__input">--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
 
-                                            <div class="col-12">
-                                                <button class="form__btn" type="button">Change</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+<%--                                            <div class="col-12">--%>
+<%--                                                <button class="form__btn" type="button">Change</button>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </form>--%>
+<%--                                </div>--%>
                                 <!-- end password form -->
                             </div>
                         </div>
@@ -284,7 +290,7 @@
                                     <thead>
                                         <tr>
                                             <th>Mã Đơn Hàng</th>
-                                            <th>Tên Sản Phẩm</th>
+<%--                                            <th>Tên Sản Phẩm</th>--%>
                                             <th>Tên Khách Hàng</th>
                                             <th>Địa Chỉ Giao</th>
                                             <th>Ngày Tạo</th>
@@ -293,18 +299,21 @@
                                     </thead>
 
                                     <tbody>
+                                    <%for(Receipt r: receipts){
+
+                                    %>
                                         <tr>
                                             <td>
-                                                <div class="main__table-text">23</div>
+                                                <div class="main__table-text"><%=r.getId()%></div>
+                                            </td>
+<%--                                            <td>--%>
+<%--                                                <div class="main__table-text"><a href="#">I Dream in Another Language</a></div>--%>
+<%--                                            </td>--%>
+                                            <td>
+                                                <div class="main__table-text"><%=r.getNamecustomer()%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text">TP.HCM</div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text">John Doe</div>
+                                                <div class="main__table-text"><%=r.getAddress()%></div>
                                             </td>
 <%--                                            <td>--%>
 <%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
@@ -313,7 +322,7 @@
 <%--                                                <div class="main__table-text">12 / 7</div>--%>
 <%--                                            </td>--%>
                                             <td>
-                                                <div class="main__table-text">24 Oct 2021</div>
+                                                <div class="main__table-text"><%=r.getSdate()%></div>
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
@@ -326,6 +335,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                    <%}%>
                                     </tbody>
                                 </table>
                             </div>
@@ -441,19 +451,22 @@
     <div id="modal-view" class="zoom-anim-dialog mfp-hide modal modal--view">
         <div class="comments__autor">
             <img class="comments__avatar" src="img/user.svg" alt="">
-            <span class="comments__name">Nguyễn Văn A</span>
-            <span class="comments__time">30.08.2018, 17:53</span>
+            <span class="comments__name"><%=customer.getTENKH()%></span>
+            <%for(Receipt r: receipts){%>
+            <span class="comments__time"><%=r.getSdate()%></span>
         </div>
-        <p class="comments__text">Bánh cánh đồng hoa.</p>
-        <p class="comments__text">Giao tại: kp3, quận 7, tpHCM.</p>
-        <p class="comments__text">Trạng thái: Giao Thành Công.</p>
-        <div class="comments__actions">
-            <div class="comments__rate">
-                <span><i class="fa fa-thumbs-up"></i>12</span>
+        <p class="comments__text">Tên Sản Phẩm: <%=r.getNamecake()%></p>
+        <p class="comments__text">Địa chỉ giao: <%=r.getAddress()%></p>
+        <p class="comments__text">Trạng thái: <%=r.getState()%></p>
+        <%}%>
+<%--        <div class="comments__actions">--%>
+<%--            <div class="comments__rate">--%>
+<%--                <span><i class="fa fa-thumbs-up"></i>12</span>--%>
 
-                <span>7<i class="fa fa-thumbs-down"></i></span>
-            </div>
-        </div>
+<%--                <span>7<i class="fa fa-thumbs-down"></i></span>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+
     </div>
     <!-- end modal view -->
 

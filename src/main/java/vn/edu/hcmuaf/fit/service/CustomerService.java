@@ -43,8 +43,15 @@ public class CustomerService {
         }
         return null;
     }
-
+    public static Customer getCusById(String makh){
+        for(Customer c: getListCustomer()){
+            if(c.getMAKH().equals(makh)){
+                return c;
+            }
+        }
+        return null;
+    }
     public static void main(String[] args) {
-//    System.out.println(getIDKhach("AD01"));
+//    System.out.println(getListCustomer());
     }
 }

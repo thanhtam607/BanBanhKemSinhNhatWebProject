@@ -1,6 +1,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.receipt" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -65,10 +65,11 @@
       <div class="navbar-nav w-100">
         <a href="./ListReceipt_Admin" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
         <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
-        <a href="customers.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-        <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Blog</a>
+        <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
+        <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+        <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
         <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-        <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm blog</a>
+        <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
         <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
       </div>
     </nav>
@@ -197,9 +198,9 @@
               <th scope="col">Xem chi tiết</th>
             </tr>
             </thead>
-            <% List<receipt> receiptList = (List<receipt>) request.getAttribute("listreceipt-full");
+            <% List<Receipt> receiptList = (List<Receipt>) request.getAttribute("listreceipt-full");
               for(int i = 0; i < receiptList.size(); i++){
-                receipt rc = receiptList.get(i);%>
+                Receipt rc = receiptList.get(i);%>
             <tbody>
             <tr>
               <td><%=i+1%></td>
@@ -262,7 +263,7 @@
 </div>
 <script>
   <% for(int i = 0; i < receiptList.size(); i++){
-    receipt rct = receiptList.get(i);%>
+    Receipt rct = receiptList.get(i);%>
     function changeIcon() {
     var x = document.getElementById('value');
     var y1 = document.getElementById('icon1');

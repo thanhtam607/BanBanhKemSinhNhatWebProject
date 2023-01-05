@@ -19,6 +19,7 @@ public class AddNewOrder extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(true);
         Order order =(Order) session.getAttribute("order");
+
         String ghichu = request.getParameter("ghichu");
 
         Date today = new Date();
@@ -30,11 +31,8 @@ public class AddNewOrder extends HttpServlet {
         OrderService.addOrder(order);
         OrderService.addCTHD(order);
 
-        response.getWriter().println(order.getBuyDate());
-        response.getWriter().println(order.getNote());
-        response.getWriter().println(order.getData().toString());
-        response.getWriter().println("add thanh cong");
-//        response.sendRedirect("checkout.jsp");
+
+        response.sendRedirect("checkout.jsp");
     }
 
     @Override

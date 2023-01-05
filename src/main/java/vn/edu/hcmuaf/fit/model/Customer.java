@@ -62,4 +62,14 @@ public class Customer {
         this.SDT = SDT;
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "MAKH='" + MAKH + '\'' +
+                ", TENKH='" + TENKH + '\'' +
+                ", MATAIKHOAN='" + MATAIKHOAN + '\'' +
+                ", DIACHI='" + DIACHI + '\'' +
+                ", SDT='" + SDT + '\'' +
+                '}';
+    }
 }

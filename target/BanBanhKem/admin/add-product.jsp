@@ -80,10 +80,11 @@
                 <div class="navbar-nav w-100">
                     <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
                     <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
-                    <a href="customers.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-                    <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Blog</a>
+                    <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
+                    <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+                    <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
                     <a href="./add-product.html" class="nav-item nav-link active"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-                    <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm blog</a>
+                    <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
                     <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
                 </div>
             </nav>
@@ -125,13 +126,13 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <textarea id="text" name="text" class="form__textarea-sp" placeholder="Nội dung"></textarea>
+                                        <textarea id="text1" name="text" class="form__textarea-sp" placeholder="Nội dung"></textarea>
                                     </div>
                                     <div class="col-12">
-                                        <textarea id="text" name="text" class="form__textarea-sp" placeholder="Mô tả"></textarea>
+                                        <textarea id="text2" name="text" class="form__textarea-sp" placeholder="Mô tả"></textarea>
                                     </div>
                                     <div class="col-12">
-                                        <textarea id="text" name="text" class="form__textarea-sp" placeholder="Thông tin"></textarea>
+                                        <textarea id="text3" name="text" class="form__textarea-sp" placeholder="Thông tin"></textarea>
                                     </div>
                                     <div class="col-12 col-sm-6 col-lg-3">
                                         <input type="text" class="form__input" placeholder="Giá bán">
@@ -184,10 +185,8 @@
                                 </ul>
                             </div>
 
-                                    <div class="col-12">
-                                        <button type="button" class="form__btn">Đăng lên</button>
-                                    </div>
-                                </div>
+                            <div class="col-12">
+                                <button type="button" class="form__btn">Đăng lên</button>
                             </div>
                         </div>
                     </form>

@@ -1,4 +1,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,17 +82,18 @@
 		<div class="navbar-nav w-100">
 			<a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
 			<a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
-			<a href="./customers.jsp" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-			<a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Blog</a>
+			<a href="./ListCustomer" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
+			<a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+			<a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
 			<a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-			<a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm blog</a>
+			<a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
             <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
 			<!--  -->
 		</div>
 	</nav>
     </div>
     <!-- Sidebar End -->
-
+<%List<Customer> listC = (List<Customer>) request.getAttribute("listCus");%>
     <!-- main content -->
     <main class="main bg-white">
         <div class="container-fluid bg-white">
@@ -100,7 +103,7 @@
                     <div class="main__title">
                         <h2>Danh sách khách hàng</h2>
 
-                        <span class="main__title-stat">3</span>
+                        <span class="main__title-stat"><%=listC.size()%></span>
 
                         <div class="main__title-wrap">
                             <!-- filter sort -->
@@ -144,15 +147,17 @@
                                     <th>Địa chỉ</th>
                                     <th>SĐT</th>
                                     <th>Trạng thái</th>
-                                    <th>Ngày đăng ký</th>
                                     <th>Tùy chọn</th>
                                 </tr>
                             </thead>
 
                             <tbody>
+                            <% int i = 1;
+                            for(Customer customer: listC){
+                            %>
                                 <tr>
                                     <td>
-                                        <div class="main__table-text">1</div>
+                                        <div class="main__table-text"><%=i%></div>
                                     </td>
                                     <td>
                                         <div class="main__user">
@@ -160,120 +165,38 @@
                                                 <img src="img/user.svg" alt="">
                                             </div>
                                             <div class="main__meta">
-                                                <h3>Nguyễn Văn An</h3>
+                                                <h3><%=customer.getTENKH()%></h3>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text">TPHCM</div>
+                                        <div class="main__table-text"><%=customer.getDIACHI()%></div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text">0989873282</div>
+                                        <div class="main__table-text"><%=customer.getSDT()%></div>
                                     </td>
                                    
                                     <td>
                                         <div class="main__table-text main__table-text--green">Đã phê duyệt</div>
                                     </td>
-                                    <td>
-                                        <div class="main__table-text">24/10/2021</div>
-                                    </td>
+
                                     <td>
                                         <div class="main__table-btns">
                                             <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
-                                            <a href="edit-user.jsp" class="main__table-btn main__table-btn--edit">
+                                            <a href="./EditUser?makh=<%=customer.getMAKH()%>" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </div>
-                                </td>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">2</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__user">
-                                            <div class="main__avatar">
-                                                <img src="img/user.svg" alt="">
-                                            </div>
-                                            <div class="main__meta">
-                                                <h3>Nguyễn Văn Bình</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">TPHCM</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">0980873282</div>
-                                    </td>
-                                    
-                                    <td>
-                                        <div class="main__table-text main__table-text--green">Đã phê duyệt</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">24/10/2021</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-btns">
-                                            <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                <i class="fa fa-lock"></i>
-                                            </a>
-                                            <a href="edit-user.jsp" class="main__table-btn main__table-btn--edit">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </div>
-                                </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="main__table-text">3</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__user">
-                                            <div class="main__avatar">
-                                                <img src="img/user.svg" alt="">
-                                            </div>
-                                            <div class="main__meta">
-                                                <h3>Nguyễn Văn Khang</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">TPHCM</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">0989873289</div>
-                                    </td>
-                                    
-                                    <td>
-                                            <div class="main__table-text main__table-text--green">Đã phê duyệt</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">24/10/2021</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
-                                                <a href="edit-user.jsp" class="main__table-btn main__table-btn--edit">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </div>
-                                    </td>
-                                    
-                                </tr>
+                               <%
+                                     i++;
+                                 }%>
                             </tbody>
                         </table>
                     </div>

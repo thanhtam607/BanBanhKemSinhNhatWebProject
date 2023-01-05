@@ -28,7 +28,7 @@ public class OrderService {
         }
         return  result;
     }
-//    public static List<CTHD> getCTHDList(){
+//    public static List<O> getCTHDList(){
 //        List<CTHD> cthdList = new ArrayList<CTHD>();
 //        return  cthdList;
 //    }

@@ -241,6 +241,7 @@
             <div class="checkout__form">
                 <h4>Thông Tin Thanh Toán</h4>
                 <form action="/BanBanhKemSinhNhatWebProject/AddNewOrder" method="get">
+<%--                <form>--%>
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
@@ -294,13 +295,13 @@
                             </div>
 
 
-                            <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
-                                    Giao đến địa chỉ khác?
-                                    <input type="checkbox" id="diff-acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
+<%--                            <div class="checkout__input__checkbox">--%>
+<%--                                <label for="diff-acc">--%>
+<%--                                    Giao đến địa chỉ khác?--%>
+<%--                                    <input type="checkbox" id="diff-acc">--%>
+<%--                                    <span class="checkmark"></span>--%>
+<%--                                </label>--%>
+<%--                            </div>--%>
                             <div class="checkout__input">
                                 <p>Ghi chú cho cửa hàng<span>*</span></p>
                                 <input type="text"
@@ -371,21 +372,23 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
-    function addOrder(){
-        var url  ="AddNewOrder";
-        $.ajax({
-            url: url,
-            type: "GET",
-            success: function (){
-                Swal.fire({
-                    text:'Đặt hàng thành công!',
-                    icon: 'success',
-                    confirmButtonColor: '#ff96b7'});
-            }
-        });
-    };
-</script>
+<%--<script>--%>
+<%--    var ghichu = document.getElementById("ghichu");--%>
+<%--    function addOrder(){--%>
+<%--        var url  ="AddNewOrder";--%>
+<%--        $.ajax({--%>
+<%--            url: url,--%>
+<%--            type: "GET",--%>
+<%--           --%>
+<%--            success: function (){--%>
+<%--                Swal.fire({--%>
+<%--                    text:'Đặt hàng thành công!',--%>
+<%--                    icon: 'success',--%>
+<%--                    confirmButtonColor: '#ff96b7'});--%>
+<%--            }--%>
+<%--        });--%>
+<%--    };--%>
+<%--</script>--%>
 
 </body>
 

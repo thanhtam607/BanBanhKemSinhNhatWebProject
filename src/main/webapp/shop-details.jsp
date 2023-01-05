@@ -450,7 +450,6 @@
             url: url,
             type: "GET",
             success: function (){
-
                 totalPro+=qty;
                 console.log(totalPro);
                 document.getElementById("totalPro").innerHTML=totalPro.toString();

@@ -132,6 +132,7 @@ a:focus {
 	text-decoration: none;
 	outline: none;
 	color: #ffffff;
+	cursor: pointer;
 }
 
 ul,
