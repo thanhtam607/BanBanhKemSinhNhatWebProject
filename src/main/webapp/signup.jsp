@@ -55,7 +55,7 @@
                             <label for="floatingText">Tạo tên đăng nhập</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <input onchange="check(this.value)" name="email" type="email"  class="form-control" id="floatingInput" placeholder="name@example.com">
                             <label for="floatingInput">Địa chỉ email</label>
                         </div>
                         <div class="form-floating mb-4">
@@ -74,7 +74,7 @@
                             </div>
 
                         </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Đăng ký</button>
+                        <button o type="submit" class="btn btn-primary py-3 w-100 mb-4">Đăng ký</button>
                         <p class="text-center mb-0">Bạn đã có tài khoản? <a href="signin.jsp">Đăng nhập</a></p>
                     </form>
                 </div>
@@ -93,9 +93,11 @@
     <script src="admin/lib/tempusdominus/js/moment.min.js"></script>
     <script src="admin/lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="admin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Template Javascript -->
     <script src="admin/js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
