@@ -520,7 +520,11 @@ async function forgotPassword() {
             type: "GET",
             success: async function (response) {
                 if (parseInt(response) ===1) {
-                    document.getElementById("insertTextHere").innerText = "Tài khoản không tồn tại!";
+
+                    Swal.fire({
+                        text:"Tài khoản không tồn tại!",
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'});
                 }
                 else {
                     const {value: code} = await Swal.fire({
@@ -531,8 +535,10 @@ async function forgotPassword() {
                         confirmButtonColor: '#ff96b7',
                         confirmButtonText:'Xác nhận',
                     })
-                    checkCode(parseInt(code), parseInt(response), email);
+                    if(checkCode(parseInt(code), parseInt(response))) {
 
+                        removePass(email);
+                    }
                 }
             }
         });
@@ -541,33 +547,101 @@ async function forgotPassword() {
 
 }
 
-async function checkCode(c1, c2, email) {
+function checkCode(c1, c2) {
     if (c1 === c2) {
-        const {value: pass} = await Swal.fire({
-            title: 'Đặt lại mật khẩu',
-            input: 'password',
-            inputLabel: 'Mật khẩu',
-            inputPlaceholder: 'Nhập mật khẩu mới...',
-            confirmButtonColor: '#ff96b7',
-            confirmButtonText: 'Xong',
-        })
-        if(pass){
-                var url = "UpdatePassword?password="+pass+"&email="+ email;
-            $.ajax({
-                url:url ,
-                type: "GET",
-                success: function () {
-                    Swal.fire({
-                        text:'Đổi mật khẩu thành công!',
-                        icon: 'success',
-                        confirmButtonColor: '#ff96b7'});
-                }
-            });
-        }
+     return true;
+
     }else{
         Swal.fire({
             text:'Mã xác nhận không đúng!',
             icon: 'error',
             confirmButtonColor: '#ff96b7'});
+        return false;
     }
+}
+
+
+/*-------------------
+   remove password
+  --------------------- */
+async function checkPass(email,pass) {
+    const {value: password} = await Swal.fire({
+        title: 'Mật khẩu hiện tại',
+        input: 'password',
+        inputLabel: 'Nhập vào mật khẩu hiện tại của bạn: ',
+        inputPlaceholder: 'Nhập mật khẩu...',
+        confirmButtonColor: '#ff96b7',
+        inputAttributes: {
+            autocapitalize: 'off',
+            autocorrect: 'off'
+        }
+    })
+
+    if (password) {
+        var url = "UpdatePassword?oldPass=" +password.toString();
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function (response) {
+                console.log(response.toString());
+
+                if(parseInt(response) === 1){
+
+                    removePass(email);
+                }
+                else{
+                    Swal.fire({
+                        text:'Mật khẩu đã nhập không đúng!',
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'});
+                }
+            }
+        });
+
+    }
+}
+async function removePass(email) {
+    const {value: formValues} = await Swal.fire({
+        title: 'Đặt lại mật khẩu',
+        html:
+            '<label>Nhập mật khẩu mới:</label>' +
+            '<input id="swal-input1" type="password" class="swal2-input" placeholder="Nhập mật khẩu mới...">' +
+            '<label >Nhập lại mật khẩu:</label>' +
+            '<input id="swal-input2" type="password" class="swal2-input" placeholder="Nhập lại mật khẩu...">',
+        focusConfirm: false,
+        confirmButtonColor: '#ff96b7',
+        confirmButtonText: 'Xác nhận',
+        preConfirm: () => {
+            var p1 = document.getElementById('swal-input1').value;
+            var p2 = document.getElementById('swal-input2').value;
+            if (p1 == p2) {
+                return [p1];
+
+            }
+            else{
+                return 0;
+            }
+        }
+    })
+    if (formValues != 0) {
+        var url = "UpdatePassword?password=" + formValues + "&email=" + email;
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function () {
+                Swal.fire({
+                    text: 'Đổi mật khẩu thành công!',
+                    icon: 'success',
+                    confirmButtonColor: '#ff96b7'
+                });
+            }
+        });
+    } else {
+        Swal.fire({
+            text: 'Đổi mật khẩu không thành công. Vui lòng kiểm tra lại!',
+            icon: 'error',
+            confirmButtonColor: '#ff96b7'
+        });
+    }
+
 }
