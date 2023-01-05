@@ -64,7 +64,7 @@
     Chart.defaults.borderColor = "#000000";
 
 
-    // Worldwide Sales Chart
+//    Worldwide Sales Chart
     var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
     var myChart1 = new Chart(ctx1, {
         type: "bar",
@@ -75,7 +75,7 @@
                     data: [15, 30, 55, 65, 60, 80, 95],
                     backgroundColor: "rgba(235, 22, 22, .7)"
                 },
-               
+
             ]
             },
         options: {

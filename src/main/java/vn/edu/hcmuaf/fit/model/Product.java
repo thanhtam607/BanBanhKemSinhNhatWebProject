@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.model;
 
 import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class Product {
     String id;
@@ -120,12 +121,13 @@ public class Product {
     }
 
     public static String formatNum(int price){
-        NumberFormat vn = NumberFormat.getInstance();
+        Locale loc = new Locale("vi", "VN");
+        NumberFormat vn = NumberFormat.getInstance(loc);
         String result = vn.format(price);
         return result;
     }
-
     public static void main(String[] args) {
+
         System.out.println(formatNum(1234567));
     }
 }

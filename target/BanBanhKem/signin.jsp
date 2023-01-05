@@ -82,7 +82,7 @@
                                       })
                             </script>
                         
-                            <a href="">Quên mật khẩu?</a>
+                            <a onclick="forgotPassword()">Quên mật khẩu?</a>
                         </div>
                         <button type="submit" id="login-button" class="btn btn-primary py-3 w-100 mb-4">Đăng nhập</button>
                         <p class="text-center mb-0">Bạn chưa có tài khoản? <a href="signup.jsp">Đăng ký ngay</a></p>
@@ -96,6 +96,7 @@
    
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="admin/lib/chart/chart.min.js"></script>
     <script src="admin/lib/easing/easing.min.js"></script>
@@ -108,6 +109,7 @@
 
     <!-- Template Javascript -->
     <script src="admin/js/main.js"></script>
+    <script src="js/main.js"></script>
 
     <!-- LOGIN ADMIN -->
 <%--    <script>--%>

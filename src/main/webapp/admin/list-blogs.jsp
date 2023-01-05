@@ -46,7 +46,7 @@
     <header class="header">
         <div class="header__content">
             <!-- header logo -->
-            <a href="admin-web.jsp" class="header__logo">
+            <a href="./ListReceipt_Admin" class="header__logo">
 				<img src="../img/logo_web.jpg" alt="">
 			</a>
             <!-- end header logo -->
@@ -65,7 +65,7 @@
              <!-- Sidebar Start -->
    <div class="sidebar pe-4 pb-3">
 	<nav class="navbar bg-pink navbar-dark">
-	
+
 		<div class="d-flex align-items-center ms-4 mb-4">
 			<div class="position-relative">
 				<i class="fa fa-user icon__user"></i>
@@ -77,7 +77,7 @@
 			</div>
 		</div>
 		<div class="navbar-nav w-100">
-			<a href="admin-web.jsp" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+			<a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
 			<a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
 			<a href="customers.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
 			<a href="./ListBlog-admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Blog</a>
