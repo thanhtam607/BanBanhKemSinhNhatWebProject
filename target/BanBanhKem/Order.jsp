@@ -222,7 +222,8 @@
     <div class="container-91 mx-auto">
         <div class="row">
             <div class="tab-content flex-sm-row mt-2">
-                <div class="my-2 center" style="background-color: white;">
+                <%-- Viết vòng lặp ở đây nhoaaa --%>
+                <div class="my-2 center" >
                     <div class="row">
                         <div class="col-6">
                                     <small class="text-secondary d-inline-block pt-3 pl-3">ID đơn hàng: @i.ID</small>
@@ -280,11 +281,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 
 <jsp:include page="footer.jsp"></jsp:include>
 

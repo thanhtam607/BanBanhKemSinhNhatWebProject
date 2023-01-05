@@ -660,7 +660,7 @@ function check(email) {
         success: async function (response) {
             const {value: code} = await Swal.fire({
                 title: 'Xác minh tài khoản',
-                input: 'number',
+                input: 'text',
                 inputLabel: 'Mã xác nhận',
                 inputPlaceholder: 'Nhập mã xác nhận...',
                 confirmButtonColor: '#ff96b7',
