@@ -15,13 +15,16 @@ public class AddNewOrder extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         Order order =(Order) session.getAttribute("order");
-        OrderService.addOrder(order);
-        response.getWriter().println(order.getId());
-        response.getWriter().println(order.getNote());
-        response.getWriter().println(order.getTrangthai());
-        response.getWriter().println(order.getBuyDate());
-        response.getWriter().println(order.getUser().getTentk());
-        response.getWriter().println(order.getData().toString());
+        Order newOd = order;
+        OrderService.addOrder(newOd);
+        OrderService.addCTHD(newOd);
+        response.getWriter().println(newOd.getId());
+        response.getWriter().println(newOd.getNote());
+        response.getWriter().println(newOd.getTrangthai());
+        response.getWriter().println(newOd.getBuyDate());
+        response.getWriter().println(newOd.getUser().getId());
+        response.getWriter().println(newOd.getData().toString());
+//        response.sendRedirect("checkout.jsp");
 //        request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }
 

@@ -14,12 +14,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class OrderService {
-    public static int getOrderListNumber(){
+    public static int getOrderNumber(){
         Statement statement = DBConnect.getInstall().get();
         int result = 0;
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT count(*) from hoadon");
+                ResultSet rs = statement.executeQuery("SELECT count(MAHD) from hoadon");
                 while (rs.next()){
                     result = rs.getInt(1);
                 }
@@ -37,15 +37,18 @@ public class OrderService {
     }
     public static void addOrder(Order order){
         Statement stm = DBConnect.getInstall().get();
-        String mahd = "HD" + (getOrderListNumber() + 1);
+        String mahd = "HD" + (getOrderNumber() + 1);
         order.setId(mahd);
+        String makh = CustomerService.getIDKhach(order.getUser().getId());
+        String sql = "insert into hoadon(MAHD, MAKH, GHICHU, THANHTIEN, TRANGTHAI) values ('" + mahd + "', '" + makh + "', '" + order.getNote()  +  "'," + order.totalMoney() +","+order.getTrangthai()+");";
         if(stm!= null) {
-            String sql = "insert into hoadon(MAHD, MAKH, GHICHU, THANHTIEN, TRANGTHAI) values ('" + order.getId() + "', '" + order.getUser().getId() + "', '" + order.getNote()  +  "'," + order.totalMoney() +","+order.getTrangthai()+");";
             try {
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }
+        }else{
+            System.out.println("No find");
         }
     }
     public static void addCTHD(Order order){
@@ -77,6 +80,6 @@ public class OrderService {
 //        }
 //    }
     public static void main(String[] args) {
-        System.out.println(getOrderListNumber());
+        System.out.println(getOrderNumber());
     }
 }

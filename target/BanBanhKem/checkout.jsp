@@ -61,9 +61,10 @@
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
+                <a href="#" class="dropdown-item">Đặt lại mật khẩu</a>
                 <% if(auth.checkRole(1)) { %>
                 <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
@@ -328,7 +329,6 @@
                                         <span ><%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND</span>
                                     </li>
                                     <%}%>
-<%--
                                 </ul>
                                 <div class="checkout__order__subtotal">Tạm tính <span><%= order.formatNum(order.totalMoney())%> VND</span></div>
                                 <div class="checkout__order__total">Tổng <span><%= order.formatNum(order.totalMoney())%> VND</span></div>
