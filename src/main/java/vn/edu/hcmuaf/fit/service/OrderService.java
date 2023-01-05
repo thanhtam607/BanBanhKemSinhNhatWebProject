@@ -8,10 +8,7 @@ import vn.edu.hcmuaf.fit.model.ItemProductInCart;
 import vn.edu.hcmuaf.fit.model.Order;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class OrderService {
     public static int getOrderNumber(){
@@ -31,16 +28,18 @@ public class OrderService {
         }
         return  result;
     }
-    public static List<CTHD> getCTHDList(){
-        List<CTHD> cthdList = new ArrayList<CTHD>();
-        return  cthdList;
-    }
+//    public static List<CTHD> getCTHDList(){
+//        List<CTHD> cthdList = new ArrayList<CTHD>();
+//        return  cthdList;
+//    }
     public static void addOrder(Order order){
         Statement stm = DBConnect.getInstall().get();
         String mahd = "HD" + (getOrderNumber() + 1);
         order.setId(mahd);
         String makh = CustomerService.getIDKhach(order.getUser().getId());
-        String sql = "insert into hoadon(MAHD, MAKH, GHICHU, THANHTIEN, TRANGTHAI) values ('" + mahd + "', '" + makh + "', '" + order.getNote()  +  "'," + order.totalMoney() +","+order.getTrangthai()+");";
+        String sql = "INSERT INTO HOADON VALUES('" + mahd + "', '" + makh + "', '"
+                + order.getBuyDate()  + "', '" + order.getNote() + "',"
+                +order.totalMoney()+ "," + order.getTrangthai()+");";
         if(stm!= null) {
             try {
                 stm.executeUpdate(sql);
@@ -53,11 +52,11 @@ public class OrderService {
     }
     public static void addCTHD(Order order){
         Statement stm = DBConnect.getInstall().get();
-        List<CTHD> cthdList = getCTHDList();
+        String sql = "";
         if(stm!= null) {
             try {
-                for(ItemProductInCart inCart: order.list()){
-                    String sql = "insert into cthd values ('" + order.getId() + "', '" + inCart.getMasp() + "'," + inCart.getSoLgMua() +");";
+                for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
+                     sql = "INSERT INTO CTHD VALUES('" + order.getId() + "','" + entry.getValue().getSp().getId() + "'," + entry.getValue().getSoLgMua() +");";
                     stm.executeUpdate(sql);
                 }
             } catch (SQLException se) {
@@ -65,21 +64,19 @@ public class OrderService {
             }
         }
     }
-//    public static void addGiaoHang(Order order){
-//        Statement stm = DBConnect.getInstall().get();
-//        List<CTHD> cthdList = getCTHDList();
-//        if(stm!= null) {
-//            try {
-//                for(ItemProductInCart inCart: order.list()){
-//                    String sql = "insert into cthd values ('" + order.getId() + "', '" + inCart.getMasp() + "'," + inCart.getSoLgMua() +");";
-//                    stm.executeUpdate(sql);
-//                }
-//            } catch (SQLException se) {
-//                se.printStackTrace();
-//            }
-//        }
-//    }
+    public static void addGiaoHang(){
+        Statement stm = DBConnect.getInstall().get();
+        if(stm!= null) {
+            try {
+                    String sql = "INSERT INTO CTHD VALUES('HD01', 'B001', 2);";
+                    stm.executeUpdate(sql);
+                    System.out.println("thanh cong");
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
     public static void main(String[] args) {
-        System.out.println(getOrderNumber());
+//        addGiaoHang();
     }
 }

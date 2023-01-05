@@ -232,12 +232,12 @@
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h6><span class="icon_tag_alt"></span> Bạn có voucher? Sử dụng ngay <a href="#">tại đây</a>
-                    </h6>
-                </div>
-            </div>
+<%--            <div class="row">--%>
+<%--                <div class="col-lg-12">--%>
+<%--                    <h6><span class="icon_tag_alt"></span> Bạn có voucher? Sử dụng ngay <a href="#">tại đây</a>--%>
+<%--                    </h6>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <div class="checkout__form">
                 <h4>Thông Tin Thanh Toán</h4>
                 <form action="/BanBanhKemSinhNhatWebProject/AddNewOrder" method="get">
@@ -247,13 +247,13 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Họ<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="ho">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Tên<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="ten">
                                     </div>
                                 </div>
                             </div>
@@ -264,11 +264,11 @@
                             <div class="checkout__input">
                                 <p>Địa chỉ<span>*</span></p>
                                 <!-- <input type="text" placeholder="Tên Đường" class="checkout__input__add"> -->
-                                <input type="text" placeholder="Số nhà, xã/phường, quận/huyện">
+                                <input type="text" placeholder="Số nhà, xã/phường, quận/huyện" name="diachihuyen">
                             </div>
                             <div class="checkout__input">
                                 <p>Tỉnh/Thành Phố<span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="diachitinh">
                             </div>
                             <!-- <div class="checkout__input">
                                 <p>Country/State<span>*</span></p>
@@ -282,29 +282,18 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Điện Thoại<span>*</span></p>
-                                        <input type="text">
+                                        <input type="tel" name="phone">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text">
+                                        <input type="email" name="email">
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
-                                    Tạo Tài Khoản?
-                                    <input type="checkbox" id="acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <p>
-                                Tạo tài khoản bằng cách nhập thông tin bên dưới. Nếu bạn là khách hàng cũ, vui lòng đăng nhập ở đầu trang.</p>
-                            <div class="checkout__input">
-                                <p>Mật Khẩu<span>*</span></p>
-                                <input type="text">
-                            </div>
+
+
                             <div class="checkout__input__checkbox">
                                 <label for="diff-acc">
                                     Giao đến địa chỉ khác?
@@ -315,7 +304,8 @@
                             <div class="checkout__input">
                                 <p>Ghi chú cho cửa hàng<span>*</span></p>
                                 <input type="text"
-                                    placeholder="VD: dụng cụ ăn uống,nến theo số tuổi,...">
+                                    placeholder="VD: dụng cụ ăn uống,nến theo số tuổi,..."
+                                name="ghichu">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
@@ -380,7 +370,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- 
+
+<script>
+    function addOrder(){
+        var url  ="AddNewOrder";
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function (){
+                Swal.fire({
+                    text:'Đặt hàng thành công!',
+                    icon: 'success',
+                    confirmButtonColor: '#ff96b7'});
+            }
+        });
+    };
+</script>
 
 </body>
 
