@@ -5,7 +5,6 @@
     --light: #ff96b7;
     --white: #ffffff;
 }
-
 .back-to-top {
     position: fixed;
     display: none;
@@ -18,7 +17,6 @@ background-color: #ffffff;
 color: #ff96b7;
 border: 3px solid #ff96b7;
 }
-
 
 /*** Spinner ***/
 #spinner {

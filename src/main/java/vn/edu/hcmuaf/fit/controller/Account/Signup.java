@@ -4,10 +4,12 @@ import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Account;
 import vn.edu.hcmuaf.fit.service.UserService;
 
+import javax.mail.MessagingException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "Signup", value = "/Signup")
@@ -19,6 +21,18 @@ public class Signup extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
+        if(request.getParameter("name")==null){
+            PrintWriter out= response.getWriter();
+            int code = UserService.randomCode();
+            try {
+                UserService.sendMail(email, code);
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
+            out.println(code);
+
+        }
+        else{
         String user = request.getParameter("name");
         String pass = request.getParameter("pass");
         String repass = request.getParameter("repass");
@@ -35,15 +49,15 @@ public class Signup extends HttpServlet {
             User newUser = new User(email, pass, user);
             UserService.register(newUser);
             String url = null;
-            if(request.getParameter("save-login") != null){
+            if (request.getParameter("save-login") != null) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("auth", newUser);
                 url = "./Index";
-            }
-            else{
+            } else {
                 url = "signin.jsp";
             }
             response.sendRedirect(url);
+        }
         }
     }
 }

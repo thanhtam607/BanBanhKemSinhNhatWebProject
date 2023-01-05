@@ -536,7 +536,6 @@ async function forgotPassword() {
                         confirmButtonText:'Xác nhận',
                     })
                     if(checkCode(parseInt(code), parseInt(response))) {
-
                         removePass(email);
                     }
                 }
@@ -551,11 +550,16 @@ function checkCode(c1, c2) {
     if (c1 === c2) {
      return true;
 
-    }else{
+    }else {
         Swal.fire({
-            text:'Mã xác nhận không đúng!',
+            text: 'Mã xác nhận không đúng!',
             icon: 'error',
-            confirmButtonColor: '#ff96b7'});
+            confirmButtonColor: '#ff96b7'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.reload();
+        }
+            });
         return false;
     }
 }
@@ -644,4 +648,27 @@ async function removePass(email) {
         });
     }
 
+}
+function check(email) {
+
+    var url = "Signup?email=" + email;
+
+
+    $.ajax({
+        url: url,
+        type: "POST",
+        success: async function (response) {
+            const {value: code} = await Swal.fire({
+                title: 'Xác minh tài khoản',
+                input: 'number',
+                inputLabel: 'Mã xác nhận',
+                inputPlaceholder: 'Nhập mã xác nhận...',
+                confirmButtonColor: '#ff96b7',
+                confirmButtonText: 'Xác nhận',
+            })
+
+            checkCode(parseInt(code), parseInt(response));
+
+        }
+    });
 }
