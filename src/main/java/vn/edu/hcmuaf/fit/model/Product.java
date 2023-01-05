@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.model;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -121,10 +122,9 @@ public class Product {
     }
 
     public static String formatNum(int price){
-        Locale loc = new Locale("vi", "VN");
-        NumberFormat vn = NumberFormat.getInstance(loc);
-        String result = vn.format(price);
-        return result;
+        DecimalFormat df = new DecimalFormat("###,###,###");
+        return df.format(price);
+
     }
     public static void main(String[] args) {
 
