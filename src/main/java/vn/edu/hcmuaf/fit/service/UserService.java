@@ -4,6 +4,7 @@ import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import vn.edu.hcmuaf.fit.model.Account;
+import vn.edu.hcmuaf.fit.model.Order;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -118,6 +119,7 @@ public class UserService {
             }
         }
     }
+
     public static int randomCode(){
         return  (int) Math.floor(((Math.random() * 899999) + 100000));
     }

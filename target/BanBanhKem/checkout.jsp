@@ -331,7 +331,6 @@
                                         <span ><%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND</span>
                                     </li>
                                     <%}%>
-<%--
                                 </ul>
                                 <div class="checkout__order__subtotal">Tạm tính <span><%= order.formatNum(order.totalMoney())%> VND</span></div>
                                 <div class="checkout__order__total">Tổng <span><%= order.formatNum(order.totalMoney())%> VND</span></div>

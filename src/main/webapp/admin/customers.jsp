@@ -1,3 +1,4 @@
+<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +18,7 @@
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
-    <link rel="stylesheet" href="css/admin.css">
+
 
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
@@ -25,7 +26,8 @@
 
 	<!-- boostrap -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	
+    <%--  admin  css --%>
+    <link rel="stylesheet" href="css/admin.css">
 	<!-- index css -->
 	<link rel="stylesheet" href="./css/style.css" >
 
@@ -40,6 +42,7 @@
 </head>
 
 <body>
+<% User auth = (User) session.getAttribute("auth");%>
     <!-- header -->
     <header class="header">
         <div class="header__content">
@@ -70,14 +73,14 @@
 				<div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
 			</div>
 			<div class="ms-3">
-				<h6 class="mb-0">Thanh Thùy</h6>
+                <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
 				<span>Admin</span>
 			</div>
 		</div>
 		<div class="navbar-nav w-100">
 			<a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
 			<a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
-			<a href="./customers.html" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
+			<a href="./customers.jsp" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
 			<a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Blog</a>
 			<a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
 			<a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm blog</a>
@@ -179,7 +182,7 @@
                                             <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
-                                            <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
+                                            <a href="edit-user.jsp" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
@@ -220,7 +223,7 @@
                                             <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
-                                            <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
+                                            <a href="edit-user.jsp" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
@@ -261,7 +264,7 @@
                                                 <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
                                                     <i class="fa fa-lock"></i>
                                                 </a>
-                                                <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
+                                                <a href="edit-user.jsp" class="main__table-btn main__table-btn--edit">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                                 <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
@@ -304,26 +307,26 @@
 
     <!-- modal status -->
     <div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Status change</h6>
+        <h6 class="modal__title">Chặn Người Dùng</h6>
 
-        <p class="modal__text">Are you sure about immediately change status?</p>
+        <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
 
         <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Apply</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+            <button class="modal__btn modal__btn--apply" type="button">Chặn</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
         </div>
     </div>
     <!-- end modal status -->
 
     <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">User delete</h6>
+        <h6 class="modal__title">Xóa người dùng</h6>
 
-        <p class="modal__text">Are you sure to permanently delete this user?</p>
+        <p class="modal__text">Bạn có chắc muốn xóa người dùng này?</p>
 
         <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Delete</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
         </div>
     </div>
     <!-- end modal delete -->

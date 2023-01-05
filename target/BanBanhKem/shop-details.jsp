@@ -64,7 +64,11 @@
             <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
+<<<<<<< HEAD
+                <a href="#" class="dropdown-item">Đặt lại mật khẩu</a>
+=======
                 <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
+>>>>>>> 617b8b08b5bc2064e0ebdc62e771fade4e4f064d
                 <% if(auth.checkRole(1)) { %>
                 <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>

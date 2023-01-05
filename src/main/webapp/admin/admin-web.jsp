@@ -122,8 +122,8 @@
                         </a>
                         <%if(auth != null) {%>
                             <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
-    <%--                            <a href="#" class="dropdown-item">Thông tin của tôi</a>--%>
-    <%--                            <a href="#" class="dropdown-item">Cài đặt</a>--%>
+                                <a href="#" class="dropdown-item">Thông tin của tôi</a>
+                                <a href="#" class="dropdown-item">Cài đặt</a>
                                 <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                             </div>
                         <%}%>
@@ -250,7 +250,7 @@
                             &copy; <a href="#">Lập trình web thầy Phan Đình Long  Khoa CNTT - ĐH Nông Lâm TP HCM</a>
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
-                           <a href="https://htmlcodex.com">Nhóm 27</a>
+                           <a href="#">Nhóm 27</a>
                         </div>
                     </div>
                 </div>

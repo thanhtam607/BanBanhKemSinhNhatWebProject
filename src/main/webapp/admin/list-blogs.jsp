@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
-    <link rel="stylesheet" href="css/admin.css">
+
 
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
@@ -27,7 +27,8 @@
 
 	<!-- boostrap -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	
+    <%--    css --%>
+    <link rel="stylesheet" href="css/admin.css">
 	<!-- index css -->
 	<link rel="stylesheet" href="./css/style.css" >
 
@@ -175,7 +176,7 @@
                                             <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
-                                            <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
+                                            <a href="edit-blog.jsp" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
@@ -218,26 +219,26 @@
 
     <!-- modal status -->
     <div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Status change</h6>
+        <h6 class="modal__title">Ẩn Tin Tức</h6>
 
-        <p class="modal__text">Are you sure about immediately change status?</p>
+        <p class="modal__text">Bạn có chắc muốn ẩn bài viết này?</p>
 
         <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Apply</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+            <button class="modal__btn modal__btn--apply" type="button">Ẩn</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
         </div>
     </div>
     <!-- end modal status -->
 
     <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">User delete</h6>
+        <h6 class="modal__title">Xóa Tin Tức</h6>
 
-        <p class="modal__text">Are you sure to permanently delete this user?</p>
+        <p class="modal__text">Bạn có chắc muốn xóa bài viết này?</p>
 
         <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Delete</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
         </div>
     </div>
     <!-- end modal delete -->
