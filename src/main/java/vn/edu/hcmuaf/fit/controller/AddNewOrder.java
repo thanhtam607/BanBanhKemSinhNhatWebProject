@@ -16,7 +16,12 @@ public class AddNewOrder extends HttpServlet {
         HttpSession session = request.getSession(true);
         Order order =(Order) session.getAttribute("order");
         OrderService.addOrder(order);
-        response.getWriter().println("thanh cong");
+        response.getWriter().println(order.getId());
+        response.getWriter().println(order.getNote());
+        response.getWriter().println(order.getTrangthai());
+        response.getWriter().println(order.getBuyDate());
+        response.getWriter().println(order.getUser().getTentk());
+        response.getWriter().println(order.getData().toString());
 //        request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }
 

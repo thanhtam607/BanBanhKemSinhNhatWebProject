@@ -2,22 +2,34 @@ package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.db.DBConnect;
+import vn.edu.hcmuaf.fit.model.Blog;
 import vn.edu.hcmuaf.fit.model.CTHD;
 import vn.edu.hcmuaf.fit.model.ItemProductInCart;
 import vn.edu.hcmuaf.fit.model.Order;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class OrderService {
-    public static List<Order> getOrderList(){
-        List<Order> orderList = new ArrayList<Order>();
-        return  orderList;
+    public static int getOrderListNumber(){
+        Statement statement = DBConnect.getInstall().get();
+        int result = 0;
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT count(*) from hoadon");
+                while (rs.next()){
+                    result = rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có đơn hàng");
+        }
+        return  result;
     }
     public static List<CTHD> getCTHDList(){
         List<CTHD> cthdList = new ArrayList<CTHD>();
@@ -25,12 +37,11 @@ public class OrderService {
     }
     public static void addOrder(Order order){
         Statement stm = DBConnect.getInstall().get();
-        List<Order> listOrder = getOrderList();
-        String mahd = "HD" + (listOrder.size() + 1);
+        String mahd = "HD" + (getOrderListNumber() + 1);
         order.setId(mahd);
         if(stm!= null) {
+            String sql = "insert into hoadon(MAHD, MAKH, GHICHU, THANHTIEN, TRANGTHAI) values ('" + order.getId() + "', '" + order.getUser().getId() + "', '" + order.getNote()  +  "'," + order.totalMoney() +","+order.getTrangthai()+");";
             try {
-                String sql = "insert into hoadon values ('" + mahd + "', '" + order.getUser().getId() + "', '" + order.getBuyDate()  + "', '" + order.getNote() + "'," + order.totalMoney() +","+0+");";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -65,5 +76,7 @@ public class OrderService {
 //            }
 //        }
 //    }
-
+    public static void main(String[] args) {
+        System.out.println(getOrderListNumber());
+    }
 }
