@@ -194,6 +194,7 @@
               <th scope="col">Địa chỉ</th>
               <th scope="col">Thành tiền</th>
               <th scope="col">Trạng thái đơn hàng</th>
+              <th scope="col">Xem chi tiết</th>
             </tr>
             </thead>
             <% List<receipt> receiptList = (List<receipt>) request.getAttribute("listreceipt-full");
@@ -202,8 +203,8 @@
             <tbody>
             <tr>
               <td><%=i+1%></td>
-              <td><%=rc.getDate()%></td>
-              <td><%=rc.getName()%></td>
+              <td><%=rc.getSdate()%></td>
+              <td><%=rc.getNamecustomer()%></td>
               <td><%=rc.getAddress()%></td>
               <td><%=rc.formatNum(rc.getTotal())%> VND</td>
               <td><select id="value" onclick="changeIcon()">
@@ -218,6 +219,11 @@
                   <i id="icon4"  class="fa fa-check-circle"></i>
               </a>
               </td>
+              <td> <div class="main__table-btns text-center">
+                <a href="cthd_Admin?mahd=<%=rc.getId()%>" class=" main__table-btn main__table-btn--edit">
+                  <i class="fa fa-eye"></i>
+                </a>
+              </div></td>
             </tr>
             </tbody>
               <% } %>

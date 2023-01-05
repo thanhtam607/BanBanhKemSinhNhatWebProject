@@ -4,15 +4,21 @@ import java.text.NumberFormat;
 
 public class receipt {
     String id;
-    String date;
-    String name;
+    String namecustomer;
+    String namecake;
+    String Sdate;
+    String phone;
+    String Edate;
     String address;
     int total;
 
-    public receipt(String id, String date, String name, String address, int total) {
+    public receipt(String id, String namecustomer, String namecake,String phone, String sdate, String edate, String address, int total) {
         this.id = id;
-        this.date = date;
-        this.name = name;
+        this.namecustomer = namecustomer;
+        this.namecake = namecake;
+        this.phone = phone;
+        Sdate = sdate;
+        Edate = edate;
         this.address = address;
         this.total = total;
     }
@@ -25,20 +31,44 @@ public class receipt {
         this.id = id;
     }
 
-    public String getDate() {
-        return date;
+    public String getNamecustomer() {
+        return namecustomer;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setNamecustomer(String namecustomer) {
+        this.namecustomer = namecustomer;
     }
 
-    public String getName() {
-        return name;
+    public String getNamecake() {
+        return namecake;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNamecake(String namecake) {
+        this.namecake = namecake;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSdate() {
+        return Sdate;
+    }
+
+    public void setSdate(String sdate) {
+        Sdate = sdate;
+    }
+
+    public String getEdate() {
+        return Edate;
+    }
+
+    public void setEdate(String edate) {
+        Edate = edate;
     }
 
     public String getAddress() {
@@ -56,6 +86,7 @@ public class receipt {
     public void setTotal(int total) {
         this.total = total;
     }
+
     public static String formatNum(int price){
         NumberFormat vn = NumberFormat.getInstance();
         String result = vn.format(price);
