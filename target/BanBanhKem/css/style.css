@@ -3839,3 +3839,26 @@ font-size: 24px;
 	overflow: hidden;
 	width: 180px;
 }
+/*Order*/
+.tab-content{
+	width: 70%;
+	margin-left: 15%;
+	margin-right: 15%;
+}
+.text-secondary{
+	margin-left: 30px;
+}
+.d-inline{
+	margin-right: 30px;
+}
+.text-left{
+	margin-left: 30px;
+}
+.container-91{
+	min-height: 50%;
+	background: #f5f5f5;
+}
+.text-dark{
+	font-size:16px;
+}
+
