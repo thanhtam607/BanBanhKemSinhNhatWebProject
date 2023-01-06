@@ -162,11 +162,14 @@
             <td><%=rcs.getEdate()%></td>
             <td><%=rcs.getNote()%></td>
             <td><%=rcs.formatNum(rcs.getPrice())%> VND</td>
-            <td><select class ="boder-none">
-              <option value="value01">Chờ xác nhận</option>
-              <option value="value02">Đang chuẩn bị</option>
-              <option value="value03">Đang vận chuyển</option>
-              <option value="value04">Giao hàng thành công</option>
+            <td> <select class="boder-none" id="rights" name="status">
+              <%List<String> listStatus = (List<String>) request.getAttribute("listStatus");
+                for(int j = 0; j < listStatus.size(); i++){
+                  if(rcs.getStatus() == 0){%>
+              <option selected value="<%=listStatus.get(j)%>"><%=listStatus.get(j)%></option>
+              <% } else { %>
+              <option  value="<%=listStatus.get(j)%>"><%=listStatus.get(j)%></option>
+              <%}}%>
             </select>
             </td>
           </tr>

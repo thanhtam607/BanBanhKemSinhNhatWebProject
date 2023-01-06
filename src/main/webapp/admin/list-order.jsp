@@ -216,31 +216,7 @@
 </main>
 <!-- end main content -->
 
-<!-- modal status -->
-<div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
-  <h6 class="modal__title">Ẩn Tin Tức</h6>
 
-  <p class="modal__text">Bạn có chắc muốn ẩn bài viết này?</p>
-
-  <div class="modal__btns">
-    <button class="modal__btn modal__btn--apply" type="button">Ẩn</button>
-    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-  </div>
-</div>
-<!-- end modal status -->
-
-<!-- modal delete -->
-<div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-  <h6 class="modal__title">Xóa Tin Tức</h6>
-
-  <p class="modal__text">Bạn có chắc muốn xóa bài viết này?</p>
-
-  <div class="modal__btns">
-    <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-  </div>
-</div>
-<!-- end modal delete -->
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

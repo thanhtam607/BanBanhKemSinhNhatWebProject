@@ -179,8 +179,7 @@
                                     <td>
                                         <div class="main__table-text"><%=pro.getComments().size()%></div>
                                     </td>
-                                    <%ProductDetails detail = pro.getDetail();
-                                       %>
+                                    <%ProductDetails detail = pro.getDetail();%>
                                     <td>
                                         <div class="main__table-text"><%=detail.getMfg()%></div>
                                     </td>

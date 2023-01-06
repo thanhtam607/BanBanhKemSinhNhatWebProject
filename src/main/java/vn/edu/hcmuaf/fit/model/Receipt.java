@@ -15,18 +15,20 @@ public class Receipt {
     int price;
     int total;
     double money;
+    int status;
     int state;
-    public Receipt(String id, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total) {
+    public Receipt(String id, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int status) {
         this.id = id;
         this.namecustomer = namecustomer;
         this.namecake = namecake;
         this.phone = phone;
-        Sdate = sdate;
-        Edate = edate;
+        this.Sdate = sdate;
+        this.Edate = edate;
         this.address = address;
         this.note = note;
         this.price = price;
         this.total = total;
+        this.status = status;
     }
 
     public Receipt(String id, String makh, String sdate, String note, double money, int state) {
@@ -149,6 +151,14 @@ public class Receipt {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public static String formatNum(int price){
