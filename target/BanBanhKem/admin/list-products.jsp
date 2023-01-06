@@ -1,6 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.ProductDetails" %>
+<%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -152,12 +153,15 @@
                                     <th>Tùy chọn</th>
                                 </tr>
                             </thead>
-                             <% for(int i = 0; i < productList.size(); i++) {
-                                  Product pro = productList.get(i);%>
+                             <% List<Product> listPa = (List<Product>) request.getAttribute("listPa");
+                                 for(int i = 0; i <listPa.size(); i++) {
+                                  Product pro = listPa.get(i);
+                             int tag =(int) request.getAttribute("tag")-1;
+                             %>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <div class="main__table-text"><%=i+1%></div>
+                                        <div class="main__table-text"><%=tag*15+1+i%></div>
                                     </td>
                                     <td>
                                         <div class="main__user">
@@ -188,9 +192,7 @@
                                     <% } %>
                                         <td>
                                             <div class="main__table-btns">
-                                                <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                    <i class="fa fa-lock"></i>
-                                                </a>
+
                                                 <a href="edit-product.jsp" class="main__table-btn main__table-btn--edit">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
@@ -198,6 +200,18 @@
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </div>
+                                            <!-- modal delete -->
+                                            <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+                                                <h6 class="modal__title">Xóa Sản Phẩm</h6>
+
+                                                <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này?</p>
+
+                                                <div class="modal__btns">
+                                                    <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
+                                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                </div>
+                                            </div>
+                                            <!-- end modal delete -->
                                     </td>
                                 </tr>
                             </tbody>
@@ -210,18 +224,28 @@
                 <!-- paginator -->
                 <div class="col-12">
                     <div class="paginator-wrap">
-                        <span><%=productList.size()%>/<%=productList.size()%> sản phẩm</span>
+                        <span><%=listPa.size()%>/<%=productList.size()%> sản phẩm</span>
 
                         <ul class="paginator">
+                            <% int tag = (int) request.getAttribute("tag");%>
                             <li class="paginator__item paginator__item--prev">
-                                <a href="#"><i class="fa fa-chevron-left"></i></a>
+                                <a href="ListProduct_Admin?page=<%=tag-1%>"><i class="fa fa-chevron-left"></i></a>
                             </li>
-                            <li class="paginator__item"><a href="#">1</a></li>
-                            <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
-                            <li class="paginator__item"><a href="#">3</a></li>
-                            <li class="paginator__item"><a href="#">4</a></li>
+                            <% int endPage = (int) request.getAttribute("endPage");
+                                for(int i = tag-1; i <= tag+2 ; i++){
+                                    if(i<1){
+                                        continue;
+                                    }
+                                    if(i==tag){%>
+                            <li class="paginator__item paginator__item--active"><a href="ListProduct_Admin?page=<%=i%>"><%=tag%></a></li>
+                            <%} else{%>
+                            <li class="paginator__item"><a href="ListProduct_Admin?page=<%=i%>"><%=i%></a></li>
+                            <%}}%>
                             <li class="paginator__item paginator__item--next">
-                                <a href="#"><i class="fa fa-chevron-right"></i></a>
+                                <a href="ListProduct_Admin?page=<%=tag+1%>"><i class="fa fa-chevron-right"></i></a>
+                            </li>
+
+
                             </li>
                         </ul>
                     </div>
@@ -234,33 +258,20 @@
 
     <!-- modal status -->
     <div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Khóa Sản Phẩm</h6>
+
 
         <p class="modal__text">Bạn có chắc muốn khóa sản phẩm này?</p>
 
         <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Khóa</button>
+
             <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
         </div>
     </div>
     <!-- end modal status -->
 
-    <!-- modal delete -->
-    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Xóa Sản Phẩm</h6>
 
-        <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này?</p>
 
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
-    <!-- end modal delete -->
-
-     <!-- Back to Top -->
-     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
+     
     <!-- JS -->
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>

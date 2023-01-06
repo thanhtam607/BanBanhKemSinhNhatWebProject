@@ -558,6 +558,7 @@ function checkCode(c1, c2) {
         }).then((result) => {
             if (result.isConfirmed) {
                 location.reload();
+
         }
             });
         return false;

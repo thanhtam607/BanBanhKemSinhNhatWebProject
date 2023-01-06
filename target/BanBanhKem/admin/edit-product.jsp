@@ -114,10 +114,10 @@
                                 <img src="img/user.svg" alt="">
                             </div>
                             <!-- or red -->
-                            <div class="profile__meta profile__meta--green">
-                                <h3>John Doe <span>(Approved)</span></h3>
-                                <span>HotFlix ID: 23562</span>
-                            </div>
+<%--                            <div class="profile__meta profile__meta--green">--%>
+<%--                                <h3>John Doe <span>(Approved)</span></h3>--%>
+<%--                                <span>HotFlix ID: 23562</span>--%>
+<%--                            </div>--%>
                         </div>
                         <!-- end profile user -->
 
