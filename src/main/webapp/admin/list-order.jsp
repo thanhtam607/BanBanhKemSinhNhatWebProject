@@ -8,306 +8,254 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Admin | Shop Bánh Kem</title>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="" name="keywords">
-  <meta content="" name="description">
-
-  <!-- Favicon -->
-  <link href="img/favicon.ico" rel="icon">
-
-  <!-- Google Web Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Icon Font Stylesheet -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- Libraries Stylesheet -->
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+  <link rel="stylesheet" href="css/select2.min.css">
+  <link rel="stylesheet" href="css/ionicons.min.css">
+
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+
+  <!-- boostrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <%--    css --%>
+  <link rel="stylesheet" href="css/admin.css">
+  <!-- index css -->
+  <link rel="stylesheet" href="./css/style.css" >
+
   <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-  <!-- Customized Bootstrap Stylesheet -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Template Stylesheet -->
-  <link href="css/style.css" rel="stylesheet">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="Dmitry Volkov">
+  <title>Admin | Shop Bánh Kem</title>
 </head>
 
 <body>
-<% User auth = (User) session.getAttribute("auth");%>
-<div class="container-fluid position-relative d-flex p-0">
-  <!-- Spinner Start -->
-  <div id="spinner" class="show bg-pink position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
+<!-- header -->
+<header class="header">
+  <div class="header__content">
+    <!-- header logo -->
+    <a href="./ListReceipt_Admin" class="header__logo">
+      <img src="../img/logo_web.jpg" alt="">
+    </a>
+    <!-- end header logo -->
+
+    <!-- header menu btn -->
+    <button class="header__btn" type="button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <!-- end header menu btn -->
   </div>
-  <!-- Spinner End -->
+</header>
+<!-- end header -->
 
+<!-- Sidebar Start -->
+<div class="sidebar pe-4 pb-3">
+  <nav class="navbar bg-pink navbar-dark">
 
-  <!-- Sidebar Start -->
-  <div class="sidebar pe-4 pb-3">
-    <nav class="navbar bg-pink navbar-dark">
+    <div class="d-flex align-items-center ms-4 mb-4">
+      <div class="position-relative">
+        <i class="fa fa-user icon__user"></i>
+        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+      </div>
+      <div class="ms-3">
+        <h6 class="mb-0">Thanh Thùy</h6>
+        <span>Admin</span>
+      </div>
+    </div>
+    <div class="navbar-nav w-100">
+      <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+      <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
+      <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
+      <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+      <a href="./ListReceipt_full_Admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
+      <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
+      <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
+      <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
       <!--  -->
-      <div class="d-flex align-items-center ms-4 mb-4">
-        <div class="position-relative">
-          <i class="fa fa-user icon__user"></i>
-          <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-        </div>
-        <div class="ms-3">
-          <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
-          <span>Admin</span>
-        </div>
-      </div>
-      <div class="navbar-nav w-100">
-        <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
-        <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
-        <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-        <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
-        <a href="./ListReceipt_full_Admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
-        <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-        <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
-        <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
-      </div>
-    </nav>
-  </div>
-  <!-- Sidebar End -->
-
-
-  <!-- Content Start -->
-  <div class="content">
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand bg-pink navbar-dark sticky-top px-4 py-0">
-      <a href="admin-web.jsp" class="navbar-brand d-flex d-lg-none me-4">
-        <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
-      </a>
-      <a href="#" class="sidebar-toggler flex-shrink-0">
-        <i class="fa fa-bars"></i>
-      </a>
-      <form class="d-none d-md-flex ms-4">
-        <input class="form-control bg-pink " type="search" placeholder="Tìm Kiếm">
-      </form>
-      <div class="navbar-nav align-items-center ms-auto">
-
-        <div class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            <i class="fa fa-bell me-lg-2"></i>
-            <span class="d-none d-lg-inline-flex">Thông báo</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
-            <a href="#" class="dropdown-item">
-              <h6 class="fw-normal mb-0">Cập nhật thông tin</h6>
-              <small>15 phút trước</small>
-            </a>
-            <hr class="dropdown-divider">
-            <a href="#" class="dropdown-item">
-              <h6 class="fw-normal mb-0">Thêm người dùng mới</h6>
-              <small>15 phút trước</small>
-            </a>
-            <hr class="dropdown-divider">
-            <a href="#" class="dropdown-item">
-              <h6 class="fw-normal mb-0">Đổi mật khẩu</h6>
-              <small>15 phút trước</small>
-            </a>
-            <hr class="dropdown-divider">
-            <a href="#" class="dropdown-item text-center">Xem tất cả</a>
-          </div>
-        </div>
-        <div class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            <i class="fa fa-user icon__user__small"></i>
-            <span class="d-none d-lg-inline-flex"><%= auth != null ? auth.getTentk():"Đăng nhập"%></span>
-          </a>
-          <%if(auth != null) {%>
-          <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
-                      <a href="#" class="dropdown-item">Thông tin của tôi</a>
-                      <a href="#" class="dropdown-item">Cài đặt</a>
-                      <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
-          </div>
-          <%}%>
-        </div>
-      </div>
-    </nav>
-    <!-- Navbar End -->
-
-
-    <!-- Sale & Revenue Start -->
-    <div class="container-fluid pt-4 px-4">
-      <div class="row g-4">
-
-        <div class="col-sm-6 col-xl-3">
-          <div class="bg-pink rounded d-flex align-items-center justify-content-between p-4">
-            <i class="fa fa-chart-bar fa-3x text-primary"></i>
-            <div class="ms-3">
-              <p class="mb-2">Tất cả đơn hàng</p>
-              <h6 class="mb-0">123 </h6>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-xl-3">
-          <div class="bg-pink rounded d-flex align-items-center justify-content-between p-4">
-            <i class="fa fa-chart-area fa-3x text-primary"></i>
-            <div class="ms-3">
-              <p class="mb-2">Sản phẩm bán được</p>
-              <h6 class="mb-0">100 </h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-          <div class="bg-pink rounded d-flex align-items-center justify-content-between p-4">
-            <i class="fa fa-chart-line fa-3x text-primary"></i>
-            <div class="ms-3">
-              <p class="mb-2">Doanh thu hôm nay</p>
-              <h6 class="mb-0">1.234.000 </h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-          <div class="bg-pink rounded d-flex align-items-center justify-content-between p-4">
-            <i class="fa fa-chart-pie fa-3x text-primary"></i>
-            <div class="ms-3">
-              <p class="mb-2">Doanh thu tháng này</p>
-              <h6 class="mb-0">4.234.000 </h6>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-    <!-- Sale & Revenue End -->
+  </nav>
+</div>
+<!-- Sidebar End -->
 
-    <!-- Recent Sales Start -->
-    <div class="container-fluid pt-4 px-4">
-      <div class="bg-pink text-center rounded p-4">
-        <div class="d-flex align-items-center justify-content-between mb-4">
-          <h6 class="mb-0">Tất cả hóa đơn</h6>
+<!-- main content -->
+<% List<Receipt> receiptList = (List<Receipt>) request.getAttribute("listreceipt-full");%>
+<main class="main bg-white">
+  <div class="container-fluid bg-white">
+    <div class="row">
+      <!-- main title -->
+      <div class="col-12">
+        <div class="main__title">
+          <h2>Danh sách đơn hàng</h2>
+          <span class="main__title-stat"><%=receiptList.size()%></span>
+          <div class="main__title-wrap">
+            <!-- filter sort -->
+            <div class="filter" id="filter__sort">
+              <span class="filter__item-label">Sắp xếp:</span>
+
+              <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <input type="button" value="Tên">
+                <span></span>
+              </div>
+
+              <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
+                <li>Giá</li>
+                <li>Ngày mua</li>
+
+              </ul>
+            </div>
+            <!-- end filter sort -->
+
+            <!-- search -->
+            <form action="#" class="main__title-form">
+              <input type="text" placeholder="Tìm kiếm..">
+              <button type="button">
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
+            <!-- end search -->
+          </div>
         </div>
-        <div class="table-responsive">
-          <table class="table text-start align-middle table-bordered table-hover mb-0">
+      </div>
+      <!-- end main title -->
+
+      <!-- users -->
+      <div class="col-12 bg-pink">
+        <div class="main__table-wrap">
+          <table class="main__table">
             <thead>
-            <tr class="text-black">
-              <th scope="col">STT</th>
-              <th scope="col">Ngày đặt hàng</th>
-              <th scope="col">Khách hàng</th>
-              <th scope="col">Địa chỉ</th>
-              <th scope="col">Thành tiền</th>
-              <th scope="col">Trạng thái đơn hàng</th>
-              <th scope="col">Xem chi tiết</th>
+            <tr>
+              <th>STT</th>
+              <th>Khách hàng</th>
+              <th>Ngày đặt hàng</th>
+              <th>Địa chỉ</th>
+              <th >Thành tiền</th>
+              <th>Trạng thái đơn hàng</th>
+              <th>Xem chi tiết</th>
             </tr>
             </thead>
-            <% List<Receipt> receiptList = (List<Receipt>) request.getAttribute("listreceipt-full");
-              for(int i = 0; i < receiptList.size(); i++){
-                Receipt rc = receiptList.get(i);%>
+            <%for(int i = 0; i < receiptList.size(); i++){
+            Receipt rc = receiptList.get(i);%>
             <tbody>
             <tr>
-              <td><%=i+1%></td>
-              <td><%=rc.getSdate()%></td>
-              <td><%=rc.getNamecustomer()%></td>
-              <td><%=rc.getAddress()%></td>
-              <td><%=rc.formatNum(rc.getTotal())%> VND</td>
-              <td><select id="value" onclick="changeIcon()">
-                <option  value="value01">Chờ xác nhận</option>
-                <option  value="value02">Đang chuẩn bị</option>
-                <option  value="value03">Đang vận chuyển</option>
-                <option  value="value04">Giao hàng thành công</option>
-              </select> &ensp; <a class="main__table-btn main__table-btn--edit">
-                  <i id="icon1" class="fa fa-envelope-open"></i>
-                  <i id="icon2" class="fa fa-cube"></i>
-                  <i id="icon3"  class="fa fa-bus"></i>
-                  <i id="icon4"  class="fa fa-check-circle"></i>
-              </a>
+              <td>
+                <div class="main__table-text"><%=i+1%></div>
               </td>
-              <td> <div class="main__table-btns text-center">
-                <a href="cthd_Admin?mahd=<%=rc.getId()%>" class=" main__table-btn main__table-btn--edit">
-                  <i class="fa fa-eye"></i>
-                </a>
-              </div></td>
+              <td>
+                <div class="main__user">
+
+                  <div class="main__meta">
+                    <h3><%=rc.getNamecustomer()%></h3>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="main__table-text"><%=rc.getSdate()%></div>
+              </td>
+              <td>
+                <div class="main__table-text"><%=rc.getAddress()%></div>
+              </td>
+              <td>
+                <div class="main__table-text"><%=rc.formatNum(rc.getPrice())%> VND</div>
+              </td>
+              <td>
+                <div class="main__table-text main__table-text--green">Đang chuẩn bị</div>
+              </td>
+              <td>
+                  <a href="cthd_Admin?mahd=<%=rc.getId()%>" class="main__table-btn main__table-btn--edit">
+                    <i class="fa fa-eye text-center"></i>
+                  </a>
+                </div>
+              </td>
             </tr>
             </tbody>
-              <% } %>
+            <% } %>
           </table>
         </div>
       </div>
-    </div>
-    <!-- Recent Sales End -->
+      <!-- end users -->
 
+      <!-- paginator -->
+      <div class="col-12">
+        <div class="paginator-wrap">
+          <span><%=receiptList.size()%>/<%=receiptList.size()%> Bài viết</span>
 
-    <!-- Widgets Start -->
-
-    <!-- Widgets End -->
-
-
-    <!-- Footer Start -->
-    <div class="container-fluid pt-4 px-4">
-      <div class="bg-pink rounded-top p-4">
-        <div class="row">
-          <div class="col-12 col-sm-6 text-center text-sm-start">
-            &copy; <a href="#">Lập trình web thầy Phan Đình Long  Khoa CNTT - ĐH Nông Lâm TP HCM</a>
-          </div>
-          <div class="col-12 col-sm-6 text-center text-sm-end">
-            <a href="https://htmlcodex.com">Nhóm 27</a>
-          </div>
+          <ul class="paginator">
+            <li class="paginator__item paginator__item--prev">
+              <a href="#"><i class="fa fa-chevron-left"></i></a>
+            </li>
+            <li class="paginator__item"><a href="#">1</a></li>
+            <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
+            <li class="paginator__item"><a href="#">3</a></li>
+            <li class="paginator__item"><a href="#">4</a></li>
+            <li class="paginator__item paginator__item--next">
+              <a href="#"><i class="fa fa-chevron-right"></i></a>
+            </li>
+          </ul>
         </div>
       </div>
+      <!-- end paginator -->
     </div>
-    <!-- Footer End -->
   </div>
-  <!-- Content End -->
+</main>
+<!-- end main content -->
 
+<!-- modal status -->
+<div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
+  <h6 class="modal__title">Ẩn Tin Tức</h6>
 
-  <!-- Back to Top -->
-  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+  <p class="modal__text">Bạn có chắc muốn ẩn bài viết này?</p>
+
+  <div class="modal__btns">
+    <button class="modal__btn modal__btn--apply" type="button">Ẩn</button>
+    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+  </div>
 </div>
-<script>
-  <% for(int i = 0; i < receiptList.size(); i++){
-    Receipt rct = receiptList.get(i);%>
-    function changeIcon() {
-    var x = document.getElementById('value');
-    var y1 = document.getElementById('icon1');
-    var y2 = document.getElementById('icon2');
-    var y3 = document.getElementById('icon3');
-    var y4 = document.getElementById('icon4');
+<!-- end modal status -->
 
-    if (x.value === 'value01') {
-      y1.style.color = '#0edc29';
-      y2.style.color = '#a49a9d';
-      y3.style.color = '#a49a9d';
-      y4.style.color = '#a49a9d';
-    } else if (x.value === 'value02') {
-      y2.style.color = '#0edc29';
-      y1.style.color = '#a49a9d';
-      y3.style.color = '#a49a9d';
-      y4.style.color = '#a49a9d';
-    } else if (x.value === 'value03') {
-      y3.style.color = '#0edc29';
-      y2.style.color = '#a49a9d';
-      y1.style.color = '#a49a9d';
-      y4.style.color = '#a49a9d';
-    } else {
-      y4.style.color = '#0edc29';
-      y2.style.color = '#a49a9d';
-      y3.style.color = '#a49a9d';
-      y1.style.color = '#a49a9d';
-    }
-  }
-  <% } %>
-  </script>
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="lib/chart/chart.min.js"></script>
-<script src="lib/easing/easing.min.js"></script>
-<script src="lib/waypoints/waypoints.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="lib/tempusdominus/js/moment.min.js"></script>
-<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- modal delete -->
+<div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+  <h6 class="modal__title">Xóa Tin Tức</h6>
 
-<!-- Template Javascript -->
-<script src="./js/main.js"></script>
+  <p class="modal__text">Bạn có chắc muốn xóa bài viết này?</p>
+
+  <div class="modal__btns">
+    <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
+    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+  </div>
+</div>
+<!-- end modal delete -->
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+<!-- JS -->
+<script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/jquery.mousewheel.min.js"></script>
+<script src="js/jquery.mCustomScrollbar.min.js"></script>
+<script src="js/select2.min.js"></script>
+<script src="js/admin.js"></script>
+
+
 </body>
+
 
 </html>
