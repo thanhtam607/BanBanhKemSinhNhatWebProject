@@ -124,13 +124,13 @@
                   for (int i = 0; i < 1; i++){
                     Receipt rc = receipts.get(i);%>
                 <div class="col-12 border-bottom margin-top-50px">
-                  <i class="fa fa-user-circle"></i> <label for="name">Tên khách hàng: </label> &ensp;<span class="text-uppercase text-pink" id="name"><%=rc.getNamecustomer()%></span>
+                  <i class="fa fa-user-circle"></i> <label for="name" class="font-size-20">Tên khách hàng: </label> &ensp;<span class="text-uppercase text--green font-size-20" id="name"><%=rc.getNamecustomer()%></span>
                 </div><br>
                 <div class="col-12 border-bottom margin-top-50px">
-                  <i class="fa fa-phone"></i> <label for="phone">Số điện thoại: </label> &ensp;<span class="text-uppercase text-pink" id="phone"><%=rc.getPhone()%></span>
+                  <i class="fa fa-phone"></i> <label for="phone" class="font-size-20">Số điện thoại: </label> &ensp;<span class="text-uppercase text--green font-size-20" id="phone"><%=rc.getPhone()%></span>
                 </div><br>
                 <div class="col-12 border-bottom margin-top-50px">
-                  <i class="fa fa-home"></i> <label for="address">Địa chỉ: </label> &ensp;<span class="text-uppercase text-pink" id="address"><%=rc.getAddress()%></span>
+                  <i class="fa fa-home"></i> <label for="address" class="font-size-20">Địa chỉ: </label> &ensp;<span class="text-uppercase text--green font-size-20" id="address"><%=rc.getAddress()%></span>
                 </div>
                 <% } %>
               </div>
@@ -162,7 +162,7 @@
             <td><%=rcs.getEdate()%></td>
             <td><%=rcs.getNote()%></td>
             <td><%=rcs.formatNum(rcs.getPrice())%> VND</td>
-            <td><select>
+            <td><select class ="boder-none">
               <option value="value01">Chờ xác nhận</option>
               <option value="value02">Đang chuẩn bị</option>
               <option value="value03">Đang vận chuyển</option>

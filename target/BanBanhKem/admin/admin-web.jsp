@@ -209,18 +209,7 @@
                                     <td><%=rc.getNamecustomer()%></td>
                                     <td><%=rc.getAddress()%></td>
                                     <td><%=rc.formatNum(rc.getTotal())%> VND</td>
-                                    <td><select>
-                                        <option value="value01">Chờ xác nhận</option>
-                                        <option value="value02">Đang chuẩn bị</option>
-                                        <option value="value03">Đang vận chuyển</option>
-                                        <option value="value04">Giao hàng thành công</option>
-                                    </select> &ensp; <a class="main__table-btn main__table-btn--edit">
-                                        <i id="icon1" class="fa fa-envelope-open"></i>
-                                        <i id="icon2" class="fa fa-cube"></i>
-                                        <i id="icon3"  class="fa fa-bus"></i>
-                                        <i id="icon4"  class="fa fa-check-circle"></i>
-                                    </a>
-                                    </td>
+                                    <td>Đang chuẩn bị</td>
                                     <td> <div class="main__table-btns text-center">
                                         <a href="cthd_Admin?mahd=<%=rc.getId()%>" class=" main__table-btn main__table-btn--edit">
                                             <i class="fa fa-eye"></i>
