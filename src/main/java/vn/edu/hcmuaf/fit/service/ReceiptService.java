@@ -14,11 +14,11 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("select hoadon.mahd, sanpham.TenSP, khachhang.TENKH,khachhang.sdt, khachhang.DIACHI, hoadon.NGAYLAPHD, giaohang.NGAYGIAO, hoadon.THANHTIEN, sanpham.gia, hoadon.ghichu " +
-                        "from sanpham, hoadon, khachhang, cthd, giaohang " +
-                        "where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH ORDER BY hoadon.NGAYLAPHD desc;");
+                ResultSet rs = statement.executeQuery("select hoadon.mahd, khachhang.TENKH, sanpham.TenSP, khachhang.sdt, hoadon.NGAYLAPHD, giaohang.NGAYGIAO, khachhang.DIACHI, hoadon.ghichu, sanpham.gia, hoadon.THANHTIEN,  hoadon.TRANGTHAI" +
+                        "                        from sanpham, hoadon, khachhang, cthd, giaohang" +
+                        "                        where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH group by hoadon.MAHD ORDER BY hoadon.NGAYLAPHD desc;");
                 while (rs.next()) {
-                    Receipt rc = new Receipt(rs.getString(1), rs.getString(3), rs.getString(2),rs.getString(4), rs.getString(6), rs.getString(7), rs.getString(5),rs.getString(10), rs.getInt(9), rs.getInt(8));
+                    Receipt rc = new Receipt(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),rs.getString(8), rs.getInt(9), rs.getInt(10), rs.getInt(11));
                     list.add(rc);
                 }
             } catch (SQLException e) {

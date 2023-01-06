@@ -15,18 +15,20 @@ public class Receipt {
     int price;
     int total;
     double money;
+    int status;
     int state;
-    public Receipt(String id, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total) {
+    public Receipt(String id, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int status) {
         this.id = id;
         this.namecustomer = namecustomer;
         this.namecake = namecake;
         this.phone = phone;
-        Sdate = sdate;
-        Edate = edate;
+        this.Sdate = sdate;
+        this.Edate = edate;
         this.address = address;
         this.note = note;
         this.price = price;
         this.total = total;
+        this.status = status;
     }
 
     public Receipt(String id, String makh, String sdate, String note, double money, int state) {
@@ -151,43 +153,29 @@ public class Receipt {
         this.total = total;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public static String formatNum(int price){
         NumberFormat vn = NumberFormat.getInstance();
         String result = vn.format(price);
         return result;
     }
 
-//    @Override
-//    public String toString() {
-//        return "receipt{" +
-//                "id='" + id + '\'' +
-//                ", idcustomer='" + makh + '\'' +
-//                ", Sdate='" + Sdate + '\'' +
-//                ", ghichu='" + note + '\'' +
-//                ", thanhtien='" + money + '\'' +
-//                ", trangthai=" + getState() +
-//                '}';
-//    }
-
-
     @Override
     public String toString() {
-        return "Receipt{" +
+        return "receipt{" +
                 "id='" + id + '\'' +
-                ", namecustomer='" + namecustomer + '\'' +
-                ", makh='" + makh + '\'' +
-                ", namecake='" + namecake + '\'' +
+                ", idcustomer='" + makh + '\'' +
                 ", Sdate='" + Sdate + '\'' +
-                ", phone='" + phone + '\'' +
-                ", Edate='" + Edate + '\'' +
-                ", address='" + address + '\'' +
-                ", note='" + note + '\'' +
-                ", price=" + price +
-                ", total=" + total +
-                ", money=" + money +
-                ", state=" + state +
+                ", ghichu='" + note + '\'' +
+                ", thanhtien='" + money + '\'' +
+                ", trangthai=" + getState() +
                 '}';
     }
-
-
 }
