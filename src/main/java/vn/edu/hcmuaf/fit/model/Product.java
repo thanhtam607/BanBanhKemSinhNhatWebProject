@@ -121,9 +121,14 @@ public class Product {
                 '}';
     }
 
-//    public String getStatus(){
-//        if()
-//    }
+    public String getStatus(){
+        if(getDetail().getInventory()>1){
+            return "Còn hàng";
+        }
+        else{
+            return "Hết hàng";
+        }
+    }
 
     public static String formatNum(int price){
         DecimalFormat df = new DecimalFormat("###,###,###");

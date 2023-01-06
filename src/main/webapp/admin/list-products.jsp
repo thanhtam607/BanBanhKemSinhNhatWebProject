@@ -193,7 +193,7 @@
                                         <td>
                                             <div class="main__table-btns">
 
-                                                <a href="Edit_Product?id=<%=pro.getId()%>" class="main__table-btn main__table-btn--edit">
+                                                <a href="Edit_Product?idP=<%=pro.getId()%>" class="main__table-btn main__table-btn--edit">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
