@@ -715,6 +715,7 @@ function addOrder(){
                 "                                </div>\n" +
                 "                                <button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>\n" +
                 "                            ";
+
             Swal.fire({
                 text:'Đặt hàng thành công!',
                 icon: 'success',

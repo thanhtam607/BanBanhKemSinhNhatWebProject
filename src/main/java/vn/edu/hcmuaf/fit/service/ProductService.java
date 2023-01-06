@@ -22,18 +22,17 @@ public class ProductService {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
                     ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
-
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
                    ProductDetails detail = new ProductDetails();
                     String s1 = rs.getString(1);
-
-                    while (rsImg.next()){
+                    while (rsImg.next()) {
                         String s2 = rsImg.getString(1);
-                        if(s1.equals(s2)){
+                        if (s1.equals(s2)) {
                             listImg.add(rsImg.getString(2));
                         }
                     }
+
                     while (rsCmt.next()) {
                         String s2 = rsCmt.getString(1);
                         if (s1.equals(s2)) {
@@ -272,21 +271,30 @@ public class ProductService {
         }
         return res;
     }
+    public static void updateProduct(String masp,String maLB, String tensp, String kichthuoc, int khoiluong, String mota, String noidung, int gia ){
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE sanpham set  MaLB='" +maLB+ "', TenSP= '"+ tensp+ "', KichThuoc= '" + kichthuoc+ "', KhoiLuong= "+ khoiluong+", MoTa = '"+ mota + "', NoiDung= '"+ noidung+"', Gia= "+gia+" where MaSP = '"+masp+"';";
 
+        try {
+            statement.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) throws SQLException {
-        List<Product> li = ProductService.getHotProduct();
-        List<Product> lir = ProductService.getData();
-
-        List<LoaiBanh> lb = getListType();
-//        System.out.println(lb);
-        for(Product p: lir){
-                   System.out.println(p.getListImg());
+//        updateProduct("B001", "LB01","Bánh cánh đồng hoa", "Vừa",500,"Bánh kem phong cách hoa Hàn Quốc, ngon và đẹp, chất lượng luôn tươi mới, nguyên liệu hoàn toàn cao cấp được chọn lọc kỹ càng, đảm bảo an toàn vệ sinh thực phẩm, bảo vệ sức khỏe cho người dùng đó chính là điều mà chúng tôi muốn mang lại cho quý khách hàng. Phần hoa của bánh sẽ được làm từ kem bơ, kem tươi tạo nên vị bánh cũng rất ấn tượng, ngọt dịu, không gây ngán. Các thợ làm bánh phải bắt từng bông hoa, để cho thật lạnh để hoa đông cứng rồi mới sắp xếp lên bánh cho hài hoà. Vì vậy cần rất nhiều thời gian, sự kiên nhẫn và cả sự khéo léo. Mỗi chiếc bánh thật sự là một tác phẩm nghệ thuật.","Trong những dịp lễ, ngày kỷ niệm hay sinh nhật, không cần một món quà quá khoa trương, đơn giản chỉ là một chiếc bánh kem được trang trí bằng những bông hoa sắc màu, bắt mắt cũng khiến bữa tiệc trở nên lung linh mà người nhận thì vui vẻ rồi. Bánh thích hợp tặng chị gái, mẹ, cô giáo.",450000);
+//        List<Product> li = ProductService.getHotProduct();
+//               for(Product p: li){
+//            System.out.println(p.getId());
 //          System.out.println(getListType().size());
-           }
+//          Product p = ProductService.findById("B001");
+//          System.out.println(p.getListImg().get(0));
 //        System.out.println(getLastComment("B001").getBinhLuan());
 //       System.out.println(getPaginationPage(1).toString());
         // addComment(new Comment("B002", "Thanh Tâm","Bánh mềm mịn vô cùng hòa quyện với  phần kem mịn màng, vị ngọt thanh vừa ăn lại có thêm phần tiramisu khá lạ miệng khiến cho người ăn cảm thấy thích thú.","2022/12/8"), "AD02");
-    }
+
+}
 
 }

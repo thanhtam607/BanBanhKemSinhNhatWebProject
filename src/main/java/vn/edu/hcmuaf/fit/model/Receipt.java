@@ -9,14 +9,14 @@ public class Receipt {
     String namecake;
     String Sdate;
     String phone;
-    String note;
     String Edate;
     String address;
+    String note;
+    int price;
     int total;
     double money;
     int state;
-
-    public Receipt(String id, String namecustomer, String namecake, String phone, String sdate, String edate, String address, int total) {
+    public Receipt(String id, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total) {
         this.id = id;
         this.namecustomer = namecustomer;
         this.namecake = namecake;
@@ -24,6 +24,8 @@ public class Receipt {
         Sdate = sdate;
         Edate = edate;
         this.address = address;
+        this.note = note;
+        this.price = price;
         this.total = total;
     }
 
@@ -130,6 +132,15 @@ public class Receipt {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getTotal() {
