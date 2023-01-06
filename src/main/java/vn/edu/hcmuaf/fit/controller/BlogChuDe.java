@@ -15,7 +15,7 @@ public class BlogChuDe extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Blog> listcd = BlogService.getChuDe(request.getParameter("chude"));
         request.setAttribute("list", listcd);
-        request.getRequestDispatcher("BlogFilter.jsp").forward(request,response);
+        request.getRequestDispatcher("blog-filter.jsp").forward(request,response);
     }
 
     @Override

@@ -86,7 +86,7 @@
             <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
             <a href="./ListCustomer" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
             <a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Tin Tức</a>
-            <a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
+            <a href="./ListReceipt_full_Admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
             <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
             <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
             <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
@@ -177,7 +177,7 @@
                         <div class="col-12">
                             <div class="row">
                                 <!-- details form -->
-                                <div class="col-12 col-lg-6">
+                                <div class="col-12">
                                     <form action="#" class="form form--profile">
                                         <div class="row row--form">
                                             <div class="col-12">
@@ -451,22 +451,21 @@
     <div id="modal-view" class="zoom-anim-dialog mfp-hide modal modal--view">
         <div class="comments__autor">
             <img class="comments__avatar" src="img/user.svg" alt="">
-            <span class="comments__name"><%=customer.getTENKH()%></span>
-            <%for(Receipt r: receipts){%>
-            <span class="comments__time"><%=r.getSdate()%></span>
+            <span class="comments__name">Thanh Thùy</span>
+
+            <span class="comments__time">2022/12/01</span>
         </div>
-        <p class="comments__text">Tên Sản Phẩm: <%=r.getNamecake()%></p>
-        <p class="comments__text">Địa chỉ giao: <%=r.getAddress()%></p>
-        <p class="comments__text">Trạng thái: <%=r.getState()%></p>
-        <%}%>
-<%--        <div class="comments__actions">--%>
-<%--            <div class="comments__rate">--%>
-<%--                <span><i class="fa fa-thumbs-up"></i>12</span>--%>
+        <p class="comments__text">Tên Sản Phẩm: Bánh </p>
+        <p class="comments__text">Địa chỉ giao: TPHCM</p>
+        <p class="comments__text">Trạng thái: Thah Công</p>
 
-<%--                <span>7<i class="fa fa-thumbs-down"></i></span>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+        <div class="comments__actions">
+            <div class="comments__rate">
+                <span><i class="fa fa-thumbs-up"></i>12</span>
 
+                <span>7<i class="fa fa-thumbs-down"></i></span>
+            </div>
+        </div>
     </div>
     <!-- end modal view -->
 

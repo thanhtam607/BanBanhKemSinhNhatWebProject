@@ -3,6 +3,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -34,7 +36,8 @@
 </head>
 
 <body>
-<% User auth = (User) session.getAttribute("auth");%>
+<% User auth = (User) session.getAttribute("auth");
+    Customer customer = (Customer) session.getAttribute("cust");%>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -56,7 +59,7 @@
 
             <%}%>
             <%Order order = (Order) session.getAttribute("order");%>
-            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro"><%= order != null ? order.totalProduct():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
@@ -99,47 +102,7 @@
 <!-- Humberger End -->
 <!-- Header Section Begin -->
 <header class="header">
-    <!-- rang cua -->
-
-    <div class="rang_cua"></div>
-
-    <!-- rang cua -->
-    <div class="header__top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="header__top__left">
-                        <ul>
-                            <li><i class="fa fa-envelope"></i>tiembanhhanhphuc@gmail.com</li>
-                            <li>Miễn phí giao hàng nội thành TP.HCM</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="header__top__right">
-                        <div class="header__top__right__social">
-                            <a href="https://www.facebook.com/mai.thuan.52438/" target="blank"><i class="fa fa-facebook"></i></a>
-                            <a href="https://www.messenger.com/t/100017755062615" target="blank"><i class="fa fa-comment"></i></a>
-                            <a href="https://www.instagram.com/maizecorn1542/" target="blank"><i class="fa fa-instagram"></i></a>
-                        </div>
-                        <div class="header__top__right__auth">
-                            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
-                            <% if(auth != null) { %>
-                            <div class="header__top__right__auth__dropdown">
-                                <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
-                                <% if(auth.checkRole(1)) { %>
-                                <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
-                                <%}%>
-                                <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
-                            </div>
-                            <%}%>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <jsp:include page="hearder-top.jsp"></jsp:include>
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -167,7 +130,7 @@
                         <li><a href="Favorite"><i class="fa fa-heart"></i> <span id="totalFav1"><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
 
                         <%}%>
-                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro1"><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -232,90 +195,53 @@
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
-<%--            <div class="row">--%>
-<%--                <div class="col-lg-12">--%>
-<%--                    <h6><span class="icon_tag_alt"></span> Bạn có voucher? Sử dụng ngay <a href="#">tại đây</a>--%>
-<%--                    </h6>--%>
-<%--                </div>--%>
-<%--            </div>--%>
             <div class="checkout__form">
                 <h4>Thông Tin Thanh Toán</h4>
-                <form action="/BanBanhKemSinhNhatWebProject/AddNewOrder" method="get">
-<%--                <form>--%>
+                <div>
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Họ<span>*</span></p>
-                                        <input type="text" name="ho">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
+
+                                <div class="col-lg-12">
                                     <div class="checkout__input">
                                         <p>Tên<span>*</span></p>
-                                        <input type="text" name="ten">
+                                        <input type="text" id="ten" value="<%=auth.getTentk()%>">
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="checkout__input">
-                                <p>Country<span>*</span></p>
-                                <input type="text">
-                            </div> -->
                             <div class="checkout__input">
                                 <p>Địa chỉ<span>*</span></p>
-                                <!-- <input type="text" placeholder="Tên Đường" class="checkout__input__add"> -->
-                                <input type="text" placeholder="Số nhà, xã/phường, quận/huyện" name="diachihuyen">
+                                <input type="text" placeholder="Số nhà, xã/phường, quận/huyện, tỉnh/thành phố..."
+                                       id="diachi" value="<%=customer.getDIACHI()%>">
                             </div>
-                            <div class="checkout__input">
-                                <p>Tỉnh/Thành Phố<span>*</span></p>
-                                <input type="text" name="diachitinh">
-                            </div>
-                            <!-- <div class="checkout__input">
-                                <p>Country/State<span>*</span></p>
-                                <input type="text">
-                            </div> -->
-                            <!-- <div class="checkout__input">
-                                <p>Postcode / ZIP<span>*</span></p>
-                                <input type="text">
-                            </div> -->
+
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Điện Thoại<span>*</span></p>
-                                        <input type="tel" name="phone">
+                                        <input type="tel" id="phone" value="<%=customer.getSDT()%>">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="email" name="email">
+                                        <input type="email" id="email" value="<%=auth.getEmail()%>">
                                     </div>
                                 </div>
                             </div>
-
-
-<%--                            <div class="checkout__input__checkbox">--%>
-<%--                                <label for="diff-acc">--%>
-<%--                                    Giao đến địa chỉ khác?--%>
-<%--                                    <input type="checkbox" id="diff-acc">--%>
-<%--                                    <span class="checkmark"></span>--%>
-<%--                                </label>--%>
-<%--                            </div>--%>
                             <div class="checkout__input">
                                 <p>Ghi chú cho cửa hàng<span>*</span></p>
                                 <input type="text"
                                     placeholder="VD: dụng cụ ăn uống,nến theo số tuổi,..."
-                                name="ghichu">
+                                id="ghichu">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <div class="checkout__order">
+                            <div id="emptyPro" class="checkout__order">
                                 <h4>Đơn hàng</h4>
                                 <div class="checkout__order__products">Sản Phẩm <span>Tổng</span></div>
-                                <ul>
+                                <ul class="">
                                     <% for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
-                                        String idQty ="qty"+ entry.getValue().getSp().getId();
                                     %>
                                     <li>
                                         <span style="float: left" class="breaklineNamePro"><%=entry.getValue().getSp().getName()%> </span>
@@ -326,33 +252,19 @@
                                 <div class="checkout__order__subtotal">Tạm tính <span><%= order.formatNum(order.totalMoney())%> VND</span></div>
                                 <div class="checkout__order__total">Tổng <span><%= order.formatNum(order.totalMoney())%> VND</span></div>
 
-<%--                                <div class="checkout__input__checkbox">--%>
-<%--                                    <label for="acc-or">--%>
-<%--                                        Tạo Tài Khoản?--%>
-<%--                                        <input type="checkbox" id="acc-or">--%>
-<%--                                        <span class="checkmark"></span>--%>
-<%--                                    </label>--%>
-<%--                                </div>--%>
 
                                 <div class="checkout__input__checkbox">
-                                    <label for="payment">
+                                    <label for="payment" >
                                        Thanh Toán Khi Nhận Hàng
                                         <input type="checkbox" id="payment">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="paypal">
-                                        MOMO
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <button type="submit" class="site-btn" >ĐẶT HÀNG</button>
+                                <button onclick="addOrder()" type="submit" class="site-btn" >ĐẶT HÀNG</button>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </section>
@@ -372,23 +284,6 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<%--<script>--%>
-<%--    var ghichu = document.getElementById("ghichu");--%>
-<%--    function addOrder(){--%>
-<%--        var url  ="AddNewOrder";--%>
-<%--        $.ajax({--%>
-<%--            url: url,--%>
-<%--            type: "GET",--%>
-<%--           --%>
-<%--            success: function (){--%>
-<%--                Swal.fire({--%>
-<%--                    text:'Đặt hàng thành công!',--%>
-<%--                    icon: 'success',--%>
-<%--                    confirmButtonColor: '#ff96b7'});--%>
-<%--            }--%>
-<%--        });--%>
-<%--    };--%>
-<%--</script>--%>
 
 </body>
 

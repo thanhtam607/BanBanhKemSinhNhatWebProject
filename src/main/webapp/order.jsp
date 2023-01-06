@@ -92,46 +92,7 @@
 <!-- Humberger End -->
 <!-- Header Section Begin -->
 <header class="header">
-    <!-- rang cua -->
-
-    <div class="rang_cua"></div>
-
-    <!-- rang cua -->
-    <div class="header__top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="header__top__left">
-                        <ul>
-                            <li><i class="fa fa-envelope"></i>tiembanhhanhphuc@gmail.com</li>
-                            <li>Miễn phí giao hàng nội thành TP.HCM</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="header__top__right">
-                        <div class="header__top__right__social">
-                            <a href="https://www.facebook.com/mai.thuan.52438/" target="blank"><i class="fa fa-facebook"></i></a>
-                            <a href="https://www.messenger.com/t/100017755062615" target="blank"><i class="fa fa-comment"></i></a>
-                            <a href="https://www.instagram.com/maizecorn1542/" target="blank"><i class="fa fa-instagram"></i></a>
-                        </div>
-                        <div class="header__top__right__auth">
-                            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
-                            <% if(auth != null) { %>
-                            <div class="header__top__right__auth__dropdown">
-                                <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
-                                <% if(auth.checkRole(1)) { %>
-                                <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
-                                <%}%>
-                                <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
-                            </div>
-                            <%}%>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <jsp:include page="hearder-top.jsp"></jsp:include>
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -223,7 +184,7 @@
         <div class="row">
             <div class="tab-content flex-sm-row mt-2">
                 <%-- Viết vòng lặp ở đây nhoaaa --%>
-                <div class="my-2 center" >
+                <div class="my-2 center overflow-hidden" >
                     <div class="row">
                         <div class="col-6">
                                     <small class="text-secondary d-inline-block pt-3 pl-3">ID đơn hàng: @i.ID</small>

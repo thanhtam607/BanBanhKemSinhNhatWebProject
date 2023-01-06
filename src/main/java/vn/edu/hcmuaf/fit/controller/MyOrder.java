@@ -1,0 +1,31 @@
+package vn.edu.hcmuaf.fit.controller;
+
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Customer;
+import vn.edu.hcmuaf.fit.model.Order;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+
+@WebServlet(name = "MyOrder", value = "/MyOrder")
+public class MyOrder extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(true);
+        Order order =(Order) session.getAttribute("order");
+        User auth = (User) session.getAttribute("auth");
+        Customer customer = (Customer) session.getAttribute("cust");
+
+        request.getRequestDispatcher("order.jsp").forward(request, response);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+}

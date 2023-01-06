@@ -51,7 +51,15 @@ public class CustomerService {
         }
         return null;
     }
+    public static Customer getCusByIdAcc(String idAcc){
+        for(Customer c: getListCustomer()){
+            if(c.getMATAIKHOAN().equals(idAcc)){
+                return c;
+            }
+        }
+        return null;
+    }
     public static void main(String[] args) {
-//    System.out.println(getListCustomer());
+//    System.out.println(getCusByIdAcc("AD01"));
     }
 }

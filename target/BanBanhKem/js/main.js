@@ -673,3 +673,76 @@ function check(email) {
         }
     });
 }
+
+/*-------------------
+   addNewOrder
+  --------------------- */
+function addOrder(){
+    var ten = document.getElementById("ten").value;
+    var diachi = document.getElementById("diachi").value;
+    var phone = document.getElementById("phone").value;
+    var email = document.getElementById("email").value;
+    var ghichu = document.getElementById("ghichu").value;
+    var url  ="AddNewOrder";
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {ten:ten,
+            diachi:diachi,
+            phone:phone,
+            email:email,
+            ghichu: ghichu},
+        success: function (){
+            document.getElementById("totalPro").innerHTML="0";
+            document.getElementById("totalPro1").innerHTML="0";
+            document.getElementById("emptyPro").innerHTML = "" +
+                "                                <h4>Đơn hàng</h4>\n" +
+                "                                <div class=\"checkout__order__products\">Sản Phẩm <span>Tổng</span></div>\n" +
+                "                                <ul class=\"\">\n" +
+                "                                    <li>\n" +
+                "                                    </li>\n" +
+                "                                </ul>\n" +
+                "                                <div class=\"checkout__order__subtotal\">Tạm tính <span>0 VND</span></div>\n" +
+                "                                <div class=\"checkout__order__total\">Tổng <span>0 VND</span></div>\n" +
+                "\n" +
+                "\n" +
+                "                                <div class=\"checkout__input__checkbox\">\n" +
+                "                                    <label for=\"payment\" >\n" +
+                "                                       Thanh Toán Khi Nhận Hàng\n" +
+                "                                        <input type=\"checkbox\" id=\"payment\">\n" +
+                "                                        <span class=\"checkmark\"></span>\n" +
+                "                                    </label>\n" +
+                "                                </div>\n" +
+                "                                <button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>\n" +
+                "                            ";
+            Swal.fire({
+                text:'Đặt hàng thành công!',
+                icon: 'success',
+                showCancelButton: true,
+                cancelButtonText:'Mua tiếp',
+                confirmButtonText: 'Xem đơn đặt',
+                confirmButtonColor: '#ff96b7'}).then((result) => {
+                if (result.isConfirmed) {
+                    location.href = "order.jsp";
+                }
+                // else{
+                //     location.href = "/BanBanhKemSinhNhatWebProject/ListProduct";
+                // }
+            }
+            );
+
+        }
+    });
+}
+function cartEmpty(){
+    Swal.fire({
+        text:'Giỏ hàng của bạn đang trống!',
+        icon: 'error',
+        confirmButtonText: 'Thêm sản phẩm',
+        confirmButtonColor: '#ff96b7'}).then((result) => {
+            if (result.isConfirmed) {
+                location.href = "/BanBanhKemSinhNhatWebProject/ListProduct";
+            }
+        }
+    );
+}

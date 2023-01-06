@@ -20,6 +20,10 @@ public class AddNewOrder extends HttpServlet {
         HttpSession session = request.getSession(true);
         Order order =(Order) session.getAttribute("order");
 
+        String ten = request.getParameter("ten");
+        String diachi = request.getParameter("diachi");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
         String ghichu = request.getParameter("ghichu");
 
         Date today = new Date();
@@ -30,8 +34,7 @@ public class AddNewOrder extends HttpServlet {
         order.setNote(ghichu);
         OrderService.addOrder(order);
         OrderService.addCTHD(order);
-
-        response.sendRedirect("order.jsp");
+        OrderService.clearCart(order);
     }
 
     @Override

@@ -56,7 +56,7 @@ public class Receipt {
         if(this.state == 0){
             return "Chờ Xác Nhận";
         }else if(this.state == 1){
-            return "Đang Chuẩn Bị";
+            return "Chuẩn Bị Hàng";
         }else if(this.state == 2){
             return "Đang Giao Hàng";
         }

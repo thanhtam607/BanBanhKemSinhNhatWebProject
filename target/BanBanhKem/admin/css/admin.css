@@ -1354,7 +1354,7 @@ ul {
 .form {
     padding: 20px;
     margin-bottom: 20px;
-    border: 1px solid #222028;
+    /*border: 1px solid #222028;*/
     border-radius: 6px;
     background-color: #fdf3f4;
 }

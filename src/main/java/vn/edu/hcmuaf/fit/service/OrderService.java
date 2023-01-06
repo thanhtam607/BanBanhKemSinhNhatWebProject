@@ -64,6 +64,10 @@ public class OrderService {
             }
         }
     }
+    public static void clearCart(Order order){
+        order.getData().clear();
+        order.setBuyDate(null);
+    }
     public static void addGiaoHang(){
         Statement stm = DBConnect.getInstall().get();
         if(stm!= null) {

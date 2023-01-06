@@ -15,7 +15,7 @@ public class BlogDanhMuc extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Blog> listdm = BlogService.getDanhMuc(request.getParameter("danhmuc"));
         request.setAttribute("list", listdm);
-        request.getRequestDispatcher("BlogFilter.jsp").forward(request,response);
+        request.getRequestDispatcher("blog-filter.jsp").forward(request,response);
     }
 
     @Override
