@@ -18,12 +18,19 @@ public class UpdateProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
                 String masp = request.getParameter("proId");
                 String tensp = request.getParameter("proname");
-                int gia = Integer.parseInt(request.getParameter("price"));
+                int gia=0;
+                int khoiLuong=0;
+                if(request.getParameter("price")!= null) {
+                    gia = Integer.parseInt(request.getParameter("price"));
+                }
+                if(request.getParameter("weight")!=null){
+                    khoiLuong = Integer.parseInt(request.getParameter("weight"));
+                }
                 String loai = request.getParameter("loaiBanh");
                 String kichthuoc = request.getParameter("size");
-                int khoiLuong = Integer.parseInt(request.getParameter("weight"));
                 String mota = request.getParameter("description");
                 String noidung = request.getParameter("intro");
                 ProductService.updateProduct(masp,  loai, tensp,kichthuoc, khoiLuong, mota, noidung, gia);

@@ -5,6 +5,14 @@ public class Comment {
     String khachhang;
     String binhLuan;
     String date;
+    int idcmt;
+    public Comment(String maSP, String khachhang, String binhLuan, String date, int idcmt){
+        this.maSP = maSP;
+        this.khachhang = khachhang;
+        this.binhLuan = binhLuan;
+        this.date = date;
+        this.idcmt =idcmt;
+    }
     public Comment(String maSP, String khachhang, String binhLuan, String date){
         this.maSP = maSP;
         this.khachhang = khachhang;
@@ -28,6 +36,10 @@ public class Comment {
         return date;
     }
 
+    public int getIdcmt() {
+        return idcmt;
+    }
+
     public void setMaSP(String maSP) {
         this.maSP = maSP;
     }
@@ -42,6 +54,10 @@ public class Comment {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setIdcmt(int idcmt) {
+        this.idcmt = idcmt;
     }
 
     @Override
