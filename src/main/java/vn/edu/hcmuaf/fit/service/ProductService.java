@@ -21,19 +21,12 @@ public class ProductService {
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
-                    List<String> listkt = new LinkedList<>();
                     ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
-                    List<ProductDetails> listpd = new LinkedList<>();
+                   ProductDetails detail = new ProductDetails();
                     String s1 = rs.getString(1);
-                    while (rsImg.next()) {
-                        String s2 = rsImg.getString(1);
-                        if (s1.equals(s2)) {
-                            listkt.add(rs.getString(4));
-                            listImg.add(rsImg.getString(2));
-                        }
-                    }
+
                     while (rsCmt.next()) {
                         String s2 = rsCmt.getString(1);
                         if (s1.equals(s2)) {
@@ -43,10 +36,10 @@ public class ProductService {
                     while (rspd.next()) {
                         String s2 = rspd.getString(1);
                         if (s1.equals(s2)) {
-                            listpd.add(new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5)));
+                           detail =new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
                         }
                     }
-                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), listkt, rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, listpd);
+                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, detail);
                     list.add(p);
                 }
             } catch (SQLException e) {
@@ -80,11 +73,11 @@ public class ProductService {
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
-                    List<String> listkt = new LinkedList<>();
+
                     ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
-                    List<ProductDetails> listpd = new LinkedList<>();
+                    ProductDetails details = new ProductDetails();
                     String s1 = rs.getString(1);
                     while (rsImg.next()) {
                         String s2 = rsImg.getString(1);
@@ -101,10 +94,10 @@ public class ProductService {
                     while (rspd.next()) {
                         String s2 = rspd.getString(1);
                         if (s1.equals(s2)) {
-                            listpd.add(new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5)));
+                            details = new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
                         }
                     }
-                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), listkt, rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, listpd);
+                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, details);
                     list.add(p);
                 }
             } catch (SQLException e) {
@@ -132,7 +125,7 @@ public class ProductService {
                     ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
-                    List<ProductDetails> listpd = new LinkedList<>();
+                    ProductDetails details = new ProductDetails();
                     String s1 = rs.getString(1);
                     while (rsImg.next()) {
                         String s2 = rsImg.getString(1);
@@ -149,10 +142,10 @@ public class ProductService {
                     while (rspd.next()) {
                         String s2 = rspd.getString(1);
                         if (s1.equals(s2)) {
-                            listpd.add(new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5)));
+                            details =new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
                         }
                     }
-                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), listkt, rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, listpd);
+                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, details);
                     list.add(p);
                 }
             } catch (SQLException e) {
@@ -185,7 +178,7 @@ public class ProductService {
         List<Product> list = getData();
         List<Product> rs = new LinkedList<>();
         for (Product p : list) {
-            if (p.getKichThuoc().get(0).equals(kichthuoc)) {
+            if (p.getKichThuoc().equals(kichthuoc)) {
                 rs.add(p);
             }
         }

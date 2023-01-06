@@ -1,4 +1,5 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,20 +105,20 @@
                     </div>
                 </div>
                 <!-- end main title -->
-
+<%Product p = (Product) request.getAttribute("product");%>
                 <!-- profile -->
                 <div class="col-12">
                     <div class="profile__content">
                         <!-- profile user -->
                         <div class="profile__user">
                             <div class="profile__avatar">
-                                <img src="img/user.svg" alt="">
+                                <img src="<%=p.getListImg().get(0)%>" alt="">
                             </div>
                             <!-- or red -->
-<%--                            <div class="profile__meta profile__meta--green">--%>
-<%--                                <h3>John Doe <span>(Approved)</span></h3>--%>
-<%--                                <span>HotFlix ID: 23562</span>--%>
-<%--                            </div>--%>
+                            <div class="profile__meta profile__meta--green">
+                                <h3> <span>(Approved)</span></h3>
+                                <span>HotFlix ID: 23562</span>
+                            </div>
                         </div>
                         <!-- end profile user -->
 
