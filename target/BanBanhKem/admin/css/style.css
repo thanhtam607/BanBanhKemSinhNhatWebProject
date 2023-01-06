@@ -25,12 +25,24 @@ border: 3px solid #ff96b7;
     margin-top: 20px;
 }
 .font-size-30 {
-    font-size: 25px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.font-size-20{
+    font-size: 20px;
     font-weight: bold;
 }
 .margin-right--20px{
     margin-left: -20px;
 }
+.text--green{
+    font-weight: bold;
+    color: green;
+}
+.boder-none{
+    border: none;
+}
+
 /*** Spinner ***/
 #spinner {
     opacity: 0;
