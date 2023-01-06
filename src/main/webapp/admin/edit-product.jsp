@@ -1,9 +1,15 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page import="vn.edu.hcmuaf.fit.model.LoaiBanh" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
+<%@ page import="java.util.ArrayList" %>
 
+<!DOCTYPE html>
+<%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
+<html lang="xzz">
+<meta http-equiv="Content-Type" charset="UTF-8">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -39,12 +45,14 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
+
     <title>Admin | Shop Bánh Kem</title>
 
 </head>
 
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
+
 <!-- header -->
 <header class="header">
     <div class="header__content">
@@ -112,12 +120,13 @@
                         <!-- profile user -->
                         <div class="profile__user">
                             <div class="profile__avatar">
-                                <img src="<%=p.getListImg().get(0)%>" alt="">
+
+                                <img src="../<%=p.getListImg().get(0)%>" alt="">
                             </div>
                             <!-- or red -->
                             <div class="profile__meta profile__meta--green">
-                                <h3> <span>(Approved)</span></h3>
-                                <span>HotFlix ID: 23562</span>
+                                <h3> <%=p.getName()%></h3>
+                                <span><%=p.getStatus()%></span>
                             </div>
                         </div>
                         <!-- end profile user -->
@@ -129,11 +138,11 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Đơn Hàng</a>
+                                <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Hình ảnh (<%=p.getListImg().size()%>)</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Bình Luận</a>
+                                <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Bình Luận (<%=p.getComments().size()%>)</a>
                             </li>
                         </ul>
                         <!-- end profile tabs nav -->
@@ -149,7 +158,7 @@
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Thông Tin</a></li>
 
-                                    <li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Đơn Hàng</a></li>
+                                        <li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Hình ảnh</a></li>
 
                                     <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Bình Luận</a></li>
                                 </ul>
@@ -159,7 +168,7 @@
 
                         <!-- profile btns -->
                         <div class="profile__actions">
-                            <a href="#modal-status3" class="profile__action profile__action--banned open-modal"><i class="fa fa-lock"></i></a>
+
                             <a href="#modal-delete3" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
                         </div>
                         <!-- end profile btns -->
@@ -173,65 +182,80 @@
                         <div class="col-12">
                             <div class="row">
                                 <!-- details form -->
-                                <div class="col-12 col-lg-6">
-                                    <form action="#" class="form form--profile">
+                                <div class="col-12 col-lg-8">
+                                    <form action="Product/UpdateProduct" method="post" class="form form--profile" id="info-product">
                                         <div class="row row--form">
                                             <div class="col-12">
-                                                <h4 class="form__title">Profile details</h4>
+                                                <h4 class="form__title">Thông tin sản phẩm</h4>
                                             </div>
+                                            <input id="proID" type="hidden" name="proId" class="form__input" value="<%=p.getId()%>">
 
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="username">Username</label>
-                                                    <input id="username" type="text" name="username" class="form__input" placeholder="User 123">
+                                                    <label class="form__label" >Tên sản phẩm</label>
+                                                    <input  type="text" name="proname" class="form__input" value="<%=p.getName()%>">
                                                 </div>
                                             </div>
 
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="col-12 col-md-7 col-lg-12 col-xl-7">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="email">Email</label>
-                                                    <input id="email" type="text" name="email" class="form__input" placeholder="email@email.com">
+                                                    <label class="form__label" >Loại bánh</label>
+                                                    <select class="form-select form__input" name="loaiBanh" >
+                                                    <%List<LoaiBanh> ListType = ProductService.getListType();
+                                                        for(LoaiBanh lb: ListType){
+                                                    if(lb.getTenLB().equals(p.getLoaiBanh())){%>
+                                                        <option selected value="<%=lb.getMaLB()%>"><%=lb.getTenLB()%></option>
+                                                        <%} else {%>
+
+
+                                                        <option value="<%=lb.getMaLB()%>"><%=lb.getTenLB()%></option>
+
+
+
+                                                    <%}}%></select>
                                                 </div>
                                             </div>
-
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="col-12 col-md-5 col-lg-12 col-xl-5">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="firstname">First Name</label>
-                                                    <input id="firstname" type="text" name="firstname" class="form__input" placeholder="John">
+                                                    <label class="form__label" for="weight">Khối lượng (g)</label>
+                                                    <input id="weight" type="number" min="10" name="weight" class="form__input" value="<%=p.getKhoiLuong()%>">
                                                 </div>
                                             </div>
-
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="lastname">Last Name</label>
-                                                    <input id="lastname" type="text" name="lastname" class="form__input" placeholder="Doe">
+                                                    <label class="form__label" for="price">Giá (VND)</label>
+                                                    <input id="price" type="number" min="1000" name="price" class="form__input" value="<%=p.getPrice()%>" >
                                                 </div>
                                             </div>
-
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="subscription">Subscription</label>
-                                                    <select class="js-example-basic-single" id="subscription">
-														<option value="Basic">Basic</option>
-														<option value="Premium">Premium</option>
-														<option value="Cinematic">Cinematic</option>
+                                                    <label class="form__label" for="rights">Kích thước</label>
+                                                    <select class="form__input" id="rights" name="size">
+                                                        <%List<String> listSize = (List<String>) request.getAttribute("listSize");
+                                                        for(String s: listSize){
+                                                            if(s.equals(p.getKichThuoc())){%>
+                                                        <option selected value="<%=s%>"><%=s%></option>
+                                                           <% }else{%>
+                                                        <option value="<%=s%>"><%=s%></option>
+                                                        <%}}%>
 													</select>
                                                 </div>
                                             </div>
-
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="rights">Rights</label>
-                                                    <select class="js-example-basic-single" id="rights">
-														<option value="User">User</option>
-														<option value="Moderator">Moderator</option>
-														<option value="Admin">Admin</option>
-													</select>
+                                                    <label class="form__label" for="description">Mô tả sản phẩm</label>
+                                                    <textarea class="form__input "  id="description" name="description" form="info-product" ><%=p.getMoTa()%></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form__group">
+                                                    <label class="form__label" for="description">Giới thiệu sản phẩm</label>
+                                                    <textarea class="form__input "  id="introduce" name="intro" form="info-product" ><%=p.getMoTa()%></textarea>
                                                 </div>
                                             </div>
 
                                             <div class="col-12">
-                                                <button class="form__btn" type="button">Save</button>
+                                                <input class="form__btn" type="submit" value="Lưu thông tin"></input>
                                             </div>
                                         </div>
                                     </form>
@@ -239,36 +263,42 @@
                                 <!-- end details form -->
 
                                 <!-- password form -->
-                                <div class="col-12 col-lg-6">
-                                    <form action="#" class="form form--profile">
+                                <div class="col-12 col-lg-4">
+                                    <div class="form form--profile">
                                         <div class="row row--form">
                                             <div class="col-12">
-                                                <h4 class="form__title">Change password</h4>
+                                                <h4 class="form__title">Chi tiết sản phẩm</h4>
                                             </div>
 
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="oldpass">Old Password</label>
-                                                    <input id="oldpass" type="password" name="oldpass" class="form__input">
+                                                    <label class="form__label" for="ngaysx">Ngày sản xuất</label>
+                                                    <input id="ngaysx" type="date" name="ngaysx" class="form__input" >
                                                 </div>
                                             </div>
 
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="newpass">New Password</label>
-                                                    <input id="newpass" type="password" name="newpass" class="form__input">
+                                                    <label class="form__label" for="ngayhh">Ngày hết hạn</label>
+                                                    <input id="ngayhh" type="date" name="ngayhh" class="form__input">
                                                 </div>
                                             </div>
 
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="confirmpass">Confirm New Password</label>
-                                                    <input id="confirmpass" type="password" name="confirmpass" class="form__input">
+                                                    <label class="form__label" for="soluong">Số lượng</label>
+                                                    <input id="soluong" type="number" min="1" class="form__input">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form__group">
+                                                    <label class="form__label" for="tonkho">Tồn kho</label>
+                                                    <input id="tonkho" type="number" min="1" class="form__input">
                                                 </div>
                                             </div>
 
                                             <div class="col-12">
-                                                <button class="form__btn" type="button">Change</button>
+                                                <button class="form__btn" type="button">Lưu thay đổi</button>
                                             </div>
                                         </div>
                                     </form>
@@ -277,106 +307,100 @@
                             </div>
                         </div>
                     </div>
-
+                    </div>
                     <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
                         <!-- table -->
-                        <div class="col-12">
+                        <div class="col-11 ">
                             <div class="main__table-wrap">
                                 <table class="main__table">
                                     <thead>
-                                        <tr>
-                                            <th>Mã Đơn Hàng</th>
-                                            <th>Tên Sản Phẩm</th>
-                                            <th>Tên Khách Hàng</th>
-                                            <th>Ngày Tạo</th>
+                                        <tr >
+                                            <th>STT</th>
+                                            <th>Ảnh Sản Phẩm</th>
+                                            <th>Vị trí</th>
                                             <th>Tùy Chọn</th>
                                         </tr>
                                     </thead>
-
+                                    <%List<String> listImg = p.getListImg();
+                                    for(int i = 0; i< listImg.size();i++){%>
                                     <tbody>
-                                        <tr>
+
+                                        <tr style="border-bottom: 3px solid #ff96b7;">
                                             <td>
-                                                <div class="main__table-text">23</div>
+                                                <div class="main__table-text"><%=i+1%></div>
+                                            </td>
+
+                                            <td>
+                                                <div class="main__table-text"><img src="../<%=listImg.get(i)%>" ></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
+                                                <div class="main__table-text"><%=listImg.get(i)%></div>
                                             </td>
-                                            <td>
-                                                <div class="main__table-text">John Doe</div>
-                                            </td>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
-<%--                                            </td>--%>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text">12 / 7</div>--%>
-<%--                                            </td>--%>
-                                            <td>
-                                                <div class="main__table-text">24 Oct 2021</div>
-                                            </td>
+
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#modal-view" class="main__table-btn main__table-btn--view open-modal">
-														<i class="fa fa-eye"></i>
-													</a>
+                                                    <a href="#" class="main__table-btn main__table-btn--edit">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
                                                     <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
                                                 </div>
                                             </td>
-                                        </tr>
+                                        </tr >
+
                                     </tbody>
+
+                                    <!-- modal delete -->
+                                    <div id="modal-delete3" class="zoom-anim-dialog mfp-hide modal">
+                                        <h6 class="modal__title">Xóa Người Dùng</h6>
+
+                                        <p class="modal__text">Bạn có chắc muốn xóa người dùng này?</p>
+
+                                        <div class="modal__btns">
+                                            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
+                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                        </div>
+                                    </div>
+                                    <!-- end modal delete -->
+
+                                    <%}%>
                                 </table>
                             </div>
                         </div>
                         <!-- end table -->
-
-                        <!-- paginator -->
-                        <div class="col-12">
-                            <div class="paginator-wrap">
-                                <span>10 from 23</span>
-
-                                <ul class="paginator">
-                                    <li class="paginator__item paginator__item--prev">
-                                        <a href="#"><i class="fa fa-arrow-back"></i></a>
-                                    </li>
-                                    <li class="paginator__item"><a href="#">1</a></li>
-                                    <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
-                                    <li class="paginator__item"><a href="#">3</a></li>
-                                    <li class="paginator__item"><a href="#">4</a></li>
-                                    <li class="paginator__item paginator__item--next">
-                                        <a href="#"><i class="fa fa-arrow-forward"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- end paginator -->
                     </div>
 
                     <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
                         <!-- table -->
-                        <div class="col-12">
+                        <div class="col-12 bg-pink">
                             <div class="main__table-wrap">
                                 <table class="main__table">
                                     <thead>
                                         <tr>
-                                            <th>Mã Khách Hàng</th>
-                                            <th>Sản Phẩm Đã Bình Luận</th>
-                                            <th>Tên Khách Hàng</th>
-                                            <th>Ngày Tạo</th>
+                                            <th>STT</th>
+                                            <th>Tên khách hàng</th>
+                                            <th>Bình luận</th>
+                                            <th>Ngày tạo</th>
                                             <th>Tùy Chọn</th>
                                         </tr>
                                     </thead>
-
+                                    <%List<Comment> listCmt = p.getComments();
+                                    for(int i = 0; i<listCmt.size();i++){%>
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div class="main__table-text">23</div>
+                                                <div class="main__table-text"><%=i+1%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text">John Doe</div>
+                                                <div class="main__table-text"><%=listCmt.get(i).getkhachhang()%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><a href="#">Bánh Cánh Đồng Hoa</a></div>
+
+                                                <div class="main__table-text"><a href="#"><%=listCmt.get(i).getBinhLuan()%></a></div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text"><a href="#"><%=listCmt.get(i).getDate()%></a></div>
                                             </td>
 <%--                                            <td>--%>
 <%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
@@ -387,52 +411,28 @@
 <%--                                            <td>--%>
 <%--                                                <div class="main__table-text">12 / 7</div>--%>
 <%--                                            </td>--%>
-                                            <td>
-                                                <div class="main__table-text">24 Oct 2021</div>
-                                            </td>
+
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#modal-view2" class="main__table-btn main__table-btn--view open-modal">
-														<i class="fa fa-eye"></i>
-													</a>
                                                     <a href="#modal-delete2" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
                                                 </div>
                                             </td>
                                         </tr>
+                                        <%}%>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <!-- end table -->
-
-                        <!-- paginator -->
-                        <div class="col-12">
-                            <div class="paginator-wrap">
-                                <span>10 from 32</span>
-
-                                <ul class="paginator">
-                                    <li class="paginator__item paginator__item--prev">
-                                        <a href="#"><i class="fa fa-arrow-back"></i></a>
-                                    </li>
-                                    <li class="paginator__item"><a href="#">1</a></li>
-                                    <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
-                                    <li class="paginator__item"><a href="#">3</a></li>
-                                    <li class="paginator__item"><a href="#">4</a></li>
-                                    <li class="paginator__item paginator__item--next">
-                                        <a href="#"><i class="fa fa-arrow-forward"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- end paginator -->
                     </div>
                 </div>
                 <!-- end content tabs -->
-            </div>
-        </div>
+
+
     </main>
+
     <!-- end main content -->
 
     <!-- modal view -->
@@ -507,18 +507,7 @@
     </div>
     <!-- end modal status -->
 
-    <!-- modal delete -->
-    <div id="modal-delete3" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Xóa Người Dùng</h6>
 
-        <p class="modal__text">Bạn có chắc muốn xóa người dùng này?</p>
-
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
-    <!-- end modal delete -->
 
     <!-- JS -->
     <script src="js/jquery-3.5.1.min.js"></script>

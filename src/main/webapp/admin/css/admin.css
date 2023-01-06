@@ -704,7 +704,7 @@ ul {
 
 .main__table {
     width: 100%;
-    min-width: 1050px;
+    min-width: 900px;
     border-spacing: 0;
 }
 
@@ -740,6 +740,7 @@ ul {
 .main__table tbody td:last-child .main__table-btns {
     border-radius: 0 6px 6px 0;
 }
+
 
 .main__table--dash {
     width: 100%;
@@ -778,6 +779,9 @@ ul {
     line-height: 30px;
     padding: 15px;
     white-space: nowrap;
+}
+.main__table-text img{
+    width: 70px;
 }
 
 .main__table-text a {
@@ -1767,7 +1771,7 @@ ul {
 .profile__avatar {
     display: block;
     position: relative;
-    width: 40px;
+    width: 70px;
     cursor: pointer;
     overflow: hidden;
     border-radius: 6px;
@@ -3026,4 +3030,11 @@ ul {
 /* set background */
 .bg-white{
     background-color: #fff;
+}
+#description{
+    height: 80px;
+}
+#introduce{
+    height: 80px;
+
 }
