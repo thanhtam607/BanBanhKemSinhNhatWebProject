@@ -724,7 +724,7 @@ function addOrder(){
                 confirmButtonText: 'Xem đơn đặt',
                 confirmButtonColor: '#ff96b7'}).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = "order.jsp";
+                    location.href = "/BanBanhKemSinhNhatWebProject/MyOrder";
                 }
                 // else{
                 //     location.href = "/BanBanhKemSinhNhatWebProject/ListProduct";
@@ -746,4 +746,11 @@ function cartEmpty(){
             }
         }
     );
+}
+function seeAll(){
+// var a = document.getElementsByClassName("xemthemdiachi")
+//         for(let i = 0; i< a.length; i++){
+//             a.classList.remove("d-none")
+//         }
+
 }

@@ -157,15 +157,37 @@ public class Receipt {
         return result;
     }
 
+//    @Override
+//    public String toString() {
+//        return "receipt{" +
+//                "id='" + id + '\'' +
+//                ", idcustomer='" + makh + '\'' +
+//                ", Sdate='" + Sdate + '\'' +
+//                ", ghichu='" + note + '\'' +
+//                ", thanhtien='" + money + '\'' +
+//                ", trangthai=" + getState() +
+//                '}';
+//    }
+
+
     @Override
     public String toString() {
-        return "receipt{" +
+        return "Receipt{" +
                 "id='" + id + '\'' +
-                ", idcustomer='" + makh + '\'' +
+                ", namecustomer='" + namecustomer + '\'' +
+                ", makh='" + makh + '\'' +
+                ", namecake='" + namecake + '\'' +
                 ", Sdate='" + Sdate + '\'' +
-                ", ghichu='" + note + '\'' +
-                ", thanhtien='" + money + '\'' +
-                ", trangthai=" + getState() +
+                ", phone='" + phone + '\'' +
+                ", Edate='" + Edate + '\'' +
+                ", address='" + address + '\'' +
+                ", note='" + note + '\'' +
+                ", price=" + price +
+                ", total=" + total +
+                ", money=" + money +
+                ", state=" + state +
                 '}';
     }
+
+
 }
