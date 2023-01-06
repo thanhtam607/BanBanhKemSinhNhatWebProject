@@ -9,19 +9,19 @@ public class Product {
     String id;
     String name;
     String loaiBanh;
-     List<String> kichThuoc;
+    String kichThuoc;
     String khoiLuong;
     String moTa;
     String noiDung;
     List<String> listImg;
     int price;
     List<Comment> comments;
-    List<ProductDetails> listpd;
+    ProductDetails details;
     public Product() {
     }
 
 
-    public Product(String id, String name, String loaiBanh, List<String> kichThuoc, String khoiLuong, String moTa, String noiDung, List<String> listImg, int price, List<Comment> comments,  List<ProductDetails> listpd) {
+    public Product(String id, String name, String loaiBanh, String kichThuoc, String khoiLuong, String moTa, String noiDung, List<String> listImg, int price, List<Comment> comments,  ProductDetails details) {
         this.id = id;
         this.name = name;
         this.loaiBanh = loaiBanh;
@@ -32,7 +32,7 @@ public class Product {
         this.listImg = listImg;
         this.price = price;
         this.comments = comments;
-        this.listpd =listpd;
+        this.details =details;
     }
 
 
@@ -77,11 +77,11 @@ public class Product {
         return loaiBanh;
     }
 
-    public List<String> getKichThuoc() {
+    public String getKichThuoc() {
         return kichThuoc;
     }
 
-    public void setKichThuoc(List<String> kichThuoc) {
+    public void setKichThuoc(String kichThuoc) {
         this.kichThuoc = kichThuoc;
     }
 
@@ -97,12 +97,12 @@ public class Product {
         return comments;
     }
 
-    public List<ProductDetails> getListpd() {
-        return listpd;
+    public ProductDetails getDetail() {
+        return details;
     }
 
-    public void setListpd(List<ProductDetails> listpd) {
-        this.listpd = listpd;
+    public void setListpd(ProductDetails details) {
+        this.details = details;
     }
 
     @Override
@@ -120,6 +120,10 @@ public class Product {
                 ", comments=" + comments +
                 '}';
     }
+
+//    public String getStatus(){
+//        if()
+//    }
 
     public static String formatNum(int price){
         DecimalFormat df = new DecimalFormat("###,###,###");

@@ -179,21 +179,21 @@
                                     <td>
                                         <div class="main__table-text"><%=pro.getComments().size()%></div>
                                     </td>
-                                    <%List<ProductDetails> Listpd = pro.getListpd();
-                                        for(ProductDetails pds : Listpd){%>
+                                    <%ProductDetails detail = pro.getDetail();
+                                       %>
                                     <td>
-                                        <div class="main__table-text"><%=pds.getMfg()%></div>
+                                        <div class="main__table-text"><%=detail.getMfg()%></div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text"><%=pds.getOod()%></div>
+                                        <div class="main__table-text"><%=detail.getOod()%></div>
                                         <td>
-                                            <div class="main__table-text main__table-text--green"><%=pds.getInventory()%></div>
+                                            <div class="main__table-text main__table-text--green"><%=detail.getInventory()%></div>
                                         </td>
-                                    <% } %>
+                                    
                                         <td>
                                             <div class="main__table-btns">
 
-                                                <a href="edit-product.jsp" class="main__table-btn main__table-btn--edit">
+                                                <a href="Edit_Product?id=<%=pro.getId()%>" class="main__table-btn main__table-btn--edit">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
@@ -271,7 +271,7 @@
 
 
 
-     
+
     <!-- JS -->
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>

@@ -14,6 +14,7 @@ public class ProductDetails {
         this.mfg = mfg;
         this.ood = ood;
     }
+    public  ProductDetails(){};
 
     public String getId() {
         return id;
