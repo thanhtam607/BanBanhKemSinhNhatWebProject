@@ -22,11 +22,18 @@ public class ProductService {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
                     ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
+
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
                    ProductDetails detail = new ProductDetails();
                     String s1 = rs.getString(1);
 
+                    while (rsImg.next()){
+                        String s2 = rsImg.getString(1);
+                        if(s1.equals(s2)){
+                            listImg.add(rsImg.getString(2));
+                        }
+                    }
                     while (rsCmt.next()) {
                         String s2 = rsCmt.getString(1);
                         if (s1.equals(s2)) {
@@ -269,8 +276,12 @@ public class ProductService {
 
     public static void main(String[] args) throws SQLException {
         List<Product> li = ProductService.getHotProduct();
-               for(Product p: li){
-            System.out.println(p.getId());
+        List<Product> lir = ProductService.getData();
+
+        List<LoaiBanh> lb = getListType();
+//        System.out.println(lb);
+        for(Product p: lir){
+                   System.out.println(p.getListImg());
 //          System.out.println(getListType().size());
            }
 //        System.out.println(getLastComment("B001").getBinhLuan());
