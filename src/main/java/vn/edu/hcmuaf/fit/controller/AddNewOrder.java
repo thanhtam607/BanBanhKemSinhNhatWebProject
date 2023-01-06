@@ -31,7 +31,6 @@ public class AddNewOrder extends HttpServlet {
         OrderService.addOrder(order);
         OrderService.addCTHD(order);
 
-
         response.sendRedirect("order.jsp");
     }
 
