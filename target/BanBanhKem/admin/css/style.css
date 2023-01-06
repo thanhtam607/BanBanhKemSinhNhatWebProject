@@ -17,7 +17,20 @@ background-color: #ffffff;
 color: #ff96b7;
 border: 3px solid #ff96b7;
 }
-
+/*** chi tiet hoa don ***/
+.margin-top-50px{
+    margin-top: 50px;
+}
+.margin-top-20px{
+    margin-top: 20px;
+}
+.font-size-30 {
+    font-size: 25px;
+    font-weight: bold;
+}
+.margin-right--20px{
+    margin-left: -20px;
+}
 /*** Spinner ***/
 #spinner {
     opacity: 0;

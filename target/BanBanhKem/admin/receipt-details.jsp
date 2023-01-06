@@ -1,3 +1,6 @@
+
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
@@ -20,6 +23,7 @@
   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
   <link rel="stylesheet" href="css/select2.min.css">
   <link rel="stylesheet" href="css/ionicons.min.css">
+  <link href="css/style.css" rel="stylesheet">
 
 
   <!-- Favicons -->
@@ -97,144 +101,98 @@
 <% List<Receipt> rcList = (List<Receipt>) request.getAttribute("listmahd");%>
 <main class="main bg-white">
   <div class="container-fluid bg-white">
-    <div class="row">
+    <form class="row">
       <!-- main title -->
       <div class="col-12">
         <div class="main__title">
-          <h2>Danh sách chi tiết hóa đơn</h2>
-          <span class="main__title-stat"><%=rcList.size()%></span>
-          <div class="main__title-wrap">
-            <!-- filter sort -->
-            <div class="filter" id="filter__sort">
-              <span class="filter__item-label">Sắp xếp:</span>
-
-              <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <input type="button" value="Tên">
-                <span></span>
-              </div>
-
-              <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-                <li>Tổng tiền</li>
-                <li>Ngày mua</li>
-
-              </ul>
-            </div>
-            <!-- end filter sort -->
-
-            <!-- search -->
-            <form action="#" class="main__title-form">
-              <input type="text" placeholder="Tìm kiếm..">
-              <button type="button">
-                <i class="fa fa-search"></i>
-              </button>
-            </form>
-            <!-- end search -->
-          </div>
+          <h2>Chi tiết đơn hàng</h2>
         </div>
       </div>
       <!-- end main title -->
 
       <!-- users -->
-      <div class="col-12 bg-pink">
-        <div class="main__table-wrap">
-          <table class="main__table">
-            <thead>
-            <tr>
-              <th>STT</th>
-              <th>Tên khách hàng</th>
-              <th>Tên sản phẩm</th>
-              <th>Địa chỉ</th>
-              <th>Số điện thoại</th>
-              <th>Ngày mua</th>
-              <th>Ngày giao</th>
-              <th>Thành tiền</th>
-            </tr>
-            </thead>
-            <% for (int i = 0; i < rcList.size(); i++) {
-              Receipt rc = rcList.get(i) ; %>
-            <tbody>
-            <tr>
-              <td>
-                <div class="main__table-text"><%=i+1%></div>
-              </td>
-              <td>
-                <div class="main__user">
-
-                  <div class="main__meta">
-                    <h5><%=rc.getNamecustomer()%></h5>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="main__table-text"><%=rc.getNamecake()%></div>
-              </td>
-              <td>
-                <div class="main__table-text"><%=rc.getAddress()%></div>
-              </td>
-              <td>
-                <div class="main__table-text"><%=rc.getPhone()%></div>
-              </td>
-              <td>
-                <div class="main__table-text"><%=rc.getSdate()%></div>
-              </td>
-              <td>
-                <div class="main__table-text"><%=rc.getEdate()%></div>
-              </td>
-              <td>
-                <div class="main__table-text"><%=rc.formatNum(rc.getTotal())%> VND</div>
-              </td>
-            </tr>
-            </tbody>
-            <% } %>
-          </table>
-        </div>
-      </div>
       <!-- end users -->
 
       <!-- paginator -->
       <div class="col-12">
-        <div class="paginator-wrap">
-          <span><%=rcList.size()%>/<%=rcList.size()%> Bài viết</span>
-
-          <ul class="paginator">
-            <li class="paginator__item paginator__item--prev">
-            </li>
-            <li class="paginator__item"><a href="#">1</a></li>
-            <li class="paginator__item paginator__item--next">
-            </li>
-          </ul>
-        </div>
+        <form action="#" class="form">
+          <div class="row row--form">
+            <div class="col-12 form__content">
+              <div class="row row--form margin-top-50px">
+                <h4 class="border-bottom">Thông tin khách hàng</h4>
+                <% List<Receipt> receipts = (List<Receipt>) request.getAttribute("listmahd");
+                  for (int i = 0; i < 1; i++){
+                    Receipt rc = receipts.get(i);%>
+                <div class="col-12 border-bottom margin-top-50px">
+                  <i class="fa fa-user-circle"></i> <label for="name">Tên khách hàng: </label> &ensp;<span class="text-uppercase text-pink" id="name"><%=rc.getNamecustomer()%></span>
+                </div><br>
+                <div class="col-12 border-bottom margin-top-50px">
+                  <i class="fa fa-phone"></i> <label for="phone">Số điện thoại: </label> &ensp;<span class="text-uppercase text-pink" id="phone"><%=rc.getPhone()%></span>
+                </div><br>
+                <div class="col-12 border-bottom margin-top-50px">
+                  <i class="fa fa-home"></i> <label for="address">Địa chỉ: </label> &ensp;<span class="text-uppercase text-pink" id="address"><%=rc.getAddress()%></span>
+                </div>
+                <% } %>
+              </div>
+              <h4 class="border-bottom margin-top-50px">Thông tin đặt hàng</h4>
+            </div>
+          </div>
+        </form>
       </div>
-      <!-- end paginator -->
-    </div>
+      <div class="table-responsive margin-top-20px col-12 margin-right--20px">
+        <table class="table text-start align-middle table-bordered table-hover mb-0">
+          <thead>
+          <tr class="text-black">
+            <th scope="col">STT</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Ngày đặt hàng</th>
+            <th scope="col">Ngày giao hàng</th>
+            <th scope="col">Ghi chú</th>
+            <th scope="col">Thành tiền</th>
+            <th scope="col">Trạng thái đơn hàng</th>
+          </tr>
+          </thead>
+          <% for (int i = 0; i < receipts.size(); i++){
+            Receipt rcs = receipts.get(i);%>
+          <tbody>
+          <tr>
+            <td><%=i + 1%></td>
+            <td><%=rcs.getNamecake()%></td>
+            <td><%=rcs.getSdate()%></td>
+            <td><%=rcs.getEdate()%></td>
+            <td><%=rcs.getNote()%></td>
+            <td><%=rcs.formatNum(rcs.getPrice())%> VND</td>
+            <td><select>
+              <option value="value01">Chờ xác nhận</option>
+              <option value="value02">Đang chuẩn bị</option>
+              <option value="value03">Đang vận chuyển</option>
+              <option value="value04">Giao hàng thành công</option>
+            </select>
+            </td>
+          </tr>
+          </tbody>
+          <% } %>
+        </table>
+      </div>
+      <% int total = 0; %>
+      <% for (int i = 0; i < receipts.size(); i++){
+        Receipt rcs = receipts.get(i);
+        total += rcs.getPrice(); }%>
+      <div class="col-5 margin-top-20px">
+        <% for (int i = 0; i < 1; i++){
+          Receipt rcs = receipts.get(i);%>
+        <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;<span class="text-danger text-uppercase text-pink" id="total"><%=rcs.formatNum(total)%> VND</span>
+      </div>
+      <% } %>
+      <div class="col-5">
+        <button type="button" class="form__btn">Lưu kết quả</button>
+      </div>
+    </form>
+  </div>
+  <!-- end form -->
+  </div>
   </div>
 </main>
-<!-- end main content -->
-
-<!-- modal status -->
-<div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
-  <h6 class="modal__title">Ẩn Tin Tức</h6>
-
-  <p class="modal__text">Bạn có chắc muốn ẩn bài viết này?</p>
-
-  <div class="modal__btns">
-    <button class="modal__btn modal__btn--apply" type="button">Ẩn</button>
-    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-  </div>
-</div>
-<!-- end modal status -->
-
-<!-- modal delete -->
-<div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-  <h6 class="modal__title">Xóa Tin Tức</h6>
-
-  <p class="modal__text">Bạn có chắc muốn xóa bài viết này?</p>
-
-  <div class="modal__btns">
-    <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-  </div>
-</div>
 <!-- end modal delete -->
 
 <!-- Back to Top -->
