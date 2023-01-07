@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.service;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.*;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -180,6 +181,7 @@ public class ProductService {
         return list.get(list.size() - 1);
     }
 
+
     public static List<Product> findBySize(String kichthuoc) {
         List<Product> list = getData();
         List<Product> rs = new LinkedList<>();
@@ -271,6 +273,10 @@ public class ProductService {
         }
         return res;
     }
+    public static String getLocation(){
+
+        return "D:/BanBanhKemSinhNhatWebProject/src/main/webapp/";
+    }
     public static void updateProduct(String masp,String maLB, String tensp, String kichthuoc, int khoiluong, String mota, String noidung, int gia ){
         Statement statement = DBConnect.getInstall().get();
         String sql = "UPDATE sanpham set  MaLB='" +maLB+ "', TenSP= '"+ tensp+ "', KichThuoc= '" + kichthuoc+ "', KhoiLuong= "+ khoiluong+", MoTa = '"+ mota + "', NoiDung= '"+ noidung+"', Gia= "+gia+" where MaSP = '"+masp+"';";
@@ -295,7 +301,10 @@ public class ProductService {
     public static void deleteCommemt(String id){
         Statement statement = DBConnect.getInstall().get();
         String sql= "DELETE FROM comments WHERE IdCmt="+ id+";";
+<<<<<<< HEAD
         System.out.println(sql);
+=======
+>>>>>>> 51e5385e3078ac1b5d243a75cb704f217c9eb923
         try {
             statement.executeUpdate(sql);
 
@@ -304,8 +313,37 @@ public class ProductService {
         }
 
     }
+<<<<<<< HEAD
     public static void main(String[] args) throws SQLException {
 
+=======
+    public static void deleteImange(String img){
+        Statement statement = DBConnect.getInstall().get();
+        String sql= "DELETE FROM anhsp WHERE Anh='"+ img+"';";
+
+        try {
+            statement.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+    }
+    public static void upProductImg(String oldImg, String newImg){
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE anhsp set  Anh= '"+ newImg+ "' where Anh = '"+oldImg+"';";
+        try {
+            statement.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+    }
+    public static void main(String[] args) throws SQLException {
+
+//        String s = "img/product/B001/banh1.jpg";
+//        upProductImg("img/product/B001/banh5.jpg", s);
+>>>>>>> 51e5385e3078ac1b5d243a75cb704f217c9eb923
 //        updateDetail("B001", 20,10,"12-1-2022", "13-2-2022");
 //        updateProduct("B001", "LB01","Bánh cánh đồng hoa", "Vừa",500,"Bánh kem phong cách hoa Hàn Quốc, ngon và đẹp, chất lượng luôn tươi mới, nguyên liệu hoàn toàn cao cấp được chọn lọc kỹ càng, đảm bảo an toàn vệ sinh thực phẩm, bảo vệ sức khỏe cho người dùng đó chính là điều mà chúng tôi muốn mang lại cho quý khách hàng. Phần hoa của bánh sẽ được làm từ kem bơ, kem tươi tạo nên vị bánh cũng rất ấn tượng, ngọt dịu, không gây ngán. Các thợ làm bánh phải bắt từng bông hoa, để cho thật lạnh để hoa đông cứng rồi mới sắp xếp lên bánh cho hài hoà. Vì vậy cần rất nhiều thời gian, sự kiên nhẫn và cả sự khéo léo. Mỗi chiếc bánh thật sự là một tác phẩm nghệ thuật.","Trong những dịp lễ, ngày kỷ niệm hay sinh nhật, không cần một món quà quá khoa trương, đơn giản chỉ là một chiếc bánh kem được trang trí bằng những bông hoa sắc màu, bắt mắt cũng khiến bữa tiệc trở nên lung linh mà người nhận thì vui vẻ rồi. Bánh thích hợp tặng chị gái, mẹ, cô giáo.",450000);
 //        List<Product> li = ProductService.getHotProduct();

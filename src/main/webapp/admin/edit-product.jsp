@@ -128,6 +128,17 @@
                             <h3> <%=p.getName()%></h3>
                             <span><%=p.getStatus()%></span>
                         </div>
+<<<<<<< HEAD
+=======
+                        <!-- end profile mobile tabs nav -->
+
+                        <!-- profile btns -->
+                        <div class="profile__actions">
+
+                            <a href="#modal-deleteA" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
+                        </div>
+                        <!-- end profile btns -->
+>>>>>>> 51e5385e3078ac1b5d243a75cb704f217c9eb923
                     </div>
                     <!-- end profile user -->
 
@@ -241,6 +252,7 @@
                                                 </select>
                                             </div>
                                         </div>
+<<<<<<< HEAD
                                         <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                             <div class="form__group">
                                                 <label class="form__label" for="description">Mô tả sản phẩm</label>
@@ -302,11 +314,200 @@
                                         </div>
                                     </div>
                                 </div>
+=======
+                                    </form>
+                                </div>
+                                <!-- end details form -->
+
+                                <!-- password form -->
+                                <div class="col-12 col-lg-4">
+                                    <div class="form form--profile">
+                                        <div class="row row--form">
+                                            <div class="col-12">
+                                                <h4 class="form__title">Chi tiết sản phẩm</h4>
+                                            </div>
+
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form__group">
+                                                    <label class="form__label" for="ngaysx">Ngày sản xuất</label>
+                                                    <input id="ngaysx" type="date" name="ngaysx" class="form__input" >
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form__group">
+                                                    <label class="form__label" for="ngayhh">Ngày hết hạn</label>
+                                                    <input id="ngayhh" type="date" name="ngayhh" class="form__input">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form__group">
+                                                    <label class="form__label" for="soluong">Số lượng</label>
+                                                    <input id="soluong" type="number" min="1" class="form__input" value="<%=p.getDetail().getQuantity()%>">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form__group">
+                                                    <label class="form__label" for="tonkho">Tồn kho</label>
+                                                    <input id="tonkho" type="number" min="1" class="form__input" value="<%=p.getDetail().getInventory()%>">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <button class="form__btn" type="button" onclick="updateDetail('<%=p.getId()%>')">Lưu thay đổi</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end password form -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
+                        <!-- table -->
+                        <div class="col-11 ">
+                            <div class="main__table-wrap">
+                                <table class="main__table">
+                                    <thead>
+                                        <tr >
+                                            <th>STT</th>
+                                            <th>Ảnh Sản Phẩm</th>
+                                            <th>Vị trí</th>
+                                            <th>Tùy Chọn</th>
+                                        </tr>
+                                    </thead>
+                                    <%List<String> listImg = p.getListImg();
+                                    for(int i = 0; i< listImg.size();i++){%>
+                                    <tbody>
+
+                                        <tr style="border-bottom: 3px solid #ff96b7;">
+                                            <td>
+                                                <div class="main__table-text"><%=i+1%></div>
+                                            </td>
+
+                                            <td>
+                                                <div class="main__table-text"><img src="../<%=listImg.get(i)%>" ></div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text"><%=listImg.get(i)%></div>
+                                            </td>
+
+                                            <td>
+                                                <div class="main__table-btns">
+                                                    <a href="#modal-deleteimg<%=i%>" class="main__table-btn main__table-btn--edit open-modal">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <!-- modal delete -->
+                                                    <div id="modal-deleteimg<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                        <form action="Product/UpdateImg"  method="POST" enctype="multipart/form-data">
+                                                        <h6 class="modal__title">Thay đổi ảnh</h6>
+                                                        <p class="modal__text">Chọn hình ảnh</p>
+                                                            <input type="text" class="form__input" name="masp" style="display: none" value="<%=p.getId()%>">
+                                                            <input type="text" class="form__input" name="oldImg" style="display: none" value="<%=listImg.get(i)%>">
+                                                        <input type="file" class="form__input" name="img">
+                                                        <div class="modal__btns">
+                                                            <input class="modal__btn modal__btn--apply" type="submit" value="Xong">
+                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                        </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- end modal delete -->
+                                                    <a href="#modal-deleteA<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
+														<i class="fa fa-trash"></i>
+													</a>
+                                                    <!-- modal delete -->
+                                                    <div id="modal-deleteA<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                        <h6 class="modal__title">Xóa hình ảnh</h6>
+                                                        <p class="modal__text">Bạn có chắc muốn xóa hình ảnh này?</p>
+                                                        <div class="modal__btns">
+                                                            <%String url = "Product/DeleteImage?masp="+p.getId()+"&img="+listImg.get(i);%>
+                                                            <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>')">Xóa</button>
+                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end modal delete -->
+                                                </div>
+                                            </td>
+                                        </tr >
+                                    </tbody>
+                                    <%}%>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end table -->
+                    </div>
+                    <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
+                        <!-- table -->
+                        <div class="col-12 bg-pink">
+                            <div class="main__table-wrap">
+                                <table class="main__table">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Tên khách hàng</th>
+                                            <th>Bình luận</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Tùy Chọn</th>
+                                        </tr>
+                                    </thead>
+                                    <%List<Comment> listCmt = p.getComments();
+                                    for(int i = 0; i<listCmt.size();i++){%>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="main__table-text"><%=i+1%></div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text"><%=listCmt.get(i).getkhachhang()%></div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text"><a href="#"><%=listCmt.get(i).getBinhLuan()%></a></div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text"><a href="#"><%=listCmt.get(i).getDate()%></a></div>
+                                            </td>
+<%--                                            <td>--%>
+<%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
+<%--                                            </td>--%>
+<%--                                            <td>--%>
+<%--                                                <div class="main__table-text main__table-text--rate"><i class="fa fa-star"></i> 7.9</div>--%>
+<%--                                            </td>--%>
+<%--                                            <td>--%>
+<%--                                                <div class="main__table-text">12 / 7</div>--%>
+<%--                                            </td>--%>
+                                            <td>
+                                                <div class="main__table-btns">
+                                                    <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
+														<i class="fa fa-trash"></i>
+													</a>
+                                                    <!-- modal delete -->
+                                                    <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                        <h6 class="modal__title">Xóa Bình Luận</h6>
+
+                                                        <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
+
+                                                        <div class="modal__btns">
+                                                            <% String url ="Product/DeleteComment?masp="+p.getId()+"&idCmt="+listCmt.get(i).getIdcmt()+"&id="+ i; %>
+                                                            <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>') ">Xóa</button>
+                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end modal delete -->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <%}%>
+                                </table>
+>>>>>>> 51e5385e3078ac1b5d243a75cb704f217c9eb923
                             </div>
                             <!-- end password form -->
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
 
                 <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
                     <!-- table -->
@@ -436,15 +637,36 @@
                                 </tr>
 
 
+=======
+                <!-- end content tabs -->
+    </main>
+>>>>>>> 51e5385e3078ac1b5d243a75cb704f217c9eb923
 
                                 </tbody>
 
+<<<<<<< HEAD
                                 <%}%>
                             </table>
                         </div>
                     </div>
                     <!-- end table -->
                 </div>
+=======
+    <!-- modal view -->
+    <div id="modal-view" class="zoom-anim-dialog mfp-hide modal modal--view">
+        <div class="comments__autor">
+            <img class="comments__avatar" src="img/user.svg" alt="">
+            <span class="comments__name">Nguyễn Văn A</span>
+            <span class="comments__time">30.08.2018, 17:53</span>
+        </div>
+        <p class="comments__text">Bánh cánh đồng hoa.</p>
+        <p class="comments__text">Giao tại: kp3, quận 7, tpHCM.</p>
+        <p class="comments__text">Trạng thái: Giao Thành Công.</p>
+        <div class="comments__actions">
+            <div class="comments__rate">
+                <span><i class="fa fa-thumbs-up"></i>12</span>
+                <span>7<i class="fa fa-thumbs-down"></i></span>
+>>>>>>> 51e5385e3078ac1b5d243a75cb704f217c9eb923
             </div>
             <!-- end content tabs -->
 
@@ -472,6 +694,7 @@
 </div>
 <!-- end modal view -->
 
+<<<<<<< HEAD
 <!-- modal delete -->
 <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
     <h6 class="modal__title">Hủy Đơn Hàng</h6>
@@ -481,6 +704,17 @@
     <div class="modal__btns">
         <button class="modal__btn modal__btn--apply" type="button">Hủy</button>
         <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+=======
+    <!-- modal delete -->
+    <div id="modal-deleteb1" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Thay đổi ảnh</h6>
+        <p class="modal__text">Chọn hình ảnh</p>
+        <input type="file" class="form__input">
+        <div class="modal__btns">
+            <button class="modal__btn modal__btn--apply" type="button">Xong</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+        </div>
+>>>>>>> 51e5385e3078ac1b5d243a75cb704f217c9eb923
     </div>
 </div>
 <!-- end modal delete -->
@@ -494,6 +728,7 @@
 
         <span class="reviews__rating"><i class="fa fa-star"></i>5</span>
     </div>
+<<<<<<< HEAD
     <p class="reviews__text">Bánh ngon xuất sắc!.</p>
 </div>
 
@@ -528,6 +763,40 @@
     function  changeHref(link){
         location.href=link;
     }
+=======
+
+    <!-- end modal view -->
+
+
+
+    <!-- modal status -->
+    <div id="modal-status3" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Chặn Người Dùng</h6>
+
+        <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
+
+        <div class="modal__btns">
+            <button class="modal__btn modal__btn--apply" type="button">Chặn</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+        </div>
+    </div>
+    <!-- end modal status -->
+
+
+
+    <!-- JS -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.mousewheel.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.min.js"></script>
+    <script src="js/select2.min.js"></script>
+    <script src="js/admin.js"></script>
+<script>
+function  changeHref(link){
+    location.href=link;
+}
+>>>>>>> 51e5385e3078ac1b5d243a75cb704f217c9eb923
 </script>
 </body>
 
