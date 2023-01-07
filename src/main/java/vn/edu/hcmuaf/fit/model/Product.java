@@ -1,27 +1,24 @@
 package vn.edu.hcmuaf.fit.model;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class Product {
     String id;
     String name;
     String loaiBanh;
     String kichThuoc;
-    String khoiLuong;
+    int khoiLuong;
     String moTa;
     String noiDung;
     List<String> listImg;
     int price;
     List<Comment> comments;
     ProductDetails details;
-    public Product() {
-    }
 
 
-    public Product(String id, String name, String loaiBanh, String kichThuoc, String khoiLuong, String moTa, String noiDung, List<String> listImg, int price, List<Comment> comments,  ProductDetails details) {
+
+    public Product(String id, String name, String loaiBanh, String kichThuoc, int khoiLuong, String moTa, String noiDung, List<String> listImg, int price, List<Comment> comments,  ProductDetails details) {
         this.id = id;
         this.name = name;
         this.loaiBanh = loaiBanh;
@@ -34,7 +31,17 @@ public class Product {
         this.comments = comments;
         this.details =details;
     }
-
+    public Product(String id, String name, String loaiBanh, String kichThuoc, int khoiLuong, String moTa, String noiDung, List<String> listImg, int price){
+        this.id=id;
+        this.name = name;
+        this.loaiBanh = loaiBanh;
+        this.kichThuoc= kichThuoc;
+        this.khoiLuong = khoiLuong;
+        this.moTa = moTa;
+        this.noiDung=noiDung;
+        this.listImg = listImg;
+        this.price = price;
+    }
 
     public void setLoaiBanh(String loaiBanh) {
         this.loaiBanh = loaiBanh;
@@ -68,7 +75,7 @@ public class Product {
         this.price = price;
     }
 
-    public String getKhoiLuong() {
+    public int getKhoiLuong() {
         return khoiLuong;
     }
 

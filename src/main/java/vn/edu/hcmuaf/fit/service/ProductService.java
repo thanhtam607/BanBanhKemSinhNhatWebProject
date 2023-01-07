@@ -46,7 +46,7 @@ public class ProductService {
                             detail =new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
                         }
                     }
-                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, detail);
+                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, detail);
                     list.add(p);
                 }
             } catch (SQLException e) {
@@ -104,7 +104,7 @@ public class ProductService {
                             details = new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
                         }
                     }
-                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, details);
+                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, details);
                     list.add(p);
                 }
             } catch (SQLException e) {
@@ -152,7 +152,7 @@ public class ProductService {
                             details =new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
                         }
                     }
-                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, details);
+                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, details);
                     list.add(p);
                 }
             } catch (SQLException e) {
@@ -174,13 +174,6 @@ public class ProductService {
             se.printStackTrace();
         }
     }
-
-    public static Comment getLastComment(String idProduct) {
-        Product p = findById(idProduct);
-        List<Comment> list = p.getComments();
-        return list.get(list.size() - 1);
-    }
-
 
     public static List<Product> findBySize(String kichthuoc) {
         List<Product> list = getData();
@@ -331,6 +324,33 @@ public class ProductService {
             se.printStackTrace();
         }
 
+    }
+    public static void addProDuct(Product p, String maLB){
+        Statement statement = DBConnect.getInstall().get();
+
+        String sql = "insert into sanpham values('" + p.getId() + "', '" + maLB + "', '" + p.getName() + "', '" + p.getKichThuoc() + "',"
+                + p.getKhoiLuong()+",'"+ p.getMoTa() + "', '"+ p.getNoiDung()+"',"+ p.getPrice()+");";
+        try {
+            statement.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        addImg(p);
+
+    }
+    public static  void addImg(Product p){
+        for(int i = 0; i< p.getListImg().size();i++){
+            Statement statement2 = DBConnect.getInstall().get();
+            String maAnh = "ASP"+p.getId().substring(1)+"-"+(i+1);
+            String sql = "insert into anhsp values( '"+ maAnh+"', '"+ p.getId()+"', '"+ p.getListImg().get(i)+"');";
+            try {
+                statement2.executeUpdate(sql);
+                System.out.println(sql);
+
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
     }
     public static void main(String[] args) throws SQLException {
 

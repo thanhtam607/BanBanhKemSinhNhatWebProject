@@ -105,15 +105,15 @@
 
                 <!-- form -->
                 <div class="col-12">
-                    <form action="#" class="form">
+                    <div  class="form">
                         <div class="row row--form">
                             <div class="col-12 col-md-5 form__cover">
                                 <div class="row row--form">
                                     <div class="col-12 col-sm-6 col-md-12">
                                         <div class="form__img">
                                             <label for="form__img-upload">Thêm ảnh (270 x 400)</label>
-                                            <input id="form__img-upload" name="form__img-upload" type="file" accept=".png, .jpg, .jpeg">
-                                            <img id="form__img" src="#" alt=" ">
+                                            <input id="form__img-upload" name="images" type="file" accept=".png, .jpg, .jpeg">
+                                            <img id="form__img" src="#orm__img-upload" alt=" ">
                                         </div>
                                     </div>
                                 </div>
@@ -131,65 +131,60 @@
                                     <div class="col-12">
                                         <textarea id="text2" name="text" class="form__textarea-sp" placeholder="Mô tả"></textarea>
                                     </div>
-                                    <div class="col-12">
-                                        <textarea id="text3" name="text" class="form__textarea-sp" placeholder="Thông tin"></textarea>
-                                    </div>
                                     <div class="col-12 col-sm-6 col-lg-3">
                                         <input type="text" class="form__input" placeholder="Giá bán">
                                     </div>
 
                                     <div class="col-12 col-sm-6 col-lg-3">
-                                        <input type="text" class="form__input" placeholder="Tình trạng">
-                                    </div>
-
-                                    <div class="col-12 col-sm-6 col-lg-3">
-                                        <input type="text" class="form__input" placeholder="Giao hàng">
-                                    </div>
-
-                                
-
-                                    <div class="col-12 col-sm-6 col-lg-3">
                                         <input type="text" class="form__input" placeholder="Khối lượng">
                                     </div>
-
                                     <div class="col-12">
-                                        <div class="form__gallery">
-                                            <label id="gallery1" for="form__gallery-upload">Thêm hình ảnh liên quan</label>
-                                            <input data-name="#gallery1" id="form__gallery-upload" name="gallery" class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg" multiple>
+                                        <ul class="form__radio">
+                                            <li>
+                                                <span>Kích thước:</span>
+                                            </li>
+                                            <li>
+                                                <input id="type1" type="radio" name="type" checked="">
+                                                <label for="type1">Bé</label>
+                                            </li>
+                                            <li>
+                                                <input id="type2" type="radio" name="type" checked="">
+                                                <label for="type2">Nhỏ</label>
+                                            </li>
+                                            <li>
+                                                <input id="type3" type="radio" name="type">
+                                                <label for="type3">Vừa</label>
+                                            </li>
+                                            <li>
+                                                <input id="type4" type="radio" name="type">
+                                                <label for="type4">Lớn</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                        <div class="wrap">
+                                            <div class="dandev-reviews">
+                                                <div class="form__input form_upload">
+                                                    <label class="dandev_insert_attach">Thêm hình ảnh liên quan</label>
+                                                </div>
+                                                <div class="list_attach">
+                                                    <ul class="dandev_attach_view">
+
+                                                    </ul>
+                                                    <span class="dandev_insert_attach"><i class="dandev-plus">+</i></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
+
+
 
                             <div class="col-12">
-                                <ul class="form__radio">
-                                    <li>
-                                        <span>Kích thước:</span>
-                                    </li>
-                                    <li>
-                                        <input id="type1" type="radio" name="type" checked="">
-                                        <label for="type1">Bé</label>
-                                    </li>
-                                    <li>
-                                        <input id="type2" type="radio" name="type" checked="">
-                                        <label for="type2">Nhỏ</label>
-                                    </li>
-                                    <li>
-                                        <input id="type3" type="radio" name="type">
-                                        <label for="type3">Vừa</label>
-                                    </li>
-                                    <li>
-                                        <input id="type4" type="radio" name="type">
-                                        <label for="type4">Lớn</label>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="col-12">
-                                <button type="button" class="form__btn">Đăng lên</button>
+                                <button type="button" class="form__btn">Thêm sản phẩm</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <!-- end form -->
             </div>
@@ -222,7 +217,81 @@
 	 <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
  
 	 <!-- Template Javascript -->
-	 <script src="js/main.js"></script>
+<script src="js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $('.dandev_insert_attach').click(function() {
+        if ($('.list_attach').hasClass('show-btn') === false) {
+            $('.list_attach').addClass('show-btn');
+        }
+        var _lastimg = jQuery('.dandev_attach_view li').last().find('input[type="file"]').val();
+
+        if (_lastimg != '') {
+
+            var time = 0;
+            var _html = '<li id="li_files_' + (time++) + '" class="li_file_hide">';
+            _html += '<div class="img-wrap">';
+            _html += '<span class="close" onclick="DelImg(this)">×</span>';
+            _html += ' <div class="img-wrap-box"></div>';
+            _html += '</div>';
+            _html += '<div class="' + (time++) + '">';
+            _html += '<input type="file" class="hidden"  onchange="uploadImg(this)" name="img"   />';
+            _html += '</div>';
+            _html += '</li>';
+            jQuery('.dandev_attach_view').append(_html);
+            jQuery('.dandev_attach_view li').last().find('input[type="file"]').click();
+        } else {
+            if (_lastimg == '') {
+                jQuery('.dandev_attach_view li').last().find('input[type="file"]').click();
+            } else {
+                if ($('.list_attach').hasClass('show-btn') === true) {
+                    $('.list_attach').removeClass('show-btn');
+                }
+            }
+        }
+    });
+    function getFile(){
+        var list = document.getElementsByName("img");
+        var f = document.getElementById("123").value;
+        console.log(f);
+        for(var i = 0;i<list.length;i++ ){
+            var file = list[i].value;
+            console.log(file);
+        }
+
+    }
+
+    function uploadImg(el) {
+        var file_data = $(el).prop('files')[0];
+        var type = file_data.type;
+        var fileToLoad = file_data;
+
+
+        var fileReader = new FileReader();
+
+        fileReader.onload = function(fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result;
+
+            var newImage = document.createElement('img');
+            newImage.src = srcData;
+            var _li = $(el).closest('li');
+            if (_li.hasClass('li_file_hide')) {
+                _li.removeClass('li_file_hide');
+            }
+            _li.find('.img-wrap-box').append(newImage.outerHTML);
+
+            console.log(  file_data);
+
+        }
+        fileReader.readAsDataURL(fileToLoad);
+
+    }
+
+    function DelImg(el) {
+        jQuery(el).closest('li').remove();
+
+    }
+</script>
 </body>
 
 </html>
