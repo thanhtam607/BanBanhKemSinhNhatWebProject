@@ -178,9 +178,6 @@
         <div class="col-5">
           <a href="/BanBanhKemSinhNhatWebProject/admin/ListReceipt_full_Admin" type="button" class="form__btn">Xem Thêm</a>
         </div>
-        <div class="col-5">
-          <a href="#" type="button" class="form__btn">Lưu Thay Đổi</a>
-        </div>
       </div>
     </form>
   </div>

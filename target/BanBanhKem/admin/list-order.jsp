@@ -182,16 +182,44 @@
                   <a href="cthd_Admin?mahd=<%=rc.getId()%>" class="main__table-btn main__table-btn--edit">
                     <i class="fa fa-eye text-center"></i>
                   </a>
-                  <a href="adminChangeStateOrder?mahd=<%=rc.getId()%>" class="main__table-btn main__table-btn--banned">
+                  <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">
                     <i class="fa fa-check"></i>
                   </a>
-                  <a href="adminRemoveOrder?mahd=<%=rc.getId()%>" class="main__table-btn main__table-btn--delete">
+                  <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                     <i class="fa fa-trash"></i>
                   </a>
                 </div>
               </td>
             </tr>
             </tbody>
+            <!-- modal delete -->
+            <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+              <h6 class="modal__title">Hủy Đơn Hàng</h6>
+
+              <p class="modal__text">Bạn có chắc muốn hủy đơn hàng này?</p>
+
+              <div class="modal__btns">
+                <a href="adminRemoveOrder?mahd=<%=rc.getId()%>" class="modal__btn modal__btn--apply" type="button">
+                Hủy Đơn Hàng
+                </a>
+                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+              </div>
+            </div>
+            <!-- end modal delete -->
+            <!-- modal status -->
+            <div id="modal-status<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+              <h6 class="modal__title">Thông Báo</h6>
+
+              <p class="modal__text">Bạn có chắc muốn chuyển ĐH cho đơn vị vận chuyển?</p>
+
+              <div class="modal__btns">
+                <a href="adminChangeStateOrder?mahd=<%=rc.getId()%>" class="modal__btn modal__btn--apply" type="button">
+                  OK
+                </a>
+                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+              </div>
+            </div>
+            <!-- end modal status -->
             <% } %>
           </table>
         </div>
@@ -222,32 +250,6 @@
   </div>
 </main>
 <!-- end main content -->
-
-<!-- modal status -->
-<div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
-  <h6 class="modal__title">Ẩn Tin Tức</h6>
-
-  <p class="modal__text">Bạn có chắc muốn ẩn bài viết này?</p>
-
-  <div class="modal__btns">
-    <button class="modal__btn modal__btn--apply" type="button">Ẩn</button>
-    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-  </div>
-</div>
-<!-- end modal status -->
-
-<!-- modal delete -->
-<div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-  <h6 class="modal__title">Hủy Đơn Hàng</h6>
-
-  <p class="modal__text">Bạn có chắc muốn hủy đơn hàng này?</p>
-
-  <div class="modal__btns">
-    <button class="modal__btn modal__btn--apply" type="button">Hủy</button>
-    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-  </div>
-</div>
-<!-- end modal delete -->
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
