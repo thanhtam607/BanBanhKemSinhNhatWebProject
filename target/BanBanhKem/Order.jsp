@@ -196,7 +196,6 @@
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns" style="text-align: center">
                         <a href="./ListProduct" class="primary-btn cart-btn" >Xem thêm sản phẩm </a>
-
                     </div>
                 </div>
                 <%}else{%>
@@ -206,7 +205,7 @@
                     <div class="row">
                         <div class="col-6">
                                     <small id="" class="text-secondary d-inline-block pt-3 pl-3">Mã đơn hàng: </small>
-                                    <small id="madhToRemove" class="text-secondary d-inline-block pt-3 pl-3" style="padding: 0;margin: 0"><%=r.getId()%></small>
+                                    <small id="madhToRemove" class="text-secondary d-inline-block pt-3 " style="padding: 0;margin: 0"><%=r.getId()%></small>
                                 </div>
                         <div class="col-6 text-right  my-2 pt-2 ">
                             <small class="d-inline text-secondary">Trạng thái |</small>
@@ -237,7 +236,7 @@
                             </div>
                             <div class="col-3 mt-3">
                                 <small class="text-dark" >
-                                    <%=c.getToTalPrice()%> VND
+                                    <%=c.formatNum(c.getToTalPrice())%> VND
                                 </small>
                             </div>
 
@@ -265,7 +264,6 @@
                                 <button onclick="cancelOrder()" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2">
                                             Hủy đơn hàng
                                 </button>
-<%--                                <button onclick="cancelOrder()" type="submit" class="site-btn" >ĐẶT HÀNG</button>--%>
                                 <%}%>
 
                             </div>
@@ -274,7 +272,7 @@
                             <div class="text-right pr-5">
                                 <h6 class="d-inline text-dark">Tổng số tiền: </h6>
                                 <h3 class="d-inline" style="color:#ee4d2d">
-                                    <%=r.getMoney()%> VND
+                                    <%=r.formatNum(r.getMoney())%> VND
                                 </h3>
                             </div>
                         </div>

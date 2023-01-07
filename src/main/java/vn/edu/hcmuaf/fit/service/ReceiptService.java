@@ -36,7 +36,7 @@ public class ReceiptService {
                 ResultSet rs = statement.executeQuery("SELECT MAHD, MAKH, NGAYLAPHD, GHICHU, THANHTIEN, TRANGTHAI FROM hoadon ORDER BY hoadon.MAHD DESC");
                 while (rs.next()) {
                     Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
-                            rs.getString(3),rs.getString(4), rs.getDouble(5), rs.getInt(6));
+                            rs.getString(3),rs.getString(4), rs.getInt(5), rs.getInt(6));
                     list.add(rc);
                 }
             } catch (SQLException e) {
@@ -64,7 +64,7 @@ public class ReceiptService {
                             listImg.add(rsImg.getString(2));
                         }
                     }
-                    CTHD cthd = new CTHD(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(5), listImg, rs.getFloat(4));
+                    CTHD cthd = new CTHD(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(5), listImg, rs.getInt(4));
                     list.add(cthd);
                 }
             } catch (SQLException e) {

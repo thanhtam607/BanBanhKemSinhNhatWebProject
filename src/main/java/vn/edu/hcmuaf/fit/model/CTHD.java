@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.model;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class CTHD {
@@ -8,10 +9,10 @@ public class CTHD {
     private String tensp;
     private int solg;
     private List<String> anhsp;
-    private double price;
+    private int price;
 
 
-    public CTHD(String mahd, String masp, String tensp, int solg, List<String> anhsp, double price) {
+    public CTHD(String mahd, String masp, String tensp, int solg, List<String> anhsp, int price) {
         this.mahd = mahd;
         this.masp = masp;
         this.tensp = tensp;
@@ -19,8 +20,8 @@ public class CTHD {
         this.anhsp = anhsp;
         this.price = price;
     }
-    public double getToTalPrice(){
-        double res = 0;
+    public int getToTalPrice(){
+        int res = 0;
         res = this.price*this.solg;
         return res;
     }
@@ -28,7 +29,7 @@ public class CTHD {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -73,7 +74,11 @@ public class CTHD {
     public void setSolg(int solg) {
         this.solg = solg;
     }
-
+    public static String formatNum(int price){
+        NumberFormat vn = NumberFormat.getInstance();
+        String result = vn.format(price);
+        return result;
+    }
     @Override
     public String toString() {
         return "CTHD{" +
