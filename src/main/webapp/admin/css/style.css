@@ -2,7 +2,8 @@
 :root {
     --primary: #ff96b7;
     --secondary: #f4abb4;
-    --light: #ff96b7;
+    /*--light: #ff96b7;*/
+    --light: #000;
     --white: #ffffff;
 }
 .back-to-top {
@@ -367,3 +368,10 @@ background-color: #ff96b7;
    margin-bottom: 20px;
 }
 
+/*box trạng thaí đơn hag*/
+.stateOrder{
+    height: 35px;
+    border: #000 3px;
+    font-size: 16px;
+    padding: 5px;
+}

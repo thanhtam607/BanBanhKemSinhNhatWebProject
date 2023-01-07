@@ -196,7 +196,7 @@
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Thành tiền</th>
                                     <th scope="col">Trạng thái đơn hàng</th>
-                                    <th scope="col">Xem chi tiết</th>
+                                    <th scope="col">Chi tiết</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -209,12 +209,14 @@
                                     <td><%=rc.getNamecustomer()%></td>
                                     <td><%=rc.getAddress()%></td>
                                     <td><%=rc.formatNum(rc.getTotal())%> VND</td>
-                                    <td>Đang chuẩn bị</td>
-                                    <td> <div class="main__table-btns text-center">
+                                    <td>
+                                        <div class="main__table-text"><%=rc.getState()%></div>
+                                    </td>
+                                    <td>
                                         <a href="cthd_Admin?mahd=<%=rc.getId()%>" class=" main__table-btn main__table-btn--edit">
-                                            <i class="fa fa-eye"></i>
+                                            <i class="fa fa-eye text-center"></i>
                                         </a>
-                                    </div></td>
+                                    </td>
                                 </tr>
                             </tbody>
                             <% } %>

@@ -147,7 +147,7 @@
               <th>Địa chỉ</th>
               <th >Thành tiền</th>
               <th>Trạng thái đơn hàng</th>
-              <th>Xem chi tiết</th>
+              <th>Tùy chọn</th>
             </tr>
             </thead>
             <%for(int i = 0; i < receiptList.size(); i++){
@@ -175,11 +175,18 @@
                 <div class="main__table-text"><%=rc.formatNum(rc.getPrice())%> VND</div>
               </td>
               <td>
-                <div class="main__table-text main__table-text--green"><%=rc.getState()%></div>
+                <div class="main__table-text"><%=rc.getState()%></div>
               </td>
               <td>
+                <div class="main__table-btns">
                   <a href="cthd_Admin?mahd=<%=rc.getId()%>" class="main__table-btn main__table-btn--edit">
                     <i class="fa fa-eye text-center"></i>
+                  </a>
+                  <a href="adminChangeStateOrder?mahd=<%=rc.getId()%>" class="main__table-btn main__table-btn--banned">
+                    <i class="fa fa-check"></i>
+                  </a>
+                  <a href="adminRemoveOrder?mahd=<%=rc.getId()%>" class="main__table-btn main__table-btn--delete">
+                    <i class="fa fa-trash"></i>
                   </a>
                 </div>
               </td>
@@ -194,7 +201,7 @@
       <!-- paginator -->
       <div class="col-12">
         <div class="paginator-wrap">
-          <span><%=receiptList.size()%>/<%=receiptList.size()%> Bài viết</span>
+<%--          <span><%=receiptList.size()%>/<%=receiptList.size()%> Bài viết</span>--%>
 
           <ul class="paginator">
             <li class="paginator__item paginator__item--prev">
@@ -231,12 +238,12 @@
 
 <!-- modal delete -->
 <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-  <h6 class="modal__title">Xóa Tin Tức</h6>
+  <h6 class="modal__title">Hủy Đơn Hàng</h6>
 
-  <p class="modal__text">Bạn có chắc muốn xóa bài viết này?</p>
+  <p class="modal__text">Bạn có chắc muốn hủy đơn hàng này?</p>
 
   <div class="modal__btns">
-    <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
+    <button class="modal__btn modal__btn--apply" type="button">Hủy</button>
     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
   </div>
 </div>
