@@ -325,11 +325,12 @@ public class ProductService {
         }
 
     }
-    public static void addProDuct(Product p, String maLB){
+    public static void addProDuct(Product p){
         Statement statement = DBConnect.getInstall().get();
 
-        String sql = "insert into sanpham values('" + p.getId() + "', '" + maLB + "', '" + p.getName() + "', '" + p.getKichThuoc() + "',"
+        String sql = "insert into sanpham values('" + p.getId() + "', '" + p.getLoaiBanh() + "', '" + p.getName() + "', '" + p.getKichThuoc() + "',"
                 + p.getKhoiLuong()+",'"+ p.getMoTa() + "', '"+ p.getNoiDung()+"',"+ p.getPrice()+");";
+        System.out.println(sql);
         try {
             statement.executeUpdate(sql);
         } catch (SQLException se) {
@@ -343,9 +344,10 @@ public class ProductService {
             Statement statement2 = DBConnect.getInstall().get();
             String maAnh = "ASP"+p.getId().substring(1)+"-"+(i+1);
             String sql = "insert into anhsp values( '"+ maAnh+"', '"+ p.getId()+"', '"+ p.getListImg().get(i)+"');";
+            System.out.println(sql);
             try {
                 statement2.executeUpdate(sql);
-                System.out.println(sql);
+
 
             } catch (SQLException se) {
                 se.printStackTrace();
