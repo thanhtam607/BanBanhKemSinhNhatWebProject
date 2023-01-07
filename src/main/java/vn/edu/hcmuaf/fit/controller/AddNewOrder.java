@@ -37,8 +37,11 @@ public class AddNewOrder extends HttpServlet {
 
         order.setGiaohang(gh);
         order.setNote(ghichu);
+
         OrderService.addOrder(order);
         OrderService.addCTHD(order);
+        OrderService.updateTonKhoWhenAdd(order);
+
         OrderService.clearCart(order);
     }
 

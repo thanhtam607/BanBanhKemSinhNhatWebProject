@@ -163,8 +163,26 @@ public class ReceiptService {
         }else{
             System.out.println("not found");
         }
+    }
+    public static void updateTonKhoWhenCancelOrder(String mahd){
+        Statement stm = DBConnect.getInstall().get();
+        List<CTHD> cthdList = getcthdUser(mahd);
 
+        if(stm!= null) {
+            try {
+                for(CTHD cthd: cthdList){
+                    String msp = cthd.getMasp();
+                    int sl = cthd.getSolg();
+                    Product p = ProductService.findById(msp);
+                    int solgConLai = p.getDetail().getInventory() + sl;
+                    String sql = "UPDATE ctsp set ctsp.tonKho = "+solgConLai+" WHERE ctsp.MaSP ='"+msp+"'";
+                    stm.executeUpdate(sql);
 
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
     }
     public static void main(String[] args) {
         cancelOrder("HD02");

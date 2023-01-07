@@ -241,7 +241,7 @@
                                     <input class="idPro" id="idProduct" type="text" value="<%=entry.getValue().getSp().getId()%>" style="display: none">
                                 </td>
                                 <td class="shoping__cart__price">
-                                    <input id="<%="price"+entry.getValue().getSp().getId() %>" class="price" type="number" value="<%=entry.getValue().getSp().getPrice()%>" style="display: none">
+                                    <input id="<%="price"+entry.getValue().getSp().getId()%>" class="price" type="number" value="<%=entry.getValue().getSp().getPrice()%>" style="display: none">
                                     <%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND
                                 </td>
                                 <td class="shoping__cart__quantity" >

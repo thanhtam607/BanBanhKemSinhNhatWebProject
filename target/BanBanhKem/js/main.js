@@ -726,9 +726,9 @@ function addOrder(){
                 if (result.isConfirmed) {
                     location.href = "/BanBanhKemSinhNhatWebProject/MyOrder";
                 }
-                // else{
-                //     location.href = "/BanBanhKemSinhNhatWebProject/ListProduct";
-                // }
+                else{
+                    location.href = "/BanBanhKemSinhNhatWebProject/ListProduct";
+                }
             }
             );
 
@@ -747,9 +747,8 @@ function cartEmpty(){
         }
     );
 }
-function cancelOrder(){
+function cancelOrder(mdh){
     var url  = "RemoveOrder";
-    var mdh = document.getElementById("madhToRemove").innerText;
 
     $.ajax({
         url: url,
@@ -765,7 +764,7 @@ function cancelOrder(){
                 confirmButtonText: 'Hủy Đơn Hàng',
                 confirmButtonColor: '#ff96b7'}).then((result) => {
                     if (result.isConfirmed) {
-                        document.getElementById("xoaDH").innerHTML = " ";
+                        document.getElementById(mdh).remove();
                     }
                 }
             );

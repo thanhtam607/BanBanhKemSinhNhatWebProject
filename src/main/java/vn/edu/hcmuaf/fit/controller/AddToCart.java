@@ -27,7 +27,7 @@ public class AddToCart extends HttpServlet {
             if (request.getParameter("masp") != null) {
                 String maSP = request.getParameter("masp");
                 Product product = ProductService.findById(maSP);
-                if (product != null) {
+                if (product != null && product.isExistNumber(solgmua)) {
                     if(request.getParameter("solgmua") != null){
                         solgmua = Integer.parseInt(request.getParameter("solgmua"));
                     }

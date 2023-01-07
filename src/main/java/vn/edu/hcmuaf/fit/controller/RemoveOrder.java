@@ -18,6 +18,8 @@ public class RemoveOrder extends HttpServlet {
         Order order =(Order) session.getAttribute("order");
 
         String mahd = request.getParameter("mahd");
+
+        ReceiptService.updateTonKhoWhenCancelOrder(mahd);
         ReceiptService.cancelOrder(mahd);
 
         response.sendRedirect("order.jsp");

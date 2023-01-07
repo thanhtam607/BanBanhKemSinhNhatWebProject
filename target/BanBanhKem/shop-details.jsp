@@ -403,10 +403,11 @@
     }
     function addToCart(id){
 
-        var qty =parseInt(document.getElementById("qty").value) ;
+        var qty =parseInt(document.getElementById("qty").value);
 
         var url  ="AddToCart?masp=" +id+"&soluong="+ qty;
         var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
+
         $.ajax({
             url: url,
             type: "GET",
@@ -421,6 +422,7 @@
                     confirmButtonColor: '#ff96b7'});
             }
         });
+
     };
 </script>
 </body>

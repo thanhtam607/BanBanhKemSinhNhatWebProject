@@ -2,10 +2,7 @@ package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.db.DBConnect;
-import vn.edu.hcmuaf.fit.model.Blog;
-import vn.edu.hcmuaf.fit.model.CTHD;
-import vn.edu.hcmuaf.fit.model.ItemProductInCart;
-import vn.edu.hcmuaf.fit.model.Order;
+import vn.edu.hcmuaf.fit.model.*;
 
 import java.sql.*;
 import java.util.*;
@@ -66,13 +63,18 @@ public class OrderService {
         order.getData().clear();
         order.setBuyDate(null);
     }
-    public static void addGiaoHang(){
+    public static void updateTonKhoWhenAdd(Order order){
         Statement stm = DBConnect.getInstall().get();
+
         if(stm!= null) {
             try {
-                    String sql = "INSERT INTO CTHD VALUES('HD01', 'B001', 2);";
+                for(Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()){
+                    Product p = entry.getValue().getSp();
+                    int solgConLai = p.getDetail().getInventory() - entry.getValue().getSoLgMua();
+                    String sql = "UPDATE ctsp set ctsp.tonKho = "+solgConLai+" WHERE ctsp.MaSP ='"+p.getId()+"'";
                     stm.executeUpdate(sql);
-                    System.out.println("thanh cong");
+
+                }
             } catch (SQLException se) {
                 se.printStackTrace();
             }
@@ -81,7 +83,6 @@ public class OrderService {
     public static void main(String[] args) {
 //        addGiaoHang();
         String a = getLastMaHD().substring(2);
-
         System.out.println(Integer.parseInt(a)+1);
     }
 }

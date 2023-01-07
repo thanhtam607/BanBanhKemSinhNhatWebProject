@@ -201,15 +201,15 @@
                 <%}else{%>
                 <%for(Receipt r: receipts){
                 %>
-                <div id="xoaDH" class="my-2 center overflow-hidden">
+                <div id="<%=r.getId()%>" class="my-2 center overflow-hidden">
                     <div class="row">
                         <div class="col-6">
-                                    <small id="" class="text-secondary d-inline-block pt-3 pl-3">Mã đơn hàng: </small>
-                                    <small id="madhToRemove" class="text-secondary d-inline-block pt-3 " style="padding: 0;margin: 0"><%=r.getId()%></small>
+                                    <small class="text-secondary d-inline-block pt-3 pl-3">Mã đơn hàng: </small>
+                                    <small class="text-secondary d-inline-block pt-3 " style="padding: 0;margin: 0"><%=r.getId()%></small>
                                 </div>
                         <div class="col-6 text-right  my-2 pt-2 ">
                             <small class="d-inline text-secondary">Trạng thái |</small>
-                            <div id="textTrangThaiDH" class="d-inline pr-3 text-uppercase" style="color:#ee4d2d; font-size:14px">
+                            <div class="d-inline pr-3 text-uppercase" style="color:#ee4d2d; font-size:14px">
                                 <span><%=r.getState()%></span>
                             </div>
                         </div>
@@ -261,7 +261,7 @@
                         <div class="col-6 pt-2 pb-3">
                             <div class="text-left mr-3">
                                 <%if(r.checkState()){%>
-                                <button onclick="cancelOrder()" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2">
+                                <button onclick="cancelOrder('<%=r.getId()%>')" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2">
                                             Hủy đơn hàng
                                 </button>
                                 <%}%>

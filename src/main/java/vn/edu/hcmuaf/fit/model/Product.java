@@ -129,6 +129,10 @@ public class Product {
             return "Hết hàng";
         }
     }
+    public boolean isExistNumber(int slg){
+        if(getDetail().getInventory() > slg) return true;
+            return false;
+    }
 
     public static String formatNum(int price){
         DecimalFormat df = new DecimalFormat("###,###,###");
