@@ -15,6 +15,19 @@ public class ListReceipt_Admin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Receipt> lr = ReceiptService.getData();
         request.setAttribute("listreceipt", lr);
+
+        String doanhthuthangnay = Receipt.formatNum(ReceiptService.getDoanhThuThisMonth());
+        request.setAttribute("doanhthuthangnay", doanhthuthangnay);
+
+        String doanhthuhomnay = Receipt.formatNum(ReceiptService.getDoanhThuToDay());
+        request.setAttribute("doanhthuhomnay", doanhthuhomnay);
+
+        int solgSPbandcthangnay = ReceiptService.getNumberProThisMonth();
+        request.setAttribute("solgSPbandcthangnay", solgSPbandcthangnay);
+
+        int soDHhomnay = ReceiptService.getAllReceiptToDay().size();
+        request.setAttribute("soDHhomnay", soDHhomnay);
+
         request.getRequestDispatcher("admin-web.jsp").forward(request,response);
 
     }
