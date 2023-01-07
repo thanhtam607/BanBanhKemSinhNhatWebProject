@@ -7,6 +7,9 @@ public class Ship {
     private String ngayGiao;
     private String diachigiao;
 
+    public Ship(){
+
+    }
     public Ship(String mahd, String ngayGiao, String diachigiao) {
         this.mahd = mahd;
         this.ngayGiao = ngayGiao;

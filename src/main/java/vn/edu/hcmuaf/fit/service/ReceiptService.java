@@ -3,9 +3,8 @@ package vn.edu.hcmuaf.fit.service;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.*;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javax.sound.midi.Soundbank;
+import java.sql.*;
 import java.util.*;
 
 public class ReceiptService {
@@ -136,7 +135,29 @@ public class ReceiptService {
         }
         return null;
     }
+
+    public static void cancelOrder(String mahd) {
+        Statement statement = DBConnect.getInstall().get();
+        Statement stmt = DBConnect.getInstall().get();
+        String sql = "DELETE from cthd WHERE MAHD = '"+mahd+"'";
+        String sql2 = "DELETE from giaohang WHERE MAHD = '"+mahd+"'";
+        String sql3 = "DELETE from hoadon WHERE MAHD = '"+mahd+"'";
+        if(statement!=null){
+            try {
+                statement.executeUpdate(sql);
+                statement.executeUpdate(sql2);
+                statement.executeUpdate(sql3);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            System.out.println("not found");
+        }
+
+
+    }
     public static void main(String[] args) {
+        cancelOrder("HD02");
 ////        List<CTHD> ls = getListCTHD();
 //        List<CTHD> ls = getcthdUser("HD84");
 ////        List<Receipt> lr = getAllReceipt();

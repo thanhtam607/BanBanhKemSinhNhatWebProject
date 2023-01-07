@@ -21,10 +21,10 @@ public class ProductService {
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
-                    ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
+                    ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
-                   ProductDetails detail = new ProductDetails();
+                    ProductDetails detail = new ProductDetails();
                     String s1 = rs.getString(1);
                     while (rsImg.next()) {
                         String s2 = rsImg.getString(1);
@@ -36,13 +36,13 @@ public class ProductService {
                     while (rsCmt.next()) {
                         String s2 = rsCmt.getString(1);
                         if (s1.equals(s2)) {
-                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4)));
+                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5)));
                         }
                     }
                     while (rspd.next()) {
                         String s2 = rspd.getString(1);
                         if (s1.equals(s2)) {
-                           detail =new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
+                            detail =new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
                         }
                     }
                     Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, detail);
@@ -80,7 +80,7 @@ public class ProductService {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
 
-                    ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
+                    ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL,IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
                     ProductDetails details = new ProductDetails();
@@ -94,7 +94,7 @@ public class ProductService {
                     while (rsCmt.next()) {
                         String s2 = rsCmt.getString(1);
                         if (s1.equals(s2)) {
-                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4)));
+                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5)));
                         }
                     }
                     while (rspd.next()) {
@@ -128,7 +128,7 @@ public class ProductService {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
                     List<String> listkt = new LinkedList<>();
-                    ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
+                    ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
                     ProductDetails details = new ProductDetails();
@@ -142,7 +142,7 @@ public class ProductService {
                     while (rsCmt.next()) {
                         String s2 = rsCmt.getString(1);
                         if (s1.equals(s2)) {
-                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4)));
+                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5)));
                         }
                     }
                     while (rspd.next()) {
@@ -282,8 +282,31 @@ public class ProductService {
             se.printStackTrace();
         }
     }
+    public static void updateDetail(ProductDetails pDetail){
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE ctsp set  soLg= "+ pDetail.getQuantity()+ ", tonKho= " + pDetail.getInventory()+ ", ngaySX = '"+ pDetail.getMfg() + "', ngayHH= '"+ pDetail.getOod()+"' where MaSP = '"+pDetail.getId()+"';";
+        try {
+            statement.executeUpdate(sql);
 
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static void deleteCommemt(String id){
+        Statement statement = DBConnect.getInstall().get();
+        String sql= "DELETE FROM comments WHERE IdCmt="+ id+";";
+        System.out.println(sql);
+        try {
+            statement.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+    }
     public static void main(String[] args) throws SQLException {
+
+//        updateDetail("B001", 20,10,"12-1-2022", "13-2-2022");
 //        updateProduct("B001", "LB01","Bánh cánh đồng hoa", "Vừa",500,"Bánh kem phong cách hoa Hàn Quốc, ngon và đẹp, chất lượng luôn tươi mới, nguyên liệu hoàn toàn cao cấp được chọn lọc kỹ càng, đảm bảo an toàn vệ sinh thực phẩm, bảo vệ sức khỏe cho người dùng đó chính là điều mà chúng tôi muốn mang lại cho quý khách hàng. Phần hoa của bánh sẽ được làm từ kem bơ, kem tươi tạo nên vị bánh cũng rất ấn tượng, ngọt dịu, không gây ngán. Các thợ làm bánh phải bắt từng bông hoa, để cho thật lạnh để hoa đông cứng rồi mới sắp xếp lên bánh cho hài hoà. Vì vậy cần rất nhiều thời gian, sự kiên nhẫn và cả sự khéo léo. Mỗi chiếc bánh thật sự là một tác phẩm nghệ thuật.","Trong những dịp lễ, ngày kỷ niệm hay sinh nhật, không cần một món quà quá khoa trương, đơn giản chỉ là một chiếc bánh kem được trang trí bằng những bông hoa sắc màu, bắt mắt cũng khiến bữa tiệc trở nên lung linh mà người nhận thì vui vẻ rồi. Bánh thích hợp tặng chị gái, mẹ, cô giáo.",450000);
 //        List<Product> li = ProductService.getHotProduct();
 //               for(Product p: li){
@@ -295,6 +318,6 @@ public class ProductService {
 //       System.out.println(getPaginationPage(1).toString());
         // addComment(new Comment("B002", "Thanh Tâm","Bánh mềm mịn vô cùng hòa quyện với  phần kem mịn màng, vị ngọt thanh vừa ăn lại có thêm phần tiramisu khá lạ miệng khiến cho người ăn cảm thấy thích thú.","2022/12/8"), "AD02");
 
-}
+    }
 
 }

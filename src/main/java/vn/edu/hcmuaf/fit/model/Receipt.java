@@ -66,6 +66,9 @@ public class Receipt {
         }
         return "Giao Thành Công";
     }
+    public int getStateInt() {
+        return this.state;
+    }
 
     public void setState(int state) {
         this.state = state;
@@ -166,7 +169,10 @@ public class Receipt {
         String result = vn.format(price);
         return result;
     }
-
+    public boolean checkState(){
+        if(this.state == 0 || this.state == 1) return true;
+        return false;
+    }
     @Override
     public String toString() {
         return "receipt{" +

@@ -747,10 +747,40 @@ function cartEmpty(){
         }
     );
 }
-function seeAll(){
-// var a = document.getElementsByClassName("xemthemdiachi")
-//         for(let i = 0; i< a.length; i++){
-//             a.classList.remove("d-none")
-//         }
+function cancelOrder(){
+    var url  = "RemoveOrder";
+    var mdh = document.getElementById("madhToRemove").innerText;
 
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {mahd:mdh},
+        success: function (){
+            if(document.getElementById("xoaDH") === " "){
+                document.getElementById("xoaDH").innerHTML = "<div class=\"cartEmpty\" name=\"cartEmpty\">\n" +
+                    "                    <img src=\"./img/null.png\" alt=\"Giỏ hàng của bạn đang trống\" class=\"d-block m-auto\" width=\"250\" />\n" +
+                    "                    <p class=\"text-center font-weight-bold\" style=\"opacity: .6;\">Không có đơn hàng nào</p>\n" +
+                    "                </div>\n" +
+                    "                <div class=\"col-lg-12\">\n" +
+                    "                    <div class=\"shoping__cart__btns\" style=\"text-align: center\">\n" +
+                    "                        <a href=\"./ListProduct\" class=\"primary-btn cart-btn\" >Xem thêm sản phẩm </a>\n" +
+                    "\n" +
+                    "                    </div>\n" +
+                    "                </div>";
+            }
+            Swal.fire({
+                text:'Bạn có chắc muốn hủy đơn hàng này không?',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText:'Quay lại',
+                confirmButtonText: 'Hủy Đơn Hàng',
+                confirmButtonColor: '#ff96b7'}).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById("xoaDH").innerHTML = " ";
+                    }
+                }
+            );
+        }
+    });
 }
+

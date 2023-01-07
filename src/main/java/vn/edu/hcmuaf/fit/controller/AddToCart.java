@@ -43,6 +43,7 @@ public class AddToCart extends HttpServlet {
                         order.setData(listItems);
                         order.setUser(auth);
                         order.setTrangthai(0);
+                        order.setGiaohang(null);
                         session.setAttribute("order", order);
 
                     } else {

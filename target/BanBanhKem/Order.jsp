@@ -187,16 +187,30 @@
     <div class="container-91 mx-auto">
         <div class="row">
             <div class="tab-content flex-sm-row mt-2">
+                <%if(receipts.size() == 0){
+                %>
+                <div class="cartEmpty" name="cartEmpty">
+                    <img src="./img/null.png" alt="Giỏ hàng của bạn đang trống" class="d-block m-auto" width="250" />
+                    <p class="text-center font-weight-bold" style="opacity: .6;">Không có đơn hàng nào</p>
+                </div>
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns" style="text-align: center">
+                        <a href="./ListProduct" class="primary-btn cart-btn" >Xem thêm sản phẩm </a>
+
+                    </div>
+                </div>
+                <%}else{%>
                 <%for(Receipt r: receipts){
                 %>
-                <div class="my-2 center overflow-hidden" >
+                <div id="xoaDH" class="my-2 center overflow-hidden">
                     <div class="row">
                         <div class="col-6">
-                                    <small class="text-secondary d-inline-block pt-3 pl-3">Mã đơn hàng: <%=r.getId()%></small>
+                                    <small id="" class="text-secondary d-inline-block pt-3 pl-3">Mã đơn hàng: </small>
+                                    <small id="madhToRemove" class="text-secondary d-inline-block pt-3 pl-3" style="padding: 0;margin: 0"><%=r.getId()%></small>
                                 </div>
                         <div class="col-6 text-right  my-2 pt-2 ">
                             <small class="d-inline text-secondary">Trạng thái |</small>
-                            <div class="d-inline pr-3 text-uppercase" style="color:#ee4d2d; font-size:14px">
+                            <div id="textTrangThaiDH" class="d-inline pr-3 text-uppercase" style="color:#ee4d2d; font-size:14px">
                                 <span><%=r.getState()%></span>
                             </div>
                         </div>
@@ -230,6 +244,7 @@
                         </div>
                     </div>
                     <%}%>
+
                     <div class="xemthemdiachi d-none card mb-3 border-left-0 border-right-0 border-bottom-0 mx-3">
                         <div class="row my-3 pb-3 mx-2" style="border-bottom:1px solid #eee">
                             <div class="col-12">
@@ -246,9 +261,13 @@
                     <div class="row" style="margin-top: -20px">
                         <div class="col-6 pt-2 pb-3">
                             <div class="text-left mr-3">
-                                <button onclick="seeAll()" style="border:1px solid #ccc" class="btn rounded-0 py-2 ml-2">
-                                            Chi tiết đơn hàng
+                                <%if(r.checkState()){%>
+                                <button onclick="cancelOrder()" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2">
+                                            Hủy đơn hàng
                                 </button>
+<%--                                <button onclick="cancelOrder()" type="submit" class="site-btn" >ĐẶT HÀNG</button>--%>
+                                <%}%>
+
                             </div>
                         </div>
                         <div class="col-6 my-2">
@@ -261,6 +280,7 @@
                         </div>
                     </div>
                 </div>
+                <%}%>
                 <%}%>
             </div>
         </div>
