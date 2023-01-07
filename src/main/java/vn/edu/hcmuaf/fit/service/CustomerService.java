@@ -96,6 +96,6 @@ public class CustomerService {
         return null;
     }
     public static void main(String[] args) {
-//    System.out.println(getCusByIdAcc("AD01"));
+    System.out.println(getCusByIdAcc("AD01"));
     }
 }
