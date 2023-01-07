@@ -197,13 +197,13 @@
 
                             <div class="col-lg-12">
                                 <div class="checkout__input">
-                                    <p>Tên<span>*</span></p>
+                                    <p>Tên Đăng Nhập</p>
                                     <input type="text" id="ten" value="<%=auth.getTentk()%>">
                                 </div>
                             </div>
                         </div>
                         <div class="checkout__input">
-                            <p>Địa chỉ<span>*</span></p>
+                            <p>Địa chỉ</p>
                             <input type="text" placeholder="Số nhà, xã/phường, quận/huyện, tỉnh/thành phố..."
                                    id="diachi" value="<%=customer.getDIACHI()%>">
                         </div>
@@ -211,38 +211,36 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
-                                    <p>Điện Thoại<span>*</span></p>
+                                    <p>Điện Thoại</p>
                                     <input type="tel" id="phone" value="<%=customer.getSDT()%>">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="checkout__input">
-                                    <p>Email<span>*</span></p>
+                                    <p>Email</p>
                                     <input type="email" id="email" value="<%=auth.getEmail()%>">
                                 </div>
                             </div>
                         </div>
-                        <div class="checkout__input">
-                            <p>Ghi chú cho cửa hàng<span>*</span></p>
-                            <input type="text"
-                                   placeholder="VD: dụng cụ ăn uống,nến theo số tuổi,..."
-                                   id="ghichu">
-                        </div>
-                        <button class="btn" onclick="" style="background-color: #ff96b7; color: white; font-style: italic; font-weight: 500;">
+
+                        <button class="btn" onclick="changeProfile()" style="background-color: #ff96b7; color: white; font-weight: 500;">
                             Lưu Thay Đổi
                         </button>
                     </div>
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6 userProfile">
                         <div style="padding: 10px">
-                        <img src="./img/Điện%20thoại%20đỏ.jpg" class="rounded-circle">
+                        <img src="./img/Điện%20thoại%20đỏ.jpg" class="rounded-circle" style="height: 300px">
 
                         </div>
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleFormControlFile1">Example file input</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                            </div>
-                        </form>
+                        <div>
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Example file input</label>
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+                            </form>
+                        </div>
+
                     </div>
                     </div>
                 </div>

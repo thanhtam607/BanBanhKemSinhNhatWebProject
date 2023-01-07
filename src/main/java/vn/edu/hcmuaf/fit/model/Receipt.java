@@ -31,7 +31,7 @@ public class Receipt {
         this.note = note;
         this.price = price;
         this.total = total;
-        this.state = state;
+        this.state = status;
         this.commentList = commentList;
     }
 
