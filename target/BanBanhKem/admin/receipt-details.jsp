@@ -108,33 +108,27 @@
           <h2>Chi tiết đơn hàng</h2>
         </div>
       </div>
-      <!-- end main title -->
 
-      <!-- users -->
-      <!-- end users -->
-
-      <!-- paginator -->
       <div class="col-12">
         <form action="#" class="form">
           <div class="row row--form">
             <div class="col-12 form__content">
-              <div class="row row--form margin-top-50px">
-                <h4 class="border-bottom">Thông tin khách hàng</h4>
+              <div class="row row--form">
                 <% List<Receipt> receipts = (List<Receipt>) request.getAttribute("listmahd");
                   for (int i = 0; i < 1; i++){
                     Receipt rc = receipts.get(i);%>
-                <div class="col-12 border-bottom margin-top-50px">
+                <div class="col-12 margin-top-30px">
                   <i class="fa fa-user-circle"></i> <label for="name" class="font-size-20">Tên khách hàng: </label> &ensp;<span class="text-uppercase text--green font-size-20" id="name"><%=rc.getNamecustomer()%></span>
                 </div><br>
-                <div class="col-12 border-bottom margin-top-50px">
+                <div class="col-12 margin-top-30px">
                   <i class="fa fa-phone"></i> <label for="phone" class="font-size-20">Số điện thoại: </label> &ensp;<span class="text-uppercase text--green font-size-20" id="phone"><%=rc.getPhone()%></span>
                 </div><br>
-                <div class="col-12 border-bottom margin-top-50px">
+                <div class="col-12 margin-top-30px">
                   <i class="fa fa-home"></i> <label for="address" class="font-size-20">Địa chỉ: </label> &ensp;<span class="text-uppercase text--green font-size-20" id="address"><%=rc.getAddress()%></span>
                 </div>
                 <% } %>
               </div>
-              <h4 class="border-bottom margin-top-50px">Thông tin đặt hàng</h4>
+              <h4 class=" margin-top-50px">Thông tin đặt hàng</h4>
             </div>
           </div>
         </form>
@@ -162,12 +156,8 @@
             <td><%=rcs.getEdate()%></td>
             <td><%=rcs.getNote()%></td>
             <td><%=rcs.formatNum(rcs.getPrice())%> VND</td>
-            <td><select class ="boder-none">
-              <option value="value01">Chờ xác nhận</option>
-              <option value="value02">Đang chuẩn bị</option>
-              <option value="value03">Đang vận chuyển</option>
-              <option value="value04">Giao hàng thành công</option>
-            </select>
+            <td>
+              <div class="main__table-text"><%=rcs.getState()%></div>
             </td>
           </tr>
           </tbody>
@@ -184,8 +174,13 @@
         <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;<span class="text-danger text-uppercase text-pink" id="total"><%=rcs.formatNum(total)%> VND</span>
       </div>
       <% } %>
-      <div class="col-5">
-        <button type="button" class="form__btn">Lưu kết quả</button>
+      <div class="main__table-btns">
+        <div class="col-5">
+          <a href="/BanBanhKemSinhNhatWebProject/admin/ListReceipt_full_Admin" type="button" class="form__btn">Xem Thêm</a>
+        </div>
+        <div class="col-5">
+          <a href="#" type="button" class="form__btn">Lưu Thay Đổi</a>
+        </div>
       </div>
     </form>
   </div>

@@ -29,7 +29,7 @@ public class Receipt {
         this.note = note;
         this.price = price;
         this.total = total;
-        this.state = state;
+        this.state = status;
     }
 
     public Receipt(String id, String makh, String sdate, String note, int money, int state) {

@@ -184,8 +184,31 @@ public class ReceiptService {
             }
         }
     }
+    public static void updateStateMove(String mahd){
+        Statement stm = DBConnect.getInstall().get();
+        if(stm!= null) {
+            try {
+                String sql = "UPDATE hoadon set hoadon.TRANGTHAI = 3 WHERE hoadon.MAHD ='"+mahd+"'";
+                stm.executeUpdate(sql);
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+    public static void updateStateAccept(String mahd){
+        Statement stm = DBConnect.getInstall().get();
+        if(stm!= null) {
+            try {
+                String sql = "UPDATE hoadon set hoadon.TRANGTHAI = 2 WHERE hoadon.MAHD ='"+mahd+"'";
+                stm.executeUpdate(sql);
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
     public static void main(String[] args) {
-        cancelOrder("HD02");
+//        cancelOrder("HD02");
+        getAllReceipt().toString();
 ////        List<CTHD> ls = getListCTHD();
 //        List<CTHD> ls = getcthdUser("HD84");
 ////        List<Receipt> lr = getAllReceipt();
