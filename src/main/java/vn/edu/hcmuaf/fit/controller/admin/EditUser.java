@@ -15,12 +15,13 @@ import java.util.List;
 public class EditUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String makh = request.getParameter("makh");
-        Customer cus = CustomerService.getCusById(makh);
-        request.setAttribute("customer", cus);
-        List<Receipt> listR = ReceiptService.getReceiptByMakh(makh);
-        request.setAttribute("listR", listR);
-
+//        String makh = request.getParameter("makh");
+//        Customer cus = CustomerService.getCusById(makh);
+//        request.setAttribute("customer", cus);
+//        List<Receipt> listR = ReceiptService.getReceiptByMakh(makh);
+//        request.setAttribute("listR", listR);
+        List<Receipt> listctkh = ReceiptService.getctkh(request.getParameter("makh"));
+        request.setAttribute("listmakh", listctkh);
         request.getRequestDispatcher("edit-user.jsp").forward(request, response);
     }
 

@@ -17,8 +17,9 @@ public class Receipt {
     int money;
     int status;
     int state;
-    public Receipt(String id, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int status) {
+    public Receipt(String id, String makh, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int status) {
         this.id = id;
+        this.makh = makh;
         this.namecustomer = namecustomer;
         this.namecake = namecake;
         this.phone = phone;
@@ -28,7 +29,7 @@ public class Receipt {
         this.note = note;
         this.price = price;
         this.total = total;
-        this.status = status;
+        this.state = state;
     }
 
     public Receipt(String id, String makh, String sdate, String note, int money, int state) {
