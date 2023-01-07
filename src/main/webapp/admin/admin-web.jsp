@@ -91,31 +91,7 @@
                     <input class="form-control bg-pink " type="search" placeholder="Tìm Kiếm">
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
-                    
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Thông báo</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Cập nhật thông tin</h6>
-                                <small>15 phút trước</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Thêm người dùng mới</h6>
-                                <small>15 phút trước</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Đổi mật khẩu</h6>
-                                <small>15 phút trước</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">Xem tất cả</a>
-                        </div>
-                    </div>
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-user icon__user__small"></i>
@@ -123,8 +99,8 @@
                         </a>
                         <%if(auth != null) {%>
                             <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">Thông tin của tôi</a>
-                                <a href="#" class="dropdown-item">Cài đặt</a>
+                                <a href="/BanBanhKemSinhNhatWebProject/EditUserProfile" class="dropdown-item">Hồ sơ của tôi</a>
+<%--                                <a href="#" class="dropdown-item">Quản lí </a>--%>
                                 <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                             </div>
                         <%}%>
@@ -143,7 +119,7 @@
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Đơn hàng hôm nay</p>
-                                <h6 class="mb-0">123 </h6>
+                                <h6 class="mb-0"><%= request.getAttribute("soDHhomnay")%> </h6>
                             </div>
                         </div>
                     </div>
@@ -152,8 +128,8 @@
                         <div class="bg-pink rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-area fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Sản phẩm bán được</p>
-                                <h6 class="mb-0">100 </h6>
+                                <p class="mb-2">Sản phẩm bán được hôm nay</p>
+                                <h6 class="mb-0"><%= request.getAttribute("solgSPbandcthangnay")%> </h6>
                             </div>
                         </div>
                     </div>
@@ -162,7 +138,7 @@
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Doanh thu hôm nay</p>
-                                <h6 class="mb-0">1.234.000 </h6>
+                                <h6 class="mb-0"><%= request.getAttribute("doanhthuhomnay")%> </h6>
                             </div>
                         </div>
                     </div>
@@ -171,7 +147,7 @@
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Doanh thu tháng này</p>
-                                <h6 class="mb-0">4.234.000 </h6>
+                                <h6 class="mb-0"><%= request.getAttribute("doanhthuthangnay")%> </h6>
                             </div>
                         </div>
                     </div>

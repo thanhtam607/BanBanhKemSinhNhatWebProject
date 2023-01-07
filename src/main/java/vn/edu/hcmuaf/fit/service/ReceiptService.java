@@ -57,6 +57,67 @@ public class ReceiptService {
         }
         return list;
     }
+    public static List<Receipt> getAllReceiptToDay() {
+        List<Receipt> list = new LinkedList<Receipt>();
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT MAHD, MAKH, NGAYLAPHD, GHICHU, THANHTIEN, TRANGTHAI FROM hoadon\n" +
+                        "WHERE NGAYLAPHD = CURRENT_DATE\n" +
+                        "ORDER BY hoadon.MAHD DESC");
+                while (rs.next()) {
+                    Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
+                            rs.getString(3),rs.getString(4), rs.getInt(5), rs.getInt(6));
+                    list.add(rc);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có  hóa đơn");
+        }
+        return list;
+    }
+    public static List<Receipt> getAllReceiptThisMonth() {
+        List<Receipt> list = new LinkedList<Receipt>();
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT MAHD, MAKH, NGAYLAPHD, GHICHU, THANHTIEN, TRANGTHAI FROM hoadon\n" +
+                        "WHERE MONTH(NGAYLAPHD) = month(CURRENT_DATE) and YEAR(NGAYLAPHD) = YEAR(CURRENT_DATE)\n" +
+                        "ORDER BY hoadon.MAHD DESC");
+                while (rs.next()) {
+                    Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
+                            rs.getString(3),rs.getString(4), rs.getInt(5), rs.getInt(6));
+                    list.add(rc);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có  hóa đơn");
+        }
+        return list;
+    }
+    public static int getNumberProThisMonth() {
+        int result = 0;
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT hoadon.MAHD, sum(cthd.SL) FROM cthd, hoadon\n" +
+                        "WHERE MONTH(NGAYLAPHD) = month(CURRENT_DATE) and YEAR(NGAYLAPHD) = YEAR(CURRENT_DATE)\n" +
+                        "and hoadon.MAHD = cthd.MAHD");
+                while (rs.next()) {
+                    result = rs.getInt(2);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có  hóa đơn");
+        }
+        return result;
+    }
     public static List<CTHD> getListCTHD() {
         List<CTHD> list = new LinkedList<CTHD>();
         Statement statement = DBConnect.getInstall().get();
@@ -216,9 +277,23 @@ public class ReceiptService {
             }
         }
     }
+    public static int getDoanhThuToDay(){
+        int rs = 0;
+        for(Receipt r: getAllReceiptToDay()){
+            rs+= r.getMoney();
+        }
+        return rs;
+    }
+    public static int getDoanhThuThisMonth(){
+        int rs = 0;
+        for(Receipt r: getAllReceiptThisMonth()){
+            rs+= r.getMoney();
+        }
+        return rs;
+    }
     public static void main(String[] args) {
 //        cancelOrder("HD02");
-        getAllReceipt().toString();
+//        getAllReceipt().toString();
 ////        List<CTHD> ls = getListCTHD();
 //        List<CTHD> ls = getcthdUser("HD84");
 ////        List<Receipt> lr = getAllReceipt();
