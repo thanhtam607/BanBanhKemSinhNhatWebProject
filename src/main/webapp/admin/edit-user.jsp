@@ -118,13 +118,12 @@
                                 <img src="img/user.svg" alt="">
                             </div>
                             <!-- or red -->
-                            <% for (int i = 0; i < 1 ; i ++){
+                            <% for (int i = 0; i <= 0; i ++){
                                 Receipt rc = listre.get(i); %>
                             <div class="profile__meta profile__meta--green">
                                 <h3><%=rc.getNamecustomer()%> <span>(Approved)</span></h3>
                                 <span> ID: <%=rc.getMakh()%></span>
                             </div>
-                            <% } %>
                         </div>
 
                         <!-- end profile user -->
@@ -187,36 +186,33 @@
                                                 <h4 class="form__title">Thông tin tài khoản</h4>
                                             </div>
 
-                                          <%  for (int i = 0; i < 1; i ++) {
-                                                Receipt rc = listre.get(i); %>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="username">Tên tài khoản</label>
-                                                    <input id="username" type="text" name="username" class="form__input" placeholder="<%=rc.getNamecustomer()%>">
+                                                    <input id="username" type="text" name="username" class="form__input" value="<%=rc.getTenTK()%>">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="email">Email</label>
-                                                    <input id="email" type="text" name="email" class="form__input" placeholder="<%=rc.getNamecustomer().split(" ")[0] + rc.getNamecustomer().split(" ")[1] + rc.getNamecustomer().split(" ")[2]%>@email.com">
+                                                    <input id="email" type="text" name="email" class="form__input text-lowercase" value="<%=rc.getEmail()%>">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="firstname">Họ</label>
-                                                    <input id="firstname" type="text" name="firstname" class="form__input" placeholder="<%=rc.getNamecustomer().split(" ")[0] + " " + rc.getNamecustomer().split(" ")[1]%>">
+                                                    <input id="firstname" type="text" name="firstname" class="form__input" value="<%=rc.getNamecustomer().split(" ")[0] + " " + rc.getNamecustomer().split(" ")[1]%>">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="lastname">Tên</label>
-                                                    <input id="lastname" type="text" name="lastname" class="form__input" placeholder="<%=rc.getNamecustomer().split(" ")[2]%>">
+                                                    <input id="lastname" type="text" name="lastname" class="form__input" value="<%=rc.getNamecustomer().split(" ")[2]%>">
                                                 </div>
                                             </div>
-                                            <% } %>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="subscription">Subscription</label>
@@ -227,21 +223,24 @@
 													</select>
                                                 </div>
                                             </div>
-
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="rights">Phân Quyền</label>
-                                                    <select class="js-example-basic-single" id="rights">
-														<option value="User">Thường</option>
-<%--														<option value="Moderator">Moderator</option>--%>
-														<option value="Admin">Admin</option>
-													</select>
+                                                    <select class="form__input" id="rights" name="size">
+                                                        <%List<Integer> listRole = (List<Integer>) request.getAttribute("listRole");
+                                                            for(int s : listRole){
+                                                                if(s == rc.getRoleint()){%>
+                                                        <option selected value="<%=s%>"><%=s%></option>
+                                                        <% } else {%>
+                                                        <option value="<%=s%>"><%=s%></option>
+                                                        <%}}%>
+                                                    </select>
                                                 </div>
                                             </div>
-
                                             <div class="col-12">
-                                                <button class="form__btn" type="button">Save</button>
+                                                <input class="form__btn" type="submit" onclick="updateRole(<%=rc.getMakh()%>)" value="Lưu thông tin">
                                             </div>
+                                            <% } %>
                                         </div>
                                     </form>
                                 </div>

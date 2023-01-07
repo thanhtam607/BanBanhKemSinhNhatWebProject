@@ -16,13 +16,15 @@ public class CustomerService {
         Statement statement = DBConnect.getInstall().get();
         if(statement !=null){
             try{
-                ResultSet rs = statement.executeQuery("SELECT MAKH, TENKH, MATAIKHOAN, DIACHI, SDT from khachhang");
+                ResultSet rs = statement.executeQuery("SELECT MAKH, TENKH, MATAIKHOAN, DIACHI, SDT, taikhoan.role from khachhang, taikhoan where taikhoan.id = khachhang.mataikhoan");
                 while(rs.next()){
                     listC.add(new Customer(rs.getString(1),
                             rs.getString(2),
                             rs.getString(3),
                             rs.getString(4),
-                            rs.getString(5)));
+                            rs.getString(5),
+                            rs.getInt(6)
+                    ));
                 }
             }
             catch (SQLException e){
@@ -95,6 +97,8 @@ public class CustomerService {
         }
         return null;
     }
+
+
     public static void main(String[] args) {
     System.out.println(getCusByIdAcc("AD01"));
     }

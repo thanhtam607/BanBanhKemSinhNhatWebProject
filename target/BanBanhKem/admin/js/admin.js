@@ -188,3 +188,10 @@ function updateDetail(id){
     location.href="Product/UpdateDetails?masp="+id+"&soluong="+sl+"&tonkho="+tonkho+"&ngaysx="+ ngsx.toString()+"&ngayhh="+nghh.toString();
 
 }
+function updateRole(id){
+    var user = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
+    var fisrt = document.getElementById("firstname").value;
+    var last = document.getElementById("lastname").value;
+    location.href="Product/EditUser?makh =" + id + "username=" + user + "&email=" + email + "&firstname=" + fisrt + "&lastname=" + last ;
+}

@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "EditUser", value = "/admin/EditUser")
@@ -21,6 +22,11 @@ public class EditUser extends HttpServlet {
 //        request.setAttribute("customer", cus);
 //        List<Receipt> listR = ReceiptService.getReceiptByMakh(makh);
 //        request.setAttribute("listR", listR);
+        List<Integer> listRole = new ArrayList<Integer>();
+        listRole.add(0);
+        listRole.add(1);
+        listRole.add(-1);
+        request.setAttribute("listRole", listRole);
         List<Receipt> listctkh = ReceiptService.getctkh(request.getParameter("makh"));
         request.setAttribute("listmakh", listctkh);
         request.getRequestDispatcher("edit-user.jsp").forward(request, response);

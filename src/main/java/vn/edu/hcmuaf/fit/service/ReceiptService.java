@@ -13,9 +13,9 @@ public class ReceiptService {
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("select hoadon.mahd, khachhang.TENKH, sanpham.TenSP, khachhang.sdt, hoadon.NGAYLAPHD, giaohang.NGAYGIAO, khachhang.DIACHI, hoadon.ghichu, sanpham.gia, hoadon.THANHTIEN,  hoadon.TRANGTHAI, khachhang.makh, sanpham.masp" +
-                        "                        from sanpham, hoadon, khachhang, cthd, giaohang" +
-                        "                        where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH group by hoadon.MAHD ORDER BY hoadon.NGAYLAPHD desc;");
+                ResultSet rs = statement.executeQuery("select hoadon.mahd, khachhang.TENKH, sanpham.TenSP, khachhang.sdt, hoadon.NGAYLAPHD, giaohang.NGAYGIAO, khachhang.DIACHI, hoadon.ghichu, sanpham.gia, hoadon.THANHTIEN,  hoadon.TRANGTHAI, khachhang.makh, sanpham.masp, taikhoan.TENTK, taikhoan.role, taikhoan.email" +
+                        "                        from sanpham, hoadon, khachhang, cthd, giaohang, taikhoan" +
+                        "                        where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH and taikhoan.id = khachhang.mataikhoan group by hoadon.MAHD ORDER BY hoadon.NGAYLAPHD desc;");
                 while (rs.next()) {
                     ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
@@ -26,7 +26,7 @@ public class ReceiptService {
                             listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5)));
                         }
                     }
-                    Receipt rc = new Receipt(rs.getString(1), rs.getString(12), rs.getString(2), rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),rs.getString(8), rs.getInt(9), rs.getInt(10), rs.getInt(11), listCmts);
+                    Receipt rc = new Receipt(rs.getString(1), rs.getString(12), rs.getString(2), rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),rs.getString(8), rs.getInt(9), rs.getInt(10), rs.getInt(11), listCmts, rs.getString(14), rs.getInt(15), rs.getString(16));
                     list.add(rc);
                 }
             } catch (SQLException e) {
@@ -250,6 +250,17 @@ public class ReceiptService {
                     System.out.println("not found");
                 }
             }
+        }
+    }
+    public static void updateRole( int role, String makh ){
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE taikhoan set  role='" +role+ " where MAKH= '"+makh+";";
+
+        try {
+            statement.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
         }
     }
     public static void main(String[] args) {

@@ -19,7 +19,10 @@ public class Receipt {
     int status;
     int state;
     List<Comment> commentList;
-    public Receipt(String id, String makh, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int status, List<Comment> commentList) {
+    String TenTK;
+    int role;
+    String email;
+    public Receipt(String id, String makh, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int status, List<Comment> commentList, String TenTK, int role, String email) {
         this.id = id;
         this.makh = makh;
         this.namecustomer = namecustomer;
@@ -33,6 +36,9 @@ public class Receipt {
         this.total = total;
         this.state = status;
         this.commentList = commentList;
+        this.TenTK = TenTK;
+        this.role = role;
+        this.email =  email;
     }
 
     public Receipt(String id, String makh, String sdate, String note, int money, int state) {
@@ -174,6 +180,37 @@ public class Receipt {
 
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    public String getTenTK() {
+        return TenTK;
+    }
+
+    public void setTenTK(String tenTK) {
+        TenTK = tenTK;
+    }
+
+    public int getRoleint() {
+        return role;
+    }
+    public String getRole() {
+        if(this.role == 0){
+            return "Thường";
+        }else if(this.role == 1){
+            return "Admin";
+        }
+        return "Khóa";
+    }
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public static String formatNum(int price){
