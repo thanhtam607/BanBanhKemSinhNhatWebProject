@@ -339,17 +339,19 @@
 
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#modal-deleteimg<%=i%>" class="main__table-btn main__table-btn--edit">
+                                                    <a href="#modal-deleteimg<%=i%>" class="main__table-btn main__table-btn--edit open-modal">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                     <!-- modal delete -->
                                                     <div id="modal-deleteimg<%=i%>" class="zoom-anim-dialog mfp-hide modal">
-                                                        <form  method="post" enctype="multipart/form-data">
+                                                        <form action="Product/UpdateImg"  method="POST" enctype="multipart/form-data">
                                                         <h6 class="modal__title">Thay đổi ảnh</h6>
                                                         <p class="modal__text">Chọn hình ảnh</p>
+                                                            <input type="text" class="form__input" name="masp" style="display: none" value="<%=p.getId()%>">
+                                                            <input type="text" class="form__input" name="oldImg" style="display: none" value="<%=listImg.get(i)%>">
                                                         <input type="file" class="form__input" name="img">
                                                         <div class="modal__btns">
-                                                            <button class="modal__btn modal__btn--apply" type="submit">Xong</button>
+                                                            <input class="modal__btn modal__btn--apply" type="submit" value="Xong">
                                                             <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                         </div>
                                                         </form>
@@ -361,12 +363,10 @@
                                                     <!-- modal delete -->
                                                     <div id="modal-deleteA<%=i%>" class="zoom-anim-dialog mfp-hide modal">
                                                         <h6 class="modal__title">Xóa hình ảnh</h6>
-
                                                         <p class="modal__text">Bạn có chắc muốn xóa hình ảnh này?</p>
-
                                                         <div class="modal__btns">
                                                             <%String url = "Product/DeleteImage?masp="+p.getId()+"&img="+listImg.get(i);%>
-                                                            <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref(url)">Xóa</button>
+                                                            <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>')">Xóa</button>
                                                             <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                         </div>
                                                     </div>

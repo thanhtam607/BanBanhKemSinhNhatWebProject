@@ -169,7 +169,7 @@
                         <!-- profile btns -->
                         <div class="profile__actions">
 
-                            <a href="#modal-delete3" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
+                            <a href="#modal-deleteA" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
                         </div>
                         <!-- end profile btns -->
                     </div>
@@ -287,27 +287,27 @@
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
                                                     <label class="form__label" for="soluong">Số lượng</label>
-                                                    <input id="soluong" type="number" min="1" class="form__input">
+                                                    <input id="soluong" type="number" min="1" class="form__input" value="<%=p.getDetail().getQuantity()%>">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
                                                     <label class="form__label" for="tonkho">Tồn kho</label>
-                                                    <input id="tonkho" type="number" min="1" class="form__input">
+                                                    <input id="tonkho" type="number" min="1" class="form__input" value="<%=p.getDetail().getInventory()%>">
                                                 </div>
                                             </div>
 
                                             <div class="col-12">
-                                                <button class="form__btn" type="button">Lưu thay đổi</button>
+                                                <button class="form__btn" type="button" onclick="updateDetail('<%=p.getId()%>')">Lưu thay đổi</button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                                 <!-- end password form -->
                             </div>
                         </div>
                     </div>
-                    </div>
+
                     <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
                         <!-- table -->
                         <div class="col-11 ">
@@ -339,38 +339,48 @@
 
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#" class="main__table-btn main__table-btn--edit">
+                                                    <a href="#modal-deleteimg<%=i%>" class="main__table-btn main__table-btn--edit open-modal">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <a href="#modal-deleteb1" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <!-- modal delete -->
+                                                    <div id="modal-deleteimg<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                        <form action="Product/UpdateImg"  method="POST" enctype="multipart/form-data">
+                                                        <h6 class="modal__title">Thay đổi ảnh</h6>
+                                                        <p class="modal__text">Chọn hình ảnh</p>
+                                                            <input type="text" class="form__input" name="masp" style="display: none" value="<%=p.getId()%>">
+                                                            <input type="text" class="form__input" name="oldImg" style="display: none" value="<%=listImg.get(i)%>">
+                                                        <input type="file" class="form__input" name="img">
+                                                        <div class="modal__btns">
+                                                            <input class="modal__btn modal__btn--apply" type="submit" value="Xong">
+                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                        </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- end modal delete -->
+                                                    <a href="#modal-deleteA<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
+                                                    <!-- modal delete -->
+                                                    <div id="modal-deleteA<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                        <h6 class="modal__title">Xóa hình ảnh</h6>
+                                                        <p class="modal__text">Bạn có chắc muốn xóa hình ảnh này?</p>
+                                                        <div class="modal__btns">
+                                                            <%String url = "Product/DeleteImage?masp="+p.getId()+"&img="+listImg.get(i);%>
+                                                            <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>')">Xóa</button>
+                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end modal delete -->
                                                 </div>
                                             </td>
                                         </tr >
-
                                     </tbody>
-
-                                    <!-- modal delete -->
-                                    <div id="modal-delete3" class="zoom-anim-dialog mfp-hide modal">
-                                        <h6 class="modal__title">Xóa Người Dùng</h6>
-
-                                        <p class="modal__text">Bạn có chắc muốn xóa người dùng này?</p>
-
-                                        <div class="modal__btns">
-                                            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                                        </div>
-                                    </div>
-                                    <!-- end modal delete -->
-
                                     <%}%>
                                 </table>
                             </div>
                         </div>
                         <!-- end table -->
                     </div>
-
                     <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
                         <!-- table -->
                         <div class="col-12 bg-pink">
@@ -396,7 +406,6 @@
                                                 <div class="main__table-text"><%=listCmt.get(i).getkhachhang()%></div>
                                             </td>
                                             <td>
-
                                                 <div class="main__table-text"><a href="#"><%=listCmt.get(i).getBinhLuan()%></a></div>
                                             </td>
                                             <td>
@@ -411,17 +420,29 @@
 <%--                                            <td>--%>
 <%--                                                <div class="main__table-text">12 / 7</div>--%>
 <%--                                            </td>--%>
-
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#modal-delete2" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
+                                                    <!-- modal delete -->
+                                                    <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                        <h6 class="modal__title">Xóa Bình Luận</h6>
+
+                                                        <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
+
+                                                        <div class="modal__btns">
+                                                            <% String url ="Product/DeleteComment?masp="+p.getId()+"&idCmt="+listCmt.get(i).getIdcmt()+"&id="+ i; %>
+                                                            <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>') ">Xóa</button>
+                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end modal delete -->
                                                 </div>
                                             </td>
                                         </tr>
-                                        <%}%>
                                     </tbody>
+                                    <%}%>
                                 </table>
                             </div>
                         </div>
@@ -429,8 +450,6 @@
                     </div>
                 </div>
                 <!-- end content tabs -->
-
-
     </main>
 
     <!-- end main content -->
@@ -448,7 +467,6 @@
         <div class="comments__actions">
             <div class="comments__rate">
                 <span><i class="fa fa-thumbs-up"></i>12</span>
-
                 <span>7<i class="fa fa-thumbs-down"></i></span>
             </div>
         </div>
@@ -458,7 +476,7 @@
     <!-- modal delete -->
     <div id="modal-deleteb1" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Thay đổi ảnh</h6>
-        <p>Chọn hình ảnh</p>
+        <p class="modal__text">Chọn hình ảnh</p>
         <input type="file" class="form__input">
         <div class="modal__btns">
             <button class="modal__btn modal__btn--apply" type="button">Xong</button>
@@ -478,20 +496,10 @@
         </div>
         <p class="reviews__text">Bánh ngon xuất sắc!.</p>
     </div>
+
     <!-- end modal view -->
 
-    <!-- modal delete -->
-    <div id="modal-delete2" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Xóa Bình Luận</h6>
 
-        <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
-
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
-    <!-- end modal delete -->
 
     <!-- modal status -->
     <div id="modal-status3" class="zoom-anim-dialog mfp-hide modal">
@@ -516,6 +524,11 @@
     <script src="js/jquery.mCustomScrollbar.min.js"></script>
     <script src="js/select2.min.js"></script>
     <script src="js/admin.js"></script>
+<script>
+function  changeHref(link){
+    location.href=link;
+}
+</script>
 </body>
 
 </html>
