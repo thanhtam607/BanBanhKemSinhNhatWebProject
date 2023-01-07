@@ -175,7 +175,7 @@
                 <div class="main__table-text"><%=rc.formatNum(rc.getPrice())%> VND</div>
               </td>
               <td>
-                <div class="main__table-text main__table-text--green">Đang chuẩn bị</div>
+                <div class="main__table-text main__table-text--green"><%=rc.getState()%></div>
               </td>
               <td>
                   <a href="cthd_Admin?mahd=<%=rc.getId()%>" class="main__table-btn main__table-btn--edit">

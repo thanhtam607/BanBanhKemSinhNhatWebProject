@@ -95,9 +95,7 @@
     </nav>
 </div>
 <!-- Sidebar End -->
-<%Customer customer = (Customer) request.getAttribute("customer");
-    List<Receipt> receipts = (List<Receipt>) request.getAttribute("listR");
-%>
+<% List<Receipt> listre = (List<Receipt>) request.getAttribute("listmakh");%>
     <!-- main content -->
     <main class="main">
         <div class="container-fluid">
@@ -119,11 +117,15 @@
                                 <img src="img/user.svg" alt="">
                             </div>
                             <!-- or red -->
+                            <% for (int i = 0; i < 1 ; i ++){
+                                Receipt rc = listre.get(i); %>
                             <div class="profile__meta profile__meta--green">
-                                <h3><%=customer.getTENKH()%> <span>(Approved)</span></h3>
-                                <span> ID: <%=customer.getMAKH()%></span>
+                                <h3><%=rc.getNamecustomer()%> <span>(Approved)</span></h3>
+                                <span> ID: <%=rc.getMakh()%></span>
                             </div>
+                            <% } %>
                         </div>
+
                         <!-- end profile user -->
 
                         <!-- profile tabs nav -->
@@ -184,34 +186,36 @@
                                                 <h4 class="form__title">Thông tin tài khoản</h4>
                                             </div>
 
+                                          <%  for (int i = 0; i < 1; i ++) {
+                                                Receipt rc = listre.get(i); %>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="username">Tên tài khoản</label>
-                                                    <input id="username" type="text" name="username" class="form__input" placeholder="User 123">
+                                                    <input id="username" type="text" name="username" class="form__input" placeholder="<%=rc.getNamecustomer()%>">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="email">Email</label>
-                                                    <input id="email" type="text" name="email" class="form__input" placeholder="email@email.com">
+                                                    <input id="email" type="text" name="email" class="form__input" placeholder="<%=rc.getNamecustomer().split(" ")[0] + rc.getNamecustomer().split(" ")[1] + rc.getNamecustomer().split(" ")[2]%>@email.com">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="firstname">Họ</label>
-                                                    <input id="firstname" type="text" name="firstname" class="form__input" placeholder="Nguyễn Văn">
+                                                    <input id="firstname" type="text" name="firstname" class="form__input" placeholder="<%=rc.getNamecustomer().split(" ")[0] + " " + rc.getNamecustomer().split(" ")[1]%>">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="lastname">Tên</label>
-                                                    <input id="lastname" type="text" name="lastname" class="form__input" placeholder="Bình">
+                                                    <input id="lastname" type="text" name="lastname" class="form__input" placeholder="<%=rc.getNamecustomer().split(" ")[2]%>">
                                                 </div>
                                             </div>
-
+                                            <% } %>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="subscription">Subscription</label>
@@ -299,9 +303,7 @@
                                     </thead>
 
                                     <tbody>
-                                    <%for(Receipt r: receipts){
-
-                                    %>
+                                    <%for(Receipt r: listre){%>
                                         <tr>
                                             <td>
                                                 <div class="main__table-text"><%=r.getId()%></div>
@@ -378,17 +380,17 @@
                                             <th>Tùy Chọn</th>
                                         </tr>
                                     </thead>
-
+                                    <%for(Receipt r: listre){%>
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div class="main__table-text">23</div>
+                                                <div class="main__table-text"><%=r.getMakh()%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><a href="#">Bánh Cánh Đồng Hoa</a></div>
+                                                <div class="main__table-text"><a href="#"><%=r.getNamecake()%></a></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text">John Doe</div>
+                                                <div class="main__table-text"><%=r.getNamecustomer()%></div>
                                             </td>
                                             <%--                                            <td>--%>
 <%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
@@ -400,7 +402,7 @@
 <%--                                                <div class="main__table-text">12 / 7</div>--%>
 <%--                                            </td>--%>
                                             <td>
-                                                <div class="main__table-text">24 Oct 2021</div>
+                                                <div class="main__table-text">Không có bình luận</div>
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
@@ -414,6 +416,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <% } %>
                                 </table>
                             </div>
                         </div>
@@ -448,27 +451,28 @@
     <!-- end main content -->
 
     <!-- modal view -->
+<%for(Receipt r: listre){%>
     <div id="modal-view" class="zoom-anim-dialog mfp-hide modal modal--view">
         <div class="comments__autor">
             <img class="comments__avatar" src="img/user.svg" alt="">
-            <span class="comments__name">Thanh Thùy</span>
+            <span class="comments__name"><%=r.getNamecustomer()%></span>
 
-            <span class="comments__time">2022/12/01</span>
+            <span class="comments__time"><%=r.getEdate()%></span>
         </div>
-        <p class="comments__text">Tên Sản Phẩm: Bánh </p>
-        <p class="comments__text">Địa chỉ giao: TPHCM</p>
-        <p class="comments__text">Trạng thái: Thah Công</p>
+        <p class="comments__text">Tên Sản Phẩm: <%=r.getNamecake()%> </p>
+        <p class="comments__text">Địa chỉ giao: <%=r.getAddress()%></p>
+        <p class="comments__text">Trạng thái: <%=r.getState()%></p>
 
         <div class="comments__actions">
             <div class="comments__rate">
-                <span><i class="fa fa-thumbs-up"></i>12</span>
+                <span><i class="fa fa-thumbs-up"></i>0</span>
 
-                <span>7<i class="fa fa-thumbs-down"></i></span>
+                <span>0<i class="fa fa-thumbs-down"></i></span>
             </div>
         </div>
     </div>
     <!-- end modal view -->
-
+<% } %>
     <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Hủy Đơn Hàng</h6>
@@ -483,16 +487,16 @@
     <!-- end modal delete -->
 
     <!-- modal view -->
+<%for(Receipt r: listre){%>
     <div id="modal-view2" class="zoom-anim-dialog mfp-hide modal modal--view">
         <div class="reviews__autor">
             <img class="reviews__avatar" src="img/user.svg" alt="">
-            <span class="reviews__name">Bánh cánh đồng hoa</span>
-            <span class="reviews__time">24.08.2018, 17:53 by Thanh Tâm</span>
-
-            <span class="reviews__rating"><i class="fa fa-star"></i>5</span>
+            <span class="reviews__name"><%=r.getNamecake()%></span>
+            <span class="reviews__time">00.00.0000, 00:00 by <%=r.getNamecustomer()%></span>
         </div>
-        <p class="reviews__text">Bánh ngon xuất sắc!.</p>
+        <p class="reviews__text text-danger">Không có bình luận</p>
     </div>
+<% } %>
     <!-- end modal view -->
 
     <!-- modal delete -->
