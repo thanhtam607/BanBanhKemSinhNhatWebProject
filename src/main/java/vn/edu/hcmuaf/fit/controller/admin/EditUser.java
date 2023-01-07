@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.controller.admin;
 import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.Receipt;
 import vn.edu.hcmuaf.fit.service.CustomerService;
+import vn.edu.hcmuaf.fit.service.ProductService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.*;

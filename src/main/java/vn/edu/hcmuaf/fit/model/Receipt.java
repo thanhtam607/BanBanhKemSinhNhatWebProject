@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.model;
 
 import java.text.NumberFormat;
+import java.util.List;
 
 public class Receipt {
     String id;
@@ -17,7 +18,8 @@ public class Receipt {
     int money;
     int status;
     int state;
-    public Receipt(String id, String makh, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int status) {
+    List<Comment> commentList;
+    public Receipt(String id, String makh, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int status, List<Comment> commentList) {
         this.id = id;
         this.makh = makh;
         this.namecustomer = namecustomer;
@@ -30,6 +32,7 @@ public class Receipt {
         this.price = price;
         this.total = total;
         this.state = state;
+        this.commentList = commentList;
     }
 
     public Receipt(String id, String makh, String sdate, String note, int money, int state) {
@@ -163,6 +166,14 @@ public class Receipt {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 
     public static String formatNum(int price){

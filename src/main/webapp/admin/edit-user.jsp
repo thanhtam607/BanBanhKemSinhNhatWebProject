@@ -2,6 +2,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -381,6 +382,8 @@
                                         </tr>
                                     </thead>
                                     <%for(Receipt r: listre){%>
+                                    <%List<Comment> listCmt = r.getCommentList();
+                                        for(int i = 0; i<listCmt.size();i++){%>
                                     <tbody>
                                         <tr>
                                             <td>
@@ -402,18 +405,40 @@
 <%--                                                <div class="main__table-text">12 / 7</div>--%>
 <%--                                            </td>--%>
                                             <td>
-                                                <div class="main__table-text">Không có bình luận</div>
+                                                <div class="main__table-text"><%=r.getCommentList().get(i).getDate()%></div>
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#modal-view2" class="main__table-btn main__table-btn--view open-modal">
+                                                    <a href="#modal-view<%=i%>" class="main__table-btn main__table-btn--view open-modal">
 														<i class="fa fa-eye"></i>
 													</a>
-                                                    <a href="#modal-delete2" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
                                                 </div>
+                                                <!-- modal view -->
+                                                <div id="modal-view<%=i%>" class="zoom-anim-dialog mfp-hide modal modal--view">
+                                                    <div class="reviews__autor">
+                                                        <img class="reviews__avatar" src="img/user.svg" alt="">
+                                                        <span class="reviews__name"><%=r.getNamecake()%></span>
+                                                        <span class="reviews__time"><%=r.getCommentList().get(i).getDate()%> by <%=r.getCommentList().get(i).getkhachhang()%></span>
+                                                    </div>
+                                                    <p class="reviews__text"><%=r.getCommentList().get(i).getBinhLuan()%></p>
+                                                </div>
+                                                <!-- end modal view -->
+                                                <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                    <h6 class="modal__title">Xóa Bình Luận</h6>
+
+                                                    <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
+
+                                                    <div class="modal__btns">
+                                                        <% String url ="DeleteCommentListReceipt?makh="+r.getMakh()+"&idCmt="+listCmt.get(i).getIdcmt()+"&id="+ i; %>
+                                                        <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>') ">Xóa</button>
+                                                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                    </div>
+                                                </div>
                                             </td>
+                                            <% } %>
                                         </tr>
                                     </tbody>
                                     <% } %>
@@ -486,32 +511,6 @@
     </div>
     <!-- end modal delete -->
 
-    <!-- modal view -->
-<%for(Receipt r: listre){%>
-    <div id="modal-view2" class="zoom-anim-dialog mfp-hide modal modal--view">
-        <div class="reviews__autor">
-            <img class="reviews__avatar" src="img/user.svg" alt="">
-            <span class="reviews__name"><%=r.getNamecake()%></span>
-            <span class="reviews__time">00.00.0000, 00:00 by <%=r.getNamecustomer()%></span>
-        </div>
-        <p class="reviews__text text-danger">Không có bình luận</p>
-    </div>
-<% } %>
-    <!-- end modal view -->
-
-    <!-- modal delete -->
-    <div id="modal-delete2" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Xóa Bình Luận</h6>
-
-        <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
-
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
-    <!-- end modal delete -->
-
     <!-- modal status -->
     <div id="modal-status3" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Chặn Người Dùng</h6>
@@ -539,6 +538,11 @@
     <!-- end modal delete -->
 
     <!-- JS -->
+<script>
+    function  changeHref(link){
+        location.href=link;
+    }
+</script>
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
