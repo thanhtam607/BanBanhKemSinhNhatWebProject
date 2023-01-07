@@ -3,7 +3,6 @@ package vn.edu.hcmuaf.fit.service;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.*;
 
-import javax.sound.midi.Soundbank;
 import java.sql.*;
 import java.util.*;
 
@@ -187,7 +186,6 @@ public class ReceiptService {
                     int solgConLai = p.getDetail().getInventory() + sl;
                     String sql = "UPDATE ctsp set ctsp.tonKho = "+solgConLai+" WHERE ctsp.MaSP ='"+msp+"'";
                     stm.executeUpdate(sql);
-
                 }
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -216,9 +214,56 @@ public class ReceiptService {
             }
         }
     }
+    public static List<String> getMahd(String makh){
+        List<String> rs = new LinkedList<>();
+        List<Receipt> list = ReceiptService.getData();
+        for(Receipt r : list){
+            if(makh.equals(r.getMakh()))
+            rs.add(r.getId());
+        }
+
+        return rs;
+    }
+    public static void deleteCustomer(String makh) {
+        Statement statement = DBConnect.getInstall().get();
+        Statement stmt = DBConnect.getInstall().get();;
+        List<String> list = ReceiptService.getMahd(makh);
+        if(!list.isEmpty()) {
+            for (int i = 0; i <= list.size(); i++) {
+                String x = "sql" + i;
+                String y = "sql" + i;
+                x = "DELETE from giaohang WHERE MAHD = '" + list.get(i) + "'";
+                y = "DELETE from cthd WHERE MAHD = '" + list.get(i) + "'";
+                String sqlx = "DELETE from hoadon WHERE MAKH = '" + makh + "'";
+                String sqly = "DELETE from khachhang WHERE MAKH = '" + makh + "'";
+
+                if (statement != null) {
+                    try {
+                        statement.executeUpdate(x);
+                        statement.executeUpdate(y);
+                        statement.executeUpdate(sqlx);
+                        statement.executeUpdate(sqly);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    System.out.println("not found");
+                }
+            }
+        }
+    }
     public static void main(String[] args) {
 //        cancelOrder("HD02");
-        getAllReceipt().toString();
+
+//        deleteCustomer("KH03");
+//        System.out.println(getAllReceipt().toString());
+        List<String> list = ReceiptService.getMahd("KH10");
+        if(!list.isEmpty()) {
+            for (int i = 0; i < list.size(); i++) {
+                String x = "sql" + i;
+                System.out.println(x);
+            }
+        }
 ////        List<CTHD> ls = getListCTHD();
 //        List<CTHD> ls = getcthdUser("HD84");
 ////        List<Receipt> lr = getAllReceipt();

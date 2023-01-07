@@ -8,14 +8,16 @@ public class Customer {
     private String MATAIKHOAN;
     private String DIACHI ;
     private String SDT;
+    private int role;
 
-    public Customer(String MAKH, String TENKH, String MATAIKHOAN, String DIACHI, String SDT) {
+    public Customer(String MAKH, String TENKH, String MATAIKHOAN, String DIACHI, String SDT, int role) {
 
         this.MAKH = MAKH;
         this.TENKH = TENKH;
         this.MATAIKHOAN = MATAIKHOAN;
         this.DIACHI = DIACHI;
         this.SDT = SDT;
+        this.role = role;
     }
 
     public Customer() {
@@ -62,6 +64,19 @@ public class Customer {
         this.SDT = SDT;
     }
 
+    public String getRole() {
+        if(this.role == 0){
+            return "Thường";
+        }else if(this.role == 1){
+            return "Admin";
+        }
+        return "Khóa";
+    }
+
+
+    public void setRole(int role) {
+        this.role = role;
+    }
 
     @Override
     public String toString() {

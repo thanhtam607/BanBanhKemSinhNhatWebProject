@@ -193,7 +193,7 @@ public class Receipt {
                 ", Sdate='" + Sdate + '\'' +
                 ", ghichu='" + note + '\'' +
                 ", thanhtien='" + money + '\'' +
-                ", trangthai=" + getState() +
+                ", trangthai=" + getState() + "/n" +
                 '}';
     }
 }
