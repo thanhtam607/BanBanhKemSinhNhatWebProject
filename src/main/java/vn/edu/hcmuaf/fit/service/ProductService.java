@@ -180,6 +180,7 @@ public class ProductService {
         return list.get(list.size() - 1);
     }
 
+
     public static List<Product> findBySize(String kichthuoc) {
         List<Product> list = getData();
         List<Product> rs = new LinkedList<>();
@@ -295,6 +296,17 @@ public class ProductService {
     public static void deleteCommemt(String id){
         Statement statement = DBConnect.getInstall().get();
         String sql= "DELETE FROM comments WHERE IdCmt="+ id+";";
+        try {
+            statement.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+    }
+    public static void deleteImange(String img){
+        Statement statement = DBConnect.getInstall().get();
+        String sql= "DELETE FROM anhsp WHERE Anh="+ img+";";
         System.out.println(sql);
         try {
             statement.executeUpdate(sql);

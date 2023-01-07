@@ -342,7 +342,7 @@
                                                     <a href="#" class="main__table-btn main__table-btn--edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <a href="#modal-deleteb1" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
                                                 </div>
@@ -473,13 +473,12 @@
     <!-- end modal view -->
 
     <!-- modal delete -->
-    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Hủy Đơn Hàng</h6>
-
-        <p class="modal__text">Bạn có chắc muốn hủy đơn hàng này?</p>
-
+    <div id="modal-deleteb1" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Thay đổi ảnh</h6>
+        <p>Chọn hình ảnh</p>
+        <input type="file" class="form__input">
         <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Hủy</button>
+            <button class="modal__btn modal__btn--apply" type="button">Xong</button>
             <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
         </div>
     </div>

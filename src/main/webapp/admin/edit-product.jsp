@@ -339,38 +339,48 @@
 
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#" class="main__table-btn main__table-btn--edit">
+                                                    <a href="#modal-deleteimg<%=i%>" class="main__table-btn main__table-btn--edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <!-- modal delete -->
+                                                    <div id="modal-deleteimg<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                        <form  method="post" enctype="multipart/form-data">
+                                                        <h6 class="modal__title">Thay đổi ảnh</h6>
+                                                        <p class="modal__text">Chọn hình ảnh</p>
+                                                        <input type="file" class="form__input" name="img">
+                                                        <div class="modal__btns">
+                                                            <button class="modal__btn modal__btn--apply" type="submit">Xong</button>
+                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                        </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- end modal delete -->
+                                                    <a href="#modal-deleteA<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
+                                                    <!-- modal delete -->
+                                                    <div id="modal-deleteA<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                        <h6 class="modal__title">Xóa hình ảnh</h6>
+
+                                                        <p class="modal__text">Bạn có chắc muốn xóa hình ảnh này?</p>
+
+                                                        <div class="modal__btns">
+                                                            <%String url = "Product/DeleteImage?masp="+p.getId()+"&img="+listImg.get(i);%>
+                                                            <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref(url)">Xóa</button>
+                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end modal delete -->
                                                 </div>
                                             </td>
                                         </tr >
-
                                     </tbody>
-
-                                    <!-- modal delete -->
-                                    <div id="modal-deleteA" class="zoom-anim-dialog mfp-hide modal">
-                                        <h6 class="modal__title">Xóa Người Dùng</h6>
-
-                                        <p class="modal__text">Bạn có chắc muốn xóa người dùng này?</p>
-
-                                        <div class="modal__btns">
-                                            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                                        </div>
-                                    </div>
-                                    <!-- end modal delete -->
-
                                     <%}%>
                                 </table>
                             </div>
                         </div>
                         <!-- end table -->
                     </div>
-
                     <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
                         <!-- table -->
                         <div class="col-12 bg-pink">
@@ -396,7 +406,6 @@
                                                 <div class="main__table-text"><%=listCmt.get(i).getkhachhang()%></div>
                                             </td>
                                             <td>
-
                                                 <div class="main__table-text"><a href="#"><%=listCmt.get(i).getBinhLuan()%></a></div>
                                             </td>
                                             <td>
@@ -411,7 +420,6 @@
 <%--                                            <td>--%>
 <%--                                                <div class="main__table-text">12 / 7</div>--%>
 <%--                                            </td>--%>
-
                                             <td>
                                                 <div class="main__table-btns">
                                                     <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
@@ -432,13 +440,8 @@
                                                     <!-- end modal delete -->
                                                 </div>
                                             </td>
-
                                         </tr>
-
-
-
                                     </tbody>
-
                                     <%}%>
                                 </table>
                             </div>
@@ -447,8 +450,6 @@
                     </div>
                 </div>
                 <!-- end content tabs -->
-
-
     </main>
 
     <!-- end main content -->
@@ -473,13 +474,12 @@
     <!-- end modal view -->
 
     <!-- modal delete -->
-    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Hủy Đơn Hàng</h6>
-
-        <p class="modal__text">Bạn có chắc muốn hủy đơn hàng này?</p>
-
+    <div id="modal-deleteb1" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Thay đổi ảnh</h6>
+        <p class="modal__text">Chọn hình ảnh</p>
+        <input type="file" class="form__input">
         <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Hủy</button>
+            <button class="modal__btn modal__btn--apply" type="button">Xong</button>
             <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
         </div>
     </div>
