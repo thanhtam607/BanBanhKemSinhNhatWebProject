@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Order;
+import vn.edu.hcmuaf.fit.model.Ship;
 import vn.edu.hcmuaf.fit.service.OrderService;
 
 import javax.servlet.*;
@@ -31,6 +32,10 @@ public class AddNewOrder extends HttpServlet {
         String todayFM = formatter.format(today);
         order.setBuyDate(todayFM);
 
+        Ship gh = new Ship();
+        gh.setDiachigiao(diachi);
+
+        order.setGiaohang(gh);
         order.setNote(ghichu);
         OrderService.addOrder(order);
         OrderService.addCTHD(order);

@@ -1,7 +1,6 @@
 package vn.edu.hcmuaf.fit.model;
 
 import java.text.NumberFormat;
-import java.util.List;
 
 public class Receipt {
     String id;
@@ -18,8 +17,7 @@ public class Receipt {
     double money;
     int status;
     int state;
-    List<Comment> comments;
-    public Receipt(String id, String makh, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int state) {
+    public Receipt(String id, String makh, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int status) {
         this.id = id;
         this.makh = makh;
         this.namecustomer = namecustomer;
@@ -32,8 +30,6 @@ public class Receipt {
         this.price = price;
         this.total = total;
         this.state = state;
-        this.comments = comments;
-
     }
 
     public Receipt(String id, String makh, String sdate, String note, double money, int state) {
@@ -70,6 +66,9 @@ public class Receipt {
             return "Đang Giao Hàng";
         }
         return "Giao Thành Công";
+    }
+    public int getStateInt() {
+        return this.state;
     }
 
     public void setState(int state) {
@@ -166,20 +165,15 @@ public class Receipt {
         this.status = status;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
     public static String formatNum(int price){
         NumberFormat vn = NumberFormat.getInstance();
         String result = vn.format(price);
         return result;
     }
-
+    public boolean checkState(){
+        if(this.state == 0 || this.state == 1) return true;
+        return false;
+    }
     @Override
     public String toString() {
         return "receipt{" +
@@ -191,5 +185,4 @@ public class Receipt {
                 ", trangthai=" + getState() +
                 '}';
     }
-
 }

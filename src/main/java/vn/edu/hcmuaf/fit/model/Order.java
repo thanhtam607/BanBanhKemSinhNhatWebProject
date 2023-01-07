@@ -14,6 +14,7 @@ public class Order {
     private double priceTotal;
     private String note;
     private int trangthai;
+    private Ship giaohang;
     private HashMap<String, ItemProductInCart> data;
     public Order() {
 
@@ -21,7 +22,7 @@ public class Order {
     }
 
     public Order(String id, User user, String buyDate, double priceTotal, String note,
-                 int trangthai, HashMap<String, ItemProductInCart> data) {
+                 int trangthai, HashMap<String, ItemProductInCart> data, Ship gh) {
         this.id = id;
         this.user = user;
         this.buyDate = buyDate;
@@ -29,6 +30,7 @@ public class Order {
         this.note = note;
         this.trangthai = trangthai;
         this.data = data;
+        this.giaohang = gh;
     }
 
     public Order(HashMap<String, ItemProductInCart> data) {
@@ -47,6 +49,13 @@ public class Order {
         this.data = data;
     }
 
+    public Ship getGiaohang() {
+        return giaohang;
+    }
+
+    public void setGiaohang(Ship giaohang) {
+        this.giaohang = giaohang;
+    }
 
     public boolean remove(String id) {
         return data.remove(id) == null;

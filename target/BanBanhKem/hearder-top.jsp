@@ -32,6 +32,7 @@
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
               <a href="/BanBanhKemSinhNhatWebProject/MyOrder" method="get" class="dropdown-item">Đơn hàng của tôi</a>
+              <a href="/BanBanhKemSinhNhatWebProject/EditUserProfile?makh=<%=customer.getMAKH()%>" method="get" class="dropdown-item">Hồ sơ của tôi</a>
               <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
               <% if(auth.checkRole(1)) { %>
               <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>

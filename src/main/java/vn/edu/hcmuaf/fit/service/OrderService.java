@@ -11,14 +11,14 @@ import java.sql.*;
 import java.util.*;
 
 public class OrderService {
-    public static int getOrderNumber(){
+    public static String getLastMaHD(){
         Statement statement = DBConnect.getInstall().get();
-        int result = 0;
+        String result = "";
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT count(MAHD) from hoadon");
+                ResultSet rs = statement.executeQuery("SELECT hoadon.MAHD from hoadon ORDER BY MAHD DESC LIMIT 1");
                 while (rs.next()){
-                    result = rs.getInt(1);
+                    result = rs.getString(1);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -28,13 +28,11 @@ public class OrderService {
         }
         return  result;
     }
-//    public static List<O> getCTHDList(){
-//        List<CTHD> cthdList = new ArrayList<CTHD>();
-//        return  cthdList;
-//    }
+
     public static void addOrder(Order order){
         Statement stm = DBConnect.getInstall().get();
-        String mahd = "HD" + (getOrderNumber() + 1);
+        String stt = getLastMaHD().substring(2);
+        String mahd = "HD" + (Integer.parseInt(stt) + 1);
         order.setId(mahd);
         String makh = CustomerService.getIDKhach(order.getUser().getId());
         String sql = "INSERT INTO HOADON VALUES('" + mahd + "', '" + makh + "', '"
@@ -82,5 +80,8 @@ public class OrderService {
     }
     public static void main(String[] args) {
 //        addGiaoHang();
+        String a = getLastMaHD().substring(2);
+
+        System.out.println(Integer.parseInt(a)+1);
     }
 }

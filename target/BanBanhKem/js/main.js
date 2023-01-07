@@ -724,7 +724,7 @@ function addOrder(){
                 confirmButtonText: 'Xem đơn đặt',
                 confirmButtonColor: '#ff96b7'}).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = "order.jsp";
+                    location.href = "/BanBanhKemSinhNhatWebProject/MyOrder";
                 }
                 // else{
                 //     location.href = "/BanBanhKemSinhNhatWebProject/ListProduct";
@@ -747,3 +747,29 @@ function cartEmpty(){
         }
     );
 }
+function cancelOrder(){
+    var url  = "RemoveOrder";
+    var mdh = document.getElementById("madhToRemove").innerText;
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {mahd:mdh},
+        success: function (){
+
+            Swal.fire({
+                text:'Bạn có chắc muốn hủy đơn hàng này không?',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText:'Quay lại',
+                confirmButtonText: 'Hủy Đơn Hàng',
+                confirmButtonColor: '#ff96b7'}).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById("xoaDH").innerHTML = " ";
+                    }
+                }
+            );
+        }
+    });
+}
+

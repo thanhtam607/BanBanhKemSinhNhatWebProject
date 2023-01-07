@@ -1,6 +1,10 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.CTHD" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html>
@@ -179,66 +183,103 @@
     </div>
 </section>
 <!-- Breadcrumb Section End -->
-
+<%List<Receipt> receipts = (List<Receipt>) session.getAttribute("listRe");%>
     <div class="container-91 mx-auto">
         <div class="row">
             <div class="tab-content flex-sm-row mt-2">
-                <%-- Viết vòng lặp ở đây nhoaaa --%>
-                <div class="my-2 center overflow-hidden" >
+                <%if(receipts.size() == 0){
+                %>
+                <div class="cartEmpty" name="cartEmpty">
+                    <img src="./img/null.png" alt="Giỏ hàng của bạn đang trống" class="d-block m-auto" width="250" />
+                    <p class="text-center font-weight-bold" style="opacity: .6;">Không có đơn hàng nào</p>
+                </div>
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns" style="text-align: center">
+                        <a href="./ListProduct" class="primary-btn cart-btn" >Xem thêm sản phẩm </a>
+                    </div>
+                </div>
+                <%}else{%>
+                <%for(Receipt r: receipts){
+                %>
+                <div id="xoaDH" class="my-2 center overflow-hidden">
                     <div class="row">
                         <div class="col-6">
-                                    <small class="text-secondary d-inline-block pt-3 pl-3">ID đơn hàng: @i.ID</small>
+                                    <small id="" class="text-secondary d-inline-block pt-3 pl-3">Mã đơn hàng: </small>
+                                    <small id="madhToRemove" class="text-secondary d-inline-block pt-3 pl-3" style="padding: 0;margin: 0"><%=r.getId()%></small>
                                 </div>
                         <div class="col-6 text-right  my-2 pt-2 ">
                             <small class="d-inline text-secondary">Trạng thái |</small>
-                            <div class="d-inline pr-3 text-uppercase" style="color:#ee4d2d; font-size:14px">
-                                <span>Đang xử lý</span>
+                            <div id="textTrangThaiDH" class="d-inline pr-3 text-uppercase" style="color:#ee4d2d; font-size:14px">
+                                <span><%=r.getState()%></span>
                             </div>
                         </div>
                     </div>
+                    <%List<CTHD> cthdList = ReceiptService.getcthdUser(r.getId());
+                        for(CTHD c: cthdList){
+                        %>
                     <div class="card mb-3 border-left-0 border-right-0 border-bottom-0 mx-3">
                         <div class="row my-3 pb-3 mx-2" style="border-bottom:1px solid #eee">
                             <div class="col-2">
                                 <div class="vertical-center">
-                                    <img class="d-block mx-auto" src="img/product/B001/banh1.jpg" width="100">
+                                    <img class="d-block mx-auto" src="<%=c.getAnhsp().get(0)%>" width="100">
                                 </div>
                             </div>
                             <div class="col-7">
                                 <div class="card-body my-0">
                                     <div class="card-text text-dark">
                                         <a href="#" class="text-decoration-none text-dark text-uppercase">
-                                            Bánh Hoa hồng pháp
+                                            <%=c.getTensp()%>
                                         </a>
                                     </div>
-                                    <div class="text-dark" style="font-size:14px">x2</div>
+                                    <div class="text-dark" style="font-size:14px">x <%=c.getSolg()%></div>
                                 </div>
                             </div>
                             <div class="col-3 mt-3">
                                 <small class="text-dark" >
-                                    200.0000 VND
+                                    <%=c.getToTalPrice()%> VND
                                 </small>
+                            </div>
+
+                        </div>
+                    </div>
+                    <%}%>
+
+                    <div class="xemthemdiachi d-none card mb-3 border-left-0 border-right-0 border-bottom-0 mx-3">
+                        <div class="row my-3 pb-3 mx-2" style="border-bottom:1px solid #eee">
+                            <div class="col-12">
+                                <div class="card-body my-0">
+                                    <div class="card-text text-dark">
+                                        <a href="" class="text-decoration-none text-dark text-uppercase">
+                                            ĐỊA CHỈ GIAO HÀNG: <%=ReceiptService.getDiaChiGiaoHang(r.getId())%>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row" style="margin-top: -20px">
                         <div class="col-6 pt-2 pb-3">
                             <div class="text-left mr-3">
-                                <button style="border:1px solid #ccc" class="btn rounded-0 py-2 ml-2">
-                                            Chi tiết đơn hàng
+                                <%if(r.checkState()){%>
+                                <button onclick="cancelOrder()" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2">
+                                            Hủy đơn hàng
                                 </button>
+                                <%}%>
+
                             </div>
                         </div>
                         <div class="col-6 my-2">
                             <div class="text-right pr-5">
                                 <h6 class="d-inline text-dark">Tổng số tiền: </h6>
                                 <h3 class="d-inline" style="color:#ee4d2d">
-                                    200.000 VND
-
+                                    <%=r.getMoney()%> VND
                                 </h3>
                             </div>
                         </div>
                     </div>
                 </div>
+                <%}%>
+                <%}%>
             </div>
         </div>
     </div>

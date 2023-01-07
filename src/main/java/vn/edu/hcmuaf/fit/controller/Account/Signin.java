@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.controller.Account;
 
 import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Customer;
+import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.UserService;
 
 import javax.servlet.*;
@@ -25,6 +27,8 @@ public class Signin extends HttpServlet {
         }else{
             HttpSession session = request.getSession(true);
             session.setAttribute("auth", user);
+            Customer customer = CustomerService.getCusByIdAcc(user.getId());
+            session.setAttribute("cust", customer);
             response.sendRedirect(request.getContextPath() + "/Index");
         }
 

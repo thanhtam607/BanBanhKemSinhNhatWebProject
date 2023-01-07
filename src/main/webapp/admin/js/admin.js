@@ -183,9 +183,8 @@ function updateDetail(id){
         var ngayhh = new Date( document.getElementById("ngayhh").value);
         nghh = ngayhh.getFullYear()+"-"+(ngayhh.getMonth()+1)+"-"+ ngayhh.getDate();
     }
- console.log(ngsx);
+    console.log(ngsx);
     console.log(nghh)
     location.href="Product/UpdateDetails?masp="+id+"&soluong="+sl+"&tonkho="+tonkho+"&ngaysx="+ ngsx.toString()+"&ngayhh="+nghh.toString();
 
 }
- 
