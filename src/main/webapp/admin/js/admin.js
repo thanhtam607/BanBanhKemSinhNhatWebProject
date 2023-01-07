@@ -164,28 +164,5 @@ $(document).ready(function() {
     });
 
 });
-/*==============================
-update product detail
-==============================*/
-function updateDetail(id){
-    var sl = document.getElementById("soluong").value;
-    var tonkho = document.getElementById("tonkho").value;
-    var d1 = document.getElementById("ngaysx").value;
-    var d2 = document.getElementById("ngayhh").value;
-    var ngsx = null;
-    var nghh=null;
 
-    if(d1!= null){
-        var ngaysx = new Date(document.getElementById("ngaysx").value);
-        ngsx = ngaysx.getFullYear()+"-"+(ngaysx.getMonth()+1)+"-"+ ngaysx.getDate();
-    }
-    if(d2!= null){
-        var ngayhh = new Date( document.getElementById("ngayhh").value);
-        nghh = ngayhh.getFullYear()+"-"+(ngayhh.getMonth()+1)+"-"+ ngayhh.getDate();
-    }
- console.log(ngsx);
-    console.log(nghh)
-    location.href="Product/UpdateDetails?masp="+id+"&soluong="+sl+"&tonkho="+tonkho+"&ngaysx="+ ngsx.toString()+"&ngayhh="+nghh.toString();
-
-}
  

@@ -21,7 +21,7 @@ public class AddToCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
-        Customer customer = CustomerService.getCusByIdAcc(auth.getId());
+
         int solgmua = Integer.parseInt(request.getParameter("soluong"));
         if(auth != null) {
             if (request.getParameter("masp") != null) {
@@ -68,7 +68,7 @@ public class AddToCart extends HttpServlet {
 
             }
         }
-            session.setAttribute("cust", customer);
+
             response.sendRedirect("shoping-cart.jsp");
     }
 
