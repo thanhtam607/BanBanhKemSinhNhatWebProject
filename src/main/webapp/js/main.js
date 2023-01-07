@@ -772,3 +772,30 @@ function cancelOrder(mdh){
     });
 }
 
+/*-------------------
+   change profile user
+  --------------------- */
+function changeProfile(){
+    var ten = document.getElementById("ten").value;
+    var diachi = document.getElementById("diachi").value;
+    var phone = document.getElementById("phone").value;
+    var email = document.getElementById("email").value;
+    var url  ="EditUserProfile";
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {ten:ten,
+            diachi:diachi,
+            phone:phone,
+            email:email
+            },
+        success: function (){
+            Swal.fire({
+                text:'Lưu thay đổi thành công!',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#ff96b7'})
+
+        }
+    });
+}

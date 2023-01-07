@@ -2,6 +2,8 @@ package vn.edu.hcmuaf.fit.controller.Account;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Account;
+import vn.edu.hcmuaf.fit.model.Customer;
+import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.UserService;
 
 import javax.mail.MessagingException;
@@ -47,7 +49,12 @@ public class Signup extends HttpServlet {
 
         else {
             User newUser = new User(email, pass, user);
+            Customer newCus = new Customer();
             UserService.register(newUser);
+            newCus.setMATAIKHOAN(newUser.getId());
+            newCus.setTENKH(newUser.getTentk());
+            CustomerService.registerKH(newCus, newUser);
+
             String url = null;
             if (request.getParameter("save-login") != null) {
                 HttpSession session = request.getSession(true);

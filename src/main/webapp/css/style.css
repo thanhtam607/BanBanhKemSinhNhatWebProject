@@ -466,7 +466,7 @@ ol {
 	content: "";
 	position: absolute;
 	height: 23px;
-	width: 80px;
+	width: 200px;
 	left: 0;
 }
 .header__top__right__auth a {
@@ -3865,3 +3865,8 @@ font-size: 24px;
 	background-color: white;
 }
 
+/*User Profile*/
+.userProfile{
+	display: flex;
+	flex-direction: column;
+}

@@ -166,7 +166,55 @@ public class UserService {
         } catch (SQLException se) {
             se.printStackTrace();
         }
-        System.out.println(sql);
+    }
+
+    public static void updateProfileEmail(String email, User auth)  {
+        if(email == null) return;
+        String idACC = auth.getId();
+        String sql = "UPDATE taikhoan set EMAIL = '"+email+"' where ID = "+ "'"+idACC+"'";
+        Statement stm  =  DBConnect.getInstall().get();
+        try {
+            stm.executeUpdate(sql);
+            auth.setEmail(email);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static void updateProfileTenTk(String tentk,User auth)  {
+        if(tentk == null) return;
+        String idACC = auth.getId();
+        String sql = "UPDATE taikhoan set TENTK = '"+tentk+"' where ID = "+ "'"+idACC+"'";
+        Statement stm  =  DBConnect.getInstall().get();
+        try {
+            stm.executeUpdate(sql);
+            auth.setTentk(tentk);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static void updateProfileAddress(String diachi, User auth)  {
+        if(diachi == null) return;
+        String idACC = auth.getId();
+        String sql1 = "UPDATE khachhang set khachhang.DIACHI = '"+diachi+"'where khachhang.MATAIKHOAN = "+ "'"+idACC+"'";
+        Statement stm  =  DBConnect.getInstall().get();
+        try {
+            stm.executeUpdate(sql1);
+            CustomerService.getCusByIdAcc(auth.getId()).setDIACHI(diachi);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static void updateProfilePhoneNo(String sdt, User auth)  {
+        if(sdt == null) return;
+        String idACC = auth.getId();
+        String sql1 = "UPDATE khachhang set khachhang.SDT = '"+sdt+"' where khachhang.MATAIKHOAN = "+ "'"+idACC+"'";
+        Statement stm  =  DBConnect.getInstall().get();
+        try {
+            stm.executeUpdate(sql1);
+            CustomerService.getCusByIdAcc(auth.getId()).setSDT(sdt);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
     }
     public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {
 //        UserService userService = new UserService();

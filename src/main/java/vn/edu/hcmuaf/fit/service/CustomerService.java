@@ -35,6 +35,42 @@ public class CustomerService {
         return listC;
 
     }
+    public static String getLastMaKH(){
+        Statement statement = DBConnect.getInstall().get();
+        String result = "";
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT khachhang.MAKH from khachhang ORDER BY MAKH DESC LIMIT 1");
+                while (rs.next()){
+                    result = rs.getString(1);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có đơn hàng");
+        }
+        return  result;
+    }
+    public static void registerKH(Customer acc, User user){
+        Statement stm = DBConnect.getInstall().get();
+        String stt = getLastMaKH().substring(2);
+        String ID = "KH" + (Integer.parseInt(stt) + 1);
+        acc.setMAKH(ID);
+        acc.setDIACHI("TPHCM");
+        acc.setSDT("035640789");
+        String sql = " ";
+        if(stm!= null) {
+            try {
+                 sql = "insert into khachhang values ('" + ID + "', '" + user.getTentk() + "', '"
+                        + user.getId()  + "', '" + acc.getDIACHI() + "'," + acc.getSDT()+");";
+                stm.executeUpdate(sql);
+
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
     public static String getIDKhach(String idAcc){
         for(Customer c: getListCustomer()){
             if(c.getMATAIKHOAN().equals(idAcc)){
