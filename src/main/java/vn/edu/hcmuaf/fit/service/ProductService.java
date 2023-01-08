@@ -368,11 +368,13 @@ public class ProductService {
         String sql1= "DELETE FROM comments WHERE MaSP='"+ id+"';";
         String sql= "DELETE FROM anhsp WHERE MaSP='"+ id+"';";
         String sql2= "DELETE FROM sanpham WHERE MaSP='"+ id+"';";
+        String sql3= "DELETE FROM ctsp WHERE MaSP='"+ id+"';";
         removeSale(id);
         removeInfoOder(id);
         try {
             statement.executeUpdate(sql);
             statement.executeUpdate(sql1);
+            statement.executeUpdate(sql3);
             statement.executeUpdate(sql2);
         } catch (SQLException se) {
             se.printStackTrace();
