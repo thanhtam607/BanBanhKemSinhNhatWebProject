@@ -402,8 +402,26 @@ public class ProductService {
             se.printStackTrace();
         }
     }
+    public static String getMaxId(){
+        String res ="";
+        String sql= "SELECT max(MaSP) from sanpham ";
+        Statement statement = DBConnect.getInstall().get();
+        try {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                res = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        String s = "B" + (Integer.parseInt(res.substring(1))+1);
+        return s;
+    }
 
     public static void main(String[] args) throws SQLException {
+
+
+
 //            Product p = findById("B100");
 //            addProDuct(p);
 //        String s = "img/product/B001/banh1.jpg";
