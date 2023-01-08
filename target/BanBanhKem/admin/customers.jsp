@@ -1,6 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -146,19 +148,19 @@
                                     <th>Tên khách hàng</th>
                                     <th>Địa chỉ</th>
                                     <th>SĐT</th>
-                                    <th>Trạng thái</th>
+                                    <th>Quyền</th>
                                     <th>Tùy chọn</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                             <%
-                            for(int i = 0 ; i < listC.size(); i++){
-                                Customer customer = listC.get(i);
+                                int i = 1;
+                            for(Customer customer:listC){
                             %>
                                 <tr>
                                     <td>
-                                        <div class="main__table-text"><%=i + 1%></div>
+                                        <div class="main__table-text"><%=i%></div>
                                     </td>
                                     <td>
                                         <div class="main__user">
@@ -178,7 +180,15 @@
                                     </td>
                                    
                                     <td>
-                                        <div class="main__table-text main__table-text--green">Đã phê duyệt</div>
+                                        <% String main__table = " ";
+                                            if(customer.getRoleNo() == -1){
+                                            main__table = "main__table-text--red";
+                                        } else if(customer.getRoleNo() == 1){
+                                                main__table = "main__table-text--green";
+                                            }else{
+                                                main__table = "main__table-text--blue";
+                                            }%>
+                                        <div class="main__table-text <%=main__table%>"><%=customer.getRole()%></div>
                                     </td>
 
                                     <td>
@@ -189,24 +199,39 @@
                                             <a href="./EditUser?makh=<%=customer.getMAKH()%>" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="adminDeleteUser?makh=<%=customer.getMAKH()%>" class="main__table-btn main__table-btn--delete open-modal">
+                                            <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </div>
-                                        <!-- modal status -->
-                                        <div id="modal-status<%=i%>" class="zoom-anim-dialog mfp-hide modal">
-                                            <form method="post" action="AdminLockCus">
-                                            <h6 class="modal__title">Chặn Người Dùng</h6>
-                                            <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
-                                                <input name = "makh" value="<%=customer.getMAKH()%>" style="display: none">
-                                            <div class="modal__btns">
-                                                <button class="modal__btn modal__btn--apply" type="submit">Chặn</button>
-                                                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                                            </div>
-                                            </form>
-                                        </div>
+
                                     </td>
                                 </tr>
+                            <!-- modal status -->
+                            <div id="modal-status<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                <form method="post" action="AdminLockCus">
+                                    <h6 class="modal__title">Chặn Người Dùng</h6>
+                                    <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
+                                    <input name = "makh" value="<%=customer.getMAKH()%>" style="display: none">
+                                    <div class="modal__btns">
+                                        <button class="modal__btn modal__btn--apply" type="submit">Chặn</button>
+                                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- modal delete -->
+                            <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                <h6 class="modal__title">Xóa Khách Hàng</h6>
+
+                                <p class="modal__text">Bạn có chắc muốn xóa khách hàng này?</p>
+
+                                <div class="modal__btns">
+                                    <a href="DeleteUser?makh=<%=customer.getMAKH()%>" class="modal__btn modal__btn--apply" type="button">
+                                        Xóa
+                                    </a>
+                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                </div>
+                            </div>
+                            <!-- end modal delete -->
                                <% i++;
                             }%>
                             </tbody>
@@ -241,20 +266,7 @@
     <!-- end main content -->
 
 
-    <!-- end modal status -->
 
-    <!-- modal delete -->
-    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Xóa người dùng</h6>
-
-        <p class="modal__text">Bạn có chắc muốn xóa người dùng này?</p>
-
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
-    <!-- end modal delete -->
 
      <!-- Back to Top -->
      <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

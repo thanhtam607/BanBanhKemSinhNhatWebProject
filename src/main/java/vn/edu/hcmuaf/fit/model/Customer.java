@@ -72,6 +72,9 @@ public class Customer {
         }
         return "Khóa";
     }
+    public int getRoleNo() {
+        return this.role;
+    }
 
 
     public void setRole(int role) {
