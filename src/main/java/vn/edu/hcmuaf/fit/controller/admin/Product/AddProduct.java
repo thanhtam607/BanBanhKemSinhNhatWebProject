@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,19 +41,23 @@ public class AddProduct extends HttpServlet {
         else{
         int gia  = Integer.parseInt(giasp);
         int khoiLg = Integer.parseInt(kl);
-        String realPa = "img/product/" + masp;
-        String path= ProductService.getLocation()+realPa+"/";
+        String realPa = request.getServletContext().getRealPath("img/product/" + masp);
         List<String> dsanh=  new ArrayList<>();
-        File file = new File(ProductService.getLocation() + realPa + "/");
-        file.mkdir();
+//            File file = new File(ProductService.getLocation() + realPa + "/");
+//            file.mkdir();
+
         for (Part part : request.getParts()) {
                 if (part.getName().equalsIgnoreCase("upload")) {
                     String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
-                    String location = ProductService.getLocation() + realPa + "/" + filename;
+                    if(!Files.exists(Path.of(realPa))){
+                        Files.createDirectories(Path.of(realPa));
+                    }
+//                    String location = ProductService.getLocation() + realPa + "/" + filename;
                     String newImg = realPa + "/" + filename;
-                    part.write(location);
+//                    part.write(location);
+                    part.write(newImg);
                     System.out.println(newImg);
-                    dsanh.add(newImg);
+                    dsanh.add( "img/product/" + masp+"/" + filename );
                     }
             }
         Product p = new Product(masp, tensp,loai,kichthuoc,khoiLg, mota,noidung,dsanh,gia);
