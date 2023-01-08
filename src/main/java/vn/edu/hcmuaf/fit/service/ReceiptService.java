@@ -196,6 +196,17 @@ public class ReceiptService {
 
         return rs;
     }
+    public static List<String> getReceiptIDByMakh(String makh) {
+        List<Receipt> list = getAllReceipt();
+        List<String> rs = new LinkedList<>();
+        for (Receipt rc : list) {
+            if (rc.getMakh().equals(makh)) {
+                rs.add(rc.getId());
+            }
+        }
+
+        return rs;
+    }
 
     public static List<Ship> getListGiaoHang() {
         List<Ship> list = new LinkedList<Ship>();
@@ -299,35 +310,6 @@ public class ReceiptService {
         return rs;
     }
 
-    public static void deleteCustomer(String makh) {
-        Statement statement = DBConnect.getInstall().get();
-        Statement stmt = DBConnect.getInstall().get();
-        ;
-        List<String> list = ReceiptService.getMahd(makh);
-        if (!list.isEmpty()) {
-            for (int i = 0; i <= list.size(); i++) {
-                String x = "sql" + i;
-                String y = "sql" + i;
-                x = "DELETE from giaohang WHERE MAHD = '" + list.get(i) + "'";
-                y = "DELETE from cthd WHERE MAHD = '" + list.get(i) + "'";
-                String sqlx = "DELETE from hoadon WHERE MAKH = '" + makh + "'";
-                String sqly = "DELETE from khachhang WHERE MAKH = '" + makh + "'";
-
-                if (statement != null) {
-                    try {
-                        statement.executeUpdate(x);
-                        statement.executeUpdate(y);
-                        statement.executeUpdate(sqlx);
-                        statement.executeUpdate(sqly);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                } else {
-                    System.out.println("not found");
-                }
-            }
-        }
-    }
 
     public static void updateRole(int role, String makh) {
         Statement statement = DBConnect.getInstall().get();
@@ -356,10 +338,25 @@ public class ReceiptService {
         }
         return rs;
     }
-
+    public static void deleteCustomer(String makh) {
+        Statement statement = DBConnect.getInstall().get();
+        Statement stmt = DBConnect.getInstall().get();
+        String idAcc = CustomerService.getIdAccByMakh(makh);
+        String sql =  "DELETE from taikhoan WHERE taikhoan.ID= '"+idAcc+"';";
+        if (statement != null) {
+            try {
+                statement.executeUpdate(sql);
+                System.out.println("thanh cong");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("not found");
+        }
+    }
 
     public static void main(String[] args) {
-   updateRole(0, "KH01");
+   deleteCustomer( "KH05");
     }
 
 

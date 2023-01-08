@@ -48,7 +48,8 @@ public class UserService {
         if (users.size() != 1) return null;
         User user = users.get(0);
         if (!user.getPass().equals(hashPassword(password))
-                ||!user.getEmail().equals(email)) return null;
+                ||!user.getEmail().equals(email)
+        ) return null;
         return user;
     }
     public static String hashPassword(String password) {

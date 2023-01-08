@@ -188,12 +188,40 @@
                                             <a href="./EditUser?makh=<%=customer.getMAKH()%>" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="adminDeleteUser?makh=<%=customer.getMAKH()%>" class="main__table-btn main__table-btn--delete open-modal">
+                                            <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </div>
                                     </td>
                                 </tr>
+                            <!-- modal delete -->
+                            <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                <h6 class="modal__title">Xóa Khách Hàng</h6>
+
+                                <p class="modal__text">Bạn có chắc muốn xóa khách hàng này?</p>
+
+                                <div class="modal__btns">
+                                    <a href="adminDeleteUser?makh=<%=customer.getMAKH()%>" class="modal__btn modal__btn--apply" type="button">
+                                        Xóa
+                                    </a>
+                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                </div>
+                            </div>
+                            <!-- end modal delete -->
+                            <!-- modal status -->
+                            <div id="modal-status<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                <h6 class="modal__title">Thông Báo</h6>
+
+                                <p class="modal__text">Bạn có chắc muốn chặn khách hàng này?</p>
+
+                                <div class="modal__btns">
+                                    <a href="adminChangeStateOrder?mahd=<%=rc.getId()%>" class="modal__btn modal__btn--apply" type="button">
+                                        Chặn
+                                    </a>
+                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                </div>
+                            </div>
+                            <!-- end modal status -->
                                <% i++;
                             }%>
                             </tbody>

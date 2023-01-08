@@ -81,10 +81,10 @@ public class CustomerService {
         }
         return null;
     }
-    public static Customer getCusById(String makh){
+    public static String getIdAccByMakh(String makh){
         for(Customer c: getListCustomer()){
             if(c.getMAKH().equals(makh)){
-                return c;
+                return c.getMATAIKHOAN();
             }
         }
         return null;

@@ -21,10 +21,15 @@ public class Signin extends HttpServlet {
         String uname = request.getParameter("username");
         String pass = request.getParameter("pass");
         User user = UserService.getInstance().checkLogin(uname, pass);
+
         if(user==null){
             request.setAttribute("Error", "Tên đăng nhập hoặc mật khẩu không đúng!!!");
             request.getRequestDispatcher("/signin.jsp").forward(request, response);
         }else{
+            if(user.checkRole(-1)){
+                request.setAttribute("Error", "Tài Khoản Của Bạn Đã Bị Khóa!!!");
+                request.getRequestDispatcher("/signin.jsp").forward(request, response);
+            }
             HttpSession session = request.getSession(true);
             session.setAttribute("auth", user);
             Customer customer = CustomerService.getCusByIdAcc(user.getId());
