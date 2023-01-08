@@ -31,16 +31,16 @@ public class AddProduct extends HttpServlet {
         String loai = request.getParameter("loaiBanh");
         String noidung = request.getParameter("noidung");
         String mota= request.getParameter("mota");
-        int gia = 0;
-        if( request.getParameter("gia")!= null){
-            gia = Integer.parseInt(request.getParameter("gia"));
-        }
-        int khoiLg = 0;
-        if(request.getParameter("khoiluong")!=null){
-            khoiLg = Integer.parseInt(request.getParameter("khoiluong"));
-        }
+        String giasp =request.getParameter("gia");
+        String kl = request.getParameter("khoiluong");
         String kichthuoc = request.getParameter("type");
-
+        if(tensp== null || giasp == null|| kl==null|| request.getPart("img") == null){
+            request.setAttribute("Error", "Vui lòng nhập đầy đủ thông tin.");
+            request.getRequestDispatcher("add-product.jsp").forward(request,response);
+        }
+        else{
+        int gia  = Integer.parseInt(giasp);
+        int khoiLg = Integer.parseInt(kl);
         String realPa = "img/product/" + masp;
         String path= ProductService.getLocation()+realPa+"/";
         List<String> imgs = UploadFileHelper.uploadFile(path, request);
@@ -50,6 +50,6 @@ public class AddProduct extends HttpServlet {
         }
         Product p = new Product(masp, tensp,loai,kichthuoc,khoiLg, mota,noidung,dsanh,gia);
         ProductService.addProDuct(p);
-        response.sendRedirect("ListProduct_Admin");
+        response.sendRedirect("ListProduct_Admin"); }
     }
 }

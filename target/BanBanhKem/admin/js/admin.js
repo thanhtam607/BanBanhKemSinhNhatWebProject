@@ -214,7 +214,7 @@ $('.dandev_insert_attach').click(function() {
         _html += ' <div class="img-wrap-box"></div>';
         _html += '</div>';
         _html += '<div class="' + (time++) + '">';
-        _html += '<input type="file" class="hidden"  onchange="uploadImg(this)" name="upload"   />';
+        _html += '<input type="file" class="hidden" accept=".png, .jpg, .jpeg"  onchange="uploadImg(this)" name="upload"   />';
         _html += '</div>';
         _html += '</li>';
         jQuery('.dandev_attach_view').append(_html);

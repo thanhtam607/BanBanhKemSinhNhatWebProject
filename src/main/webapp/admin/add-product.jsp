@@ -125,27 +125,32 @@
                             <div class="col-12 col-md-7 form__content">
                                 <div class="row row--form">
                                     <div class="col-12">
+                                        <label class="form__label" >Tên bánh:</label>
                                         <input type="text" class="form__input" name="tensp" placeholder="Tên bánh">
                                     </div>
 
                                     <div class="col-12">
+                                        <label class="form__label" >Nội dung:</label>
                                         <textarea name="noidung" class="form__textarea-sp" placeholder="Nội dung"></textarea>
                                     </div>
                                     <div class="col-12">
+                                        <label class="form__label" >Mô tả:</label>
                                         <textarea  name="mota" class="form__textarea-sp" placeholder="Mô tả"></textarea>
                                     </div>
                                     <div class="col-12 col-sm-6 col-lg-3">
-                                        <input type="number" min="1" class="form__input" name="gia" placeholder="Giá bán">
+                                        <label class="form__label" >Giá bán:</label>
+                                        <input type="number" min="0" class="form__input" name="gia" placeholder="Giá bán">
                                     </div>
 
 
                                     <div class="col-12 col-sm-6 col-lg-3">
-                                        <input type="number" name="khoiluong" min="50" class="form__input" placeholder="Khối lượng">
+                                        <label class="form__label" >Khối lượng:</label>
+                                        <input type="number" name="khoiluong" min="0" class="form__input" placeholder="Khối lượng">
                                     </div>
                                     <div class="col-12">
                                         <div class="col-12 col-md-7 col-lg-12 col-xl-7">
                                             <div class="form__group">
-                                                <label class="form__label" >Loại bánh</label>
+                                                <label class="form__label" >Loại bánh:</label>
                                                 <select class="form-select form__input" name="loaiBanh" >
                                                     <% List<LoaiBanh> ListType = ProductService.getListType();
                                                     for(LoaiBanh lb: ListType){%>
@@ -176,6 +181,8 @@
                                             </li>
                                         </ul>
                                     </div>
+                                    <% String error = (String) request.getAttribute("Error");%>
+                                    <span id="insertTextHere"><%= error != null ? error:""%></span>
                                     <div class="wrap">
                                         <div class="dandev-reviews">
                                             <div class="form__input form_upload">
