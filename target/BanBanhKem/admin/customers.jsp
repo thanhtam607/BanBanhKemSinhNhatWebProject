@@ -152,12 +152,13 @@
                             </thead>
 
                             <tbody>
-                            <% int i = 1;
-                            for(Customer customer: listC){
+                            <%
+                            for(int i = 0 ; i < listC.size(); i++){
+                                Customer customer = listC.get(i);
                             %>
                                 <tr>
                                     <td>
-                                        <div class="main__table-text"><%=i%></div>
+                                        <div class="main__table-text"><%=i + 1%></div>
                                     </td>
                                     <td>
                                         <div class="main__user">
@@ -182,7 +183,7 @@
 
                                     <td>
                                         <div class="main__table-btns">
-                                            <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
+                                            <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
                                             <a href="./EditUser?makh=<%=customer.getMAKH()%>" class="main__table-btn main__table-btn--edit">
@@ -191,6 +192,18 @@
                                             <a href="adminDeleteUser?makh=<%=customer.getMAKH()%>" class="main__table-btn main__table-btn--delete open-modal">
                                                 <i class="fa fa-trash"></i>
                                             </a>
+                                        </div>
+                                        <!-- modal status -->
+                                        <div id="modal-status<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                            <form method="post" action="AdminLockCus">
+                                            <h6 class="modal__title">Chặn Người Dùng</h6>
+                                            <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
+                                                <input name = "makh" value="<%=customer.getMAKH()%>" style="display: block">
+                                            <div class="modal__btns">
+                                                <button class="modal__btn modal__btn--apply" type="submit">Chặn</button>
+                                                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                            </div>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -226,17 +239,7 @@
     </main>
     <!-- end main content -->
 
-    <!-- modal status -->
-    <div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Chặn Người Dùng</h6>
 
-        <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
-
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Chặn</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
     <!-- end modal status -->
 
     <!-- modal delete -->

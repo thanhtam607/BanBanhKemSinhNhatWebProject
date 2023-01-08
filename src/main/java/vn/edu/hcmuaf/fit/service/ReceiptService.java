@@ -302,7 +302,6 @@ public class ReceiptService {
     public static void deleteCustomer(String makh) {
         Statement statement = DBConnect.getInstall().get();
         Statement stmt = DBConnect.getInstall().get();
-        ;
         List<String> list = ReceiptService.getMahd(makh);
         if (!list.isEmpty()) {
             for (int i = 0; i <= list.size(); i++) {
