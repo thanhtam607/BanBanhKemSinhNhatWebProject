@@ -227,7 +227,7 @@
                     <a onclick="addToFav('<%=pro.getId()%>')"  class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <%}%>
                      <ul>
-                        <li><b>Tình trạng</b> <span>Còn hàng</span></li>
+                        <li><b>Tình trạng</b> <span><%=pro.getStatus()%></span></li>
                         <li><b>Giao hàng</b> <span>Giao ngay trong ngày</span></li>
                         </li>
                     </ul>

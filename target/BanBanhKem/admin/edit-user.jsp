@@ -244,19 +244,6 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="firstname">Họ</label>
-                                                    <input id="firstname" type="text" name="firstname" class="form__input" value="<%=rc.getNamecustomer().split(" ")[0] + " " + rc.getNamecustomer().split(" ")[1]%>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="lastname">Tên</label>
-                                                    <input id="lastname" type="text" name="lastname" class="form__input" value="<%=rc.getNamecustomer().split(" ")[2]%>">
-                                                </div>
-                                            </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
@@ -316,7 +303,7 @@
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#modal-viewcthd<%=j%>" class="main__table-btn main__table-btn--view open-modal">
+                                                    <a href="#modal-viewcthd<%=j%>" class="main__table-btn main__table-btn--edit open-modal">
 														<i class="fa fa-eye"></i>
 													</a>
                                                     <a href="#modal-deletehd<%=j%>" class="main__table-btn main__table-btn--delete open-modal">
@@ -402,7 +389,7 @@
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#modal-view<%=i%>" class="main__table-btn main__table-btn--view open-modal">
+                                                    <a href="#modal-view<%=i%>" class="main__table-btn main__table-btn--edit open-modal">
 														<i class="fa fa-eye"></i>
 													</a>
                                                     <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
