@@ -3,6 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.CTHD" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -271,8 +273,8 @@
                                             </div>
                                             </div>
                                             <div class="col-12">
-                                            <input class="form__btn" type="submit"  value="Lưu thông tin">
-                                        </div>
+                                            <input id="" class="form__btn" type="submit"  value="Lưu thông tin">
+                                            </div>
                                             <% }} %>
                                         </div>
                                     </form>
@@ -297,67 +299,74 @@
                                     </thead>
 
                                     <tbody>
-                                    <%for(Receipt r: listre){%>
+                                    <% int j = 0;
+                                        for(Receipt r: listre){%>
                                         <tr>
                                             <td>
                                                 <div class="main__table-text"><%=r.getId()%></div>
                                             </td>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text"><a href="#">I Dream in Another Language</a></div>--%>
-<%--                                            </td>--%>
                                             <td>
                                                 <div class="main__table-text"><%=r.getNamecustomer()%></div>
                                             </td>
                                             <td>
                                                 <div class="main__table-text"><%=r.getAddress()%></div>
                                             </td>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
-<%--                                            </td>--%>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text">12 / 7</div>--%>
-<%--                                            </td>--%>
                                             <td>
                                                 <div class="main__table-text"><%=r.getSdate()%></div>
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#modal-view" class="main__table-btn main__table-btn--view open-modal">
+                                                    <a href="#modal-viewcthd<%=j%>" class="main__table-btn main__table-btn--view open-modal">
 														<i class="fa fa-eye"></i>
 													</a>
-                                                    <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <a href="#modal-deletehd<%=j%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
                                                 </div>
+                                                <!-- modal view cthd-->
+                                                <div id="modal-viewcthd<%=j%>" class="zoom-anim-dialog mfp-hide modal modal--view">
+                                                    <div class="comments__autor">
+                                                        <img class="comments__avatar" src="img/user.svg" alt="">
+                                                        <span class="comments__name"><%=r.getNamecustomer()%></span>
+
+                                                        <span class="comments__time"><%=r.getEdate()%></span>
+                                                    </div>
+                                                    <%List<CTHD> cthds = ReceiptService.getcthdUser(r.getId());
+                                                    for(CTHD cthd: cthds){
+                                                     %>
+                                                    <p class="comments__text">Tên Sản Phẩm: <%=cthd.getTensp()%></p>
+
+                                                    <p class="comments__text">Số Lượng: <%=cthd.getSolg()%> </p>
+                                                    <%}%>
+                                                    <p class="comments__text">Địa chỉ giao: <%=r.getAddress()%></p>
+                                                    <p class="comments__text">Trạng thái: <%=r.getState()%></p>
+                                                </div>
+                                                <!-- end modal view cthd-->
+                                                <!-- modal delete hd-->
+                                                <div id="modal-deletehd<%=j%>" class="zoom-anim-dialog mfp-hide modal">
+                                                    <h6 class="modal__title">Hủy Đơn Hàng</h6>
+
+                                                    <p class="modal__text">Bạn có chắc muốn hủy đơn hàng này?</p>
+
+                                                    <div class="modal__btns">
+                                                        <a href="adminRemoveOrderCTKH?mahd=<%=r.getId()%>&makhCTKH=<%=r.getMakh()%>" class="modal__btn modal__btn--apply" type="button">
+                                                            Hủy Đơn Hàng
+                                                        </a>
+                                                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                    </div>
+                                                </div>
+                                                <!-- end modal delete hd-->
                                             </td>
                                         </tr>
-                                    <%}%>
+                                    <% j++;
+                                        }%>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <!-- end table -->
 
-                        <!-- paginator -->
-                        <div class="col-12">
-                            <div class="paginator-wrap">
-                                <span>10 from 23</span>
 
-                                <ul class="paginator">
-                                    <li class="paginator__item paginator__item--prev">
-                                        <a href="#"><i class="fa fa-arrow-back"></i></a>
-                                    </li>
-                                    <li class="paginator__item"><a href="#">1</a></li>
-                                    <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
-                                    <li class="paginator__item"><a href="#">3</a></li>
-                                    <li class="paginator__item"><a href="#">4</a></li>
-                                    <li class="paginator__item paginator__item--next">
-                                        <a href="#"><i class="fa fa-arrow-forward"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- end paginator -->
                     </div>
 
                     <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
@@ -388,15 +397,6 @@
                                             <td>
                                                 <div class="main__table-text"><%=r.getNamecustomer()%></div>
                                             </td>
-                                            <%--                                            <td>--%>
-<%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
-<%--                                            </td>--%>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text main__table-text--rate"><i class="fa fa-star"></i> 7.9</div>--%>
-<%--                                            </td>--%>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text">12 / 7</div>--%>
-<%--                                            </td>--%>
                                             <td>
                                                 <div class="main__table-text"><%=r.getCommentList().get(i).getDate()%></div>
                                             </td>
@@ -408,6 +408,7 @@
                                                     <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
+
                                                 </div>
                                                 <!-- modal view -->
                                                 <div id="modal-view<%=i%>" class="zoom-anim-dialog mfp-hide modal modal--view">
@@ -419,6 +420,7 @@
                                                     <p class="reviews__text"><%=r.getCommentList().get(i).getBinhLuan()%></p>
                                                 </div>
                                                 <!-- end modal view -->
+                                                <!-- end modal delete -->
                                                 <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">
                                                     <h6 class="modal__title">Xóa Bình Luận</h6>
 
@@ -440,26 +442,6 @@
                         </div>
                         <!-- end table -->
 
-                        <!-- paginator -->
-                        <div class="col-12">
-                            <div class="paginator-wrap">
-                                <span>10 from 32</span>
-
-                                <ul class="paginator">
-                                    <li class="paginator__item paginator__item--prev">
-                                        <a href="#"><i class="fa fa-arrow-back"></i></a>
-                                    </li>
-                                    <li class="paginator__item"><a href="#">1</a></li>
-                                    <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
-                                    <li class="paginator__item"><a href="#">3</a></li>
-                                    <li class="paginator__item"><a href="#">4</a></li>
-                                    <li class="paginator__item paginator__item--next">
-                                        <a href="#"><i class="fa fa-arrow-forward"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- end paginator -->
                     </div>
                 </div>
                 <!-- end content tabs -->
@@ -468,29 +450,7 @@
     </main>
     <!-- end main content -->
 
-    <!-- modal view -->
-<%for(Receipt r: listre){%>
-    <div id="modal-view" class="zoom-anim-dialog mfp-hide modal modal--view">
-        <div class="comments__autor">
-            <img class="comments__avatar" src="img/user.svg" alt="">
-            <span class="comments__name"><%=r.getNamecustomer()%></span>
 
-            <span class="comments__time"><%=r.getEdate()%></span>
-        </div>
-        <p class="comments__text">Tên Sản Phẩm: <%=r.getNamecake()%> </p>
-        <p class="comments__text">Địa chỉ giao: <%=r.getAddress()%></p>
-        <p class="comments__text">Trạng thái: <%=r.getState()%></p>
-
-        <div class="comments__actions">
-            <div class="comments__rate">
-                <span><i class="fa fa-thumbs-up"></i>0</span>
-
-                <span>0<i class="fa fa-thumbs-down"></i></span>
-            </div>
-        </div>
-    </div>
-    <!-- end modal view -->
-<% } %>
 
 
 
