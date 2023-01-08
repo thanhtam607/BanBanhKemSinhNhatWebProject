@@ -198,7 +198,7 @@
                                             <form method="post" action="AdminLockCus">
                                             <h6 class="modal__title">Chặn Người Dùng</h6>
                                             <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
-                                                <input name = "makh" value="<%=customer.getMAKH()%>" style="display: block">
+                                                <input name = "makh" value="<%=customer.getMAKH()%>" style="display: none">
                                             <div class="modal__btns">
                                                 <button class="modal__btn modal__btn--apply" type="submit">Chặn</button>
                                                 <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
