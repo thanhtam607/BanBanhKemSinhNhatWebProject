@@ -20,6 +20,6 @@ public class AdminLockCus extends HttpServlet {
         String makh = request.getParameter("makh");
         int role = -1;
         ReceiptService.updateRole( role, makh);
-        response.sendRedirect("/BanBanhKemSinhNhatWebProject/admin/ListCustomer");
+        response.sendRedirect("/BanBanhKemSinhNhatWebProject/admin/EditUser?makh=" + request.getParameter("makh"));
     }
 }

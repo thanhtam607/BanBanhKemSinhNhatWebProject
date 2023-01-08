@@ -221,20 +221,6 @@
                                 </div>
                             </div>
                             <!-- end modal delete -->
-                            <!-- modal status -->
-                            <div id="modal-status<%=i%>" class="zoom-anim-dialog mfp-hide modal">
-                                <h6 class="modal__title">Thông Báo</h6>
-
-                                <p class="modal__text">Bạn có chắc muốn chặn khách hàng này?</p>
-
-                                <div class="modal__btns">
-                                    <a href="adminChangeStateOrder?mahd=<%=rc.getId()%>" class="modal__btn modal__btn--apply" type="button">
-                                        Chặn
-                                    </a>
-                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                                </div>
-                            </div>
-                            <!-- end modal status -->
                                <% i++;
                             }%>
                             </tbody>

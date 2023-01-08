@@ -215,16 +215,6 @@
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="subscription">Subscription</label>
-                                                    <select class="js-example-basic-single" id="subscription">
-														<option value="Basic">Basic</option>
-														<option value="Premium">Premium</option>
-														<option value="Cinematic">Cinematic</option>
-													</select>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
                                                     <label class="form__label" for="rights">Phân Quyền</label>
                                                     <select class="form__input" id="rights" name="role">
                                                         <%List<String> listRole = (List<String>) request.getAttribute("listRole");
