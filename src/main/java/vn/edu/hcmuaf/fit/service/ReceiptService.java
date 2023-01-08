@@ -356,7 +356,7 @@ public class ReceiptService {
     }
 
     public static void main(String[] args) {
-   deleteCustomer( "KH05");
+        System.out.println(getData().toString());
     }
 
 

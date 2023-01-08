@@ -3197,3 +3197,10 @@ i.dandev-plus {
 ul.dandev_attach_view li input {
     display: none;
 }
+.main__table-text--black{
+    color: #000000;
+}
+.main__table-btn--black, .profile__action--black{
+    color: #000000;
+    background-color: rgba(235, 87, 87, 0.08);
+}

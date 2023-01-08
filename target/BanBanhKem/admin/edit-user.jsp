@@ -123,12 +123,16 @@
                                 Receipt rc = listre.get(i); %>
                             <div class="profile__meta">
                                 <% String main__table = " ";
+                                String profile__text ="";
                                     if(rc.getRoleint() == -1){
                                         main__table = "main__table-text--red";
+                                        profile__text = "profile__action--delete";
                                     } else if(rc.getRoleint() == 1){
                                         main__table = "main__table-text--green";
+                                        profile__text = "profile__action--banned";
                                     }else{
-                                        main__table = "main__table-text--blue";
+                                        main__table = "main__table-text--black";
+                                        profile__text = "profile__action--banned";
                                     }%>
                                 <h3><%=rc.getNamecustomer()%> <span class="<%=main__table%>">(<%=rc.getRole()%>)</span></h3>
                                 <span name = "makh" value="<%=rc.getMakh()%>"> ID: <%=rc.getMakh()%></span>
@@ -173,7 +177,7 @@
 
                         <!-- profile btns -->
                         <div class="profile__actions">
-                            <a href="#modal-status" class="profile__action profile__action--banned open-modal"><i class="fa fa-lock"></i></a>
+                            <a href="#modal-status" class="profile__action <%=profile__text%> open-modal"><i class="fa fa-lock"></i></a>
                             <a href="#modal-delete" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
                         </div>
                         <!-- end profile btns -->

@@ -59,6 +59,18 @@ public class OrderService {
             }
         }
     }
+    public static void addGiaoHang(Order order){
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "";
+        if(stm!= null) {
+            try {
+                 sql = "INSERT INTO giaohang VALUES('" + order.getId() + "','" + order.getGiaohang().getNgayGiao() + "',' " + order.getGiaohang().getDiachigiao()+"');";
+                stm.executeUpdate(sql);
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
     public static void clearCart(Order order){
         order.getData().clear();
         order.setBuyDate(null);

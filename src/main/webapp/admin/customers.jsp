@@ -181,19 +181,23 @@
                                    
                                     <td>
                                         <% String main__table = " ";
+                                            String main__btn ="";
                                             if(customer.getRoleNo() == -1){
-                                            main__table = "main__table-text--red";
-                                        } else if(customer.getRoleNo() == 1){
+                                                main__table = "main__table-text--red";
+                                                main__btn = "main__table-btn--delete";
+                                            } else if(customer.getRoleNo() == 1){
                                                 main__table = "main__table-text--green";
+                                                main__btn = "main__table-btn--banned";
                                             }else{
-                                                main__table = "main__table-text--blue";
+                                                main__table = "main__table-text--black";
+                                                main__btn = "main__table-btn--banned";
                                             }%>
                                         <div class="main__table-text <%=main__table%>"><%=customer.getRole()%></div>
                                     </td>
 
                                     <td>
                                         <div class="main__table-btns">
-                                            <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">
+                                            <a href="#modal-status<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
                                             <a href="./EditUser?makh=<%=customer.getMAKH()%>" class="main__table-btn main__table-btn--edit">

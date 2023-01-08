@@ -34,12 +34,15 @@ public class AddNewOrder extends HttpServlet {
 
         Ship gh = new Ship();
         gh.setDiachigiao(diachi);
+        gh.setNgayGiao(todayFM);
+
 
         order.setGiaohang(gh);
         order.setNote(ghichu);
 
         OrderService.addOrder(order);
         OrderService.addCTHD(order);
+        OrderService.addGiaoHang(order);
         OrderService.updateTonKhoWhenAdd(order);
 
         OrderService.clearCart(order);
