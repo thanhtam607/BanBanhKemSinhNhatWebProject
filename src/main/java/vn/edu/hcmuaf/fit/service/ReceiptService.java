@@ -393,7 +393,10 @@ public class ReceiptService {
     }
 
     public static void main(String[] args) {
-        System.out.println(getData().toString());
+        for(Receipt r: getData()){
+            System.out.println(r.getCommentList().toString());
+        }
+
     }
 
 
