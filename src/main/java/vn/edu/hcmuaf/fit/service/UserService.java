@@ -99,7 +99,7 @@ public class UserService {
         String result = "";
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT taikhoan.ID from taikhoan ORDER BY MAKH DESC LIMIT 1");
+                ResultSet rs = statement.executeQuery("SELECT taikhoan.ID from taikhoan ORDER BY ID DESC LIMIT 1");
                 while (rs.next()){
                     result = rs.getString(1);
                 }
