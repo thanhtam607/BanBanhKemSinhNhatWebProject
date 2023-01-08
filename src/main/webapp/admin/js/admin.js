@@ -206,7 +206,6 @@ $('.dandev_insert_attach').click(function() {
     var _lastimg = jQuery('.dandev_attach_view li').last().find('input[type="file"]').val();
 
     if (_lastimg != '') {
-
         var time = 0;
         var _html = '<li id="li_files_' + (time++) + '" class="li_file_hide">';
         _html += '<div class="img-wrap">';

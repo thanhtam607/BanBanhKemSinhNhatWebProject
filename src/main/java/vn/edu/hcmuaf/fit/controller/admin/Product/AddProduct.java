@@ -34,7 +34,7 @@ public class AddProduct extends HttpServlet {
         String giasp =request.getParameter("gia");
         String kl = request.getParameter("khoiluong");
         String kichthuoc = request.getParameter("type");
-        if(tensp== null || giasp == null|| kl==null|| request.getPart("img") == null){
+        if(tensp== null || giasp == null|| kl==null){
             request.setAttribute("Error", "Vui lòng nhập đầy đủ thông tin.");
             request.getRequestDispatcher("add-product.jsp").forward(request,response);
         }

@@ -22,14 +22,13 @@ public class UploadFileHelper {
 
                     InputStream inputStream = null;
                     OutputStream outputStream = null;
-                    System.out.println(Path.of(UPLOAD_DIR));
+
                     try {
 
                         File outputFilePath = new File(Path.of(UPLOAD_DIR)+ fileName);
 
                         inputStream = part.getInputStream();
                         outputStream = new FileOutputStream(outputFilePath);
-                        System.out.println(outputFilePath.getAbsolutePath());
                         int read = 0;
                         final byte[] bytes = new byte[1024];
                         while ((read = inputStream.read(bytes)) != -1) {

@@ -329,9 +329,10 @@ public class ProductService {
 
         String sql = "insert into sanpham values('" + p.getId() + "', '" + p.getLoaiBanh() + "', '" + p.getName() + "', '" + p.getKichThuoc() + "',"
                 + p.getKhoiLuong()+",'"+ p.getMoTa() + "', '"+ p.getNoiDung()+"',"+ p.getPrice()+");";
-        System.out.println(sql);
+        String sql1 = "insert into ctsp(MaSP) values('"+ p.getId()+"');" ;
         try {
             statement.executeUpdate(sql);
+            statement.executeUpdate(sql1);
         } catch (SQLException se) {
             se.printStackTrace();
         }
@@ -401,8 +402,8 @@ public class ProductService {
     }
 
     public static void main(String[] args) throws SQLException {
-
-
+//            Product p = findById("B100");
+//            addProDuct(p);
 //        String s = "img/product/B001/banh1.jpg";
 //        upProductImg("img/product/B001/banh5.jpg", s);
 //        updateDetail("B001", 20,10,"12-1-2022", "13-2-2022");
