@@ -188,7 +188,7 @@ function updateDetail(id){
     location.href="Product/UpdateDetails?masp="+id+"&soluong="+sl+"&tonkho="+tonkho+"&ngaysx="+ ngsx.toString()+"&ngayhh="+nghh.toString();
 
 }
-<<<<<<< HEAD
+
 function updateRole(id){
     var user = document.getElementById("username").value;
     var email = document.getElementById("email").value;
@@ -196,7 +196,6 @@ function updateRole(id){
     var last = document.getElementById("lastname").value;
     location.href="Product/EditUser?makh =" + id + "username=" + user + "&email=" + email + "&firstname=" + fisrt + "&lastname=" + last ;
 }
-=======
 /*==============================
 hiển thị file
 ==============================*/
@@ -272,4 +271,3 @@ function chooseFile(fileInput){
     }
 }
 
->>>>>>> 5d4e9f5e3fa94ca8201a28271d52980fe72201aa

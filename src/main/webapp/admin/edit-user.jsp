@@ -119,13 +119,13 @@
                             </div>
                             <!-- or red -->
                             <% for (int i = 0; i <= 0; i ++){
+                                if(!listre.isEmpty()){
                                 Receipt rc = listre.get(i); %>
                             <div class="profile__meta profile__meta--green">
                                 <h3><%=rc.getNamecustomer()%> <span>(Approved)</span></h3>
-                                <span> ID: <%=rc.getMakh()%></span>
+                                <span name = "makh" value="<%=rc.getMakh()%>"> ID: <%=rc.getMakh()%></span>
                             </div>
                         </div>
-
                         <!-- end profile user -->
 
                         <!-- profile tabs nav -->
@@ -180,12 +180,12 @@
                             <div class="row">
                                 <!-- details form -->
                                 <div class="col-12">
-                                    <form action="#" class="form form--profile">
+                                    <form action="UpdateRole" method="post" class="form form--profile">
                                         <div class="row row--form">
                                             <div class="col-12">
                                                 <h4 class="form__title">Thông tin tài khoản</h4>
                                             </div>
-
+                                           <input name = "makh" value="<%=rc.getMakh()%>" style="display: none">
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="username">Tên tài khoản</label>
@@ -226,21 +226,21 @@
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="rights">Phân Quyền</label>
-                                                    <select class="form__input" id="rights" name="size">
-                                                        <%List<Integer> listRole = (List<Integer>) request.getAttribute("listRole");
-                                                            for(int s : listRole){
-                                                                if(s == rc.getRoleint()){%>
-                                                        <option selected value="<%=s%>"><%=s%></option>
+                                                    <select class="form__input" id="rights" name="role">
+                                                        <%List<String> listRole = (List<String>) request.getAttribute("listRole");
+                                                            for(String r : listRole){
+                                                                if(r == rc.getRole()){%>
+                                                        <option selected value="<%=r%>"><%=r%></option>
                                                         <% } else {%>
-                                                        <option value="<%=s%>"><%=s%></option>
+                                                        <option value="<%=r%>"><%=r%></option>
                                                         <%}}%>
                                                     </select>
-                                                </div>
+                                            </div>
                                             </div>
                                             <div class="col-12">
-                                                <input class="form__btn" type="submit" onclick="updateRole(<%=rc.getMakh()%>)" value="Lưu thông tin">
-                                            </div>
-                                            <% } %>
+                                            <input class="form__btn" type="submit"  value="Lưu thông tin">
+                                        </div>
+                                            <% }} %>
                                         </div>
                                     </form>
                                 </div>

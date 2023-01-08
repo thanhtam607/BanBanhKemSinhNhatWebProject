@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <input type="submit"  class="form__btn" value="Thêm sản phẩm"></input>
+                                <input type="submit"  class="form__btn" value="Thêm sản phẩm">
                             </div>
 
                         </div>

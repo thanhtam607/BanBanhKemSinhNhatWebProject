@@ -22,9 +22,16 @@ public class UpdateRole extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         String makh = request.getParameter("makh");
-        int role = Integer.parseInt(request.getParameter("role"));
-        ReceiptService.updateRole(role, makh);
-        response.sendRedirect("../ListCustomer");
-
+        String r = request.getParameter("role");
+        int role = 0;
+        if(r.equals("Thường")){
+            role = 0;
+        } else if (r.equals("Admin")){
+            role = 1;
+        } else {
+            role = -1;
+        }
+        ReceiptService.updateRole( role, makh);
+        response.sendRedirect("./EditUser?makh="+ request.getParameter("makh"));
     }
 }
