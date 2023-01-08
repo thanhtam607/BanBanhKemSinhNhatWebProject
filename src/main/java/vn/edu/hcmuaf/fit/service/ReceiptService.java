@@ -331,7 +331,7 @@ public class ReceiptService {
 
     public static void updateRole(int role, String makh) {
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE taikhoan set  role='" + role + " where MAKH= '" + makh + ";";
+        String sql = "UPDATE taikhoan, khachhang set  role= " + role + " where khachhang.MAKH = '" + makh + "' and taikhoan.id = khachhang.mataikhoan;";
 
         try {
             statement.executeUpdate(sql);
@@ -359,7 +359,7 @@ public class ReceiptService {
 
 
     public static void main(String[] args) {
-
+   updateRole(0, "KH01");
     }
 
 

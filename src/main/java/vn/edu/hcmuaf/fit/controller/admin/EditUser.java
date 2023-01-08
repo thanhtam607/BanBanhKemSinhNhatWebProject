@@ -22,10 +22,10 @@ public class EditUser extends HttpServlet {
 //        request.setAttribute("customer", cus);
 //        List<Receipt> listR = ReceiptService.getReceiptByMakh(makh);
 //        request.setAttribute("listR", listR);
-        List<Integer> listRole = new ArrayList<Integer>();
-        listRole.add(0);
-        listRole.add(1);
-        listRole.add(-1);
+        List<String> listRole = new ArrayList<String>();
+        listRole.add("Thường");
+        listRole.add("Admin");
+        listRole.add("Khóa");
         request.setAttribute("listRole", listRole);
         List<Receipt> listctkh = ReceiptService.getctkh(request.getParameter("makh"));
         request.setAttribute("listmakh", listctkh);

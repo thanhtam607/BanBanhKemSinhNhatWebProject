@@ -270,4 +270,6 @@ function chooseFile(fileInput){
         reader.readAsDataURL((fileInput.files[0]))
     }
 }
-
+function  changeHref(link){
+    location.href=link;
+}

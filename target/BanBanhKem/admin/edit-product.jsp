@@ -169,9 +169,19 @@
                         <!-- profile btns -->
                         <div class="profile__actions">
 
-                            <a href="#modal-deleteA" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
+                            <a href="#modal-delete<%=p.getId()%>" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
                         </div>
                         <!-- end profile btns -->
+                    </div>
+                </div>
+                <div id="modal-delete<%=p.getId()%>" class="zoom-anim-dialog mfp-hide modal">
+                    <h6 class="modal__title">Xóa Sản Phẩm</h6>
+
+                    <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này?</p>
+                    <%String urlq = "DeleteProduct?masp="+p.getId();%>
+                    <div class="modal__btns">
+                        <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=urlq%>')" type="button">Xóa</button>
+                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                     </div>
                 </div>
                 <!-- end profile -->
@@ -543,9 +553,7 @@
     <script src="js/select2.min.js"></script>
     <script src="js/admin.js"></script>
 <script>
-function  changeHref(link){
-    location.href=link;
-}
+
 </script>
 </body>
 
