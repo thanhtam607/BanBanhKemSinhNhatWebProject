@@ -196,18 +196,18 @@
                                                 <a href="Edit_Product?idP=<%=pro.getId()%>" class="main__table-btn main__table-btn--edit">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+                                                <a href="#modal-delete<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </div>
                                             <!-- modal delete -->
-                                            <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+                                            <div id="modal-delete<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
                                                 <h6 class="modal__title">Xóa Sản Phẩm</h6>
 
                                                 <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này?</p>
-
+                                                <%String url = "DeleteProduct?masp="+pro.getId();%>
                                                 <div class="modal__btns">
-                                                    <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
+                                                    <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url%>')" type="button">Xóa</button>
                                                     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                 </div>
                                             </div>

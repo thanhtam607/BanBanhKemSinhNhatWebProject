@@ -99,14 +99,8 @@
                         </a>
                         <%if(auth != null) {%>
                             <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
-<<<<<<< HEAD
-
-                                <a href="#" class="dropdown-item">Thông tin của tôi</a>
-                                <a href="#" class="dropdown-item">Cài đặt</a>
-=======
                                 <a href="/BanBanhKemSinhNhatWebProject/EditUserProfile" class="dropdown-item">Hồ sơ của tôi</a>
 <%--                                <a href="#" class="dropdown-item">Quản lí </a>--%>
->>>>>>> 5d4e9f5e3fa94ca8201a28271d52980fe72201aa
                                 <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                             </div>
                         <%}%>

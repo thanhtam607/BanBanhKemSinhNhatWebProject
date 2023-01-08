@@ -356,14 +356,71 @@ public class ProductService {
         Statement statement= DBConnect.getInstall().get();
         String maAnh = "ASP"+p.getId().substring(1)+"-"+(p.getListImg().size()+1);
         String sql = "insert into anhsp values( '"+ maAnh+"', '"+ p.getId()+"', '"+ img+"');";
-        System.out.println(sql);
+
         try {
             statement.executeUpdate(sql);
         } catch (SQLException se) {
             se.printStackTrace();
         }
     }
+    public static  void removeProduct(String id){
+        Statement statement = DBConnect.getInstall().get();
+        String sql= "DELETE FROM anhsp WHERE MaSP='"+ id+"';";
+
+        try {
+            statement.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        Statement statement1 = DBConnect.getInstall().get();
+        String sql1= "DELETE FROM comments WHERE MaSP='"+ id+"';";
+
+        try {
+            statement1.executeUpdate(sql1);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        removeSale(id);
+        removeInfoOder(id);
+
+        Statement statement2 = DBConnect.getInstall().get();
+        String sql2= "DELETE FROM sanpham WHERE MaSP='"+ id+"';";
+
+        try {
+            statement2.executeUpdate(sql2);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+    }
+    public  static  void removeSale(String id){
+        Statement statement = DBConnect.getInstall().get();
+        String sql2= "DELETE FROM giamgia WHERE MaSP='"+ id+"';";
+
+        try {
+            statement.executeUpdate(sql2);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public  static  void removeInfoOder(String id){
+        Statement statement = DBConnect.getInstall().get();
+        String sql2= "DELETE FROM cthd WHERE MASP='"+ id+"';";
+
+        try {
+            statement.executeUpdate(sql2);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws SQLException {
+
 
 //        String s = "img/product/B001/banh1.jpg";
 //        upProductImg("img/product/B001/banh5.jpg", s);
