@@ -10,6 +10,7 @@ public class CTHD {
     private int solg;
     private List<String> anhsp;
     private int price;
+    private String diachigiao;
 
 
     public CTHD(String mahd, String masp, String tensp, int solg, List<String> anhsp, int price) {
@@ -19,13 +20,24 @@ public class CTHD {
         this.solg = solg;
         this.anhsp = anhsp;
         this.price = price;
+
     }
+
     public int getToTalPrice(){
         int res = 0;
         res = this.price*this.solg;
         return res;
     }
-    public double getPrice() {
+
+    public String getDiachigiao() {
+        return diachigiao;
+    }
+
+    public void setDiachigiao(String diachigiao) {
+        this.diachigiao = diachigiao;
+    }
+
+    public int getPrice() {
         return price;
     }
 

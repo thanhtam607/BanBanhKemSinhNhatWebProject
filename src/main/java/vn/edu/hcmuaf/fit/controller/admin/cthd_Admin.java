@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller.admin;
 
+import vn.edu.hcmuaf.fit.model.CTHD;
 import vn.edu.hcmuaf.fit.model.Receipt;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
@@ -13,8 +14,10 @@ import java.util.List;
 public class cthd_Admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Receipt> listctsp = ReceiptService.getcthd(request.getParameter("mahd"));
-        request.setAttribute("listmahd", listctsp);
+        String tenKH = request.getParameter("tenkh");
+        List<CTHD> listcthdOfKH = ReceiptService.getcthdUser(request.getParameter("mahd"));
+        request.setAttribute("listcthdOfKH", listcthdOfKH);
+        request.setAttribute("tenkh", tenKH);
         request.getRequestDispatcher("receipt-details.jsp").forward(request,response);
     }
 

@@ -145,11 +145,11 @@
               <th>STT</th>
               <th>Khách hàng</th>
               <th>Ngày đặt hàng</th>
-              <th>Địa chỉ</th>
+              <th>Địa chỉ giao hàng</th>
+              <th>Ghi chú đơn hàng</th>
               <th >Thành tiền</th>
               <th>Trạng thái đơn hàng</th>
               <th>Tùy chọn</th>
-<%--              <th>Chọn nhiều</th>--%>
             </tr>
             </thead>
             <%for(int i = 0; i < receiptList.size(); i++){
@@ -175,7 +175,10 @@
                 <div class="main__table-text"><%=rc.getAddress()%></div>
               </td>
               <td>
-                <div class="main__table-text"><%=rc.formatNum(rc.getPrice())%> VND</div>
+                <div class="main__table-text"><%=rc.getNote()%></div>
+              </td>
+              <td>
+                <div class="main__table-text"><%=rc.formatNum(rc.getTotal())%> VND</div>
               </td>
               <td>
                 <div class="main__table-text"><%=rc.getState()%></div>
@@ -183,7 +186,7 @@
               <td>
                 <div class="main__table-btns">
 
-                  <a href="cthd_Admin?mahd=<%=rc.getId()%>" class="main__table-btn main__table-btn--edit">
+                  <a href="cthd_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn main__table-btn--edit">
                     <i class="fa fa-eye text-center"></i>
                   </a>
                   <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">

@@ -11,11 +11,18 @@ public class ReceiptService {
         List<Receipt> list = new LinkedList<Receipt>();
         Statement statement = DBConnect.getInstall().get();
         Statement stmt1 = DBConnect.getInstall().get();
+        String sql = "select hoadon.mahd, khachhang.TENKH, sanpham.TenSP, khachhang.sdt, hoadon.NGAYLAPHD, giaohang.NGAYGIAO, giaohang.DIACHIGIAO, hoadon.ghichu, sanpham.gia, hoadon.THANHTIEN,  hoadon.TRANGTHAI, khachhang.makh, sanpham.masp, taikhoan.TENTK,taikhoan.role, taikhoan.email\n" +
+                "from sanpham, hoadon, khachhang, cthd, giaohang, taikhoan where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH and taikhoan.id = khachhang.mataikhoan \n" +
+                "group by hoadon.MAHD ORDER BY hoadon.NGAYLAPHD desc;";
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("select hoadon.mahd, khachhang.TENKH, sanpham.TenSP, khachhang.sdt, hoadon.NGAYLAPHD, giaohang.NGAYGIAO, khachhang.DIACHI, hoadon.ghichu, sanpham.gia, hoadon.THANHTIEN,  hoadon.TRANGTHAI, khachhang.makh, sanpham.masp, taikhoan.TENTK, taikhoan.role, taikhoan.email" +
-                        "                        from sanpham, hoadon, khachhang, cthd, giaohang, taikhoan" +
-                        "                        where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH and taikhoan.id = khachhang.mataikhoan group by hoadon.MAHD ORDER BY hoadon.NGAYLAPHD desc;");
+//                ResultSet rs = statement.executeQuery("select hoadon.mahd, khachhang.TENKH, sanpham.TenSP, khachhang.sdt, " +
+//                        "hoadon.NGAYLAPHD, giaohang.NGAYGIAO, giaohang.DIACHIGIAO, hoadon.ghichu, sanpham.gia, hoadon.THANHTIEN, " +
+//                        " hoadon.TRANGTHAI, khachhang.makh, sanpham.masp, taikhoan.TENTK, taikhoan.role, taikhoan.email" +
+//                        "from sanpham, hoadon, khachhang, cthd, giaohang, taikhoan" +
+//                        "where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH" +
+//                        " and taikhoan.id = khachhang.mataikhoan group by hoadon.MAHD ORDER BY hoadon.NGAYLAPHD desc;");
+                ResultSet rs = statement.executeQuery(sql);
                 while (rs.next()) {
                     ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
@@ -26,7 +33,15 @@ public class ReceiptService {
                             listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5)));
                         }
                     }
-                    Receipt rc = new Receipt(rs.getString(1), rs.getString(12), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getInt(10), rs.getInt(11), listCmts, rs.getString(14), rs.getInt(15), rs.getString(16));
+                    Receipt rc = new Receipt(rs.getString(1),
+                            rs.getString(12), rs.getString(2),
+                            rs.getString(3), rs.getString(4),
+                            rs.getString(5), rs.getString(6),
+                            rs.getString(7), rs.getString(8),
+                            rs.getInt(9), rs.getInt(10),
+                            rs.getInt(11), listCmts,
+                            rs.getString(14), rs.getInt(15),
+                            rs.getString(16));
                     list.add(rc);
                 }
             } catch (SQLException e) {
@@ -41,12 +56,21 @@ public class ReceiptService {
     public static List<Receipt> getAllReceipt() {
         List<Receipt> list = new LinkedList<Receipt>();
         Statement statement = DBConnect.getInstall().get();
+        Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT MAHD, MAKH, NGAYLAPHD, GHICHU, THANHTIEN, TRANGTHAI FROM hoadon ORDER BY hoadon.MAHD DESC");
                 while (rs.next()) {
+                    ResultSet rsDiaChiGiao = stmt1.executeQuery("SELECT giaohang.DIACHIGIAO, giaohang.MAHD FROM giaohang");
+                    String diachi = "";
+                    while (rsDiaChiGiao.next()){
+                        String s2 = rsDiaChiGiao.getString(2);
+                        if (rs.getString(1).equals(s2)) {
+                            diachi = rsDiaChiGiao.getString(1);
+                        }
+                    }
                     Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
-                            rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+                            rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), diachi);
                     list.add(rc);
                 }
             } catch (SQLException e) {
@@ -126,6 +150,7 @@ public class ReceiptService {
         List<CTHD> list = new LinkedList<CTHD>();
         Statement statement = DBConnect.getInstall().get();
         Statement stmt = DBConnect.getInstall().get();
+        Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT cthd.MAHD, cthd.MASP, sanpham.TenSP, sanpham.Gia, cthd.SL from hoadon, cthd, sanpham\n" +
@@ -133,6 +158,7 @@ public class ReceiptService {
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
+
                     while (rsImg.next()) {
                         String s2 = rsImg.getString(1);
                         if (rs.getString(2).equals(s2)) {
@@ -174,6 +200,17 @@ public class ReceiptService {
     }
 
     public static List<CTHD> getcthdUser(String mahd) {
+        List<CTHD> list = getListCTHD();
+        List<CTHD> rs = new LinkedList<>();
+        for (CTHD rc : list) {
+            if (rc.getMahd().equals(mahd)) {
+                rs.add(rc);
+            }
+        }
+
+        return rs;
+    }
+    public static List<CTHD> getgiaohangUser(String mahd) {
         List<CTHD> list = getListCTHD();
         List<CTHD> rs = new LinkedList<>();
         for (CTHD rc : list) {

@@ -49,6 +49,15 @@ public class Receipt {
         this.money = money;
         this.state = state;
     }
+    public Receipt(String id, String makh, String sdate, String note, int money, int state, String dc) {
+        this.id = id;
+        this.makh = makh;
+        Sdate = sdate;
+        this.note = note;
+        this.money = money;
+        this.state = state;
+        this.address = dc;
+    }
 
     public String getNote() {
         return note;

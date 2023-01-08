@@ -296,9 +296,18 @@ function addToCartI(id){
             document.getElementById("totalPro").innerHTML=totalPro.toString();
             document.getElementById("totalPro1").innerHTML=totalPro.toString();
             Swal.fire({
-                text:'Sản phẩm đã được thêm vào giỏ hàng!',
+                text:'Thêm sản phẩm thành công!',
                 icon: 'success',
-                confirmButtonColor: '#ff96b7'});
+                showCancelButton: true,
+                cancelButtonText: 'Mua tiếp',
+                confirmButtonText: 'Đi đến giỏ hàng',
+                confirmButtonColor: '#ff96b7'}).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "shoping-cart.jsp";
+                    }
+
+                }
+            );
         }
     });
 };

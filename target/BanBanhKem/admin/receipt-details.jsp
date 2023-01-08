@@ -4,6 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.CTHD" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +99,8 @@
 <!-- Sidebar End -->
 
 <!-- main content -->
-<% List<Receipt> rcList = (List<Receipt>) request.getAttribute("listmahd");%>
+<% List<CTHD> receiptsDt = (List<CTHD>) request.getAttribute("listcthdOfKH");
+String tenkh =(String) request.getAttribute("tenkh");%>
 <main class="main bg-white">
   <div class="container-fluid bg-white">
     <form class="row">
@@ -108,30 +110,10 @@
           <h2>Chi tiết đơn hàng</h2>
         </div>
       </div>
-
       <div class="col-12">
-        <form action="#" class="form">
-          <div class="row row--form">
             <div class="col-12 form__content">
-              <div class="row row--form">
-                <% List<Receipt> receipts = (List<Receipt>) request.getAttribute("listmahd");
-                  for (int i = 0; i < 1; i++){
-                    Receipt rc = receipts.get(i);%>
-                <div class="col-12 margin-top-30px">
-                  <i class="fa fa-user-circle"></i> <label for="name" class="font-size-20">Tên khách hàng: </label> &ensp;<span class="text-uppercase text--green font-size-20" id="name"><%=rc.getNamecustomer()%></span>
-                </div><br>
-                <div class="col-12 margin-top-30px">
-                  <i class="fa fa-phone"></i> <label for="phone" class="font-size-20">Số điện thoại: </label> &ensp;<span class="text-uppercase text--green font-size-20" id="phone"><%=rc.getPhone()%></span>
-                </div><br>
-                <div class="col-12 margin-top-30px">
-                  <i class="fa fa-home"></i> <label for="address" class="font-size-20">Địa chỉ: </label> &ensp;<span class="text-uppercase text--green font-size-20" id="address"><%=rc.getAddress()%></span>
-                </div>
-                <% } %>
-              </div>
-              <h4 class=" margin-top-50px">Thông tin đặt hàng</h4>
+              <h5 class=" margin-top-50px">Đơn Hàng Của <%=tenkh%></h5>
             </div>
-          </div>
-        </form>
       </div>
       <div class="table-responsive margin-top-20px col-12 margin-right--20px">
         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -139,44 +121,38 @@
           <tr class="text-black">
             <th scope="col">STT</th>
             <th scope="col">Tên sản phẩm</th>
-            <th scope="col">Ngày đặt hàng</th>
-            <th scope="col">Ngày giao hàng</th>
-            <th scope="col">Ghi chú</th>
-            <th scope="col">Thành tiền</th>
-            <th scope="col">Trạng thái đơn hàng</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Đơn giá</th>
+            <th scope="col">Tổng</th>
           </tr>
           </thead>
-          <% for (int i = 0; i < receipts.size(); i++){
-            Receipt rcs = receipts.get(i);%>
+          <% for (int i = 0; i < receiptsDt.size(); i++){
+            CTHD rcs = receiptsDt.get(i);%>
           <tbody>
           <tr>
             <td><%=i + 1%></td>
-            <td><%=rcs.getNamecake()%></td>
-            <td><%=rcs.getSdate()%></td>
-            <td><%=rcs.getEdate()%></td>
-            <td><%=rcs.getNote()%></td>
-            <td><%=rcs.formatNum(rcs.getPrice())%> VND</td>
-            <td>
-              <div class="main__table-text"><%=rcs.getState()%></div>
-            </td>
+            <td><%=rcs.getTensp()%></td>
+            <td><%=rcs.getSolg()%></td>
+            <td><%=rcs.formatNum(rcs.getPrice())%></td>
+            <td><%=rcs.formatNum(rcs.getToTalPrice())%></td>
           </tr>
           </tbody>
           <% } %>
         </table>
       </div>
       <% int total = 0; %>
-      <% for (int i = 0; i < receipts.size(); i++){
-        Receipt rcs = receipts.get(i);
-        total += rcs.getPrice(); }%>
+      <% for (int i = 0; i < receiptsDt.size(); i++){
+        CTHD rcs = receiptsDt.get(i);
+        total += rcs.getToTalPrice(); }%>
       <div class="col-5 margin-top-20px">
         <% for (int i = 0; i < 1; i++){
-          Receipt rcs = receipts.get(i);%>
+          CTHD rcs = receiptsDt.get(i);%>
         <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;<span class="text-danger text-uppercase text-pink" id="total"><%=rcs.formatNum(total)%> VND</span>
       </div>
       <% } %>
       <div class="main__table-btns">
         <div class="col-5">
-          <a href="/BanBanhKemSinhNhatWebProject/admin/ListReceipt_full_Admin" type="button" class="form__btn">Xem Thêm</a>
+          <a href="/BanBanhKemSinhNhatWebProject/admin/ListReceipt_full_Admin" type="button" class="form__btn">Quay lại</a>
         </div>
       </div>
     </form>

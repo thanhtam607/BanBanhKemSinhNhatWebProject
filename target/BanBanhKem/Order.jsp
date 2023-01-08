@@ -244,13 +244,13 @@
                     </div>
                     <%}%>
 
-                    <div class="xemthemdiachi d-none card mb-3 border-left-0 border-right-0 border-bottom-0 mx-3">
+                    <div class="xemthemdiachi card mb-3 border-left-0 border-right-0 border-bottom-0 mx-3">
                         <div class="row my-3 pb-3 mx-2" style="border-bottom:1px solid #eee">
                             <div class="col-12">
                                 <div class="card-body my-0">
                                     <div class="card-text text-dark">
                                         <a href="" class="text-decoration-none text-dark text-uppercase">
-                                            ĐỊA CHỈ GIAO HÀNG: <%=ReceiptService.getDiaChiGiaoHang(r.getId())%>
+                                            ĐỊA CHỈ GIAO HÀNG: <%=r.getAddress()%>
                                         </a>
                                     </div>
                                 </div>

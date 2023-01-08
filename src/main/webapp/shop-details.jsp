@@ -421,7 +421,16 @@
                 Swal.fire({
                     text:'Thêm sản phẩm thành công!',
                     icon: 'success',
-                    confirmButtonColor: '#ff96b7'});
+                    showCancelButton: true,
+                    cancelButtonText: 'Mua tiếp',
+                    confirmButtonText: 'Đi đến giỏ hàng',
+                    confirmButtonColor: '#ff96b7'}).then((result) => {
+                        if (result.isConfirmed) {
+                            location.href = "shoping-cart.jsp";
+                        }
+
+                    }
+                );
             }
         });
 
