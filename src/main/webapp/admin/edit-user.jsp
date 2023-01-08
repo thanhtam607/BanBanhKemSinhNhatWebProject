@@ -5,6 +5,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.CTHD" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +100,8 @@
     </nav>
 </div>
 <!-- Sidebar End -->
-<% List<Receipt> listre = (List<Receipt>) request.getAttribute("listmakh");%>
+<% List<Receipt> listre = (List<Receipt>) request.getAttribute("listmakh");
+%>
     <!-- main content -->
     <main class="main">
         <div class="container-fluid">
@@ -229,32 +232,36 @@
                                             <div class="col-12">
                                                 <h4 class="form__title">Thông tin tài khoản</h4>
                                             </div>
-                                           <input name = "makh" value="<%=rc.getMakh()%>" style="display: none">
+                                            <% String  idAcc = CustomerService.getIdAccByMakh(mkh);
+                                            User user  = UserService.findById(idAcc);
+                                            Customer cus = CustomerService.getCusByIdAcc(idAcc);
+                                            %>
+                                           <input name = "makh" value="<%=mkh%>" style="display: none">
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="username">Tên tài khoản</label>
-                                                    <input id="username" type="text" name="username" class="form__input" value="<%=rc.getTenTK()%>">
+                                                    <input id="username" type="text" name="username" class="form__input" value="<%=user.getTentk()%>">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="email">Email</label>
-                                                    <input id="email" type="text" name="email" class="form__input text-lowercase" value="<%=rc.getEmail()%>">
+                                                    <input id="email" type="text" name="email" class="form__input text-lowercase" value="<%=user.getEmail()%>">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="firstname">Họ</label>
-                                                    <input id="firstname" type="text" name="firstname" class="form__input" value="<%=rc.getNamecustomer().split(" ")[0] + " " + rc.getNamecustomer().split(" ")[1]%>">
+                                                    <input id="firstname" type="text" name="firstname" class="form__input" value="<%=cus.getTENKH().split(" ")[0] + " " + cus.getTENKH().split(" ")[1]%>">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="lastname">Tên</label>
-                                                    <input id="lastname" type="text" name="lastname" class="form__input" value="<%=rc.getNamecustomer().split(" ")[2]%>">
+                                                    <input id="lastname" type="text" name="lastname" class="form__input" value="<%=cus.getTENKH().split(" ")[2]%>">
                                                 </div>
                                             </div>
 
@@ -264,7 +271,7 @@
                                                     <select class="form__input" id="rights" name="role">
                                                         <%List<String> listRole = (List<String>) request.getAttribute("listRole");
                                                             for(String r : listRole){
-                                                                if(r == rc.getRole()){%>
+                                                                if(r == user.getRoleName()){%>
                                                         <option selected value="<%=r%>"><%=r%></option>
                                                         <% } else {%>
                                                         <option value="<%=r%>"><%=r%></option>
