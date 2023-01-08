@@ -24,21 +24,20 @@ public class UpdateImg extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String masp = request.getParameter("masp");
         Part p = request.getPart("img");
-        String realPa = "img/product/" + masp;
+        String realPa = request.getServletContext().getRealPath("img/product/" + masp);
         String filename = Path.of(p.getSubmittedFileName()).getFileName().toString();
         String oldImg = request.getParameter("oldImg");
-        String location = ProductService.getLocation()+realPa+"/"+ filename;
-        String newImg = realPa + "/" + filename;
-        File file = new File(location);
-        if(file.exists()){
-            file.delete();
-            ProductService.upProductImg(oldImg, newImg);
+//        String location = ProductService.getLocation()+realPa+"/"+ filename;
+//        String newImg = realPa + "/" + filename;
+        if(!Files.exists(Path.of(realPa))){
+            Files.createDirectories(Path.of(realPa));
         }
-        else {
-            p.write(location);
+        String img = realPa + "/" + filename;
+            p.write(img);
 
-            ProductService.upProductImg(oldImg, newImg);
-        }
+
+            ProductService.upProductImg(oldImg, "img/product/" + masp+"/" + filename);
+
         response.sendRedirect("../ListProduct_Admin");
 
 

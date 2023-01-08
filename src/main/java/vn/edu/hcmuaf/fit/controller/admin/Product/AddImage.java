@@ -21,19 +21,21 @@ public class AddImage extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String masp = request.getParameter("masp");
         Part p = request.getPart("newImg");
-        String realPa = "img/product/" + masp;
+        String realPa = request.getServletContext().getRealPath("img/product/" + masp);
         String filename = Path.of(p.getSubmittedFileName()).getFileName().toString();
-        String location = ProductService.getLocation()+realPa+"/"+ filename;
-        String newImg = realPa + "/" + filename;
-        File file = new File(location);
+//        String location = ProductService.getLocation()+realPa+"/"+ filename;
+        String img = realPa + "/" + filename;
+        File file = new File(img);
+
         if(file.exists()){
             file.delete();
-            ProductService.addImgForPro(masp, newImg);
+
+            ProductService.addImgForPro(masp, "img/product/" + masp+"/" + filename);
         }
         else {
-            p.write(location);
+            p.write(img);
 
-            ProductService.addImgForPro(masp, newImg);
+            ProductService.addImgForPro(masp, "img/product/" + masp+"/" + filename);
         }
         response.sendRedirect("./ListProduct_Admin");
 
