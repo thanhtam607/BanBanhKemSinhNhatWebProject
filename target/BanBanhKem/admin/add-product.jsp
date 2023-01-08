@@ -183,7 +183,6 @@
                                             </div>
                                             <div class="list_attach">
                                                 <ul class="dandev_attach_view">
-
                                                 </ul>
                                                 <span class="dandev_insert_attach"><i class="dandev-plus">+</i></span>
                                             </div>
