@@ -183,7 +183,6 @@
                                             </div>
                                             <div class="list_attach">
                                                 <ul class="dandev_attach_view">
-
                                                 </ul>
                                                 <span class="dandev_insert_attach"><i class="dandev-plus">+</i></span>
                                             </div>
@@ -192,7 +191,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <input type="submit"  class="form__btn" value="Thêm sản phẩm"></input>
+                                <input type="submit"  class="form__btn" value="Thêm sản phẩm">
                             </div>
 
                         </div>

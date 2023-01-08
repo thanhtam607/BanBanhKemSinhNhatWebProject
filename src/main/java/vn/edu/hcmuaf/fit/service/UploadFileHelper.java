@@ -45,14 +45,11 @@ public class UploadFileHelper {
                             inputStream.close();
                         }
                     }
-
-
                 }
             }
         } catch (Exception e) {
             fileNames = null;
         }
-
         return fileNames;
     }
 

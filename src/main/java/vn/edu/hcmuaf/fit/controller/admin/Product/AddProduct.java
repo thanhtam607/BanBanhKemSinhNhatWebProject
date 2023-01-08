@@ -42,7 +42,7 @@ public class AddProduct extends HttpServlet {
         String kichthuoc = request.getParameter("type");
 
         String realPa = "img/product/" + masp;
-        String path= ProductService.getLocation()+realPa;
+        String path= ProductService.getLocation()+realPa+"/";
         List<String> imgs = UploadFileHelper.uploadFile(path, request);
         List<String> dsanh=  new ArrayList<>();
         for (String i : imgs ) {
@@ -50,10 +50,6 @@ public class AddProduct extends HttpServlet {
         }
         Product p = new Product(masp, tensp,loai,kichthuoc,khoiLg, mota,noidung,dsanh,gia);
         ProductService.addProDuct(p);
-
         response.sendRedirect("ListProduct_Admin");
-
-
-
     }
 }

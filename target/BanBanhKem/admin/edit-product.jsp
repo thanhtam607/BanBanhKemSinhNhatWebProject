@@ -310,6 +310,22 @@
 
                     <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
                         <!-- table -->
+                        <div class="col-11" style="text-align: right; font-size: 25px; color: #e83e8c"><a href="#modal-deleteimg<%=(listSize.size()+1)%>" class="open-modal"><i class="bi bi-plus-square-dotted " ></i></a></div>
+                        <!-- modal delete -->
+                        <div id="modal-deleteimg<%=(listSize.size()+1)%>" class="zoom-anim-dialog mfp-hide modal">
+                            <form action="AddImage"  method="POST" enctype="multipart/form-data">
+                                <h6 class="modal__title">Thêm ảnh</h6>
+                                <p class="modal__text">Chọn hình ảnh</p>
+                                <input type="text" class="form__input" name="masp" style="display: none" value="<%=p.getId()%>">
+
+                                <input type="file" class="form__input" name="newImg">
+                                <div class="modal__btns">
+                                    <input class="modal__btn modal__btn--apply" type="submit" value="Xong">
+                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end modal delete -->
                         <div class="col-11 ">
                             <div class="main__table-wrap">
                                 <table class="main__table">
@@ -319,7 +335,9 @@
                                             <th>Ảnh Sản Phẩm</th>
                                             <th>Vị trí</th>
                                             <th>Tùy Chọn</th>
+
                                         </tr>
+
                                     </thead>
                                     <%List<String> listImg = p.getListImg();
                                     for(int i = 0; i< listImg.size();i++){%>

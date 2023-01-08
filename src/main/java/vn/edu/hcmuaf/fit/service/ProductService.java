@@ -344,14 +344,23 @@ public class ProductService {
             Statement statement2 = DBConnect.getInstall().get();
             String maAnh = "ASP"+p.getId().substring(1)+"-"+(i+1);
             String sql = "insert into anhsp values( '"+ maAnh+"', '"+ p.getId()+"', '"+ p.getListImg().get(i)+"');";
-            System.out.println(sql);
             try {
                 statement2.executeUpdate(sql);
-
-
             } catch (SQLException se) {
                 se.printStackTrace();
             }
+        }
+    }
+    public static void addImgForPro(String masp, String img){
+        Product p = ProductService.findById(masp);
+        Statement statement= DBConnect.getInstall().get();
+        String maAnh = "ASP"+p.getId().substring(1)+"-"+(p.getListImg().size()+1);
+        String sql = "insert into anhsp values( '"+ maAnh+"', '"+ p.getId()+"', '"+ img+"');";
+        System.out.println(sql);
+        try {
+            statement.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
         }
     }
     public static void main(String[] args) throws SQLException {
