@@ -121,8 +121,16 @@
                             <% for (int i = 0; i <= 0; i ++){
                                 if(!listre.isEmpty()){
                                 Receipt rc = listre.get(i); %>
-                            <div class="profile__meta profile__meta--green">
-                                <h3><%=rc.getNamecustomer()%> <span>(Approved)</span></h3>
+                            <div class="profile__meta">
+                                <% String main__table = " ";
+                                    if(rc.getRoleint() == -1){
+                                        main__table = "main__table-text--red";
+                                    } else if(rc.getRoleint() == 1){
+                                        main__table = "main__table-text--green";
+                                    }else{
+                                        main__table = "main__table-text--blue";
+                                    }%>
+                                <h3><%=rc.getNamecustomer()%> <span class="<%=main__table%>">(<%=rc.getRole()%>)</span></h3>
                                 <span name = "makh" value="<%=rc.getMakh()%>"> ID: <%=rc.getMakh()%></span>
                             </div>
                         </div>
@@ -165,10 +173,40 @@
 
                         <!-- profile btns -->
                         <div class="profile__actions">
-                            <a href="#modal-status3" class="profile__action profile__action--banned open-modal"><i class="fa fa-lock"></i></a>
-                            <a href="#modal-delete3" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
+                            <a href="#modal-status" class="profile__action profile__action--banned open-modal"><i class="fa fa-lock"></i></a>
+                            <a href="#modal-delete" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
                         </div>
                         <!-- end profile btns -->
+                        <!-- modal status -->
+                        <% String mkh = (String) request.getAttribute("mkh");%>
+                        <div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
+                            <form method="post" action="AdminLockCus">
+                                <h6 class="modal__title">Chặn Người Dùng</h6>
+                                <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
+
+                                <input name = "makh" value="<%=mkh%>" style="display: none">
+                                <div class="modal__btns">
+                                    <button class="modal__btn modal__btn--apply" type="submit">Chặn</button>
+                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end modal status -->
+
+                        <!-- modal delete -->
+                        <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+                            <h6 class="modal__title">Xóa Khách Hàng</h6>
+
+                            <p class="modal__text">Bạn có chắc muốn xóa khách hàng này?</p>
+
+                            <div class="modal__btns">
+                                <a href="DeleteUser?makh=<%=mkh%>" class="modal__btn modal__btn--apply" type="button">
+                                    Xóa
+                                </a>
+                                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                            </div>
+                        </div>
+                        <!-- end modal delete -->
                     </div>
                 </div>
                 <!-- end profile -->
@@ -213,6 +251,7 @@
                                                     <input id="lastname" type="text" name="lastname" class="form__input" value="<%=rc.getNamecustomer().split(" ")[2]%>">
                                                 </div>
                                             </div>
+
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="rights">Phân Quyền</label>
@@ -234,44 +273,6 @@
                                         </div>
                                     </form>
                                 </div>
-                                <!-- end details form -->
-
-                                <!-- password form -->
-<%--                                <div class="col-12 col-lg-6">--%>
-<%--                                    <form action="#" class="form form--profile">--%>
-<%--                                        <div class="row row--form">--%>
-<%--                                            <div class="col-12">--%>
-<%--                                                <h4 class="form__title">Đổi Mật Khẩu</h4>--%>
-<%--                                            </div>--%>
-
-<%--                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">--%>
-<%--                                                <div class="form__group">--%>
-<%--                                                    <label class="form__label" for="oldpass">Old Password</label>--%>
-<%--                                                    <input id="oldpass" type="password" name="oldpass" class="form__input">--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-
-<%--                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">--%>
-<%--                                                <div class="form__group">--%>
-<%--                                                    <label class="form__label" for="newpass">New Password</label>--%>
-<%--                                                    <input id="newpass" type="password" name="newpass" class="form__input">--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-
-<%--                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">--%>
-<%--                                                <div class="form__group">--%>
-<%--                                                    <label class="form__label" for="confirmpass">Confirm New Password</label>--%>
-<%--                                                    <input id="confirmpass" type="password" name="confirmpass" class="form__input">--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-
-<%--                                            <div class="col-12">--%>
-<%--                                                <button class="form__btn" type="button">Change</button>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </form>--%>
-<%--                                </div>--%>
-                                <!-- end password form -->
                             </div>
                         </div>
                     </div>
@@ -284,7 +285,6 @@
                                     <thead>
                                         <tr>
                                             <th>Mã Đơn Hàng</th>
-<%--                                            <th>Tên Sản Phẩm</th>--%>
                                             <th>Tên Khách Hàng</th>
                                             <th>Địa Chỉ Giao</th>
                                             <th>Ngày Tạo</th>
@@ -487,44 +487,9 @@
     </div>
     <!-- end modal view -->
 <% } %>
-    <!-- modal delete -->
-    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Hủy Đơn Hàng</h6>
 
-        <p class="modal__text">Bạn có chắc muốn hủy đơn hàng này?</p>
 
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Hủy</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
-    <!-- end modal delete -->
 
-    <!-- modal status -->
-    <div id="modal-status3" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Chặn Người Dùng</h6>
-
-        <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
-
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Chặn</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
-    <!-- end modal status -->
-
-    <!-- modal delete -->
-    <div id="modal-delete3" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Xóa Người Dùng</h6>
-
-        <p class="modal__text">Bạn có chắc muốn xóa người dùng này?</p>
-
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
-    <!-- end modal delete -->
 
     <!-- JS -->
 <script>

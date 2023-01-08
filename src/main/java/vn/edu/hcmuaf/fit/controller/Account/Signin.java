@@ -27,7 +27,7 @@ public class Signin extends HttpServlet {
             request.getRequestDispatcher("/signin.jsp").forward(request, response);
         }else{
             if(user.checkRole(-1)){
-                request.setAttribute("Error", "Tài Khoản Của Bạn Đã Bị Khóa!!!");
+                request.setAttribute("Error", "Tài Khoản Của Bạn Đã Bị Khóa! Không Thể Đăng Nhập!!");
                 request.getRequestDispatcher("/signin.jsp").forward(request, response);
             }
             HttpSession session = request.getSession(true);

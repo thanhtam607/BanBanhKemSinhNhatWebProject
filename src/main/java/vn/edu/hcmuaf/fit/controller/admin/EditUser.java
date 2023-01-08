@@ -17,18 +17,16 @@ import java.util.List;
 public class EditUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String makh = request.getParameter("makh");
-//        Customer cus = CustomerService.getCusById(makh);
-//        request.setAttribute("customer", cus);
-//        List<Receipt> listR = ReceiptService.getReceiptByMakh(makh);
-//        request.setAttribute("listR", listR);
+
         List<String> listRole = new ArrayList<String>();
         listRole.add("Thường");
         listRole.add("Admin");
         listRole.add("Khóa");
         request.setAttribute("listRole", listRole);
-        List<Receipt> listctkh = ReceiptService.getctkh(request.getParameter("makh"));
+        String makh = request.getParameter("makh");
+        List<Receipt> listctkh = ReceiptService.getctkh(makh);
         request.setAttribute("listmakh", listctkh);
+        request.setAttribute("mkh", makh);
         request.getRequestDispatcher("edit-user.jsp").forward(request, response);
     }
 

@@ -94,6 +94,23 @@ public class UserService {
         return list;
 
     }
+    public static String getLastMaTK(){
+        Statement statement = DBConnect.getInstall().get();
+        String result = "";
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT taikhoan.ID from taikhoan ORDER BY ID DESC LIMIT 1");
+                while (rs.next()){
+                    result = rs.getString(1);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có đơn hàng");
+        }
+        return  result;
+    }
     public static boolean checkEmail(String email){
         List<User> list = getListAcc();
         List<String> listEmail = new ArrayList<String>();
@@ -107,8 +124,8 @@ public class UserService {
     }
     public static void register(User acc){
         Statement stm = DBConnect.getInstall().get();
-        List<User> list = getListAcc();
-        String ID = "AD" + (list.size() + 1);
+        String stt = getLastMaTK().substring(2);
+        String ID = "AD" + (Integer.parseInt(stt) + 1);
         acc.setId(ID);
         if(stm!= null) {
             try {

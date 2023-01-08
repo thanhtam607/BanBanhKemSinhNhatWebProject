@@ -1,6 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -148,6 +149,7 @@
               <th >Thành tiền</th>
               <th>Trạng thái đơn hàng</th>
               <th>Tùy chọn</th>
+<%--              <th>Chọn nhiều</th>--%>
             </tr>
             </thead>
             <%for(int i = 0; i < receiptList.size(); i++){
@@ -157,6 +159,7 @@
               <td>
                 <div class="main__table-text"><%=i+1%></div>
               </td>
+
               <td>
                 <div class="main__user">
 
@@ -188,8 +191,19 @@
                   <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                     <i class="fa fa-trash"></i>
                   </a>
+
                 </div>
               </td>
+<%--              <td>--%>
+<%--                <div class="checkout__input__checkbox">--%>
+<%--                  <label for="payment<%=i%>" >--%>
+<%--                    Chọn--%>
+<%--                    <input type="checkbox" id="payment<%=i%>">--%>
+<%--                    <span class="checkmark"></span>--%>
+<%--                  </label>--%>
+<%--                </div>--%>
+<%--               --%>
+<%--              </td>--%>
             </tr>
             </tbody>
             <!-- modal delete -->
@@ -229,7 +243,6 @@
       <!-- paginator -->
       <div class="col-12">
         <div class="paginator-wrap">
-<%--          <span><%=receiptList.size()%>/<%=receiptList.size()%> Bài viết</span>--%>
 
           <ul class="paginator">
             <li class="paginator__item paginator__item--prev">
@@ -243,7 +256,9 @@
               <a href="#"><i class="fa fa-chevron-right"></i></a>
             </li>
           </ul>
+
         </div>
+
       </div>
       <!-- end paginator -->
     </div>

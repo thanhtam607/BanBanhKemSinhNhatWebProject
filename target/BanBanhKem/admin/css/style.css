@@ -375,3 +375,56 @@ background-color: #ff96b7;
     font-size: 16px;
     padding: 5px;
 }
+
+/*check box*/
+.checkout__input__checkbox {
+    margin-top: 10px;
+}
+
+.checkout__input__checkbox label {
+    position: relative;
+    font-size: 16px;
+    color: #1c1c1c;
+    padding-left: 32px;
+    cursor: pointer;
+}
+
+.checkout__input__checkbox label input {
+    position: absolute;
+    visibility: hidden;
+}
+
+.checkout__input__checkbox label input:checked~.checkmark {
+    background: #ff96b7;
+    border-color: #ff96b7;
+}
+
+.checkout__input__checkbox label input:checked~.checkmark:after {
+    opacity: 1;
+}
+
+.checkout__input__checkbox label .checkmark {
+    position: absolute;
+    left: 0;
+    top: -6px;
+    height: 26px;
+    width: 25px;
+    border: 1px solid #a6a6a6;
+    content: "";
+    border-radius: 4px;
+}
+
+.checkout__input__checkbox label .checkmark:after {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: 18px;
+    height: 12px;
+    border: solid white;
+    border-width: 3px 3px 0px 0px;
+    -webkit-transform: rotate(127deg);
+    -ms-transform: rotate(127deg);
+    transform: rotate(127deg);
+    content: "";
+    opacity: 0;
+}
