@@ -227,22 +227,7 @@
                             Lưu Thay Đổi
                         </button>
                     </div>
-                    <div class="col-lg-4 col-md-6 userProfile">
-                        <div style="padding: 10px">
-                        <img src="./img/Điện%20thoại%20đỏ.jpg" class="rounded-circle" style="height: 300px">
 
-                        </div>
-                        <div>
-                            <form>
-                                <div class="form-group">
-                                    <label for="exampleFormControlFile1">Example file input</label>
-                                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                    </div>
                 </div>
             </div>
         </div>
