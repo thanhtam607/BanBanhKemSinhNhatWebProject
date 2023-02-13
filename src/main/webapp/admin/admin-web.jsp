@@ -188,7 +188,7 @@
                                         <div class="main__table-text"><%=rc.getState()%></div>
                                     </td>
                                     <td>
-                                        <a href="cthd_Admin?mahd=<%=rc.getId()%>" class=" main__table-btn main__table-btn--edit">
+                                        <a href="cthd_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit">
                                             <i class="fa fa-eye text-center"></i>
                                         </a>
                                     </td>
