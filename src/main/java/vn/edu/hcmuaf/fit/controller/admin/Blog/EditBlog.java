@@ -14,8 +14,8 @@ import java.util.List;
 public class EditBlog extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Blog blog = BlogService.findById("idB");
-        request.setAttribute("blog",blog);
+        Blog blog = BlogService.findById(request.getParameter("idB"));
+        request.setAttribute("blg",blog);
         List<String> listdm = new ArrayList<String>();
         listdm.add("Đời sống");
         listdm.add("Kỉ niệm");

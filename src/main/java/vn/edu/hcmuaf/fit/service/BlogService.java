@@ -76,18 +76,28 @@ public class BlogService {
         }
         return rs;
     }
+    public static void updateBlog(String MaBlog, String DeMuc, String ChiTiet){
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE ctblog set  DEMUC='" +DeMuc+ "', CHITIET= '"+ ChiTiet+ "', MABLOG= '" + MaBlog+ "';";
+        try {
+            statement.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
 
 
     public static void main(String[] args) {
-            List<Blog> li = BlogService.getData();
+//            List<Blog> li = BlogService.getData();
 //        for(Blog b: li){
 //            System.out.print(b.getCategory()+"\t");
-//            System.out.println(b.getTitle());
-//
 //        }
-        List<Blog> l = BlogService.getDanhMuc("Đời Sống");
-        for(Blog b: l) {
-            System.out.println(b.getId());
-        }
+//        List<Blog> l = BlogService.getDanhMuc("Đời Sống");
+//        for(Blog b: l) {
+//            System.out.println(b.getId());
+//        }
+        Blog b1 = BlogService.findById("BL01");
+        System.out.println(b1.getCategory());
     }
 }

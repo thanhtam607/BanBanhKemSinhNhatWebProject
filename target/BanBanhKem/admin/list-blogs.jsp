@@ -177,7 +177,7 @@
                                             <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
-                                            <a href="edit-blog.jsp" class="main__table-btn main__table-btn--edit">
+                                            <a href="EditBlog?idB=<%=blog.getId()%>" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
