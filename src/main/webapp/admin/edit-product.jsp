@@ -120,7 +120,6 @@
                         <!-- profile user -->
                         <div class="profile__user">
                             <div class="profile__avatar">
-
                                 <img src="../<%=p.getListImg().get(0)%>" alt="">
                             </div>
                             <!-- or red -->
@@ -209,19 +208,14 @@
 
                                             <div class="col-12 col-md-7 col-lg-12 col-xl-7">
                                                 <div class="form__group">
-                                                    <label class="form__label" >Loại bánh</label>
+                                                    <label class="form__label">Loại bánh</label>
                                                     <select class="form-select form__input" name="loaiBanh" >
                                                     <%List<LoaiBanh> ListType = ProductService.getListType();
                                                         for(LoaiBanh lb: ListType){
                                                     if(lb.getTenLB().equals(p.getLoaiBanh())){%>
                                                         <option selected value="<%=lb.getMaLB()%>"><%=lb.getTenLB()%></option>
                                                         <%} else {%>
-
-
                                                         <option value="<%=lb.getMaLB()%>"><%=lb.getTenLB()%></option>
-
-
-
                                                     <%}}%></select>
                                                 </div>
                                             </div>

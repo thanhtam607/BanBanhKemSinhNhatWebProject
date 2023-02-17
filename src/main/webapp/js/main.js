@@ -333,7 +333,7 @@ function removeCart(id){
             }
             totalMoney-=(priceR*qty);
             console.log(totalMoney);
-            document.getElementById("totalMoney").innerHTML = totalMoney.toLocaleString('vi-VN') + " VND";
+            document.getElementById("totalMoney").innerHTML = totalMoney.toLocaleString('en-US') + " VND";
 
 
             document.getElementById("totalPro").innerHTML=totalPro.toString();
@@ -400,7 +400,7 @@ function FilterbyPrice(){
     var pr2 = document.getElementById("maxamount").value;
     var p1 = parseInt(pr1);
     var p2 = parseInt(pr2);
-    var title = "Giá từ " + p1.toLocaleString('vi-VN')+" VND đến "+ p2.toLocaleString('vi-VN')+" VND";
+    var title = "Giá từ " + p1.toLocaleString('en-US')+" VND đến "+ p2.toLocaleString('en-US')+" VND";
     var url = "ProductFilter?pricemin=" + p1 +"&pricemax="+ p2+"&title="+ title;
     location.href=url;
 }
@@ -431,13 +431,13 @@ function updateCart(id){
                 total = (price * qty);
                 totalMoney += total;
 
-                row.getElementsByClassName("shoping__cart__total")[0].innerHTML = total.toLocaleString('vi-VN') + " VND";
+                row.getElementsByClassName("shoping__cart__total")[0].innerHTML = total.toLocaleString('en-US') + " VND";
 
                 }
                 document.getElementById("totalPro").innerHTML = totalPro.toString();
                 document.getElementById("totalPro1").innerHTML = totalPro.toString();
-                document.getElementById("totalMoney").innerHTML = totalMoney.toLocaleString('vi-VN') + " VND";
-                document.getElementById("payment").innerHTML = totalMoney.toLocaleString('vi-VN') + " VND";
+                document.getElementById("totalMoney").innerHTML = totalMoney.toLocaleString('en-US') + " VND";
+                document.getElementById("payment").innerHTML = totalMoney.toLocaleString('en-US') + " VND";
 
             }
         });

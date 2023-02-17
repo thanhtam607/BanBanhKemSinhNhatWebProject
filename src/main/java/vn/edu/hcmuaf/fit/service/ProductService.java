@@ -434,7 +434,7 @@ public class ProductService {
 //        List<Product> li = ProductService.getHotProduct();
 //               for(Product p: li){
 //            System.out.println(p.getId());
-//          System.out.println(getListType().size());
+//          System.out.println(getHotProduct().size());
 //          Product p = ProductService.findById("B001");
 //          System.out.println(p.getListImg().get(0));
 //        System.out.println(getLastComment("B001").getBinhLuan());
