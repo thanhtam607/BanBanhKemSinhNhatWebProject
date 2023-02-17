@@ -336,8 +336,9 @@
             </div>
             <% }
             } else {
+                Product product1;
                 for(int i = 0; i < 4; i++ ){
-              Product product1 = listproduct.get(i);%>
+                    product1 = listproduct.get(i);%>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="<%=product1.getListImg().get(0)%>">

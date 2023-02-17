@@ -230,8 +230,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <% for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
-                            String idQty ="qty"+ entry.getValue().getSp().getId();
+                        <% String idQty;
+                            for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
+                            idQty ="qty"+ entry.getValue().getSp().getId();
                         %>
                             <tr id="<%=entry.getValue().getSp().getId()%>" class="cart-item">
                                 <td  class="shoping__cart__item">
