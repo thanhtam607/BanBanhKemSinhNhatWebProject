@@ -19,11 +19,12 @@ public class BlogService {
             try {
                 ResultSet rs = statement.executeQuery("SELECT  blog.mablog, blog.tieude,blog.mota, blog.anhblog, blog.ngaydang, blog.danhmuc, blog.chude from blog ");
                 while (rs.next()) {
-                    ResultSet rsdetails = stmt.executeQuery("SELECT ctblog.mablog, ctblog.demuc, ctblog.chitiet from ctblog");
+                    ResultSet rsdetails = stmt.executeQuery("SELECT ctblog.mablog, ctblog.demuc, ctblog.chitiet, ctblog.mactb from ctblog");
                     List<String> listdemuc = new LinkedList<String>();
                     List<String> listchitiet = new LinkedList<String>();
                     List<String> listdanhmuc = new LinkedList<String>();
                     List<String> listchude = new LinkedList<String>();
+                    List<String> listid = new LinkedList<String>();
                     while (rsdetails.next()) {
                         String s1 = rs.getString(1);
                         String s2 = rsdetails.getString(1);
@@ -32,11 +33,12 @@ public class BlogService {
                             listdanhmuc.add(rs.getString(6));
                             listdemuc.add(rsdetails.getString(2));
                             listchitiet.add(rsdetails.getString(3));
+                            listid.add(rsdetails.getString(4));
 
                         }
                     }
 
-                    Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), listdanhmuc, listchude,  listdemuc, listchitiet);
+                    Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), listdanhmuc, listchude,  listdemuc, listchitiet, listid);
                     list.add(b);
                 }
             } catch (SQLException e) {
@@ -76,9 +78,9 @@ public class BlogService {
         }
         return rs;
     }
-    public static void updateBlog(String MaBlog, String DeMuc, String ChiTiet){
+    public static void updateBlog(String MactB, String DeMuc, String ChiTiet, String DeMucS, String ChiTietS){
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE ctblog set  DEMUC='" +DeMuc+ "', CHITIET= '"+ ChiTiet+ "', MABLOG= '" + MaBlog+ "';";
+        String sql = "UPDATE ctblog set  DEMUC='" +DeMuc+ "', CHITIET= '"+ ChiTiet+ "' Where DEMUC='" +DeMucS+ "' and CHITIET= '"+ ChiTietS+ "' and  MACTB= '" + MactB+ "' ;";
         try {
             statement.executeUpdate(sql);
 

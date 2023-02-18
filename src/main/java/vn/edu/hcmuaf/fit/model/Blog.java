@@ -13,8 +13,8 @@ public class Blog implements Serializable {
     List<String> listchude;
     List<String> listdemuc;
     List<String> listchitiet;
-
-    public Blog(String id, String category,   String cont, String img, String date, List<String> listdanhmuc,  List<String> listchude, List<String> listdemuc, List<String> listchitiet) {
+    List<String> listid;
+    public Blog(String id, String category,   String cont, String img, String date, List<String> listdanhmuc,  List<String> listchude, List<String> listdemuc, List<String> listchitiet, List<String> listid) {
         this.id = id;
         this.category = category;
         this.cont = cont;
@@ -24,6 +24,7 @@ public class Blog implements Serializable {
         this.listchude = listchude;
         this.listdemuc = listdemuc;
         this.listchitiet = listchitiet;
+        this.listid = listid;
     }
 
 
@@ -102,6 +103,14 @@ public class Blog implements Serializable {
 
     public void setListchitiet(List<String> listchitiet) {
         this.listchitiet = listchitiet;
+    }
+
+    public List<String> getListid() {
+        return listid;
+    }
+
+    public void setListid(List<String> listid) {
+        this.listid = listid;
     }
 
     @Override
