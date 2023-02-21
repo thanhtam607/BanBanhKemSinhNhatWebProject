@@ -152,7 +152,7 @@ String tenkh =(String) request.getAttribute("tenkh");%>
       <% } %>
       <div class="main__table-btns">
         <div class="col-5">
-          <a href="/BanBanhKemSinhNhatWebProject/admin/ListReceipt_full_Admin" type="button" class="form__btn">Quay lại</a>
+          <a href="admin/ListReceipt_full_Admin" type="button" class="form__btn">Quay lại</a>
         </div>
       </div>
     </form>

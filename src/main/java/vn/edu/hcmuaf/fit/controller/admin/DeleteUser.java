@@ -19,7 +19,7 @@ public class DeleteUser extends HttpServlet {
 
         ReceiptService.deleteCustomer(makh);
 
-        response.sendRedirect("/BanBanhKemSinhNhatWebProject/admin/ListCustomer");
+        response.sendRedirect("ListCustomer");
     }
 
 
