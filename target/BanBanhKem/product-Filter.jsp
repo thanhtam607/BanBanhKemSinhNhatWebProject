@@ -80,12 +80,12 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li><a href="./Index">Trang chủ</a></li>
+                <li><a href="Index">Trang chủ</a></li>
                 <li><a href="about.jsp">Giới thiệu</a></li>
                 <li class="active"><a href="./ListProduct">Sản phẩm</a>
                    
                 </li>
-                <li><a href="./ListBlog">Tin tức</a></li>
+                <li><a href="ListBlog">Tin tức</a></li>
                 <li><a href="contact.jsp">Liên hệ</a></li>
             </ul>
         </nav>
@@ -209,9 +209,12 @@
                             <ul class="slidebar__loaibanh">
                                 <li class="text__loaibanh"><a href="./ListProduct">Tất cả</a></li>
                                 <%List<LoaiBanh> ListType = ProductService.getListType();
-                                    for(LoaiBanh lb: ListType){%>
-                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getTenLB()%> &filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
-                                <%}%>
+                                    for(LoaiBanh lb: ListType){
+                                        if(lb.getTenLB().equals(request.getParameter("filter"))){%>
+                                             <li class="text__loaibanh"><a class="text__loaibanh__active"  href="ProductFilter?title=<%=lb.getTenLB()%> &filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
+                                        <%} else{ %>
+                                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getTenLB()%> &filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
+                                <%}}%>
 
                             </ul>
                         </div>
@@ -242,16 +245,28 @@
                             <h4>Kích thước</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
+                                    <% if(request.getParameter("filter").equals("Lớn")){%>
+                                    <a class="text__loaibanh__active" href="ProductFilter?title=Sản phẩm có kích thước lớn &filter=Lớn" id="large">Lớn</a>
+                                    <%} else{%>
                                     <a href="ProductFilter?title=Sản phẩm có kích thước lớn &filter=Lớn" id="large">Lớn</a>
+                                    <%}%>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label  for="medium">
+                                    <% if(request.getParameter("filter").equals("Vừa")){%>
+                                    <a class="text__loaibanh__active" href="ProductFilter?title=Sản phẩm có kích thước vừa &filter=Vừa" id="medium">Vừa</a>
+                                    <%} else{%>
                                     <a href="ProductFilter?title=Sản phẩm có kích thước vừa &filter=Vừa" id="medium">Vừa</a>
+                                    <%}%>
                                 </label>
                             </div>
                             <div  class="sidebar__item__size">
                                 <label for="small">
+                                    <% if(request.getParameter("filter").equals("Lớn")){%>
+                                    <a class="text__loaibanh__active" href="ProductFilter?title=Sản phẩm có kích thước vừa &filter=Vừa" id="medium">Vừa</a>
+                                    <%} else%>
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước vừa &filter=Vừa" id="medium">Vừa</a>
                                     <a href="ProductFilter?title=Sản phẩm có kích thước nhỏ &filter=Nhỏ" id="small">Nhỏ</a>
                                 </label>
                             </div>
