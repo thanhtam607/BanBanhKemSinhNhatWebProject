@@ -3870,3 +3870,9 @@ font-size: 24px;
 	display: flex;
 	flex-direction: column;
 }
+/* active*/
+.size__active{
+	border: solid #ff96b7 3px;
+	font-weight: 600;
+	color: #ff96b7 !important;
+}

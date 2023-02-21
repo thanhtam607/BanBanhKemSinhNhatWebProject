@@ -243,38 +243,21 @@
 
                         <div class="sidebar__item">
                             <h4>Kích thước</h4>
+                            <%for(String size: ProductService.getListSize()){
+                                if(size.equals(request.getParameter("filter"))){%>
+                                    <div class="sidebar__item__size">
+                                        <label class="size__active">
+                                            <a href="ProductFilter?title=Sản phẩm có kích thước <%=size%> &filter=<%=size%>" id="<%=size%>"><%=size%></a>
+                                        </label>
+                                    </div>
+                            <% }
+                            else{%>
                             <div class="sidebar__item__size">
-                                <label for="large">
-                                    <% if(request.getParameter("filter").equals("Lớn")){%>
-                                    <a class="text__loaibanh__active" href="ProductFilter?title=Sản phẩm có kích thước lớn &filter=Lớn" id="large">Lớn</a>
-                                    <%} else{%>
-                                    <a href="ProductFilter?title=Sản phẩm có kích thước lớn &filter=Lớn" id="large">Lớn</a>
-                                    <%}%>
+                                <label for="<%=size%>">
+                                    <a href="ProductFilter?title=Sản phẩm có kích thước <%=size%> &filter=<%=size%>" id="<%=size%>"><%=size%></a>
                                 </label>
                             </div>
-                            <div class="sidebar__item__size">
-                                <label  for="medium">
-                                    <% if(request.getParameter("filter").equals("Vừa")){%>
-                                    <a class="text__loaibanh__active" href="ProductFilter?title=Sản phẩm có kích thước vừa &filter=Vừa" id="medium">Vừa</a>
-                                    <%} else{%>
-                                    <a href="ProductFilter?title=Sản phẩm có kích thước vừa &filter=Vừa" id="medium">Vừa</a>
-                                    <%}%>
-                                </label>
-                            </div>
-                            <div  class="sidebar__item__size">
-                                <label for="small">
-                                    <% if(request.getParameter("filter").equals("Lớn")){%>
-                                    <a class="text__loaibanh__active" href="ProductFilter?title=Sản phẩm có kích thước vừa &filter=Vừa" id="medium">Vừa</a>
-                                    <%} else%>
-                                    <a href="ProductFilter?title=Sản phẩm có kích thước vừa &filter=Vừa" id="medium">Vừa</a>
-                                    <a href="ProductFilter?title=Sản phẩm có kích thước nhỏ &filter=Nhỏ" id="small">Nhỏ</a>
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="tiny">
-                                    <a href="ProductFilter?title=Sản phẩm có kích thước bé &filter=Bé" id="tiny">Bé</a>
-                                </label>
-                            </div>
+                            <%}}%>
                         </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
