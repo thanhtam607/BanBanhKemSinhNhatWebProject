@@ -155,14 +155,14 @@
                                     </li>
                                 </ul>
                             </div>
-                           
                                     <div class="col-12">
                                         <button type="button" class="form__btn">Đăng lên</button>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+
                     </form>
+                </div>
+            </div>
                 </div>
                 <!-- end form -->
             </div>

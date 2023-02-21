@@ -23,7 +23,7 @@ public class adminRemoveOrderCTKH extends HttpServlet {
         ReceiptService.updateTonKhoWhenCancelOrder(mhd);
         ReceiptService.cancelOrder(mhd);
 
-        response.sendRedirect("/BanBanhKemSinhNhatWebProject/admin/EditUser?makh="+ mh );
+        response.sendRedirect("EditUser?makh="+ mh );
 
     }
 

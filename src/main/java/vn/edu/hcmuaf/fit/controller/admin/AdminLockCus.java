@@ -21,6 +21,6 @@ public class AdminLockCus extends HttpServlet {
         request.setAttribute("mkh", makh);
         int role = -1;
         ReceiptService.updateRole( role, makh);
-        response.sendRedirect("/BanBanhKemSinhNhatWebProject/admin/ListCustomer");
+        response.sendRedirect("/ListCustomer");
     }
 }

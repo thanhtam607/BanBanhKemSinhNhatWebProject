@@ -71,9 +71,9 @@
                     <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
 
                     <% if(auth.checkRole(1)) { %>
-                    <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                    <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                     <%}%>
-                    <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
+                    <a href="doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                 </div>
                 <%}%>
             </div>
