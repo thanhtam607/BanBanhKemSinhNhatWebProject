@@ -182,42 +182,63 @@
                                     <td>
                                         <% String main__table = " ";
                                             String main__btn ="";
-                                            if(customer.getRoleNo() == -1){
-                                                main__table = "main__table-text--red";
+                                            String iconName = "";
+                                            if(UserService.findById(customer.getMAKH()).getStatus() == -1){
                                                 main__btn = "main__table-btn--delete";
+                                            }else{
+                                                main__btn = "main__table-btn--banned";
+                                            }
+                                            if(customer.getRoleNo() == 2){
+                                                main__table = "main__table-text--red";
                                             } else if(customer.getRoleNo() == 1){
                                                 main__table = "main__table-text--green";
-                                                main__btn = "main__table-btn--banned";
                                             }else{
                                                 main__table = "main__table-text--black";
-                                                main__btn = "main__table-btn--banned";
                                             }%>
                                         <div class="main__table-text <%=main__table%>"><%=customer.getRole()%></div>
                                     </td>
 
                                     <td>
                                         <div class="main__table-btns">
-                                            <a href="#modal-status<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
+                                            <%if(UserService.findById(customer.getMAKH()).getStatus() == -1){%>
+                                            <a href="#modal-status-unlock<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
+                                            <%}else{%>
+                                            <a href="#modal-status-lock<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
+                                                <i class="fa fa-unlock"></i>
+                                            </a>
+                                            <%}%>
                                             <a href="./EditUser?makh=<%=customer.getMAKH()%>" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
+<%--                                            <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">--%>
+<%--                                                <i class="fa fa-trash"></i>--%>
+<%--                                            </a>--%>
                                         </div>
 
                                     </td>
                                 </tr>
-                            <!-- modal status -->
-                            <div id="modal-status<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                            <!-- modal status lock-->
+                            <div id="modal-status-lock<%=i%>" class="zoom-anim-dialog mfp-hide modal">
                                 <form method="post" action="AdminLockCus">
                                     <h6 class="modal__title">Chặn Người Dùng</h6>
                                     <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
                                     <input name = "makh" value="<%=customer.getMAKH()%>" style="display: none">
                                     <div class="modal__btns">
                                         <button class="modal__btn modal__btn--apply" type="submit">Chặn</button>
+                                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- modal status unlock-->
+                            <div id="modal-status-unlock<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                <form method="post" action="AdminLockCus">
+                                    <h6 class="modal__title">Bỏ Chặn Người Dùng</h6>
+                                    <p class="modal__text">Bạn có chắc muốn bỏ chặn người dùng này?</p>
+                                    <input name = "makh" value="<%=customer.getMAKH()%>" style="display: none">
+                                    <div class="modal__btns">
+                                        <button class="modal__btn modal__btn--apply" type="submit">OK</button>
                                         <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                     </div>
                                 </form>

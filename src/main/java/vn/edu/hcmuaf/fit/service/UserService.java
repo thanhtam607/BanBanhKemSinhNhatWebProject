@@ -39,7 +39,7 @@ public class UserService {
     }
     public User checkLogin(String email, String password) {
         List<User> users = JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT taikhoan.ID, taikhoan.email, taikhoan.PASS, taikhoan.tentk, taikhoan.ROLE FROM taikhoan WHERE email = ?")
+                h.createQuery("SELECT taikhoan.ID, taikhoan.email, taikhoan.PASS, taikhoan.tentk, taikhoan.ROLE, taikhoan.STATUS FROM taikhoan WHERE email = ?")
                         .bind(0, email)
                         .mapToBean(User.class)
                         .stream()
@@ -79,9 +79,9 @@ public class UserService {
         Statement statement = DBConnect.getInstall().get();
         if(statement !=null){
             try{
-                ResultSet rsAcc = statement.executeQuery("select ID, EMAIL, PASS, TENTK, ROLE from taikhoan;");
+                ResultSet rsAcc = statement.executeQuery("select ID, EMAIL, PASS, TENTK, ROLE, STATUS from taikhoan;");
                 while(rsAcc.next()){
-                    list.add(new User(rsAcc.getString(1), rsAcc.getString(2), rsAcc.getString(3), rsAcc.getString(4), rsAcc.getInt(5)));
+                    list.add(new User(rsAcc.getString(1), rsAcc.getString(2), rsAcc.getString(3), rsAcc.getString(4), rsAcc.getInt(5), rsAcc.getInt(6)));
                 }
             }
             catch (SQLException e){
@@ -130,7 +130,7 @@ public class UserService {
         if(stm!= null) {
             try {
                 String sql = "insert into taikhoan values ('" + ID + "', '" + acc.getEmail() + "', '"
-                        + hashPassword(acc.getPass())  + "', '" + acc.getTentk() + "'," + acc.getRole()+");";
+                        + hashPassword(acc.getPass())  + "', '" + acc.getTentk() + "'," + acc.getRole() + acc.getStatus()+");";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -213,7 +213,7 @@ public class UserService {
     public static void updateProfileAddress(String diachi, User auth)  {
         if(diachi == null) return;
         String idACC = auth.getId();
-        String sql1 = "UPDATE khachhang set khachhang.DIACHI = '"+diachi+"'where khachhang.MATAIKHOAN = "+ "'"+idACC+"'";
+        String sql1 = "UPDATE khachhang set khachhang.DIACHI = '"+diachi+"'where khachhang.MAKH = "+ "'"+idACC+"'";
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql1);
@@ -225,7 +225,7 @@ public class UserService {
     public static void updateProfilePhoneNo(String sdt, User auth)  {
         if(sdt == null) return;
         String idACC = auth.getId();
-        String sql1 = "UPDATE khachhang set khachhang.SDT = '"+sdt+"' where khachhang.MATAIKHOAN = "+ "'"+idACC+"'";
+        String sql1 = "UPDATE khachhang set khachhang.SDT = '"+sdt+"' where khachhang.MAKH = "+ "'"+idACC+"'";
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql1);

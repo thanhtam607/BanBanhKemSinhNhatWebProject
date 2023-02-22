@@ -733,10 +733,10 @@ function addOrder(){
                 confirmButtonText: 'Xem đơn đặt',
                 confirmButtonColor: '#ff96b7'}).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = "/BanBanhKemSinhNhatWebProject/MyOrder";
+                    location.href = "MyOrder";
                 }
                 else{
-                    location.href = "/BanBanhKemSinhNhatWebProject/ListProduct";
+                    location.href = "ListProduct";
                 }
             }
             );
@@ -751,7 +751,7 @@ function cartEmpty(){
         confirmButtonText: 'Thêm sản phẩm',
         confirmButtonColor: '#ff96b7'}).then((result) => {
             if (result.isConfirmed) {
-                location.href = "/BanBanhKemSinhNhatWebProject/ListProduct";
+                location.href = "/ListProduct";
             }
         }
     );

@@ -11,17 +11,11 @@ public class ReceiptService {
         List<Receipt> list = new LinkedList<Receipt>();
         Statement statement = DBConnect.getInstall().get();
         Statement stmt1 = DBConnect.getInstall().get();
-        String sql = "select hoadon.mahd, khachhang.TENKH, sanpham.TenSP, khachhang.sdt, hoadon.NGAYLAPHD, giaohang.NGAYGIAO, giaohang.DIACHIGIAO, hoadon.ghichu, sanpham.gia, hoadon.THANHTIEN,  hoadon.TRANGTHAI, khachhang.makh, sanpham.masp, taikhoan.TENTK,taikhoan.role, taikhoan.email\n" +
-                "from sanpham, hoadon, khachhang, cthd, giaohang, taikhoan where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH and taikhoan.id = khachhang.mataikhoan \n" +
+        String sql = "select hoadon.mahd, khachhang.TENKH, sanpham.TenSP, khachhang.sdt, hoadon.NGAYLAPHD, giaohang.NGAYGIAO, giaohang.DIACHIGIAO, hoadon.ghichu, sanpham.gia, hoadon.THANHTIEN,  hoadon.STATUS, khachhang.makh, sanpham.masp, taikhoan.TENTK,taikhoan.role, taikhoan.email\n" +
+                "from sanpham, hoadon, khachhang, cthd, giaohang, taikhoan where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH and taikhoan.id = khachhang.makh \n" +
                 "group by hoadon.MAHD ORDER BY hoadon.NGAYLAPHD desc;";
         if (statement != null)
             try {
-//                ResultSet rs = statement.executeQuery("select hoadon.mahd, khachhang.TENKH, sanpham.TenSP, khachhang.sdt, " +
-//                        "hoadon.NGAYLAPHD, giaohang.NGAYGIAO, giaohang.DIACHIGIAO, hoadon.ghichu, sanpham.gia, hoadon.THANHTIEN, " +
-//                        " hoadon.TRANGTHAI, khachhang.makh, sanpham.masp, taikhoan.TENTK, taikhoan.role, taikhoan.email" +
-//                        "from sanpham, hoadon, khachhang, cthd, giaohang, taikhoan" +
-//                        "where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH" +
-//                        " and taikhoan.id = khachhang.mataikhoan group by hoadon.MAHD ORDER BY hoadon.NGAYLAPHD desc;");
                 ResultSet rs = statement.executeQuery(sql);
                 while (rs.next()) {
                     ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
@@ -59,7 +53,7 @@ public class ReceiptService {
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT MAHD, MAKH, NGAYLAPHD, GHICHU, THANHTIEN, TRANGTHAI FROM hoadon ORDER BY hoadon.MAHD DESC");
+                ResultSet rs = statement.executeQuery("SELECT MAHD, MAKH, NGAYLAPHD, GHICHU, THANHTIEN, STATUS FROM hoadon ORDER BY hoadon.MAHD DESC");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = stmt1.executeQuery("SELECT giaohang.DIACHIGIAO, giaohang.MAHD FROM giaohang");
                     String diachi = "";
@@ -87,7 +81,7 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT MAHD, MAKH, NGAYLAPHD, GHICHU, THANHTIEN, TRANGTHAI FROM hoadon\n" +
+                ResultSet rs = statement.executeQuery("SELECT MAHD, MAKH, NGAYLAPHD, GHICHU, THANHTIEN, STATUS FROM hoadon\n" +
                         "WHERE NGAYLAPHD = CURRENT_DATE\n" +
                         "ORDER BY hoadon.MAHD DESC");
                 while (rs.next()) {
@@ -109,7 +103,7 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT MAHD, MAKH, NGAYLAPHD, GHICHU, THANHTIEN, TRANGTHAI FROM hoadon\n" +
+                ResultSet rs = statement.executeQuery("SELECT MAHD, MAKH, NGAYLAPHD, GHICHU, THANHTIEN, STATUS FROM hoadon\n" +
                         "WHERE MONTH(NGAYLAPHD) = month(CURRENT_DATE) and YEAR(NGAYLAPHD) = YEAR(CURRENT_DATE)\n" +
                         "ORDER BY hoadon.MAHD DESC");
                 while (rs.next()) {
@@ -316,7 +310,7 @@ public class ReceiptService {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE hoadon set hoadon.TRANGTHAI = 3 WHERE hoadon.MAHD ='" + mahd + "'";
+                String sql = "UPDATE hoadon set hoadon.STATUS = 3 WHERE hoadon.MAHD ='" + mahd + "'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -328,7 +322,7 @@ public class ReceiptService {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE hoadon set hoadon.TRANGTHAI = 2 WHERE hoadon.MAHD ='" + mahd + "'";
+                String sql = "UPDATE hoadon set hoadon.STATUS = 2 WHERE hoadon.MAHD ='" + mahd + "'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -348,9 +342,26 @@ public class ReceiptService {
     }
 
 
-    public static void updateRole(int role, String makh) {
+    public static void updateStatus(String id) {
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE taikhoan, khachhang set  role= " + role + " where khachhang.MAKH = '" + makh + "' and taikhoan.id = khachhang.mataikhoan;";
+        int status = UserService.findById(id).getStatus();
+        if(status != -1) {
+            status = -1;
+        }else{
+            status = 0;
+        }
+        String sql = "UPDATE taikhoan set  status= " + status + " where taikhoan.id = '" + id + "'";
+
+        try {
+            statement.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static void updateRole(int role, String id) {
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE taikhoan set  role= " + role + " where taikhoan.id = '" + id + "'";
 
         try {
             statement.executeUpdate(sql);
@@ -375,22 +386,7 @@ public class ReceiptService {
         }
         return rs;
     }
-    public static void deleteCustomer(String makh) {
-        Statement statement = DBConnect.getInstall().get();
-        Statement stmt = DBConnect.getInstall().get();
-        String idAcc = CustomerService.getIdAccByMakh(makh);
-        String sql =  "DELETE from taikhoan WHERE taikhoan.ID= '"+idAcc+"';";
-        if (statement != null) {
-            try {
-                statement.executeUpdate(sql);
-                System.out.println("thanh cong");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            System.out.println("not found");
-        }
-    }
+
 
     public static void main(String[] args) {
         for(Receipt r: getData()){

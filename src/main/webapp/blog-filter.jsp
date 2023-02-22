@@ -105,16 +105,16 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="/BanBanhKemSinhNhatWebProject/Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                    <a href="/Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
                 <nav class="header__menu">
                     <ul>
-                        <li class=""><a href="/BanBanhKemSinhNhatWebProject/Index">Trang chủ</a></li>
+                        <li class=""><a href="/Index">Trang chủ</a></li>
                         <li class=""><a href="about.jsp">Giới thiệu</a></li>
-                        <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListProduct">Sản phẩm</a></li>
-                        <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListBlog">Tin tức</a></li>
+                        <li class=""><a href="/ListProduct">Sản phẩm</a></li>
+                        <li class=""><a href="/ListBlog">Tin tức</a></li>
                         <li class=""><a href="contact.jsp">Liên hệ</a></li>
                     </ul>
                 </nav>
