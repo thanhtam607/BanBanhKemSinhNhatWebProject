@@ -21,7 +21,7 @@ public class EditUser extends HttpServlet {
         List<String> listRole = new ArrayList<String>();
         listRole.add("Thường");
         listRole.add("Admin");
-        listRole.add("Khóa");
+        listRole.add("Quản Lí");
         request.setAttribute("listRole", listRole);
         String makh = request.getParameter("makh");
         List<Receipt> listctkh = ReceiptService.getctkh(makh);

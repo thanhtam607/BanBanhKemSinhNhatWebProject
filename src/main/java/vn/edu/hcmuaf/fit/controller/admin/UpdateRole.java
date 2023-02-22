@@ -28,10 +28,10 @@ public class UpdateRole extends HttpServlet {
             role = 0;
         } else if (r.equals("Admin")){
             role = 1;
-        } else {
-            role = -1;
+        } else if (r.equals("Quản Lí")){
+            role = 2;
         }
-        ReceiptService.updateRole( role, makh);
+        ReceiptService.updateRole(role, makh);
         response.sendRedirect("./EditUser?makh="+ request.getParameter("makh"));
     }
 }

@@ -208,7 +208,7 @@ public class Receipt {
         }else if(this.role == 1){
             return "Admin";
         }
-        return "Khóa";
+        return "Quản Lí";
     }
     public void setRole(int role) {
         this.role = role;
