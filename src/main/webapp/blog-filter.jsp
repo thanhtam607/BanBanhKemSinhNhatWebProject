@@ -67,19 +67,19 @@
             <div class="header__top__right__auth__dropdown">
                 <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
                 <% if(auth.checkRole(1)) { %>
-                <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
-                <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
+                <a href="doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
             </div>
             <%}%>
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class=""><a href="/BanBanhKemSinhNhatWebProject/Index">Trang chủ</a></li>
+            <li class=""><a href="Index">Trang chủ</a></li>
             <li class=""><a href="about.jsp">Giới thiệu</a></li>
-            <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListProduct">Sản phẩm</a></li>
-            <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListBlog">Tin tức</a></li>
+            <li class=""><a href="ListProduct">Sản phẩm</a></li>
+            <li class=""><a href="ListBlog">Tin tức</a></li>
             <li class=""><a href="contact.jsp">Liên hệ</a></li>
         </ul>
     </nav>

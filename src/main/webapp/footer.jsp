@@ -7,7 +7,7 @@
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="footer__about">
           <div class="footer__about__logo">
-            <a href="/BanBanhKemSinhNhatWebProject/Index"><img src="img/logo_web.jpg" alt=""></a>
+            <a href="Index"><img src="img/logo_web.jpg" alt=""></a>
           </div>
           <ul class="mt-5" id="about">
             <li><i class="fa fa-home"></i> Địa chỉ: Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM</li>

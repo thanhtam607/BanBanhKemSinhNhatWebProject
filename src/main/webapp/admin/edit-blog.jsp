@@ -1,4 +1,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,8 +84,8 @@
             <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
             <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
             <a href="./ListCustomer" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-            <a href="./ListBlog-admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
-            <a href="./ListReceipt_full_Admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
+            <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+            <a href="./ListReceipt_full_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
             <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
             <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
             <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
@@ -94,6 +96,7 @@
 <!-- Sidebar End -->
 
     <!-- main content -->
+<% Blog b = (Blog) request.getAttribute("blg"); %>
     <main class="main">
         <div class="container-fluid">
             <div class="row">
@@ -111,37 +114,22 @@
                         <!-- profile user -->
                         <div class="profile__user">
                             <div class="profile__avatar">
-                                <img src="img/user.svg" alt="">
+                                <img src="../<%=b.getImg()%>" alt="">
                             </div>
                             <!-- or red -->
                             <div class="profile__meta profile__meta--green">
-                                <h3>Tên bài viết <span></span></h3>
-                                <span>ID: blog 01</span>
+                                <h3>Tên bài viết: <%=b.getCategory()%></h3>
+                                <span>ID: <%=b.getId()%></span>
                             </div>
                         </div>
                         <!-- end profile user -->
 
-                        <!-- profile tabs nav -->
-                        <ul class="nav nav-tabs profile__tabs" id="profile__tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Thông Tin</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Nội Dung Chi Tiết</a>
-                            </li>
-
-
-                        </ul>
-                        <!-- end profile tabs nav -->
-
 
                         <!-- profile btns -->
                         <div class="profile__actions">
-                            <a href="#modal-delete2" class="profile__action profile__action--banned open-modal"><i class="fa fa-lock"></i></a>
-                            <a href="#modal-status3" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
+                            <a href="#modal-delete2" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
+                            <a href="#modal-status3" class="profile__action profile__action--banned open-modal"><i class="fa fa-lock"></i></a>
                         </div>
-                        <!-- end profile btns -->
                     </div>
                 </div>
                 <!-- end profile -->
@@ -152,107 +140,61 @@
                         <div class="col-12">
                             <div class="row">
                                 <!-- details form -->
-                                <div class="col-12 col-lg-6">
-                                    <form action="#" class="form form--profile">
+                                <div class="col-12">
+                                    <form action="" method="post" class="form form--profile" id="info-blog">
                                         <div class="row row--form">
                                             <div class="col-12">
-                                                <h4 class="form__title">Profile details</h4>
                                             </div>
-
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <% for (int i = 0; i < b.getListdemuc().size(); i++) { %>
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                <input style="display:none" type="text" name="idB" class="form__input" value="<%=b.getId()%>">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="username">Username</label>
-                                                    <input id="username" type="text" name="username" class="form__input" placeholder="User 123">
+                                                    <label class="form__label" >Tiêu đề <%=i + 1%></label>
+                                                    <input  type="text" name="demuc" class="form__input" value="<%=b.getListdemuc().get(i)%>">
                                                 </div>
                                             </div>
-
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="email">Email</label>
-                                                    <input id="email" type="text" name="email" class="form__input" placeholder="email@email.com">
+                                                    <label class="form__label" for="description">Nội dung <%=i +1%></label>
+                                                    <textarea class="form__input "  id="description" name="chitiet" form="info-blog" ><%=b.getListchitiet().get(i)%></textarea>
                                                 </div>
                                             </div>
-
+                                            <% } %>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="firstname">First Name</label>
-                                                    <input id="firstname" type="text" name="firstname" class="form__input" placeholder="John">
+                                                    <label class="form__label">Danh mục</label>
+                                                    <select class="form__input"  name="title">
+                                                        <%List<String> listDm = (List<String>) request.getAttribute("listDm");
+                                                            for(String dm : listDm){
+                                                                if(dm == b.getListdanhmuc().get(0)){%>
+                                                        <option selected value="<%=dm%>"><%=dm%></option>
+                                                        <% } else {%>
+                                                        <option value="<%=dm%>"><%=dm%></option>
+                                                        <%}}%>
+                                                    </select>
                                                 </div>
                                             </div>
-
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="lastname">Last Name</label>
-                                                    <input id="lastname" type="text" name="lastname" class="form__input" placeholder="Doe">
+                                                    <label class="form__label">Chủ đề</label>
+                                                    <select class="form__input" name="topic">
+                                                        <%List<String> listCd = (List<String>) request.getAttribute("listCd");
+                                                            for(String cd : listCd){
+                                                                if(cd == b.getListchude().get(0)){%>
+                                                        <option selected value="<%=cd%>"><%=cd%></option>
+                                                        <% } else {%>
+                                                        <option value="<%=cd%>"><%=cd%></option>
+                                                        <%}}%>
+                                                    </select>
                                                 </div>
                                             </div>
-
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="subscription">Subscription</label>
-                                                    <select class="js-example-basic-single" id="subscription">
-														<option value="Basic">Basic</option>
-														<option value="Premium">Premium</option>
-														<option value="Cinematic">Cinematic</option>
-													</select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="rights">Rights</label>
-                                                    <select class="js-example-basic-single" id="rights">
-														<option value="User">User</option>
-														<option value="Moderator">Moderator</option>
-														<option value="Admin">Admin</option>
-													</select>
-                                                </div>
-                                            </div>
-
                                             <div class="col-12">
-                                                <button class="form__btn" type="button">Save</button>
+                                                <button class="form__btn" type="submit">Save</button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <!-- end details form -->
-
-                                <!-- password form -->
-                                <div class="col-12 col-lg-6">
-                                    <form action="#" class="form form--profile">
-                                        <div class="row row--form">
-                                            <div class="col-12">
-                                                <h4 class="form__title">Change password</h4>
-                                            </div>
-
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="oldpass">Old Password</label>
-                                                    <input id="oldpass" type="password" name="oldpass" class="form__input">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="newpass">New Password</label>
-                                                    <input id="newpass" type="password" name="newpass" class="form__input">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="confirmpass">Confirm New Password</label>
-                                                    <input id="confirmpass" type="password" name="confirmpass" class="form__input">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <button class="form__btn" type="button">Change</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- end password form -->
                             </div>
                         </div>
                     </div>

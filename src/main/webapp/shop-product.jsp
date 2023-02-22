@@ -65,19 +65,19 @@
             <div class="header__top__right__auth__dropdown">
                 <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
                 <% if(auth.checkRole(1)) { %>
-                <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
-                <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
+                <a href="doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
             </div>
             <%}%>
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class=""><a href="/BanBanhKemSinhNhatWebProject/Index">Trang chủ</a></li>
+            <li class=""><a href="Index">Trang chủ</a></li>
             <li class=""><a href="about.jsp">Giới thiệu</a></li>
-            <li class="active"><a href="/BanBanhKemSinhNhatWebProject/ListProduct">Sản phẩm</a></li>
-            <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListBlog">Tin tức</a></li>
+            <li class="active"><a href="ListProduct">Sản phẩm</a></li>
+            <li class=""><a href="ListBlog">Tin tức</a></li>
             <li class=""><a href="contact.jsp">Liên hệ</a></li>
         </ul>
     </nav>
@@ -103,16 +103,16 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="/BanBanhKemSinhNhatWebProject/Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                    <a href="Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
                 <nav class="header__menu">
                     <ul>
-                        <li class=""><a href="/BanBanhKemSinhNhatWebProject/Index">Trang chủ</a></li>
+                        <li class=""><a href="Index">Trang chủ</a></li>
                         <li class=""><a href="about.jsp">Giới thiệu</a></li>
-                        <li class="active"><a href="/BanBanhKemSinhNhatWebProject/ListProduct">Sản phẩm</a></li>
-                        <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListBlog">Tin tức</a></li>
+                        <li class="active"><a href="ListProduct">Sản phẩm</a></li>
+                        <li class=""><a href="ListBlog">Tin tức</a></li>
                         <li class=""><a href="contact.jsp">Liên hệ</a></li>
                     </ul>
                 </nav>
@@ -257,8 +257,9 @@
                                 <div class="latest-product__slider owl-carousel">
                                     <% List<Product> listhotproducts = (List<Product>) request.getAttribute("listBanChay"); %>
                                     <div class="latest-prdouct__slider__item">
-                                        <% for(int i = 0; i<3;i++){
-                                            Product productL = listhotproducts.get(i);%>
+                                        <% Product productL;
+                                            for(int i = 0; i<3;i++){
+                                            productL = listhotproducts.get(i);%>
                                         <a href="ProductDetail?id=<%=productL.getId() %>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
                                                 <img src="<%=productL.getListImg().get(0)%>" alt="">
@@ -272,8 +273,9 @@
                                     </div>
                                     </a>
                                     <div class="latest-prdouct__slider__item">
-                                        <% for(int i = 3; i<6;i++){
-                                            Product productR = listhotproducts.get(i);%>
+                                        <% Product productR;
+                                            for(int i = 3; i<6;i++){
+                                            productR = listhotproducts.get(i);%>
                                         <a href="ProductDetail?id=<%=productR.getId() %>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
                                                 <img src="<%=productR.getListImg().get(0)%>" alt="">
@@ -298,9 +300,11 @@
                         <div class="row">
                             <% List<ProductDiscount> listdiscount = (List<ProductDiscount>) request.getAttribute("listdiscount");%>
                             <div class="product__discount__slider owl-carousel">
-                                <% for(ProductDiscount pd : listdiscount){
-                                int price = (int) (pd.getPrice() - pd.getPrice()*pd.getDiscount());
-                                int discount = (int) (pd.getDiscount()*100);%>
+                                <% int price=0;
+                                    int discount=0;
+                                    for(ProductDiscount pd : listdiscount){
+                                        price = (int) (pd.getPrice() - pd.getPrice()*pd.getDiscount());
+                                        discount = (int) (pd.getDiscount()*100);%>
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg"
@@ -337,8 +341,9 @@
                                         listOption.add("Mặc định");
                                         listOption.add("Giá từ thấp đến cao");
                                         listOption.add("Giá từ cao đến thấp");
+                                        String val;
                                         for(String s: listOption){
-                                            String val = request.getParameter("sortValue");
+                                            val = request.getParameter("sortValue");
                                         if(s.equals(val)){%>
                                             <option href="ListProduct?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></option>
                                         <%}

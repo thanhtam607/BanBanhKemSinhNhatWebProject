@@ -99,8 +99,8 @@
                         </a>
                         <%if(auth != null) {%>
                             <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
-                                <a href="/BanBanhKemSinhNhatWebProject/EditUserProfile" class="dropdown-item">Hồ sơ của tôi</a>
-                                <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
+                                <a href="EditUserProfile" class="dropdown-item">Hồ sơ của tôi</a>
+                                <a href="doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                             </div>
                         <%}%>
                     </div>

@@ -243,8 +243,6 @@
                                                     <input id="email" type="text" name="email" class="form__input text-lowercase" value="<%=rc.getEmail()%>">
                                                 </div>
                                             </div>
-
-
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="rights">Phân Quyền</label>

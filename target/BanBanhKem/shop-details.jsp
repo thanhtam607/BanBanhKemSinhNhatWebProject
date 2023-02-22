@@ -66,19 +66,19 @@
             <div class="header__top__right__auth__dropdown">
                 <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
                 <% if(auth.checkRole(1)) { %>
-                <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
-                <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
+                <a href="doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
             </div>
             <%}%>
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class=""><a href="/BanBanhKemSinhNhatWebProject/Index">Trang chủ</a></li>
+            <li class=""><a href="Index">Trang chủ</a></li>
             <li class=""><a href="about.jsp">Giới thiệu</a></li>
-            <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListProduct">Sản phẩm</a></li>
-            <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListBlog">Tin tức</a></li>
+            <li class=""><a href="ListProduct">Sản phẩm</a></li>
+            <li class=""><a href="ListBlog">Tin tức</a></li>
             <li class=""><a href="contact.jsp">Liên hệ</a></li>
         </ul>
     </nav>
@@ -104,16 +104,16 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="/BanBanhKemSinhNhatWebProject/Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                    <a href="Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
                 <nav class="header__menu">
                     <ul>
-                        <li class=""><a href="/BanBanhKemSinhNhatWebProject/Index">Trang chủ</a></li>
+                        <li class=""><a href="Index">Trang chủ</a></li>
                         <li class=""><a href="about.jsp">Giới thiệu</a></li>
-                        <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListProduct">Sản phẩm</a></li>
-                        <li class=""><a href="/BanBanhKemSinhNhatWebProject/ListBlog">Tin tức</a></li>
+                        <li class=""><a href="ListProduct">Sản phẩm</a></li>
+                        <li class=""><a href="ListBlog">Tin tức</a></li>
                         <li class=""><a href="contact.jsp">Liên hệ</a></li>
                     </ul>
                 </nav>
@@ -336,8 +336,9 @@
             </div>
             <% }
             } else {
+                Product product1;
                 for(int i = 0; i < 4; i++ ){
-              Product product1 = listproduct.get(i);%>
+                    product1 = listproduct.get(i);%>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="<%=product1.getListImg().get(0)%>">
