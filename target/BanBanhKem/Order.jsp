@@ -63,7 +63,7 @@
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
                 <a onclick="checkPass('<%=auth.getEmail()%>', '<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
-                <% if(auth.checkRole(1)) { %>
+                <% if(auth.checkRole()) { %>
                 <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
                 <a href="doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
@@ -201,7 +201,7 @@
                 <%}else{%>
                 <%for(Receipt r: receipts){
                 %>
-                <div id="<%=r.getId()%>" class="my-2 center overflow-hidden">
+                <div class="my-2 center overflow-hidden">
                     <div class="row">
                         <div class="col-6">
                                     <small class="text-secondary d-inline-block pt-3 pl-3">Mã đơn hàng: </small>
@@ -209,8 +209,8 @@
                                 </div>
                         <div class="col-6 text-right  my-2 pt-2 ">
                             <small class="d-inline text-secondary">Trạng thái |</small>
-                            <div class="d-inline pr-3 text-uppercase" style="color:#ee4d2d; font-size:14px">
-                                <span><%=r.getState()%></span>
+                            <div id="statusName<%=r.getId()%>" class="d-inline pr-3 text-uppercase" style="color:#ee4d2d; font-size:14px">
+                                <span><%=r.getStatusName()%></span>
                             </div>
                         </div>
                     </div>
@@ -259,10 +259,14 @@
                     </div>
                     <div class="row" style="margin-top: -20px">
                         <div class="col-6 pt-2 pb-3">
-                            <div class="text-left mr-3">
+                            <div id="<%=r.getId()%>" class="text-left mr-3">
                                 <%if(r.checkState()){%>
-                                <button onclick="cancelOrder('<%=r.getId()%>')" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2">
+                                <button onclick="cancelOrder('<%=r.getId()%>')" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2" >
                                             Hủy đơn hàng
+                                </button>
+                                <%}if(r.getStateInt() == 4){%>
+                                <button onclick="buyAgain('<%=r.getId()%>')" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2" >
+                                    Mua lại
                                 </button>
                                 <%}%>
 

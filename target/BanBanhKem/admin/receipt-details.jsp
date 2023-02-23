@@ -5,6 +5,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.CTHD" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +50,7 @@
 </head>
 
 <body>
+<% User auth = (User) session.getAttribute("auth");%>
 <!-- header -->
 <header class="header">
   <div class="header__content">
@@ -79,8 +81,8 @@
         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
       </div>
       <div class="ms-3">
-        <h6 class="mb-0">Thanh Thùy</h6>
-        <span>Admin</span>
+        <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
+        <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
       </div>
     </div>
     <div class="navbar-nav w-100">
@@ -152,7 +154,7 @@ String tenkh =(String) request.getAttribute("tenkh");%>
       <% } %>
       <div class="main__table-btns">
         <div class="col-5">
-          <a href="admin/ListReceipt_full_Admin" type="button" class="form__btn">Quay lại</a>
+          <a href="/ListReceipt_full_Admin" type="button" class="form__btn">Quay lại</a>
         </div>
       </div>
     </form>

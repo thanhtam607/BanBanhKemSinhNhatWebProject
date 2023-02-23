@@ -29,7 +29,7 @@ public class AccFilter implements Filter {
 
             chain.doFilter(request, response);
         }else{
-            ((HttpServletResponse) response).sendRedirect("/BanBanhKemSinhNhatWebProject/signin.jsp");
+            ((HttpServletResponse) response).sendRedirect("/signin.jsp");
         }
     }
 }

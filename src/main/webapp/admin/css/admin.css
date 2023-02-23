@@ -704,7 +704,7 @@ ul {
 
 .main__table {
     width: 100%;
-    min-width: 900px;
+    min-width: 1050px;
     border-spacing: 0;
 }
 
@@ -811,6 +811,10 @@ ul {
 
 .main__table-text--red {
     color: #eb5757;
+}
+.main__table-text--yellow {
+    color: #2f80ed;
+    font-weight: 600;
 }
 
 .main__table-text--green {
@@ -3204,4 +3208,13 @@ ul.dandev_attach_view li input {
 .main__table-btn--black, .profile__action--black{
     color: #000000;
     background-color: rgba(235, 87, 87, 0.08);
+}
+.breaklineNamePro{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    width: 270px;
+    height: 90px;
+    margin: 15px 0 0;
 }
