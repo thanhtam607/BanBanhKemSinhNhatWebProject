@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
 <meta http-equiv="Content-Type" charset="UTF-8">
@@ -50,7 +50,7 @@
         <div class="container-fluid bg_signin_signup">
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                    <form action="/BanBanhKemSinhNhatWebProject/doSignin" method="post" class="bg-pink rounded p-4 p-sm-5 my-4 mx-3">
+                    <form action="./doSignin" method="post" class="bg-pink rounded p-4 p-sm-5 my-4 mx-3">
                         <div>
                             <h2 class="title-sg">Đăng nhập</h2>
                         </div>

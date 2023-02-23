@@ -16,14 +16,13 @@ public class CustomerService {
         Statement statement = DBConnect.getInstall().get();
         if(statement !=null){
             try{
-                ResultSet rs = statement.executeQuery("SELECT MAKH, TENKH, MATAIKHOAN, DIACHI, SDT, taikhoan.role from khachhang, taikhoan where taikhoan.id = khachhang.mataikhoan");
+                ResultSet rs = statement.executeQuery("SELECT MAKH, TENKH, DIACHI, SDT, taikhoan.role from khachhang, taikhoan where taikhoan.id = khachhang.MAKH");
                 while(rs.next()){
                     listC.add(new Customer(rs.getString(1),
                             rs.getString(2),
                             rs.getString(3),
                             rs.getString(4),
-                            rs.getString(5),
-                            rs.getInt(6)
+                            rs.getInt(5)
                     ));
                 }
             }
@@ -56,11 +55,10 @@ public class CustomerService {
     }
     public static void registerKH(Customer acc, User user){
         Statement stm = DBConnect.getInstall().get();
-        String stt = getLastMaKH().substring(2);
-        String ID = "KH" + (Integer.parseInt(stt) + 1);
+        String ID = user.getId();
         acc.setMAKH(ID);
         acc.setDIACHI("TPHCM");
-        acc.setSDT("035640789");
+        acc.setSDT("0356407289");
         String sql = " ";
         if(stm!= null) {
             try {
@@ -73,25 +71,39 @@ public class CustomerService {
             }
         }
     }
-    public static String getIDKhach(String idAcc){
-        for(Customer c: getListCustomer()){
-            if(c.getMATAIKHOAN().equals(idAcc)){
-                return c.getMAKH();
+    public static void deleteCustomer(String makh) {
+        Statement statement = DBConnect.getInstall().get();
+        String sql =  "DELETE from taikhoan WHERE taikhoan.ID= '"+makh+"';";
+        if (statement != null) {
+            try {
+                statement.executeUpdate(sql);
+                System.out.println("thanh cong");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
+        } else {
+            System.out.println("not found");
         }
-        return null;
     }
-    public static String getIdAccByMakh(String makh){
-        for(Customer c: getListCustomer()){
-            if(c.getMAKH().equals(makh)){
-                return c.getMATAIKHOAN();
-            }
-        }
-        return null;
-    }
+//    public static String getIDKhach(String idAcc){
+//        for(Customer c: getListCustomer()){
+//            if(c.getMATAIKHOAN().equals(idAcc)){
+//                return c.getMAKH();
+//            }
+//        }
+//        return null;
+//    }
+//    public static String getIdAccByMakh(String makh){
+//        for(Customer c: getListCustomer()){
+//            if(c.getMAKH().equals(makh)){
+//                return c.getMATAIKHOAN();
+//            }
+//        }
+//        return null;
+//    }
     public static Customer getCusByIdAcc(String idAcc){
         for(Customer c: getListCustomer()){
-            if(c.getMATAIKHOAN().equals(idAcc)){
+            if(c.getMAKH().equals(idAcc)){
                 return c;
             }
         }

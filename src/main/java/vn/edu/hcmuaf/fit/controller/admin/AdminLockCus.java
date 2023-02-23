@@ -19,8 +19,7 @@ public class AdminLockCus extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String makh = request.getParameter("makh");
         request.setAttribute("mkh", makh);
-        int role = -1;
-        ReceiptService.updateRole( role, makh);
-        response.sendRedirect("/BanBanhKemSinhNhatWebProject/admin/ListCustomer");
+        ReceiptService.updateStatus(makh);
+        response.sendRedirect("./ListCustomer");
     }
 }

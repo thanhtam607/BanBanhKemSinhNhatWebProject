@@ -197,7 +197,7 @@
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <a href="#modal-delete<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-trash"></i>
+                                                    <i class="fa fa-eye"></i>
                                                 </a>
                                             </div>
                                             <!-- modal delete -->

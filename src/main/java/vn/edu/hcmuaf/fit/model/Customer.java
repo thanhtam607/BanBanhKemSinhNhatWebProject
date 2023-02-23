@@ -5,16 +5,14 @@ import vn.edu.hcmuaf.fit.bean.User;
 public class Customer {
     private String MAKH;
     private String TENKH;
-    private String MATAIKHOAN;
-    private String DIACHI ;
+    private String DIACHI;
     private String SDT;
     private int role;
 
-    public Customer(String MAKH, String TENKH, String MATAIKHOAN, String DIACHI, String SDT, int role) {
+    public Customer(String MAKH, String TENKH, String DIACHI, String SDT, int role) {
 
         this.MAKH = MAKH;
         this.TENKH = TENKH;
-        this.MATAIKHOAN = MATAIKHOAN;
         this.DIACHI = DIACHI;
         this.SDT = SDT;
         this.role = role;
@@ -40,14 +38,6 @@ public class Customer {
         this.TENKH = TENKH;
     }
 
-    public String getMATAIKHOAN() {
-        return MATAIKHOAN;
-    }
-
-    public void setMATAIKHOAN(String MATAIKHOAN) {
-        this.MATAIKHOAN = MATAIKHOAN;
-    }
-
     public String getDIACHI() {
         return DIACHI;
     }
@@ -70,7 +60,7 @@ public class Customer {
         }else if(this.role == 1){
             return "Admin";
         }
-        return "Khóa";
+        return "Quản lí";
     }
     public int getRoleNo() {
         return this.role;
@@ -86,7 +76,6 @@ public class Customer {
         return "Customer{" +
                 "MAKH='" + MAKH + '\'' +
                 ", TENKH='" + TENKH + '\'' +
-                ", MATAIKHOAN='" + MATAIKHOAN + '\'' +
                 ", DIACHI='" + DIACHI + '\'' +
                 ", SDT='" + SDT + '\'' +
                 '}';

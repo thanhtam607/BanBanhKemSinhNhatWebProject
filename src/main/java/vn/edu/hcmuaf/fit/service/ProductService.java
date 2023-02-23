@@ -16,16 +16,17 @@ public class ProductService {
         Statement stmt = DBConnect.getInstall().get();
         Statement stmt1 = DBConnect.getInstall().get();
         Statement stmt2 = DBConnect.getInstall().get();
+        ResultSet rsCmt;
+        ProductDetails detail = new ProductDetails();
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT distinct sanpham.MaSP ,sanpham.TenSP,loaibanh.TenLB, sanpham.KichThuoc, sanpham.KhoiLuong, sanpham.MoTa, sanpham.NoiDung, sanpham.Gia  from sanpham, loaibanh, giamgia where sanpham.MalB = loaibanh.MaLB");
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
-                    ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
+                    rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select masp, solg, tonkho, ngaysx, ngayhh from ctsp");
-                    ProductDetails detail = new ProductDetails();
                     String s1 = rs.getString(1);
                     while (rsImg.next()) {
                         String s2 = rsImg.getString(1);
@@ -266,10 +267,7 @@ public class ProductService {
         }
         return res;
     }
-    public static String getLocation(){
 
-        return "D:/BanBanhKemSinhNhatWebProject/src/main/webapp/";
-    }
     public static void updateProduct(String masp,String maLB, String tensp, String kichthuoc, int khoiluong, String mota, String noidung, int gia ){
         Statement statement = DBConnect.getInstall().get();
         String sql = "UPDATE sanpham set  MaLB='" +maLB+ "', TenSP= '"+ tensp+ "', KichThuoc= '" + kichthuoc+ "', KhoiLuong= "+ khoiluong+", MoTa = '"+ mota + "', NoiDung= '"+ noidung+"', Gia= "+gia+" where MaSP = '"+masp+"';";
@@ -340,10 +338,12 @@ public class ProductService {
 
     }
     public static  void addImg(Product p){
+        Statement statement2 = DBConnect.getInstall().get();
+        String maAnh;
+        String sql;
         for(int i = 0; i< p.getListImg().size();i++){
-            Statement statement2 = DBConnect.getInstall().get();
-            String maAnh = "ASP"+p.getId().substring(1)+"-"+(i+1);
-            String sql = "insert into anhsp values( '"+ maAnh+"', '"+ p.getId()+"', '"+ p.getListImg().get(i)+"');";
+            maAnh = "ASP"+p.getId().substring(1)+"-"+(i+1);
+            sql = "insert into anhsp values( '"+ maAnh+"', '"+ p.getId()+"', '"+ p.getListImg().get(i)+"');";
             try {
                 statement2.executeUpdate(sql);
             } catch (SQLException se) {
@@ -417,6 +417,21 @@ public class ProductService {
         String s = "B" + (Integer.parseInt(res.substring(1))+1);
         return s;
     }
+    public static List<String> getListSize(){
+        Statement statement = DBConnect.getInstall().get();
+        List<String> res = new ArrayList<>();
+
+        try {
+            ResultSet rs = statement.executeQuery("select distinct kichthuoc from sanpham");
+            while (rs.next()) {
+               res.add(rs.getString(1));
+            }
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return res;
+    }
 
     public static void main(String[] args) throws SQLException {
 
@@ -437,7 +452,7 @@ public class ProductService {
 //        System.out.println(getLastComment("B001").getBinhLuan());
 //       System.out.println(getPaginationPage(1).toString());
         // addComment(new Comment("B002", "Thanh Tâm","Bánh mềm mịn vô cùng hòa quyện với  phần kem mịn màng, vị ngọt thanh vừa ăn lại có thêm phần tiramisu khá lạ miệng khiến cho người ăn cảm thấy thích thú.","2022/12/8"), "AD02");
-
+//        System.out.print(getListSize().toString());
     }
 
 }

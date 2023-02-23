@@ -31,7 +31,7 @@ public class OrderService {
         String stt = getLastMaHD().substring(2);
         String mahd = "HD" + (Integer.parseInt(stt) + 1);
         order.setId(mahd);
-        String makh = CustomerService.getIDKhach(order.getUser().getId());
+        String makh = order.getUser().getId();
         String sql = "INSERT INTO HOADON VALUES('" + mahd + "', '" + makh + "', '"
                 + order.getBuyDate()  + "', '" + order.getNote() + "',"
                 +order.totalMoney()+ "," + order.getTrangthai()+");";
@@ -51,8 +51,9 @@ public class OrderService {
         if(stm!= null) {
             try {
                 for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
-                     sql = "INSERT INTO CTHD VALUES('" + order.getId() + "','" + entry.getValue().getSp().getId() + "'," + entry.getValue().getSoLgMua() +");";
+                     sql = "INSERT INTO CTHD VALUES('" + order.getId() + "','" + entry.getValue().getSp().getId() + "'," + entry.getValue().getSoLgMua() + ",'" +order.getNote()+"');";
                     stm.executeUpdate(sql);
+
                 }
             } catch (SQLException se) {
                 se.printStackTrace();

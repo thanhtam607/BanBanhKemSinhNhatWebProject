@@ -5,6 +5,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.CTHD" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -122,21 +123,20 @@
                             <!-- or red -->
                             <% for (int i = 0; i <= 0; i ++){
                                 if(!listre.isEmpty()){
-                                Receipt rc = listre.get(i); %>
+                                Receipt rc = listre.get(i);
+                                User user = UserService.findById(rc.getMakh());%>
                             <div class="profile__meta">
                                 <% String main__table = " ";
                                 String profile__text ="";
-                                    if(rc.getRoleint() == -1){
+                                    if(user.getStatus() == -1){
                                         main__table = "main__table-text--red";
                                         profile__text = "profile__action--delete";
-                                    } else if(rc.getRoleint() == 1){
+
+                                    }else{
                                         main__table = "main__table-text--green";
                                         profile__text = "profile__action--banned";
-                                    }else{
-                                        main__table = "main__table-text--black";
-                                        profile__text = "profile__action--banned";
                                     }%>
-                                <h3><%=rc.getNamecustomer()%> <span class="<%=main__table%>">(<%=rc.getRole()%>)</span></h3>
+                                <h3><%=rc.getNamecustomer()%> <span class="<%=main__table%>">(<%=user.getStatusName()%>)</span></h3>
                                 <span name = "makh" value="<%=rc.getMakh()%>"> ID: <%=rc.getMakh()%></span>
                             </div>
                         </div>
@@ -179,20 +179,42 @@
 
                         <!-- profile btns -->
                         <div class="profile__actions">
-                            <a href="#modal-status" class="profile__action <%=profile__text%> open-modal"><i class="fa fa-lock"></i></a>
-                            <a href="#modal-delete" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
+                            <%if(user.getStatus() == -1){%>
+                            <a href="#modal-status-unlock" class="profile__action <%=profile__text%> open-modal">
+                                <i class="fa fa-lock"></i>
+                            </a>
+                            <%}else{%>
+                            <a href="#modal-status-lock" class="profile__action <%=profile__text%> open-modal">
+                                <i class="fa fa-unlock"></i>
+                            </a>
+                            <%}%>
+<%--                            <a href="#modal-delete" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>--%>
                         </div>
                         <!-- end profile btns -->
                         <!-- modal status -->
                         <% String mkh = (String) request.getAttribute("mkh");%>
-                        <div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
-                            <form method="post" action="AdminLockCus">
+                        <div id="modal-status-lock" class="zoom-anim-dialog mfp-hide modal">
+                            <form method="post" action="AdminLockCusInEditUser">
                                 <h6 class="modal__title">Chặn Người Dùng</h6>
                                 <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
 
                                 <input name = "makh" value="<%=mkh%>" style="display: none">
                                 <div class="modal__btns">
                                     <button class="modal__btn modal__btn--apply" type="submit">Chặn</button>
+                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end modal status -->
+                        <!-- modal status -->
+                        <div id="modal-status-unlock" class="zoom-anim-dialog mfp-hide modal">
+                            <form method="post" action="AdminLockCusInEditUser">
+                                <h6 class="modal__title">Bỏ Chặn Người Dùng</h6>
+                                <p class="modal__text">Bạn có chắc muốn bỏ chặn người dùng này?</p>
+
+                                <input name = "makh" value="<%=mkh%>" style="display: none">
+                                <div class="modal__btns">
+                                    <button class="modal__btn modal__btn--apply" type="submit">OK</button>
                                     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                 </div>
                             </form>
@@ -245,7 +267,7 @@
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="rights">Phân Quyền</label>
+                                                    <label class="form__label" for="rights">Quyền Hạn</label>
                                                     <select class="form__input" id="rights" name="role">
                                                         <%List<String> listRole = (List<String>) request.getAttribute("listRole");
                                                             for(String r : listRole){

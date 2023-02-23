@@ -31,13 +31,13 @@
             <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
-              <a href="/BanBanhKemSinhNhatWebProject/MyOrder" method="get" class="dropdown-item">Đơn hàng của tôi</a>
-              <a href="/BanBanhKemSinhNhatWebProject/EditUserProfile" method="get" class="dropdown-item">Hồ sơ của tôi</a>
+              <a href="MyOrder" method="get" class="dropdown-item">Đơn hàng của tôi</a>
+              <a href="EditUserProfile" method="get" class="dropdown-item">Hồ sơ của tôi</a>
               <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
               <% if(auth.checkRole(1)) { %>
-              <a href="/BanBanhKemSinhNhatWebProject/admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+              <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
               <%}%>
-              <a href="/BanBanhKemSinhNhatWebProject/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
+              <a href="doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
             </div>
             <%}%>
           </div>

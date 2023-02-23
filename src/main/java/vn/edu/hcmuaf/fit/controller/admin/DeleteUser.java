@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller.admin;
 
+import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.*;
@@ -17,9 +18,9 @@ public class DeleteUser extends HttpServlet {
 
         String makh = request.getParameter("makh");
 
-        ReceiptService.deleteCustomer(makh);
+        CustomerService.deleteCustomer(makh);
 
-        response.sendRedirect("/BanBanhKemSinhNhatWebProject/admin/ListCustomer");
+        response.sendRedirect("ListCustomer");
     }
 
 

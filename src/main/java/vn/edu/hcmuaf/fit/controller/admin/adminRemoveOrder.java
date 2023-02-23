@@ -19,7 +19,7 @@ public class adminRemoveOrder extends HttpServlet {
         ReceiptService.updateTonKhoWhenCancelOrder(mahd);
         ReceiptService.cancelOrder(mahd);
 
-        response.sendRedirect("/BanBanhKemSinhNhatWebProject/admin/ListReceipt_full_Admin");
+        response.sendRedirect("./ListReceipt_full_Admin");
     }
 
     @Override
