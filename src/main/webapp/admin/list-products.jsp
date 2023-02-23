@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.ProductDetails" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -45,6 +46,7 @@
 </head>
 
 <body>
+<% User auth = (User) session.getAttribute("auth");%>
     <!-- header -->
     <header class="header">
         <div class="header__content">
@@ -75,8 +77,8 @@
 				<div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
 			</div>
 			<div class="ms-3">
-				<h6 class="mb-0">Thanh Thùy</h6>
-				<span>Admin</span>
+                <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
+                <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
 			</div>
 		</div>
 		<div class="navbar-nav w-100">

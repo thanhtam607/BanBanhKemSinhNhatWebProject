@@ -60,7 +60,7 @@ public class Customer {
         }else if(this.role == 1){
             return "Admin";
         }
-        return "Quản lí";
+        return "Quản Lí";
     }
     public int getRoleNo() {
         return this.role;

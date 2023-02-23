@@ -67,7 +67,14 @@ public class User implements Serializable {
         return role;
     }
 
-
+    public String getRoleName() {
+        if(this.role == 0){
+            return "Thường";
+        }else if(this.role == 1){
+            return "Admin";
+        }
+        return "Quản Lí";
+    }
     public void setRole(int role) {
         this.role = role;
     }

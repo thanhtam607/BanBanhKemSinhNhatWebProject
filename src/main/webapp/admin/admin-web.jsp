@@ -58,8 +58,8 @@
 				<div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
 			</div>
 			<div class="ms-3">
-				<h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
-				<span>Admin</span>
+                <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
+                <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
 			</div>
 		</div>
 		<div class="navbar-nav w-100">
@@ -93,7 +93,7 @@
                 <div class="navbar-nav align-items-center ms-auto">
 
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <a href="./signin.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-user icon__user__small"></i>
                             <span class="d-none d-lg-inline-flex"><%= auth != null ? auth.getTentk():"Đăng nhập"%></span>
                         </a>
@@ -185,7 +185,7 @@
                                     <td><%=rc.getAddress()%></td>
                                     <td><%=rc.formatNum(rc.getTotal())%> VND</td>
                                     <td>
-                                        <div class="main__table-text"><%=rc.getState()%></div>
+                                        <div class="main__table-text"><%=rc.getStatusName()%></div>
                                     </td>
                                     <td>
                                         <a href="cthd_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit">

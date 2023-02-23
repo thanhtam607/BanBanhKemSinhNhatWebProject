@@ -78,7 +78,7 @@
 			</div>
 			<div class="ms-3">
                 <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
-				<span>Admin</span>
+                <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
 			</div>
 		</div>
 		<div class="navbar-nav w-100">
