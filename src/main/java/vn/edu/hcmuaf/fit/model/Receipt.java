@@ -22,7 +22,11 @@ public class Receipt {
     String TenTK;
     int role;
     String email;
-    public Receipt(String id, String makh, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int status, List<Comment> commentList, String TenTK, int role, String email) {
+
+    public Receipt() {
+    }
+
+    public Receipt(String id, String makh, String namecustomer, String namecake, String phone, String sdate, String edate, String address, String note, int price, int total, int status, List<Comment> commentList, String TenTK, int role, String email) {
         this.id = id;
         this.makh = makh;
         this.namecustomer = namecustomer;
@@ -44,7 +48,7 @@ public class Receipt {
     public Receipt(String id, String makh, String sdate, String note, int money, int state) {
         this.id = id;
         this.makh = makh;
-        Sdate = sdate;
+        this.Sdate = sdate;
         this.note = note;
         this.money = money;
         this.state = state;
@@ -52,7 +56,7 @@ public class Receipt {
     public Receipt(String id, String makh, String sdate, String note, int money, int state, String dc) {
         this.id = id;
         this.makh = makh;
-        Sdate = sdate;
+        this.Sdate = sdate;
         this.note = note;
         this.money = money;
         this.state = state;

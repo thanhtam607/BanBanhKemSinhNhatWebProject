@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.CTHD" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +56,7 @@
 <header class="header">
   <div class="header__content">
     <!-- header logo -->
-    <a href="./ListReceipt_Admin" class="header__logo">
+    <a href="ListReceipt_Admin" class="header__logo">
       <img src="../img/logo_web.jpg" alt="">
     </a>
     <!-- end header logo -->
@@ -101,8 +102,9 @@
 <!-- Sidebar End -->
 
 <!-- main content -->
-<% List<CTHD> receiptsDt = (List<CTHD>) request.getAttribute("listcthdOfKH");
-String tenkh =(String) request.getAttribute("tenkh");%>
+<% Receipt receipt = (Receipt) request.getAttribute("receipt");
+  List<CTHD> receiptsDt = (List<CTHD>) request.getAttribute("listcthdOfKH");
+  String tenkh =(String) request.getAttribute("tenkh");%>
 <main class="main bg-white">
   <div class="container-fluid bg-white">
     <form class="row">
@@ -113,9 +115,18 @@ String tenkh =(String) request.getAttribute("tenkh");%>
         </div>
       </div>
       <div class="col-12">
-            <div class="col-12 form__content">
-              <h5 class=" margin-top-50px">Đơn Hàng Của <%=tenkh%></h5>
+        <h5 style="margin-bottom: 25px">Tên KH: <%=tenkh%></h5>
+            <div class="col-12 d-flex form__content pl-0 pr-0">
+              <div class="col-6 pl-0 pr-0">
+                <p>Ngày Lập: <%=receipt.getSdate()%></p>
+                <p>Ngày Giao Hàng: <%=receipt.getEdate()%></p>
+              </div>
+              <div class="col-6 pl-0 pr-0">
+                <p>Địa Chỉ Giao: <%=receipt.getAddress()%></p>
+                <p>Trạng Thái: <%=receipt.getStatusName()%></p>
+              </div>
             </div>
+        <p>Ghi Chú Chung: <%=receipt.getNote()%></p>
       </div>
       <div class="table-responsive margin-top-20px col-12 margin-right--20px">
         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -123,6 +134,7 @@ String tenkh =(String) request.getAttribute("tenkh");%>
           <tr class="text-black">
             <th scope="col">STT</th>
             <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Ghi chú</th>
             <th scope="col">Số lượng</th>
             <th scope="col">Đơn giá</th>
             <th scope="col">Tổng</th>
@@ -134,6 +146,7 @@ String tenkh =(String) request.getAttribute("tenkh");%>
           <tr>
             <td><%=i + 1%></td>
             <td><%=rcs.getTensp()%></td>
+            <td><%=rcs.getNote()%></td>
             <td><%=rcs.getSolg()%></td>
             <td><%=rcs.formatNum(rcs.getPrice())%></td>
             <td><%=rcs.formatNum(rcs.getToTalPrice())%></td>
@@ -142,19 +155,18 @@ String tenkh =(String) request.getAttribute("tenkh");%>
           <% } %>
         </table>
       </div>
-      <% int total = 0; %>
-      <% for (int i = 0; i < receiptsDt.size(); i++){
-        CTHD rcs = receiptsDt.get(i);
-        total += rcs.getToTalPrice(); }%>
+
       <div class="col-5 margin-top-20px">
-        <% for (int i = 0; i < 1; i++){
-          CTHD rcs = receiptsDt.get(i);%>
-        <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;<span class="text-danger text-uppercase text-pink" id="total"><%=rcs.formatNum(total)%> VND</span>
+
+        <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;
+        <span class="text-danger text-uppercase text-pink" id="total"><%=receipt.formatNum(receipt.getTotal())%> VND</span>
       </div>
-      <% } %>
       <div class="main__table-btns">
-        <div class="col-5">
+        <div class="col-9">
           <a href="ListReceipt_full_Admin" type="button" class="form__btn">Quay lại</a>
+        </div>
+        <div class="col-5">
+          <a href="" type="button" class="form__btn">In hóa đơn</a>
         </div>
       </div>
     </form>
