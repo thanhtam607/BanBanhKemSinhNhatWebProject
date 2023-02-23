@@ -812,6 +812,10 @@ ul {
 .main__table-text--red {
     color: #eb5757;
 }
+.main__table-text--yellow {
+    color: #2f80ed;
+    font-weight: 600;
+}
 
 .main__table-text--green {
     color: #29b474;

@@ -84,8 +84,8 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    public boolean checkRole(int i) {
-        if(this.role == i) return true;
+    public boolean checkRole() {
+        if(this.role == 1 || this.role == 2) return true;
         return false;
     }
     public boolean checkStatus() {
