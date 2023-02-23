@@ -773,7 +773,37 @@ function cancelOrder(mdh){
                 confirmButtonText: 'Hủy Đơn Hàng',
                 confirmButtonColor: '#ff96b7'}).then((result) => {
                     if (result.isConfirmed) {
-                        document.getElementById(mdh).remove();
+                        document.getElementById(mdh).innerHTML = "<button onclick=\"buyAgain('"+mdh+"')\" type=\"submit\" style=\"border:1px solid #ccc;\" class=\"btn rounded-0 py-2 ml-2\" >\n" +
+                            "                                    Mua lại\n" +
+                            "                                </button>";
+                        document.getElementById("statusName"+mdh).innerHTML = "<span>ĐÃ HỦY</span>";
+                    }
+                }
+            );
+        }
+    });
+}
+function buyAgain(mdh){
+    var url  = "BuyAgain";
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {mahd:mdh},
+        success: function (){
+
+            Swal.fire({
+                text:'Bạn muốn mua lại đơn hàng này?',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText:'Quay lại',
+                confirmButtonText: 'Mua lại',
+                confirmButtonColor: '#ff96b7'}).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById(mdh).innerHTML = " <button onclick=\"cancelOrder('"+mdh+"')\" type=\"submit\" style=\"border:1px solid #ccc;\" class=\"btn rounded-0 py-2 ml-2\" >\n" +
+                            "                                            Hủy đơn hàng\n" +
+                            "                                </button>";
+                        document.getElementById("statusName"+mdh).innerHTML = "<span>CHỜ XÁC NHẬN</span>";
                     }
                 }
             );

@@ -1,4 +1,5 @@
-
+CREATE DATABASE banbanhkem;
+use banbanhkem;
 -- --
 /*==============================loaibanh=====================================*/
 create table loaibanh(MALB char (4) not null PRIMARY key, TenLB varchar(40));
@@ -804,8 +805,7 @@ CREATE TABLE taikhoan(ID CHAR(4) PRIMARY KEY,
 									 PASS VARCHAR(255) NOT NULL,
 									 TENTK VARCHAR(100),
 									 ROLE tinyint(4) NOT NULL DEFAULT 0,
-									STATUS tinyint(4) DEFAULT 0
-									 );
+									STATUS tinyint(4) DEFAULT 0 );
 INSERT INTO taikhoan VALUES('AD01', 'thanhthuy@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Thanh Thùy', 1,0);
 INSERT INTO taikhoan VALUES('AD02', 'thanhtam@gmail.com', 'b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0', 'Thanh Tâm', 1,0);
 INSERT INTO taikhoan VALUES('AD03', 'thanhthuan@gmail.com', '35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281', 'Thanh Thuận', 1,0);
@@ -892,7 +892,7 @@ INSERT INTO CTHD VALUES('HD15', 'B090', 1, 'Bánh này lấy nên 20 tuổi');
 CREATE TABLE GIAOHANG(MAHD CHAR(4),
 										    NGAYGIAO DATETIME NOT NULL,
 												DIACHIGIAO VARCHAR(60) NOT NULL,
-												CONSTRAINT f_mhdgh FOREIGN KEY(MAHD) REFERENCES HOADON(MAHD)  );
+												CONSTRAINT f_mhdgh FOREIGN KEY(MAHD) REFERENCES HOADON(MAHD));
 --
 INSERT INTO GIAOHANG VALUES('HD01', '2022/11/11', 'Q1, TP HCM');
 INSERT INTO GIAOHANG VALUES('HD02', '2022/11/1', 'Q3, TP HCM');

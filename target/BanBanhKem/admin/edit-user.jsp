@@ -82,7 +82,7 @@
             </div>
             <div class="ms-3">
                 <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
-                <span>Admin</span>
+                <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
             </div>
         </div>
         <div class="navbar-nav w-100">
@@ -271,7 +271,7 @@
                                                     <select class="form__input" id="rights" name="role">
                                                         <%List<String> listRole = (List<String>) request.getAttribute("listRole");
                                                             for(String r : listRole){
-                                                                if(r == rc.getRole()){%>
+                                                                if(r == rc.getRoleName()){%>
                                                         <option selected value="<%=r%>"><%=r%></option>
                                                         <% } else {%>
                                                         <option value="<%=r%>"><%=r%></option>
@@ -346,7 +346,7 @@
                                                     <p class="comments__text">Số Lượng: <%=cthd.getSolg()%> </p>
                                                     <%}%>
                                                     <p class="comments__text">Địa chỉ giao: <%=r.getAddress()%></p>
-                                                    <p class="comments__text">Trạng thái: <%=r.getState()%></p>
+                                                    <p class="comments__text">Trạng thái: <%=r.getStatusName()%></p>
                                                 </div>
                                                 <!-- end modal view cthd-->
                                                 <!-- modal delete hd-->

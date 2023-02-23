@@ -78,7 +78,7 @@
 			</div>
 			<div class="ms-3">
                 <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
-				<span>Admin</span>
+                <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
 			</div>
 		</div>
 		<div class="navbar-nav w-100">
@@ -145,7 +145,7 @@
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Tên khách hàng</th>
+                                    <th>Tên người dùng</th>
                                     <th>Địa chỉ</th>
                                     <th>SĐT</th>
                                     <th>Quyền</th>
@@ -182,14 +182,13 @@
                                     <td>
                                         <% String main__table = " ";
                                             String main__btn ="";
-                                            String iconName = "";
                                             if(UserService.findById(customer.getMAKH()).getStatus() == -1){
                                                 main__btn = "main__table-btn--delete";
                                             }else{
                                                 main__btn = "main__table-btn--banned";
                                             }
                                             if(customer.getRoleNo() == 2){
-                                                main__table = "main__table-text--red";
+                                                main__table = "main__table-text--yellow";
                                             } else if(customer.getRoleNo() == 1){
                                                 main__table = "main__table-text--green";
                                             }else{
@@ -268,7 +267,7 @@
                 <!-- paginator -->
                 <div class="col-12">
                     <div class="paginator-wrap">
-                        <span>3/3 khách hàng</span>
+                        <span><%=listC.size()%> khách hàng</span>
 
                         <ul class="paginator">
                             <li class="paginator__item paginator__item--prev">
