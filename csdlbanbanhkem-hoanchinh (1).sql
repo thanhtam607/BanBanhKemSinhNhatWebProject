@@ -839,7 +839,7 @@ CREATE TABLE KHACHHANG(MAKH CHAR(4) PRIMARY KEY NOT NULL,
  /*==============================HOADON=====================================*/
 CREATE TABLE HOADON ( MAHD CHAR(4) PRIMARY KEY,
 											MAKH CHAR(4) NOT NULL,       
-											NGAYLAPHD DATE NOT NULL,
+											NGAYLAPHD DATETIME NOT NULL,
 											GHICHU VARCHAR(255),
 											THANHTIEN FLOAT,
 											STATUS int DEFAULT 0,	
@@ -983,3 +983,6 @@ CREATE table log(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, level TINYINT(4) no
 
 /*================================================================Query===================================================================*/
 -- 
+-- select hoadon.mahd, khachhang.TENKH, sanpham.TenSP, khachhang.sdt, hoadon.NGAYLAPHD, giaohang.NGAYGIAO, giaohang.DIACHIGIAO, hoadon.ghichu, sanpham.gia, hoadon.THANHTIEN,  hoadon.STATUS, khachhang.makh, sanpham.masp, taikhoan.TENTK,taikhoan.role, taikhoan.email
+--                 from sanpham, hoadon, khachhang, cthd, giaohang, taikhoan where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH and taikhoan.id = khachhang.makh 
+--                 group by hoadon.MAHD ORDER BY hoadon.NGAYLAPHD desc;
