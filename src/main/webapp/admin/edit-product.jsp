@@ -113,7 +113,7 @@
                     </div>
                 </div>
                 <!-- end main title -->
-<%Product p = (Product) request.getAttribute("product");%>
+            <%Product p = (Product) request.getAttribute("product");%>
                 <!-- profile -->
                 <div class="col-12">
                     <div class="profile__content">
