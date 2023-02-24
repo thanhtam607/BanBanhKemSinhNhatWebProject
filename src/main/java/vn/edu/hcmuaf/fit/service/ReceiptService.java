@@ -11,14 +11,14 @@ public class ReceiptService {
         List<Receipt> list = new LinkedList<Receipt>();
         Statement statement = DBConnect.getInstall().get();
         Statement stmt1 = DBConnect.getInstall().get();
-        String sql = "select hoadon.mahd, khachhang.TENKH, sanpham.TenSP, khachhang.sdt, hoadon.NGAYLAPHD, giaohang.NGAYGIAO, giaohang.DIACHIGIAO, hoadon.ghichu, sanpham.gia, hoadon.THANHTIEN,  hoadon.STATUS, khachhang.makh, sanpham.masp, taikhoan.TENTK,taikhoan.role, taikhoan.email\n" +
-                "from sanpham, hoadon, khachhang, cthd, giaohang, taikhoan where hoadon.mahd = cthd.MAHD and cthd.MASP = sanpham.MaSP and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH and taikhoan.id = khachhang.makh \n" +
+        String sql = "select hoadon.mahd, khachhang.TENKH, products.productName, khachhang.sdt, hoadon.NGAYLAPHD, giaohang.NGAYGIAO, giaohang.DIACHIGIAO, hoadon.ghichu, products.price, hoadon.THANHTIEN,  hoadon.STATUS, khachhang.makh, products.idProduct, taikhoan.TENTK,taikhoan.role, taikhoan.email\n" +
+                "from products, hoadon, khachhang, cthd, giaohang, taikhoan where hoadon.mahd = cthd.MAHD and cthd.idProduct = products.idProduct and giaohang.MAHD = hoadon.MAHD and khachhang.MAKH = hoadon.MAKH and taikhoan.id = khachhang.makh \n" +
                 "group by hoadon.MAHD ORDER BY hoadon.NGAYLAPHD desc;";
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery(sql);
                 while (rs.next()) {
-                    ResultSet rsCmt = stmt1.executeQuery("SELECT MaSP, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
+                    ResultSet rsCmt = stmt1.executeQuery("SELECT idProduct, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     String s1 = rs.getString(13);
                     while (rsCmt.next()) {
@@ -146,10 +146,10 @@ public class ReceiptService {
         Statement stmt = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT cthd.MAHD, cthd.MASP, sanpham.TenSP, sanpham.Gia, cthd.SL, cthd.GHICHU from hoadon, cthd, sanpham\n" +
-                        "WHERE cthd.MAHD = hoadon.MAHD and cthd.MASP = sanpham.MaSP ORDER BY cthd.MAHD DESC ");
+                ResultSet rs = statement.executeQuery("SELECT cthd.MAHD, cthd.idProduct, products.productName, products.Gia, cthd.SL, cthd.GHICHU from hoadon, cthd, products\n" +
+                        "WHERE cthd.MAHD = hoadon.MAHD and cthd.idProduct = products.idProduct ORDER BY cthd.MAHD DESC ");
                 while (rs.next()) {
-                    ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
+                    ResultSet rsImg = stmt.executeQuery("SELECT anhsp.idProduct,anhsp.Anh from anhsp");
                     List<String> listImg = new LinkedList<String>();
 
                     while (rsImg.next()) {
@@ -279,7 +279,7 @@ public class ReceiptService {
                     int sl = cthd.getSolg();
                     Product p = ProductService.findById(msp);
                     int solgConLai = p.getDetail().getInventory() + sl;
-                    String sql = "UPDATE ctsp set ctsp.tonKho = " + solgConLai + " WHERE ctsp.MaSP ='" + msp + "'";
+                    String sql = "UPDATE productDetails set productDetails.inventory = " + solgConLai + " WHERE productDetails.idProduct ='" + msp + "'";
                     stm.executeUpdate(sql);
                 }
             } catch (SQLException se) {
@@ -298,7 +298,7 @@ public class ReceiptService {
                     int sl = cthd.getSolg();
                     Product p = ProductService.findById(msp);
                     int solgConLai = p.getDetail().getInventory() - sl;
-                    String sql = "UPDATE ctsp set ctsp.tonKho = " + solgConLai + " WHERE ctsp.MaSP ='" + msp + "'";
+                    String sql = "UPDATE productDetails set productDetails.inventory = " + solgConLai + " WHERE productDetails.idProduct ='" + msp + "'";
                     stm.executeUpdate(sql);
                 }
             } catch (SQLException se) {

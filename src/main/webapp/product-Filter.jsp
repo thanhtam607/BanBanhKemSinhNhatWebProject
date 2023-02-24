@@ -2,7 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.LoaiBanh" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.TypeOfCake" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="java.util.ArrayList" %>
@@ -208,12 +208,12 @@
                             <h4>Các Loại Bánh</h4>
                             <ul class="slidebar__loaibanh">
                                 <li class="text__loaibanh"><a href="./ListProduct">Tất cả</a></li>
-                                <%List<LoaiBanh> ListType = ProductService.getListType();
-                                    for(LoaiBanh lb: ListType){
-                                        if(lb.getTenLB().equals(request.getParameter("filter"))){%>
-                                             <li class="text__loaibanh"><a class="text__loaibanh__active"  href="ProductFilter?title=<%=lb.getTenLB()%> &filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
+                                <%List<TypeOfCake> ListType = ProductService.getListType();
+                                    for(TypeOfCake lb: ListType){
+                                        if(lb.getName().equals(request.getParameter("filter"))){%>
+                                             <li class="text__loaibanh"><a class="text__loaibanh__active"  href="ProductFilter?title=<%=lb.getName()%> &filter=<%=lb.getName()%>"><%=lb.getName()%></a></li>
                                         <%} else{ %>
-                                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getTenLB()%> &filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
+                                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getName()%> &filter=<%=lb.getName()%>"><%=lb.getName()%></a></li>
                                 <%}}%>
 
                             </ul>

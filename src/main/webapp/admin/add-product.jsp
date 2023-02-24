@@ -1,5 +1,5 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.LoaiBanh" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.TypeOfCake" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
@@ -153,9 +153,9 @@
                                             <div class="form__group">
                                                 <label class="form__label" >Loại bánh:</label>
                                                 <select class="form-select form__input" name="loaiBanh" >
-                                                    <% List<LoaiBanh> ListType = ProductService.getListType();
-                                                    for(LoaiBanh lb: ListType){%>
-                                                    <option value="<%=lb.getMaLB()%>"><%=lb.getTenLB()%></option>
+                                                    <% List<TypeOfCake> ListType = ProductService.getListType();
+                                                    for(TypeOfCake lb: ListType){%>
+                                                    <option value="<%=lb.getIdType()%>"><%=lb.getName()%></option>
                                                     <%}%>
                                                 </select>
                                             </div>

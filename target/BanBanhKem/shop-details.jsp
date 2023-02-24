@@ -211,7 +211,7 @@
                     <h3><%= pro.getName()%></h3>
 
                     <div class="product__details__price"><%= pro.formatNum(pro.getPrice())%> VND</div>
-                    <p><%= pro.getNoiDung()%></p>
+                    <p><%= pro.getIntroduction()%></p>
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty" >
@@ -255,15 +255,15 @@
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="product__details__tab__desc">
                                 <h6>Mô tả sản phẩm</h6>
-                                <p><%= pro.getMoTa()%></p>
+                                <p><%= pro.getDescription()%></p>
                             </div>
                         </div>
                         <div class="tab-pane" id="tabs-2" role="tabpanel">
                             <div class="product__details__tab__desc">
                                 <h6>Đặc điểm:</h6>
-                                <p>- Loại bánh: <%= pro.getLoaiBanh()%></p>
-                                <p>- Kích thước: <%= pro.getKichThuoc()%></p>
-                                <p>- Khối lượng: <%= pro.getKhoiLuong()%></p>
+                                <p>- Loại bánh: <%= pro.getType()%></p>
+                                <p>- Kích thước: <%= pro.getSize()%></p>
+                                <p>- Khối lượng: <%= pro.getWeight()%>g</p>
                             </div>
                         </div>
 
@@ -310,7 +310,7 @@
             </div>
         </div>
         <div class="row">
-            <% String type = pro.getLoaiBanh(); %>
+            <% String type = pro.getType(); %>
             <% List<Product> listproduct = (List<Product>) request.getAttribute("splq");
             listproduct = ProductService.findByType(type);
             if (listproduct.size() < 4) {
@@ -359,9 +359,9 @@
             </div>
             <% }
             }%>
-            <%List<LoaiBanh> ListType = ProductService.getListType();
-                for(LoaiBanh lb: ListType){%>
-            <a href="ProductFilter?title=<%=lb.getTenLB()%> &filter=<%=lb.getTenLB()%>" type="button" class="btn btn_pink py-md-3 px-md-5 mt-2 btn-rm" >Xem nhiều hơn</a>
+            <%List<TypeOfCake> ListType = ProductService.getListType();
+                for(TypeOfCake lb: ListType){%>
+            <a href="ProductFilter?title=<%=lb.getName()%> &filter=<%=lb.getName()%>" type="button" class="btn btn_pink py-md-3 px-md-5 mt-2 btn-rm" >Xem nhiều hơn</a>
             <% break;} %>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.LoaiBanh" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.TypeOfCake" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
@@ -211,19 +211,19 @@
                                                 <div class="form__group">
                                                     <label class="form__label">Loại bánh</label>
                                                     <select class="form-select form__input" name="loaiBanh" >
-                                                    <%List<LoaiBanh> ListType = ProductService.getListType();
-                                                        for(LoaiBanh lb: ListType){
-                                                    if(lb.getTenLB().equals(p.getLoaiBanh())){%>
-                                                        <option selected value="<%=lb.getMaLB()%>"><%=lb.getTenLB()%></option>
+                                                    <%List<TypeOfCake> ListType = ProductService.getListType();
+                                                        for(TypeOfCake lb: ListType){
+                                                    if(lb.getName().equals(p.getType())){%>
+                                                        <option selected value="<%=lb.getIdType()%>"><%=lb.getName()%></option>
                                                         <%} else {%>
-                                                        <option value="<%=lb.getMaLB()%>"><%=lb.getTenLB()%></option>
+                                                        <option value="<%=lb.getIdType()%>"><%=lb.getName()%></option>
                                                     <%}}%></select>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-5 col-lg-12 col-xl-5">
                                                 <div class="form__group">
                                                     <label class="form__label" for="weight">Khối lượng (g)</label>
-                                                    <input id="weight" type="number" min="10" name="weight" class="form__input" value="<%=p.getKhoiLuong()%>">
+                                                    <input id="weight" type="number" min="10" name="weight" class="form__input" value="<%=p.getWeight()%>">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
@@ -238,7 +238,7 @@
                                                     <select class="form__input" id="rights" name="size">
                                                         <%List<String> listSize = (List<String>) request.getAttribute("listSize");
                                                         for(String s: listSize){
-                                                            if(s.equals(p.getKichThuoc())){%>
+                                                            if(s.equals(p.getSize())){%>
                                                         <option selected value="<%=s%>"><%=s%></option>
                                                            <% }else{%>
                                                         <option value="<%=s%>"><%=s%></option>
@@ -249,13 +249,13 @@
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
                                                     <label class="form__label" for="description">Mô tả sản phẩm</label>
-                                                    <textarea class="form__input "  id="description" name="description" form="info-product" ><%=p.getMoTa()%></textarea>
+                                                    <textarea class="form__input "  id="description" name="description" form="info-product" ><%=p.getDescription()%></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
                                                     <label class="form__label" for="description">Giới thiệu sản phẩm</label>
-                                                    <textarea class="form__input "  id="introduce" name="intro" form="info-product" ><%=p.getMoTa()%></textarea>
+                                                    <textarea class="form__input "  id="introduce" name="intro" form="info-product" ><%=p.getIntroduction()%></textarea>
                                                 </div>
                                             </div>
 
