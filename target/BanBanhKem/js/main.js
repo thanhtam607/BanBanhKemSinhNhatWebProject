@@ -838,3 +838,11 @@ function changeProfile(){
         }
     });
 }
+// function to hide a blog
+function hideBlog(blogID) {
+    // get the relevant product element
+    var productElement = document.getElementById(blogID);
+
+    // set the visibility to hidden
+    productElement.style.visibility = 'hidden';
+}

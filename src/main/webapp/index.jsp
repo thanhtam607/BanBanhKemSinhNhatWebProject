@@ -308,7 +308,24 @@
             <div class="row">
                 <% List<Blog> list2 = (List<Blog>) request.getAttribute("list");
                     for(int i = 0; i<3;i++){
-                        Blog b2 = list2.get(i);%>
+                        Blog b2 = list2.get(i);
+                if(b2.getStatus() == -1){ %>
+                <div class="col-lg-4 col-md-4 col-sm-6" style = "display: none">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="<%=b2.getImg()%>" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i><%=b2.getDate()%></li>
+                            </ul>
+                            <h5><a href="BlogDetails?id=<%=b2.getId()%>"><%=b2.getCategory()%></a></h5>
+                            <p class="text-justify"><%=b2.getCont()%></p>
+                            <a href="BlogDetails?id=<%=b2.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
+                        </div>
+                    </div>
+                </div>
+                <%} else {%>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
@@ -324,7 +341,7 @@
                         </div>
                     </div>
                 </div>
-                <%}%>
+                <% } } %>
             </div>
         </div>
     </section>

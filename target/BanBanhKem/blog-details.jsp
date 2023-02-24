@@ -102,7 +102,6 @@
 <!-- Header Section Begin -->
 <header class="header">
     <jsp:include page="hearder-top.jsp"></jsp:include>
-
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -128,7 +127,6 @@
                         <li><a onclick="notLogged()"><i class="fa fa-heart"></i> <span ><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
                         <% }else {%>
                         <li><a href="Favorite"><i class="fa fa-heart"></i> <span id="totalFav1"><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
-
                         <%}%>
                         <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
                     </ul>
@@ -219,6 +217,17 @@
                             <%List<Blog> list = (List<Blog>) request.getAttribute("list");
                                 for(Blog menublog: list){ %>
                             <div class="blog__sidebar__recent">
+                               <% if(menublog.getStatus() == -1 ) { %>
+                                <a href="BlogDetails?id=<%=menublog.getId()%>" class="blog__sidebar__recent__item" style="display: none">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img src="<%=menublog.getImg()%>" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6><%=menublog.getCategory()%></h6>
+                                        <span><%=menublog.getDate()%></span>
+                                    </div>
+                                </a>
+                                <% } else { %>
                                 <a href="BlogDetails?id=<%=menublog.getId()%>" class="blog__sidebar__recent__item">
                                     <div class="blog__sidebar__recent__item__pic">
                                         <img src="<%=menublog.getImg()%>" alt="">
@@ -228,6 +237,7 @@
                                         <span><%=menublog.getDate()%></span>
                                     </div>
                                 </a>
+                                <%}%>
                             </div>
                             <%}%>
                         </div>
@@ -290,7 +300,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         </div>
@@ -310,7 +319,24 @@
                         <div class="row">
                             <%List<Blog> listhotblog = (List<Blog>) request.getAttribute("list");
                                 for(int i = 0; i<3;i++){
-                                    Blog bloghot = listhotblog.get(i);%>
+                                    Blog bloghot = listhotblog.get(i);
+                            if(bloghot.getStatus() == -1) { %>
+                            <div class="col-lg-4 col-md-4 col-sm-6" style="display: none">
+                                <div class="blog__item">
+                                    <div class="blog__item__pic">
+                                        <img src="<%=bloghot.getImg()%>" alt="">
+                                    </div>
+                                    <div class="blog__item__text">
+                                        <ul>
+                                            <li><i class="fa fa-calendar-o"></i><%=bloghot.getDate()%></li>
+                                        </ul>
+                                        <h5><a href="blog-details.jsp"><%=bloghot.getCategory()%></a></h5>
+                                        <p class="text-justify"><%=bloghot.getCont()%></p>
+                                        <a href="BlogDetails?id=<%=bloghot.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <%} else {%>
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
@@ -326,7 +352,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <%}%>
+                            <% } } %>
                         </div>
                     </div>
                 </section>
