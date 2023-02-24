@@ -5,30 +5,24 @@ import java.util.List;
 
 public class Blog implements Serializable {
     String id;
-    String category;
-    String cont;
     String img;
+    String title;
     String date;
-    List<String> listdanhmuc;
-    List<String> listchude;
-    List<String> listdemuc;
-    List<String> listchitiet;
-    List<String> listid;
+    String cont;
+    String category;
+    String season;
     int status;
-    public Blog(String id, String category,   String cont, String img, String date, List<String> listdanhmuc,  List<String> listchude, List<String> listdemuc, List<String> listchitiet, List<String> listid, int status) {
+
+    public Blog(String id, String img, String title, String date, String cont, String category, String season, int status) {
         this.id = id;
-        this.category = category;
-        this.cont = cont;
         this.img = img;
+        this.title = title;
         this.date = date;
-        this.listdanhmuc = listdanhmuc;
-        this.listchude = listchude;
-        this.listdemuc = listdemuc;
-        this.listchitiet = listchitiet;
-        this.listid = listid;
+        this.cont = cont;
+        this.category = category;
+        this.season = season;
         this.status = status;
     }
-
 
     public String getId() {
         return id;
@@ -42,10 +36,21 @@ public class Blog implements Serializable {
         return category;
     }
 
+    public String getTitle() {
+        return title;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
+    public String getSeason() {
+        return season;
+    }
 
-
+    public void setSeason(String season) {
+        this.season = season;
+    }
 
     public void setCategory(String category) {
         this.category = category;
@@ -75,45 +80,6 @@ public class Blog implements Serializable {
         this.date = date;
     }
 
-    public List<String> getListdanhmuc() {
-        return listdanhmuc;
-    }
-
-    public void setListdanhmuc(List<String> listdanhmuc) {
-        this.listdanhmuc = listdanhmuc;
-    }
-
-    public List<String> getListchude() {
-        return listchude;
-    }
-
-    public void setListchude(List<String> listchude) {
-        this.listchude = listchude;
-    }
-
-    public List<String> getListdemuc() {
-        return listdemuc;
-    }
-
-    public void setListdemuc(List<String> listBlog) {
-        this.listdemuc = listdemuc;
-    }
-
-    public List<String> getListchitiet() {
-        return listchitiet;
-    }
-
-    public void setListchitiet(List<String> listchitiet) {
-        this.listchitiet = listchitiet;
-    }
-
-    public List<String> getListid() {
-        return listid;
-    }
-
-    public void setListid(List<String> listid) {
-        this.listid = listid;
-    }
 
     public int getStatus() {
         return status;
@@ -131,20 +97,5 @@ public class Blog implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "Blog{" +
-                "id='" + id + '\'' +
-                ", category='" + category + '\'' +
-                ", cont='" + cont + '\'' +
-                ", img='" + img + '\'' +
-                ", date='" + date + '\'' +
-                ", listdanhmuc=" + listdanhmuc +
-                ", listchude=" + listchude +
-                ", listdemuc=" + listdemuc +
-                ", listchitiet=" + listchitiet +
-                '}';
     }
 }

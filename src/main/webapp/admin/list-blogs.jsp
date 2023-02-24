@@ -162,12 +162,12 @@
                                         <div class="main__user">
                                            
                                             <div class="main__meta">
-                                                <h3><%=blog.getCategory()%></h3>
+                                                <h3><%=blog.getTitle()%></h3>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text"><%=blog.getListdanhmuc().get(0)%></div>
+                                        <div class="main__table-text"><%=blog.getCategory()%></div>
                                     </td>
                                     
                                     <td>

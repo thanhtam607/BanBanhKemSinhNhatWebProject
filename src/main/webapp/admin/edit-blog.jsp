@@ -118,7 +118,7 @@
                             </div>
                             <!-- or red -->
                             <div class="profile__meta profile__meta--green">
-                                <h3>Tên bài viết: <%=b.getCategory()%></h3>
+                                <h3>Tên bài viết: <%=b.getTitle()%></h3>
                                 <span>ID: <%=b.getId()%></span>
                             </div>
                         </div>
@@ -145,25 +145,22 @@
                                         <div class="row row--form">
                                             <div class="col-12">
                                             </div>
-                                            <% for (int i = 0; i < b.getListdemuc().size(); i++) { %>
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <input style="display: none;" type="text" name="<%="idB" + (i + 1)%>" class="form__input" value="<%=b.getId()%>">
-                                                <input style="display: none;" type="text" name=" + <%="idctB" + (i + 1)%>" class="form__input" value="<%=b.getListid().get(i)%>">
+                                                <input style="display: none;" type="text" name="<%=b.getId()%>" class="form__input" value="<%=b.getId()%>">
                                             </div>
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
                                                     <label class="form__label" for="description">Nội dung</label>
-                                                    <textarea class="form__input "  id="description" name="description" form="info-blog"><%=b.getListchitiet()%></textarea>
+                                                    <textarea class="form__input "  id="description" name="description" form="info-blog"><%=b.getCont()%></textarea>
                                                 </div>
                                             </div>
-                                            <% } %>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label">Danh mục</label>
                                                     <select class="form__input"  name="title">
                                                         <%List<String> listDm = (List<String>) request.getAttribute("listDm");
                                                             for(String dm : listDm){
-                                                                if(dm == b.getListdanhmuc().get(0)){%>
+                                                                if(dm == b.getCategory()){%>
                                                         <option selected value="<%=dm%>"><%=dm%></option>
                                                         <% } else {%>
                                                         <option value="<%=dm%>"><%=dm%></option>
@@ -177,7 +174,7 @@
                                                     <select class="form__input" name="topic">
                                                         <%List<String> listCd = (List<String>) request.getAttribute("listCd");
                                                             for(String cd : listCd){
-                                                                if(cd == b.getListchude().get(0)){%>
+                                                                if(cd == b.getSeason()){%>
                                                         <option selected value="<%=cd%>"><%=cd%></option>
                                                         <% } else {%>
                                                         <option value="<%=cd%>"><%=cd%></option>

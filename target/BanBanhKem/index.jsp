@@ -319,8 +319,8 @@
                             <ul>
                                 <li><i class="fa fa-calendar-o"></i><%=b2.getDate()%></li>
                             </ul>
-                            <h5><a href="BlogDetails?id=<%=b2.getId()%>"><%=b2.getCategory()%></a></h5>
-                            <p class="text-justify"><%=b2.getCont()%></p>
+                            <h5><a href="BlogDetails?id=<%=b2.getId()%>"><%=b2.getTitle()%></a></h5>
+                            <p class="text-justify"></p>
                             <a href="BlogDetails?id=<%=b2.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                         </div>
                     </div>
@@ -335,8 +335,8 @@
                             <ul>
                                 <li><i class="fa fa-calendar-o"></i><%=b2.getDate()%></li>
                             </ul>
-                            <h5><a href="BlogDetails?id=<%=b2.getId()%>"><%=b2.getCategory()%></a></h5>
-                            <p class="text-justify"><%=b2.getCont()%></p>
+                            <h5><a href="BlogDetails?id=<%=b2.getId()%>"><%=b2.getTitle()%></a></h5>
+                            <p class="text-justify"></p>
                             <a href="BlogDetails?id=<%=b2.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                         </div>
                     </div>

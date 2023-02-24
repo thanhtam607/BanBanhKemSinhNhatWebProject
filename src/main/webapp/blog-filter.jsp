@@ -204,8 +204,8 @@
                                         <h4>Danh mục</h4>
                                         <ul>
                                             <li><a href="./ListBlog">Tất cả</a></li>
-                                            <li><a href="BlogDanhMuc?danhmuc=Đời Sống">Đời Sống (3)</a></li>
-                                            <li><a href="BlogDanhMuc?danhmuc=Kỉ niệm">Kỷ niệm (1)</a></li>
+                                            <li><a href="BlogCategory?category=Đời Sống">Đời Sống (3)</a></li>
+                                            <li><a href="BlogCategory?category=Kỉ niệm">Kỷ niệm (1)</a></li>
 
                                         </ul>
                                     </div>
@@ -220,7 +220,7 @@
                                                     <img src="<%=b1.getImg()%>" alt="">
                                                 </div>
                                                 <div class="blog__sidebar__recent__item__text">
-                                                    <h6><%=b1.getCategory()%></h6>
+                                                    <h6><%=b1.getTitle()%></h6>
                                                     <span><%=b1.getDate()%></span>
                                                 </div>
                                             </a>
@@ -230,7 +230,7 @@
                                                     <img src="<%=b1.getImg()%>" alt="">
                                                 </div>
                                                 <div class="blog__sidebar__recent__item__text">
-                                                    <h6><%=b1.getCategory()%></h6>
+                                                    <h6><%=b1.getTitle()%></h6>
                                                     <span><%=b1.getDate()%></span>
                                                 </div>
                                             </a>
@@ -242,11 +242,11 @@
                                         <h4>Chủ đề</h4>
                                         <div class="blog__sidebar__item__tags">
                                             <a href="./ListBlog">Bánh kem</a>
-                                            <a href="BlogChuDe?chude=Hiện đại">Hiện đại</a>
-                                            <a href="BlogChuDe?chude=Bảo quản bánh">Bảo quản bánh</a>
-                                            <a href="BlogChuDe?chude=Chọn bánh">Chọn bánh</a>
-                                            <a href="BlogChuDe?chude=Ý nghĩa bánh">Ý nghĩa bánh</a>
-                                            <a href="BlogChuDe?chude=Khác">Khác</a>
+                                            <a href="BlogSeason?season=Hiện đại">Hiện đại</a>
+                                            <a href="BlogSeason?season=Bảo quản bánh">Bảo quản bánh</a>
+                                            <a href="BlogSeason?season=Chọn bánh">Chọn bánh</a>
+                                            <a href="BlogSeason?season=Ý nghĩa bánh">Ý nghĩa bánh</a>
+                                            <a href="BlogSeason?season=Khác">Khác</a>
                                         </div>
                                     </div>
                                 </div>
@@ -265,7 +265,7 @@
                                                 <ul>
                                                     <li><i class="fa fa-calendar-o"></i><%=b.getDate()%></li>
                                                 </ul>
-                                                <h5><a href="BlogDetails?id=<%=b.getId()%>"><%=b.getCategory()%></a></h5>
+                                                <h5><a href="BlogDetails?id=<%=b.getId()%>"><%=b.getTitle()%></a></h5>
                                                 <p class="text-justify"><%=b.getCont()%></p>
                                                 <a href="BlogDetails?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
                                             </div>
@@ -281,7 +281,7 @@
                                                 <ul>
                                                     <li><i class="fa fa-calendar-o"></i><%=b.getDate()%></li>
                                                 </ul>
-                                                <h5><a href="BlogDetails?id=<%=b.getId()%>"><%=b.getCategory()%></a></h5>
+                                                <h5><a href="BlogDetails?id=<%=b.getId()%>"><%=b.getTitle()%></a></h5>
                                                 <p class="text-justify"><%=b.getCont()%></p>
                                                 <a href="BlogDetails?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
                                             </div>

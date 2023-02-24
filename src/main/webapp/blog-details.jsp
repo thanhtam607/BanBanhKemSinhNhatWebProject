@@ -208,8 +208,8 @@
                             <h4>Danh mục</h4>
                             <ul>
                                 <li><a href="./ListBlog">Tất cả</a></li>
-                                <li><a href="BlogDanhMuc?danhmuc=Đời Sống" >Đời sống (3)</a></li>
-                                <li><a href="BlogDanhMuc?danhmuc=Kỉ niệm">Kỷ niệm (1)</a></li>
+                                <li><a href="BlogCategory?category=Đời Sống" >Đời sống (3)</a></li>
+                                <li><a href="BlogCategory?category=Kỉ niệm">Kỷ niệm (1)</a></li>
                             </ul>
                         </div>
                         <div class="blog__sidebar__item">
@@ -223,7 +223,7 @@
                                         <img src="<%=menublog.getImg()%>" alt="">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
-                                        <h6><%=menublog.getCategory()%></h6>
+                                        <h6><%=menublog.getTitle()%></h6>
                                         <span><%=menublog.getDate()%></span>
                                     </div>
                                 </a>
@@ -233,7 +233,7 @@
                                         <img src="<%=menublog.getImg()%>" alt="">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
-                                        <h6><%=menublog.getCategory()%></h6>
+                                        <h6><%=menublog.getTitle()%></h6>
                                         <span><%=menublog.getDate()%></span>
                                     </div>
                                 </a>
@@ -245,11 +245,11 @@
                             <h4>Chủ đề</h4>
                             <div class="blog__sidebar__item__tags">
                                 <a href="./ListBlog">Bánh kem</a>
-                                <a href="BlogChuDe?chude=Hiện đại">Hiện đại</a>
-                                <a href="BlogChuDe?chude=Bảo quản bánh">Bảo quản bánh</a>
-                                <a href="BlogChuDe?chude=Chọn bánh">Chọn bánh</a>
-                                <a href="BlogChuDe?chude=Ý nghĩa bánh">Ý nghĩa bánh</a>
-                                <a href="BlogChuDe?chude=Khác">Khác</a>
+                                <a href="BlogSeason?season=Hiện đại">Hiện đại</a>
+                                <a href="BlogSeason?season=Bảo quản bánh">Bảo quản bánh</a>
+                                <a href="BlogSeason?season=Chọn bánh">Chọn bánh</a>
+                                <a href="BlogSeason?season=Ý nghĩa bánh">Ý nghĩa bánh</a>
+                                <a href="BlogSeason?season=Khác">Khác</a>
                             </div>
                             <div class="blog__sidebar__item__tags">
                             </div>
@@ -258,18 +258,9 @@
                 </div>
                 <div class="col-lg-8 col-md-7 order-md-1 order-1">
                     <div class="blog__details__text">
-                        <h3 class="text-center cochu-blog"><%= b.getCategory()%></h3>
+                        <h3 class="text-center cochu-blog"><%= b.getTitle()%></h3>
                         <img src="<%=b.getImg()%>" alt="" class = "image-blog">
-                        <h4><%=b.getListdemuc().get(0)%></h4>
-                        <p class="text-justify"><%=b.getListchitiet().get(0)%></p>
-                        <h4><%=b.getListdemuc().get(1)%></h4>
-                        <p class="text-justify"><%=b.getListchitiet().get(1)%></p>
-                        <span id="bld1">
-                        <h4><%=b.getListdemuc().get(2)%></h4>
-                        <p class="text-justify"><%=b.getListchitiet().get(2)%></p>
-                            <h4><%=b.getListdemuc().get(3)%></h4>
-                        <p class="text-justify"><%=b.getListchitiet().get(3)%></p>
-                        </span>
+                        <p class="text-justify"><%=b.getCont()%></p>
                       <span id="readmore" type="button" class="blog__btn" onclick="myFunction()">Xem thêm</span>
                     <div class="blog__details__content">
                         <div class="row">
@@ -287,8 +278,8 @@
                             <div class="col-lg-6">
                                 <div class="blog__details__widget">
                                     <ul>
-                                        <li><span>Danh mục:</span><%=b.getListdanhmuc().get(0)%></li>
-                                        <li><span>Chủ đề:</span><%=b.getListchude().get(0)%> </li>
+                                        <li><span>Danh mục:</span><%=b.getCategory()%></li>
+                                        <li><span>Chủ đề:</span><%=b.getSeason()%> </li>
                                     </ul>
                                     <div class="blog__details__social">
                                         <a href="https://www.facebook.com/mai.thuan.52438/"><i class="fa fa-facebook"></i></a>
@@ -330,8 +321,8 @@
                                         <ul>
                                             <li><i class="fa fa-calendar-o"></i><%=bloghot.getDate()%></li>
                                         </ul>
-                                        <h5><a href="blog-details.jsp"><%=bloghot.getCategory()%></a></h5>
-                                        <p class="text-justify"><%=bloghot.getCont()%></p>
+                                        <h5><a href="blog-details.jsp"><%=bloghot.getTitle()%></a></h5>
+                                        <p class="text-justify"></p>
                                         <a href="BlogDetails?id=<%=bloghot.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                                     </div>
                                 </div>
@@ -346,8 +337,8 @@
                                         <ul>
                                             <li><i class="fa fa-calendar-o"></i><%=bloghot.getDate()%></li>
                                         </ul>
-                                        <h5><a href="blog-details.jsp"><%=bloghot.getCategory()%></a></h5>
-                                        <p class="text-justify"><%=bloghot.getCont()%></p>
+                                        <h5><a href="blog-details.jsp"><%=bloghot.getTitle()%></a></h5>
+                                        <p class="text-justify"></p>
                                         <a href="BlogDetails?id=<%=bloghot.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                                     </div>
                                 </div>

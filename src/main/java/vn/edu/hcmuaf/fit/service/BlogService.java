@@ -13,32 +13,12 @@ public class BlogService {
     public static List<Blog> getData() {
         List<Blog> list = new LinkedList<Blog>();
         Statement statement = DBConnect.getInstall().get();
-        Statement stmt = DBConnect.getInstall().get();
 
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  blog.mablog, blog.tieude,blog.mota, blog.anhblog, blog.ngaydang, blog.danhmuc, blog.chude, blog.status from blog ");
-                while (rs.next()) {
-                    ResultSet rsdetails = stmt.executeQuery("SELECT ctblog.mablog, ctblog.demuc, ctblog.chitiet, ctblog.mactb from ctblog");
-                    List<String> listdemuc = new LinkedList<String>();
-                    List<String> listchitiet = new LinkedList<String>();
-                    List<String> listdanhmuc = new LinkedList<String>();
-                    List<String> listchude = new LinkedList<String>();
-                    List<String> listid = new LinkedList<String>();
-                    while (rsdetails.next()) {
-                        String s1 = rs.getString(1);
-                        String s2 = rsdetails.getString(1);
-                        if (s1.equals(s2)) {
-                            listchude.add(rs.getString(7));
-                            listdanhmuc.add(rs.getString(6));
-                            listdemuc.add(rsdetails.getString(2));
-                            listchitiet.add(rsdetails.getString(3));
-                            listid.add(rsdetails.getString(4));
-
-                        }
-                    }
-
-                    Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), listdanhmuc, listchude,  listdemuc, listchitiet, listid, rs.getInt(8));
+                ResultSet rs = statement.executeQuery("SELECT  blog.idblog, blog.imgblog,blog.title, blog.date, blog.content, blog.category, blog.season, blog.status from blog ");
+                while(rs.next()) {
+                    Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
                     list.add(b);
                 }
             } catch (SQLException e) {
@@ -58,21 +38,21 @@ public class BlogService {
         }
         return null;
     }
-    public static List<Blog> getDanhMuc(String danhmuc) {
+    public static List<Blog> ListCategory(String category) {
         List<Blog> list = getData();
         List<Blog> rs = new LinkedList<>();
         for(Blog b : list){
-            if (b.getListdanhmuc().get(0).equals(danhmuc)) {
+            if (b.getCategory().equals(category)) {
                 rs.add(b);
             }
         }
         return rs;
     }
-    public static List<Blog> getChuDe(String chude) {
+    public static List<Blog> ListSeason(String season) {
         List<Blog> list = getData();
         List<Blog> rs = new LinkedList<>();
         for(Blog b : list){
-            if (b.getListchude().get(0).equals(chude)) {
+            if (b.getSeason().equals(season)) {
                 rs.add(b);
             }
         }
@@ -90,7 +70,7 @@ public class BlogService {
     }
     public static void updateStatus(String id, int status) {
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE blog set  status= " + status + " where blog.mablog = '" + id + "'";
+        String sql = "UPDATE blog set  status= " + status + " where blog.idblog = '" + id + "'";
         try {
             statement.executeUpdate(sql);
 
