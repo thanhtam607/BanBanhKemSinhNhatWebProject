@@ -1,27 +1,27 @@
 package vn.edu.hcmuaf.fit.model;
 
 public class Comment {
-    String maSP;
+    String idProduct;
     String khachhang;
     String binhLuan;
     String date;
     int idcmt;
-    public Comment(String maSP, String khachhang, String binhLuan, String date, int idcmt){
-        this.maSP = maSP;
+    public Comment(String idProduct, String khachhang, String binhLuan, String date, int idcmt){
+        this.idProduct = idProduct;
         this.khachhang = khachhang;
         this.binhLuan = binhLuan;
         this.date = date;
         this.idcmt =idcmt;
     }
-    public Comment(String maSP, String khachhang, String binhLuan, String date){
-        this.maSP = maSP;
+    public Comment(String idProduct, String khachhang, String binhLuan, String date){
+        this.idProduct = idProduct;
         this.khachhang = khachhang;
         this.binhLuan = binhLuan;
         this.date = date;
     }
 
-    public String getMaSP() {
-        return maSP;
+    public String getIdProduct() {
+        return idProduct;
     }
 
     public String getkhachhang() {
@@ -40,11 +40,11 @@ public class Comment {
         return idcmt;
     }
 
-    public void setMaSP(String maSP) {
-        this.maSP = maSP;
+    public void setIdProduct(String idProduct) {
+        this.idProduct = idProduct;
     }
 
-    public void setkhachhang(String khachhang) {
+    public void setKhachhang(String khachhang) {
         this.khachhang = khachhang;
     }
 
@@ -63,7 +63,7 @@ public class Comment {
     @Override
     public String toString() {
         return "Comment{" +
-                "maSP='" + maSP + '\'' +
+                "idProduct='" + idProduct + '\'' +
                 ", khachhang='" + khachhang + '\'' +
                 ", binhLuan='" + binhLuan + '\'' +
                 ", date='" + date + '\'' +

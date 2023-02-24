@@ -199,9 +199,9 @@
                             <h4>Các Loại Bánh</h4>
                             <ul class="slidebar__loaibanh">
                                 <li class="text__loaibanh"><a class="text__loaibanh__active" href="/ListProduct">Tất cả</a></li>
-                                <%List<LoaiBanh> ListType = ProductService.getListType();
-                                    for(LoaiBanh lb: ListType){%>
-                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getTenLB()%>&filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
+                                <%List<TypeOfCake> ListType = ProductService.getListType();
+                                    for(TypeOfCake lb: ListType){%>
+                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getName()%>&filter=<%=lb.getName()%>"><%=lb.getName()%></a></li>
                                 <%}%>
                             </ul>
                         </div>

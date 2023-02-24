@@ -6,45 +6,60 @@ import java.util.List;
 public class Product {
     String id;
     String name;
-    String loaiBanh;
-    String kichThuoc;
-    int khoiLuong;
-    String moTa;
-    String noiDung;
+    String type;
+    String size;
+    int weight;
+    String description;
+    String introduction;
     List<String> listImg;
     int price;
     List<Comment> comments;
     ProductDetails details;
+    int status;
 
 
-
-    public Product(String id, String name, String loaiBanh, String kichThuoc, int khoiLuong, String moTa, String noiDung, List<String> listImg, int price, List<Comment> comments,  ProductDetails details) {
+    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<String> listImg, int price, List<Comment> comments,  ProductDetails details) {
         this.id = id;
         this.name = name;
-        this.loaiBanh = loaiBanh;
-        this.kichThuoc= kichThuoc;
-        this.khoiLuong = khoiLuong;
-        this.moTa = moTa;
-        this.noiDung=noiDung;
+        this.type = type;
+        this.size= size;
+        this.weight = weight;
+        this.description = description;
+        this.introduction=introduction;
         this.listImg = listImg;
         this.price = price;
         this.comments = comments;
         this.details =details;
+        this.status=0;
     }
-    public Product(String id, String name, String loaiBanh, String kichThuoc, int khoiLuong, String moTa, String noiDung, List<String> listImg, int price){
+    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<String> listImg, int price){
         this.id=id;
         this.name = name;
-        this.loaiBanh = loaiBanh;
-        this.kichThuoc= kichThuoc;
-        this.khoiLuong = khoiLuong;
-        this.moTa = moTa;
-        this.noiDung=noiDung;
+        this.type = type;
+        this.size= size;
+        this.weight = weight;
+        this.description = description;
+        this.introduction=introduction;
         this.listImg = listImg;
         this.price = price;
     }
+    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<String> listImg, int price, List<Comment> comments,  ProductDetails details, int status) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.size= size;
+        this.weight = weight;
+        this.description = description;
+        this.introduction=introduction;
+        this.listImg = listImg;
+        this.price = price;
+        this.comments = comments;
+        this.details =details;
+        this.status = status;
+    }
 
-    public void setLoaiBanh(String loaiBanh) {
-        this.loaiBanh = loaiBanh;
+    public void settype(String type) {
+        this.type = type;
     }
 
     public String getId() {
@@ -75,29 +90,29 @@ public class Product {
         this.price = price;
     }
 
-    public int getKhoiLuong() {
-        return khoiLuong;
+    public int getWeight() {
+        return weight;
     }
 
 
-    public String getLoaiBanh() {
-        return loaiBanh;
+    public String getType() {
+        return type;
     }
 
-    public String getKichThuoc() {
-        return kichThuoc;
+    public String getSize() {
+        return size;
     }
 
-    public void setKichThuoc(String kichThuoc) {
-        this.kichThuoc = kichThuoc;
+    public void setSize(String size) {
+        this.size = size;
     }
 
-    public String getMoTa() {
-        return moTa;
+    public String getDescription() {
+        return description;
     }
 
-    public String getNoiDung() {
-        return noiDung;
+    public String getIntroduction() {
+        return introduction;
     }
 
     public List<Comment> getComments() {
@@ -117,15 +132,29 @@ public class Product {
         return "Product{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", loaiBanh='" + loaiBanh + '\'' +
-                ", kichThuoc='" + kichThuoc + '\'' +
-                ", khoiLuong='" + khoiLuong + '\'' +
-                ", moTa='" + moTa + '\'' +
-                ", noiDung='" + noiDung + '\'' +
+                ", type='" + type + '\'' +
+                ", size='" + size + '\'' +
+                ", weight='" + weight + '\'' +
+                ", description='" + description + '\'' +
+                ", introduction='" + introduction + '\'' +
                 ", listImg=" + listImg +
                 ", price=" + price +
                 ", comments=" + comments +
                 '}';
+    }
+    public void setHide(boolean hide){
+        if(hide){
+            this.status = 1;
+        }
+        else{
+            this.status=0;
+        }
+    }
+    public boolean isHide(){
+        if(this.status==1){
+            return true;
+        }
+        return false;
     }
 
     public String getStatus(){
@@ -146,8 +175,8 @@ public class Product {
         return df.format(price);
 
     }
-    public static void main(String[] args) {
-
-        System.out.println(formatNum(1234567));
-    }
+//    public static void main(String[] args) {
+//
+//        System.out.println(formatNum(1234567));
+//    }
 }

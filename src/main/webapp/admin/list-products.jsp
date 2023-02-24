@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.ProductDetails" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -138,9 +139,12 @@
                     </div>
                 </div>
                 <!-- end main title -->
+                <div class="button_right">
+                <a class="form__btn" href="ListProductRemoved">Sản phẩm đã xóa (<%=ProductService.getListProductRemove().size()%>)</a>
+                </div>
 
-                <!-- users -->
                 <div class="col-12 bg-pink">
+
                     <div class="main__table-wrap">
                         <table class="main__table">
                             <thead>
@@ -174,7 +178,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text"><%=pro.getLoaiBanh()%></div>
+                                        <div class="main__table-text"><%=pro.getType()%></div>
                                     </td>
                                     <td>
                                         <div class="main__table-text"><%=pro.formatNum(pro.getPrice())%></div>
@@ -199,22 +203,41 @@
                                                 <a href="Edit_Product?idP=<%=pro.getId()%>" class="main__table-btn main__table-btn--edit">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a href="#modal-delete<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-eye"></i>
+                                                <%if (pro.isHide()){%>
+                                                <a href="#modal-unHiden<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <i class="fas fa-eye-slash" ></i>
                                                 </a>
+                                                <%}else{%>
+                                                <a href="#modal-hiden<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <i class="fa fa-eye" style="color: #24cc63"></i>
+                                                </a>
+                                                <%}%>
                                             </div>
-                                            <!-- modal delete -->
-                                            <div id="modal-delete<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
-                                                <h6 class="modal__title">Xóa Sản Phẩm</h6>
+                                            <!-- modal hiden -->
+                                            <div id="modal-hiden<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
+                                                <h6 class="modal__title">Ẩn Sản Phẩm</h6>
 
-                                                <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này?</p>
-                                                <%String url = "DeleteProduct?masp="+pro.getId();%>
+                                                <p class="modal__text">Bạn có chắc muốn ẩn sản phẩm này?</p>
+                                                <%String url = "HideProduct?idProduct="+pro.getId();%>
                                                 <div class="modal__btns">
-                                                    <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url%>')" type="button">Xóa</button>
+                                                    <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url%>')" type="button">Ẩn sản phẩm</button>
                                                     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                 </div>
                                             </div>
-                                            <!-- end modal delete -->
+                                            <!-- end modal hiden -->
+
+                                            <!-- modal unHiden -->
+                                            <div id="modal-unHiden<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
+                                                <h6 class="modal__title">Hiển thị Sản Phẩm</h6>
+
+                                                <p class="modal__text">Bạn có chắc muốn hiển thị sản phẩm này?</p>
+                                                <%String url1 = "UnHidenProduct?idProduct="+pro.getId();%>
+                                                <div class="modal__btns">
+                                                    <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url1%>')" type="button">Hiển thị</button>
+                                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                </div>
+                                            </div>
+                                            <!-- end modal unHiden -->
                                     </td>
                                 </tr>
                             </tbody>
