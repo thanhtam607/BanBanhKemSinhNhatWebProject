@@ -116,8 +116,8 @@
                                     <div class="col-12 col-sm-6 col-md-12">
                                         <div class="form__img">
                                             <label for="form__img-upload">Thêm ảnh </label>
-                                            <input id="form__img-upload" onchange="chooseFile(this)" name="upload"  type="file" accept=".png, .jpg, .jpeg">
-                                            <img id="form__img" src="" alt=" ">
+                                            <input id="form__img-upload" onchange="chooseFile(this)" name="upload"  type="file" accept=".png, .jpg, .jpeg" required>
+                                            <img id="form__img" src="" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -127,26 +127,26 @@
                                 <div class="row row--form">
                                     <div class="col-12">
                                         <label class="form__label" >Tên bánh:</label>
-                                        <input type="text" class="form__input" name="tensp" placeholder="Tên bánh">
+                                        <input type="text" class="form__input" id="productName" name="tensp" placeholder="Tên bánh"  required pattern="\S+.*">
                                     </div>
 
                                     <div class="col-12">
                                         <label class="form__label" >Nội dung:</label>
-                                        <textarea name="noidung" class="form__textarea-sp" placeholder="Nội dung"></textarea>
+                                        <input name="noidung" class="form__textarea-sp" placeholder="Nội dung" required pattern="\S+.*">
                                     </div>
                                     <div class="col-12">
                                         <label class="form__label" >Mô tả:</label>
-                                        <textarea  name="mota" class="form__textarea-sp" placeholder="Mô tả"></textarea>
+                                        <input name="mota" class="form__textarea-sp" placeholder="Mô tả" required pattern="\S+.*">
                                     </div>
                                     <div class="col-12 col-sm-6 col-lg-3">
                                         <label class="form__label" >Giá bán:</label>
-                                        <input type="number" min="0" class="form__input" name="gia" placeholder="Giá bán">
+                                        <input type="number" min="0" class="form__input" name="gia" placeholder="Giá bán"  required pattern="\S+.*">
                                     </div>
 
 
                                     <div class="col-12 col-sm-6 col-lg-3">
                                         <label class="form__label" >Khối lượng:</label>
-                                        <input type="number" name="khoiluong" min="0" class="form__input" placeholder="Khối lượng">
+                                        <input type="number" name="khoiluong" min="0" class="form__input" placeholder="Khối lượng"  required pattern="\S+.*">
                                     </div>
                                     <div class="col-12">
                                         <div class="col-12 col-md-7 col-lg-12 col-xl-7">
@@ -199,13 +199,12 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <input type="submit"  class="form__btn" value="Thêm sản phẩm">
+                                <button type="submit" class="form__btn" >Thêm sản phẩm</button>
                             </div>
 
                         </div>
                     </form>
                 </div>
-
                 <!-- end form -->
             </div>
         </div>
@@ -240,6 +239,7 @@
 <script src="js/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </body>
 
 </html>
