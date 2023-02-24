@@ -27,7 +27,7 @@ public class Sort extends HttpServlet {
 
         String sort = request.getParameter("sortValue");
 
-        List<Product> listFilter = ProductService.getData();
+        List<Product> listFilter = ProductService.getListProduct();
 
         if(session.getAttribute("filter")!=null){
             String filter = session.getAttribute("filter").toString();

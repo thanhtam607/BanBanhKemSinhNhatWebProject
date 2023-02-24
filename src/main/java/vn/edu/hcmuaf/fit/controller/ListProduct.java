@@ -22,7 +22,7 @@ public class ListProduct extends HttpServlet {
         request.setAttribute("listdiscount", listdiscount);
         String numPage = request.getParameter("page");
         String sort = request.getParameter("sortValue");
-        List<Product> listPro = ProductService.getData();
+        List<Product> listPro = ProductService.getListProduct();
         if(sort != null ){
             if(sort.equals("Giá từ thấp đến cao") ) {
                 listPro.sort((Product o1, Product o2) -> o1.getPrice() - o2.getPrice());
