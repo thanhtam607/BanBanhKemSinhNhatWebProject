@@ -22,7 +22,11 @@ public class Receipt {
     String TenTK;
     int role;
     String email;
-    public Receipt(String id, String makh, String namecustomer, String namecake,String phone, String sdate, String edate, String address,  String note, int price, int total, int status, List<Comment> commentList, String TenTK, int role, String email) {
+
+    public Receipt() {
+    }
+
+    public Receipt(String id, String makh, String namecustomer, String namecake, String phone, String sdate, String edate, String address, String note, int price, int total, int status, List<Comment> commentList, String TenTK, int role, String email) {
         this.id = id;
         this.makh = makh;
         this.namecustomer = namecustomer;
@@ -44,7 +48,7 @@ public class Receipt {
     public Receipt(String id, String makh, String sdate, String note, int money, int state) {
         this.id = id;
         this.makh = makh;
-        Sdate = sdate;
+        this.Sdate = sdate;
         this.note = note;
         this.money = money;
         this.state = state;
@@ -52,7 +56,7 @@ public class Receipt {
     public Receipt(String id, String makh, String sdate, String note, int money, int state, String dc) {
         this.id = id;
         this.makh = makh;
-        Sdate = sdate;
+        this.Sdate = sdate;
         this.note = note;
         this.money = money;
         this.state = state;
@@ -75,15 +79,21 @@ public class Receipt {
         this.money = money;
     }
 
-    public String getState() {
+    public String getStatusName() {
         if(this.state == 0){
             return "Chờ Xác Nhận";
         }else if(this.state == 1){
-            return "Chuẩn Bị Hàng";
+            return "Chờ Lấy Hàng";
         }else if(this.state == 2){
-            return "Đang Giao Hàng";
-        }
+            return "Đang Giao";
+        }else if(this.state == 3){
         return "Giao Thành Công";
+        }
+        return "Đã hủy";
+    }
+    public boolean checkState(){
+        if(this.state == 0 || this.state == 1) return true;
+        return false;
     }
     public int getStateInt() {
         return this.state;
@@ -199,16 +209,17 @@ public class Receipt {
         TenTK = tenTK;
     }
 
-    public int getRoleint() {
+    public int getRoleInt() {
         return role;
     }
-    public String getRole() {
+
+    public String getRoleName() {
         if(this.role == 0){
             return "Thường";
         }else if(this.role == 1){
             return "Admin";
         }
-        return "Khóa";
+        return "Quản Lí";
     }
     public void setRole(int role) {
         this.role = role;
@@ -227,19 +238,7 @@ public class Receipt {
         String result = vn.format(price);
         return result;
     }
-    public boolean checkState(){
-        if(this.state == 0 || this.state == 1) return true;
-        return false;
-    }
-    @Override
-    public String toString() {
-        return "receipt{" +
-                "id='" + id + '\'' +
-                ", idcustomer='" + makh + '\'' +
-                ", Sdate='" + Sdate + '\'' +
-                ", ghichu='" + note + '\'' +
-                ", thanhtien='" + money + '\'' +
-                ", trangthai=" + getState() + "/n" +
-                '}';
-    }
+
+
+
 }

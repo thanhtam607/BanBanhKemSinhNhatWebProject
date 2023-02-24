@@ -19,7 +19,7 @@ public class EditUserProfile extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
-        Customer customer = CustomerService.getCusByIdAcc(auth.getId());
+//        Customer customer = CustomerService.getCusByIdAcc(auth.getId());
 
         String ten = request.getParameter("ten");
         String diachi = request.getParameter("diachi");

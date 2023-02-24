@@ -51,7 +51,6 @@ public class Signup extends HttpServlet {
             User newUser = new User(email, pass, user);
             Customer newCus = new Customer();
             UserService.register(newUser);
-            newCus.setMATAIKHOAN(newUser.getId());
             newCus.setTENKH(newUser.getTentk());
             CustomerService.registerKH(newCus, newUser);
 

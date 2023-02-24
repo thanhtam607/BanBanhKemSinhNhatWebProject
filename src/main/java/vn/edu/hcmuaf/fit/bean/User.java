@@ -9,19 +9,21 @@ public class User implements Serializable {
     private String pass;
     private String tentk;
     private int role;
+    private int status;
 
     public User(){
 
     }
 
-    public User(String id, String email, String pass, String tentk, int role) {
+    public User(String id, String email, String pass, String tentk, int role, int status) {
         this.id = id;
         this.email = email;
         this.pass = pass;
         this.tentk = tentk;
         this.role = role;
+        this.status = status;
     }
-    public User(String email, String pass, String tentk ){
+    public User(String email, String pass, String tentk){
         this.id = null;
         this.email = email;
         this.pass = pass;
@@ -64,21 +66,37 @@ public class User implements Serializable {
     public int getRole() {
         return role;
     }
+
     public String getRoleName() {
         if(this.role == 0){
             return "Thường";
         }else if(this.role == 1){
             return "Admin";
         }
-        return "Khóa";
+        return "Quản Lí";
     }
-
     public void setRole(int role) {
         this.role = role;
     }
 
-    public boolean checkRole(int i) {
-        if(this.role == i) return true;
+    public int getStatus() {
+        return status;
+    }
+    public String getStatusName() {
+        if(this.status == 0) return "Hoạt Động";
+        return "Khóa";
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public boolean checkRole() {
+        if(this.role == 1 || this.role == 2) return true;
+        return false;
+    }
+    public boolean checkStatus() {
+        if(this.status == -1) return true;
         return false;
     }
 
@@ -92,4 +110,5 @@ public class User implements Serializable {
                 ", role=" + role +
                 '}';
     }
+
 }

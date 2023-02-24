@@ -46,6 +46,7 @@
 </head>
 
 <body>
+<% User auth = (User) session.getAttribute("auth");%>
 <!-- header -->
 <header class="header">
   <div class="header__content">
@@ -76,8 +77,8 @@
         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
       </div>
       <div class="ms-3">
-        <h6 class="mb-0">Thanh Thùy</h6>
-        <span>Admin</span>
+        <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
+        <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
       </div>
     </div>
     <div class="navbar-nav w-100">
@@ -144,11 +145,11 @@
             <tr>
               <th>STT</th>
               <th>Khách hàng</th>
-              <th>Ngày đặt hàng</th>
-              <th>Địa chỉ giao hàng</th>
-              <th>Ghi chú đơn hàng</th>
+              <th>Ngày đặt</th>
+              <th>Địa chỉ giao</th>
+              <th>Ghi chú</th>
               <th >Thành tiền</th>
-              <th>Trạng thái đơn hàng</th>
+              <th>Trạng thái ĐH</th>
               <th>Tùy chọn</th>
             </tr>
             </thead>
@@ -175,13 +176,13 @@
                 <div class="main__table-text"><%=rc.getAddress()%></div>
               </td>
               <td>
-                <div class="main__table-text"><%=rc.getNote()%></div>
+                <div class="main__user breaklineNamePro"><%=rc.getNote()%></div>
               </td>
               <td>
                 <div class="main__table-text"><%=rc.formatNum(rc.getTotal())%> VND</div>
               </td>
               <td>
-                <div class="main__table-text"><%=rc.getState()%></div>
+                <div class="main__table-text"><%=rc.getStatusName()%></div>
               </td>
               <td>
                 <div class="main__table-btns">
@@ -192,10 +193,11 @@
                   <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">
                     <i class="fa fa-check"></i>
                   </a>
+                  <%if(rc.getStateInt() != 4){%>
                   <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                     <i class="fa fa-trash"></i>
                   </a>
-
+                  <%}%>
                 </div>
               </td>
 <%--              <td>--%>

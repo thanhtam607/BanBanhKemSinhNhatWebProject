@@ -13,7 +13,7 @@ public class Admin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User auth= (User) session.getAttribute("auth");
-        if(auth==null || !auth.checkRole(1)){
+        if(auth==null || !auth.checkRole()){
             request.setAttribute("error","Bạn không có quyền truy cập");
             response.sendRedirect("../signin.jsp");
             return;

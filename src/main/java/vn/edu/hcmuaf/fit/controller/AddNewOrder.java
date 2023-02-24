@@ -28,7 +28,7 @@ public class AddNewOrder extends HttpServlet {
         String ghichu = request.getParameter("ghichu");
 
         Date today = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayFM = formatter.format(today);
         order.setBuyDate(todayFM);
 

@@ -11,15 +11,17 @@ public class CTHD {
     private List<String> anhsp;
     private int price;
     private String diachigiao;
+    private String note;
 
 
-    public CTHD(String mahd, String masp, String tensp, int solg, List<String> anhsp, int price) {
+    public CTHD(String mahd, String masp, String tensp, int solg, List<String> anhsp, int price, String note) {
         this.mahd = mahd;
         this.masp = masp;
         this.tensp = tensp;
         this.solg = solg;
         this.anhsp = anhsp;
         this.price = price;
+        this.note = note;
 
     }
 
@@ -62,6 +64,13 @@ public class CTHD {
     }
 
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
     public String getMahd() {
         return mahd;
@@ -91,15 +100,5 @@ public class CTHD {
         String result = vn.format(price);
         return result;
     }
-    @Override
-    public String toString() {
-        return "CTHD{" +
-                "mahd='" + mahd + '\'' +
-                ", masp='" + masp + '\'' +
-                ", tensp='" + tensp + '\'' +
-                ", solg=" + solg +
-                ", anhsp=" + anhsp +
-                ", price=" + price +
-                '}';
-    }
+
 }
