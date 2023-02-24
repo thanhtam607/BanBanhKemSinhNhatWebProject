@@ -19,7 +19,7 @@ public class ProductService {
         ProductDetails detail = new ProductDetails();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price  from products, typeOfCake, sale where products.idType = typeOfCake.idType");
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake, sale where products.idType = typeOfCake.idType");
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT productImgs.idProduct,productImgs.img from productImgs");
                     List<String> listImg = new LinkedList<String>();
@@ -46,8 +46,12 @@ public class ProductService {
                             detail =new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
                         }
                     }
-                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, detail);
-                    list.add(p);
+                    int status= rs.getInt(9);
+                    if(status!= -1){
+                        Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, detail);
+                        list.add(p);
+                    }
+
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -364,39 +368,9 @@ public class ProductService {
     }
     public static  void removeProduct(String id){
         Statement statement = DBConnect.getInstall().get();
-        String sql1= "DELETE FROM comments WHERE idProduct='"+ id+"';";
-        String sql= "DELETE FROM productImgs WHERE idProduct='"+ id+"';";
-        String sql2= "DELETE FROM products WHERE idProduct='"+ id+"';";
-        String sql3= "DELETE FROM productDetails WHERE idProduct='"+ id+"';";
-        removeSale(id);
-        removeInfoOder(id);
+        String sql = "UPDATE products set STATUS = -1 where idProduct = '"+id+"';";
         try {
             statement.executeUpdate(sql);
-            statement.executeUpdate(sql1);
-            statement.executeUpdate(sql3);
-            statement.executeUpdate(sql2);
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-    }
-    public  static  void removeSale(String id){
-        Statement statement = DBConnect.getInstall().get();
-        String sql2= "DELETE FROM sale WHERE idProduct='"+ id+"';";
-
-        try {
-            statement.executeUpdate(sql2);
-
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-    }
-    public  static  void removeInfoOder(String id){
-        Statement statement = DBConnect.getInstall().get();
-        String sql2= "DELETE FROM cthd WHERE idProduct='"+ id+"';";
-
-        try {
-            statement.executeUpdate(sql2);
-
         } catch (SQLException se) {
             se.printStackTrace();
         }
@@ -430,6 +404,67 @@ public class ProductService {
             se.printStackTrace();
         }
         return res;
+    }
+    public static List<Product> getListProductRemove() {
+        List<Product> list = new LinkedList<Product>();
+        Statement statement = DBConnect.getInstall().get();
+        Statement stmt = DBConnect.getInstall().get();
+        Statement stmt1 = DBConnect.getInstall().get();
+        Statement stmt2 = DBConnect.getInstall().get();
+        ResultSet rsCmt;
+        ProductDetails detail = new ProductDetails();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake, sale where products.idType = typeOfCake.idType");
+                while (rs.next()) {
+                    ResultSet rsImg = stmt.executeQuery("SELECT productImgs.idProduct,productImgs.img from productImgs");
+                    List<String> listImg = new LinkedList<String>();
+                    rsCmt = stmt1.executeQuery("SELECT idProduct, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
+                    List<Comment> listCmts = new LinkedList<Comment>();
+                    ResultSet rspd = stmt2.executeQuery("select idProduct, quantity, inventory, dateOfManufacture, expirationDate from productDetails");
+                    String s1 = rs.getString(1);
+                    while (rsImg.next()) {
+                        String s2 = rsImg.getString(1);
+                        if (s1.equals(s2)) {
+                            listImg.add(rsImg.getString(2));
+                        }
+                    }
+
+                    while (rsCmt.next()) {
+                        String s2 = rsCmt.getString(1);
+                        if (s1.equals(s2)) {
+                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5)));
+                        }
+                    }
+                    while (rspd.next()) {
+                        String s2 = rspd.getString(1);
+                        if (s1.equals(s2)) {
+                            detail =new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
+                        }
+                    }
+                    int status= rs.getInt(9);
+                    if(status== -1){
+                        Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8), listCmts, detail);
+                        list.add(p);
+                    }
+
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có sản phẩm");
+        }
+        return list;
+    }
+    public static  void restoreProduct(String id){
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE products set STATUS = 0 where idProduct = '"+id+"';";
+        try {
+            statement.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
     }
 
     public static void main(String[] args) throws SQLException {

@@ -436,3 +436,13 @@ background-color: #ff96b7;
 .row input:valid {
     border-color: hsl(120, 76%, 50%);
 }
+.button_right{
+    width: 100%;
+    display: flow;
+    margin-bottom: 15px;
+    margin-top: -10px;
+}
+.button_right a{
+    float: right;
+    margin-right: 30px;
+}

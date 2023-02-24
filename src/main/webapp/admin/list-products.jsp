@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.ProductDetails" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -138,9 +139,12 @@
                     </div>
                 </div>
                 <!-- end main title -->
+                <div class="button_right">
+                <a class="form__btn" href="ListProductRemoved">Sản phẩm đã xóa (<%=ProductService.getListProductRemove().size()%>)</a>
+                </div>
 
-                <!-- users -->
                 <div class="col-12 bg-pink">
+
                     <div class="main__table-wrap">
                         <table class="main__table">
                             <thead>
