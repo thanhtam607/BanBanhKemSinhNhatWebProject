@@ -203,22 +203,41 @@
                                                 <a href="Edit_Product?idP=<%=pro.getId()%>" class="main__table-btn main__table-btn--edit">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a href="#modal-delete<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <i class="fa fa-eye"></i>
+                                                <%if (pro.isHide()){%>
+                                                <a href="#modal-unHiden<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <i class="fas fa-eye-slash" ></i>
                                                 </a>
+                                                <%}else{%>
+                                                <a href="#modal-hiden<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <i class="fa fa-eye" style="color: #24cc63"></i>
+                                                </a>
+                                                <%}%>
                                             </div>
-                                            <!-- modal delete -->
-                                            <div id="modal-delete<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
-                                                <h6 class="modal__title">Xóa Sản Phẩm</h6>
+                                            <!-- modal hiden -->
+                                            <div id="modal-hiden<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
+                                                <h6 class="modal__title">Ẩn Sản Phẩm</h6>
 
-                                                <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này?</p>
-                                                <%String url = "DeleteProduct?masp="+pro.getId();%>
+                                                <p class="modal__text">Bạn có chắc muốn ẩn sản phẩm này?</p>
+                                                <%String url = "HideProduct?idProduct="+pro.getId();%>
                                                 <div class="modal__btns">
-                                                    <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url%>')" type="button">Xóa</button>
+                                                    <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url%>')" type="button">Ẩn sản phẩm</button>
                                                     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                 </div>
                                             </div>
-                                            <!-- end modal delete -->
+                                            <!-- end modal hiden -->
+
+                                            <!-- modal unHiden -->
+                                            <div id="modal-unHiden<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
+                                                <h6 class="modal__title">Hiển thị Sản Phẩm</h6>
+
+                                                <p class="modal__text">Bạn có chắc muốn hiển thị sản phẩm này?</p>
+                                                <%String url1 = "UnHidenProduct?idProduct="+pro.getId();%>
+                                                <div class="modal__btns">
+                                                    <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url1%>')" type="button">Hiển thị</button>
+                                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                </div>
+                                            </div>
+                                            <!-- end modal unHiden -->
                                     </td>
                                 </tr>
                             </tbody>

@@ -15,7 +15,7 @@ public class Product {
     int price;
     List<Comment> comments;
     ProductDetails details;
-
+    int status;
 
 
     public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<String> listImg, int price, List<Comment> comments,  ProductDetails details) {
@@ -30,6 +30,7 @@ public class Product {
         this.price = price;
         this.comments = comments;
         this.details =details;
+        this.status=0;
     }
     public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<String> listImg, int price){
         this.id=id;
@@ -41,6 +42,20 @@ public class Product {
         this.introduction=introduction;
         this.listImg = listImg;
         this.price = price;
+    }
+    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<String> listImg, int price, List<Comment> comments,  ProductDetails details, int status) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.size= size;
+        this.weight = weight;
+        this.description = description;
+        this.introduction=introduction;
+        this.listImg = listImg;
+        this.price = price;
+        this.comments = comments;
+        this.details =details;
+        this.status = status;
     }
 
     public void settype(String type) {
@@ -126,6 +141,20 @@ public class Product {
                 ", price=" + price +
                 ", comments=" + comments +
                 '}';
+    }
+    public void setHide(boolean hide){
+        if(hide){
+            this.status = 1;
+        }
+        else{
+            this.status=0;
+        }
+    }
+    public boolean isHide(){
+        if(this.status==1){
+            return true;
+        }
+        return false;
     }
 
     public String getStatus(){
