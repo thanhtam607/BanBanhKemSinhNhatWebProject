@@ -18,9 +18,9 @@ public class ProductDiscountService {
         Statement stmt = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT distinct sanpham.MaSP ,sanpham.TenSP,loaibanh.TenLB, sanpham.Gia, giamgia.giamgia  from sanpham, loaibanh, giamgia where sanpham.MalB = loaibanh.MaLB and sanpham.masp = giamgia.masp");
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.price, sale.sale  from products, typeOfCake, sale where products.idType = typeOfCake.idType and products.idProduct = sale.idProduct");
                 while (rs.next()) {
-                    ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
+                    ResultSet rsImg = stmt.executeQuery("SELECT productImgs.idProduct,productImgs.img from productImgs");
                     List<String> listImg = new LinkedList<String>();
                     String s1 = rs.getString(1);
                     while (rsImg.next()) {
@@ -44,7 +44,7 @@ public class ProductDiscountService {
         List<ProductDiscount> res = new ArrayList<ProductDiscount>();
         List<String> listId = new ArrayList<String>();
         Statement stm = DBConnect.getInstall().get();
-        String sql = "SELECT masp from giamgia GROUP BY masp, tungay, denngay HAVING DATEDIFF(CURRENT_DATE, denngay) < 0;";
+        String sql = "SELECT idProduct from sale GROUP BY idProduct, tungay, denngay HAVING DATEDIFF(CURRENT_DATE, denngay) < 0;";
         try {
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {

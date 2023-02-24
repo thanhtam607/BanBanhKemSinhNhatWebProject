@@ -174,7 +174,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text"><%=pro.getLoaiBanh()%></div>
+                                        <div class="main__table-text"><%=pro.getType()%></div>
                                     </td>
                                     <td>
                                         <div class="main__table-text"><%=pro.formatNum(pro.getPrice())%></div>

@@ -428,11 +428,11 @@ background-color: #ff96b7;
     content: "";
     opacity: 0;
 }
-input:not(:placeholder-shown) {
+.row input:not(:placeholder-shown) {
     border-color: hsl(0, 76%, 50%);
 }
 
 /* Show green borders when valid */
-input:valid {
+.row input:valid {
     border-color: hsl(120, 76%, 50%);
 }

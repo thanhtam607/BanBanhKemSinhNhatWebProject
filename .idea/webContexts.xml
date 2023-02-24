@@ -3,38 +3,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/Order.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/about.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/add-blog.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
-=======
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/Catalog_Management.html" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
->>>>>>> b175ec429ba74b8dc6f076fc9fccfd522299b867
-=======
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/Catalog_Management.html" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
->>>>>>> eabec50bc78b5b42c9fde5be991b650eda57ff51
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/admin-web.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/customers.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/edit-blog.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/edit-product.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/edit-user.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/list-products.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/blog-details-1.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/blog-details.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/blog.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/contact.html" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/contact.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/favorites.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/header.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/order.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/product-Filter.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/shop-details.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/shop-product-banh-hoa.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/shop-product.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/shoping-cart.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/signup.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
     </option>
   </component>
