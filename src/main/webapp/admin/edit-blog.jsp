@@ -141,22 +141,25 @@
                             <div class="row">
                                 <!-- details form -->
                                 <div class="col-12">
-                                    <form action="" method="post" class="form form--profile" id="info-blog">
+                                    <form action="Blog/UpdateBlog" method="post" class="form form--profile" id="info-blog">
                                         <div class="row row--form">
                                             <div class="col-12">
                                             </div>
                                             <% for (int i = 0; i < b.getListdemuc().size(); i++) { %>
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <input style="display:none" type="text" name="idB" class="form__input" value="<%=b.getId()%>">
+                                                <input style="display: none;" type="text" name="<%="idB" + (i + 1)%>" class="form__input" value="<%=b.getId()%>">
+                                                <input style="display: none;" type="text" name=" + <%="idctB" + (i + 1)%>" class="form__input" value="<%=b.getListid().get(i)%>">
                                                 <div class="form__group">
                                                     <label class="form__label" >Tiêu đề <%=i + 1%></label>
-                                                    <input  type="text" name="demuc" class="form__input" value="<%=b.getListdemuc().get(i)%>">
+                                                    <input  type="text" name="<%="topic" + (i + 1)%>" class="form__input" value="<%=b.getListdemuc().get(i)%>">
+                                                    <input style="display: none;"  type="text" name="<%="topic_after" + (i + 1)%>" class="form__input" value="<%=b.getListdemuc().get(i)%>">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
                                                     <label class="form__label" for="description">Nội dung <%=i +1%></label>
-                                                    <textarea class="form__input "  id="description" name="chitiet" form="info-blog" ><%=b.getListchitiet().get(i)%></textarea>
+                                                    <textarea class="form__input "  id="description" name="<%="content" + (i + 1)%>" form="info-blog" ><%=b.getListchitiet().get(i)%></textarea>
+                                                    <input style="display: none;" class="form__input "  name="<%="content_after" + (i + 1)%>" form="info-blog" value="<%=b.getListchitiet().get(i)%>">
                                                 </div>
                                             </div>
                                             <% } %>
@@ -189,7 +192,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <button class="form__btn" type="submit">Save</button>
+                                                <button class="form__btn" type="submit"><a><i class="fa fa-save"></i> </a> Lưu lại</button>
                                             </div>
                                         </div>
                                     </form>
