@@ -17,7 +17,7 @@ public class BlogService {
 
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  blog.mablog, blog.tieude,blog.mota, blog.anhblog, blog.ngaydang, blog.danhmuc, blog.chude from blog ");
+                ResultSet rs = statement.executeQuery("SELECT  blog.mablog, blog.tieude,blog.mota, blog.anhblog, blog.ngaydang, blog.danhmuc, blog.chude, blog.status from blog ");
                 while (rs.next()) {
                     ResultSet rsdetails = stmt.executeQuery("SELECT ctblog.mablog, ctblog.demuc, ctblog.chitiet, ctblog.mactb from ctblog");
                     List<String> listdemuc = new LinkedList<String>();
@@ -38,7 +38,7 @@ public class BlogService {
                         }
                     }
 
-                    Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), listdanhmuc, listchude,  listdemuc, listchitiet, listid);
+                    Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), listdanhmuc, listchude,  listdemuc, listchitiet, listid, rs.getInt(8));
                     list.add(b);
                 }
             } catch (SQLException e) {
@@ -88,7 +88,16 @@ public class BlogService {
             se.printStackTrace();
         }
     }
+    public static void updateStatus(String id, int status) {
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE blog set  status= " + status + " where blog.mablog = '" + id + "'";
+        try {
+            statement.executeUpdate(sql);
 
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
 //            List<Blog> li = BlogService.getData();

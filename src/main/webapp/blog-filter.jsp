@@ -214,6 +214,17 @@
                                         <% List<Blog> list1 = (List<Blog>) request.getAttribute("list");
                                             for(Blog b1: list1){ %>
                                         <div class="blog__sidebar__recent">
+                                            <% if(b1.getStatus() == -1) { %>
+                                            <a href="BlogDetails?id=<%=b1.getId()%>" class="blog__sidebar__recent__item" style="display: none">
+                                                <div class="blog__sidebar__recent__item__pic">
+                                                    <img src="<%=b1.getImg()%>" alt="">
+                                                </div>
+                                                <div class="blog__sidebar__recent__item__text">
+                                                    <h6><%=b1.getCategory()%></h6>
+                                                    <span><%=b1.getDate()%></span>
+                                                </div>
+                                            </a>
+                                            <% } else { %>
                                             <a href="BlogDetails?id=<%=b1.getId()%>" class="blog__sidebar__recent__item">
                                                 <div class="blog__sidebar__recent__item__pic">
                                                     <img src="<%=b1.getImg()%>" alt="">
@@ -223,6 +234,7 @@
                                                     <span><%=b1.getDate()%></span>
                                                 </div>
                                             </a>
+                                            <% } %>
                                         </div>
                                         <%}%>
                                     </div>
@@ -242,8 +254,9 @@
                             <div class="col-lg-8 col-md-7">
                                 <div class="row">
                                     <% List<Blog> list = (List<Blog>) request.getAttribute("list");
-                                        for(Blog b: list){ %>
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        for(Blog b: list){
+                                    if(b.getStatus() == -1){%>
+                                    <div class="col-lg-6 col-md-6 col-sm-6" style="display: none">
                                         <div class="blog__item">
                                                 <div class="blog__item__pic">
                                                 <img src="<%=b.getImg()%>">
@@ -258,7 +271,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <% } %>
+                                    <% } else { %>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="blog__item">
+                                            <div class="blog__item__pic">
+                                                <img src="<%=b.getImg()%>">
+                                            </div>
+                                            <div class="blog__item__text">
+                                                <ul>
+                                                    <li><i class="fa fa-calendar-o"></i><%=b.getDate()%></li>
+                                                </ul>
+                                                <h5><a href="BlogDetails?id=<%=b.getId()%>"><%=b.getCategory()%></a></h5>
+                                                <p class="text-justify"><%=b.getCont()%></p>
+                                                <a href="BlogDetails?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% } } %>
                                     </div>
                                 </div>
                             </div>

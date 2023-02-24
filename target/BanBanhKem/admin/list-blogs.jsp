@@ -1,6 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -175,11 +176,26 @@
                                     <td>
                                         <div class="main__table-text"><%=blog.getDate()%></div>
                                     </td>
+                                    <td style="display: none">
+                                        <%String main__btn ="";
+                                            if(BlogService.findById(blog.getId()).getStatus() == -1){
+                                                main__btn = "main__table-btn--delete";
+                                            }else{
+                                                main__btn = "main__table-btn--banned";
+                                            }%>
+                                    </td>
+
                                     <td>
                                         <div class="main__table-btns">
-                                            <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
+                                            <%if(BlogService.findById(blog.getId()).getStatus() == -1){%>
+                                            <a href="#modal-status-unlock<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
+                                            <%}else{%>
+                                            <a href="#modal-status-lock<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
+                                                <i class="fa fa-unlock"></i>
+                                            </a>
+                                            <%}%>
                                             <a href="EditBlog?idB=<%=blog.getId()%>" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-eye"></i>
                                             </a>
@@ -190,6 +206,32 @@
                                 </td>
                                 </tr>
                             </tbody>
+                            <!-- modal status lock-->
+                            <div id="modal-status-lock<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                <form method="post" action="HideBlog">
+                                    <h6 class="modal__title">Ẩn tin tức</h6>
+                                    <p class="modal__text">Bạn có chắc muốn ẩn tin tức này này?</p>
+                                    <input name = "mablog" value="<%=blog.getId()%>" style="display: none">
+                                    <input name = "stt" value="-1" style="display: none">
+                                    <div class="modal__btns">
+                                        <button class="modal__btn modal__btn--apply" type="submit">Ẩn</button>
+                                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- modal status unlock-->
+                            <div id="modal-status-unlock<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                <form method="post" action="HideBlog">
+                                    <h6 class="modal__title">Bỏ ẩn tin tức</h6>
+                                    <p class="modal__text">Bạn có chắc muốn bỏ ẩn tin tức này?</p>
+                                    <input name = "mablog" value="<%=blog.getId()%>" style="display: none">
+                                    <input name = "stt" value="0" style="display: none">
+                                    <div class="modal__btns">
+                                        <button class="modal__btn modal__btn--apply" type="submit">OK</button>
+                                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                    </div>
+                                </form>
+                            </div>
                             <% } %>
                         </table>
                     </div>
@@ -220,19 +262,6 @@
         </div>
     </main>
     <!-- end main content -->
-
-    <!-- modal status -->
-    <div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Ẩn Tin Tức</h6>
-
-        <p class="modal__text">Bạn có chắc muốn ẩn bài viết này?</p>
-
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Ẩn</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
-    <!-- end modal status -->
 
     <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">

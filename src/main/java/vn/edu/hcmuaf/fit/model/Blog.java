@@ -14,7 +14,8 @@ public class Blog implements Serializable {
     List<String> listdemuc;
     List<String> listchitiet;
     List<String> listid;
-    public Blog(String id, String category,   String cont, String img, String date, List<String> listdanhmuc,  List<String> listchude, List<String> listdemuc, List<String> listchitiet, List<String> listid) {
+    int status;
+    public Blog(String id, String category,   String cont, String img, String date, List<String> listdanhmuc,  List<String> listchude, List<String> listdemuc, List<String> listchitiet, List<String> listid, int status) {
         this.id = id;
         this.category = category;
         this.cont = cont;
@@ -25,6 +26,7 @@ public class Blog implements Serializable {
         this.listdemuc = listdemuc;
         this.listchitiet = listchitiet;
         this.listid = listid;
+        this.status = status;
     }
 
 
@@ -111,6 +113,24 @@ public class Blog implements Serializable {
 
     public void setListid(List<String> listid) {
         this.listid = listid;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+    public String getStatusString() {
+        String stt = "";
+        if(this.status == -1){
+            stt = "Ẩn tin tức";
+        }
+        else {
+            stt = "Bỏ ẩn tin tức";
+        }
+        return stt;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @Override
