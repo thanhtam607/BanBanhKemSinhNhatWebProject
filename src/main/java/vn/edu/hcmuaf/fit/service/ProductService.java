@@ -326,7 +326,7 @@ public class ProductService {
         Statement statement = DBConnect.getInstall().get();
 
         String sql = "insert into sanpham values('" + p.getId() + "', '" + p.getLoaiBanh() + "', '" + p.getName() + "', '" + p.getKichThuoc() + "',"
-                + p.getKhoiLuong()+",'"+ p.getMoTa() + "', '"+ p.getNoiDung()+"',"+ p.getPrice()+");";
+                + p.getKhoiLuong()+",'"+ p.getMoTa() + "', '"+ p.getNoiDung()+"',"+ p.getPrice()+",0);";
         String sql1 = "insert into ctsp(MaSP) values('"+ p.getId()+"');" ;
         try {
             statement.executeUpdate(sql);
@@ -343,7 +343,7 @@ public class ProductService {
         String sql;
         for(int i = 0; i< p.getListImg().size();i++){
             maAnh = "ASP"+p.getId().substring(1)+"-"+(i+1);
-            sql = "insert into anhsp values( '"+ maAnh+"', '"+ p.getId()+"', '"+ p.getListImg().get(i)+"');";
+            sql = "insert into anhsp values( '"+ maAnh+"', '"+ p.getId()+"', '"+ p.getListImg().get(i)+"', 0);";
             try {
                 statement2.executeUpdate(sql);
             } catch (SQLException se) {
@@ -355,7 +355,7 @@ public class ProductService {
         Product p = ProductService.findById(masp);
         Statement statement= DBConnect.getInstall().get();
         String maAnh = "ASP"+p.getId().substring(1)+"-"+(p.getListImg().size()+1);
-        String sql = "insert into anhsp values( '"+ maAnh+"', '"+ p.getId()+"', '"+ img+"');";
+        String sql = "insert into anhsp values( '"+ maAnh+"', '"+ p.getId()+"', '"+ img+"',0);";
 
         try {
             statement.executeUpdate(sql);

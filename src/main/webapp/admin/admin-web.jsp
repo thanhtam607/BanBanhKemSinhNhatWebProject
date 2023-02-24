@@ -70,6 +70,7 @@
 			<a href="./ListReceipt_full_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
 			<a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
 			<a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
+            <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
 			<a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
 		</div>
 	</nav>
@@ -93,14 +94,14 @@
                 <div class="navbar-nav align-items-center ms-auto">
 
                     <div class="nav-item dropdown">
-                        <a href="./signin.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <a href="/signin.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-user icon__user__small"></i>
                             <span class="d-none d-lg-inline-flex"><%= auth != null ? auth.getTentk():"Đăng nhập"%></span>
                         </a>
                         <%if(auth != null) {%>
                             <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
-                                <a href="EditUserProfile" class="dropdown-item">Hồ sơ của tôi</a>
-                                <a href="doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
+                                <a href="/EditUserProfile" class="dropdown-item">Hồ sơ của tôi</a>
+                                <a href="/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                             </div>
                         <%}%>
                     </div>

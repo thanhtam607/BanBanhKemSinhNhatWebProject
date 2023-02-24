@@ -93,6 +93,7 @@
             <a href="./ListReceipt_full_Admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
             <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
             <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
+            <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
             <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
             <!--  -->
         </div>
@@ -323,32 +324,14 @@
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#modal-viewcthd<%=j%>" class="main__table-btn main__table-btn--edit open-modal">
+                                                    <a href="cthd_Admin?mahd=<%=r.getId()%>&tenkh=<%=r.getNamecustomer()%>" class="main__table-btn main__table-btn--edit">
 														<i class="fa fa-eye"></i>
 													</a>
                                                     <a href="#modal-deletehd<%=j%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
                                                 </div>
-                                                <!-- modal view cthd-->
-                                                <div id="modal-viewcthd<%=j%>" class="zoom-anim-dialog mfp-hide modal modal--view">
-                                                    <div class="comments__autor">
-                                                        <img class="comments__avatar" src="img/user.svg" alt="">
-                                                        <span class="comments__name"><%=r.getNamecustomer()%></span>
 
-                                                        <span class="comments__time"><%=r.getEdate()%></span>
-                                                    </div>
-                                                    <%List<CTHD> cthds = ReceiptService.getcthdUser(r.getId());
-                                                    for(CTHD cthd: cthds){
-                                                     %>
-                                                    <p class="comments__text">Tên Sản Phẩm: <%=cthd.getTensp()%></p>
-
-                                                    <p class="comments__text">Số Lượng: <%=cthd.getSolg()%> </p>
-                                                    <%}%>
-                                                    <p class="comments__text">Địa chỉ giao: <%=r.getAddress()%></p>
-                                                    <p class="comments__text">Trạng thái: <%=r.getStatusName()%></p>
-                                                </div>
-                                                <!-- end modal view cthd-->
                                                 <!-- modal delete hd-->
                                                 <div id="modal-deletehd<%=j%>" class="zoom-anim-dialog mfp-hide modal">
                                                     <h6 class="modal__title">Hủy Đơn Hàng</h6>
@@ -372,7 +355,6 @@
                             </div>
                         </div>
                         <!-- end table -->
-
 
                     </div>
 
@@ -448,6 +430,12 @@
                             </div>
                         </div>
                         <!-- end table -->
+
+                    </div>
+                    <div class="main__table-btns">
+                        <div class="col-5">
+                            <a href="ListCustomer" type="button" class="form__btn">Quay lại</a>
+                        </div>
 
                     </div>
                 </div>

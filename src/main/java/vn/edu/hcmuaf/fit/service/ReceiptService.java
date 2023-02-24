@@ -82,7 +82,7 @@ public class ReceiptService {
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT MAHD, MAKH, NGAYLAPHD, GHICHU, THANHTIEN, STATUS FROM hoadon\n" +
-                        "WHERE NGAYLAPHD = CURRENT_DATE\n" +
+                        "WHERE NGAYLAPHD = CURRENT_DATE and STATUS != 4\n" +
                         "ORDER BY hoadon.MAHD DESC");
                 while (rs.next()) {
                     Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
@@ -127,7 +127,7 @@ public class ReceiptService {
             try {
                 ResultSet rs = statement.executeQuery("SELECT hoadon.MAHD, sum(cthd.SL) FROM cthd, hoadon\n" +
                         "WHERE MONTH(NGAYLAPHD) = month(CURRENT_DATE) and YEAR(NGAYLAPHD) = YEAR(CURRENT_DATE)\n" +
-                        "and hoadon.MAHD = cthd.MAHD");
+                        "and hoadon.MAHD = cthd.MAHD and hoadon.status != 4");
                 while (rs.next()) {
                     result = rs.getInt(2);
                 }
@@ -144,10 +144,9 @@ public class ReceiptService {
         List<CTHD> list = new LinkedList<CTHD>();
         Statement statement = DBConnect.getInstall().get();
         Statement stmt = DBConnect.getInstall().get();
-        Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT cthd.MAHD, cthd.MASP, sanpham.TenSP, sanpham.Gia, cthd.SL from hoadon, cthd, sanpham\n" +
+                ResultSet rs = statement.executeQuery("SELECT cthd.MAHD, cthd.MASP, sanpham.TenSP, sanpham.Gia, cthd.SL, cthd.GHICHU from hoadon, cthd, sanpham\n" +
                         "WHERE cthd.MAHD = hoadon.MAHD and cthd.MASP = sanpham.MaSP ORDER BY cthd.MAHD DESC ");
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT anhsp.MaSP,anhsp.Anh from anhsp");
@@ -159,7 +158,12 @@ public class ReceiptService {
                             listImg.add(rsImg.getString(2));
                         }
                     }
-                    CTHD cthd = new CTHD(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(5), listImg, rs.getInt(4));
+                    CTHD cthd = new CTHD(rs.getString(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getInt(5), listImg,
+                            rs.getInt(4),
+                            rs.getString(6));
                     list.add(cthd);
                 }
             } catch (SQLException e) {
@@ -194,6 +198,16 @@ public class ReceiptService {
         }
 
         return rs;
+    }
+    public static Receipt getReceiptByMahd(String mhd) {
+        List<Receipt> list = getData();
+        for (Receipt rc : list) {
+            if (rc.getId().equals(mhd)) {
+                return rc;
+            }
+        }
+
+        return null;
     }
 
 
@@ -317,16 +331,6 @@ public class ReceiptService {
         }
     }
 
-    public static List<String> getMahd(String makh) {
-        List<String> rs = new LinkedList<>();
-        List<Receipt> list = ReceiptService.getData();
-        for (Receipt r : list) {
-            if (makh.equals(r.getMakh()))
-                rs.add(r.getId());
-        }
-
-        return rs;
-    }
 
 
     public static void updateStatus(String id) {
@@ -361,7 +365,9 @@ public class ReceiptService {
     public static int getDoanhThuToDay() {
         int rs = 0;
         for (Receipt r : getAllReceiptToDay()) {
-            rs += r.getMoney();
+            if(r.getStateInt() != 4){
+                rs += r.getMoney();
+            }
         }
         return rs;
     }
@@ -369,7 +375,9 @@ public class ReceiptService {
     public static int getDoanhThuThisMonth() {
         int rs = 0;
         for (Receipt r : getAllReceiptThisMonth()) {
-            rs += r.getMoney();
+            if(r.getStateInt() != 4){
+                rs += r.getMoney();
+            }
         }
         return rs;
     }

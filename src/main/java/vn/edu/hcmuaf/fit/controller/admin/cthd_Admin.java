@@ -15,8 +15,10 @@ public class cthd_Admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tenKH = request.getParameter("tenkh");
+        Receipt receipt = ReceiptService.getReceiptByMahd(request.getParameter("mahd"));
         List<CTHD> listcthdOfKH = ReceiptService.getcthdUser(request.getParameter("mahd"));
         request.setAttribute("listcthdOfKH", listcthdOfKH);
+        request.setAttribute("receipt", receipt);
         request.setAttribute("tenkh", tenKH);
         request.getRequestDispatcher("receipt-details.jsp").forward(request,response);
     }

@@ -34,7 +34,7 @@ public class AddProduct extends HttpServlet {
         String giasp =request.getParameter("gia");
         String kl = request.getParameter("khoiluong");
         String kichthuoc = request.getParameter("type");
-        if(tensp== null || giasp == null|| kl==null){
+        if(tensp.isEmpty() || giasp.isEmpty()|| kl.isEmpty()){
             request.setAttribute("Error", "Vui lòng nhập đầy đủ thông tin.");
             request.getRequestDispatcher("add-product.jsp").forward(request,response);
         }
@@ -45,7 +45,6 @@ public class AddProduct extends HttpServlet {
         List<String> dsanh=  new ArrayList<>();
 //            File file = new File(ProductService.getLocation() + realPa + "/");
 //            file.mkdir();
-
         for (Part part : request.getParts()) {
                 if (part.getName().equalsIgnoreCase("upload")) {
                     String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
