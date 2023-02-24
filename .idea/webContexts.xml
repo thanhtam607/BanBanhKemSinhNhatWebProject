@@ -5,7 +5,15 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Order.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/about.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/add-blog.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
+=======
         <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/Catalog_Management.html" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
+>>>>>>> b175ec429ba74b8dc6f076fc9fccfd522299b867
+=======
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/Catalog_Management.html" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
+>>>>>>> eabec50bc78b5b42c9fde5be991b650eda57ff51
         <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/admin-web.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/customers.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/edit-blog.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
