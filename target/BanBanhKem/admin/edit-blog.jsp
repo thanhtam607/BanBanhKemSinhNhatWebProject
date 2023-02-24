@@ -4,7 +4,6 @@
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -41,7 +40,7 @@
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
     <title>Admin | Shop Bánh Kem</title>
-
+    <script src="libraries/ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
@@ -150,17 +149,11 @@
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <input style="display: none;" type="text" name="<%="idB" + (i + 1)%>" class="form__input" value="<%=b.getId()%>">
                                                 <input style="display: none;" type="text" name=" + <%="idctB" + (i + 1)%>" class="form__input" value="<%=b.getListid().get(i)%>">
-                                                <div class="form__group">
-                                                    <label class="form__label" >Tiêu đề <%=i + 1%></label>
-                                                    <input  type="text" name="<%="topic" + (i + 1)%>" class="form__input" value="<%=b.getListdemuc().get(i)%>">
-                                                    <input style="display: none;"  type="text" name="<%="topic_after" + (i + 1)%>" class="form__input" value="<%=b.getListdemuc().get(i)%>">
-                                                </div>
                                             </div>
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="description">Nội dung <%=i +1%></label>
-                                                    <textarea class="form__input "  id="description" name="<%="content" + (i + 1)%>" form="info-blog" ><%=b.getListchitiet().get(i)%></textarea>
-                                                    <input style="display: none;" class="form__input "  name="<%="content_after" + (i + 1)%>" form="info-blog" value="<%=b.getListchitiet().get(i)%>">
+                                                    <label class="form__label" for="description">Nội dung</label>
+                                                    <textarea class="form__input "  id="description" name="description" form="info-blog" ><%=b.getListchitiet()%></textarea>
                                                 </div>
                                             </div>
                                             <% } %>
@@ -201,157 +194,6 @@
                                 <!-- end details form -->
                             </div>
                         </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
-                        <!-- table -->
-                        <div class="col-12">
-                            <div class="main__table-wrap">
-                                <table class="main__table">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã Đơn Hàng</th>
-                                            <th>Tên Sản Phẩm</th>
-                                            <th>Tên Khách Hàng</th>
-                                            <th>Ngày Tạo</th>
-                                            <th>Tùy Chọn</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="main__table-text">23</div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text">John Doe</div>
-                                            </td>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
-<%--                                            </td>--%>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text">12 / 7</div>--%>
-<%--                                            </td>--%>
-                                            <td>
-                                                <div class="main__table-text">24 Oct 2021</div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-btns">
-                                                    <a href="#modal-view" class="main__table-btn main__table-btn--view open-modal">
-														<i class="fa fa-eye"></i>
-													</a>
-                                                    <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-														<i class="fa fa-trash"></i>
-													</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- end table -->
-
-                        <!-- paginator -->
-                        <div class="col-12">
-                            <div class="paginator-wrap">
-                                <span>10 from 23</span>
-
-                                <ul class="paginator">
-                                    <li class="paginator__item paginator__item--prev">
-                                        <a href="#"><i class="fa fa-arrow-back"></i></a>
-                                    </li>
-                                    <li class="paginator__item"><a href="#">1</a></li>
-                                    <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
-                                    <li class="paginator__item"><a href="#">3</a></li>
-                                    <li class="paginator__item"><a href="#">4</a></li>
-                                    <li class="paginator__item paginator__item--next">
-                                        <a href="#"><i class="fa fa-arrow-forward"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- end paginator -->
-                    </div>
-
-                    <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
-                        <!-- table -->
-                        <div class="col-12">
-                            <div class="main__table-wrap">
-                                <table class="main__table">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã Khách Hàng</th>
-                                            <th>Sản Phẩm Đã Bình Luận</th>
-                                            <th>Tên Khách Hàng</th>
-                                            <th>Ngày Tạo</th>
-                                            <th>Tùy Chọn</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="main__table-text">23</div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text">John Doe</div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text"><a href="#">Bánh Cánh Đồng Hoa</a></div>
-                                            </td>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
-<%--                                            </td>--%>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text main__table-text--rate"><i class="fa fa-star"></i> 7.9</div>--%>
-<%--                                            </td>--%>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text">12 / 7</div>--%>
-<%--                                            </td>--%>
-                                            <td>
-                                                <div class="main__table-text">24 Oct 2021</div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-btns">
-                                                    <a href="#modal-view2" class="main__table-btn main__table-btn--view open-modal">
-														<i class="fa fa-eye"></i>
-													</a>
-                                                    <a href="#modal-delete2" class="main__table-btn main__table-btn--delete open-modal">
-														<i class="fa fa-trash"></i>
-													</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- end table -->
-
-                        <!-- paginator -->
-                        <div class="col-12">
-                            <div class="paginator-wrap">
-                                <span>10 from 32</span>
-
-                                <ul class="paginator">
-                                    <li class="paginator__item paginator__item--prev">
-                                        <a href="#"><i class="fa fa-arrow-back"></i></a>
-                                    </li>
-                                    <li class="paginator__item"><a href="#">1</a></li>
-                                    <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
-                                    <li class="paginator__item"><a href="#">3</a></li>
-                                    <li class="paginator__item"><a href="#">4</a></li>
-                                    <li class="paginator__item paginator__item--next">
-                                        <a href="#"><i class="fa fa-arrow-forward"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- end paginator -->
                     </div>
                 </div>
                 <!-- end content tabs -->
@@ -453,6 +295,11 @@
     <script src="js/jquery.mCustomScrollbar.min.js"></script>
     <script src="js/select2.min.js"></script>
     <script src="js/admin.js"></script>
+<script>
+    // Replace the <textarea id="editor1"> with a CKEditor 4
+    // instance, using default configuration.
+    CKEDITOR.replace('description');
+</script>
 </body>
 
 </html>
