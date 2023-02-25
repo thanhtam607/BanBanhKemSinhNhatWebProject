@@ -34,7 +34,7 @@
     <%--    css --%>
     <link rel="stylesheet" href="css/admin.css">
     <!-- index css -->
-    <link rel="stylesheet" href="./css/style.css" >
+    <link rel="stylesheet" href="./css/style.css">
 
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
