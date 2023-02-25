@@ -190,7 +190,6 @@
                     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                 </div>
             </div>
-
             <!-- content tabs -->
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">

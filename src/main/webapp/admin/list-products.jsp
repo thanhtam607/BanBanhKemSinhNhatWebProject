@@ -244,7 +244,6 @@
                                             <!-- end modal unHiden -->
                                             <div id="modal-delete<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
                                                 <h6 class="modal__title">Xóa Sản Phẩm</h6>
-
                                                 <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này?</p>
                                                 <%String urlq = "DeleteProduct?masp=" + pro.getId();%>
                                                 <div class="modal__btns">

@@ -64,7 +64,6 @@ public class ProductService {
         }
         return null;
     }
-
     public static List<Product> getHotProduct() {
         List<Product> list = new LinkedList<Product>();
         Statement statement = DBConnect.getInstall().get();
