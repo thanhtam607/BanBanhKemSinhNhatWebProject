@@ -44,8 +44,8 @@ public class ProductService {
                             detail =new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
                         }
                     }
-                        Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8),listCmts, detail, rs.getInt(9));
-                        list.add(p);
+                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8),listCmts, detail, rs.getInt(9));
+                    list.add(p);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -74,7 +74,7 @@ public class ProductService {
                 ResultSet rs = statement.executeQuery("SELECT products.idProduct,products.STATUS ,sum(cthd.SL)as total FROM products, cthd WHERE products.idProduct = cthd.idProduct GROUP BY products.idProduct ORDER BY total DESC;");
                 while (rs.next()) {
                     int status = rs.getInt(2);
-                  if(status==0) {
+                    if(status==0) {
                         Product p = findById(rs.getString(1)) ;
                         list.add(p);
                     }
@@ -310,7 +310,7 @@ public class ProductService {
         try {
             ResultSet rs = statement.executeQuery("select distinct size from products");
             while (rs.next()) {
-               res.add(rs.getString(1));
+                res.add(rs.getString(1));
             }
 
         } catch (SQLException se) {
@@ -372,8 +372,26 @@ public class ProductService {
         }
         return res;
     }
+    public static  void hideImg(String img){
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE productImgs set STATUS = 1 where img = '"+img+"';";
+        try {
+            statement.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static  void UnHidenImg(String img){
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE productImgs set STATUS = 0 where img = '"+img+"';";
+        try {
+            statement.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
     public static void main(String[] args) throws SQLException {
-            deleteImage("img/product/B001/banh1.jpg");
+//            deleteImage("img/product/B001/banh1.jpg");
 //            Product p = findById("B100");
 //            addProDuct(p);
 //        String s = "img/product/B001/banh1.jpg";
