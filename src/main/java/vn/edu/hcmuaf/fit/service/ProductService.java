@@ -372,8 +372,26 @@ public class ProductService {
         }
         return res;
     }
+    public static  void hideImg(String img){
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE productImgs set STATUS = 1 where img = '"+img+"';";
+        try {
+            statement.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static  void UnHidenImg(String img){
+        Statement statement = DBConnect.getInstall().get();
+        String sql = "UPDATE productImgs set STATUS = 0 where img = '"+img+"';";
+        try {
+            statement.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
     public static void main(String[] args) throws SQLException {
-            deleteImage("img/product/B001/banh1.jpg");
+//            deleteImage("img/product/B001/banh1.jpg");
 //            Product p = findById("B100");
 //            addProDuct(p);
 //        String s = "img/product/B001/banh1.jpg";

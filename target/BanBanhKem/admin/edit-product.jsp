@@ -122,7 +122,13 @@
                         <!-- profile user -->
                         <div class="profile__user">
                             <div class="profile__avatar">
-                                <img src="../<%=p.getListImg().get(0).getImg()%>" alt="">
+                                <%for(Image img :p.getListImg()){
+                                    if(!img.delete()&& !img.isHide()){%>
+                                        <img src="../<%=img.getImg()%>" alt="">
+                                    <% break;
+                                    }
+                                    }%>
+
                             </div>
                             <!-- or red -->
                             <div class="profile__meta profile__meta--green">
@@ -381,7 +387,42 @@
                                                         </div>
                                                         </form>
                                                     </div>
-                                                    <!-- end modal delete -->
+                                                    <%if (img.isHide()){%>
+                                                    <a href="#modal-unHiden<%=i-1%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                        <i class="fas fa-eye-slash" ></i>
+                                                    </a>
+                                                    <%}else if(!img.delete() && !img.isHide()){%>
+                                                    <a href="#modal-hiden<%=i-1%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                        <i class="fa fa-eye" style="color: #24cc63"></i>
+                                                    </a>
+                                                    <%}%>
+                                                    <!-- modal hiden -->
+                                                    <div id="modal-hiden<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
+                                                        <h6 class="modal__title">Ẩn hình ảnh</h6>
+
+                                                        <p class="modal__text">Bạn có chắc muốn ẩn hình ảnh này?</p>
+                                                        <%String url = "hideImage?img="+img.getImg()+"&&idP="+ p.getId();%>
+                                                        <div class="modal__btns">
+                                                            <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url%>')" type="button">Ẩn hình ảnh</button>
+                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end modal hiden -->
+
+                                                    <!-- modal unHiden -->
+                                                    <div id="modal-unHiden<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
+                                                        <h6 class="modal__title">Hiển thị hình ảnh</h6>
+
+                                                        <p class="modal__text">Bạn có chắc muốn hiển thị hình ảnh này?</p>
+                                                        <%String url1 = "UnHideImage?img="+img.getImg()+"&&idP="+ p.getId();%>
+                                                        <div class="modal__btns">
+                                                            <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url1%>')" type="button">Hiển thị</button>
+                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end modal unHiden -->
+
+
                                                     <a href="#modal-deleteA<%=i-1%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
@@ -390,8 +431,8 @@
                                                         <h6 class="modal__title">Xóa hình ảnh</h6>
                                                         <p class="modal__text">Bạn có chắc muốn xóa hình ảnh này?</p>
                                                         <div class="modal__btns">
-                                                            <%String url = "Product/DeleteImage?masp="+p.getId()+"&img="+img.getImg();%>
-                                                            <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>')">Xóa</button>
+                                                            <%String url2 = "Product/DeleteImage?masp="+p.getId()+"&img="+img.getImg();%>
+                                                            <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url2%>')">Xóa</button>
                                                             <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                         </div>
                                                     </div>
