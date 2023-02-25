@@ -1,9 +1,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
 <%@ page import="java.util.*" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <html lang="xzz">
@@ -236,7 +233,12 @@
                         %>
                             <tr id="<%=entry.getValue().getSp().getId()%>" class="cart-item">
                                 <td  class="shoping__cart__item">
-                                    <img src="<%=entry.getValue().getSp().getListImg().get(0)%>" alt="">
+                                    <%for(Image img :entry.getValue().getSp().getListImg()){
+                                        if(!img.delete()&& !img.isHide()){%>
+                                    <img src="<%=img.getImg()%>" alt="">
+                                    <% break;
+                                    }
+                                    }%>
                                     <h5><%=entry.getValue().getSp().getName()%>
                                     </h5>
                                     <input class="idPro" id="idProduct" type="text" value="<%=entry.getValue().getSp().getId()%>" style="display: none">

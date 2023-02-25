@@ -428,14 +428,7 @@ background-color: #ff96b7;
     content: "";
     opacity: 0;
 }
-.row input:not(:placeholder-shown) {
-    border-color: hsl(0, 76%, 50%);
-}
 
-/* Show green borders when valid */
-.row input:valid {
-    border-color: #ff96b7;;
-}
 .button_right{
     width: 100%;
     display: flow;

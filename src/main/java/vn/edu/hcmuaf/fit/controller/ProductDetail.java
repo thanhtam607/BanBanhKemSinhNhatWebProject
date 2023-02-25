@@ -13,10 +13,11 @@ import java.util.List;
 public class ProductDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> listsplq = ProductService.findByType("type");
-        request.setAttribute("splq", listsplq);
+
         Product product = ProductService.findById(request.getParameter("id"));
         request.setAttribute("getDetail", product);
+        List<Product> listsplq = ProductService.findByType(product.getType(), ProductService.getListProduct());
+        request.setAttribute("splq", listsplq);
         request.getRequestDispatcher("shop-details.jsp").forward(request,response);
     }
 
