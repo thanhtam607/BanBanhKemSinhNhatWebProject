@@ -494,9 +494,7 @@
                                             <!-- modal delete -->
                                             <div id="modal-delete<%=index%>" class="zoom-anim-dialog mfp-hide modal">
                                                 <h6 class="modal__title">Xóa Bình Luận</h6>
-
                                                 <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
-
                                                 <div class="modal__btns">
                                                     <% String url ="Product/DeleteComment?masp="+p.getId()+"&idCmt="+listCmt.get(index).getIdcmt()+"&id="+ index; %>
                                                     <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>') ">Xóa</button>
@@ -517,7 +515,6 @@
             </div>
             <!-- end content tabs -->
 </main>
-
 <!-- end main content -->
 
 <!-- modal view -->

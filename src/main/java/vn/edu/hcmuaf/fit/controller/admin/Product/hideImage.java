@@ -15,7 +15,6 @@ public class hideImage extends HttpServlet {
         ProductService.hideImg(img);
         request.getRequestDispatcher("Edit_Product?idP="+request.getParameter("idP")).forward(request,response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

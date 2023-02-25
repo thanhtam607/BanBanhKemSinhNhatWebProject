@@ -173,12 +173,14 @@
                                     <td>
                                         <div class="main__user">
                                             <div class="main__meta">
-                                                <h3><%=pro.getName()%></h3>
+                                                <a href="Edit_Product?idP=<%=pro.getId()%>"><%=pro.getName()%></a>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text"><%=pro.getType()%></div>
+                                        <div class="main__table-text">
+                                                <%=pro.getType()%>
+                                            </div>
                                     </td>
                                     <td>
                                         <div class="main__table-text"><%=pro.formatNum(pro.getPrice())%></div>
