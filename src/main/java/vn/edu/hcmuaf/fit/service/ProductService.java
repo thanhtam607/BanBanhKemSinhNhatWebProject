@@ -5,7 +5,6 @@ import vn.edu.hcmuaf.fit.model.*;
 
 import java.sql.*;
 import java.util.*;
-
 public class ProductService {
     public static List<Product> getData()    {
         List<Product> list = new LinkedList<Product>();

@@ -15,7 +15,6 @@ public class UnHidenProduct extends HttpServlet {
         ProductService.UnHidenProduct(idProduct);
         request.getRequestDispatcher("ListProduct_Admin").forward(request,response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

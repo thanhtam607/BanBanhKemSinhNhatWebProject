@@ -173,12 +173,11 @@
                     </div>
                     <!-- end profile mobile tabs nav -->
 
-                    <!-- profile btns -->
-                    <div class="profile__actions">
 
+                    <div class="profile__actions">
                         <a href="#modal-delete<%=p.getId()%>" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
                     </div>
-                    <!-- end profile btns -->
+
                 </div>
             </div>
             <div id="modal-delete<%=p.getId()%>" class="zoom-anim-dialog mfp-hide modal">
@@ -191,7 +190,6 @@
                     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                 </div>
             </div>
-            <!-- end profile -->
 
             <!-- content tabs -->
             <div class="tab-content" id="myTabContent">

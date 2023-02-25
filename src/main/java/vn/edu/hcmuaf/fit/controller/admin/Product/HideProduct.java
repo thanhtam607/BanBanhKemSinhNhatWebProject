@@ -15,7 +15,6 @@ public class HideProduct extends HttpServlet {
         ProductService.hideProduct(idProduct);
         request.getRequestDispatcher("ListProduct_Admin").forward(request,response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
