@@ -433,7 +433,7 @@ background-color: #ff96b7;
 }
 
 /* Show green borders when valid */
-.row input:valid {
+.row--form input:valid {
     border-color: hsl(120, 76%, 50%);
 }
 .button_right{

@@ -165,7 +165,7 @@
 
                             <td>
                                 <div class="main__table-text" >
-                                    <img src="../<%=pro.getListImg().get(0)%>" alt="" style="width: 60px; margin-right: 15px;">
+                                    <img src="../<%=pro.getListImg().get(0).getImg()%>" alt="" style="width: 60px; margin-right: 15px;">
                                         <%=pro.getName()%>
                                 </div>
                             </td>

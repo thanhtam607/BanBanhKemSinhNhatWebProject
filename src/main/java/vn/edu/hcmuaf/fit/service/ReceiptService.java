@@ -146,10 +146,10 @@ public class ReceiptService {
         Statement stmt = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT cthd.MAHD, cthd.idProduct, products.productName, products.Gia, cthd.SL, cthd.GHICHU from hoadon, cthd, products\n" +
+                ResultSet rs = statement.executeQuery("SELECT cthd.MAHD, cthd.idProduct, products.productName, products.price, cthd.SL, cthd.GHICHU from hoadon, cthd, products\n" +
                         "WHERE cthd.MAHD = hoadon.MAHD and cthd.idProduct = products.idProduct ORDER BY cthd.MAHD DESC ");
                 while (rs.next()) {
-                    ResultSet rsImg = stmt.executeQuery("SELECT anhsp.idProduct,anhsp.Anh from anhsp");
+                    ResultSet rsImg = stmt.executeQuery("SELECT productImgs.idProduct,productImgs.img from productImgs");
                     List<String> listImg = new LinkedList<String>();
 
                     while (rsImg.next()) {

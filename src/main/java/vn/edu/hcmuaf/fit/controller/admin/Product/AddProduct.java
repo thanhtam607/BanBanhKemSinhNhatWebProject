@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller.admin.Product;
 
+import vn.edu.hcmuaf.fit.model.Image;
 import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
@@ -42,9 +43,10 @@ public class AddProduct extends HttpServlet {
         int gia  = Integer.parseInt(giasp);
         int khoiLg = Integer.parseInt(kl);
         String realPa = request.getServletContext().getRealPath("img/product/" + masp);
-        List<String> dsanh=  new ArrayList<>();
+        List<Image> listImg=  new ArrayList<>();
 //            File file = new File(ProductService.getLocation() + realPa + "/");
 //            file.mkdir();
+            int i =1;
         for (Part part : request.getParts()) {
                 if (part.getName().equalsIgnoreCase("upload")) {
                     String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
@@ -56,10 +58,13 @@ public class AddProduct extends HttpServlet {
 //                    part.write(location);
                     part.write(newImg);
                     System.out.println(newImg);
-                    dsanh.add( "img/product/" + masp+"/" + filename );
+                    String idImg = "ASP"+masp.substring(1)+"-"+(i);
+                    String img = "img/product/" + masp+"/" + filename;
+                    listImg.add(new Image(idImg, masp, img, 0));
+                    i++;
                     }
             }
-        Product p = new Product(masp, tensp,loai,kichthuoc,khoiLg, mota,noidung,dsanh,gia);
+        Product p = new Product(masp, tensp,loai,kichthuoc,khoiLg, mota,noidung,listImg,gia);
         ProductService.addProDuct(p);
         response.sendRedirect("ListProduct_Admin"); }
     }

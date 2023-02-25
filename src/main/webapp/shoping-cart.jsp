@@ -236,7 +236,7 @@
                         %>
                             <tr id="<%=entry.getValue().getSp().getId()%>" class="cart-item">
                                 <td  class="shoping__cart__item">
-                                    <img src="<%=entry.getValue().getSp().getListImg().get(0)%>" alt="">
+                                    <img src="<%=entry.getValue().getSp().getListImg().get(0).getImg()%>" alt="">
                                     <h5><%=entry.getValue().getSp().getName()%>
                                     </h5>
                                     <input class="idPro" id="idProduct" type="text" value="<%=entry.getValue().getSp().getId()%>" style="display: none">

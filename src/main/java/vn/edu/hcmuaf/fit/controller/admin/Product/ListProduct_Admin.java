@@ -15,7 +15,7 @@ import java.util.List;
 public class ListProduct_Admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> list = ProductService.getData();
+        List<Product> list = ProductService.getListProductForAdmin();
         request.setAttribute("listpro", list);
 
         String numPage = request.getParameter("page");

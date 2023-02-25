@@ -5,6 +5,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Image" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -121,7 +122,7 @@
                         <!-- profile user -->
                         <div class="profile__user">
                             <div class="profile__avatar">
-                                <img src="../<%=p.getListImg().get(0)%>" alt="">
+                                <img src="../<%=p.getListImg().get(0).getImg()%>" alt="">
                             </div>
                             <!-- or red -->
                             <div class="profile__meta profile__meta--green">
@@ -344,7 +345,7 @@
                                         </tr>
 
                                     </thead>
-                                    <%List<String> listImg = p.getListImg();
+                                    <%List<Image> listImg = p.getListImg();
                                     for(int i = 0; i< listImg.size();i++){%>
                                     <tbody>
 
@@ -354,10 +355,10 @@
                                             </td>
 
                                             <td>
-                                                <div class="main__table-text"><img src="../<%=listImg.get(i)%>" ></div>
+                                                <div class="main__table-text"><img src="../<%=listImg.get(i).getImg()%>" ></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><%=listImg.get(i)%></div>
+                                                <div class="main__table-text"><%=listImg.get(i).getImg()%></div>
                                             </td>
 
                                             <td>

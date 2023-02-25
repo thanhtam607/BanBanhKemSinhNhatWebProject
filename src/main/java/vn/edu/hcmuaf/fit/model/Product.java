@@ -11,14 +11,14 @@ public class Product {
     int weight;
     String description;
     String introduction;
-    List<String> listImg;
+    List<Image> listImg;
     int price;
     List<Comment> comments;
     ProductDetails details;
     int status;
 
 
-    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<String> listImg, int price, List<Comment> comments,  ProductDetails details) {
+    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<Image> listImg, int price, List<Comment> comments,  ProductDetails details) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -32,7 +32,7 @@ public class Product {
         this.details =details;
         this.status=0;
     }
-    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<String> listImg, int price){
+    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<Image> listImg, int price){
         this.id=id;
         this.name = name;
         this.type = type;
@@ -43,7 +43,7 @@ public class Product {
         this.listImg = listImg;
         this.price = price;
     }
-    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<String> listImg, int price, List<Comment> comments,  ProductDetails details, int status) {
+    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<Image> listImg, int price, List<Comment> comments,  ProductDetails details, int status) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -78,7 +78,7 @@ public class Product {
         this.name = name;
     }
 
-    public List<String> getListImg() {
+    public List<Image> getListImg() {
         return listImg;
     }
 
@@ -156,6 +156,12 @@ public class Product {
         }
         return false;
     }
+    public boolean delete(){
+        if(this.status==-1){
+            return true;
+        }
+        return false;
+    }
 
     public String getStatus(){
         if(getDetail().getInventory()>1){
@@ -175,6 +181,7 @@ public class Product {
         return df.format(price);
 
     }
+
 //    public static void main(String[] args) {
 //
 //        System.out.println(formatNum(1234567));
