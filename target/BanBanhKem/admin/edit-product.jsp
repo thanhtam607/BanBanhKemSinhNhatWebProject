@@ -104,451 +104,489 @@
 </div>
 <!-- Sidebar End -->
 
-    <!-- main content -->
-    <main class="main">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- main title -->
-                <div class="col-12">
-                    <div class="main__title">
-                        <h2>Chỉnh sửa sản phẩm</h2>
-                    </div>
+<!-- main content -->
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- main title -->
+            <div class="col-12">
+                <div class="main__title">
+                    <h2>Chỉnh sửa sản phẩm</h2>
                 </div>
-                <!-- end main title -->
-            <%Product p = (Product) request.getAttribute("product");%>
-                <!-- profile -->
-                <div class="col-12">
-                    <div class="profile__content">
-                        <!-- profile user -->
-                        <div class="profile__user">
-                            <div class="profile__avatar">
-                                <img src="../<%=p.getListImg().get(0).getImg()%>" alt="">
-                            </div>
-                            <!-- or red -->
-                            <div class="profile__meta profile__meta--green">
-                                <h3> <%=p.getName()%></h3>
-                                <span><%=p.getStatus()%></span>
-                            </div>
+            </div>
+            <!-- end main title -->
+                <%Product p = (Product) request.getAttribute("product");%>
+            <!-- profile -->
+            <div class="col-12">
+                <div class="profile__content">
+                    <!-- profile user -->
+                    <div class="profile__user">
+                        <div class="profile__avatar">
+                            <%for(Image img :p.getListImg()){
+                                if(!img.delete()&& !img.isHide()){%>
+                            <img src="../<%=img.getImg()%>" alt="">
+                            <% break;
+                            }
+                            }%>
+
                         </div>
-                        <!-- end profile user -->
-
-                        <!-- profile tabs nav -->
-                        <ul class="nav nav-tabs profile__tabs" id="profile__tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Thông Tin</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Hình ảnh (<%=p.countImgs()%>)</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Bình Luận (<%=p.getComments().size()%>)</a>
-                            </li>
-                        </ul>
-                        <!-- end profile tabs nav -->
-
-                        <!-- profile mobile tabs nav -->
-                        <div class="profile__mobile-tabs" id="profile__mobile-tabs">
-                            <div class="profile__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <input type="button" value="Profile">
-                                <span></span>
-                            </div>
-
-                            <div class="profile__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Thông Tin</a></li>
-
-                                        <li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Hình ảnh (<%=p.countImgs()%>)</a></li>
-
-                                    <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Bình Luận (<%=p.getComments().size()%>)</a></li>
-                                </ul>
-                            </div>
+                        <!-- or red -->
+                        <div class="profile__meta profile__meta--green">
+                            <h3> <%=p.getName()%></h3>
+                            <span><%=p.getStatus()%></span>
                         </div>
-                        <!-- end profile mobile tabs nav -->
-
-                        <!-- profile btns -->
-                        <div class="profile__actions">
-
-                            <a href="#modal-delete<%=p.getId()%>" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
-                        </div>
-                        <!-- end profile btns -->
                     </div>
-                </div>
-                <div id="modal-delete<%=p.getId()%>" class="zoom-anim-dialog mfp-hide modal">
-                    <h6 class="modal__title">Xóa Sản Phẩm</h6>
+                    <!-- end profile user -->
 
-                    <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này?</p>
-                    <%String urlq = "DeleteProduct?masp="+p.getId();%>
-                    <div class="modal__btns">
-                        <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=urlq%>')" type="button">Xóa</button>
-                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                    <!-- profile tabs nav -->
+                    <ul class="nav nav-tabs profile__tabs" id="profile__tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Thông Tin</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Hình ảnh (<%=p.countImgs()%>)</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Bình Luận (<%=p.getComments().size()%>)</a>
+                        </li>
+                    </ul>
+                    <!-- end profile tabs nav -->
+
+                    <!-- profile mobile tabs nav -->
+                    <div class="profile__mobile-tabs" id="profile__mobile-tabs">
+                        <div class="profile__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <input type="button" value="Profile">
+                            <span></span>
+                        </div>
+
+                        <div class="profile__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Thông Tin</a></li>
+
+                                <li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Hình ảnh (<%=p.countImgs()%>)</a></li>
+
+                                <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Bình Luận (<%=p.getComments().size()%>)</a></li>
+                            </ul>
+                        </div>
                     </div>
+                    <!-- end profile mobile tabs nav -->
+
+                    <!-- profile btns -->
+                    <div class="profile__actions">
+
+                        <a href="#modal-delete<%=p.getId()%>" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
+                    </div>
+                    <!-- end profile btns -->
                 </div>
-                <!-- end profile -->
+            </div>
+            <div id="modal-delete<%=p.getId()%>" class="zoom-anim-dialog mfp-hide modal">
+                <h6 class="modal__title">Xóa Sản Phẩm</h6>
 
-                <!-- content tabs -->
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
-                        <div class="col-12">
-                            <div class="row">
-                                <!-- details form -->
-                                <div class="col-12 col-lg-8">
-                                    <form action="Product/UpdateProduct" method="post" class="form form--profile" id="info-product">
-                                        <div class="row row--form">
-                                            <div class="col-12">
-                                                <h4 class="form__title">Thông tin sản phẩm</h4>
-                                            </div>
-                                            <input id="proID" type="hidden" name="proId" class="form__input" value="<%=p.getId()%>">
+                <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này?</p>
+                <%String urlq = "DeleteProduct?masp="+p.getId();%>
+                <div class="modal__btns">
+                    <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=urlq%>')" type="button">Xóa</button>
+                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                </div>
+            </div>
+            <!-- end profile -->
 
-                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <div class="form__group">
-                                                    <label class="form__label" >Tên sản phẩm</label>
-                                                    <input  type="text" name="proname" class="form__input" value="<%=p.getName()%>">
-                                                </div>
-                                            </div>
+            <!-- content tabs -->
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
+                    <div class="col-12">
+                        <div class="row">
+                            <!-- details form -->
+                            <div class="col-12 col-lg-8">
+                                <form action="Product/UpdateProduct" method="post" class="form form--profile" id="info-product">
+                                    <div class="row row--form">
+                                        <div class="col-12">
+                                            <h4 class="form__title">Thông tin sản phẩm</h4>
+                                        </div>
+                                        <input id="proID" type="hidden" name="proId" class="form__input" value="<%=p.getId()%>">
 
-                                            <div class="col-12 col-md-7 col-lg-12 col-xl-7">
-                                                <div class="form__group">
-                                                    <label class="form__label">Loại bánh</label>
-                                                    <select class="form-select form__input" name="loaiBanh" >
-                                                    <%List<TypeOfCake> ListType = ProductService.getListType();
-                                                        for(TypeOfCake lb: ListType){
-                                                    if(lb.getName().equals(p.getType())){%>
-                                                        <option selected value="<%=lb.getIdType()%>"><%=lb.getName()%></option>
-                                                        <%} else {%>
-                                                        <option value="<%=lb.getIdType()%>"><%=lb.getName()%></option>
-                                                    <%}}%></select>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-5 col-lg-12 col-xl-5">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="weight">Khối lượng (g)</label>
-                                                    <input id="weight" type="number" min="10" name="weight" class="form__input" value="<%=p.getWeight()%>">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="price">Giá (VND)</label>
-                                                    <input id="price" type="number" min="1000" name="price" class="form__input" value="<%=p.getPrice()%>" >
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="rights">Kích thước</label>
-                                                    <select class="form__input" id="rights" name="size">
-                                                        <%List<String> listSize = (List<String>) request.getAttribute("listSize");
-                                                        for(String s: listSize){
-                                                            if(s.equals(p.getSize())){%>
-                                                        <option selected value="<%=s%>"><%=s%></option>
-                                                           <% }else{%>
-                                                        <option value="<%=s%>"><%=s%></option>
-                                                        <%}}%>
-													</select>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="description">Mô tả sản phẩm</label>
-                                                    <textarea class="form__input "  id="description" name="description" form="info-product" ><%=p.getDescription()%></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="description">Giới thiệu sản phẩm</label>
-                                                    <textarea class="form__input "  id="introduce" name="intro" form="info-product" ><%=p.getIntroduction()%></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <input class="form__btn" type="submit" value="Lưu thông tin"></input>
+                                        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                            <div class="form__group">
+                                                <label class="form__label" >Tên sản phẩm</label>
+                                                <input  type="text" name="proname" class="form__input" value="<%=p.getName()%>">
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                                <!-- end details form -->
 
-                                <!-- password form -->
-                                <div class="col-12 col-lg-4">
-                                    <div class="form form--profile">
-                                        <div class="row row--form">
-                                            <div class="col-12">
-                                                <h4 class="form__title">Chi tiết sản phẩm</h4>
+                                        <div class="col-12 col-md-7 col-lg-12 col-xl-7">
+                                            <div class="form__group">
+                                                <label class="form__label">Loại bánh</label>
+                                                <select class="form-select form__input" name="loaiBanh" >
+                                                    <%List<TypeOfCake> ListType = ProductService.getListType();
+                                                        for(TypeOfCake lb: ListType){
+                                                            if(lb.getName().equals(p.getType())){%>
+                                                    <option selected value="<%=lb.getIdType()%>"><%=lb.getName()%></option>
+                                                    <%} else {%>
+                                                    <option value="<%=lb.getIdType()%>"><%=lb.getName()%></option>
+                                                    <%}}%></select>
                                             </div>
+                                        </div>
+                                        <div class="col-12 col-md-5 col-lg-12 col-xl-5">
+                                            <div class="form__group">
+                                                <label class="form__label" for="weight">Khối lượng (g)</label>
+                                                <input id="weight" type="number" min="10" name="weight" class="form__input" value="<%=p.getWeight()%>">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="form__group">
+                                                <label class="form__label" for="price">Giá (VND)</label>
+                                                <input id="price" type="number" min="1000" name="price" class="form__input" value="<%=p.getPrice()%>" >
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="form__group">
+                                                <label class="form__label" for="rights">Kích thước</label>
+                                                <select class="form__input" id="rights" name="size">
+                                                    <%List<String> listSize = (List<String>) request.getAttribute("listSize");
+                                                        for(String s: listSize){
+                                                            if(s.equals(p.getSize())){%>
+                                                    <option selected value="<%=s%>"><%=s%></option>
+                                                    <% }else{%>
+                                                    <option value="<%=s%>"><%=s%></option>
+                                                    <%}}%>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                            <div class="form__group">
+                                                <label class="form__label" for="description">Mô tả sản phẩm</label>
+                                                <textarea class="form__input "  id="description" name="description" form="info-product" ><%=p.getDescription()%></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                            <div class="form__group">
+                                                <label class="form__label" for="description">Giới thiệu sản phẩm</label>
+                                                <textarea class="form__input "  id="introduce" name="intro" form="info-product" ><%=p.getIntroduction()%></textarea>
+                                            </div>
+                                        </div>
 
-                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="ngaysx">Ngày sản xuất</label>
-                                                    <input id="ngaysx" type="date" name="ngaysx" class="form__input" >
-                                                </div>
-                                            </div>
+                                        <div class="col-12">
+                                            <input class="form__btn" type="submit" value="Lưu thông tin"></input>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- end details form -->
 
-                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="ngayhh">Ngày hết hạn</label>
-                                                    <input id="ngayhh" type="date" name="ngayhh" class="form__input">
-                                                </div>
-                                            </div>
+                            <!-- password form -->
+                            <div class="col-12 col-lg-4">
+                                <div class="form form--profile">
+                                    <div class="row row--form">
+                                        <div class="col-12">
+                                            <h4 class="form__title">Chi tiết sản phẩm</h4>
+                                        </div>
 
-                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="soluong">Số lượng</label>
-                                                    <input id="soluong" type="number" min="1" class="form__input" value="<%=p.getDetail().getQuantity()%>">
-                                                </div>
+                                        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                            <div class="form__group">
+                                                <label class="form__label" for="ngaysx">Ngày sản xuất</label>
+                                                <input id="ngaysx" type="date" name="ngaysx" class="form__input" >
                                             </div>
-                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <div class="form__group">
-                                                    <label class="form__label" for="tonkho">Tồn kho</label>
-                                                    <input id="tonkho" type="number" min="1" class="form__input" value="<%=p.getDetail().getInventory()%>">
-                                                </div>
-                                            </div>
+                                        </div>
 
-                                            <div class="col-12">
-                                                <button class="form__btn" type="button" onclick="updateDetail('<%=p.getId()%>')">Lưu thay đổi</button>
+                                        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                            <div class="form__group">
+                                                <label class="form__label" for="ngayhh">Ngày hết hạn</label>
+                                                <input id="ngayhh" type="date" name="ngayhh" class="form__input">
                                             </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                            <div class="form__group">
+                                                <label class="form__label" for="soluong">Số lượng</label>
+                                                <input id="soluong" type="number" min="1" class="form__input" value="<%=p.getDetail().getQuantity()%>">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                            <div class="form__group">
+                                                <label class="form__label" for="tonkho">Tồn kho</label>
+                                                <input id="tonkho" type="number" min="1" class="form__input" value="<%=p.getDetail().getInventory()%>">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button class="form__btn" type="button" onclick="updateDetail('<%=p.getId()%>')">Lưu thay đổi</button>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end password form -->
                             </div>
+                            <!-- end password form -->
                         </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
-                        <!-- table -->
-                        <div class="col-11" style="text-align: right; font-size: 25px; color: #e83e8c"><a href="#modal-deleteimg<%=(listSize.size()+1)%>" class="open-modal"><i class="bi bi-plus-square-dotted " ></i></a></div>
-                        <!-- modal delete -->
-                        <div id="modal-deleteimg<%=(listSize.size()+1)%>" class="zoom-anim-dialog mfp-hide modal">
-                            <form action="AddImage"  method="POST" enctype="multipart/form-data">
-                                <h6 class="modal__title">Thêm ảnh</h6>
-                                <p class="modal__text">Chọn hình ảnh</p>
-                                <input type="text" class="form__input" name="masp" style="display: none" value="<%=p.getId()%>">
-
-                                <input type="file" class="form__input" name="newImg">
-                                <div class="modal__btns">
-                                    <input class="modal__btn modal__btn--apply" type="submit" value="Xong">
-                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- end modal delete -->
-                        <div class="col-11 ">
-                            <div class="main__table-wrap">
-                                <table class="main__table">
-                                    <thead>
-                                        <tr >
-                                            <th>STT</th>
-                                            <th>Ảnh Sản Phẩm</th>
-                                            <th>Vị trí</th>
-                                            <th>Tùy Chọn</th>
-
-                                        </tr>
-
-                                    </thead>
-                                    <% int i =1;
-                                    for(Image img :p.getListImg() ){
-                                    if(!img.delete()){%>
-                                    <tbody>
-
-                                        <tr style="border-bottom: 3px solid #ff96b7;">
-                                            <td>
-                                                <div class="main__table-text"><%=i%></div>
-                                            </td>
-
-                                            <td>
-                                                <div class="main__table-text"><img src="../<%=img.getImg()%>" ></div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text"><%=img.getImg()%></div>
-                                            </td>
-
-                                            <td>
-                                                <div class="main__table-btns">
-                                                    <a href="#modal-deleteimg<%=i-1%>" class="main__table-btn main__table-btn--edit open-modal">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                    <!-- modal delete -->
-                                                    <div id="modal-deleteimg<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
-                                                        <form action="Product/UpdateImg"  method="POST" enctype="multipart/form-data">
-                                                        <h6 class="modal__title">Thay đổi ảnh</h6>
-                                                        <p class="modal__text">Chọn hình ảnh</p>
-                                                            <input type="text" class="form__input" name="masp" style="display: none" value="<%=p.getId()%>">
-                                                            <input type="text" class="form__input" name="oldImg" style="display: none" value="<%=img.getImg()%>">
-                                                        <input type="file" class="form__input" name="img">
-                                                        <div class="modal__btns">
-                                                            <input class="modal__btn modal__btn--apply" type="submit" value="Xong">
-                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                    <!-- end modal delete -->
-                                                    <a href="#modal-deleteA<%=i-1%>" class="main__table-btn main__table-btn--delete open-modal">
-														<i class="fa fa-trash"></i>
-													</a>
-                                                    <!-- modal delete -->
-                                                    <div id="modal-deleteA<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
-                                                        <h6 class="modal__title">Xóa hình ảnh</h6>
-                                                        <p class="modal__text">Bạn có chắc muốn xóa hình ảnh này?</p>
-                                                        <div class="modal__btns">
-                                                            <%String url = "Product/DeleteImage?masp="+p.getId()+"&img="+img.getImg();%>
-                                                            <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>')">Xóa</button>
-                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                                                        </div>
-                                                    </div>
-                                                    <!-- end modal delete -->
-                                                </div>
-                                            </td>
-                                        </tr >
-                                    </tbody>
-                                    <% i++;}}%>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- end table -->
-                    </div>
-                    <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
-                        <!-- table -->
-                        <div class="col-12 bg-pink">
-                            <div class="main__table-wrap">
-                                <table class="main__table">
-                                    <thead>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>Tên khách hàng</th>
-                                            <th>Bình luận</th>
-                                            <th>Ngày tạo</th>
-                                            <th>Tùy Chọn</th>
-                                        </tr>
-                                    </thead>
-                                    <%List<Comment> listCmt = p.getComments();
-                                    for(int index = 0; i<listCmt.size();i++){%>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="main__table-text"><%=index+1%></div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text"><%=listCmt.get(index).getkhachhang()%></div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text"><a href="#"><%=listCmt.get(index).getBinhLuan()%></a></div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text"><a href="#"><%=listCmt.get(index).getDate()%></a></div>
-                                            </td>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
-<%--                                            </td>--%>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text main__table-text--rate"><i class="fa fa-star"></i> 7.9</div>--%>
-<%--                                            </td>--%>
-<%--                                            <td>--%>
-<%--                                                <div class="main__table-text">12 / 7</div>--%>
-<%--                                            </td>--%>
-                                            <td>
-                                                <div class="main__table-btns">
-                                                    <a href="#modal-delete<%=index%>" class="main__table-btn main__table-btn--delete open-modal">
-														<i class="fa fa-trash"></i>
-													</a>
-                                                    <!-- modal delete -->
-                                                    <div id="modal-delete<%=index%>" class="zoom-anim-dialog mfp-hide modal">
-                                                        <h6 class="modal__title">Xóa Bình Luận</h6>
-
-                                                        <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
-
-                                                        <div class="modal__btns">
-                                                            <% String url ="Product/DeleteComment?masp="+p.getId()+"&idCmt="+listCmt.get(index).getIdcmt()+"&id="+ index; %>
-                                                            <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>') ">Xóa</button>
-                                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                                                        </div>
-                                                    </div>
-                                                    <!-- end modal delete -->
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <%}%>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- end table -->
                     </div>
                 </div>
-                <!-- end content tabs -->
-    </main>
 
-    <!-- end main content -->
+                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
+                    <!-- table -->
+                    <div class="col-11" style="text-align: right; font-size: 25px; color: #e83e8c"><a href="#modal-deleteimg<%=(listSize.size()+1)%>" class="open-modal"><i class="bi bi-plus-square-dotted " ></i></a></div>
+                    <!-- modal delete -->
+                    <div id="modal-deleteimg<%=(listSize.size()+1)%>" class="zoom-anim-dialog mfp-hide modal">
+                        <form action="AddImage"  method="POST" enctype="multipart/form-data">
+                            <h6 class="modal__title">Thêm ảnh</h6>
+                            <p class="modal__text">Chọn hình ảnh</p>
+                            <input type="text" class="form__input" name="masp" style="display: none" value="<%=p.getId()%>">
 
-    <!-- modal view -->
-    <div id="modal-view" class="zoom-anim-dialog mfp-hide modal modal--view">
-        <div class="comments__autor">
-            <img class="comments__avatar" src="img/user.svg" alt="">
-            <span class="comments__name">Nguyễn Văn A</span>
-            <span class="comments__time">30.08.2018, 17:53</span>
-        </div>
-        <p class="comments__text">Bánh cánh đồng hoa.</p>
-        <p class="comments__text">Giao tại: kp3, quận 7, tpHCM.</p>
-        <p class="comments__text">Trạng thái: Giao Thành Công.</p>
-        <div class="comments__actions">
-            <div class="comments__rate">
-                <span><i class="fa fa-thumbs-up"></i>12</span>
-                <span>7<i class="fa fa-thumbs-down"></i></span>
+                            <input type="file" class="form__input" name="newImg">
+                            <div class="modal__btns">
+                                <input class="modal__btn modal__btn--apply" type="submit" value="Xong">
+                                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end modal delete -->
+                    <div class="col-11 ">
+                        <div class="main__table-wrap">
+                            <table class="main__table">
+                                <thead>
+                                <tr >
+                                    <th>STT</th>
+                                    <th>Ảnh Sản Phẩm</th>
+                                    <th>Vị trí</th>
+                                    <th>Tùy Chọn</th>
+
+                                </tr>
+
+                                </thead>
+                                <% int i =1;
+                                    for(Image img :p.getListImg() ){
+                                        if(!img.delete()){%>
+                                <tbody>
+
+                                <tr style="border-bottom: 3px solid #ff96b7;">
+                                    <td>
+                                        <div class="main__table-text"><%=i%></div>
+                                    </td>
+
+                                    <td>
+                                        <div class="main__table-text"><img src="../<%=img.getImg()%>" ></div>
+                                    </td>
+                                    <td>
+                                        <div class="main__table-text"><%=img.getImg()%></div>
+                                    </td>
+
+                                    <td>
+                                        <div class="main__table-btns">
+                                            <a href="#modal-deleteimg<%=i-1%>" class="main__table-btn main__table-btn--edit open-modal">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <!-- modal delete -->
+                                            <div id="modal-deleteimg<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
+                                                <form action="Product/UpdateImg"  method="POST" enctype="multipart/form-data">
+                                                    <h6 class="modal__title">Thay đổi ảnh</h6>
+                                                    <p class="modal__text">Chọn hình ảnh</p>
+                                                    <input type="text" class="form__input" name="masp" style="display: none" value="<%=p.getId()%>">
+                                                    <input type="text" class="form__input" name="oldImg" style="display: none" value="<%=img.getImg()%>">
+                                                    <input type="file" class="form__input" name="img">
+                                                    <div class="modal__btns">
+                                                        <input class="modal__btn modal__btn--apply" type="submit" value="Xong">
+                                                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <%if (img.isHide()){%>
+                                            <a href="#modal-unHiden<%=i-1%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                <i class="fas fa-eye-slash" ></i>
+                                            </a>
+                                            <%}else if(!img.delete() && !img.isHide()){%>
+                                            <a href="#modal-hiden<%=i-1%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                <i class="fa fa-eye" style="color: #24cc63"></i>
+                                            </a>
+                                            <%}%>
+                                            <!-- modal hiden -->
+                                            <div id="modal-hiden<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
+                                                <h6 class="modal__title">Ẩn hình ảnh</h6>
+
+                                                <p class="modal__text">Bạn có chắc muốn ẩn hình ảnh này?</p>
+                                                <%String url = "hideImage?img="+img.getImg()+"&&idP="+ p.getId();%>
+                                                <div class="modal__btns">
+                                                    <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url%>')" type="button">Ẩn hình ảnh</button>
+                                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                </div>
+                                            </div>
+                                            <!-- end modal hiden -->
+
+                                            <!-- modal unHiden -->
+                                            <div id="modal-unHiden<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
+                                                <h6 class="modal__title">Hiển thị hình ảnh</h6>
+
+                                                <p class="modal__text">Bạn có chắc muốn hiển thị hình ảnh này?</p>
+                                                <%String url1 = "UnHideImage?img="+img.getImg()+"&&idP="+ p.getId();%>
+                                                <div class="modal__btns">
+                                                    <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url1%>')" type="button">Hiển thị</button>
+                                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                </div>
+                                            </div>
+                                            <!-- end modal unHiden -->
+
+
+                                            <a href="#modal-deleteA<%=i-1%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            <!-- modal delete -->
+                                            <div id="modal-deleteA<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
+                                                <h6 class="modal__title">Xóa hình ảnh</h6>
+                                                <p class="modal__text">Bạn có chắc muốn xóa hình ảnh này?</p>
+                                                <div class="modal__btns">
+                                                    <%String url2 = "Product/DeleteImage?masp="+p.getId()+"&img="+img.getImg();%>
+                                                    <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url2%>')">Xóa</button>
+                                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                </div>
+                                            </div>
+                                            <!-- end modal delete -->
+                                        </div>
+                                    </td>
+                                </tr >
+                                </tbody>
+                                <% i++;}}%>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end table -->
+                </div>
+                <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
+                    <!-- table -->
+                    <div class="col-12 bg-pink">
+                        <div class="main__table-wrap">
+                            <table class="main__table">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên khách hàng</th>
+                                    <th>Bình luận</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Tùy Chọn</th>
+                                </tr>
+                                </thead>
+                                <%List<Comment> listCmt = p.getComments();
+                                    for(int index = 0; i<listCmt.size();i++){%>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="main__table-text"><%=index+1%></div>
+                                    </td>
+                                    <td>
+                                        <div class="main__table-text"><%=listCmt.get(index).getkhachhang()%></div>
+                                    </td>
+                                    <td>
+                                        <div class="main__table-text"><a href="#"><%=listCmt.get(index).getBinhLuan()%></a></div>
+                                    </td>
+                                    <td>
+                                        <div class="main__table-text"><a href="#"><%=listCmt.get(index).getDate()%></a></div>
+                                    </td>
+                                    <%--                                            <td>--%>
+                                    <%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
+                                    <%--                                            </td>--%>
+                                    <%--                                            <td>--%>
+                                    <%--                                                <div class="main__table-text main__table-text--rate"><i class="fa fa-star"></i> 7.9</div>--%>
+                                    <%--                                            </td>--%>
+                                    <%--                                            <td>--%>
+                                    <%--                                                <div class="main__table-text">12 / 7</div>--%>
+                                    <%--                                            </td>--%>
+                                    <td>
+                                        <div class="main__table-btns">
+                                            <a href="#modal-delete<%=index%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            <!-- modal delete -->
+                                            <div id="modal-delete<%=index%>" class="zoom-anim-dialog mfp-hide modal">
+                                                <h6 class="modal__title">Xóa Bình Luận</h6>
+                                                <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
+                                                <div class="modal__btns">
+                                                    <% String url ="Product/DeleteComment?masp="+p.getId()+"&idCmt="+listCmt.get(index).getIdcmt()+"&id="+ index; %>
+                                                    <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>') ">Xóa</button>
+                                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                </div>
+                                            </div>
+                                            <!-- end modal delete -->
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <%}%>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end table -->
+                </div>
             </div>
+            <!-- end content tabs -->
+</main>
+<!-- end main content -->
+
+<!-- modal view -->
+<div id="modal-view" class="zoom-anim-dialog mfp-hide modal modal--view">
+    <div class="comments__autor">
+        <img class="comments__avatar" src="img/user.svg" alt="">
+        <span class="comments__name">Nguyễn Văn A</span>
+        <span class="comments__time">30.08.2018, 17:53</span>
+    </div>
+    <p class="comments__text">Bánh cánh đồng hoa.</p>
+    <p class="comments__text">Giao tại: kp3, quận 7, tpHCM.</p>
+    <p class="comments__text">Trạng thái: Giao Thành Công.</p>
+    <div class="comments__actions">
+        <div class="comments__rate">
+            <span><i class="fa fa-thumbs-up"></i>12</span>
+            <span>7<i class="fa fa-thumbs-down"></i></span>
         </div>
     </div>
-    <!-- end modal view -->
+</div>
+<!-- end modal view -->
 
-    <!-- modal delete -->
-    <div id="modal-deleteb1" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Thay đổi ảnh</h6>
-        <p class="modal__text">Chọn hình ảnh</p>
-        <input type="file" class="form__input">
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Xong</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
+<!-- modal delete -->
+<div id="modal-deleteb1" class="zoom-anim-dialog mfp-hide modal">
+    <h6 class="modal__title">Thay đổi ảnh</h6>
+    <p class="modal__text">Chọn hình ảnh</p>
+    <input type="file" class="form__input">
+    <div class="modal__btns">
+        <button class="modal__btn modal__btn--apply" type="button">Xong</button>
+        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
     </div>
-    <!-- end modal delete -->
+</div>
+<!-- end modal delete -->
 
-    <!-- modal view -->
-    <div id="modal-view2" class="zoom-anim-dialog mfp-hide modal modal--view">
-        <div class="reviews__autor">
-            <img class="reviews__avatar" src="img/user.svg" alt="">
-            <span class="reviews__name">Bánh cánh đồng hoa</span>
-            <span class="reviews__time">24.08.2018, 17:53 by Thanh Tâm</span>
+<!-- modal view -->
+<div id="modal-view2" class="zoom-anim-dialog mfp-hide modal modal--view">
+    <div class="reviews__autor">
+        <img class="reviews__avatar" src="img/user.svg" alt="">
+        <span class="reviews__name">Bánh cánh đồng hoa</span>
+        <span class="reviews__time">24.08.2018, 17:53 by Thanh Tâm</span>
 
-            <span class="reviews__rating"><i class="fa fa-star"></i>5</span>
-        </div>
-        <p class="reviews__text">Bánh ngon xuất sắc!.</p>
+        <span class="reviews__rating"><i class="fa fa-star"></i>5</span>
     </div>
+    <p class="reviews__text">Bánh ngon xuất sắc!.</p>
+</div>
 
-    <!-- end modal view -->
+<!-- end modal view -->
 
 
 
-    <!-- modal status -->
-    <div id="modal-status3" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Chặn Người Dùng</h6>
+<!-- modal status -->
+<div id="modal-status3" class="zoom-anim-dialog mfp-hide modal">
+    <h6 class="modal__title">Chặn Người Dùng</h6>
 
-        <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
+    <p class="modal__text">Bạn có chắc muốn chặn người dùng này?</p>
 
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Chặn</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
+    <div class="modal__btns">
+        <button class="modal__btn modal__btn--apply" type="button">Chặn</button>
+        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
     </div>
-    <!-- end modal status -->
+</div>
+<!-- end modal status -->
 
 
 
-    <!-- JS -->
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery.mousewheel.min.js"></script>
-    <script src="js/jquery.mCustomScrollbar.min.js"></script>
-    <script src="js/select2.min.js"></script>
-    <script src="js/admin.js"></script>
+<!-- JS -->
+<script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/jquery.mousewheel.min.js"></script>
+<script src="js/jquery.mCustomScrollbar.min.js"></script>
+<script src="js/select2.min.js"></script>
+<script src="js/admin.js"></script>
 <script>
 
 </script>
