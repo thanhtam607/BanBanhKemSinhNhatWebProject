@@ -309,6 +309,7 @@
                 <% List<Blog> list2 = (List<Blog>) request.getAttribute("list");
                     for(int i = 0; i<3;i++){
                         Blog b2 = list2.get(i);
+                        String[] rs = b2.getCont().split("\\n");
                 if(b2.getStatus() == -1){ %>
                 <div class="col-lg-4 col-md-4 col-sm-6" style = "display: none">
                     <div class="blog__item">
@@ -336,7 +337,12 @@
                                 <li><i class="fa fa-calendar-o"></i><%=b2.getDate()%></li>
                             </ul>
                             <h5><a href="BlogDetails?id=<%=b2.getId()%>"><%=b2.getTitle()%></a></h5>
-                            <p class="text-justify"></p>
+                            <% if(rs[0].length() < 60) {%>
+                            <h6 class="text-justify text-bolder"><%=rs[0]%></h6>
+                            <p class="text-justify"><%=rs[2]%></p>
+                            <% } else {%>
+                            <p class="text-justify"><%=rs[0]%></p>
+                            <% } %>
                             <a href="BlogDetails?id=<%=b2.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                         </div>
                     </div>

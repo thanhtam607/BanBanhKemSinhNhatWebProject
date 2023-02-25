@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.service;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.Blog;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -58,9 +59,9 @@ public class BlogService {
         }
         return rs;
     }
-    public static void updateBlog(String MactB, String DeMuc, String ChiTiet, String DeMucS, String ChiTietS){
+    public static void updateBlog(String idblog, String date, String cont, String category, String season){
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE ctblog set  DEMUC='" +DeMuc+ "', CHITIET= '"+ ChiTiet+ "' Where DEMUC='" +DeMucS+ "' and CHITIET= '"+ ChiTietS+ "' and  MACTB= '" + MactB+ "' ;";
+        String sql = "UPDATE blog set  DATE='" +date+ "', CONTENT= '"+ cont+ "', CATEGORY= '"+ category+ "', SEASON= '"+ season+ "' Where  IDBLOG= '" + idblog+ "' ;";
         try {
             statement.executeUpdate(sql);
 
@@ -78,6 +79,16 @@ public class BlogService {
             se.printStackTrace();
         }
     }
+ public  static void deleteBlog(String idblog){
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "DELETE FROM BLOG WHERE IDBLOG = '" + idblog + "'";
+     try {
+         stm.executeUpdate(sql);
+
+     } catch (SQLException se) {
+         se.printStackTrace();
+     }
+ }
 
     public static void main(String[] args) {
 //            List<Blog> li = BlogService.getData();
@@ -89,6 +100,9 @@ public class BlogService {
 //            System.out.println(b.getId());
 //        }
         Blog b1 = BlogService.findById("BL01");
-        System.out.println(b1.getCategory());
+        String[] rs = b1.getCont().split("\\n");
+        for (int i = 0; i < rs.length; i++){
+            System.out.print(rs[i] + '\n');
+        }
     }
 }

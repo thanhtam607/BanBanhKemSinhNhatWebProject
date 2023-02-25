@@ -3,6 +3,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="static java.util.Arrays.*" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -256,6 +258,7 @@
                                 <div class="row">
                                     <% List<Blog> list = (List<Blog>) request.getAttribute("list");
                                         for(Blog b: list){
+                                            String[] rs = b.getCont().split("\\n");
                                             if(b.getStatus() == -1) {%>
                                     <div class="col-lg-6 col-md-6 col-sm-6" style = "display: none;">
                                         <div class="blog__item">
@@ -267,7 +270,11 @@
                                                     <li><i class="fa fa-calendar-o"></i><%=b.getDate()%></li>
                                                 </ul>
                                                 <h5><a href="BlogDetails?id=<%=b.getId()%>"><%=b.getTitle()%></a></h5>
-                                                <p class="text-justify"><%=b.getCont()%></p>
+                                                <% if(rs[0].length() < 100) {%>
+                                                <p class="text-justify"><%=rs[0] + rs[1]%></p>
+                                                <% } else {%>
+                                                <p class="text-justify"><%=rs[0]%></p>
+                                                <% } %>
                                                 <a href="BlogDetails?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
                                             </div>
                                         </div>
@@ -283,7 +290,12 @@
                                                     <li><i class="fa fa-calendar-o"></i><%=b.getDate()%></li>
                                                 </ul>
                                                 <h5><a href="BlogDetails?id=<%=b.getId()%>"><%=b.getTitle()%></a></h5>
-                                                <p class="text-justify"><%=b.getCont()%></p>
+                                                <% if(rs[0].length() < 60) {%>
+                                                <h6 class="text-justify text-bolder"><%=rs[0]%></h6>
+                                                <p class="text-justify"><%=rs[2]%></p>
+                                                <% } else {%>
+                                                <p class="text-justify"><%=rs[0]%></p>
+                                                <% } %>
                                                 <a href="BlogDetails?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
                                             </div>
                                         </div>

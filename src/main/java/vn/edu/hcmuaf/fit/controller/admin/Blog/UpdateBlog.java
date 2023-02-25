@@ -21,30 +21,14 @@ public class UpdateBlog extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-     int i = 5;
-     while(i < 1){
-            String idB = "idB" + i;
-            String idctB = "idctB" + i;
-            String topic = "topic" + i;
-            String content = "content" + i;
-            String topic_after = "topic_after" + i;
-            String content_after = "content_after" + i;
 
-            String mablog = request.getParameter(idB);
-            String mactb = request.getParameter(idctB);
-            String demuc = request.getParameter(topic);
-            String chitiet = request.getParameter(content);
-            String demucs = request.getParameter(topic_after);
-            String chitiets = request.getParameter(content_after);
-            BlogService.updateBlog(mactb, demuc, chitiet, demucs, chitiets);
-        }
+            String idblog = request.getParameter("idblog");
+            String dateblog = request.getParameter("dateblog");
+            String content = request.getParameter("content");
+            String category = request.getParameter("category");
+            String season = request.getParameter("season");
+            BlogService.updateBlog(idblog, dateblog, content, category, season);
             response.sendRedirect("../ListBlog-admin");
         }
 
-    public static void main(String[] args) {
-        for(int i = 1;  i < 5; i++) {
-            String idB = "idB" + i;
-            System.out.println("idB" + (i + 1));
-        }
-    }
     }

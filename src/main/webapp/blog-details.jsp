@@ -260,7 +260,14 @@
                     <div class="blog__details__text">
                         <h3 class="text-center cochu-blog"><%= b.getTitle()%></h3>
                         <img src="<%=b.getImg()%>" alt="" class = "image-blog">
-                        <p class="text-justify"><%=b.getCont()%></p>
+                        <% String [] rs1 = b.getCont().split("\\n");
+                         for (int i = 0; i < 10; i++){%>
+                        <p class="text-justify"><%=rs1[i]%></p>
+                        <% } %>
+                        <span id="bld1">
+                        <% for (int i = 10; i < rs1.length; i++){%>
+                         <p class="text-justify"><%=rs1[i]%></p>
+                        <%}%></span>
                       <span id="readmore" type="button" class="blog__btn" onclick="myFunction()">Xem thêm</span>
                     <div class="blog__details__content">
                         <div class="row">
@@ -311,6 +318,7 @@
                             <%List<Blog> listhotblog = (List<Blog>) request.getAttribute("list");
                                 for(int i = 0; i<3;i++){
                                     Blog bloghot = listhotblog.get(i);
+                                    String[] rs = bloghot.getCont().split("\\n");
                             if(bloghot.getStatus() == -1) { %>
                             <div class="col-lg-4 col-md-4 col-sm-6" style="display: none">
                                 <div class="blog__item">
@@ -322,7 +330,12 @@
                                             <li><i class="fa fa-calendar-o"></i><%=bloghot.getDate()%></li>
                                         </ul>
                                         <h5><a href="blog-details.jsp"><%=bloghot.getTitle()%></a></h5>
-                                        <p class="text-justify"></p>
+                                        <% if(rs[0].length() < 60) {%>
+                                        <h6 class="text-justify text-bolder"><%=rs[0]%></h6>
+                                        <p class="text-justify"><%=rs[2]%></p>
+                                        <% } else {%>
+                                        <p class="text-justify"><%=rs[0]%></p>
+                                        <% } %>
                                         <a href="BlogDetails?id=<%=bloghot.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                                     </div>
                                 </div>
@@ -338,7 +351,12 @@
                                             <li><i class="fa fa-calendar-o"></i><%=bloghot.getDate()%></li>
                                         </ul>
                                         <h5><a href="blog-details.jsp"><%=bloghot.getTitle()%></a></h5>
-                                        <p class="text-justify"></p>
+                                        <% if(rs[0].length() < 60) {%>
+                                        <h6 class="text-justify text-bolder"><%=rs[0]%></h6>
+                                        <p class="text-justify"><%=rs[2]%></p>
+                                        <% } else {%>
+                                        <p class="text-justify"><%=rs[0]%></p>
+                                        <% } %>
                                         <a href="BlogDetails?id=<%=bloghot.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span> </a>
                                     </div>
                                 </div>

@@ -1,6 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,8 +128,63 @@
 
                         <!-- profile btns -->
                         <div class="profile__actions">
-                            <a href="#modal-delete2" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
-                            <a href="#modal-status3" class="profile__action profile__action--banned open-modal"><i class="fa fa-lock"></i></a>
+                            <%String main__btn ="";
+                                if(BlogService.findById(b.getId()).getStatus() == -1){
+                                    main__btn = "main__table-btn--delete";
+                                }else{
+                                    main__btn = "main__table-btn--banned";
+                                }%>
+                            <%if(BlogService.findById(b.getId()).getStatus() == -1){%>
+                            <a href="#modal-status-unlock" class="main__table-btn <%=main__btn%> open-modal">
+                                <i class="fa fa-lock"></i>
+                            </a>
+                            <%}else{%>
+                            <a href="#modal-status-lock" class="main__table-btn <%=main__btn%> open-modal">
+                                <i class="fa fa-unlock"></i>
+                            </a>
+                            <%}%>
+                            <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <!-- modal status lock-->
+                            <div id="modal-status-lock" class="zoom-anim-dialog mfp-hide modal">
+                                <form method="post" action="HideBlog">
+                                    <h6 class="modal__title">Ẩn tin tức</h6>
+                                    <p class="modal__text">Bạn có chắc muốn ẩn tin tức này này?</p>
+                                    <input name = "mablog" value="<%=b.getId()%>" style="display: none">
+                                    <input name = "stt" value="-1" style="display: none">
+                                    <div class="modal__btns">
+                                        <button class="modal__btn modal__btn--apply" type="submit">Ẩn</button>
+                                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- modal status unlock-->
+                            <div id="modal-status-unlock" class="zoom-anim-dialog mfp-hide modal">
+                                <form method="post" action="HideBlog">
+                                    <h6 class="modal__title">Bỏ ẩn tin tức</h6>
+                                    <p class="modal__text">Bạn có chắc muốn bỏ ẩn tin tức này?</p>
+                                    <input name = "mablog" value="<%=b.getId()%>" style="display: none">
+                                    <input name = "stt" value="0" style="display: none">
+                                    <div class="modal__btns">
+                                        <button class="modal__btn modal__btn--apply" type="submit">OK</button>
+                                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- modal delete -->
+                            <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+                                <form method="post" action="DeleteBlog">
+                                <h6 class="modal__title">Xóa Bài Viết</h6>
+                                <p class="modal__text">Bạn có chắc muốn xóa bài viết này?</p>
+                                    <input name = "idblog" value="<%=b.getId()%>" style="display: none">
+                                <div class="modal__btns">
+                                    <button class="modal__btn modal__btn--apply" type="submit">Xóa</button>
+                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                </div>
+                                </form>
+                            </div>
+                            <!-- end modal delete -->
                         </div>
                     </div>
                 </div>
@@ -146,21 +202,25 @@
                                             <div class="col-12">
                                             </div>
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <input style="display: none;" type="text" name="<%=b.getId()%>" class="form__input" value="<%=b.getId()%>">
+                                                <input style="display: none;" type="text" name="idblog" class="form__input" value="<%=b.getId()%>">
                                             </div>
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="description">Nội dung</label>
-                                                    <textarea class="form__input "  id="description" name="description" form="info-blog"><%=b.getCont()%></textarea>
+                                                    <label class="form__label" for="content">Nội dung</label>
+                                                    <textarea class="form__input text-justify"  id="content" name="content" form="info-blog">
+                                                    <% String[] rs = b.getCont().split("\\n");
+                                                    for(int i = 0; i < rs.length; i++){%>
+                                                        <%=rs[i] + '\n'%>&#10;
+                                                    <% } %></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label">Danh mục</label>
-                                                    <select class="form__input"  name="title">
+                                                    <select class="form__input"  name="category">
                                                         <%List<String> listDm = (List<String>) request.getAttribute("listDm");
                                                             for(String dm : listDm){
-                                                                if(dm == b.getCategory()){%>
+                                                                if(b.getCategory().equals(dm)){%>
                                                         <option selected value="<%=dm%>"><%=dm%></option>
                                                         <% } else {%>
                                                         <option value="<%=dm%>"><%=dm%></option>
@@ -171,15 +231,21 @@
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label">Chủ đề</label>
-                                                    <select class="form__input" name="topic">
+                                                    <select class="form__input" name="season">
                                                         <%List<String> listCd = (List<String>) request.getAttribute("listCd");
                                                             for(String cd : listCd){
-                                                                if(cd == b.getSeason()){%>
+                                                                if(b.getSeason().equals(cd)){%>
                                                         <option selected value="<%=cd%>"><%=cd%></option>
                                                         <% } else {%>
                                                         <option value="<%=cd%>"><%=cd%></option>
                                                         <%}}%>
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form__group">
+                                                    <label class="form__label" for="dateblog">Ngày đăng</label>
+                                                    <input id="dateblog" type="datetime-local" name="dateblog" class="form__input" value="<%=b.getDate()%>">
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -245,18 +311,6 @@
 <%--    </div>--%>
     <!-- end modal view -->
 
-    <!-- modal delete -->
-    <div id="modal-delete2" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Xóa Bài Viết</h6>
-
-        <p class="modal__text">Bạn có chắc muốn xóa bài viết này?</p>
-
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
-    <!-- end modal delete -->
 
     <!-- modal status -->
     <div id="modal-status3" class="zoom-anim-dialog mfp-hide modal">
@@ -293,7 +347,7 @@
     <script src="js/select2.min.js"></script>
     <script src="js/admin.js"></script>
 <script>
-    CKEDITOR.replace('description');
+    CKEDITOR.replace('content');
 </script>
 </body>
 

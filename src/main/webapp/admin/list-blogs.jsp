@@ -199,7 +199,7 @@
                                             <a href="EditBlog?idB=<%=blog.getId()%>" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+                                            <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </div>
@@ -232,6 +232,19 @@
                                     </div>
                                 </form>
                             </div>
+                            <!-- modal delete -->
+                            <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                <form method="post" action="DeleteBlog">
+                                <h6 class="modal__title">Xóa Tin Tức</h6>
+                                <p class="modal__text">Bạn có chắc muốn xóa bài viết này?</p>
+                                <input name = "idblog" value="<%=blog.getId()%>" style="display: none">
+                                <div class="modal__btns">
+                                    <button class="modal__btn modal__btn--apply" type="submit">Xóa</button>
+                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                </div>
+                                </form>
+                            </div>
+                            <!-- end modal delete -->
                             <% } %>
                         </table>
                     </div>
@@ -262,19 +275,6 @@
         </div>
     </main>
     <!-- end main content -->
-
-    <!-- modal delete -->
-    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Xóa Tin Tức</h6>
-
-        <p class="modal__text">Bạn có chắc muốn xóa bài viết này?</p>
-
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-        </div>
-    </div>
-    <!-- end modal delete -->
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

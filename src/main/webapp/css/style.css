@@ -3854,6 +3854,9 @@ font-size: 24px;
 .text-left{
 	margin-left: 30px;
 }
+.text-bolder{
+	font-weight: bolder;
+}
 .container-91{
 	min-height: 50%;
 	background: #f5f5f5;
