@@ -196,13 +196,20 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                             src="<%= pro.getListImg().get(0).getImg()%>" alt="">
+                             <%for(Image img :pro.getListImg()){
+                                 if(!img.delete()&& !img.isHide()){%>
+                                    src="<%= img.getImg()%>" alt="">
+                                <% break;
+                                 }
+                             }%>
+
                     </div>
                     <div class="product__details__pic__slider owl-carousel">
-                        <% for (Image img : pro.getListImg()){%>
+                        <% for (Image img : pro.getListImg()){
+                        if(!img.delete() && !img.isHide()){%>
                         <img data-imgbigurl="<%= img.getImg()%>"
                              src="<%= img.getImg()%>" alt="">
-                        <%}%>
+                        <%}}%>
                     </div>
                 </div>
             </div>
@@ -316,7 +323,13 @@
              for(Product product : listproduct){ %>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="<%=product.getListImg().get(0).getImg()%>">
+                    <%for(Image img :product.getListImg()){
+                        if(!img.delete()&& !img.isHide()){%>
+                    <div class="product__item__pic set-bg" data-setbg="<%=img.getImg()%>">
+                    <% break;
+                    }
+                    }%>
+
                         <ul class="product__item__pic__hover">
                             <% if(auth==null){%>
                             <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
@@ -340,7 +353,12 @@
                     product1 = listproduct.get(i);%>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="<%=product1.getListImg().get(0).getImg()%>">
+                    <%for(Image img :product1.getListImg()){
+                        if(!img.delete()&& !img.isHide()){%>
+                    <div class="product__item__pic set-bg" data-setbg="<%=img.getImg()%>">
+                        <% break;
+                        }
+                        }%>
                         <ul class="product__item__pic__hover">
                             <% if(auth==null){%>
                             <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>

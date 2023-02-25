@@ -41,6 +41,16 @@
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
 	<title>Admin | Shop Bánh Kem</title>
+    <style>
+        .row input:not(:placeholder-shown) {
+            border-color: hsl(0, 76%, 50%);
+        }
+
+        /* Show green borders when valid */
+        .row--form input:valid {
+            border-color: hsl(120, 76%, 50%);
+        }
+    </style>
 
 </head>
 

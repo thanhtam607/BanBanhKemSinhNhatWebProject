@@ -1,11 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -228,7 +225,12 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 mix traditional lover">
                         <span class="icon-km icon-hot"></span>
                         <div class="featured__item">
-                            <div class="featured__item__pic set-bg" data-setbg="<%=p.getListImg().get(0).getImg()%>">
+                            <%for(Image img :p.getListImg()){
+                                if(!img.delete()&& !img.isHide()){%>
+                            <div class="product__item__pic set-bg" data-setbg="<%=img.getImg()%>">
+                                <% break;
+                                }
+                                }%>
                                 <ul class="featured__item__pic__hover">
                                     <%if(auth==null){%>
                                     <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
@@ -271,7 +273,13 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix traditional lover">
                     <span class="icon-km icon-sale"></span>
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="<%=p1.getListImg().get(0).getImg()%>">
+                        <%for(Image img :p1.getListImg()){
+                            if(!img.delete()&& !img.isHide()){%>
+                        <div class="product__item__pic set-bg" data-setbg="<%=img.getImg()%>">
+                            <% break;
+                            }
+                            }%>
+
                             <ul class="featured__item__pic__hover">
                                 <%if(auth==null){%>
                                 <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>

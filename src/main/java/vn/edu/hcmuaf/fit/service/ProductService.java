@@ -220,7 +220,7 @@ public class ProductService {
         }
 
     }
-    public static void deleteImange(String img){
+    public static void deleteImage(String img){
         Statement statement = DBConnect.getInstall().get();
         String sql= "UPDATE productImgs set status = -1 where img = '"+img+"';";
         try {
@@ -229,6 +229,7 @@ public class ProductService {
         } catch (SQLException se) {
             se.printStackTrace();
         }
+        System.out.println(sql);
     }
     public static void upProductImg(String oldImg, String newImg){
         Statement statement = DBConnect.getInstall().get();
@@ -372,7 +373,7 @@ public class ProductService {
         return res;
     }
     public static void main(String[] args) throws SQLException {
-            System.out.println(getHotProduct().size());
+            deleteImage("img/product/B001/banh1.jpg");
 //            Product p = findById("B100");
 //            addProDuct(p);
 //        String s = "img/product/B001/banh1.jpg";

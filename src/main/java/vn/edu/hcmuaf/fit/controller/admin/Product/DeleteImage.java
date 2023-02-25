@@ -12,7 +12,7 @@ public class DeleteImage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String img = request.getParameter("img");
-        ProductService.deleteImange(img);
+        ProductService.deleteImage(img);
         response.sendRedirect("../Edit_Product?idP="+request.getParameter("masp"));
 
     }

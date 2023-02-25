@@ -262,7 +262,13 @@
                                             productL = listhotproducts.get(i);%>
                                         <a href="ProductDetail?id=<%=productL.getId() %>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="<%=productL.getListImg().get(0).getImg()%>" alt="">
+                                                    <%for(Image img :productL.getListImg()){
+                                                            if(!img.delete()&& !img.isHide()){%>
+                                                                <img src="<%=img.getImg()%>" alt="">
+                                                    <% break;
+                                                    }
+                                                    }%>
+
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6><%=productL.getName()%></h6>
@@ -278,7 +284,12 @@
                                             productR = listhotproducts.get(i);%>
                                         <a href="ProductDetail?id=<%=productR.getId() %>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="<%=productR.getListImg().get(0).getImg()%>" alt="">
+                                                <%for(Image img :productR.getListImg()){
+                                                    if(!img.delete()&& !img.isHide()){%>
+                                                <img src="<%=img.getImg()%>" alt="">
+                                                <% break;
+                                                }
+                                                }%>
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6><%=productR.getName()%></h6>
@@ -375,7 +386,13 @@
                         <% for(Product p: list){ %>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="<%=p.getListImg().get(0).getImg()%>">
+                                <%for(Image img :p.getListImg()){
+                                    if(!img.delete()&& !img.isHide()){%>
+                                <div class="product__item__pic set-bg" data-setbg="<%=img.getImg()%>">
+                                <% break;
+                                }
+                                }%>
+
                                     <ul class="product__item__pic__hover">
                                         <%if(auth==null){%>
                                         <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>

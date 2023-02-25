@@ -181,6 +181,15 @@ public class Product {
         return df.format(price);
 
     }
+    public int countImgs(){
+        int res=0;
+        for(Image img : getListImg()){
+            if(!img.delete()){
+                res++;
+            }
+        }
+        return res;
+    }
 
 //    public static void main(String[] args) {
 //

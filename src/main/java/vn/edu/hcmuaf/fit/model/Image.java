@@ -46,4 +46,10 @@ public class Image {
         }
         return false;
     }
+    public boolean delete() {
+        if(this.status==-1){
+            return true;
+        }
+        return false;
+    }
 }
