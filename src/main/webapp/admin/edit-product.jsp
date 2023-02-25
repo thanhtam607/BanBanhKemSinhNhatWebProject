@@ -5,6 +5,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Image" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -121,7 +122,7 @@
                         <!-- profile user -->
                         <div class="profile__user">
                             <div class="profile__avatar">
-                                <img src="../<%=p.getListImg().get(0)%>" alt="">
+                                <img src="../<%=p.getListImg().get(0).getImg()%>" alt="">
                             </div>
                             <!-- or red -->
                             <div class="profile__meta profile__meta--green">
@@ -138,7 +139,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Hình ảnh (<%=p.getListImg().size()%>)</a>
+                                <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Hình ảnh (<%=p.countImgs()%>)</a>
                             </li>
 
                             <li class="nav-item">
@@ -158,9 +159,9 @@
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Thông Tin</a></li>
 
-                                        <li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Hình ảnh</a></li>
+                                        <li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Hình ảnh (<%=p.countImgs()%>)</a></li>
 
-                                    <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Bình Luận</a></li>
+                                    <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Bình Luận (<%=p.getComments().size()%>)</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -344,34 +345,35 @@
                                         </tr>
 
                                     </thead>
-                                    <%List<String> listImg = p.getListImg();
-                                    for(int i = 0; i< listImg.size();i++){%>
+                                    <% int i =1;
+                                    for(Image img :p.getListImg() ){
+                                    if(!img.delete()){%>
                                     <tbody>
 
                                         <tr style="border-bottom: 3px solid #ff96b7;">
                                             <td>
-                                                <div class="main__table-text"><%=i+1%></div>
+                                                <div class="main__table-text"><%=i%></div>
                                             </td>
 
                                             <td>
-                                                <div class="main__table-text"><img src="../<%=listImg.get(i)%>" ></div>
+                                                <div class="main__table-text"><img src="../<%=img.getImg()%>" ></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><%=listImg.get(i)%></div>
+                                                <div class="main__table-text"><%=img.getImg()%></div>
                                             </td>
 
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#modal-deleteimg<%=i%>" class="main__table-btn main__table-btn--edit open-modal">
+                                                    <a href="#modal-deleteimg<%=i-1%>" class="main__table-btn main__table-btn--edit open-modal">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                     <!-- modal delete -->
-                                                    <div id="modal-deleteimg<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                    <div id="modal-deleteimg<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
                                                         <form action="Product/UpdateImg"  method="POST" enctype="multipart/form-data">
                                                         <h6 class="modal__title">Thay đổi ảnh</h6>
                                                         <p class="modal__text">Chọn hình ảnh</p>
                                                             <input type="text" class="form__input" name="masp" style="display: none" value="<%=p.getId()%>">
-                                                            <input type="text" class="form__input" name="oldImg" style="display: none" value="<%=listImg.get(i)%>">
+                                                            <input type="text" class="form__input" name="oldImg" style="display: none" value="<%=img.getImg()%>">
                                                         <input type="file" class="form__input" name="img">
                                                         <div class="modal__btns">
                                                             <input class="modal__btn modal__btn--apply" type="submit" value="Xong">
@@ -380,15 +382,15 @@
                                                         </form>
                                                     </div>
                                                     <!-- end modal delete -->
-                                                    <a href="#modal-deleteA<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <a href="#modal-deleteA<%=i-1%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
                                                     <!-- modal delete -->
-                                                    <div id="modal-deleteA<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                    <div id="modal-deleteA<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
                                                         <h6 class="modal__title">Xóa hình ảnh</h6>
                                                         <p class="modal__text">Bạn có chắc muốn xóa hình ảnh này?</p>
                                                         <div class="modal__btns">
-                                                            <%String url = "Product/DeleteImage?masp="+p.getId()+"&img="+listImg.get(i);%>
+                                                            <%String url = "Product/DeleteImage?masp="+p.getId()+"&img="+img.getImg();%>
                                                             <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>')">Xóa</button>
                                                             <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                         </div>
@@ -398,7 +400,7 @@
                                             </td>
                                         </tr >
                                     </tbody>
-                                    <%}%>
+                                    <% i++;}}%>
                                 </table>
                             </div>
                         </div>
@@ -419,20 +421,20 @@
                                         </tr>
                                     </thead>
                                     <%List<Comment> listCmt = p.getComments();
-                                    for(int i = 0; i<listCmt.size();i++){%>
+                                    for(int index = 0; i<listCmt.size();i++){%>
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div class="main__table-text"><%=i+1%></div>
+                                                <div class="main__table-text"><%=index+1%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><%=listCmt.get(i).getkhachhang()%></div>
+                                                <div class="main__table-text"><%=listCmt.get(index).getkhachhang()%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><a href="#"><%=listCmt.get(i).getBinhLuan()%></a></div>
+                                                <div class="main__table-text"><a href="#"><%=listCmt.get(index).getBinhLuan()%></a></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><a href="#"><%=listCmt.get(i).getDate()%></a></div>
+                                                <div class="main__table-text"><a href="#"><%=listCmt.get(index).getDate()%></a></div>
                                             </td>
 <%--                                            <td>--%>
 <%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
@@ -445,17 +447,17 @@
 <%--                                            </td>--%>
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                    <a href="#modal-delete<%=index%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
                                                     <!-- modal delete -->
-                                                    <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">
+                                                    <div id="modal-delete<%=index%>" class="zoom-anim-dialog mfp-hide modal">
                                                         <h6 class="modal__title">Xóa Bình Luận</h6>
 
                                                         <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
 
                                                         <div class="modal__btns">
-                                                            <% String url ="Product/DeleteComment?masp="+p.getId()+"&idCmt="+listCmt.get(i).getIdcmt()+"&id="+ i; %>
+                                                            <% String url ="Product/DeleteComment?masp="+p.getId()+"&idCmt="+listCmt.get(index).getIdcmt()+"&id="+ index; %>
                                                             <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>') ">Xóa</button>
                                                             <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                         </div>

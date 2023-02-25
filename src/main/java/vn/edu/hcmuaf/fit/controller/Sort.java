@@ -31,15 +31,15 @@ public class Sort extends HttpServlet {
 
         if(session.getAttribute("filter")!=null){
             String filter = session.getAttribute("filter").toString();
-            listFilter = ProductService.findBySize(filter);
+            listFilter = ProductService.findBySize(filter, listFilter);
             if(listFilter.isEmpty()){
-                listFilter = ProductService.findByType(filter);
+                listFilter = ProductService.findByType(filter, ProductService.getListProduct());
 
             }
         }
         if(session.getAttribute("filter")==null) {
             if (session.getAttribute("search")!= null) {
-                listFilter = ProductService.findByName(session.getAttribute("search").toString());
+                listFilter = ProductService.findByName(session.getAttribute("search").toString(), ProductService.getListProduct());
 
             }
             if (session.getAttribute("search")== null){
@@ -47,7 +47,7 @@ public class Sort extends HttpServlet {
                 if (session.getAttribute("pricemin") != null && session.getAttribute("pricemax") != null){
                     String p_min = session.getAttribute("pricemin").toString();
                     String p_max = session.getAttribute("pricemax").toString();
-                    listFilter = ProductService.filterByPrice(Integer.parseInt(p_min), Integer.parseInt(p_max));
+                    listFilter = ProductService.filterByPrice(Integer.parseInt(p_min), Integer.parseInt(p_max), ProductService.getListProduct());
                 }
             }
         }
@@ -77,7 +77,7 @@ public class Sort extends HttpServlet {
         User auth = (User) session.getAttribute("auth");
         PrintWriter out = response.getWriter();
         for(Product p: listF) {
-            String img = p.getListImg().get(0);
+            String img = p.getListImg().get(0).getImg();
             String s = null;
             if(auth==null){
                 s= "<li><a onclick=\"notLogged()\"><i class=\"fa fa-heart\"></i></a></li>\n"+

@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.ProductDetails" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Image" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -165,7 +166,12 @@
 
                             <td>
                                 <div class="main__table-text" >
-                                    <img src="../<%=pro.getListImg().get(0)%>" alt="" style="width: 60px; margin-right: 15px;">
+                                        <%for(Image img :pro.getListImg()){
+                                    if(!img.delete()&& !img.isHide()){%>
+                                        <img src="../<%=img.getImg()%>" alt="" style="width: 60px; margin-right: 15px;">
+                                        <% break;
+                                        }
+                                        }%>
                                         <%=pro.getName()%>
                                 </div>
                             </td>

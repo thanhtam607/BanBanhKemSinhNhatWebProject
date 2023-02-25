@@ -261,7 +261,7 @@
                                             Product productL = listhotproducts.get(i);%>
                                         <a href="ProductDetail?id=<%=productL.getId() %>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="<%=productL.getListImg().get(0)%>" alt="">
+                                                <img src="<%=productL.getListImg().get(0).getImg()%>" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6><%=productL.getName()%></h6>
@@ -276,7 +276,7 @@
                                             Product productR = listhotproducts.get(i);%>
                                         <a href="ProductDetail?id=<%=productR.getId() %>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="<%=productR.getListImg().get(0)%>" alt="">
+                                                <img src="<%=productR.getListImg().get(0).getImg()%>" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6><%=productR.getName()%></h6>
@@ -324,7 +324,7 @@
                         %>
                         <div class="col-lg-4 col-md-6 col-sm-6" id="<%=id%>">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="<%=fav.getSp().getListImg().get(0)%>">
+                                <div class="product__item__pic set-bg" data-setbg="<%=fav.getSp().getListImg().get(0).getImg()%>">
                                     <ul class="product__item__pic__hover">
                                         <%if(auth==null){%>
                                         <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
