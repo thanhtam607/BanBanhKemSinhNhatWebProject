@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+        <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.ProductDetails" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
@@ -78,8 +78,8 @@
 				<div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
 			</div>
 			<div class="ms-3">
-                <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
-                <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
+                <h6 class="mb-0"><%=auth != null ? auth.getTentk() : "ADMIN"%></h6>
+                <span><%=auth != null ? auth.getRoleName() : "Admin"%></span>
 			</div>
 		</div>
 		<div class="navbar-nav w-100">
@@ -161,14 +161,15 @@
                                 </tr>
                             </thead>
                              <% List<Product> listPa = (List<Product>) request.getAttribute("listPa");
-                                 for(int i = 0; i <listPa.size(); i++) {
-                                  Product pro = listPa.get(i);
-                             int tag =(int) request.getAttribute("tag")-1;
+                                 Product pro = null;
+                                 for (int i = 0; i < listPa.size(); i++) {
+                                     pro = listPa.get(i);
+                                     int tag = (int) request.getAttribute("tag") - 1;
                              %>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <div class="main__table-text"><%=tag*15+1+i%></div>
+                                        <div class="main__table-text"><%=tag * 15 + 1 + i%></div>
                                     </td>
                                     <td>
                                         <div class="main__user">
@@ -189,14 +190,15 @@
                                         <div class="main__table-text"><%=pro.getComments().size()%></div>
                                     </td>
                                     <%ProductDetails detail = pro.getDetail();
-                                       %>
+                                    %>
                                     <td>
                                         <div class="main__table-text"><%=detail.getMfg()%></div>
                                     </td>
                                     <td>
                                         <div class="main__table-text"><%=detail.getOod()%></div>
                                         <td>
-                                            <div class="main__table-text main__table-text--green"><%=detail.getInventory()%></div>
+                                            <div class="main__table-text main__table-text--green">
+                                                <%=detail.getInventory()%></div>
                                         </td>
 
                                         <td>
@@ -205,22 +207,24 @@
                                                 <a href="Edit_Product?idP=<%=pro.getId()%>" class="main__table-btn main__table-btn--edit">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <%if (pro.isHide()){%>
+                                                <%if (pro.isHide()) {%>
                                                 <a href="#modal-unHiden<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
                                                     <i class="fas fa-eye-slash" ></i>
                                                 </a>
-                                                <%}else{%>
+                                                <%} else {%>
                                                 <a href="#modal-hiden<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
                                                     <i class="fa fa-eye" style="color: #24cc63"></i>
                                                 </a>
                                                 <%}%>
+
+                                                <a href="#modal-delete<%=pro.getId()%>" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
                                             </div>
                                             <!-- modal hiden -->
                                             <div id="modal-hiden<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
                                                 <h6 class="modal__title">Ẩn Sản Phẩm</h6>
 
                                                 <p class="modal__text">Bạn có chắc muốn ẩn sản phẩm này?</p>
-                                                <%String url = "HideProduct?idProduct="+pro.getId();%>
+                                                <%String url = "HideProduct?idProduct=" + pro.getId();%>
                                                 <div class="modal__btns">
                                                     <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url%>')" type="button">Ẩn sản phẩm</button>
                                                     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
@@ -233,13 +237,23 @@
                                                 <h6 class="modal__title">Hiển thị Sản Phẩm</h6>
 
                                                 <p class="modal__text">Bạn có chắc muốn hiển thị sản phẩm này?</p>
-                                                <%String url1 = "UnHidenProduct?idProduct="+pro.getId();%>
+                                                <%String url1 = "UnHidenProduct?idProduct=" + pro.getId();%>
                                                 <div class="modal__btns">
                                                     <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=url1%>')" type="button">Hiển thị</button>
                                                     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                 </div>
                                             </div>
                                             <!-- end modal unHiden -->
+                                            <div id="modal-delete<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
+                                                <h6 class="modal__title">Xóa Sản Phẩm</h6>
+
+                                                <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này?</p>
+                                                <%String urlq = "DeleteProduct?masp=" + pro.getId();%>
+                                                <div class="modal__btns">
+                                                    <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=urlq%>')" type="button">Xóa</button>
+                                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                                </div>
+                                            </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -257,20 +271,22 @@
                         <ul class="paginator">
                             <% int tag = (int) request.getAttribute("tag");%>
                             <li class="paginator__item paginator__item--prev">
-                                <a href="ListProduct_Admin?page=<%=tag-1%>"><i class="fa fa-chevron-left"></i></a>
+                                <a href="ListProduct_Admin?page=<%=tag - 1%>"><i class="fa fa-chevron-left"></i></a>
                             </li>
                             <% int endPage = (int) request.getAttribute("endPage");
-                                for(int i = tag-1; i <= tag+2 ; i++){
-                                    if(i<1){
+                                for (int i = tag - 1; i <= tag + 2; i++) {
+                                    if (i < 1) {
                                         continue;
                                     }
-                                    if(i==tag){%>
-                            <li class="paginator__item paginator__item--active"><a href="ListProduct_Admin?page=<%=i%>"><%=tag%></a></li>
-                            <%} else{%>
+                                    if (i == tag) {%>
+                            <li class="paginator__item paginator__item--active"><a href="ListProduct_Admin?page=<%=i%>">
+                                <%=tag%></a></li>
+                            <%} else {%>
                             <li class="paginator__item"><a href="ListProduct_Admin?page=<%=i%>"><%=i%></a></li>
-                            <%}}%>
+                            <%}
+                            }%>
                             <li class="paginator__item paginator__item--next">
-                                <a href="ListProduct_Admin?page=<%=tag+1%>"><i class="fa fa-chevron-right"></i></a>
+                                <a href="ListProduct_Admin?page=<%=tag + 1%>"><i class="fa fa-chevron-right"></i></a>
                             </li>
 
 
@@ -283,6 +299,8 @@
         </div>
     </main>
     <!-- end main content -->
+
+<!-- end profile -->
 
     <!-- modal status -->
     <div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
