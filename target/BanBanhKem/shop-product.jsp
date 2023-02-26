@@ -392,7 +392,6 @@
                                 <% break;
                                 }
                                 }%>
-
                                     <ul class="product__item__pic__hover">
                                         <%if(auth==null){%>
                                         <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
