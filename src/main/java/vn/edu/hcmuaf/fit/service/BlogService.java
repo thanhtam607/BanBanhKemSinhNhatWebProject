@@ -89,7 +89,26 @@ public class BlogService {
          se.printStackTrace();
      }
  }
+public static  void updateImgBlog(String img,String imgnew){
+    Statement stm = DBConnect.getInstall().get();
+    String sql = "UPDATE BLOG SET IMGBLOG = '" + imgnew + "' WHERE IMGBLOG = '" + img +"'";
+    try {
+        stm.executeUpdate(sql);
 
+    } catch (SQLException se) {
+        se.printStackTrace();
+    }
+}
+public static void  updateTitle(String idblog, String title ){
+    Statement stm = DBConnect.getInstall().get();
+    String sql = "UPDATE BLOG SET TITLE = '" + title + "' WHERE IDBLOG = '" + idblog +"'";
+    try {
+        stm.executeUpdate(sql);
+
+    } catch (SQLException se) {
+        se.printStackTrace();
+    }
+}
     public static void main(String[] args) {
 //            List<Blog> li = BlogService.getData();
 //        for(Blog b: li){

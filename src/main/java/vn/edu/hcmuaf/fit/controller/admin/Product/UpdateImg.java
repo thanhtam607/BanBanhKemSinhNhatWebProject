@@ -19,7 +19,6 @@ public class UpdateImg extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("../Edit_Product?idP=" + request.getParameter("masp")).forward(request, response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String masp = request.getParameter("masp");
@@ -34,8 +33,6 @@ public class UpdateImg extends HttpServlet {
         }
         String img = realPa + "/" + filename;
             p.write(img);
-
-
             ProductService.upProductImg(oldImg, "img/product/" + masp+"/" + filename);
 
         response.sendRedirect("../ListProduct_Admin");

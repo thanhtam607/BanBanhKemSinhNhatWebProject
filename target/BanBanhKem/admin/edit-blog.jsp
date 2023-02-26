@@ -115,7 +115,7 @@
                         <!-- profile user -->
                         <div class="profile__user">
                             <div class="profile__avatar">
-                                <img src="../<%=b.getImg()%>" alt="">
+                                <img src="../<%=b.getImg()%>" alt="" href="#modal-update" class="open-modal">
                             </div>
                             <!-- or red -->
                             <div class="profile__meta profile__meta--green">
@@ -123,6 +123,21 @@
                                 <span>ID: <%=b.getId()%></span>
                             </div>
                         </div>
+                        <!-- modal update -->
+                        <div id="modal-update" class="zoom-anim-dialog mfp-hide modal">
+                            <form action="Blog/UpdateImgBlog"  method="POST" enctype="multipart/form-data">
+                                <h6 class="modal__title">Thay đổi ảnh</h6>
+                                <p class="modal__text">Chọn hình ảnh</p>
+                                <input type="text" class="form__input" name="idblog" style="display: none" value="<%=b.getId()%>">
+                                <input name = "oldImg" value="<%=b.getImg()%>" style="display: none">
+                                <input type="file" class="form__input" name="img">
+                                <div class="modal__btns">
+                                    <input class="modal__btn modal__btn--apply" type="submit" value="Xong">
+                                    <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end modal update -->
                         <!-- end profile user -->
 
 
@@ -143,9 +158,24 @@
                                 <i class="fa fa-unlock"></i>
                             </a>
                             <%}%>
+                            <a href="#modal-update-title" class="main__table-btn main__table-btn--edit open-modal"><i class="fa fa-edit"></i></a>
                             <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
                                 <i class="fa fa-trash"></i>
                             </a>
+                            <!-- modal update title-->
+                            <div id="modal-update-title" class="zoom-anim-dialog mfp-hide modal">
+                                <form method="post" action="UpdateTitle">
+                                    <h6 class="modal__title">Ẩn tin tức</h6>
+                                    <label class="form__label" for="update-name" style="color: white;">Tên danh mục</label>
+                                    <input id="update-name" type="text" name="title" class="form__input" value="<%=b.getTitle()%>">
+                                    <input name = "idb" value="<%=b.getId()%>" style="display: none">
+                                    <div class="modal__btns">
+                                        <button class="modal__btn modal__btn--apply" type="submit">Xác nhận</button>
+                                        <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- end modal update title-->
                             <!-- modal status lock-->
                             <div id="modal-status-lock" class="zoom-anim-dialog mfp-hide modal">
                                 <form method="post" action="HideBlog">
