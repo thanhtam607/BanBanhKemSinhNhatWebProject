@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 @MultipartConfig
-@WebServlet(name = "UpdateImgBlog", value = "/admin/Blog/UpdateImgBlog")
+@WebServlet(name = "UpdateImgBlog", value = "/admin/UpdateImgBlog")
 public class UpdateImgBlog extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Override
@@ -29,6 +29,6 @@ public class UpdateImgBlog extends HttpServlet {
         String img = path + "/" + filename;
             p.write(img);
         BlogService.updateImgBlog(oldImg, "img/blog/" + idblog+"/" + filename);
-        response.sendRedirect("../ListBlog-admin");
+        response.sendRedirect("./EditBlog?idB=" + request.getParameter("idblog"));
     }
 }

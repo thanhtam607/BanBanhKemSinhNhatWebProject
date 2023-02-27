@@ -1,4 +1,5 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +39,7 @@
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
 	<title>Admin | Shop Bánh Kem</title>
+    <script src="libraries/ckeditor/ckeditor.js"></script>
 
 </head>
 
@@ -106,61 +108,55 @@
 
                 <!-- form -->
                 <div class="col-12">
-                    <form action="#" class="form">
+                    <form action="AddBlog" class="form" method="post" enctype="multipart/form-data">
                         <div class="row row--form">
+                            <div class="col-12">
+                                <input type="text" class="form__input" placeholder="Tiêu đề" name="title">
+                            </div>
                             <div class="col-12 col-md-5 form__cover">
                                 <div class="row row--form">
                                     <div class="col-12 col-sm-6 col-md-12">
-                                        <div class="form__img">
+                                        <div class="form__img" style="height: 175px">
                                             <label for="form__img-upload">Thêm ảnh (270 x 400)</label>
-                                            <input id="form__img-upload" name="form__img-upload" type="file" accept=".png, .jpg, .jpeg">
-                                            <img id="form__img" src="#" alt=" ">
+                                            <input id="form__img-upload" onchange="chooseFile(this)" name="img" type="file" accept=".png, .jpg, .jpeg">
+                                            <img id="form__img" src="" alt=" ">
                                         </div>
+                                    </div>
+                                        <div class="form__group">
+                                            <label class="form__label" for="dateblog">Ngày đăng:</label>
+                                            <input id="dateblog" type="datetime-local" name="datetime" class="form__input" value="">
+                                        </div>
+                                    <div class="col-12 col-sm-6 col-md-12">
+                                        <label class="text-dark" for="textdm">Danh mục:</label>
+                                        <select id = "textdm" class="form__input"  name="category">
+                                            <option value="Đời Sống">Đời Sống</option>
+                                            <option value="Kỉ niệm">Kỉ niệm</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-12">
+                                        <label class="text-dark" for="textcd">Chủ đề:</label>
+                                        <select id="textcd" class="form__input"  name="season">
+                                            <option value="Ý nghĩa bánh">Ý nghĩa bánh</option>
+                                            <option value="Chọn bánh">Chọn bánh</option>
+                                            <option value="Bảo quản bánh">Bảo quản bánh</option>
+                                            <option value="Hiện đại">Hiện đại</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-12 col-md-7 form__content">
                                 <div class="row row--form">
                                     <div class="col-12">
-                                        <input type="text" class="form__input" placeholder="Tiêu đề">
+                                        <textarea id="content" name="content" class="form__textarea-blog">Thêm mô tả</textarea>
                                     </div>
-                                    <div class="col-12">
-                                        <textarea id="text" name="text" class="form__textarea-blog" placeholder="Thêm mô tả"></textarea>
-                                        
-                                    </div>
-
-                                    <div class="col-12 col-sm-6 col-lg-6">
-                                        <label class="text-pink" for="text">Ngày đăng:</label>
-                                        <input type="date" class="form__input" value="2022-01-01">
-                                    </div>
-                              
                                 </div>
                             </div>
                             <div class="col-12">
-                                <ul class="form__radio">
-                                    <li>
-                                        <span>Danh mục tin tức:</span>
-                                    </li>
-                                    <li>
-                                        <input id="type1" type="radio" name="type" checked="">
-                                        <label for="type1">Đời sống</label>
-                                    </li>
-                                    <li>
-                                        <input id="type2" type="radio" name="type">
-                                        <label for="type2">Kỉ niệm</label>
-                                    </li>
-                                    <li>
-                                        <input id="type3" type="radio" name="type">
-                                        <label for="type3">Khác</label>
-                                    </li>
-                                </ul>
+                                <button class="form__btn" type="submit">Thêm</button>
                             </div>
-                                    <div class="col-12">
-                                        <button type="button" class="form__btn">Đăng lên</button>
-                                    </div>
-                                </div>
-
+                        </div>
                     </form>
                 </div>
             </div>
@@ -196,6 +192,9 @@
  
 	 <!-- Template Javascript -->
 	 <script src="js/main.js"></script>
+<script>
+    CKEDITOR.replace('content');
+</script>
 </body>
 
 </html>

@@ -125,14 +125,14 @@
                         </div>
                         <!-- modal update -->
                         <div id="modal-update" class="zoom-anim-dialog mfp-hide modal">
-                            <form action="Blog/UpdateImgBlog"  method="POST" enctype="multipart/form-data">
+                            <form action="UpdateImgBlog"  method="POST" enctype="multipart/form-data">
                                 <h6 class="modal__title">Thay đổi ảnh</h6>
                                 <p class="modal__text">Chọn hình ảnh</p>
                                 <input type="text" class="form__input" name="idblog" style="display: none" value="<%=b.getId()%>">
                                 <input name = "oldImg" value="<%=b.getImg()%>" style="display: none">
                                 <input type="file" class="form__input" name="img">
                                 <div class="modal__btns">
-                                    <input class="modal__btn modal__btn--apply" type="submit" value="Xong">
+                                    <button class="modal__btn modal__btn--apply" type="submit">Xong</button>
                                     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                 </div>
                             </form>
