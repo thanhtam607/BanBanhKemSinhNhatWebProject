@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class Order {
+public class  Order {
     private String id;
     private User user;
     private String buyDate;
