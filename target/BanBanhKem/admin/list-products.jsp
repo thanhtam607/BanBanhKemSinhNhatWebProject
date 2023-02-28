@@ -231,11 +231,9 @@
                                                 </div>
                                             </div>
                                             <!-- end modal hiden -->
-
                                             <!-- modal unHiden -->
                                             <div id="modal-unHiden<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
                                                 <h6 class="modal__title">Hiển thị Sản Phẩm</h6>
-
                                                 <p class="modal__text">Bạn có chắc muốn hiển thị sản phẩm này?</p>
                                                 <%String url1 = "UnHidenProduct?idProduct=" + pro.getId();%>
                                                 <div class="modal__btns">
@@ -246,7 +244,6 @@
                                             <!-- end modal unHiden -->
                                             <div id="modal-delete<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">
                                                 <h6 class="modal__title">Xóa Sản Phẩm</h6>
-
                                                 <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này?</p>
                                                 <%String urlq = "DeleteProduct?masp=" + pro.getId();%>
                                                 <div class="modal__btns">

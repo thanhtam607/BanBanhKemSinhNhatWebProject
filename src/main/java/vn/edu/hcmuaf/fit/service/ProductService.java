@@ -16,7 +16,7 @@ public class ProductService {
         ProductDetails detail = new ProductDetails();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake, sale where products.idType = typeOfCake.idType");
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake, discount where products.idType = typeOfCake.idType");
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT idImg, productImgs.idProduct,productImgs.img, status from productImgs");
                     List<Image> listImg = new LinkedList<Image>();
@@ -388,7 +388,21 @@ public class ProductService {
             se.printStackTrace();
         }
     }
+
+    public static List<Product> getDiscountProduct() {
+        List<Product> res = new ArrayList<Product>();
+        for (Discount d: DiscountService.getListDiscount()) {
+            Product p = findById(d.getIdProduct());
+            p.setDiscount(d);
+            res.add(p);
+        }
+        return res;
+    }
     public static void main(String[] args) throws SQLException {
+        for(Product p : getDiscountProduct()){
+            System.out.println(p.getId());
+        }
+
 //            deleteImage("img/product/B001/banh1.jpg");
 //            Product p = findById("B100");
 //            addProDuct(p);
