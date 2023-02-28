@@ -260,15 +260,11 @@
                     <div class="blog__details__text">
                         <h3 class="text-center cochu-blog"><%= b.getTitle()%></h3>
                         <img src="<%=b.getImg()%>" alt="" class = "image-blog">
-                        <% String [] rs1 = b.getCont().split("\\n");
-                         for (int i = 0; i < 10; i++){%>
-                        <p class="text-justify"><%=rs1[i]%></p>
-                        <% } %>
-                        <span id="bld1">
-                        <% for (int i = 10; i < rs1.length; i++){%>
-                         <p class="text-justify"><%=rs1[i]%></p>
-                        <%}%></span>
-                      <span id="readmore" type="button" class="blog__btn" onclick="myFunction()">Xem thêm</span>
+                        <p class="text-justify"><%=b.getCont()%></p>
+<%--                        <span id="bld1">--%>
+<%--                         <p class="text-justify"></p>--%>
+<%--                       </span>--%>
+<%--                      <span id="readmore" type="button" class="blog__btn" onclick="myFunction()">Xem thêm</span>--%>
                     <div class="blog__details__content">
                         <div class="row">
                             <div class="col-lg-6">
