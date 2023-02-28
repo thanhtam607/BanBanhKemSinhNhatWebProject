@@ -18,13 +18,13 @@ public class ReceiptService {
             try {
                 ResultSet rs = statement.executeQuery(sql);
                 while (rs.next()) {
-                    ResultSet rsCmt = stmt1.executeQuery("SELECT idProduct, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
+                    ResultSet rsCmt = stmt1.executeQuery("SELECT idProduct, TAIKHOAN.TENTK,comment,date, IdCmt, Comments.STATUS from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     String s1 = rs.getString(13);
                     while (rsCmt.next()) {
                         String s2 = rsCmt.getString(1);
                         if (s1.equals(s2)) {
-                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5)));
+                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
                         }
                     }
                     Receipt rc = new Receipt(rs.getString(1),

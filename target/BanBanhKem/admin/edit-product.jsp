@@ -459,30 +459,22 @@
                                 </tr>
                                 </thead>
                                 <%List<Comment> listCmt = p.getComments();
-                                    for(int index = 0; i<listCmt.size();i++){%>
+                                    int index = 0;
+                                    for(Comment cmt: listCmt){%>
                                 <tbody>
                                 <tr>
                                     <td>
                                         <div class="main__table-text"><%=index+1%></div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text"><%=listCmt.get(index).getkhachhang()%></div>
+                                        <div class="main__table-text"><%=cmt.getkhachhang()%></div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text"><a href="#"><%=listCmt.get(index).getBinhLuan()%></a></div>
+                                        <div class="main__table-text"><%=cmt.getBinhLuan()%></div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text"><a href="#"><%=listCmt.get(index).getDate()%></a></div>
+                                        <div class="main__table-text"><%=cmt.getDate()%></div>
                                     </td>
-                                    <%--                                            <td>--%>
-                                    <%--                                                <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>--%>
-                                    <%--                                            </td>--%>
-                                    <%--                                            <td>--%>
-                                    <%--                                                <div class="main__table-text main__table-text--rate"><i class="fa fa-star"></i> 7.9</div>--%>
-                                    <%--                                            </td>--%>
-                                    <%--                                            <td>--%>
-                                    <%--                                                <div class="main__table-text">12 / 7</div>--%>
-                                    <%--                                            </td>--%>
                                     <td>
                                         <div class="main__table-btns">
                                             <a href="#modal-delete<%=index%>" class="main__table-btn main__table-btn--delete open-modal">
@@ -493,7 +485,7 @@
                                                 <h6 class="modal__title">Xóa Bình Luận</h6>
                                                 <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
                                                 <div class="modal__btns">
-                                                    <% String url ="Product/DeleteComment?masp="+p.getId()+"&idCmt="+listCmt.get(index).getIdcmt()+"&id="+ index; %>
+                                                    <% String url ="Product/DeleteComment?masp="+p.getId()+"&idCmt="+cmt.getIdcmt()+"&id="+ index; %>
                                                     <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>') ">Xóa</button>
                                                     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                 </div>
@@ -503,7 +495,7 @@
                                     </td>
                                 </tr>
                                 </tbody>
-                                <%}%>
+                                <% index++;}%>
                             </table>
                         </div>
                     </div>

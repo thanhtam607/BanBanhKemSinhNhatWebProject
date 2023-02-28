@@ -6,18 +6,21 @@ public class Comment {
     String binhLuan;
     String date;
     int idcmt;
-    public Comment(String idProduct, String khachhang, String binhLuan, String date, int idcmt){
+    int status;
+    public Comment(String idProduct, String khachhang, String binhLuan, String date, int idcmt, int status){
         this.idProduct = idProduct;
         this.khachhang = khachhang;
         this.binhLuan = binhLuan;
         this.date = date;
         this.idcmt =idcmt;
+        this.status = status;
     }
     public Comment(String idProduct, String khachhang, String binhLuan, String date){
         this.idProduct = idProduct;
         this.khachhang = khachhang;
         this.binhLuan = binhLuan;
         this.date = date;
+        this.status = 0;
     }
 
     public String getIdProduct() {
@@ -68,5 +71,12 @@ public class Comment {
                 ", binhLuan='" + binhLuan + '\'' +
                 ", date='" + date + '\'' +
                 '}';
+    }
+
+    public int getStatus() {
+        return status;
+    }
+    public void setStatus(int status){
+        this.status = status;
     }
 }
