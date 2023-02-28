@@ -208,11 +208,11 @@
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <%if (pro.isHide()) {%>
-                                                <a href="#modal-unHiden<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                <a href="#modal-unHiden<%=pro.getId()%>" class="main__table-btn main__table-btn--banned open-modal">
                                                     <i class="fas fa-eye-slash" ></i>
                                                 </a>
                                                 <%} else {%>
-                                                <a href="#modal-hiden<%=pro.getId()%>" class="main__table-btn main__table-btn--delete open-modal">
+                                                <a href="#modal-hiden<%=pro.getId()%>" class="main__table-btn main__table-btn--banned open-modal">
                                                     <i class="fa fa-eye" style="color: #24cc63"></i>
                                                 </a>
                                                 <%}%>

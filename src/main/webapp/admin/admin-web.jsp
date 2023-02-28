@@ -94,14 +94,14 @@
                 <div class="navbar-nav align-items-center ms-auto">
 
                     <div class="nav-item dropdown">
-                        <a href="/signin.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <a href="../signin.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-user icon__user__small"></i>
                             <span class="d-none d-lg-inline-flex"><%= auth != null ? auth.getTentk():"Đăng nhập"%></span>
                         </a>
                         <%if(auth != null) {%>
                             <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
                                 <a href="/EditUserProfile" class="dropdown-item">Hồ sơ của tôi</a>
-                                <a href="/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
+                                <a href="./doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                             </div>
                         <%}%>
                     </div>
@@ -190,7 +190,7 @@
                                     </td>
                                     <td>
                                         <a href="cthd_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit">
-                                            <i class="fa fa-eye text-center"></i>
+                                            <i class="fas fa-info-circle text-center"></i>
                                         </a>
                                     </td>
                                 </tr>

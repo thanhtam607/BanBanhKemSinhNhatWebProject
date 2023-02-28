@@ -15,12 +15,12 @@ INSERT INTO typeOfCake VALUES ('LB08', 'Bánh trang trí đơn giản');
 
 /*==============================products=====================================*/
 create table products(idProduct char(4) not null PRIMARY KEY, idType char(4), productName varchar(100),
-                      size varchar(10), weight int, description varchar(1000), introduction varchar(1000), price float, STATUS tinyint(4) DEFAULT 0,
-                      CONSTRAINT f_mlb FOREIGN KEY(idType) REFERENCES typeOfCake(idType));
+										size varchar(10), weight int, description varchar(1000), introduction varchar(1000), price float, STATUS tinyint(4) DEFAULT 0,
+										CONSTRAINT f_mlb FOREIGN KEY(idType) REFERENCES typeOfCake(idType));
 -- --
 -- --
 INSERT INTO products VALUES ('B001', 'LB01','Bánh cánh đồng hoa', 'Vừa', 500,
-                             "Bánh kem phong cách hoa Hàn Quốc, ngon và đẹp, chất lượng luôn tươi mới, nguyên liệu hoàn toàn cao cấp được chọn lọc kỹ càng, đảm bảo an toàn vệ sinh thực phẩm, bảo vệ sức khỏe cho người dùng đó chính là điều mà chúng tôi muốn mang lại cho quý khách hàng. Phần hoa của bánh sẽ được làm từ kem bơ, kem tươi tạo nên vị bánh cũng rất ấn tượng, ngọt dịu, không gây ngán. Các thợ làm bánh phải bắt từng bông hoa, để cho thật lạnh để hoa đông cứng rồi mới sắp xếp lên bánh cho hài hoà. Vì vậy cần rất nhiều thời gian, sự kiên nhẫn và cả sự khéo léo. Mỗi chiếc bánh thật sự là một tác phẩm nghệ thuật.", "Trong những dịp lễ, ngày kỷ niệm hay sinh nhật, không cần một món quà quá khoa trương, đơn giản chỉ là một chiếc bánh kem được trang trí bằng những bông hoa sắc màu, bắt mắt cũng khiến bữa tiệc trở nên lung linh mà người nhận thì vui vẻ rồi. Bánh thích hợp tặng chị gái, mẹ, cô giáo.", 450000, 0);
+"Bánh kem phong cách hoa Hàn Quốc, ngon và đẹp, chất lượng luôn tươi mới, nguyên liệu hoàn toàn cao cấp được chọn lọc kỹ càng, đảm bảo an toàn vệ sinh thực phẩm, bảo vệ sức khỏe cho người dùng đó chính là điều mà chúng tôi muốn mang lại cho quý khách hàng. Phần hoa của bánh sẽ được làm từ kem bơ, kem tươi tạo nên vị bánh cũng rất ấn tượng, ngọt dịu, không gây ngán. Các thợ làm bánh phải bắt từng bông hoa, để cho thật lạnh để hoa đông cứng rồi mới sắp xếp lên bánh cho hài hoà. Vì vậy cần rất nhiều thời gian, sự kiên nhẫn và cả sự khéo léo. Mỗi chiếc bánh thật sự là một tác phẩm nghệ thuật.", "Trong những dịp lễ, ngày kỷ niệm hay sinh nhật, không cần một món quà quá khoa trương, đơn giản chỉ là một chiếc bánh kem được trang trí bằng những bông hoa sắc màu, bắt mắt cũng khiến bữa tiệc trở nên lung linh mà người nhận thì vui vẻ rồi. Bánh thích hợp tặng chị gái, mẹ, cô giáo.", 450000, 0);
 
 INSERT INTO products  VALUES ('B002','LB01', 'Bánh hoa hồng kem dâu tây', 'Vừa', 500,"Bánh kem phong cách hoa Hàn Quốc, ngon và đẹp, chất lượng luôn tươi mới, nguyên liệu hoàn toàn cao cấp được chọn lọc kỹ càng, đảm bảo an toàn vệ sinh thực phẩm, bảo vệ sức khỏe cho người dùng đó chính là điều mà chúng tôi muốn mang lại cho quý khách hàng. Phần hoa của bánh sẽ được làm từ kem bơ, kem tươi tạo nên vị bánh cũng rất ấn tượng, ngọt dịu, không gây ngán. Các thợ làm bánh phải bắt từng bông hoa, để cho thật lạnh để hoa đông cứng rồi mới sắp xếp lên bánh cho hài hoà. Vì vậy cần rất nhiều thời gian, sự kiên nhẫn và cả sự khéo léo. Mỗi chiếc bánh thật sự là một tác phẩm nghệ thuật.", "Trong những dịp lễ, ngày kỷ niệm hay sinh nhật, không cần một món quà quá khoa trương, đơn giản chỉ là một chiếc bánh kem được trang trí bằng những bông hoa sắc màu, bắt mắt cũng khiến bữa tiệc trở nên lung linh mà người nhận thì vui vẻ rồi. Bánh thích hợp tặng chị gái, mẹ, cô giáo.", 450000, 0);
 
@@ -219,6 +219,7 @@ INSERT INTO products VALUES ('B099','LB06', 'Bánh kem caramel socola', 'Vừa',
 INSERT INTO products VALUES ('B100', 'LB06','Bánh kem chery kem tươi', 'Vừa', 450, "Socola là sở thích của rất nhiều người. Một chiếc bánh gato kem socola chắc chắn sẽ vô cùng hấp dẫn với cả người. Với những bạn thích socola thì 1 chiếc bánh kém sinh nhật socola hoặc maccaron sẽ rất ý nghĩa trong ngày Sinh nhật.","Socola là sở thích của rất nhiều người. Một chiếc bánh gato kem socola chắc chắn sẽ vô cùng hấp dẫn với cả người. Với những bạn thích socola thì 1 chiếc bánh kém sinh nhật socola hoặc maccaron sẽ rất ý nghĩa trong ngày Sinh nhật.", 400000, 0);
 
 
+<<<<<<< HEAD
 /*==============================discount=====================================*/
 create table discount( id int AUTO_INCREMENT PRIMARY KEY,
                    idProduct char(4),
@@ -237,6 +238,26 @@ insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B019',
 insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B021', 0.1, '2022/12/11', '2023/12/20');
 insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B023', 0.05, '2022/12/11', '2023/12/20');
 insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B025', 0.3, '2022/12/11', '2022/12/20');
+=======
+/*==============================sale=====================================*/
+create table sale( id char(4) PRIMARY KEY,
+											idProduct char(4),
+											sale DOUBLE,
+											tungay datetime,
+											denngay datetime,
+							CONSTRAINT f_mk FOREIGN KEY(idProduct) REFERENCES products(idProduct));
+insert into sale values('G001', 'B003', 0.2, '2022/12/11', '2023/2/20');
+insert into sale values('G002', 'B007', 0.3, '2022/12/11', '2023/2/20');
+insert into sale values('G003', 'B009', 0.5, '2022/12/11', '2023/2/20');
+insert into sale values('G004', 'B011', 0.1, '2022/12/11', '2023/2/20');
+insert into sale values('G005', 'B013', 0.3, '2022/12/11', '2023/2/20');
+insert into sale values('G006', 'B015', 0.2, '2022/12/11', '2023/2/20');
+insert into sale values('G007', 'B017', 0.4, '2022/12/11', '2023/2/20');
+insert into sale values('G008', 'B019', 0.5, '2022/12/11', '2023/2/20');
+insert into sale values('G009', 'B021', 0.1, '2022/12/11', '2023/2/20');
+insert into sale values('G010', 'B023', 0.05, '2022/12/11', '2023/2/20');
+insert into sale values('G011', 'B025', 0.3, '2022/12/11', '2022/12/20');
+>>>>>>> 7be39f885ab988e4b462bb40c6ff791737f6bc55
 
 /*==============================ANH SP=====================================*/
 
@@ -696,8 +717,8 @@ INSERT INTO productImgs VALUES('ASP100-3','B100','img/product/B100/banh3.jpg', 0
 
 /*==============================productDetails=====================================*/
 create table productDetails(idProduct char(4) not null, quantity int, inventory int,
-                            dateOfManufacture DATETIME, expirationDate DATETIME,
-                            CONSTRAINT f_mspproductDetails FOREIGN KEY(idProduct) REFERENCES products(idProduct));
+										dateOfManufacture DATETIME, expirationDate DATETIME,
+										CONSTRAINT f_mspproductDetails FOREIGN KEY(idProduct) REFERENCES products(idProduct));
 INSERT INTO productDetails VALUES('B001', 10, 10, '2022/10/12', '2022/10/15');
 INSERT INTO productDetails VALUES('B002', 10, 10, '2022/10/12', '2022/10/15');
 INSERT INTO productDetails VALUES('B003', 15, 10, '2022/10/12', '2022/10/15');
@@ -801,11 +822,11 @@ INSERT INTO productDetails VALUES('B100', 10, 10, '2022/10/12', '2022/10/15');
 
 /*=========================================taikhoan=========================================*/
 CREATE TABLE taikhoan(ID CHAR(4) PRIMARY KEY,
-                      EMAIL VARCHAR(255),
-                      PASS VARCHAR(255) NOT NULL,
-                      TENTK VARCHAR(100),
-                      ROLE tinyint(4) NOT NULL DEFAULT 0,
-                      STATUS tinyint(4) DEFAULT 0 );
+									EMAIL VARCHAR(255),
+									 PASS VARCHAR(255) NOT NULL,
+									 TENTK VARCHAR(100),
+									 ROLE tinyint(4) NOT NULL DEFAULT 0,
+									STATUS tinyint(4) DEFAULT 0 );
 INSERT INTO taikhoan VALUES('AD01', 'thanhthuy@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Thanh Thùy', 1,0);
 INSERT INTO taikhoan VALUES('AD02', 'thanhtam@gmail.com', 'b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0', 'Thanh Tâm', 1,0);
 INSERT INTO taikhoan VALUES('AD03', 'thanhthuan@gmail.com', '35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281', 'Thanh Thuận', 1,0);
@@ -819,31 +840,31 @@ INSERT INTO taikhoan VALUES('AD10', 'nhom275@gmail.com', '8a050fa1b4e6ed4a406292
 
 /*==============================KHACHHANG=====================================*/
 CREATE TABLE KHACHHANG(MAKH CHAR(4) PRIMARY KEY NOT NULL,
-                       TENKH VARCHAR(40),
+											 TENKH VARCHAR(40),
 -- 											 MAtaikhoan char(4) NOT NULL,
-                       DIACHI VARCHAR(60),
-                       SDT VARCHAR(10),
-                       CONSTRAINT f_mTK FOREIGN KEY (MAKH) REFERENCES taikhoan(ID));
-INSERT INTO KHACHHANG VALUES('AD01', 'Thanh Thuỳ Huỳnh','TP.HCM', '0978675678');
-INSERT INTO KHACHHANG VALUES('AD02', 'Thanh Tâm Nguyễn', 'TP.HCM', '0987675435');
-INSERT INTO KHACHHANG VALUES('AD03', 'Mai Thanh Thuận','TP.HCM', '0987863764');
-INSERT INTO KHACHHANG VALUES('AD04', 'Nguyễn Văn Dũng', 'TP.HCM', '0987467536');
-INSERT INTO KHACHHANG VALUES('AD05', 'Nguyễn Văn Hữu Cảnh', 'BINH DUONG', '0987463578');
-INSERT INTO KHACHHANG VALUES('AD06', 'Nguyễn Văn Tuấn Tú', 'DONG NAI', '0978365478');
-INSERT INTO KHACHHANG VALUES('AD07', 'Nguyễn Thị Thu Thuý ', 'TP.HCM', '0987425367');
-INSERT INTO KHACHHANG VALUES('AD08', 'Trần Phi Hùng', 'TP.HCM', '0976456736');
-INSERT INTO KHACHHANG VALUES('AD09', 'Lê Hữu Phước', 'LONG AN', '0978365627');
-INSERT INTO KHACHHANG VALUES('AD10', 'Huỳnh Văn Biên', 'TP.HCM', '0987362567');
+											 DIACHI VARCHAR(60),
+											 SDT VARCHAR(10),
+											 CONSTRAINT f_mTK FOREIGN KEY (MAKH) REFERENCES taikhoan(ID));
+ INSERT INTO KHACHHANG VALUES('AD01', 'Thanh Thuỳ Huỳnh','TP.HCM', '0978675678');
+ INSERT INTO KHACHHANG VALUES('AD02', 'Thanh Tâm Nguyễn', 'TP.HCM', '0987675435');
+ INSERT INTO KHACHHANG VALUES('AD03', 'Mai Thanh Thuận','TP.HCM', '0987863764');
+ INSERT INTO KHACHHANG VALUES('AD04', 'Nguyễn Văn Dũng', 'TP.HCM', '0987467536');
+ INSERT INTO KHACHHANG VALUES('AD05', 'Nguyễn Văn Hữu Cảnh', 'BINH DUONG', '0987463578');
+ INSERT INTO KHACHHANG VALUES('AD06', 'Nguyễn Văn Tuấn Tú', 'DONG NAI', '0978365478');
+ INSERT INTO KHACHHANG VALUES('AD07', 'Nguyễn Thị Thu Thuý ', 'TP.HCM', '0987425367');
+ INSERT INTO KHACHHANG VALUES('AD08', 'Trần Phi Hùng', 'TP.HCM', '0976456736');
+ INSERT INTO KHACHHANG VALUES('AD09', 'Lê Hữu Phước', 'LONG AN', '0978365627');
+ INSERT INTO KHACHHANG VALUES('AD10', 'Huỳnh Văn Biên', 'TP.HCM', '0987362567');
 
 
-/*==============================HOADON=====================================*/
+ /*==============================HOADON=====================================*/
 CREATE TABLE HOADON ( MAHD CHAR(4) PRIMARY KEY,
-                      MAKH CHAR(4) NOT NULL,
-                      NGAYLAPHD DATETIME NOT NULL,
-                      GHICHU LONGTEXT,
-                      THANHTIEN FLOAT,
-                      STATUS int DEFAULT 0,
-                      CONSTRAINT f_mkh FOREIGN KEY (MAKH) REFERENCES KHACHHANG(MAKH));
+											MAKH CHAR(4) NOT NULL,
+											NGAYLAPHD DATETIME NOT NULL,
+											GHICHU LONGTEXT,
+											THANHTIEN FLOAT,
+											STATUS int DEFAULT 0,
+											CONSTRAINT f_mkh FOREIGN KEY (MAKH) REFERENCES KHACHHANG(MAKH));
 INSERT INTO HOADON VALUES('HD01', 'AD02', '2022/10/12','1 nến 2 dĩa', 900000, 0);
 INSERT INTO HOADON VALUES('HD02', 'AD04', '2022/10/19','1 nến 2 dĩa', 330000, 1);
 INSERT INTO HOADON VALUES('HD03', 'AD05', '2022/10/12','1 nến 2 dĩa', 950000, 0);
@@ -862,11 +883,11 @@ INSERT INTO HOADON VALUES('HD15', 'AD02', '2023/1/8','1 nến 2 dĩa', 300000, 0
 
 /*==============================CTHD=====================================*/
 CREATE TABLE CTHD (MAHD CHAR(4),
-                   idProduct CHAR(4),
-                   SL INT,
-                   GHICHU LONGTEXT,
-                   CONSTRAINT f_mhdcthd FOREIGN KEY(idProduct) REFERENCES products(idProduct),
-                   CONSTRAINT f_mspcthd FOREIGN KEY (MAHD) REFERENCES HOADON(MAHD)  );
+									 idProduct CHAR(4),
+										SL INT,
+										GHICHU LONGTEXT,
+										CONSTRAINT f_mhdcthd FOREIGN KEY(idProduct) REFERENCES products(idProduct),
+										CONSTRAINT f_mspcthd FOREIGN KEY (MAHD) REFERENCES HOADON(MAHD)  );
 INSERT INTO CTHD VALUES('HD01', 'B001', 2, 'Bánh này lấy nên 2 tuổi');
 INSERT INTO CTHD VALUES('HD02', 'B005', 1, 'Bánh này lấy nên 32 tuổi');
 INSERT INTO CTHD VALUES('HD03', 'B039', 1, 'Bánh này lấy nên 25 tuổi');
@@ -890,9 +911,9 @@ INSERT INTO CTHD VALUES('HD15', 'B090', 1, 'Bánh này lấy nên 20 tuổi');
 /*=============================================GIAOHANG=======================================*/
 
 CREATE TABLE GIAOHANG(MAHD CHAR(4),
-                      NGAYGIAO DATETIME NOT NULL,
-                      DIACHIGIAO VARCHAR(60) NOT NULL,
-                      CONSTRAINT f_mhdgh FOREIGN KEY(MAHD) REFERENCES HOADON(MAHD));
+										    NGAYGIAO DATETIME NOT NULL,
+												DIACHIGIAO VARCHAR(60) NOT NULL,
+												CONSTRAINT f_mhdgh FOREIGN KEY(MAHD) REFERENCES HOADON(MAHD));
 --
 INSERT INTO GIAOHANG VALUES('HD01', '2022/10/14', 'Q1, TP HCM');
 INSERT INTO GIAOHANG VALUES('HD02', '2022/10/23', 'Q3, TP HCM');
@@ -920,15 +941,15 @@ INSERT into Comments VALUES(1,'B001','AD02',"Lần đầu đặt bánh ở tiệ
 /*=========================================Blog=========================================*/
 
 CREATE TABLE BLOG (IDBLOG CHAR(4) PRIMARY KEY,
-                   IMGBLOG VARCHAR(255) NOT NULL,
-                   TITLE VARCHAR(255),
-                   DATE DATETIME,
-                   CONTENT TEXT NOT NULL,
-                   CATEGORY VARCHAR(50),
-                   SEASON VARCHAR(50),
-                   STATUS TINYINT(4) DEFAULT(0));
---
-INSERT INTO BLOG VALUES('BL01', 'img/blog/blog1.jpg', 'Giải mã sức hút của bánh kem hiện đại', '2022/10/22',  'Vì sao bánh kem hiện đại được yêu thích đến vậy?\n
+									 IMGBLOG VARCHAR(255) NOT NULL,
+									 TITLE VARCHAR(255),
+									 DATE DATETIME,
+									 CONTENT TEXT NOT NULL,
+									 CATEGORY VARCHAR(50),
+									 SEASON VARCHAR(50),
+									 STATUS TINYINT(4) DEFAULT(0));
+ --
+INSERT INTO BLOG VALUES('BL01', 'img/blog/BL01/blog1.jpg', 'Giải mã sức hút của bánh kem hiện đại', '2022/10/22',  'Vì sao bánh kem hiện đại được yêu thích đến vậy?\n
 Sở dĩ bánh kem được làm theo phong cách hiện đại được mọi người ưa chuộng vì nhiều lý do. Nhưng phải nhắc đến đó là hương vị bánh thơm ngon, kiểu dáng độc đáo, kích thước và màu sắc đa dạng. Bên cạnh đó phải kể đến những điểm đặc biệt sau đây. \n
 1. Tất cả nguyên liệu đều là tự nhiên.\n
 Kế thừa tinh hoa ẩm thực cũ được sáng tạo, thay đổi phù hợp với xu thế mới của thời đại, chiếc bánh kem còn là món ăn tốt cho sức khỏe. Dưới bàn tay khéo léo của những người thợ làm bánh cho ra đời sản phẩm đẹp và độc đáo. Bánh kem hiện đại sử dụng nguyên liệu tự nhiên không chứa chất độc hại. Màu sắc nhẹ nhàng không sử dụng hóa chất.\n
@@ -941,7 +962,7 @@ Một lý do khiến bánh hiện đại được các tín đồ hảo ngọt y
 Với những người thích socola bạn có thể chọn bánh kem hương vị socola, hay vị bắp tốt cho sức khỏe. Các loại trái cây thanh mát kết hợp mang đến những chiếc bánh vẻ ngoài bắt mắt, hương vị độc lạ bên trong.
 Hãy đặt mua bánh kem hiện đại để những bữa tiệc trở nên ý nghĩa hơn. Đến với Tiệm bánh Hạnh Phúc quý khách sẽ được chọn lựa một trong số rất nhiều kiểu bánh đẹp. Được sản xuất từ nguyên liệu tươi ngon, không chứa chất bảo quản sẽ khiến bạn hài lòng. Nhấc máy gọi ngay cho chúng tôi theo số Hotline 0987654321 để được phục vụ.
 ' ,  'Đời Sống', 'Hiện đại',0);
-INSERT INTO BLOG VALUES('BL02', 'img/blog/blog2.jpg', 'Tổng hợp cách bảo quản bánh kem cực đơn giản', '2022/10/22','Các loại bánh kem thông thường trên thị trường hiện nay, nếu được bảo quản đúng cách trong tủ chuyên dụng sẽ có thể dùng được trong 5 - 7 ngày mà không lo hư hỏng. Còn nếu bạn bảo quản bánh kem trong tủ lạnh ở ngăn mát thì có thể an tâm sử dụng trong vòng 2 - 3 ngày.\n
+INSERT INTO BLOG VALUES('BL02', 'img/blog/BL02/blog2.jpg', 'Tổng hợp cách bảo quản bánh kem cực đơn giản', '2022/10/22','Các loại bánh kem thông thường trên thị trường hiện nay, nếu được bảo quản đúng cách trong tủ chuyên dụng sẽ có thể dùng được trong 5 - 7 ngày mà không lo hư hỏng. Còn nếu bạn bảo quản bánh kem trong tủ lạnh ở ngăn mát thì có thể an tâm sử dụng trong vòng 2 - 3 ngày.\n
 1. Cách bảo quản bánh kem trong tủ lạnh.\n
 Bạn có thể cho bánh kem và hộp đựng hoặc bọc kín bánh lại rồi cho vào tủ lạnh, giữ ở mức nhiệt 2 - 8 độ C. Với cách bảo quản này bánh kem có thể dùng được trong vòng 2 - 3 ngày. Tuy nhiên, lớp kem bánh thường sẽ bị khô lại, giảm hương vị thơm ngon, mềm xốp vốn có.\n
 Khi bảo quản bánh kem trong tủ lạnh bạn cần lưu ý không được để bánh gần các loại thực phẩm có mùi, các loại thực phẩm này có thể gây ảnh hưởng đến mùi vị của bánh kem. Hơn nữa, bạn cần phải bọc kín bánh lại để vi khuẩn trong tủ không xâm nhập được vào bánh.\n
@@ -954,14 +975,14 @@ Do vi khuẩn làm lên men protein và chất béo có trong kem nên khi kem b
 Phần kem bị tách nước, bị chảy cũng là một dấu hiệu nhận biết bánh kem có dấu hiệu bị hỏng.\n
 Phần cốt bánh bông lan bên trong bị xuất hiện những đốm mốc đen hoặc mốc xanh lạ, có mùi khó chịu.\n
 ', 'Đời Sống', 'Bảo quản bánh',0);
-INSERT INTO BLOG VALUES('BL03', 'img/blog/blog3.jpg', 'Chọn bánh kem cho những ngày kỷ niệm ý nghĩa', '2022/10/22','Ngày nay, bánh kem không chỉ xuất hiện vào duy nhất sinh nhật mà bất cứ dịp kỷ niệm nào cũng có thể sử dụng. Các tiệm bánh cũng bắt kịp các xu hướng để đưa ra nhiều mẫu bánh phù hợp với từng mục đích sử dụng. Cùng tìm hiểu các dịp kỷ niệm ý nghĩa nên sử dụng bánh kem và cách chọn sao cho phù hợp nhất trong bài viết dưới đây.\n
+INSERT INTO BLOG VALUES('BL03', 'img/blog/BL03/blog3.jpg', 'Chọn bánh kem cho những ngày kỷ niệm ý nghĩa', '2022/10/22','Ngày nay, bánh kem không chỉ xuất hiện vào duy nhất sinh nhật mà bất cứ dịp kỷ niệm nào cũng có thể sử dụng. Các tiệm bánh cũng bắt kịp các xu hướng để đưa ra nhiều mẫu bánh phù hợp với từng mục đích sử dụng. Cùng tìm hiểu các dịp kỷ niệm ý nghĩa nên sử dụng bánh kem và cách chọn sao cho phù hợp nhất trong bài viết dưới đây.\n
 1. Bánh kem sinh nhật.\n
 Sinh nhật chắc chắn là dịp không thể thiếu bánh kem, dù là tổ chức đơn giản hay linh đình, thì ít nhiều cũng phải có một chiếc bánh kem nhỏ. Bánh kem có ý nghĩa vô cùng đặc biệt, như đánh dấu kỷ niệm đáng nhớ này. Chọn bánh kem sinh nhật tặng người thân, bạn bè nên lưu ý về tuổi tác, sở thích… để phù hợp. Bánh kem của người lớn tuổi thì nên trang nhã, lịch sự; bánh kem cho trẻ nhỏ thì nên nổi bật, sặc sỡ; bánh kem cho bạn bè nên chọn loại tinh nghịch, đáng yêu.\n
 2. Kỷ niệm ngày cưới, lễ tình nhân.\n
 Bánh kem tình yêu có thể được sử dụng vào ngày kỷ niệm cho các cặp đôi, kỷ niệm ngày cưới, ngày yêu, 14/2… Bánh kem cho các đôi yêu nhau thường là bánh hình trái tim, trang trí màu hồng hoặc đỏ lãng mạn, có thể sử dụng thêm hoa tươi vô cùng bắt mắt và ý nghĩa. Những ngày này, chỉ cần một chiếc bánh kem và hai người bên nhau trong ánh nến lung linh là đã vô cùng ngọt ngào và đáng nhớ. Đừng quên tặng thêm một nửa của bạn những món quà nhỏ làm vật định tình cho tình yêu đẹp này nhé.\n
 3. Bánh sự kiện.\n
 Những ngày như quốc tế phụ nữ, kỷ niệm thành lập công ty, lễ tốt nghiệp… đều nên chọn bánh kem để sự kiện thêm phần chỉn chu. Chọn bánh kem cho những ngày này nên dựa vào ý nghĩa để lựa chọn cho phù hợp. Bánh cho doanh nghiệp, tập thể nên chọn bánh size to, lớn và chữ ghi rõ thông điệp để có thể chụp ảnh tập thể đánh dấu mốc đáng nhớ trong năm. Bánh chọn trang nhã, lịch sự, có thể điểm thêm logo của doanh nghiệp để thêm phần độc đáo, khác biệt với những mẫu bánh kem thông thường.', 'Kỉ niệm', 'Chọn bánh',0);
-INSERT INTO BLOG VALUES('BL04', 'img/blog/blog4.jpg', 'Tại sao sinh nhật lại quan trọng đến thế?','2022/10/22','Ai cũng biết rằng sinh nhật là một ngày đặc biệt đối với tất cả mọi người. Là sự kiện đánh dấu ngày ra đời, đó như là một điều mặc định khi nói về ý nghĩa của ngày sinh nhật. Nhưng có bao giờ bạn tự hỏi tại sao nó lại ý nghĩa và đặc biệt đến thế không? Cùng tìm hiểu nguồn gốc và những ý nghĩa tuyệt vời mà ta chưa nhận ra từ ngày sinh nhật tuyệt vời nhé!\n
+INSERT INTO BLOG VALUES('BL04', 'img/blog/BL04/blog4.jpg', 'Tại sao sinh nhật lại quan trọng đến thế?','2022/10/22','Ai cũng biết rằng sinh nhật là một ngày đặc biệt đối với tất cả mọi người. Là sự kiện đánh dấu ngày ra đời, đó như là một điều mặc định khi nói về ý nghĩa của ngày sinh nhật. Nhưng có bao giờ bạn tự hỏi tại sao nó lại ý nghĩa và đặc biệt đến thế không? Cùng tìm hiểu nguồn gốc và những ý nghĩa tuyệt vời mà ta chưa nhận ra từ ngày sinh nhật tuyệt vời nhé!\n
 1.Nguồn gốc của ngày sinh nhật.\n
 Ngày sinh bắt nguồn từ đạo Kitô Giáo ở phương Tây, người ta tin rằng đây là ngày mà những linh hồn mang đến quấy phá. Để bảo vệ người thân yêu khỏi những điều không tốt lành đó, thì cần phải tổ chức những bữa tiệc vui chơi nhảy múa, hò hét tạo không khí để xua đuổi ma quỷ. Và dành tặng cho những lời chúc tốt đẹp, những món quà ý nghĩa để xua đi điềm xấu.\n
 Lễ kỷ niệm sinh nhật nổi tiếng nhất là của Chúa Giêsu, hay được biết đến là lễ giáng sinh. Sau đó, phong tục kỷ niệm ngày sinh lan rộng ra toàn thế giới. Là ngày tổ chức sinh nhật, dấu mốc ngày bạn sinh ra đời và nhớ ơn đấng sinh thành. Sinh nhật không còn mang nặng ý nghĩa tôn giáo như trước đây mà chỉ đơn giản là dịp để tận hưởng giây phút đặc biệt, hạnh phúc và vui vẻ bên người thân yêu.\n

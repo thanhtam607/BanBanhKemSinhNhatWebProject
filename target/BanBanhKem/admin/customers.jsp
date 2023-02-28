@@ -210,7 +210,7 @@
                                             </a>
                                             <%}%>
                                             <a href="./EditUser?makh=<%=customer.getMAKH()%>" class="main__table-btn main__table-btn--edit">
-                                                <i class="fa fa-eye"></i>
+                                                <i class="fa fa-edit"></i>
                                             </a>
 <%--                                            <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">--%>
 <%--                                                <i class="fa fa-trash"></i>--%>

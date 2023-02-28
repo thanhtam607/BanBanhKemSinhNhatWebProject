@@ -89,6 +89,56 @@ public class BlogService {
          se.printStackTrace();
      }
  }
+public static  void updateImgBlog(String img,String imgnew){
+    Statement stm = DBConnect.getInstall().get();
+    String sql = "UPDATE BLOG SET IMGBLOG = '" + imgnew + "' WHERE IMGBLOG = '" + img +"'";
+    try {
+        stm.executeUpdate(sql);
+
+    } catch (SQLException se) {
+        se.printStackTrace();
+    }
+}
+public static void  updateTitle(String idblog, String title ){
+    Statement stm = DBConnect.getInstall().get();
+    String sql = "UPDATE BLOG SET TITLE = '" + title + "' WHERE IDBLOG = '" + idblog +"'";
+    try {
+        stm.executeUpdate(sql);
+
+    } catch (SQLException se) {
+        se.printStackTrace();
+    }
+}
+public  static String getMaxIdBlog(){
+    String res ="";
+    String sql= "SELECT max(idblog) from blog";
+    Statement statement = DBConnect.getInstall().get();
+    try {
+        ResultSet rs = statement.executeQuery(sql);
+        while (rs.next()) {
+            res = rs.getString(1);
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+    String s = "";
+    int n = Integer.parseInt(res.substring(2));
+    if(n < 10) {
+       s  = "BL0" + (n + 1);
+    } else {
+        s = "BL" + (n + 1);
+    }
+    return s;
+}
+public static void addBlog(Blog b){
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "INSERT INTO BLOG VALUES('" + b.getId() + "', '" + b.getImg() + "', '" + b.getTitle() + "','" + b.getDate() + "','" + b.getCont() + "','" + b.getCategory() + "','" + b.getSeason() + "',0);";
+    try {
+        stm.executeUpdate(sql);
+    } catch (SQLException se) {
+        se.printStackTrace();
+    }
+}
 
     public static void main(String[] args) {
 //            List<Blog> li = BlogService.getData();
@@ -99,10 +149,11 @@ public class BlogService {
 //        for(Blog b: l) {
 //            System.out.println(b.getId());
 //        }
-        Blog b1 = BlogService.findById("BL01");
-        String[] rs = b1.getCont().split("\\n");
-        for (int i = 0; i < rs.length; i++){
-            System.out.print(rs[i] + '\n');
-        }
+//        Blog b1 = BlogService.findById("BL01");
+//        String[] rs = b1.getCont().split("\\n");
+//        for (int i = 0; i < rs.length; i++){
+//            System.out.print(rs[i] + '\n');
+//        }
+        System.out.println(BlogService.getMaxIdBlog());
     }
 }
