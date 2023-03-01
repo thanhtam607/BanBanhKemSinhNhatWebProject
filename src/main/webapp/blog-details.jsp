@@ -208,9 +208,9 @@
                             <h4>Danh mục</h4>
                             <ul>
                                 <li><a href="./ListBlog">Tất cả</a></li>
-                                <%List<String> listDm = (List<String>) request.getAttribute("listDm");
+                                <%List<String> listDm = BlogService.listcate();
                                     for(String dm : listDm){%>
-                                <li><a href="BlogCategory?category=<%=dm%>" ><%=dm%></a></li>
+                                <li><a href="BlogCategory?category=<%=dm%>"><%=dm%></a></li>
                                 <% } %>
                             </ul>
                         </div>
@@ -247,7 +247,7 @@
                             <h4>Chủ đề</h4>
                             <div class="blog__sidebar__item__tags">
                                 <a href="./ListBlog">Bánh kem</a>
-                                <%List<String> listCd = (List<String>) request.getAttribute("listCd");
+                                <%List<String> listCd = BlogService.listss();
                                     for(String cd : listCd){%>
                                 <a href="BlogSeason?season=<%=cd%>"><%=cd%></a>
                                 <% } %>

@@ -248,7 +248,7 @@
                                                 <div class="form__group">
                                                     <label class="form__label">Danh mục</label>
                                                     <select class="form__input"  name="category">
-                                                        <%List<String> listDm = (List<String>) request.getAttribute("listDm");
+                                                        <%List<String> listDm = BlogService.listcate();
                                                             for(String dm : listDm){
                                                                 if(b.getCategory().equals(dm)){%>
                                                         <option selected value="<%=dm%>"><%=dm%></option>
@@ -262,7 +262,7 @@
                                                 <div class="form__group">
                                                     <label class="form__label">Chủ đề</label>
                                                     <select class="form__input" name="season">
-                                                        <%List<String> listCd = (List<String>) request.getAttribute("listCd");
+                                                        <%List<String> listCd = BlogService.listss();
                                                             for(String cd : listCd){
                                                                 if(b.getSeason().equals(cd)){%>
                                                         <option selected value="<%=cd%>"><%=cd%></option>

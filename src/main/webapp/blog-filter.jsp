@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -204,7 +205,7 @@
                                         <h4>Danh mục</h4>
                                         <ul>
                                             <li><a href="./ListBlog">Tất cả</a></li>
-                                            <%List<String> listDm = (List<String>) request.getAttribute("listDm");
+                                            <%List<String> listDm = BlogService.listcate();
                                                 for(String dm : listDm){%>
                                             <li><a href="BlogCategory?category=<%=dm%>" ><%=dm%></a></li>
                                             <% } %>
@@ -244,7 +245,7 @@
                                         <h4>Chủ đề</h4>
                                         <div class="blog__sidebar__item__tags">
                                             <a href="./ListBlog">Bánh kem</a>
-                                            <%List<String> listCd = (List<String>) request.getAttribute("listCd");
+                                            <%List<String> listCd = BlogService.listss();
                                                 for(String cd : listCd){%>
                                             <a href="BlogSeason?season=<%=cd%>"><%=cd%></a>
                                             <% } %>
@@ -269,7 +270,7 @@
                                                 </ul>
                                                 <h5><a href="BlogDetails?id=<%=b.getId()%>"><%=b.getTitle()%></a></h5>
                                                 <p class="text-justify"><%=b.getCont()%></p>
-                                                <a href="BlogDetails?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
+                                                <a href="BlogDetails?id=<%=b.getId()%>" class="blog__btn">Xem thêm<span class="arrow_right"></span></a>
                                             </div>
                                         </div>
                                     </div>

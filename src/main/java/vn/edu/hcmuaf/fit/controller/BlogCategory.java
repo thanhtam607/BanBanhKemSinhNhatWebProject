@@ -15,8 +15,6 @@ public class BlogCategory extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Blog> listC = BlogService.ListCategory(request.getParameter("category"));
         request.setAttribute("list", listC);
-        List<String> listdm = BlogService.listcate();
-        request.setAttribute("listDm", listdm);
         request.getRequestDispatcher("blog-filter.jsp").forward(request,response);
     }
 

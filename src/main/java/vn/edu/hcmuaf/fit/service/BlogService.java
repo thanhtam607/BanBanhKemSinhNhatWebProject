@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class BlogService {
         List<Blog> list = getData();
         List<Blog> rs = new LinkedList<>();
         for(Blog b : list){
-            if (b.getCategory().equals(category)) {
+            if (category.equals(b.getCategory())) {
                 rs.add(b);
             }
         }
@@ -54,7 +55,7 @@ public class BlogService {
         List<Blog> list = getData();
         List<Blog> rs = new LinkedList<>();
         for(Blog b : list){
-            if (b.getSeason().equals(season)) {
+            if (season.equals(b.getSeason())) {
                 rs.add(b);
             }
         }
@@ -191,5 +192,7 @@ public static void addBlog(Blog b){
 //        }
         System.out.println(BlogService.getMaxIdBlog());
         System.out.println(BlogService.listss());
+        String rs = BlogService.listcate().get(0);
+        System.out.println(BlogService.ListCategory(rs));
     }
 }

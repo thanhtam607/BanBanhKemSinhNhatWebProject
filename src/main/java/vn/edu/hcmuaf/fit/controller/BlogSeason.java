@@ -15,8 +15,6 @@ public class BlogSeason extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Blog> listss = BlogService.ListSeason(request.getParameter("season"));
         request.setAttribute("list", listss);
-        List<String> listcd = BlogService.listss();
-        request.setAttribute("listCd", listcd);
         request.getRequestDispatcher("blog-filter.jsp").forward(request,response);
     }
 
