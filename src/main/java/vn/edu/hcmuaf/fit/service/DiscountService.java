@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.service;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.Discount;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,6 +23,21 @@ public class DiscountService {
             throw new RuntimeException(e);
         }
         return list;
+    }
+    public static Discount findByIdProduct(String idProduct){
+        Discount dis = null;
+        try {
+            PreparedStatement stm = DBConnect.getConn().prepareStatement("SELECT idProduct, discount, startDate, expiryDate from discount where idProduct= ? GROUP BY idProduct, startDate, expiryDate HAVING DATEDIFF(CURRENT_DATE, expiryDate) < 0;");
+            stm.setString(1,idProduct);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+              dis = (new Discount(rs.getString(1), rs.getDouble(2), rs.getString(3),rs.getString(4)));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return dis;
     }
 
     public static void main(String[] args) {
