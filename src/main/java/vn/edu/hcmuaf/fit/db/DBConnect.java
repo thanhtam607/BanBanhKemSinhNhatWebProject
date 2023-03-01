@@ -10,7 +10,7 @@ public class DBConnect {
     static String URL = "jdbc:mysql://localhost:3306/banbanhkem";
     static String user= "root";
     static String pass= "";
-    static Connection conn;
+    Connection conn;
     static DBConnect install;
      private DBConnect(){
         try {

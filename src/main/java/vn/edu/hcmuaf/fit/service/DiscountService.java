@@ -3,14 +3,12 @@ package vn.edu.hcmuaf.fit.service;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.Discount;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DiscountService {
+    static Connection con = DBConnect.getConn();
     public static List<Discount> getListDiscount(){
         List<Discount> list = new ArrayList<>();
         Statement stm = DBConnect.getInstall().get();
@@ -27,7 +25,7 @@ public class DiscountService {
     public static Discount findByIdProduct(String idProduct){
         Discount dis = null;
         try {
-            PreparedStatement stm = DBConnect.getConn().prepareStatement("SELECT idProduct, discount, startDate, expiryDate from discount where idProduct= ? GROUP BY idProduct, startDate, expiryDate HAVING DATEDIFF(CURRENT_DATE, expiryDate) < 0;");
+            PreparedStatement stm = con.prepareStatement("SELECT idProduct, discount, startDate, expiryDate from discount where idProduct= ? GROUP BY idProduct, startDate, expiryDate HAVING DATEDIFF(CURRENT_DATE, expiryDate) < 0;");
             stm.setString(1,idProduct);
             ResultSet rs = stm.executeQuery();
             while(rs.next()){

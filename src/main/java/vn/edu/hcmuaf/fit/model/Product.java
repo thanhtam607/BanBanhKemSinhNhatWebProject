@@ -14,12 +14,12 @@ public class Product {
     List<Image> listImg;
     int price;
     List<Comment> comments;
-    ProductDetails details;
+    ProductDetail details;
     int status;
     Discount discount;
 
 
-    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<Image> listImg, int price, List<Comment> comments,  ProductDetails details) {
+    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<Image> listImg, int price, List<Comment> comments,  ProductDetail details) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -47,7 +47,7 @@ public class Product {
         this.status =0;
         this.discount = null;
     }
-    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<Image> listImg, int price, List<Comment> comments,  ProductDetails details, int status) {
+    public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<Image> listImg, int price, List<Comment> comments, ProductDetail details, int status) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -124,11 +124,11 @@ public class Product {
         return comments;
     }
 
-    public ProductDetails getDetail() {
+    public ProductDetail getDetail() {
         return details;
     }
 
-    public void setListpd(ProductDetails details) {
+    public void setListpd(ProductDetail details) {
         this.details = details;
     }
 
