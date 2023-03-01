@@ -1,6 +1,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.ProductDetails" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.ProductDetail" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Image" %>

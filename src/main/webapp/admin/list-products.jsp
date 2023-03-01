@@ -1,6 +1,6 @@
         <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.ProductDetails" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.ProductDetail" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
@@ -189,7 +189,8 @@
                                     <td>
                                         <div class="main__table-text"><%=pro.getComments().size()%></div>
                                     </td>
-                                    <%ProductDetails detail = pro.getDetail();
+                                    <%
+                                        ProductDetail detail = pro.getDetail();
                                     %>
                                     <td>
                                         <div class="main__table-text"><%=detail.getMfg()%></div>
