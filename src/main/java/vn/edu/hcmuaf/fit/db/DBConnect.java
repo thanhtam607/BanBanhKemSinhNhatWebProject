@@ -10,7 +10,7 @@ public class DBConnect {
     static String URL = "jdbc:mysql://localhost:3306/banbanhkem";
     static String user= "root";
     static String pass= "";
-    Connection conn;
+    static Connection conn;
     static DBConnect install;
      private DBConnect(){
         try {
@@ -37,13 +37,8 @@ public class DBConnect {
 
     }
     public static Connection getConn(){
-        Connection con = null;
-        try {
-            con = DriverManager.getConnection(URL, user, pass);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return con;
+
+        return conn;
     }
 
     public static void main(String[] args) {

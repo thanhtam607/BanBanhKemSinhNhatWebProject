@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiscountService {
-    static Connection con = DBConnect.getConn();
+    static Connection con = DBConnect.getInstall().getConn();
     public static List<Discount> getListDiscount(){
         List<Discount> list = new ArrayList<>();
         Statement stm = DBConnect.getInstall().get();
