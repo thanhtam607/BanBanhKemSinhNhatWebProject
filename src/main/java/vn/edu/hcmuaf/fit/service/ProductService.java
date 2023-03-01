@@ -186,7 +186,6 @@ public class ProductService {
         }
         return res;
     }
-
     public static void updateProduct(String idProduct,String idType, String productName, String size, int weight, String description, String introduction, int price ){
         Statement statement = DBConnect.getInstall().get();
         String sql = "UPDATE products set  idType='" +idType+ "', productName= '"+ productName+ "', size= '" + size+ "', weight= "+ weight+", description = '"+ description + "', introduction= '"+ introduction+"', price= "+price+" where idProduct = '"+idProduct+"';";
@@ -354,13 +353,54 @@ public class ProductService {
         }
     }
     public static List<Product> getListProduct(){
-        List<Product> res = new ArrayList<>();
-        for(Product p: ProductService.getData()){
-            if(!p.isHide()){
-                res.add(p);
+        List<Product> list = new LinkedList<Product>();
+        Statement statement = DBConnect.getInstall().get();
+        Statement stmt = DBConnect.getInstall().get();
+        Statement stmt1 = DBConnect.getInstall().get();
+        Statement stmt2 = DBConnect.getInstall().get();
+        ResultSet rsCmt;
+        ProductDetails detail = new ProductDetails();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake, discount where products.idType = typeOfCake.idType and products.STATUS=0");
+                while (rs.next()) {
+                    ResultSet rsImg = stmt.executeQuery("SELECT idImg, productImgs.idProduct,productImgs.img, status from productImgs");
+                    List<Image> listImg = new LinkedList<Image>();
+                    rsCmt = stmt1.executeQuery("SELECT idProduct, TAIKHOAN.TENTK,comment,date, IdCmt, Comments.STATUS from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
+                    List<Comment> listCmts = new LinkedList<Comment>();
+                    ResultSet rspd = stmt2.executeQuery("select idProduct, quantity, inventory, dateOfManufacture, expirationDate from productDetails");
+                    String s1 = rs.getString(1);
+                    while (rsImg.next()) {
+                        String s2 = rsImg.getString(2);
+                        if (s1.equals(s2)) {
+                            listImg.add(new Image(rsImg.getString(1), s2,rsImg.getString(3), rsImg.getInt(4)));
+                        }
+                    }
+
+                    while (rsCmt.next()) {
+                        String s2 = rsCmt.getString(1);
+                        int status = rsCmt.getInt(6);
+                        if (s1.equals(s2) && status==0) {
+                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
+                        }
+                    }
+                    while (rspd.next()) {
+                        String s2 = rspd.getString(1);
+                        if (s1.equals(s2)) {
+                            detail =new ProductDetails(rspd.getString(1), rspd.getInt(2), rspd.getInt(3), rspd.getString(4), rspd.getString(5));
+                        }
+                    }
+                    Product p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), listImg, rs.getInt(8),listCmts, detail, rs.getInt(9));
+                    p.setDiscount(DiscountService.findByIdProduct(rs.getString(1)));
+                    list.add(p);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
+        else {
+            System.out.println("Không có sản phẩm");
         }
-        return res;
+        return list;
     }
     public static List<Product> getListProductForAdmin(){
         List<Product> res = new ArrayList<>();
@@ -400,9 +440,9 @@ public class ProductService {
         return res;
     }
     public static void main(String[] args) throws SQLException {
-        for(Product p : getDiscountProduct()){
-            System.out.println(p.getId());
-        }
+//        for(Product p : getDiscountProduct()){
+//            System.out.println(p.getId());
+//        }
 
 //            deleteImage("img/product/B001/banh1.jpg");
 //            Product p = findById("B100");

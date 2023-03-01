@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBConnect {
-    String URL = "jdbc:mysql://localhost:3306/banbanhkem";
-    String user= "root";
-    String pass= "";
-    Connection conn;
+    static String URL = "jdbc:mysql://localhost:3306/banbanhkem";
+    static String user= "root";
+    static String pass= "";
+    static Connection conn;
     static DBConnect install;
-    private DBConnect(){
+     private DBConnect(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(URL, user, pass);
@@ -35,6 +35,15 @@ public class DBConnect {
             return null;
         }
 
+    }
+    public static Connection getConn(){
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection(URL, user, pass);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return con;
     }
 
     public static void main(String[] args) {
