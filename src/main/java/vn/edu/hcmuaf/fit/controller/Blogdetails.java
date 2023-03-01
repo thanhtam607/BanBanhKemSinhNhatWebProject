@@ -16,6 +16,10 @@ public class Blogdetails extends HttpServlet {
        Blog b = BlogService.findById(request.getParameter("id"));
         request.setAttribute("blog", b);
         List<Blog> list = BlogService.getData();
+        List<String> listdm = BlogService.listcate();
+        List<String> listcd = BlogService.listss();
+        request.setAttribute("listDm", listdm);
+        request.setAttribute("listCd", listcd);
         request.setAttribute("list", list);
         request.getRequestDispatcher("blog-details.jsp").forward(request,response);
     }

@@ -7,6 +7,7 @@ import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -109,7 +110,7 @@ public static void  updateTitle(String idblog, String title ){
         se.printStackTrace();
     }
 }
-public  static String getMaxIdBlog(){
+public  static String getNewIdBlog(){
     String res ="";
     String sql= "SELECT max(idblog) from blog";
     Statement statement = DBConnect.getInstall().get();
@@ -123,13 +124,47 @@ public  static String getMaxIdBlog(){
     }
     String s = "";
     int n = Integer.parseInt(res.substring(2));
-    if(n < 10) {
+    if(n < 9) {
        s  = "BL0" + (n + 1);
     } else {
         s = "BL" + (n + 1);
     }
     return s;
 }
+    public  static String getMaxIdBlog(){
+        String res ="";
+        String sql= "SELECT max(idblog) from blog";
+        Statement statement = DBConnect.getInstall().get();
+        try {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                res = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+      return res;
+    }
+public static List<String> listcate(){
+        List<String> rs = new ArrayList<>();
+        List<Blog> listb =  BlogService.getData();
+        for(Blog b : listb){
+            if (!rs.contains(b.getCategory())){
+                rs.add(b.getCategory());
+            }
+        }
+        return rs;
+}
+    public static List<String> listss(){
+        List<String> rs = new ArrayList<>();
+        List<Blog> listb =  BlogService.getData();
+        for(Blog b : listb){
+            if (!rs.contains(b.getSeason())){
+                rs.add(b.getSeason());
+            }
+        }
+        return rs;
+    }
 public static void addBlog(Blog b){
         Statement stm = DBConnect.getInstall().get();
         String sql = "INSERT INTO BLOG VALUES('" + b.getId() + "', '" + b.getImg() + "', '" + b.getTitle() + "','" + b.getDate() + "','" + b.getCont() + "','" + b.getCategory() + "','" + b.getSeason() + "',0);";
@@ -155,5 +190,6 @@ public static void addBlog(Blog b){
 //            System.out.print(rs[i] + '\n');
 //        }
         System.out.println(BlogService.getMaxIdBlog());
+        System.out.println(BlogService.listss());
     }
 }

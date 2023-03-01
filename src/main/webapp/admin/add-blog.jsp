@@ -1,5 +1,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -128,20 +129,22 @@
                                         </div>
                                     <div class="col-12 col-sm-6 col-md-12">
                                         <label class="text-dark" for="textdm">Danh mục:</label>
+                                        <% List<String> listcate = BlogService.listcate();
+                                           List<String> listss = BlogService.listss();%>
                                         <select id = "textdm" class="form__input"  name="category">
-                                            <option value="Đời Sống">Đời Sống</option>
-                                            <option value="Kỉ niệm">Kỉ niệm</option>
-                                            <option value="Khác">Khác</option>
+                                            <%for(int i = 0; i < listcate.size(); i++){
+                                                String cate = listcate.get(i);%>
+                                            <option value="<%=cate%>"><%=cate%></option>
+                                            <% } %>
                                         </select>
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-12">
                                         <label class="text-dark" for="textcd">Chủ đề:</label>
                                         <select id="textcd" class="form__input"  name="season">
-                                            <option value="Ý nghĩa bánh">Ý nghĩa bánh</option>
-                                            <option value="Chọn bánh">Chọn bánh</option>
-                                            <option value="Bảo quản bánh">Bảo quản bánh</option>
-                                            <option value="Hiện đại">Hiện đại</option>
-                                            <option value="Khác">Khác</option>
+                                            <%for(int i = 0; i < listss.size(); i++){
+                                                String season = listss.get(i);%>
+                                            <option value="<%=season%>"><%=season%></option>
+                                            <% } %>
                                         </select>
                                     </div>
                                 </div>

@@ -207,9 +207,10 @@
                                         <h4>Danh mục</h4>
                                         <ul>
                                             <li><a href="./ListBlog">Tất cả</a></li>
-                                            <li><a href="BlogCategory?category=Đời Sống" >Đời Sống (3)</a></li>
-                                            <li><a href="BlogCategory?category=Kỉ niệm">Kỷ niệm (1)</a></li>
-
+                                            <%List<String> listDm = (List<String>) request.getAttribute("listDm");
+                                                for(String dm : listDm){%>
+                                            <li><a href="BlogCategory?category=<%=dm%>" ><%=dm%></a></li>
+                                            <% } %>
                                         </ul>
                                     </div>
                                     <div class="blog__sidebar__item">
@@ -245,11 +246,10 @@
                                         <h4>Chủ đề</h4>
                                         <div class="blog__sidebar__item__tags">
                                             <a href="./ListBlog">Bánh kem</a>
-                                            <a href="BlogSeason?season=Hiện đại">Hiện đại</a>
-                                            <a href="BlogSeason?season=Bảo quản bánh">Bảo quản bánh</a>
-                                            <a href="BlogSeason?season=Chọn bánh">Chọn bánh</a>
-                                            <a href="BlogSeason?season=Ý nghĩa bánh">Ý nghĩa bánh</a>
-                                            <a href="BlogSeason?season=Khác">Khác</a>
+                                            <%List<String> listCd = (List<String>) request.getAttribute("listCd");
+                                                for(String cd : listCd){%>
+                                            <a href="BlogSeason?season=<%=cd%>"><%=cd%></a>
+                                         <% } %>
                                         </div>
                                     </div>
                                 </div>

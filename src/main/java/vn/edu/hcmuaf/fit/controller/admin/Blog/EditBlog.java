@@ -16,16 +16,8 @@ public class EditBlog extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Blog blog = BlogService.findById(request.getParameter("idB"));
         request.setAttribute("blg",blog);
-        List<String> listdm = new ArrayList<String>();
-        listdm.add("Đời sống");
-        listdm.add("Kỉ niệm");
-        listdm.add("Khác");
-        List<String> listcd = new ArrayList<String>();
-        listcd.add("Hiện đại");
-        listcd.add("Bảo quản bánh");
-        listcd.add("Chọn bánh");
-        listcd.add("Ý nghĩa bánh");
-        listcd.add("Khác");
+        List<String> listdm = BlogService.listcate();
+        List<String> listcd = BlogService.listss();
         request.setAttribute("listDm", listdm);
         request.setAttribute("listCd", listcd);
         request.getRequestDispatcher("edit-blog.jsp").forward(request, response);
