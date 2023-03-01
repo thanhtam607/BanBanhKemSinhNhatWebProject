@@ -406,7 +406,9 @@
                                 <div class="product__item__text">
                                     <h6><a href="ProductDetail?id=<%=p.getId()%>"><%= p.getName()%></a></h6>
                                     <%if(p.getPromotional()!=0){%>
-                                    <div class="product__item__price"><%=p.formatNum(p.getPromotional())%> VND<span><%=p.formatNum(p.getPrice())%> VND</span></div>
+                                    <div class="product__discount__item__text" style="padding-top: 0px">
+                                        <div class="product__item__price"><%=p.formatNum(p.getPromotional())%> VND<span><%=p.formatNum(p.getPrice())%> VND</span></div>
+                                    </div>
                                     <%}else{%>
                                     <h5><%= p.formatNum(p.getPrice())%> VND</h5>
                                     <%}%>
