@@ -189,7 +189,7 @@
                 <div class="main__table-btns">
 
                   <a href="cthd_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn main__table-btn--edit">
-                    <i class="fa fa-eye text-center"></i>
+                    <i class="fas fa-info"></i>
                   </a>
                   <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">
                     <i class="fa fa-check"></i>

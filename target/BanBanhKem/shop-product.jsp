@@ -309,36 +309,37 @@
                             <h2>Khuyến Mãi</h2>
                         </div>
                         <div class="row">
-                            <% List<ProductDiscount> listdiscount = (List<ProductDiscount>) request.getAttribute("listdiscount");%>
+                            <% List<Product> listdiscount = (List<Product>) request.getAttribute("listdiscount");%>
                             <div class="product__discount__slider owl-carousel">
-                                <% int price=0;
-                                    int discount=0;
-                                    for(ProductDiscount pd : listdiscount){
-                                        price = (int) (pd.getPrice() - pd.getPrice()*pd.getDiscount());
-                                        discount = (int) (pd.getDiscount()*100);%>
+                                <% for(Product pd : listdiscount){%>
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
+                                        <%for(Image img : pd.getListImg()){
+                                            if(!img.delete()&& !img.isHide()){%>
                                         <div class="product__discount__item__pic set-bg"
-<%--                                            data-setbg="<%=pd.getListImg().get(0).getImg()%>">--%>
-                                            <div class="product__discount__percent">-<%=discount%>%</div>
+                                             data-setbg="<%=img.getImg()%>">
+                                            <% break;
+                                            }
+                                             }%>
+                                            <div class="product__discount__percent">-<%=pd.getDiscount().getPercentage()%></div>
                                             <ul class="product__item__pic__hover">
                                                 <%if(auth==null){%>
-                                        <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
-                                        <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
-                                       <% } else{ %>
-                                        <li><a onclick="addToFav('<%=pd.getId()%>')"><i class="fa fa-heart"></i></a></li>
-                                        <li><a onclick="addToCartI('<%=pd.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
-                                   <%}%>
+                                                <li><a onclick="notLogged()"><i class="fa fa-heart"></i></a></li>
+                                                <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <% } else{ %>
+                                                <li><a onclick="addToFav('<%=pd.getId()%>')"><i class="fa fa-heart"></i></a></li>
+                                                <li><a onclick="addToCartI('<%=pd.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <%}%>
                                             </ul>
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span><%=pd.getType()%></span>
                                             <h5><a href="ProductDetail?id=<%=pd.getId()%>"><%=pd.getName()%></a></h5>
-                                            <div class="product__item__price"><%=pd.formatNum(price)%> VND<span><%=pd.formatNum(pd.getPrice())%> VND</span></div>
+                                            <div class="product__item__price"><%=pd.formatNum(pd.getPromotional())%> VND<span><%=pd.formatNum(pd.getPrice())%> VND</span></div>
                                         </div>
                                     </div>
                                 </div>
-                            <% } %>
+                                <% } %>
                             </div>
                         </div>
                     </div>

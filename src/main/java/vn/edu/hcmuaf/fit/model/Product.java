@@ -16,6 +16,7 @@ public class Product {
     List<Comment> comments;
     ProductDetails details;
     int status;
+    Discount discount;
 
 
     public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<Image> listImg, int price, List<Comment> comments,  ProductDetails details) {
@@ -30,6 +31,7 @@ public class Product {
         this.price = price;
         this.comments = comments;
         this.details =details;
+        this.discount=null;
         this.status=0;
     }
     public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<Image> listImg, int price){
@@ -42,6 +44,8 @@ public class Product {
         this.introduction=introduction;
         this.listImg = listImg;
         this.price = price;
+        this.status =0;
+        this.discount = null;
     }
     public Product(String id, String name, String type, String size, int weight, String description, String introduction, List<Image> listImg, int price, List<Comment> comments,  ProductDetails details, int status) {
         this.id = id;
@@ -56,6 +60,7 @@ public class Product {
         this.comments = comments;
         this.details =details;
         this.status = status;
+        this.discount=null;
     }
 
     public void settype(String type) {
@@ -189,6 +194,21 @@ public class Product {
             }
         }
         return res;
+    }
+    public void setDiscount(Discount discount){
+        this.discount=discount;
+    }
+    public Discount getDiscount(){
+        return discount;
+    }
+    public int getPromotional(){
+        if(this.discount != null){
+            double promotional = this.price - (this.price*this.discount.getDiscount());
+            return (int)Math.round( (1000 * promotional) / 1000);
+        }
+        else{
+            return 0;
+        }
     }
 
 //    public static void main(String[] args) {

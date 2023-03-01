@@ -16,11 +16,11 @@ public class ProductService {
         ProductDetails detail = new ProductDetails();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake, sale where products.idType = typeOfCake.idType");
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake, discount where products.idType = typeOfCake.idType");
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT idImg, productImgs.idProduct,productImgs.img, status from productImgs");
                     List<Image> listImg = new LinkedList<Image>();
-                    rsCmt = stmt1.executeQuery("SELECT idProduct, TAIKHOAN.TENTK,BinhLuan,NgayBL, IdCmt from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
+                    rsCmt = stmt1.executeQuery("SELECT idProduct, TAIKHOAN.TENTK,comment,date, IdCmt, Comments.STATUS from Comments, TAIKHOAN where TAIKHOAN.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select idProduct, quantity, inventory, dateOfManufacture, expirationDate from productDetails");
                     String s1 = rs.getString(1);
@@ -33,8 +33,9 @@ public class ProductService {
 
                     while (rsCmt.next()) {
                         String s2 = rsCmt.getString(1);
-                        if (s1.equals(s2)) {
-                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5)));
+                        int status = rsCmt.getInt(6);
+                        if (s1.equals(s2) && status==0) {
+                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
                         }
                     }
                     while (rspd.next()) {
@@ -94,7 +95,7 @@ public class ProductService {
     public static void addComment(Comment cmt, String IDUser) {
         Statement statement = DBConnect.getInstall().get();
 
-        String sql = "insert into Comments(idProduct, ID,BinhLuan, NgayBL) values('" + cmt.getIdProduct() + "', '" + IDUser + "', '" + cmt.getBinhLuan() + "', '" + cmt.getDate() + "');";
+        String sql = "insert into Comments(idProduct, ID,comment, date, STATUS) values('" + cmt.getIdProduct() + "', '" + IDUser + "', '" + cmt.getBinhLuan() + "', '" + cmt.getDate() + " '," + cmt.getStatus() +");";
         try {
             statement.executeUpdate(sql);
 
@@ -209,7 +210,7 @@ public class ProductService {
     }
     public static void deleteCommemt(String id){
         Statement statement = DBConnect.getInstall().get();
-        String sql= "DELETE FROM comments WHERE IdCmt="+ id+";";
+        String sql= "UPDATE comments set STATUS = -1 WHERE IdCmt="+ id+";";
         try {
             statement.executeUpdate(sql);
 
@@ -388,7 +389,21 @@ public class ProductService {
             se.printStackTrace();
         }
     }
+
+    public static List<Product> getDiscountProduct() {
+        List<Product> res = new ArrayList<Product>();
+        for (Discount d: DiscountService.getListDiscount()) {
+            Product p = findById(d.getIdProduct());
+            p.setDiscount(d);
+            res.add(p);
+        }
+        return res;
+    }
     public static void main(String[] args) throws SQLException {
+        for(Product p : getDiscountProduct()){
+            System.out.println(p.getId());
+        }
+
 //            deleteImage("img/product/B001/banh1.jpg");
 //            Product p = findById("B100");
 //            addProDuct(p);
