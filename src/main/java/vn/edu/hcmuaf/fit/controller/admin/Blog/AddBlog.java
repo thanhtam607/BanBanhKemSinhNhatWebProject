@@ -27,6 +27,7 @@ public class AddBlog extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         String idblog = BlogService.getMaxIdBlog();
+        String idnew = BlogService.getNewIdBlog();
         String title = request.getParameter("title");
         Part p = request.getPart("img");
         String path = request.getServletContext().getRealPath("img/blog/" + idblog);
@@ -46,8 +47,8 @@ public class AddBlog extends HttpServlet {
         }
         int i = 0;
         String imgblog = "img/blog/" + idblog+"/" + filename;
-        Blog b = new Blog(idblog, imgblog, title, date, content, category, season, i);
+        Blog b = new Blog(idnew, imgblog, title, date, content, category, season, i);
         BlogService.addBlog(b);
-        response.sendRedirect("./ListBlog-admin");
+       response.sendRedirect("./EditBlog?idB="+ idblog);
     }
 }

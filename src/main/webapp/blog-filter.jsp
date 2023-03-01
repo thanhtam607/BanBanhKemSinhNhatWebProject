@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -204,8 +205,10 @@
                                         <h4>Danh mục</h4>
                                         <ul>
                                             <li><a href="./ListBlog">Tất cả</a></li>
-                                            <li><a href="BlogCategory?category=Đời Sống">Đời Sống (3)</a></li>
-                                            <li><a href="BlogCategory?category=Kỉ niệm">Kỷ niệm (1)</a></li>
+                                            <%List<String> listDm = BlogService.listcate();
+                                                for(String dm : listDm){%>
+                                            <li><a href="BlogCategory?category=<%=dm%>" ><%=dm%></a></li>
+                                            <% } %>
 
                                         </ul>
                                     </div>
@@ -242,11 +245,10 @@
                                         <h4>Chủ đề</h4>
                                         <div class="blog__sidebar__item__tags">
                                             <a href="./ListBlog">Bánh kem</a>
-                                            <a href="BlogSeason?season=Hiện đại">Hiện đại</a>
-                                            <a href="BlogSeason?season=Bảo quản bánh">Bảo quản bánh</a>
-                                            <a href="BlogSeason?season=Chọn bánh">Chọn bánh</a>
-                                            <a href="BlogSeason?season=Ý nghĩa bánh">Ý nghĩa bánh</a>
-                                            <a href="BlogSeason?season=Khác">Khác</a>
+                                            <%List<String> listCd = BlogService.listss();
+                                                for(String cd : listCd){%>
+                                            <a href="BlogSeason?season=<%=cd%>"><%=cd%></a>
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -268,7 +270,7 @@
                                                 </ul>
                                                 <h5><a href="BlogDetails?id=<%=b.getId()%>"><%=b.getTitle()%></a></h5>
                                                 <p class="text-justify"><%=b.getCont()%></p>
-                                                <a href="BlogDetails?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
+                                                <a href="BlogDetails?id=<%=b.getId()%>" class="blog__btn">Xem thêm<span class="arrow_right"></span></a>
                                             </div>
                                         </div>
                                     </div>
