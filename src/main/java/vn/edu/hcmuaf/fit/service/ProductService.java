@@ -6,7 +6,7 @@ import vn.edu.hcmuaf.fit.model.*;
 import java.sql.*;
 import java.util.*;
 public class ProductService {
-    static Connection con = DBConnect.getConn();
+    static Connection con = DBConnect.getInstall().getConn();
     public static List<Product> getData()    {
         List<Product> list = new LinkedList<Product>();
         Statement statement = DBConnect.getInstall().get();
@@ -65,6 +65,7 @@ public class ProductService {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), findImagesByIdProduct(rs.getString(1)), rs.getInt(8), findCommentsByIdProduct(rs.getString(1)), findPDetailByIdProduct(rs.getString(1)), rs.getInt(9));
+                p.setDiscount(DiscountService.findByIdProduct(id));
             }
             }catch (SQLException e) {
             throw new RuntimeException(e);
@@ -458,7 +459,7 @@ public class ProductService {
         return list;
     }
     public static ProductDetail findPDetailByIdProduct(String idProduct){
-        ProductDetail detail= null;
+        ProductDetail detail= new ProductDetail();
         try{
             PreparedStatement stm = con.prepareStatement("select idProduct, quantity, inventory, dateOfManufacture, expirationDate from productDetails where idProduct=?");
             stm.setString(1, idProduct);
