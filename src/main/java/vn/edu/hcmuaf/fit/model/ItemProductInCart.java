@@ -8,7 +8,6 @@ public class ItemProductInCart {
     private Product sp;
     private double price;
     private Order order;
-
     public ItemProductInCart() {
     }
 
@@ -19,48 +18,36 @@ public class ItemProductInCart {
         this.price = price;
         this.order = order;
     }
-
     public Order getOrder() {
         return order;
     }
-
     public void setOrder(Order order) {
         this.order = order;
     }
-
     public String getMasp() {
         return masp;
     }
-
     public void setMasp(String masp) {
         this.masp = masp;
     }
-
     public int getSoLgMua() {
         return soLgMua;
     }
-
     public void setSoLgMua(int soLgMua) {
         this.soLgMua = soLgMua;
     }
-
     public Product getSp() {
         return sp;
     }
-
     public void setSp(Product sp) {
         this.sp = sp;
     }
-
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
-
-
     public void quantityUp(int solg) {
         setSoLgMua(this.soLgMua + solg);
     }
