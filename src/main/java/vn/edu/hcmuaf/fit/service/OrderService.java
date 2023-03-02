@@ -45,13 +45,13 @@ public class OrderService {
             System.out.println("No find");
         }
     }
-    public static void addCTHD(Order order){
+    public static void addCTHD(Order order, String note){
         Statement stm = DBConnect.getInstall().get();
         String sql = "";
         if(stm!= null) {
             try {
                 for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
-                     sql = "INSERT INTO BILL_DETAIL VALUES('" + order.getId() + "','" + entry.getValue().getSp().getId() + "'," + entry.getValue().getSoLgMua() + ",'" +order.getNote()+"');";
+                     sql = "INSERT INTO BILL_DETAIL VALUES('" + order.getId() + "','" + entry.getValue().getSp().getId() + "'," + entry.getValue().getSoLgMua() + ",'" +note+"');";
                     stm.executeUpdate(sql);
 
                 }
@@ -65,7 +65,7 @@ public class OrderService {
         String sql = "";
         if(stm!= null) {
             try {
-                 sql = "INSERT INTO DELIVERY(delivery.BILL_ID, delivery.DELIVERY_DATE, delivery.DELIVERY_ADDRESS) VALUES('" + order.getId() + "','" + order.getGiaohang().getNgayGiao() + "',' " + order.getGiaohang().getDiachigiao()+"');";
+                 sql = "INSERT INTO DELIVERY VALUES('" + order.getId() + "','" + order.getGiaohang().getNgayGiao() + "',' "+ order.getGiaohang().getDiachigiao() + "',' "+ order.getGiaohang().getEmail() + "',' "+ order.getGiaohang().getPhone() + "',' " + order.getGiaohang().getTenKH()+"');";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();

@@ -4,7 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.CTHD" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
@@ -320,7 +320,7 @@
                                                 <div class="main__table-text"><%=r.getAddress()%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><%=r.getSdate()%></div>
+                                                <div class="main__table-text"><%=r.getExport_date()%></div>
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">

@@ -22,7 +22,7 @@ public class ListReceipt_Admin extends HttpServlet {
         String doanhthuhomnay = Receipt.formatNum(ReceiptService.getDoanhThuToDay());
         request.setAttribute("doanhthuhomnay", doanhthuhomnay);
 
-        int solgSPbandcthangnay = ReceiptService.getNumberProThisMonth();
+        int solgSPbandcthangnay = ReceiptService.getNumberProToDay();
         request.setAttribute("solgSPbandcthangnay", solgSPbandcthangnay);
 
         int soDHhomnay = ReceiptService.getAllReceiptToDay().size();

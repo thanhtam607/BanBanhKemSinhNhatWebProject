@@ -171,7 +171,7 @@
                 </div>
               </td>
               <td>
-                <div class="main__table-text"><%=rc.getSdate()%></div>
+                <div class="main__table-text"><%=rc.getExport_date()%></div>
               </td>
               <td>
                 <div class="main__table-text"><%=rc.getAddress()%></div>
