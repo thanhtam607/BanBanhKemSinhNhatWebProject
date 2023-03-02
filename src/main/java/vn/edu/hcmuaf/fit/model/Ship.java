@@ -4,16 +4,47 @@ import java.util.Date;
 
 public class Ship {
     private String mahd;
+    private String tenKH;
     private String ngayGiao;
     private String diachigiao;
+    private String email;
+    private String phone;
 
     public Ship(){
 
     }
-    public Ship(String mahd, String ngayGiao, String diachigiao) {
+
+    public Ship(String mahd, String tenKH, String ngayGiao, String diachigiao, String email, String phone) {
         this.mahd = mahd;
+        this.tenKH = tenKH;
         this.ngayGiao = ngayGiao;
         this.diachigiao = diachigiao;
+        this.email = email;
+        this.phone = phone;
+    }
+
+    public String getTenKH() {
+        return tenKH;
+    }
+
+    public void setTenKH(String tenKH) {
+        this.tenKH = tenKH;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getMahd() {

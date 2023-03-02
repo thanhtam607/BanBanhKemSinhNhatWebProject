@@ -2,6 +2,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -34,7 +35,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");
-    Customer customer = (Customer) session.getAttribute("cust");%>
+    Customer customer = CustomerService.getCusByIdAcc(auth.getAccount_id());%>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -60,10 +61,10 @@
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getAccount_name():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
-                <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
+                <a onclick="checkPass('<%=auth.getAccount_email()%>','<%=auth.getAccount_pass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
                 <% if(auth.checkRole()) { %>
                 <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
@@ -198,7 +199,7 @@
                             <div class="col-lg-12">
                                 <div class="checkout__input">
                                     <p>Tên Đăng Nhập</p>
-                                    <input type="text" id="ten" value="<%=auth.getTentk()%>">
+                                    <input type="text" id="ten" value="<%=auth.getAccount_name()%>">
                                 </div>
                             </div>
                         </div>
@@ -218,7 +219,7 @@
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Email</p>
-                                    <input type="email" id="email" value="<%=auth.getEmail()%>">
+                                    <input type="email" id="email" value="<%=auth.getAccount_email()%>">
                                 </div>
                             </div>
                         </div>

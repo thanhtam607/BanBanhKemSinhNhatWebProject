@@ -20,15 +20,21 @@ public class MyOrder extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(true);
-        Order order =(Order) session.getAttribute("order");
+//        Order order =(Order) session.getAttribute("order");
         User auth = (User) session.getAttribute("auth");
 
-        List<Receipt> receipts = ReceiptService.getReceiptByMakh(auth.getId());
+        if(auth != null){
+            List<Receipt> receipts = ReceiptService.getReceiptByMakh(auth.getAccount_id());
 
-        session.setAttribute("listRe", receipts);
+            session.setAttribute("listRe", receipts);
 
 
-        request.getRequestDispatcher("order.jsp").forward(request, response);
+            request.getRequestDispatcher("order.jsp").forward(request, response);
+        }else{
+            response.sendRedirect("blank_page.jsp");
+
+        }
+
 
     }
 
