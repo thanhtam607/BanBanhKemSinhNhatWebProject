@@ -908,8 +908,8 @@ CREATE TABLE DELIVERY(BILL_ID CHAR(4),
 										    DELIVERY_DATE DATETIME NOT NULL,
 												DELIVERY_ADDRESS VARCHAR(60) NOT NULL,
 												DELIVERY_EMAIL VARCHAR(60),
-												DELIVERY_PHONE VARCHAR(10),
-													DELIVERY_NAME VARCHAR(60),
+												DELIVERY_PHONE VARCHAR(12),
+												DELIVERY_NAME VARCHAR(60),
 												CONSTRAINT f_mhdgh FOREIGN KEY(BILL_ID) REFERENCES BILLS(BILL_ID));
 --
 INSERT INTO DELIVERY VALUES('HD01', '2022/10/14', 'Q1, TP HCM', null, null,null);
@@ -992,7 +992,7 @@ Mỗi một sinh nhật trôi qua là thêm một tuổi mới, để nhìn nh�
 3. Sinh nhật không thể thiếu điều gì?\n
 Đồ vật không thể thiếu cho tiệc sinh nhật tất nhiên là bánh kem. Việc cắm nến sinh nhật trên bánh có ý nghĩa là tỏa sáng rực rỡ. Nếu cắm trên bánh đủ số nến bằng số tuổi và thổi tắt trong 1 lần sẽ gặp được điều may và tốt lành. Nếu không tắt hết thì điều ước sẽ không trở thành hiện thực. Một vài nơi còn có những nét văn hóa đặc trưng riêng, với món ăn truyền thống vào sinh nhật hay tập tục nào đó. Như quệt kem lên mặt chủ nhân bữa tiệc trước khi cắt bánh, ăn mì trường thọ vào ngày sinh nhật…
 Để sinh nhật có ý nghĩa hơn, không gì bằng tự tay chuẩn bị chiếc bánh sinh nhật tặng cho người mình yêu thương. Nếu chưa có ý tưởng hay các dụng cụ làm bánh, hãy đến với Paolo Bakery để chọn những chiếc bánh xinh xắn nhất nhé!\n
-Tiệm bánh HP là một trong những cơ sở cung cấp bánh sinh nhật lấy ngay vô cùng chất lượng tại TP HCM. Khách hàng có thể tự chọn mẫu bánh hoặc yêu cầu theo mong muốn của mình. Chỉ cần gửi yêu cầu về chiếc bánh bạn cần, còn lại cứ để HP lo. Bánh kem sẽ được hoàn thiện và ship tận tay bạn. HP hiện tại cung cấp các dòng bánh sinh nhật, bánh kem sự kiện, bánh mousse, bánh bông lan trứng muối và các loại bánh hot trend khác...', 'Đời Sống', 'Ý nghĩa bánh',0);
+Tiệm bánh HP là một trong những cơ sở cung cấp bánh sinh nhật lấy ngay vô cùng chất lượng tại TP HCM. Khách hàng có thể tự chọn mẫu bánh hoặc yêu cầu theo mong muốn của mình. Chỉ cần gửi yêu cầu về chiếc bánh bạn cần, còn lại cứ để HP lo. Bánh kem sẽ được hoàn thiện và delivery tận tay bạn. HP hiện tại cung cấp các dòng bánh sinh nhật, bánh kem sự kiện, bánh mousse, bánh bông lan trứng muối và các loại bánh hot trend khác...', 'Đời Sống', 'Ý nghĩa bánh',0);
 create table FEEDBACKS(id INT AUTO_INCREMENT PRIMARY KEY,
 												username varchar(50), 
 												email varchar(50), 
@@ -1015,3 +1015,5 @@ create table cartItems(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 
 /*================================================================Query===================================================================*/
 
+
+SELECT*from delivery

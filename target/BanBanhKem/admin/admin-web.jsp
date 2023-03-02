@@ -181,7 +181,7 @@
                                     Receipt rc = receiptList.get(i);%>
                                 <tr>
                                     <td><%=i+1%></td>
-                                    <td><%=rc.getSdate()%></td>
+                                    <td><%=rc.getExport_date()%></td>
                                     <td><%=rc.getNamecustomer()%></td>
                                     <td><%=rc.getAddress()%></td>
                                     <td><%=rc.formatNum(rc.getTotal())%> VND</td>

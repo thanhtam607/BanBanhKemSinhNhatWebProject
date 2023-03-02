@@ -8,9 +8,9 @@ public class Receipt {
     String namecustomer;
     String makh;
     String namecake;
-    String Sdate;
+    String export_date;
     String phone;
-    String Edate;
+    String delivery_date;
     String address;
     String note;
     int price;
@@ -26,14 +26,14 @@ public class Receipt {
     public Receipt() {
     }
 
-    public Receipt(String id, String makh, String namecustomer, String namecake, String phone, String sdate, String edate, String address, String note, int price, int total, int status, List<Comment> commentList, String TenTK, int role, String email) {
+    public Receipt(String id, String makh, String namecustomer, String namecake, String phone, String export_date, String delivery_date, String address, String note, int price, int total, int status, List<Comment> commentList, String TenTK, int role, String email) {
         this.id = id;
         this.makh = makh;
         this.namecustomer = namecustomer;
         this.namecake = namecake;
         this.phone = phone;
-        this.Sdate = sdate;
-        this.Edate = edate;
+        this.export_date = export_date;
+        this.delivery_date = delivery_date;
         this.address = address;
         this.note = note;
         this.price = price;
@@ -45,18 +45,18 @@ public class Receipt {
         this.email =  email;
     }
 
-    public Receipt(String id, String makh, String sdate, String note, int money, int state) {
+    public Receipt(String id, String makh, String export_date, String note, int money, int state) {
         this.id = id;
         this.makh = makh;
-        this.Sdate = sdate;
+        this.export_date = export_date;
         this.note = note;
         this.money = money;
         this.state = state;
     }
-    public Receipt(String id, String makh, String sdate, String note, int money, int state, String dc) {
+    public Receipt(String id, String makh, String export_date, String note, int money, int state, String dc) {
         this.id = id;
         this.makh = makh;
-        this.Sdate = sdate;
+        this.export_date = export_date;
         this.note = note;
         this.money = money;
         this.state = state;
@@ -143,21 +143,21 @@ public class Receipt {
         this.phone = phone;
     }
 
-    public String getSdate() {
-        return Sdate;
+    public String getExport_date() {
+        return export_date;
     }
 
-    public void setSdate(String sdate) {
+    public void setExport_date(String export_date) {
 
-        Sdate = sdate;
+        export_date = export_date;
     }
 
-    public String getEdate() {
-        return Edate;
+    public String getDelivery_date() {
+        return delivery_date;
     }
 
-    public void setEdate(String edate) {
-        Edate = edate;
+    public void setDelivery_date(String delivery_date) {
+        delivery_date = delivery_date;
     }
 
     public String getAddress() {

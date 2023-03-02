@@ -5,7 +5,6 @@ import vn.edu.hcmuaf.fit.bean.User;
 import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 public class  Order {
     private String id;
@@ -14,7 +13,7 @@ public class  Order {
     private double priceTotal;
     private String note;
     private int trangthai;
-    private Ship giaohang;
+    private Delivery giaohang;
     private HashMap<String, ItemProductInCart> data;
     public Order() {
 
@@ -22,7 +21,7 @@ public class  Order {
     }
 
     public Order(String id, User user, String buyDate, double priceTotal, String note,
-                 int trangthai, HashMap<String, ItemProductInCart> data, Ship gh) {
+                 int trangthai, HashMap<String, ItemProductInCart> data, Delivery gh) {
         this.id = id;
         this.user = user;
         this.buyDate = buyDate;
@@ -49,11 +48,11 @@ public class  Order {
         this.data = data;
     }
 
-    public Ship getGiaohang() {
+    public Delivery getGiaohang() {
         return giaohang;
     }
 
-    public void setGiaohang(Ship giaohang) {
+    public void setGiaohang(Delivery giaohang) {
         this.giaohang = giaohang;
     }
 

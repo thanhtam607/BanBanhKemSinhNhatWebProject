@@ -686,12 +686,15 @@ function check(email) {
 /*-------------------
    addNewOrder
   --------------------- */
-function addOrder(){
+function addOrder(i){
     var ten = document.getElementById("ten").value;
     var diachi = document.getElementById("diachi").value;
     var phone = document.getElementById("phone").value;
     var email = document.getElementById("email").value;
     var ghichu = document.getElementById("ghichu").value;
+    var ghichuDetail = document.getElementById(i).value;
+    var haveDisk = document.getElementById("payment3").labels;
+
     var url  ="AddNewOrder";
     $.ajax({
         url: url,
@@ -700,7 +703,9 @@ function addOrder(){
             diachi:diachi,
             phone:phone,
             email:email,
-            ghichu: ghichu},
+            ghichu: ghichu,
+            ghichuDetail:ghichuDetail,
+            haveDisk: haveDisk},
         success: function (){
             document.getElementById("totalPro").innerHTML="0";
             document.getElementById("totalPro1").innerHTML="0";

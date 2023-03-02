@@ -1,7 +1,13 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="java.util.List" %>
+<<<<<<< HEAD
 <%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
+=======
+<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.*" %>
+
+>>>>>>> 081561666f644247db31b685438f0cc71aa13b42
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html>
@@ -211,21 +217,26 @@
                             </div>
                         </div>
                     </div>
-                    <%List<CTHD> cthdList = ReceiptService.getcthdUser(r.getId());
-                        for(CTHD c: cthdList){
+                    <%List<Bill_Detail> billDetailList = ReceiptService.getcthdUser(r.getId());
+                        for(Bill_Detail c: billDetailList){
                         %>
                     <div class="card mb-3 border-left-0 border-right-0 border-bottom-0 mx-3">
                         <div class="row my-3 pb-3 mx-2" style="border-bottom:1px solid #eee">
                             <div class="col-2">
                                 <div class="vertical-center">
-                                    <img class="d-block mx-auto" src="<%=c.getAnhsp().get(0)%>" width="100">
+                                    <%for(Image img : ProductService.findById(c.getMasp()).getListImg()){
+                                        if(!img.delete()&& !img.isHide()){%>
+                                    <img class="d-block mx-auto" src="<%=img.getImg()%>" width="100">
+                                    <% break;
+                                    }
+                                    }%>
                                 </div>
                             </div>
                             <div class="col-7">
                                 <div class="card-body my-0">
                                     <div class="card-text text-dark">
                                         <a href="#" class="text-decoration-none text-dark text-uppercase">
-                                            <%=c.getTensp()%>
+                                            <%=c.getNamePro()%>
                                         </a>
                                     </div>
                                     <div class="text-dark" style="font-size:14px">x <%=c.getSolg()%></div>

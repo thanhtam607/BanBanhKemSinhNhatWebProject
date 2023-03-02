@@ -197,54 +197,68 @@
         <div class="container">
             <div class="checkout__form">
                 <h4>Thông Tin Thanh Toán</h4>
+                <p>Điền đầy đủ thông tin của bạn để theo dõi đơn hàng dễ dàng</p>
                 <div>
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
-
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Tên<span>*</span></p>
+                                        <p>Họ và tên<span>*</span></p>
                                         <input type="text" id="ten" value="<%=auth.getAccount_name()%>">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Điện thoại<span>*</span></p>
+                                        <input type="tel" id="phone" value="<%=customer.getSDT()%>">
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
-                                <p>Địa chỉ<span>*</span></p>
+                                <p>Email<span>*</span></p>
+                                <input type="email" id="email" value="<%=auth.getAccount_email()%>">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Địa chỉ giao hàng<span>*</span></p>
                                 <input type="text" placeholder="Số nhà, xã/phường, quận/huyện, tỉnh/thành phố..."
                                        id="diachi" value="<%=customer.getDIACHI()%>">
                             </div>
 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Điện Thoại<span>*</span></p>
-                                        <input type="tel" id="phone" value="<%=customer.getSDT()%>">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Email<span>*</span></p>
-                                        <input type="email" id="email" value="<%=auth.getAccount_email()%>">
-                                    </div>
-                                </div>
+                            <% int i = 0;
+                            for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
+
+                            %>
+                            <div class="checkout__input">
+                                <p><%=entry.getValue().getSp().getName()%></p>
+                                <input type="text" id="<%=i%>" placeholder="Lời chúc bạn muốn ghi lên bánh">
                             </div>
+
+                            <%i++;}%>
+
                             <div class="checkout__input">
                                 <p>Ghi chú cho cửa hàng<span>*</span></p>
                                 <input type="text"
-                                    placeholder="VD: dụng cụ ăn uống,nến theo số tuổi,..."
-                                id="ghichu">
+                                    placeholder="Lời nhắn khác" id="ghichu">
                             </div>
+                            <div class="col-lg-6 checkout__input__checkbox">
+                                <label for="payment3" >
+                                    Lấy dụng cụ ăn uống,...
+                                    <input type="radio" id="payment3" name="yes">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div id="emptyPro" class="checkout__order">
                                 <h4>Đơn hàng</h4>
                                 <div class="checkout__order__products">Sản Phẩm <span>Tổng</span></div>
-                                <ul class="">
+                                <ul >
                                     <% for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
                                     %>
                                     <li>
-                                        <span style="float: left" class="breaklineNamePro"><%=entry.getValue().getSp().getName()%> </span>
+                                        <span style="float: left" class="breaklineNamePro"><%=entry.getValue().getSp().getName()%></span>
                                         <span ><%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND</span>
                                     </li>
                                     <%}%>
@@ -256,11 +270,16 @@
                                 <div class="checkout__input__checkbox">
                                     <label for="payment" >
                                        Thanh Toán Khi Nhận Hàng
-                                        <input type="checkbox" id="payment" name="isPayment">
+                                        <input type="radio" id="payment" name="isPayment">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="payment_onl" >
+                                       Thanh Toán Qua Chuyển Khoản
+                                        <input type="radio" id="payment_onl" name="isPayment">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <button onclick="addOrder()" type="submit" class="site-btn" >ĐẶT HÀNG</button>
+                                <button onclick="addOrder('<%=i%>')" type="submit" class="site-btn" >ĐẶT HÀNG</button>
                             </div>
                         </div>
                     </div>
