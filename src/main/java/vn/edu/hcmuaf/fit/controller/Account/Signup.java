@@ -52,7 +52,7 @@ public class Signup extends HttpServlet {
             Customer newCus = new Customer();
             UserService.register(newUser);
             newCus.setTENKH(newUser.getAccount_name());
-            CustomerService.registerKH(newCus, newUser);
+            CustomerService.registerKH(newCus,newUser);
 
             String url = null;
             if (request.getParameter("save-login") != null) {

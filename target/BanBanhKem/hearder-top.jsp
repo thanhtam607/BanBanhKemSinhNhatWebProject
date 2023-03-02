@@ -2,8 +2,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<% User auth = (User) session.getAttribute("auth");
-  Customer customer = (Customer) session.getAttribute("cust");%>
+<% User auth = (User) session.getAttribute("auth");%>
 
 <!-- rang cua -->
 <div class="rang_cua"></div>

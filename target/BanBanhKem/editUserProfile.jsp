@@ -2,6 +2,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -34,7 +35,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");
-    Customer customer = (Customer) session.getAttribute("cust");%>
+    Customer customer = CustomerService.getCusByIdAcc(auth.getAccount_id());%>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>

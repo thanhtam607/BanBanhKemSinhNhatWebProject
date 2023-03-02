@@ -129,8 +129,8 @@ public class UserService {
         acc.setAccount_id(ID);
         if(stm!= null) {
             try {
-                String sql = "insert into ACCOUNTS values ('" + ID + "', '" + acc.getAccount_email() + "', '"
-                        + hashPassword(acc.getAccount_pass())  + "', '" + acc.getAccount_name() + "'," + acc.getAccount_role() + acc.getAccount_status()+");";
+                String sql = "insert into ACCOUNTS values('" + ID + "', '" + acc.getAccount_email() + "', '" + hashPassword(acc.getAccount_pass())  + "', '" + acc.getAccount_name() + "'," + acc.getAccount_role() +","+ acc.getAccount_status()+");";
+                System.out.println(sql);
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -246,5 +246,7 @@ public class UserService {
 //        System.out.println(UserService.checkEmail("thanh@gmail.com"));
 //        sendMail("thanhtamv14717@gmail.com", randomCode());
 //        updatePass("thanhtamv14717@gmail.com", hashPassword("123"));
+        User u = new User("AD11", "thanhthuy@gmai", "123", "Huy", 0, 0);
+        UserService.register(u);
     }
 }

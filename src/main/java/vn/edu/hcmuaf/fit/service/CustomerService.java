@@ -63,7 +63,8 @@ public class CustomerService {
         if(stm!= null) {
             try {
                  sql = "insert into CUSTOMERS values ('" + ID + "', '" + user.getAccount_name() + "', '"
-                        + user.getAccount_id()  + "', '" + acc.getDIACHI() + "'," + acc.getSDT()+");";
+                           + acc.getDIACHI() + "'," + acc.getSDT()+");";
+                System.out.println(sql);
                 stm.executeUpdate(sql);
 
             } catch (SQLException se) {
@@ -83,6 +84,10 @@ public class CustomerService {
 
 
     public static void main(String[] args) {
-    System.out.println(getCusByIdAcc("AD01"));
+        Customer c = new Customer();
+        User u = new User("AD11", "thanhthuy@gmai", "123", "Huy", 0, 0);
+       CustomerService.registerKH(c, u);
+
+
     }
 }

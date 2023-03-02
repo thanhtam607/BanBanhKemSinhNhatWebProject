@@ -229,9 +229,9 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILL_ID, DELIVERY_DATE, DELIVERY_ADDRESS from DELIVERY");
+                ResultSet rs = statement.executeQuery("SELECT BILL_ID, DELIVERY_DATE, DELIVERY_ADDRESS,DELIVERY_EMAIL,DELIVERY_PHONE,DELIVERY_NAME  from DELIVERY");
                 while (rs.next()) {
-                    Ship ship = new Ship(rs.getString(1), rs.getString(2), rs.getString(3));
+                    Ship ship = new Ship(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6));
                     list.add(ship);
                 }
             } catch (SQLException e) {

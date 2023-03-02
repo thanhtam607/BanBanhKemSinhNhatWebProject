@@ -37,7 +37,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");
-    Customer customer = (Customer) session.getAttribute("cust");%>
+    Customer customer = CustomerService.getCusByIdAcc(auth.getAccount_id());%>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -255,7 +255,7 @@
                                 <div class="checkout__input__checkbox">
                                     <label for="payment" >
                                        Thanh Toán Khi Nhận Hàng
-                                        <input type="checkbox" id="payment">
+                                        <input type="checkbox" id="payment" name="isPayment">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>

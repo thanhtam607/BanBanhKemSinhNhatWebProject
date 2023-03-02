@@ -24,12 +24,13 @@ public class User implements Serializable {
         this.account_status = account_status;
     }
 
-    public User(String email, String pass, String name){
+    public User(String account_email, String account_pass, String account_name){
         this.account_id = null;
-        this.account_email = email;
-        this.account_pass = pass;
-        this.account_name =name;
+        this.account_email = account_email;
+        this.account_pass = account_pass;
+        this.account_name = account_name;
         this.account_role=0;
+        this.account_status=0;
     }
 
     public String getAccount_id() {

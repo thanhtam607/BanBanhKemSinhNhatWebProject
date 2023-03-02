@@ -255,7 +255,7 @@
                                 <div class="checkout__input__checkbox">
                                     <label for="payment" >
                                        Thanh Toán Khi Nhận Hàng
-                                        <input type="checkbox" id="payment">
+                                        <input type="checkbox" id="payment" name="isPayment">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
