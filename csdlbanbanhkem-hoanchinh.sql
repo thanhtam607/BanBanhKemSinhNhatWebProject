@@ -800,116 +800,127 @@ INSERT INTO productDetails VALUES('B098', 20, 10, '2022/10/12', '2022/10/15');
 INSERT INTO productDetails VALUES('B099', 10, 10, '2022/10/12', '2022/10/15');
 INSERT INTO productDetails VALUES('B100', 10, 10, '2022/10/12', '2022/10/15');
 
-/*=========================================taikhoan=========================================*/
-CREATE TABLE taikhoan(ID CHAR(4) PRIMARY KEY,
-									EMAIL VARCHAR(255),
-									 PASS VARCHAR(255) NOT NULL,
-									 TENTK VARCHAR(100),
-									 ROLE tinyint(4) NOT NULL DEFAULT 0,
-									STATUS tinyint(4) DEFAULT 0 );
-INSERT INTO taikhoan VALUES('AD01', 'thanhthuy@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Thanh Thùy', 1,0);
-INSERT INTO taikhoan VALUES('AD02', 'thanhtam@gmail.com', 'b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0', 'Thanh Tâm', 1,0);
-INSERT INTO taikhoan VALUES('AD03', 'thanhthuan@gmail.com', '35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281', 'Thanh Thuận', 1,0);
-INSERT INTO taikhoan VALUES('AD04', 'nhom27@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 27', 1,0);
-INSERT INTO taikhoan VALUES('AD05', 'nhom270@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 270', 1,0);
-INSERT INTO taikhoan VALUES('AD06', 'nhom271@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 271', 0,0);
-INSERT INTO taikhoan VALUES('AD07', 'nhom272@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 272', 0,0);
-INSERT INTO taikhoan VALUES('AD08', 'nhom273@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 273', 0,0);
-INSERT INTO taikhoan VALUES('AD09', 'nhom274@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 274', 0,0);
-INSERT INTO taikhoan VALUES('AD10', 'nhom275@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 275', 0,0);
+/*=========================================ACCOUNTS=========================================*/
+CREATE TABLE ACCOUNTS(ACCOUNT_ID CHAR(4) PRIMARY KEY,
+									ACCOUNT_EMAIL VARCHAR(255),
+									 ACCOUNT_PASS VARCHAR(255) NOT NULL,
+									 ACCOUNT_NAME VARCHAR(100),
+									 ACCOUNT_ROLE tinyint(4) NOT NULL DEFAULT 0,
+									ACCOUNT_STATUS tinyint(4) DEFAULT 0 );
+INSERT INTO ACCOUNTS VALUES('AD01', 'thanhthuy@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Thanh Thùy', 1,0);
+INSERT INTO ACCOUNTS VALUES('AD02', 'thanhtam@gmail.com', 'b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0', 'Thanh Tâm', 1,0);
+INSERT INTO ACCOUNTS VALUES('AD03', 'thanhthuan@gmail.com', '35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281', 'Thanh Thuận', 1,0);
+INSERT INTO ACCOUNTS VALUES('AD04', 'nhom27@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 27', 1,0);
+INSERT INTO ACCOUNTS VALUES('AD05', 'nhom270@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 270', 1,0);
+INSERT INTO ACCOUNTS VALUES('AD06', 'nhom271@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 271', 0,0);
+INSERT INTO ACCOUNTS VALUES('AD07', 'nhom272@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 272', 0,0);
+INSERT INTO ACCOUNTS VALUES('AD08', 'nhom273@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 273', 0,0);
+INSERT INTO ACCOUNTS VALUES('AD09', 'nhom274@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 274', 0,0);
+INSERT INTO ACCOUNTS VALUES('AD10', 'nhom275@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 275', 0,0);
 
-/*==============================KHACHHANG=====================================*/
-CREATE TABLE KHACHHANG(MAKH CHAR(4) PRIMARY KEY NOT NULL,
-											 TENKH VARCHAR(40),
--- 											 MAtaikhoan char(4) NOT NULL,
-											 DIACHI VARCHAR(60),
-											 SDT VARCHAR(10),
-											 CONSTRAINT f_mTK FOREIGN KEY (MAKH) REFERENCES taikhoan(ID));
- INSERT INTO KHACHHANG VALUES('AD01', 'Thanh Thuỳ Huỳnh','TP.HCM', '0978675678');
- INSERT INTO KHACHHANG VALUES('AD02', 'Thanh Tâm Nguyễn', 'TP.HCM', '0987675435');
- INSERT INTO KHACHHANG VALUES('AD03', 'Mai Thanh Thuận','TP.HCM', '0987863764');
- INSERT INTO KHACHHANG VALUES('AD04', 'Nguyễn Văn Dũng', 'TP.HCM', '0987467536');
- INSERT INTO KHACHHANG VALUES('AD05', 'Nguyễn Văn Hữu Cảnh', 'BINH DUONG', '0987463578');
- INSERT INTO KHACHHANG VALUES('AD06', 'Nguyễn Văn Tuấn Tú', 'DONG NAI', '0978365478');
- INSERT INTO KHACHHANG VALUES('AD07', 'Nguyễn Thị Thu Thuý ', 'TP.HCM', '0987425367');
- INSERT INTO KHACHHANG VALUES('AD08', 'Trần Phi Hùng', 'TP.HCM', '0976456736');
- INSERT INTO KHACHHANG VALUES('AD09', 'Lê Hữu Phước', 'LONG AN', '0978365627');
- INSERT INTO KHACHHANG VALUES('AD10', 'Huỳnh Văn Biên', 'TP.HCM', '0987362567');
+/*==============================CUSTOMERS=====================================*/
+CREATE TABLE CUSTOMERS(CUSTOMER_ID CHAR(4) PRIMARY KEY NOT NULL,
+											 CUSTOMER_NAME VARCHAR(40),
+											 CUSTOMER_ADDRESS VARCHAR(60),
+											 CUSTOMER_PHONE VARCHAR(10),
+											 CONSTRAINT f_mTK FOREIGN KEY (CUSTOMER_ID) REFERENCES ACCOUNTS(ACCOUNT_ID));
+ INSERT INTO CUSTOMERS VALUES('AD01', 'Thanh Thuỳ Huỳnh','TP.HCM', '0978675678');
+ INSERT INTO CUSTOMERS VALUES('AD02', 'Thanh Tâm Nguyễn', 'TP.HCM', '0987675435');
+ INSERT INTO CUSTOMERS VALUES('AD03', 'Mai Thanh Thuận','TP.HCM', '0987863764');
+ INSERT INTO CUSTOMERS VALUES('AD04', 'Nguyễn Văn Dũng', 'TP.HCM', '0987467536');
+ INSERT INTO CUSTOMERS VALUES('AD05', 'Nguyễn Văn Hữu Cảnh', 'BINH DUONG', '0987463578');
+ INSERT INTO CUSTOMERS VALUES('AD06', 'Nguyễn Văn Tuấn Tú', 'DONG NAI', '0978365478');
+ INSERT INTO CUSTOMERS VALUES('AD07', 'Nguyễn Thị Thu Thuý ', 'TP.HCM', '0987425367');
+ INSERT INTO CUSTOMERS VALUES('AD08', 'Trần Phi Hùng', 'TP.HCM', '0976456736');
+ INSERT INTO CUSTOMERS VALUES('AD09', 'Lê Hữu Phước', 'LONG AN', '0978365627');
+ INSERT INTO CUSTOMERS VALUES('AD10', 'Huỳnh Văn Biên', 'TP.HCM', '0987362567');
+
+/*==============================STAFFS=====================================*/
+CREATE TABLE STAFFS(STAFF_ID CHAR(4) PRIMARY KEY NOT NULL,
+											 STAFF_NAME VARCHAR(40),
+											 STAFF_GENDER INT,
+											 STAFF_ADDRESS VARCHAR(60),
+											 STAFF_PHONE VARCHAR(10),
+											 CONSTRAINT f_mNV FOREIGN KEY (STAFF_ID) REFERENCES ACCOUNTS(ACCOUNT_ID));
+											 
+ INSERT INTO STAFFS VALUES('AD01', 'Thanh Thuỳ Huỳnh', 0,'TP.HCM', '0978675678');
+ INSERT INTO STAFFS VALUES('AD02', 'Thanh Tâm Nguyễn', 0, 'TP.HCM', '0987675435');
+ INSERT INTO STAFFS VALUES('AD03', 'Mai Thanh Thuận', 1,'TP.HCM', '0987863764');
 
 
- /*==============================HOADON=====================================*/
-CREATE TABLE HOADON ( MAHD CHAR(4) PRIMARY KEY,
-											MAKH CHAR(4) NOT NULL,
-											NGAYLAPHD DATETIME NOT NULL,
-											GHICHU LONGTEXT,
-											THANHTIEN FLOAT,
-											STATUS int DEFAULT 0,
-											CONSTRAINT f_mkh FOREIGN KEY (MAKH) REFERENCES KHACHHANG(MAKH));
-INSERT INTO HOADON VALUES('HD01', 'AD02', '2022/10/12','1 nến 2 dĩa', 900000, 0);
-INSERT INTO HOADON VALUES('HD02', 'AD04', '2022/10/19','1 nến 2 dĩa', 330000, 1);
-INSERT INTO HOADON VALUES('HD03', 'AD05', '2022/10/12','1 nến 2 dĩa', 950000, 0);
-INSERT INTO HOADON VALUES('HD04', 'AD02', '2022/9/23','1 nến 2 dĩa', 300000, 1);
-INSERT INTO HOADON VALUES('HD05', 'AD05', '2022/10/21','1 nến 2 dĩa', 1230000, 0);
-INSERT INTO HOADON VALUES('HD06', 'AD03', '2022/10/12','1 nến 2 dĩa', 900000, 0);
-INSERT INTO HOADON VALUES('HD07', 'AD03', '2022/5/6','1 nến 2 dĩa', 380000, 2);
-INSERT INTO HOADON VALUES('HD08', 'AD01', '2022/8/12','1 nến 2 dĩa', 400000, 0);
-INSERT INTO HOADON VALUES('HD09', 'AD06', '2022/7/15','1 nến 2 dĩa', 400000, 1);
-INSERT INTO HOADON VALUES('HD10', 'AD07', '2022/11/7','1 nến 2 dĩa', 650000, 0);
-INSERT INTO HOADON VALUES('HD11', 'AD08', '2022/1/19','1 nến 2 dĩa', 1950000, 1);
-INSERT INTO HOADON VALUES('HD12', 'AD02', '2023/1/8','1 nến 2 dĩa', 350000, 0);
-INSERT INTO HOADON VALUES('HD13', 'AD10', '2023/1/8','1 nến 2 dĩa', 500000, 2);
-INSERT INTO HOADON VALUES('HD14', 'AD09', '2023/1/8','1 nến 2 dĩa', 300000, 0);
-INSERT INTO HOADON VALUES('HD15', 'AD02', '2023/1/8','1 nến 2 dĩa', 300000, 0);
+ /*==============================BILLS=====================================*/
+CREATE TABLE BILLS(BILL_ID CHAR(4) PRIMARY KEY,
+											CUSTOMER_ID CHAR(4) NOT NULL,
+											EXPORT_DATE DATETIME NOT NULL,
+											NOTES LONGTEXT,
+											TOTAL_BILL FLOAT,
+											BILL_STATUS int DEFAULT 0,
+											CONSTRAINT f_mkh FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID));
+INSERT INTO BILLS VALUES('HD01', 'AD02', '2022/10/12','1 nến 2 dĩa', 900000, 0);
+INSERT INTO BILLS VALUES('HD02', 'AD04', '2022/10/19','1 nến 2 dĩa', 330000, 1);
+INSERT INTO BILLS VALUES('HD03', 'AD05', '2022/10/12','1 nến 2 dĩa', 950000, 0);
+INSERT INTO BILLS VALUES('HD04', 'AD02', '2022/9/23','1 nến 2 dĩa', 300000, 1);
+INSERT INTO BILLS VALUES('HD05', 'AD05', '2022/10/21','1 nến 2 dĩa', 1230000, 0);
+INSERT INTO BILLS VALUES('HD06', 'AD03', '2022/10/12','1 nến 2 dĩa', 900000, 0);
+INSERT INTO BILLS VALUES('HD07', 'AD03', '2022/5/6','1 nến 2 dĩa', 380000, 2);
+INSERT INTO BILLS VALUES('HD08', 'AD01', '2022/8/12','1 nến 2 dĩa', 400000, 0);
+INSERT INTO BILLS VALUES('HD09', 'AD06', '2022/7/15','1 nến 2 dĩa', 400000, 1);
+INSERT INTO BILLS VALUES('HD10', 'AD07', '2022/11/7','1 nến 2 dĩa', 650000, 0);
+INSERT INTO BILLS VALUES('HD11', 'AD08', '2022/1/19','1 nến 2 dĩa', 1950000, 1);
+INSERT INTO BILLS VALUES('HD12', 'AD02', '2023/1/8','1 nến 2 dĩa', 350000, 0);
+INSERT INTO BILLS VALUES('HD13', 'AD10', '2023/1/8','1 nến 2 dĩa', 500000, 2);
+INSERT INTO BILLS VALUES('HD14', 'AD09', '2023/1/8','1 nến 2 dĩa', 300000, 0);
+INSERT INTO BILLS VALUES('HD15', 'AD02', '2023/1/8','1 nến 2 dĩa', 300000, 0);
 
-/*==============================CTHD=====================================*/
-CREATE TABLE CTHD (MAHD CHAR(4),
+/*==============================BILL_DETAIL=====================================*/
+CREATE TABLE BILL_DETAIL(BILL_ID CHAR(4),
 									 idProduct CHAR(4),
-										SL INT,
-										GHICHU LONGTEXT,
+										AMOUNT INT,
+										NOTES LONGTEXT,
 										CONSTRAINT f_mhdcthd FOREIGN KEY(idProduct) REFERENCES products(idProduct),
-										CONSTRAINT f_mspcthd FOREIGN KEY (MAHD) REFERENCES HOADON(MAHD)  );
-INSERT INTO CTHD VALUES('HD01', 'B001', 2, 'Bánh này lấy nên 2 tuổi');
-INSERT INTO CTHD VALUES('HD02', 'B005', 1, 'Bánh này lấy nên 32 tuổi');
-INSERT INTO CTHD VALUES('HD03', 'B039', 1, 'Bánh này lấy nên 25 tuổi');
-INSERT INTO CTHD VALUES('HD03', 'B035', 2, 'Bánh này lấy nên 2 tuổi');
-INSERT INTO CTHD VALUES('HD04', 'B023', 1, 'Bánh này lấy nên 27 tuổi');
-INSERT INTO CTHD VALUES('HD05', 'B014', 1, 'Bánh này lấy nên 2 tuổi');
-INSERT INTO CTHD VALUES('HD05', 'B012', 2, 'Bánh này lấy nên 52 tuổi');
-INSERT INTO CTHD VALUES('HD05', 'B004', 1, 'Bánh này lấy nên 12 tuổi');
-INSERT INTO CTHD VALUES('HD06', 'B008', 2, 'Bánh này lấy nên 2 tuổi');
-INSERT INTO CTHD VALUES('HD07', 'B010', 1, 'Bánh này lấy nên 22 tuổi');
-INSERT INTO CTHD VALUES('HD08', 'B099', 1, 'Bánh này lấy nên 21 tuổi');
-INSERT INTO CTHD VALUES('HD09', 'B029', 1, 'Bánh này lấy nên 25 tuổi');
-INSERT INTO CTHD VALUES('HD10', 'B067', 1, 'Bánh này lấy nên 28 tuổi');
-INSERT INTO CTHD VALUES('HD11', 'B050', 3, 'Bánh này lấy nên 62 tuổi');
-INSERT INTO CTHD VALUES('HD12', 'B040', 1, 'Bánh này lấy nên 29 tuổi');
-INSERT INTO CTHD VALUES('HD13', 'B054', 1, 'Bánh này lấy nên 30 tuổi');
-INSERT INTO CTHD VALUES('HD13', 'B034', 1, 'Bánh này lấy nên 24 tuổi');
-INSERT INTO CTHD VALUES('HD14', 'B088', 1, 'Bánh này lấy nên 23 tuổi');
-INSERT INTO CTHD VALUES('HD15', 'B090', 1, 'Bánh này lấy nên 20 tuổi');
+										CONSTRAINT f_mspcthd FOREIGN KEY (BILL_ID) REFERENCES BILLS(BILL_ID)  );
+INSERT INTO BILL_DETAIL VALUES('HD01', 'B001', 2, 'Bánh này lấy nên 2 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD02', 'B005', 1, 'Bánh này lấy nên 32 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD03', 'B039', 1, 'Bánh này lấy nên 25 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD03', 'B035', 2, 'Bánh này lấy nên 2 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD04', 'B023', 1, 'Bánh này lấy nên 27 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD05', 'B014', 1, 'Bánh này lấy nên 2 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD05', 'B012', 2, 'Bánh này lấy nên 52 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD05', 'B004', 1, 'Bánh này lấy nên 12 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD06', 'B008', 2, 'Bánh này lấy nên 2 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD07', 'B010', 1, 'Bánh này lấy nên 22 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD08', 'B099', 1, 'Bánh này lấy nên 21 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD09', 'B029', 1, 'Bánh này lấy nên 25 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD10', 'B067', 1, 'Bánh này lấy nên 28 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD11', 'B050', 3, 'Bánh này lấy nên 62 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD12', 'B040', 1, 'Bánh này lấy nên 29 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD13', 'B054', 1, 'Bánh này lấy nên 30 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD13', 'B034', 1, 'Bánh này lấy nên 24 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD14', 'B088', 1, 'Bánh này lấy nên 23 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD15', 'B090', 1, 'Bánh này lấy nên 20 tuổi');
 
-/*=============================================GIAOHANG=======================================*/
+/*=============================================DELIVERY=======================================*/
 
-CREATE TABLE GIAOHANG(MAHD CHAR(4),
-										    NGAYGIAO DATETIME NOT NULL,
-												DIACHIGIAO VARCHAR(60) NOT NULL,
-												CONSTRAINT f_mhdgh FOREIGN KEY(MAHD) REFERENCES HOADON(MAHD));
+CREATE TABLE DELIVERY(BILL_ID CHAR(4),
+										    DELIVERY_DATE DATETIME NOT NULL,
+												DELIVERY_ADDRESS VARCHAR(60) NOT NULL,
+												CONSTRAINT f_mhdgh FOREIGN KEY(BILL_ID) REFERENCES BILLS(BILL_ID));
 --
-INSERT INTO GIAOHANG VALUES('HD01', '2022/10/14', 'Q1, TP HCM');
-INSERT INTO GIAOHANG VALUES('HD02', '2022/10/23', 'Q3, TP HCM');
-INSERT INTO GIAOHANG VALUES('HD03', '2022/10/15', 'TP.THỦ ĐỨC TP HCM');
-INSERT INTO GIAOHANG VALUES('HD04', '2022/9/25', 'Q1, TP HCM');
-INSERT INTO GIAOHANG VALUES('HD05', '2022/10/24', 'DONG NAI');
-INSERT INTO GIAOHANG VALUES('HD06', '2022/10/15', 'Q10, TP HCM');
-INSERT INTO GIAOHANG VALUES('HD07', '2022/5/11', 'Q10, TP HCM');
-INSERT INTO GIAOHANG VALUES('HD08', '2022/8/15', 'Q.BINH THANH, TP HCM');
-INSERT INTO GIAOHANG VALUES('HD09', '2022/7/17', 'H.CHAU THANH,LONG AN');
-INSERT INTO GIAOHANG VALUES('HD10', '2022/11/10', 'Q9, TP HCM');
-INSERT INTO GIAOHANG VALUES('HD11', '2022/1/22', 'Q.BINH CHANH, TP HCM');
-INSERT INTO GIAOHANG VALUES('HD12', '2023/1/12', 'Q1, TP HCM');
-INSERT INTO GIAOHANG VALUES('HD13', '2023/1/11', 'Q1, TP HCM');
-INSERT INTO GIAOHANG VALUES('HD14', '2023/1/12', 'Q3, TP HCM');
-INSERT INTO GIAOHANG VALUES('HD15', '2023/1/13', 'Q1, TP HCM');
+INSERT INTO DELIVERY VALUES('HD01', '2022/10/14', 'Q1, TP HCM');
+INSERT INTO DELIVERY VALUES('HD02', '2022/10/23', 'Q3, TP HCM');
+INSERT INTO DELIVERY VALUES('HD03', '2022/10/15', 'TP.THỦ ĐỨC TP HCM');
+INSERT INTO DELIVERY VALUES('HD04', '2022/9/25', 'Q1, TP HCM');
+INSERT INTO DELIVERY VALUES('HD05', '2022/10/24', 'ĐỒNG NAI');
+INSERT INTO DELIVERY VALUES('HD06', '2022/10/15', 'Q10, TP HCM');
+INSERT INTO DELIVERY VALUES('HD07', '2022/5/11', 'Q10, TP HCM');
+INSERT INTO DELIVERY VALUES('HD08', '2022/8/15', 'Q.BÌNH THẠNH, TP HCM');
+INSERT INTO DELIVERY VALUES('HD09', '2022/7/17', 'H.CHÂU THÀNH,LONG AN');
+INSERT INTO DELIVERY VALUES('HD10', '2022/11/10', 'Q9, TP HCM');
+INSERT INTO DELIVERY VALUES('HD11', '2022/1/22', 'Q.BÌNH CHÁNH, TP HCM');
+INSERT INTO DELIVERY VALUES('HD12', '2023/1/12', 'Q1, TP HCM');
+INSERT INTO DELIVERY VALUES('HD13', '2023/1/11', 'Q1, TP HCM');
+INSERT INTO DELIVERY VALUES('HD14', '2023/1/12', 'Q3, TP HCM');
+INSERT INTO DELIVERY VALUES('HD15', '2023/1/13', 'Q1, TP HCM');
 
 
 /*=========================================Comments=========================================*/
@@ -917,10 +928,11 @@ INSERT INTO GIAOHANG VALUES('HD15', '2023/1/13', 'Q1, TP HCM');
 create table Comments(IdCmt INT PRIMARY KEY AUTO_INCREMENT,idProduct CHAR(4) not null, ID CHAR(4)  not null , comment longtext, date datetime, STATUS tinyint(4) DEFAULT 0);
 
 INSERT into Comments VALUES(1,'B001','AD02',"Lần đầu đặt bánh ở tiệm này thấy rất hài lòng, cầm chiếc bánh trên tay đi tặng được mọi người khen . Rất hài lòng, trang trí sang trọng, đẹp mắt.", '2022/11/22', 0);
+INSERT into Comments VALUES(2,'B002','AD01',"Đặt bánh ở tiệm này thấy rất hài lòng, cầm chiếc bánh trên tay đi tặng được mọi người khen . Rất hài lòng, trang trí sang trọng, đẹp mắt.", '2023/03/02', 0);
 
-/*=========================================Blog=========================================*/
+/*========================================= BLOG =========================================*/
 
-CREATE TABLE BLOG (IDBLOG CHAR(4) PRIMARY KEY,
+CREATE TABLE BLOGS (IDBLOG CHAR(4) PRIMARY KEY,
 									 IMGBLOG VARCHAR(255) NOT NULL,
 									 TITLE VARCHAR(255),
 									 DATE DATETIME,
@@ -929,7 +941,7 @@ CREATE TABLE BLOG (IDBLOG CHAR(4) PRIMARY KEY,
 									 SEASON VARCHAR(50),
 									 STATUS TINYINT(4) DEFAULT(0));
  --
-INSERT INTO BLOG VALUES('BL01', 'img/blog/BL01/blog1.jpg', 'Giải mã sức hút của bánh kem hiện đại', '2022/10/22',  'Vì sao bánh kem hiện đại được yêu thích đến vậy?\n
+INSERT INTO BLOGS VALUES('BL01', 'img/blog/BL01/blog1.jpg', 'Giải mã sức hút của bánh kem hiện đại', '2022/10/22',  'Vì sao bánh kem hiện đại được yêu thích đến vậy?\n
 Sở dĩ bánh kem được làm theo phong cách hiện đại được mọi người ưa chuộng vì nhiều lý do. Nhưng phải nhắc đến đó là hương vị bánh thơm ngon, kiểu dáng độc đáo, kích thước và màu sắc đa dạng. Bên cạnh đó phải kể đến những điểm đặc biệt sau đây. \n
 1. Tất cả nguyên liệu đều là tự nhiên.\n
 Kế thừa tinh hoa ẩm thực cũ được sáng tạo, thay đổi phù hợp với xu thế mới của thời đại, chiếc bánh kem còn là món ăn tốt cho sức khỏe. Dưới bàn tay khéo léo của những người thợ làm bánh cho ra đời sản phẩm đẹp và độc đáo. Bánh kem hiện đại sử dụng nguyên liệu tự nhiên không chứa chất độc hại. Màu sắc nhẹ nhàng không sử dụng hóa chất.\n
@@ -942,7 +954,7 @@ Một lý do khiến bánh hiện đại được các tín đồ hảo ngọt y
 Với những người thích socola bạn có thể chọn bánh kem hương vị socola, hay vị bắp tốt cho sức khỏe. Các loại trái cây thanh mát kết hợp mang đến những chiếc bánh vẻ ngoài bắt mắt, hương vị độc lạ bên trong.
 Hãy đặt mua bánh kem hiện đại để những bữa tiệc trở nên ý nghĩa hơn. Đến với Tiệm bánh Hạnh Phúc quý khách sẽ được chọn lựa một trong số rất nhiều kiểu bánh đẹp. Được sản xuất từ nguyên liệu tươi ngon, không chứa chất bảo quản sẽ khiến bạn hài lòng. Nhấc máy gọi ngay cho chúng tôi theo số Hotline 0987654321 để được phục vụ.
 ' ,  'Đời Sống', 'Hiện đại',0);
-INSERT INTO BLOG VALUES('BL02', 'img/blog/BL02/blog2.jpg', 'Tổng hợp cách bảo quản bánh kem cực đơn giản', '2022/10/22','Các loại bánh kem thông thường trên thị trường hiện nay, nếu được bảo quản đúng cách trong tủ chuyên dụng sẽ có thể dùng được trong 5 - 7 ngày mà không lo hư hỏng. Còn nếu bạn bảo quản bánh kem trong tủ lạnh ở ngăn mát thì có thể an tâm sử dụng trong vòng 2 - 3 ngày.\n
+INSERT INTO BLOGS VALUES('BL02', 'img/blog/BL02/blog2.jpg', 'Tổng hợp cách bảo quản bánh kem cực đơn giản', '2022/10/22','Các loại bánh kem thông thường trên thị trường hiện nay, nếu được bảo quản đúng cách trong tủ chuyên dụng sẽ có thể dùng được trong 5 - 7 ngày mà không lo hư hỏng. Còn nếu bạn bảo quản bánh kem trong tủ lạnh ở ngăn mát thì có thể an tâm sử dụng trong vòng 2 - 3 ngày.\n
 1. Cách bảo quản bánh kem trong tủ lạnh.\n
 Bạn có thể cho bánh kem và hộp đựng hoặc bọc kín bánh lại rồi cho vào tủ lạnh, giữ ở mức nhiệt 2 - 8 độ C. Với cách bảo quản này bánh kem có thể dùng được trong vòng 2 - 3 ngày. Tuy nhiên, lớp kem bánh thường sẽ bị khô lại, giảm hương vị thơm ngon, mềm xốp vốn có.\n
 Khi bảo quản bánh kem trong tủ lạnh bạn cần lưu ý không được để bánh gần các loại thực phẩm có mùi, các loại thực phẩm này có thể gây ảnh hưởng đến mùi vị của bánh kem. Hơn nữa, bạn cần phải bọc kín bánh lại để vi khuẩn trong tủ không xâm nhập được vào bánh.\n
@@ -955,14 +967,14 @@ Do vi khuẩn làm lên men protein và chất béo có trong kem nên khi kem b
 Phần kem bị tách nước, bị chảy cũng là một dấu hiệu nhận biết bánh kem có dấu hiệu bị hỏng.\n
 Phần cốt bánh bông lan bên trong bị xuất hiện những đốm mốc đen hoặc mốc xanh lạ, có mùi khó chịu.\n
 ', 'Đời Sống', 'Bảo quản bánh',0);
-INSERT INTO BLOG VALUES('BL03', 'img/blog/BL03/blog3.jpg', 'Chọn bánh kem cho những ngày kỷ niệm ý nghĩa', '2022/10/22','Ngày nay, bánh kem không chỉ xuất hiện vào duy nhất sinh nhật mà bất cứ dịp kỷ niệm nào cũng có thể sử dụng. Các tiệm bánh cũng bắt kịp các xu hướng để đưa ra nhiều mẫu bánh phù hợp với từng mục đích sử dụng. Cùng tìm hiểu các dịp kỷ niệm ý nghĩa nên sử dụng bánh kem và cách chọn sao cho phù hợp nhất trong bài viết dưới đây.\n
+INSERT INTO BLOGS VALUES('BL03', 'img/blog/BL03/blog3.jpg', 'Chọn bánh kem cho những ngày kỷ niệm ý nghĩa', '2022/10/22','Ngày nay, bánh kem không chỉ xuất hiện vào duy nhất sinh nhật mà bất cứ dịp kỷ niệm nào cũng có thể sử dụng. Các tiệm bánh cũng bắt kịp các xu hướng để đưa ra nhiều mẫu bánh phù hợp với từng mục đích sử dụng. Cùng tìm hiểu các dịp kỷ niệm ý nghĩa nên sử dụng bánh kem và cách chọn sao cho phù hợp nhất trong bài viết dưới đây.\n
 1. Bánh kem sinh nhật.\n
 Sinh nhật chắc chắn là dịp không thể thiếu bánh kem, dù là tổ chức đơn giản hay linh đình, thì ít nhiều cũng phải có một chiếc bánh kem nhỏ. Bánh kem có ý nghĩa vô cùng đặc biệt, như đánh dấu kỷ niệm đáng nhớ này. Chọn bánh kem sinh nhật tặng người thân, bạn bè nên lưu ý về tuổi tác, sở thích… để phù hợp. Bánh kem của người lớn tuổi thì nên trang nhã, lịch sự; bánh kem cho trẻ nhỏ thì nên nổi bật, sặc sỡ; bánh kem cho bạn bè nên chọn loại tinh nghịch, đáng yêu.\n
 2. Kỷ niệm ngày cưới, lễ tình nhân.\n
 Bánh kem tình yêu có thể được sử dụng vào ngày kỷ niệm cho các cặp đôi, kỷ niệm ngày cưới, ngày yêu, 14/2… Bánh kem cho các đôi yêu nhau thường là bánh hình trái tim, trang trí màu hồng hoặc đỏ lãng mạn, có thể sử dụng thêm hoa tươi vô cùng bắt mắt và ý nghĩa. Những ngày này, chỉ cần một chiếc bánh kem và hai người bên nhau trong ánh nến lung linh là đã vô cùng ngọt ngào và đáng nhớ. Đừng quên tặng thêm một nửa của bạn những món quà nhỏ làm vật định tình cho tình yêu đẹp này nhé.\n
 3. Bánh sự kiện.\n
 Những ngày như quốc tế phụ nữ, kỷ niệm thành lập công ty, lễ tốt nghiệp… đều nên chọn bánh kem để sự kiện thêm phần chỉn chu. Chọn bánh kem cho những ngày này nên dựa vào ý nghĩa để lựa chọn cho phù hợp. Bánh cho doanh nghiệp, tập thể nên chọn bánh size to, lớn và chữ ghi rõ thông điệp để có thể chụp ảnh tập thể đánh dấu mốc đáng nhớ trong năm. Bánh chọn trang nhã, lịch sự, có thể điểm thêm logo của doanh nghiệp để thêm phần độc đáo, khác biệt với những mẫu bánh kem thông thường.', 'Kỉ niệm', 'Chọn bánh',0);
-INSERT INTO BLOG VALUES('BL04', 'img/blog/BL04/blog4.jpg', 'Tại sao sinh nhật lại quan trọng đến thế?','2022/10/22','Ai cũng biết rằng sinh nhật là một ngày đặc biệt đối với tất cả mọi người. Là sự kiện đánh dấu ngày ra đời, đó như là một điều mặc định khi nói về ý nghĩa của ngày sinh nhật. Nhưng có bao giờ bạn tự hỏi tại sao nó lại ý nghĩa và đặc biệt đến thế không? Cùng tìm hiểu nguồn gốc và những ý nghĩa tuyệt vời mà ta chưa nhận ra từ ngày sinh nhật tuyệt vời nhé!\n
+INSERT INTO BLOGS VALUES('BL04', 'img/blog/BL04/blog4.jpg', 'Tại sao sinh nhật lại quan trọng đến thế?','2022/10/22','Ai cũng biết rằng sinh nhật là một ngày đặc biệt đối với tất cả mọi người. Là sự kiện đánh dấu ngày ra đời, đó như là một điều mặc định khi nói về ý nghĩa của ngày sinh nhật. Nhưng có bao giờ bạn tự hỏi tại sao nó lại ý nghĩa và đặc biệt đến thế không? Cùng tìm hiểu nguồn gốc và những ý nghĩa tuyệt vời mà ta chưa nhận ra từ ngày sinh nhật tuyệt vời nhé!\n
 1.Nguồn gốc của ngày sinh nhật.\n
 Ngày sinh bắt nguồn từ đạo Kitô Giáo ở phương Tây, người ta tin rằng đây là ngày mà những linh hồn mang đến quấy phá. Để bảo vệ người thân yêu khỏi những điều không tốt lành đó, thì cần phải tổ chức những bữa tiệc vui chơi nhảy múa, hò hét tạo không khí để xua đuổi ma quỷ. Và dành tặng cho những lời chúc tốt đẹp, những món quà ý nghĩa để xua đi điềm xấu.\n
 Lễ kỷ niệm sinh nhật nổi tiếng nhất là của Chúa Giêsu, hay được biết đến là lễ giáng sinh. Sau đó, phong tục kỷ niệm ngày sinh lan rộng ra toàn thế giới. Là ngày tổ chức sinh nhật, dấu mốc ngày bạn sinh ra đời và nhớ ơn đấng sinh thành. Sinh nhật không còn mang nặng ý nghĩa tôn giáo như trước đây mà chỉ đơn giản là dịp để tận hưởng giây phút đặc biệt, hạnh phúc và vui vẻ bên người thân yêu.\n
@@ -975,10 +987,24 @@ Mỗi một sinh nhật trôi qua là thêm một tuổi mới, để nhìn nh�
 Đồ vật không thể thiếu cho tiệc sinh nhật tất nhiên là bánh kem. Việc cắm nến sinh nhật trên bánh có ý nghĩa là tỏa sáng rực rỡ. Nếu cắm trên bánh đủ số nến bằng số tuổi và thổi tắt trong 1 lần sẽ gặp được điều may và tốt lành. Nếu không tắt hết thì điều ước sẽ không trở thành hiện thực. Một vài nơi còn có những nét văn hóa đặc trưng riêng, với món ăn truyền thống vào sinh nhật hay tập tục nào đó. Như quệt kem lên mặt chủ nhân bữa tiệc trước khi cắt bánh, ăn mì trường thọ vào ngày sinh nhật…
 Để sinh nhật có ý nghĩa hơn, không gì bằng tự tay chuẩn bị chiếc bánh sinh nhật tặng cho người mình yêu thương. Nếu chưa có ý tưởng hay các dụng cụ làm bánh, hãy đến với Paolo Bakery để chọn những chiếc bánh xinh xắn nhất nhé!\n
 Tiệm bánh HP là một trong những cơ sở cung cấp bánh sinh nhật lấy ngay vô cùng chất lượng tại TP HCM. Khách hàng có thể tự chọn mẫu bánh hoặc yêu cầu theo mong muốn của mình. Chỉ cần gửi yêu cầu về chiếc bánh bạn cần, còn lại cứ để HP lo. Bánh kem sẽ được hoàn thiện và ship tận tay bạn. HP hiện tại cung cấp các dòng bánh sinh nhật, bánh kem sự kiện, bánh mousse, bánh bông lan trứng muối và các loại bánh hot trend khác...', 'Đời Sống', 'Ý nghĩa bánh',0);
-create table feedbacks(id INT AUTO_INCREMENT PRIMARY KEY,username varchar(50), email varchar(50), feedback longtext, fbDate datetime);
+create table FEEDBACKS(id INT AUTO_INCREMENT PRIMARY KEY,
+												username varchar(50), 
+												email varchar(50), 
+												feedback longtext, 
+												fbDate datetime);
 
-CREATE table log(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, level TINYINT(4) not null DEFAULT(0), userid char(4), src longtext not null DEFAULT('none'), content LONGTEXT, creatAt datetime DEFAULT(NOW()), status TINYINT(4) not null DEFAULT(0));
-create table cartItem(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, idUser char(4), idProduct char(4), quantity int);
+CREATE table LOGS(LOGS_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+										LOGS_LEVEL TINYINT(4) not null DEFAULT(0), 
+										ACCOUNT_ID char(4), 
+										LOGS_SRC longtext not null DEFAULT('none'), 
+										LOGS_CONTENT LONGTEXT,
+										LOGS_CREATE_AT datetime DEFAULT(NOW()), 
+										LOGS_STATUS TINYINT(4) not null DEFAULT(0));
+										
+create table cartItem(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+											idUser char(4), 
+											idProduct char(4), 
+											quantity int);
 
 /*================================================================Query===================================================================*/
 -- select hoadon.mahd, khachhang.TENKH, products.productName, khachhang.sdt, hoadon.NGAYLAPHD, GIAOHANg.NGAYGIAO, GIAOHANg.DIACHIGIAO, hoadon.ghichu, products.price, hoadon.thanhTIEN,  hoadon.STATUS, khachhang.makh, products.idProduct, taikhoan.TENTK,taikhoan.role, taikhoan.email
