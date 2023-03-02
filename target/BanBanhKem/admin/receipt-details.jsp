@@ -4,9 +4,10 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.CTHD" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,7 +105,7 @@
 
 <!-- main content -->
 <% Receipt receipt = (Receipt) request.getAttribute("receipt");
-  List<CTHD> receiptsDt = (List<CTHD>) request.getAttribute("listcthdOfKH");
+  List<Bill_Detail> receiptsDt = (List<Bill_Detail>) request.getAttribute("listcthdOfKH");
   String tenkh =(String) request.getAttribute("tenkh");%>
 <main class="main bg-white">
   <div class="container-fluid bg-white">
@@ -119,8 +120,8 @@
         <h5 style="margin-bottom: 25px">Tên KH: <%=tenkh%></h5>
             <div class="col-12 d-flex form__content pl-0 pr-0">
               <div class="col-6 pl-0 pr-0">
-                <p>Ngày Lập: <%=receipt.getSdate()%></p>
-                <p>Ngày Giao Hàng: <%=receipt.getEdate()%></p>
+                <p>Ngày Lập: <%=receipt.getExport_date()%></p>
+                <p>Ngày Giao Hàng: <%=receipt.getDelivery_date()%></p>
               </div>
               <div class="col-6 pl-0 pr-0">
                 <p>Địa Chỉ Giao: <%=receipt.getAddress()%></p>
@@ -142,11 +143,11 @@
           </tr>
           </thead>
           <% for (int i = 0; i < receiptsDt.size(); i++){
-            CTHD rcs = receiptsDt.get(i);%>
+            Bill_Detail rcs = receiptsDt.get(i);%>
           <tbody>
           <tr>
             <td><%=i + 1%></td>
-            <td><%=rcs.getTensp()%></td>
+            <td><%=rcs.getNamePro()%></td>
             <td><%=rcs.getNote()%></td>
             <td><%=rcs.getSolg()%></td>
             <td><%=rcs.formatNum(rcs.getPrice())%></td>
