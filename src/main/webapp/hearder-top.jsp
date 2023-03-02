@@ -2,8 +2,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<% User auth = (User) session.getAttribute("auth");
-  Customer customer = (Customer) session.getAttribute("cust");%>
+<% User auth = (User) session.getAttribute("auth");%>
 
 <!-- rang cua -->
 <div class="rang_cua"></div>
@@ -28,12 +27,12 @@
             <a href="https://www.instagram.com/maizecorn1542/" target="blank"><i class="fa fa-instagram"></i></a>
           </div>
           <div class="header__top__right__auth">
-            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+            <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getAccount_name():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
               <a href="MyOrder" method="get" class="dropdown-item">Đơn hàng của tôi</a>
               <a href="EditUserProfile" method="get" class="dropdown-item">Hồ sơ của tôi</a>
-              <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
+              <a onclick="checkPass('<%=auth.getAccount_email()%>','<%=auth.getAccount_pass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
               <% if(auth.checkRole()) { %>
               <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
               <%}%>

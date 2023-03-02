@@ -81,7 +81,7 @@
                 <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
             </div>
             <div class="ms-3">
-                <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
+                <h6 class="mb-0"><%= auth != null ? auth.getAccount_name():"ADMIN"%></h6>
                 <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
             </div>
         </div>
@@ -129,7 +129,7 @@
                             <div class="profile__meta">
                                 <% String main__table = " ";
                                 String profile__text ="";
-                                    if(user.getStatus() == -1){
+                                    if(user.getAccount_status() == -1){
                                         main__table = "main__table-text--red";
                                         profile__text = "profile__action--delete";
 
@@ -180,7 +180,7 @@
 
                         <!-- profile btns -->
                         <div class="profile__actions">
-                            <%if(user.getStatus() == -1){%>
+                            <%if(user.getAccount_status() == -1){%>
                             <a href="#modal-status-unlock" class="profile__action <%=profile__text%> open-modal">
                                 <i class="fa fa-lock"></i>
                             </a>

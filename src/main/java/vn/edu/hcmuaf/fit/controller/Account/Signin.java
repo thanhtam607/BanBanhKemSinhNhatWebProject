@@ -32,7 +32,7 @@ public class Signin extends HttpServlet {
             }
             HttpSession session = request.getSession(true);
             session.setAttribute("auth", user);
-            Customer customer = CustomerService.getCusByIdAcc(user.getId());
+            Customer customer = CustomerService.getCusByIdAcc(user.getAccount_id());
             session.setAttribute("cust", customer);
             response.sendRedirect(request.getContextPath() + "/Index");
         }

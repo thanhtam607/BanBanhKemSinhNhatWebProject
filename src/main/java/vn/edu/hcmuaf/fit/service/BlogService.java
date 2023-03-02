@@ -19,7 +19,7 @@ public class BlogService {
 
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  blog.idblog, blog.imgblog,blog.title, blog.date, blog.content, blog.category, blog.season, blog.status from blog ");
+                ResultSet rs = statement.executeQuery("SELECT  blogs.idblog, blogs.imgblog,blogs.title, blogs.date, blogs.content, blogs.category, blogs.season, blogs.status from BLOGS ");
                 while(rs.next()) {
                     Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
                     list.add(b);
@@ -63,7 +63,7 @@ public class BlogService {
     }
     public static void updateBlog(String idblog, String date, String cont, String category, String season){
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE blog set  DATE='" +date+ "', CONTENT= '"+ cont+ "', CATEGORY= '"+ category+ "', SEASON= '"+ season+ "' Where  IDBLOG= '" + idblog+ "' ;";
+        String sql = "UPDATE blogs set  DATE='" +date+ "', CONTENT= '"+ cont+ "', CATEGORY= '"+ category+ "', SEASON= '"+ season+ "' Where  IDBLOG= '" + idblog+ "' ;";
         try {
             statement.executeUpdate(sql);
 
@@ -73,7 +73,7 @@ public class BlogService {
     }
     public static void updateStatus(String id, int status) {
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE blog set  status= " + status + " where blog.idblog = '" + id + "'";
+        String sql = "UPDATE blogs set  status= " + status + " where blogs.idblog = '" + id + "'";
         try {
             statement.executeUpdate(sql);
 
@@ -83,7 +83,7 @@ public class BlogService {
     }
  public  static void deleteBlog(String idblog){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "DELETE FROM BLOG WHERE IDBLOG = '" + idblog + "'";
+        String sql = "DELETE FROM blogs WHERE IDBLOG = '" + idblog + "'";
      try {
          stm.executeUpdate(sql);
 
@@ -93,7 +93,7 @@ public class BlogService {
  }
 public static  void updateImgBlog(String img,String imgnew){
     Statement stm = DBConnect.getInstall().get();
-    String sql = "UPDATE BLOG SET IMGBLOG = '" + imgnew + "' WHERE IMGBLOG = '" + img +"'";
+    String sql = "UPDATE blogs SET IMGBLOG = '" + imgnew + "' WHERE IMGBLOG = '" + img +"'";
     try {
         stm.executeUpdate(sql);
 
@@ -103,7 +103,7 @@ public static  void updateImgBlog(String img,String imgnew){
 }
 public static void  updateTitle(String idblog, String title ){
     Statement stm = DBConnect.getInstall().get();
-    String sql = "UPDATE BLOG SET TITLE = '" + title + "' WHERE IDBLOG = '" + idblog +"'";
+    String sql = "UPDATE blogs SET TITLE = '" + title + "' WHERE IDBLOG = '" + idblog +"'";
     try {
         stm.executeUpdate(sql);
 
@@ -113,7 +113,7 @@ public static void  updateTitle(String idblog, String title ){
 }
 public  static String getNewIdBlog(){
     String res ="";
-    String sql= "SELECT max(idblog) from blog";
+    String sql= "SELECT max(idblog) from blogs";
     Statement statement = DBConnect.getInstall().get();
     try {
         ResultSet rs = statement.executeQuery(sql);
@@ -134,7 +134,7 @@ public  static String getNewIdBlog(){
 }
     public  static String getMaxIdBlog(){
         String res ="";
-        String sql= "SELECT max(idblog) from blog";
+        String sql= "SELECT max(idblog) from blogs";
         Statement statement = DBConnect.getInstall().get();
         try {
             ResultSet rs = statement.executeQuery(sql);
@@ -168,7 +168,7 @@ public static List<String> listcate(){
     }
 public static void addBlog(Blog b){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "INSERT INTO BLOG VALUES('" + b.getId() + "', '" + b.getImg() + "', '" + b.getTitle() + "','" + b.getDate() + "','" + b.getCont() + "','" + b.getCategory() + "','" + b.getSeason() + "',0);";
+        String sql = "INSERT INTO BLOGS VALUES('" + b.getId() + "', '" + b.getImg() + "', '" + b.getTitle() + "','" + b.getDate() + "','" + b.getCont() + "','" + b.getCategory() + "','" + b.getSeason() + "',0);";
     try {
         stm.executeUpdate(sql);
     } catch (SQLException se) {
@@ -190,9 +190,9 @@ public static void addBlog(Blog b){
 //        for (int i = 0; i < rs.length; i++){
 //            System.out.print(rs[i] + '\n');
 //        }
-        System.out.println(BlogService.getMaxIdBlog());
-        System.out.println(BlogService.listss());
-        String rs = BlogService.listcate().get(0);
-        System.out.println(BlogService.ListCategory(rs));
+//        System.out.println(BlogService.getMaxIdBlog());
+//        System.out.println(BlogService.listss());
+//        String rs = BlogService.listcate().get(0);
+//        System.out.println(BlogService.ListCategory(rs));
     }
 }

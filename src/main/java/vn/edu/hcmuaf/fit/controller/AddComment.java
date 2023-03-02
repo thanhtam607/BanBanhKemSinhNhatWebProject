@@ -30,8 +30,8 @@ public class AddComment extends HttpServlet {
             String date = request.getParameter("date");
 //          String userID = request.getParameter("userId");
             User user =(User) session.getAttribute("auth");
-            Comment newCmt = new Comment(maSp, user.getTentk(),cmt,date);
-            ProductService.addComment(newCmt,user.getId());
+            Comment newCmt = new Comment(maSp, user.getAccount_name(),cmt,date);
+            ProductService.addComment(newCmt,user.getAccount_id());
 
 
             PrintWriter out = response.getWriter();
