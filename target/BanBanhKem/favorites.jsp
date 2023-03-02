@@ -62,11 +62,10 @@
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getTentk():"Đăng nhập"%></a>
+            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getAccount_name():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
-                <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
-
+                <a onclick="checkPass('<%=auth.getAccount_email()%>','<%=auth.getAccount_pass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
                 <% if(auth.checkRole()) { %>
                 <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
@@ -200,7 +199,7 @@
                                 <li class="text__loaibanh"><a href="./ListProduct">Tất cả</a></li>
                                 <%List<TypeOfCake> ListType = ProductService.getListType();
                                     for(TypeOfCake lb: ListType){%>
-                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getName()%> &filter=<%=lb.getTenLB()%>"><%=lb.getTenLB()%></a></li>
+                                <li class="text__loaibanh"><a href="ProductFilter?title=<%=lb.getName()%> &filter=<%=lb.getName()%>"><%=lb.getName()%></a></li>
                                 <%}%>
 
                             </ul>

@@ -15,7 +15,7 @@ public class Admin extends HttpServlet {
         User auth= (User) session.getAttribute("auth");
         if(auth==null || !auth.checkRole()){
             request.setAttribute("error","Bạn không có quyền truy cập");
-            response.sendRedirect("../signin.jsp");
+            response.sendRedirect("../blank_page.jsp");
             return;
         }
         response.sendRedirect("ListReceipt_Admin");

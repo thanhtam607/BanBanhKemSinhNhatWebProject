@@ -77,7 +77,7 @@
 				<div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
 			</div>
 			<div class="ms-3">
-                <h6 class="mb-0"><%= auth != null ? auth.getTentk():"ADMIN"%></h6>
+                <h6 class="mb-0"><%= auth != null ? auth.getAccount_name():"ADMIN"%></h6>
                 <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
 			</div>
 		</div>
@@ -183,7 +183,7 @@
                                     <td>
                                         <% String main__table = " ";
                                             String main__btn ="";
-                                            if(UserService.findById(customer.getMAKH()).getStatus() == -1){
+                                            if(UserService.findById(customer.getMAKH()).getAccount_status() == -1){
                                                 main__btn = "main__table-btn--delete";
                                             }else{
                                                 main__btn = "main__table-btn--banned";
@@ -200,7 +200,7 @@
 
                                     <td>
                                         <div class="main__table-btns">
-                                            <%if(UserService.findById(customer.getMAKH()).getStatus() == -1){%>
+                                            <%if(UserService.findById(customer.getMAKH()).getAccount_status() == -1){%>
                                             <a href="#modal-status-unlock<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>

@@ -51,7 +51,7 @@ public class Signup extends HttpServlet {
             User newUser = new User(email, pass, user);
             Customer newCus = new Customer();
             UserService.register(newUser);
-            newCus.setTENKH(newUser.getTentk());
+            newCus.setTENKH(newUser.getAccount_name());
             CustomerService.registerKH(newCus, newUser);
 
             String url = null;

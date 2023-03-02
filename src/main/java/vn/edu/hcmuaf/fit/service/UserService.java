@@ -37,18 +37,18 @@ public class UserService {
         }
         return instance;
     }
-    public User checkLogin(String email, String password) {
+    public User checkLogin(String account_email, String password) {
         List<User> users = JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT taikhoan.ID, taikhoan.email, taikhoan.PASS, taikhoan.tentk, taikhoan.ROLE, taikhoan.STATUS FROM taikhoan WHERE email = ?")
-                        .bind(0, email)
+                h.createQuery("SELECT ACCOUNTS.account_id, ACCOUNTS.account_email, ACCOUNTS.account_pass, ACCOUNTS.account_name, ACCOUNTS.account_role, ACCOUNTS.account_status FROM ACCOUNTS WHERE ACCOUNTS.account_email = ?")
+                        .bind(0, account_email)
                         .mapToBean(User.class)
                         .stream()
                         .collect(Collectors.toList())
         );
         if (users.size() != 1) return null;
         User user = users.get(0);
-        if (!user.getPass().equals(hashPassword(password))
-                ||!user.getEmail().equals(email)
+        if (!user.getAccount_pass().equals(hashPassword(password))
+                ||!user.getAccount_email().equals(account_email)
         ) return null;
         return user;
     }
@@ -66,7 +66,7 @@ public class UserService {
     public static User findById(String Id){
         List<User> list = getListAcc();
         for (User u: list) {
-            if(Id.equals(u.getId())){
+            if(Id.equals(u.getAccount_id())){
                 return u;
             }
 
@@ -79,7 +79,7 @@ public class UserService {
         Statement statement = DBConnect.getInstall().get();
         if(statement !=null){
             try{
-                ResultSet rsAcc = statement.executeQuery("select ID, EMAIL, PASS, TENTK, ROLE, STATUS from taikhoan;");
+                ResultSet rsAcc = statement.executeQuery("select ACCOUNT_ID, ACCOUNT_EMAIL, ACCOUNT_PASS, ACCOUNT_NAME, ACCOUNT_ROLE, ACCOUNT_STATUS from ACCOUNTS;");
                 while(rsAcc.next()){
                     list.add(new User(rsAcc.getString(1), rsAcc.getString(2), rsAcc.getString(3), rsAcc.getString(4), rsAcc.getInt(5), rsAcc.getInt(6)));
                 }
@@ -99,7 +99,7 @@ public class UserService {
         String result = "";
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT taikhoan.ID from taikhoan ORDER BY ID DESC LIMIT 1");
+                ResultSet rs = statement.executeQuery("SELECT ACCOUNTS.ACCOUNT_ID from ACCOUNTS ORDER BY ACCOUNT_ID DESC LIMIT 1");
                 while (rs.next()){
                     result = rs.getString(1);
                 }
@@ -115,7 +115,7 @@ public class UserService {
         List<User> list = getListAcc();
         List<String> listEmail = new ArrayList<String>();
         for(User a : list){
-            listEmail.add(a.getEmail());
+            listEmail.add(a.getAccount_email());
         }
         if (!listEmail.contains(email)) {
             return true;
@@ -126,11 +126,11 @@ public class UserService {
         Statement stm = DBConnect.getInstall().get();
         String stt = getLastMaTK().substring(2);
         String ID = "AD" + (Integer.parseInt(stt) + 1);
-        acc.setId(ID);
+        acc.setAccount_id(ID);
         if(stm!= null) {
             try {
-                String sql = "insert into taikhoan values ('" + ID + "', '" + acc.getEmail() + "', '"
-                        + hashPassword(acc.getPass())  + "', '" + acc.getTentk() + "'," + acc.getRole() + acc.getStatus()+");";
+                String sql = "insert into ACCOUNTS values ('" + ID + "', '" + acc.getAccount_email() + "', '"
+                        + hashPassword(acc.getAccount_pass())  + "', '" + acc.getAccount_name() + "'," + acc.getAccount_role() + acc.getAccount_status()+");";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -176,7 +176,7 @@ public class UserService {
 
     }
     public static void updatePass(String email, String pass)  {
-        String sql = "UPDATE taikhoan set PASS = '"+pass+"' where EMAIL like "+ "'"+email+"'";
+        String sql = "UPDATE ACCOUNTS set ACCOUNT_PASS = '"+pass+"' where ACCOUNT_EMAIL like "+ "'"+email+"'";
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql);
@@ -188,48 +188,48 @@ public class UserService {
 
     public static void updateProfileEmail(String email, User auth)  {
         if(email == null) return;
-        String idACC = auth.getId();
-        String sql = "UPDATE taikhoan set EMAIL = '"+email+"' where ID = "+ "'"+idACC+"'";
+        String idACC = auth.getAccount_id();
+        String sql = "UPDATE ACCOUNTS set ACCOUNT_EMAIL = '"+email+"' where ACCOUNT_ID = "+ "'"+idACC+"'";
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql);
-            auth.setEmail(email);
+            auth.setAccount_email(email);
         } catch (SQLException se) {
             se.printStackTrace();
         }
     }
     public static void updateProfileTenTk(String tentk,User auth)  {
         if(tentk == null) return;
-        String idACC = auth.getId();
-        String sql = "UPDATE taikhoan set TENTK = '"+tentk+"' where ID = "+ "'"+idACC+"'";
+        String idACC = auth.getAccount_id();
+        String sql = "UPDATE ACCOUNTS set ACCOUNT_NAME = '"+tentk+"' where ACCOUNT_ID = "+ "'"+idACC+"'";
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql);
-            auth.setTentk(tentk);
+            auth.setAccount_name(tentk);
         } catch (SQLException se) {
             se.printStackTrace();
         }
     }
     public static void updateProfileAddress(String diachi, User auth)  {
         if(diachi == null) return;
-        String idACC = auth.getId();
-        String sql1 = "UPDATE khachhang set khachhang.DIACHI = '"+diachi+"'where khachhang.MAKH = "+ "'"+idACC+"'";
+        String idACC = auth.getAccount_id();
+        String sql1 = "UPDATE CUSTOMERS set CUSTOMERS.CUSTOMER_ADDRESS = '"+diachi+"'where CUSTOMERS.CUSTOMER_ID = "+ "'"+idACC+"'";
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql1);
-            CustomerService.getCusByIdAcc(auth.getId()).setDIACHI(diachi);
+            CustomerService.getCusByIdAcc(auth.getAccount_id()).setDIACHI(diachi);
         } catch (SQLException se) {
             se.printStackTrace();
         }
     }
     public static void updateProfilePhoneNo(String sdt, User auth)  {
         if(sdt == null) return;
-        String idACC = auth.getId();
-        String sql1 = "UPDATE khachhang set khachhang.SDT = '"+sdt+"' where khachhang.MAKH = "+ "'"+idACC+"'";
+        String idACC = auth.getAccount_id();
+        String sql1 = "UPDATE CUSTOMERS set CUSTOMERS.CUSTOMER_PHONE = '"+sdt+"' where CUSTOMERS.CUSTOMER_ID = "+ "'"+idACC+"'";
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql1);
-            CustomerService.getCusByIdAcc(auth.getId()).setSDT(sdt);
+            CustomerService.getCusByIdAcc(auth.getAccount_id()).setSDT(sdt);
         } catch (SQLException se) {
             se.printStackTrace();
         }
