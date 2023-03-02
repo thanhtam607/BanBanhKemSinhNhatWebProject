@@ -6,6 +6,7 @@ import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.ItemProductInCart;
 import vn.edu.hcmuaf.fit.model.Order;
 import vn.edu.hcmuaf.fit.model.Product;
+import vn.edu.hcmuaf.fit.service.CartService;
 import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
@@ -14,6 +15,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 @WebServlet(name = "AddToCart", value = "/AddToCart")
 public class AddToCart extends HttpServlet {
@@ -38,7 +40,6 @@ public class AddToCart extends HttpServlet {
                         ItemProductInCart item = new ItemProductInCart();
                         item.setSoLgMua(solgmua);
                         item.setSp(product);
-                        item.setPrice(product.getPrice());
                         listItems.put(maSP, item);
                         order.setData(listItems);
                         order.setUser(auth);
@@ -56,7 +57,7 @@ public class AddToCart extends HttpServlet {
                             item = new ItemProductInCart();
                             item.setSp(product);
                             item.setSoLgMua(solgmua);
-                            item.setPrice(product.getPrice());
+//                            item.setPrice(product.getPrice());
                             listItems.put(maSP, item);
                         }
                         session.setAttribute("order", order);

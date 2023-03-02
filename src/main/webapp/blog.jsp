@@ -6,6 +6,7 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="static java.util.Arrays.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -60,8 +61,8 @@
             <li><a href="Favorite"><i class="fa fa-heart"></i> <span id="totalFav1"><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
 
             <%}%>
-            <%Order order = (Order) session.getAttribute("order");%>
-            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+            <%List<ItemProductInCart>listItemCart = (List<ItemProductInCart>) session.getAttribute("itemCart");%>
+            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= listItemCart != null ? listItemCart.size():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
@@ -132,7 +133,7 @@
                         <li><a href="Favorite"><i class="fa fa-heart"></i> <span ><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
 
                         <%}%>
-                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= order != null ? order.totalProduct():"0"%></span></a></li>
+                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span><%= listItemCart != null ? listItemCart.size():"0"%></span></a></li>
                     </ul>
                 </div>
             </div>

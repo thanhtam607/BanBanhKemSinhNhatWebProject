@@ -17,7 +17,7 @@ public class ProductService {
         ProductDetail detail = new ProductDetail();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake, discount where products.idType = typeOfCake.idType");
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake where products.idType = typeOfCake.idType");
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT idImg, productImgs.idProduct,productImgs.img, status from productImgs");
                     List<Image> listImg = new LinkedList<Image>();
@@ -60,13 +60,13 @@ public class ProductService {
     public static Product findById(String id) {
         Product p = null;
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake, discount where products.idType = typeOfCake.idType and products.idProduct = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake where products.idType = typeOfCake.idType and products.idProduct = ?");
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), findImagesByIdProduct(rs.getString(1)), rs.getInt(8), findCommentsByIdProduct(rs.getString(1)), findPDetailByIdProduct(rs.getString(1)), rs.getInt(9));
                 p.setDiscount(DiscountService.findByIdProduct(id));
-            }
+                }
             }catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -376,7 +376,7 @@ public class ProductService {
         ProductDetail detail ;
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake, discount where products.idType = typeOfCake.idType and products.STATUS=0");
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake where products.idType = typeOfCake.idType and products.STATUS=0");
                 while (rs.next()) {
                     String idProduct = rs.getString(1);
                     detail = findPDetailByIdProduct(idProduct);
@@ -424,7 +424,7 @@ public class ProductService {
         List<Product> res = new ArrayList<Product>();
         for (Discount d: DiscountService.getListDiscount()) {
             Product p = findById(d.getIdProduct());
-            p.setDiscount(d);
+//            p.setDiscount(d);
             res.add(p);
         }
         return res;

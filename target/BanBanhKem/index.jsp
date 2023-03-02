@@ -55,8 +55,8 @@
             <li><a href="Favorite"><i class="fa fa-heart"></i> <span id="totalFav"><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
 
             <%}%>
-            <%Order order = (Order) session.getAttribute("order");%>
-            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro"><%= order != null ? order.totalProduct():"0"%></span></a></li>
+            <%List<ItemProductInCart>listItemCart = (List<ItemProductInCart>) session.getAttribute("itemCart");%>
+            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro"><%= listItemCart != null ? listItemCart.size():"0"%></span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
@@ -128,7 +128,7 @@
                         <li><a href="Favorite"><i class="fa fa-heart"></i> <span id="totalFav1"><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
 
                         <%}%>
-                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro1"><%= order != null ? order.totalProduct():"0"%></span></a></li>
+                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span id="totalPro1"><%= listItemCart != null ? listItemCart.size():"0"%></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -227,7 +227,7 @@
                         <div class="featured__item">
                             <%for(Image img :p.getListImg()){
                                 if(!img.delete()&& !img.isHide()){%>
-                            <div class="product__item__pic set-bg" data-setbg="<%=img.getImg()%>">
+                            <div class="featured__item__pic set-bg" data-setbg="<%=img.getImg()%>">
                                 <% break;
                                 }
                                 }%>
@@ -281,7 +281,7 @@
                     <div class="featured__item">
                         <%for(Image img :p1.getListImg()){
                             if(!img.delete()&& !img.isHide()){%>
-                        <div class="product__item__pic set-bg" data-setbg="<%=img.getImg()%>">
+                        <div class="featured__item__pic set-bg" data-setbg="<%=img.getImg()%>">
                             <% break;
                             }
                             }%>
