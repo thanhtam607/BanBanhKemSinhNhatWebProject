@@ -227,7 +227,7 @@
                         <div class="featured__item">
                             <%for(Image img :p.getListImg()){
                                 if(!img.delete()&& !img.isHide()){%>
-                            <div class="product__item__pic set-bg" data-setbg="<%=img.getImg()%>">
+                            <div class="featured__item__pic set-bg" data-setbg="<%=img.getImg()%>">
                                 <% break;
                                 }
                                 }%>
@@ -281,7 +281,7 @@
                     <div class="featured__item">
                         <%for(Image img :p1.getListImg()){
                             if(!img.delete()&& !img.isHide()){%>
-                        <div class="product__item__pic set-bg" data-setbg="<%=img.getImg()%>">
+                        <div class="featured__item__pic set-bg" data-setbg="<%=img.getImg()%>">
                             <% break;
                             }
                             }%>
