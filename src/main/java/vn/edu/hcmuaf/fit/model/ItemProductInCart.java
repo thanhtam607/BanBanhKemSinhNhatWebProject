@@ -3,20 +3,33 @@ package vn.edu.hcmuaf.fit.model;
 import java.text.NumberFormat;
 
 public class ItemProductInCart {
-    private String masp;
+    int id;
+    private String customer_id;
     private int soLgMua;
     private Product sp;
-    private double price;
     private Order order;
     public ItemProductInCart() {
     }
 
-    public ItemProductInCart(String masp, int soLgMua, Product sp, double price, Order order) {
-        this.masp = masp;
+    public ItemProductInCart(int id,String customer_id, int soLgMua, Product sp, Order order) {
+        this.id = id;
+        this.customer_id=customer_id;
         this.soLgMua = soLgMua;
         this.sp = sp;
-        this.price = price;
         this.order = order;
+    }
+    public ItemProductInCart(int id, String customer_id, Product sp,int soLgMua) {
+        this.id = id;
+        this.customer_id = customer_id;
+        this.soLgMua = soLgMua;
+        this.sp = sp;
+        this.order = new Order();
+    }
+    public void setId(int id){
+        this.id = id;
+    }
+    public int getId(){
+        return this.id;
     }
     public Order getOrder() {
         return order;
@@ -24,11 +37,11 @@ public class ItemProductInCart {
     public void setOrder(Order order) {
         this.order = order;
     }
-    public String getMasp() {
-        return masp;
+    public String getCustomer_id() {
+        return customer_id;
     }
-    public void setMasp(String masp) {
-        this.masp = masp;
+    public void setCustomer_id(String idUser) {
+        this.customer_id = customer_id;
     }
     public int getSoLgMua() {
         return soLgMua;
@@ -43,11 +56,16 @@ public class ItemProductInCart {
         this.sp = sp;
     }
     public double getPrice() {
+        double price = 0;
+        if(getSp().getPromotional()!=0){
+            price = getSp().getPromotional()*getSoLgMua();
+        }
+        else{
+            price = getSp().getPrice()*getSoLgMua();
+        }
         return price;
     }
-    public void setPrice(double price) {
-        this.price = price;
-    }
+
     public void quantityUp(int solg) {
         setSoLgMua(this.soLgMua + solg);
     }
@@ -56,14 +74,13 @@ public class ItemProductInCart {
         cost = this.getSp().getPrice() * this.getSoLgMua();
         return cost;
     }
-
     @Override
     public String toString() {
         return "ItemProductInCart{" +
-                "masp='" + masp + '\'' +
+                "customer_id ='" + customer_id + '\'' +
                 ", soLgMua=" + soLgMua +
                 ", sp=" + sp +
-                ", price=" + price +
+
                 ", order=" + order +
                 '}';
     }

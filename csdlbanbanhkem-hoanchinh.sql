@@ -1,4 +1,5 @@
-
+CREATE DATABASE banbanhkem;
+use banbanhkem;
 -- --
 /*==============================typeOfCake=====================================*/
 create table typeOfCake(idType char (4) not null PRIMARY key, name varchar(40));
@@ -218,24 +219,24 @@ INSERT INTO products VALUES ('B099','LB06', 'Bánh kem caramel socola', 'Vừa',
 INSERT INTO products VALUES ('B100', 'LB06','Bánh kem chery kem tươi', 'Vừa', 450, "Socola là sở thích của rất nhiều người. Một chiếc bánh gato kem socola chắc chắn sẽ vô cùng hấp dẫn với cả người. Với những bạn thích socola thì 1 chiếc bánh kém sinh nhật socola hoặc maccaron sẽ rất ý nghĩa trong ngày Sinh nhật.","Socola là sở thích của rất nhiều người. Một chiếc bánh gato kem socola chắc chắn sẽ vô cùng hấp dẫn với cả người. Với những bạn thích socola thì 1 chiếc bánh kém sinh nhật socola hoặc maccaron sẽ rất ý nghĩa trong ngày Sinh nhật.", 400000, 0);
 
 
-/*==============================discount=====================================*/
-create table discount( id int AUTO_INCREMENT PRIMARY KEY,
+/*==============================discounts=====================================*/
+create table discounts( id int AUTO_INCREMENT PRIMARY KEY,
                    idProduct char(4),
                    discount DOUBLE,
                    startDate datetime,
                    expiryDate datetime,
                    CONSTRAINT f_mk FOREIGN KEY(idProduct) REFERENCES products(idProduct));
-insert into discount(idProduct, discount, startDATE, expiryDate)  values('B003', 0.2, '2022/12/11', '2023/12/20');
-insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B007', 0.3, '2022/12/11', '2023/12/20');
-insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B009', 0.5, '2022/12/11', '2023/12/20');
-insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B011', 0.1, '2022/12/11', '2023/12/20');
-insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B013', 0.3, '2022/12/11', '2023/12/20');
-insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B015', 0.2, '2022/12/11', '2023/12/20');
-insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B017', 0.4, '2022/12/11', '2023/12/20');
-insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B019', 0.5, '2022/12/11', '2023/12/20');
-insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B021', 0.1, '2022/12/11', '2023/12/20');
-insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B023', 0.05, '2022/12/11', '2023/12/20');
-insert into discount(idProduct, discount, startDATE, expiryDate) values( 'B025', 0.3, '2022/12/11', '2022/12/20');
+insert into discounts(idProduct, discount, startDATE, expiryDate)  values('B003', 0.2, '2022/12/11', '2023/12/20');
+insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B007', 0.3, '2022/12/11', '2023/12/20');
+insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B009', 0.5, '2022/12/11', '2023/12/20');
+insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B011', 0.1, '2022/12/11', '2023/12/20');
+insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B013', 0.3, '2022/12/11', '2023/12/20');
+insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B015', 0.2, '2022/12/11', '2023/12/20');
+insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B017', 0.4, '2022/12/11', '2023/12/20');
+insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B019', 0.5, '2022/12/11', '2023/12/20');
+insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B021', 0.1, '2022/12/11', '2023/12/20');
+insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B023', 0.05, '2022/12/11', '2023/12/20');
+insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B025', 0.3, '2022/12/11', '2022/12/20');
 
 
 /*==============================ANH SP=====================================*/
@@ -1006,10 +1007,11 @@ CREATE table LOGS(LOGS_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 										LOGS_CREATE_AT datetime DEFAULT(NOW()), 
 										LOGS_STATUS TINYINT(4) not null DEFAULT(0));
 										
-create table cartItem(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
-											idUser char(4), 
-											idProduct char(4), 
-											quantity int);
+create table cartItems(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+											customer_id char(4) , 
+											idProduct char(4) , 
+											quantity int ,FOREIGN KEY (customer_id)REFERENCES CUSTOMERS(CUSTOMER_ID),
+											FOREIGN KEY (idProduct)REFERENCES products(idProduct));
 
 /*================================================================Query===================================================================*/
 
