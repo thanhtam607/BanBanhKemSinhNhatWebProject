@@ -7,6 +7,7 @@ import vn.edu.hcmuaf.fit.model.Product;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,8 +65,6 @@ public class CartService {
             throw new RuntimeException(e);
         }
     }
-
-
      public static void addToCart(String cusId, String idProduct, int qty){
          ItemProductInCart item = findItemCart(cusId, idProduct);
          if(item != null){
@@ -73,6 +72,7 @@ public class CartService {
         }else{
             addItemCart(cusId,idProduct,qty);
          }
+         System.out.println(1234);
      }
      public static void removeToCart(int id){
          String sql = "delete from cartItems where id=? ";
@@ -84,7 +84,18 @@ public class CartService {
              throw new RuntimeException(e);
          }
      }
-
+     public static double totalPrice(List<ItemProductInCart> list){
+         double res = 0;
+         for(ItemProductInCart item : list){
+             res +=item.getPrice();
+         }
+         return res;
+     }
+    public static String formatNum(double num){
+        NumberFormat vn = NumberFormat.getInstance();
+        String result = vn.format(num);
+        return result;
+    }
     public static void main(String[] args) {
 //       addToCart("AD03", "B004",4);
     }

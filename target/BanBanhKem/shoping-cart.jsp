@@ -287,7 +287,7 @@
                     <h5>Tổng cộng</h5>
                     <hr>
                     <ul>
-                        <li>Tổng thanh toán:<span id="totalMoney"><%= 0%> VND</span></li>
+                        <li>Tổng thanh toán:<span id="totalMoney"><%=CartService.formatNum(CartService.totalPrice(listItemCart))%> VND</span></li>
                     </ul>
                     <hr>
                     <a href="checkout.jsp" class="primary-btn">THANH TOÁN NGAY</a>

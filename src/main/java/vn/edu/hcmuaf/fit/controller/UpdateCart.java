@@ -30,9 +30,9 @@ public class UpdateCart extends HttpServlet {
                 Product product = ProductService.findById(maSP);
                 if (product != null) {
                     Order order = (Order) session.getAttribute("order");
-                    HashMap<String, ItemProductInCart> listItems = order.getData();
-                    ItemProductInCart item = listItems.get(maSP);
-                    item.setSoLgMua(solgmua);
+//                    HashMap<String, ItemProductInCart> listItems = order.getData();
+//                    ItemProductInCart item = listItems.get(maSP);
+//                    item.setSoLgMua(solgmua);
                     session.setAttribute("order", order);
                 }
             }
