@@ -61,13 +61,7 @@ public class  Order {
     }
 
 
-    public double totalMoney() {
-        this.priceTotal = 0;
-        for (ItemProductInCart p : list()) {
-            this.priceTotal += p.giaSanPhamTrongGioHang();
-        }
-        return this.priceTotal;
-    }
+
     public Collection<ItemProductInCart> list(){
         return  data.values();
     }

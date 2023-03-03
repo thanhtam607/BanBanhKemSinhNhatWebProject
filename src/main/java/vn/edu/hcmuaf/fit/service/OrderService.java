@@ -27,23 +27,23 @@ public class OrderService {
     }
 
     public static void addOrder(Order order){
-        Statement stm = DBConnect.getInstall().get();
-        String stt = getLastMaHD().substring(2);
-        String mahd = "HD" + (Integer.parseInt(stt) + 1);
-        order.setId(mahd);
-        String makh = order.getUser().getAccount_id();
-        String sql = "INSERT INTO BILLS VALUES('" + mahd + "', '" + makh + "', '"
-                + order.getBuyDate()  + "', '" + order.getNote() + "',"
-                +order.totalMoney()+ "," + order.getTrangthai()+");";
-        if(stm!= null) {
-            try {
-                stm.executeUpdate(sql);
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }else{
-            System.out.println("No find");
-        }
+//        Statement stm = DBConnect.getInstall().get();
+//        String stt = getLastMaHD().substring(2);
+//        String mahd = "HD" + (Integer.parseInt(stt) + 1);
+//        order.setId(mahd);
+//        String makh = order.getUser().getAccount_id();
+//        String sql = "INSERT INTO BILLS VALUES('" + mahd + "', '" + makh + "', '"
+//                + order.getBuyDate()  + "', '" + order.getNote() + "',"
+//                +order.totalMoney()+ "," + order.getTrangthai()+");";
+//        if(stm!= null) {
+//            try {
+//                stm.executeUpdate(sql);
+//            } catch (SQLException se) {
+//                se.printStackTrace();
+//            }
+//        }else{
+//            System.out.println("No find");
+//        }
     }
     public static void addCTHD(Order order, String note){
         Statement stm = DBConnect.getInstall().get();

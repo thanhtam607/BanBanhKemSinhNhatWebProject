@@ -250,9 +250,9 @@
                                 <td class="shoping__cart__quantity" >
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <span class="dec qtybtn" onclick="updateCart('<%=item.getSp().getId()%>')">-</span>
-                                            <input id="<%="qty"+item.getSp().getId()%>" class="qty" name="solgmua" value="<%=item.getSoLgMua()%>" onchange="updateCart('<%=item.getSp().getId()%>')" >
-                                            <span class="inc qtybtn" onclick="updateCart('<%=item.getSp().getId()%>')">+</span>
+                                            <span class="dec qtybtn" onclick="updateCartDec('<%=item.getSp().getId()%>')">-</span>
+                                            <input id="<%="qty"+item.getSp().getId()%>" class="qty" name="solgmua" value="<%=item.getSoLgMua()%>"  >
+                                            <span class="inc qtybtn" onclick="updateCartInc('<%=item.getSp().getId()%>')">+</span>
                                         </div>
                                     </div>
                                 </td>
@@ -287,7 +287,7 @@
                     <h5>Tổng cộng</h5>
                     <hr>
                     <ul>
-                        <li>Tổng thanh toán:<span id="totalMoney"><%= 0%> VND</span></li>
+                        <li>Tổng thanh toán:<span id="totalMoney"><%=CartService.formatNum(CartService.totalPrice(listItemCart))%> VND</span></li>
                     </ul>
                     <hr>
                     <a href="checkout.jsp" class="primary-btn">THANH TOÁN NGAY</a>
