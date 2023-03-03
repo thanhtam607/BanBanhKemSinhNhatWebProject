@@ -72,7 +72,6 @@ public class CartService {
         }else{
             addItemCart(cusId,idProduct,qty);
          }
-         System.out.println(1234);
      }
      public static void removeToCart(int id){
          String sql = "delete from cartItems where id=? ";
