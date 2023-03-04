@@ -859,21 +859,21 @@ CREATE TABLE BILLS(BILL_ID CHAR(4) PRIMARY KEY,
 											TOTAL_BILL FLOAT,
 											BILL_STATUS int DEFAULT 0,
 											CONSTRAINT f_mkh FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID));
-INSERT INTO BILLS VALUES('HD01', 'AD02', '2022/10/12','1 nến 2 dĩa', 900000, 0);
-INSERT INTO BILLS VALUES('HD02', 'AD04', '2022/10/19','1 nến 2 dĩa', 330000, 1);
-INSERT INTO BILLS VALUES('HD03', 'AD05', '2022/10/12','1 nến 2 dĩa', 950000, 0);
-INSERT INTO BILLS VALUES('HD04', 'AD02', '2022/9/23','1 nến 2 dĩa', 300000, 1);
-INSERT INTO BILLS VALUES('HD05', 'AD01', '2022/10/21','1 nến 2 dĩa', 1230000, 0);
-INSERT INTO BILLS VALUES('HD06', 'AD03', '2022/10/12','1 nến 2 dĩa', 900000, 0);
-INSERT INTO BILLS VALUES('HD07', 'AD03', '2022/5/6','1 nến 2 dĩa', 380000, 2);
-INSERT INTO BILLS VALUES('HD08', 'AD01', '2022/8/12','1 nến 2 dĩa', 400000, 0);
-INSERT INTO BILLS VALUES('HD09', 'AD06', '2022/7/15','1 nến 2 dĩa', 400000, 1);
-INSERT INTO BILLS VALUES('HD10', 'AD07', '2022/11/7','1 nến 2 dĩa', 650000, 0);
-INSERT INTO BILLS VALUES('HD11', 'AD01', '2022/1/19','1 nến 2 dĩa', 1950000, 1);
-INSERT INTO BILLS VALUES('HD12', 'AD02', '2023/1/8','1 nến 2 dĩa', 350000, 0);
-INSERT INTO BILLS VALUES('HD13', 'AD01', '2023/1/8','1 nến 2 dĩa', 500000, 2);
-INSERT INTO BILLS VALUES('HD14', 'AD09', '2023/1/8','1 nến 2 dĩa', 300000, 0);
-INSERT INTO BILLS VALUES('HD15', 'AD02', '2023/1/8','1 nến 2 dĩa', 300000, 0);
+INSERT INTO BILLS VALUES('HD01', 'AD02', '2022/10/12','Giao sớm, đúng địa chỉ nha shop ơi :3', 900000, 0);
+INSERT INTO BILLS VALUES('HD02', 'AD04', '2022/10/19','Giao sớm, đúng địa chỉ nha shop ơi :3', 330000, 1);
+INSERT INTO BILLS VALUES('HD03', 'AD05', '2022/10/12','Giao sớm, đúng địa chỉ nha shop ơi :3', 950000, 0);
+INSERT INTO BILLS VALUES('HD04', 'AD02', '2022/9/23','Giao sớm, đúng địa chỉ nha shop ơi :3', 300000, 1);
+INSERT INTO BILLS VALUES('HD05', 'AD01', '2022/10/21','Giao sớm, đúng địa chỉ nha shop ơi :3', 1230000, 0);
+INSERT INTO BILLS VALUES('HD06', 'AD03', '2022/10/12','Giao sớm, đúng địa chỉ nha shop ơi :3', 900000, 0);
+INSERT INTO BILLS VALUES('HD07', 'AD03', '2022/5/6','Giao sớm, đúng địa chỉ nha shop ơi :3', 380000, 2);
+INSERT INTO BILLS VALUES('HD08', 'AD01', '2022/8/12','Giao sớm, đúng địa chỉ nha shop ơi :3', 400000, 0);
+INSERT INTO BILLS VALUES('HD09', 'AD06', '2022/7/15','Giao sớm, đúng địa chỉ nha shop ơi :3', 400000, 1);
+INSERT INTO BILLS VALUES('HD10', 'AD07', '2022/11/7','Giao sớm, đúng địa chỉ nha shop ơi :3', 650000, 0);
+INSERT INTO BILLS VALUES('HD11', 'AD01', '2022/1/19','Giao sớm, đúng địa chỉ nha shop ơi :3', 1950000, 1);
+INSERT INTO BILLS VALUES('HD12', 'AD02', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi :3', 350000, 0);
+INSERT INTO BILLS VALUES('HD13', 'AD01', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi :3', 500000, 2);
+INSERT INTO BILLS VALUES('HD14', 'AD09', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi :3', 300000, 0);
+INSERT INTO BILLS VALUES('HD15', 'AD02', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi :3', 300000, 0);
 
 /*==============================BILL_DETAIL=====================================*/
 CREATE TABLE BILL_DETAIL(BILL_ID CHAR(4),
@@ -882,26 +882,26 @@ CREATE TABLE BILL_DETAIL(BILL_ID CHAR(4),
 										NOTES LONGTEXT,
 										CONSTRAINT f_mhdcthd FOREIGN KEY(idProduct) REFERENCES products(idProduct),
 										CONSTRAINT f_mspcthd FOREIGN KEY (BILL_ID) REFERENCES BILLS(BILL_ID)  );
-INSERT INTO BILL_DETAIL VALUES('HD01', 'B001', 2, 'Bánh này lấy nến 2 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD02', 'B005', 1, 'Bánh này lấy nến 32 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD03', 'B039', 1, 'Bánh này lấy nến 25 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD03', 'B035', 2, 'Bánh này lấy nến 2 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD04', 'B023', 1, 'Bánh này lấy nến 27 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD05', 'B014', 1, 'Bánh này lấy nến 2 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD05', 'B012', 2, 'Bánh này lấy nến 52 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD05', 'B004', 1, 'Bánh này lấy nến 12 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD06', 'B008', 2, 'Bánh này lấy nến 2 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD07', 'B010', 1, 'Bánh này lấy nến 22 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD08', 'B099', 1, 'Bánh này lấy nến 21 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD09', 'B029', 1, 'Bánh này lấy nến 25 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD10', 'B067', 1, 'Bánh này lấy nến 28 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD11', 'B050', 3, 'Bánh này lấy nến 62 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD12', 'B040', 1, 'Bánh này lấy nến 29 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD13', 'B054', 1, 'Bánh này lấy nến 30 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD13', 'B034', 1, 'Bánh này lấy nến 24 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD13', 'B014', 3, 'Bánh này lấy nến 24 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD14', 'B088', 1, 'Bánh này lấy nến 23 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD15', 'B090', 1, 'Bánh này lấy nến 20 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD01', 'B001', 2, 'Chúc mừng sinh nhật 2 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD02', 'B005', 1, 'Chúc mừng sinh nhật 32 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD03', 'B039', 1, 'Chúc mừng sinh nhật 25 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD03', 'B035', 2, 'Chúc mừng sinh nhật 2 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD04', 'B023', 1, 'Chúc mừng sinh nhật 27 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD05', 'B014', 1, 'Chúc mừng sinh nhật 2 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD05', 'B012', 2, 'Chúc mừng sinh nhật 52 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD05', 'B004', 1, 'Chúc mừng sinh nhật 12 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD06', 'B008', 2, 'Chúc mừng sinh nhật 2 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD07', 'B010', 1, 'Chúc mừng sinh nhật 22 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD08', 'B099', 1, 'Chúc mừng sinh nhật 21 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD09', 'B029', 1, 'Chúc mừng sinh nhật 25 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD10', 'B067', 1, 'Chúc mừng sinh nhật 28 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD11', 'B050', 3, 'Chúc mừng sinh nhật 62 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD12', 'B040', 1, 'Chúc mừng sinh nhật 29 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD13', 'B054', 1, 'Chúc mừng sinh nhật 30 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD13', 'B034', 1, 'Chúc mừng sinh nhật 24 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD13', 'B014', 3, 'Chúc mừng sinh nhật 24 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD14', 'B088', 1, 'Chúc mừng sinh nhật 23 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD15', 'B090', 1, 'Chúc mừng sinh nhật 20 tuổi');
 
 /*=============================================DELIVERY=======================================*/
 

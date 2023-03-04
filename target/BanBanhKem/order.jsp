@@ -216,7 +216,7 @@
                     <%List<Bill_Detail> billDetailList = ReceiptService.getcthdUser(r.getId());
                         for(Bill_Detail c: billDetailList){
                         %>
-                    <div class="card mb-3 border-left-0 border-right-0 border-bottom-0 mx-3">
+                    <div class="card border-left-0 border-right-0 border-bottom-0 mx-3">
                         <div class="row my-3 pb-3 mx-2" style="border-bottom:1px solid #eee">
                             <div class="col-2">
                                 <div class="vertical-center">
@@ -251,11 +251,17 @@
 
                     <div class="col-12 mb-2">
                         <div class="card-body my-0">
+                            <div class="card-text text-dark border-bottom pb-4">
+                                <span class=" text-dark font-italic">
+                                    GHI CHÚ CHUNG: <%=r.getNote()%>
+                                </span>
+                            </div>
                             <div class="card-text text-dark">
                                 <span class=" text-dark text-uppercase">
                                     ĐỊA CHỈ GIAO HÀNG: <%=r.getAddress()%>
                                 </span>
                             </div>
+
                         </div>
                     </div>
                     <div class="row mb-2" style="margin-top: -20px">
