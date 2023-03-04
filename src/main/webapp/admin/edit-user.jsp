@@ -324,7 +324,7 @@
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="cthd_Admin?mahd=<%=r.getId()%>&tenkh=<%=r.getNamecustomer()%>" class="main__table-btn main__table-btn--edit">
+                                                    <a href="Bill_detail_Admin?mahd=<%=r.getId()%>&tenkh=<%=r.getNamecustomer()%>" class="main__table-btn main__table-btn--edit">
 														<i class="fa fa-eye"></i>
 													</a>
                                                     <a href="#modal-deletehd<%=j%>" class="main__table-btn main__table-btn--delete open-modal">
