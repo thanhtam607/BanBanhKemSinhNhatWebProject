@@ -31,7 +31,7 @@ public class MyOrder extends HttpServlet {
 
             request.getRequestDispatcher("order.jsp").forward(request, response);
         }else{
-            response.sendRedirect("blank_page.jsp");
+            response.sendRedirect("signin.jsp");
 
         }
 

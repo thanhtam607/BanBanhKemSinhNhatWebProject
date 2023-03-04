@@ -432,12 +432,6 @@
                         <!-- end table -->
 
                     </div>
-                    <div class="main__table-btns">
-                        <div class="col-5">
-                            <a href="ListCustomer" type="button" class="form__btn">Quay lại</a>
-                        </div>
-
-                    </div>
                 </div>
                 <!-- end content tabs -->
             </div>
