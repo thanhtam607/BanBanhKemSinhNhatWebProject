@@ -53,7 +53,7 @@ public class ReceiptService {
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILL_ID, CUSTOMER_ID, EXPORT_DATE, NOTES, TOTAL_BILL, BILL_STATUS FROM BILLS ORDER BY BILLS.BILL_ID DESC");
+                ResultSet rs = statement.executeQuery("SELECT BILL_ID, CUSTOMER_ID, EXPORT_DATE, NOTES, TOTAL_BILL, BILL_STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = stmt1.executeQuery("SELECT DELIVERY.DELIVERY_ADDRESS, DELIVERY.BILL_ID FROM DELIVERY");
                     String diachi = "";

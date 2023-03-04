@@ -1,13 +1,9 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="java.util.List" %>
-<<<<<<< HEAD
-<%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
-=======
+
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.*" %>
 
->>>>>>> 081561666f644247db31b685438f0cc71aa13b42
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html>
@@ -76,7 +72,7 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class="active"><a href="Index">Trang chủ</a></li>
+            <li class=""><a href="Index">Trang chủ</a></li>
             <li class=""><a href="about.jsp">Giới thiệu</a></li>
             <li class=""><a href="ListProduct">Sản phẩm</a></li>
             <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -110,7 +106,7 @@
             <div class="col-lg-7 ">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="Index">Trang chủ</a></li>
+                        <li class=""><a href="Index">Trang chủ</a></li>
                         <li class=""><a href="about.jsp">Giới thiệu</a></li>
                         <li class=""><a href="ListProduct">Sản phẩm</a></li>
                         <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -207,8 +203,8 @@
                 <div class="my-2 center overflow-hidden">
                     <div class="row">
                         <div class="col-6">
-                                    <small class="text-secondary d-inline-block pt-3 pl-3">Mã đơn hàng: </small>
-                                    <small class="text-secondary d-inline-block pt-3 " style="padding: 0;margin: 0"><%=r.getId()%></small>
+                                    <small class="text-secondary d-inline-block pt-3 pl-3">Ngày đặt hàng: </small>
+                                    <small class="text-secondary d-inline-block pt-3 " style="padding: 0;margin: 0"><%=r.getExport_date()%></small>
                                 </div>
                         <div class="col-6 text-right  my-2 pt-2 ">
                             <small class="d-inline text-secondary">Trạng thái |</small>
@@ -235,11 +231,12 @@
                             <div class="col-7">
                                 <div class="card-body my-0">
                                     <div class="card-text text-dark">
-                                        <a href="#" class="text-decoration-none text-dark text-uppercase">
+                                        <a href="ProductDetail?id=<%=c.getMasp()%>" class="text-decoration-none text-dark text-uppercase">
                                             <%=c.getNamePro()%>
                                         </a>
                                     </div>
                                     <div class="text-dark" style="font-size:14px">x <%=c.getSolg()%></div>
+                                    <div class="text-dark" style="font-size:14px">Lời chúc trên bánh: <%=c.getNote()%></div>
                                 </div>
                             </div>
                             <div class="col-3 mt-3">
@@ -252,20 +249,16 @@
                     </div>
                     <%}%>
 
-                    <div class="xemthemdiachi card mb-3 border-left-0 border-right-0 border-bottom-0 mx-3">
-                        <div class="row my-3 pb-3 mx-2" style="border-bottom:1px solid #eee">
-                            <div class="col-12">
-                                <div class="card-body my-0">
-                                    <div class="card-text text-dark">
-                                        <a href="" class="text-decoration-none text-dark text-uppercase">
-                                            ĐỊA CHỈ GIAO HÀNG: <%=r.getAddress()%>
-                                        </a>
-                                    </div>
-                                </div>
+                    <div class="col-12 mb-2">
+                        <div class="card-body my-0">
+                            <div class="card-text text-dark">
+                                <span class=" text-dark text-uppercase">
+                                    ĐỊA CHỈ GIAO HÀNG: <%=r.getAddress()%>
+                                </span>
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="margin-top: -20px">
+                    <div class="row mb-2" style="margin-top: -20px">
                         <div class="col-6 pt-2 pb-3">
                             <div id="<%=r.getId()%>" class="text-left mr-3">
                                 <%if(r.checkState()){%>
@@ -282,7 +275,7 @@
                         </div>
                         <div class="col-6 my-2">
                             <div class="text-right pr-5">
-                                <h6 class="d-inline text-dark">Tổng số tiền: </h6>
+                                <h6 class="d-inline text-dark">Thành tiền: </h6>
                                 <h3 class="d-inline" style="color:#ee4d2d">
                                     <%=r.formatNum(r.getMoney())%> VND
                                 </h3>

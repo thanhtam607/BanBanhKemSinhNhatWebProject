@@ -189,7 +189,7 @@
                                         <div class="main__table-text"><%=rc.getStatusName()%></div>
                                     </td>
                                     <td>
-                                        <a href="cthd_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit">
+                                        <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit">
                                             <i class="fas fa-info-circle text-center"></i>
                                         </a>
                                     </td>

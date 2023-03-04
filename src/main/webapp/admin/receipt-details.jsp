@@ -109,15 +109,14 @@
   String tenkh =(String) request.getAttribute("tenkh");%>
 <main class="main bg-white">
   <div class="container-fluid bg-white">
-    <form class="row">
       <!-- main title -->
-      <div class="col-12">
+    <div class="col-12">
         <div class="main__title">
           <h2>Chi tiết đơn hàng</h2>
         </div>
       </div>
-      <div class="col-12">
-        <h5 style="margin-bottom: 25px">Tên KH: <%=tenkh%></h5>
+    <div class="col-12 pt-2 pb-2 rounded bg-pink">
+        <h5 style="margin-bottom: 25px">Tên KH: <%=tenkh%> - SĐT: <%=receipt.getPhone()%></h5>
             <div class="col-12 d-flex form__content pl-0 pr-0">
               <div class="col-6 pl-0 pr-0">
                 <p>Ngày Lập: <%=receipt.getExport_date()%></p>
@@ -129,49 +128,45 @@
               </div>
             </div>
         <p>Ghi Chú Chung: <%=receipt.getNote()%></p>
-      </div>
-      <div class="table-responsive margin-top-20px col-12 margin-right--20px">
-        <table class="table text-start align-middle table-bordered table-hover mb-0">
-          <thead>
-          <tr class="text-black">
-            <th scope="col">STT</th>
-            <th scope="col">Tên sản phẩm</th>
-            <th scope="col">Ghi chú</th>
-            <th scope="col">Số lượng</th>
-            <th scope="col">Đơn giá</th>
-            <th scope="col">Tổng</th>
-          </tr>
-          </thead>
-          <% for (int i = 0; i < receiptsDt.size(); i++){
-            Bill_Detail rcs = receiptsDt.get(i);%>
-          <tbody>
-          <tr>
-            <td><%=i + 1%></td>
-            <td><%=rcs.getNamePro()%></td>
-            <td><%=rcs.getNote()%></td>
-            <td><%=rcs.getSolg()%></td>
-            <td><%=rcs.formatNum(rcs.getPrice())%></td>
-            <td><%=rcs.formatNum(rcs.getToTalPrice())%></td>
-          </tr>
-          </tbody>
-          <% } %>
-        </table>
-      </div>
+          <div class="table-responsive margin-top-20px col-12 pl-0">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+              <thead>
+              <tr class="text-black">
+                <th scope="col">STT</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Ghi chú</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Tổng</th>
+              </tr>
+              </thead>
+              <% for (int i = 0; i < receiptsDt.size(); i++){
+                Bill_Detail rcs = receiptsDt.get(i);%>
+              <tbody>
+              <tr>
+                <td><%=i + 1%></td>
+                <td><%=rcs.getNamePro()%></td>
+                <td><%=rcs.getNote()%></td>
+                <td><%=rcs.getSolg()%></td>
+                <td><%=rcs.formatNum(rcs.getPrice())%></td>
+                <td><%=rcs.formatNum(rcs.getToTalPrice())%></td>
+              </tr>
+              </tbody>
+              <% } %>
+            </table>
+          </div>
 
-      <div class="col-5 margin-top-20px">
-
-        <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;
-        <span class="text-danger text-uppercase text-pink" id="total"><%=receipt.formatNum(receipt.getTotal())%> VND</span>
-      </div>
-      <div class="main__table-btns">
-        <div class="col-9">
-          <a href="ListReceipt_full_Admin" type="button" class="form__btn">Quay lại</a>
-        </div>
+          <div class="col-5 margin-top-20px">
+            <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;
+            <span class="text-danger text-uppercase text-pink" id="total"><%=receipt.formatNum(receipt.getTotal())%> VND</span>
+          </div>
+          <div class="main__table-btns">
         <div class="col-5">
-          <a href="" type="button" class="form__btn">In hóa đơn</a>
+          <a href="#" type="button" class="form__btn">In hóa đơn</a>
         </div>
       </div>
-    </form>
+    </div>
+
   </div>
   <!-- end form -->
   </div>

@@ -239,8 +239,7 @@
                                     <% break;
                                     }
                                     }%>
-                                    <h5><%=item.getSp().getName()%>
-                                    </h5>
+                                    <h5><a href="ProductDetail?id=<%=item.getSp().getId()%>"><%=item.getSp().getName()%></a>/h5>
                                     <input class="idPro" id="idProduct" type="text" value="<%=item.getSp().getId()%>" style="display: none">
                                 </td>
                                 <td class="shoping__cart__price">
