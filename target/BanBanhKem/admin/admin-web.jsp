@@ -1,6 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -202,6 +203,22 @@
             </div>
             <!-- Recent Sales End -->
 
+            <div class="container-fluid pt-4 px-4">
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-pink rounded h-100 p-4">
+                        <h6 class="mb-4 bg-pink">Sản phẩm bán chạy trong tháng này </h6>
+                        <ul class="list-group">
+                            <%Map<String, Integer> map = (Map<String, Integer>) request.getAttribute("map");
+
+                                for(Map.Entry<String, Integer> entry: map.entrySet()){
+                            %>
+                            <li class="list-group-item bg-pink"><%=entry.getKey()%> : <span class="text-right"><%=entry.getValue()%></span></li>
+
+                            <% }%>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <!-- Widgets Start -->
           
             <!-- Widgets End -->

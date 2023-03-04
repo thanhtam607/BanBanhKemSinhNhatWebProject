@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "ListReceipt_Admin", value = "/admin/ListReceipt_Admin")
 public class ListReceipt_Admin extends HttpServlet {
@@ -27,6 +28,9 @@ public class ListReceipt_Admin extends HttpServlet {
 
         int soDHhomnay = ReceiptService.getAllReceiptToDay().size();
         request.setAttribute("soDHhomnay", soDHhomnay);
+
+        Map<String, Integer> map = ReceiptService.getAllCakeThisMonth();
+        request.setAttribute("map", map);
 
         request.getRequestDispatcher("admin-web.jsp").forward(request,response);
 

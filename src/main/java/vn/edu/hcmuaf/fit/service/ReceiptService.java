@@ -120,7 +120,28 @@ public class ReceiptService {
         }
         return list;
     }
-
+    public static Map<String,Integer> getAllCakeThisMonth() {
+        Map<String,Integer> map = new HashMap<>();
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT products.productName, sum(bill_detail.AMOUNT) as slg\n" +
+                        "from products, bills, bill_detail\n" +
+                        "WHERE  bills.BILL_ID = bill_detail.BILL_ID and products.idProduct = bill_detail.idProduct \n" +
+                        "and bills.BILL_STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)\n" +
+                        "GROUP BY  products.idProduct\n" +
+                        "ORDER BY slg DESC");
+                while (rs.next()) {
+                   map.put(rs.getString(1), rs.getInt(2));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có  hóa đơn");
+        }
+        return map;
+    }
     public static int getNumberProToDay() {
         int result = 0;
         Statement statement = DBConnect.getInstall().get();
@@ -213,6 +234,16 @@ public class ReceiptService {
         }
 
         return rs;
+    }
+    public static List<String> getAllStatusNameOrder() {
+        List<String> list = new ArrayList<>();
+        list.add("Chờ Xác Nhận");
+        list.add("Chờ Lấy Hàng");
+        list.add("Đang Giao");
+        list.add( "Giao Thành Công");
+        list.add( "Đã hủy");
+
+        return list;
     }
 
 

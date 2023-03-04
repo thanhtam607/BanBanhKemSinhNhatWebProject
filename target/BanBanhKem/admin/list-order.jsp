@@ -188,11 +188,14 @@
               <td>
                 <div class="main__table-btns">
 
-                  <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn main__table-btn--edit">
+                  <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn bg-info">
                     <i class="fas fa-info"></i>
                   </a>
                   <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">
                     <i class="fa fa-check"></i>
+                  </a>
+                  <a href="AdminEditOrder?id=<%=rc.getId()%>" class="main__table-btn main__table-btn--edit">
+                    <i class="fa fa-edit"></i>
                   </a>
                   <%if(rc.getStateInt() != 4){%>
                   <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
