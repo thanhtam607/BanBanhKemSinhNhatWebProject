@@ -16,7 +16,7 @@ public class CustomerService {
         Statement statement = DBConnect.getInstall().get();
         if(statement !=null){
             try{
-                ResultSet rs = statement.executeQuery("SELECT MAKH, TENKH, DIACHI, SDT, taikhoan.role from khachhang, taikhoan where taikhoan.id = khachhang.MAKH");
+                ResultSet rs = statement.executeQuery("SELECT CUSTOMER_ID, CUSTOMER_NAME, CUSTOMER_ADDRESS, CUSTOMER_PHONE, ACCOUNTS.ACCOUNT_ROLE from CUSTOMERS, ACCOUNTS where ACCOUNTS.ACCOUNT_ID = CUSTOMERS.CUSTOMER_ID");
                 while(rs.next()){
                     listC.add(new Customer(rs.getString(1),
                             rs.getString(2),
@@ -41,7 +41,7 @@ public class CustomerService {
         String result = "";
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT khachhang.MAKH from khachhang ORDER BY MAKH DESC LIMIT 1");
+                ResultSet rs = statement.executeQuery("SELECT CUSTOMERS.CUSTOMER_ID from CUSTOMERS ORDER BY CUSTOMER_ID DESC LIMIT 1");
                 while (rs.next()){
                     result = rs.getString(1);
                 }
@@ -55,15 +55,16 @@ public class CustomerService {
     }
     public static void registerKH(Customer acc, User user){
         Statement stm = DBConnect.getInstall().get();
-        String ID = user.getId();
+        String ID = user.getAccount_id();
         acc.setMAKH(ID);
         acc.setDIACHI("TPHCM");
         acc.setSDT("0356407289");
         String sql = " ";
         if(stm!= null) {
             try {
-                 sql = "insert into khachhang values ('" + ID + "', '" + user.getTentk() + "', '"
-                        + user.getId()  + "', '" + acc.getDIACHI() + "'," + acc.getSDT()+");";
+                 sql = "insert into CUSTOMERS values ('" + ID + "', '" + user.getAccount_name() + "', '"
+                           + acc.getDIACHI() + "'," + acc.getSDT()+");";
+                System.out.println(sql);
                 stm.executeUpdate(sql);
 
             } catch (SQLException se) {
@@ -71,36 +72,7 @@ public class CustomerService {
             }
         }
     }
-    public static void deleteCustomer(String makh) {
-        Statement statement = DBConnect.getInstall().get();
-        String sql =  "DELETE from taikhoan WHERE taikhoan.ID= '"+makh+"';";
-        if (statement != null) {
-            try {
-                statement.executeUpdate(sql);
-                System.out.println("thanh cong");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            System.out.println("not found");
-        }
-    }
-//    public static String getIDKhach(String idAcc){
-//        for(Customer c: getListCustomer()){
-//            if(c.getMATAIKHOAN().equals(idAcc)){
-//                return c.getMAKH();
-//            }
-//        }
-//        return null;
-//    }
-//    public static String getIdAccByMakh(String makh){
-//        for(Customer c: getListCustomer()){
-//            if(c.getMAKH().equals(makh)){
-//                return c.getMATAIKHOAN();
-//            }
-//        }
-//        return null;
-//    }
+
     public static Customer getCusByIdAcc(String idAcc){
         for(Customer c: getListCustomer()){
             if(c.getMAKH().equals(idAcc)){
@@ -112,6 +84,10 @@ public class CustomerService {
 
 
     public static void main(String[] args) {
-    System.out.println(getCusByIdAcc("AD01"));
+        Customer c = new Customer();
+        User u = new User("AD11", "thanhthuy@gmai", "123", "Huy", 0, 0);
+       CustomerService.registerKH(c, u);
+
+
     }
 }

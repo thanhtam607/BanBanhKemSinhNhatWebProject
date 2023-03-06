@@ -1,7 +1,6 @@
 package vn.edu.hcmuaf.fit.controller.admin.Product;
 
-import vn.edu.hcmuaf.fit.model.Product;
-import vn.edu.hcmuaf.fit.model.ProductDetails;
+import vn.edu.hcmuaf.fit.model.ProductDetail;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
@@ -32,7 +31,7 @@ public class UpdateDetails extends HttpServlet {
         if(ngayhh == null){
             ngayhh= ProductService.findById(masp).getDetail().getOod();
         }
-        ProductService.updateDetail(new ProductDetails(masp,soLuong,tonKho,ngaysx,ngayhh));
+        ProductService.updateDetail(new ProductDetail(masp,soLuong,tonKho,ngaysx,ngayhh));
         response.sendRedirect("../ListProduct_Admin");
 
     }

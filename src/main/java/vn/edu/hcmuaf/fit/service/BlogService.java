@@ -19,7 +19,7 @@ public class BlogService {
 
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  blogs.idblog, blogs.imgblog,blogs.title, blogs.date, blogs.content, blos.category, blogs.season, blogs.status from blogs ");
+                ResultSet rs = statement.executeQuery("SELECT  blogs.idblog, blogs.imgblog,blogs.title, blogs.date, blogs.content, blogs.category, blogs.season, blogs.status from BLOGS ");
                 while(rs.next()) {
                     Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
                     list.add(b);
@@ -83,7 +83,7 @@ public class BlogService {
     }
  public  static void deleteBlog(String idblog){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "DELETE FROM BLOGS WHERE IDBLOG = '" + idblog + "'";
+        String sql = "DELETE FROM blogs WHERE IDBLOG = '" + idblog + "'";
      try {
          stm.executeUpdate(sql);
 
@@ -93,7 +93,7 @@ public class BlogService {
  }
 public static  void updateImgBlog(String img,String imgnew){
     Statement stm = DBConnect.getInstall().get();
-    String sql = "UPDATE BLOGS SET IMGBLOG = '" + imgnew + "' WHERE IMGBLOG = '" + img +"'";
+    String sql = "UPDATE blogs SET IMGBLOG = '" + imgnew + "' WHERE IMGBLOG = '" + img +"'";
     try {
         stm.executeUpdate(sql);
 
@@ -103,7 +103,7 @@ public static  void updateImgBlog(String img,String imgnew){
 }
 public static void  updateTitle(String idblog, String title ){
     Statement stm = DBConnect.getInstall().get();
-    String sql = "UPDATE BLOGS SET TITLE = '" + title + "' WHERE IDBLOG = '" + idblog +"'";
+    String sql = "UPDATE blogs SET TITLE = '" + title + "' WHERE IDBLOG = '" + idblog +"'";
     try {
         stm.executeUpdate(sql);
 
@@ -190,9 +190,9 @@ public static void addBlog(Blog b){
 //        for (int i = 0; i < rs.length; i++){
 //            System.out.print(rs[i] + '\n');
 //        }
-        System.out.println(BlogService.getMaxIdBlog());
-        System.out.println(BlogService.listss());
-        String rs = BlogService.listcate().get(0);
-        System.out.println(BlogService.ListCategory(rs));
+//        System.out.println(BlogService.getMaxIdBlog());
+//        System.out.println(BlogService.listss());
+//        String rs = BlogService.listcate().get(0);
+//        System.out.println(BlogService.ListCategory(rs));
     }
 }

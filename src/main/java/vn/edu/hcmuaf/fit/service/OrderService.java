@@ -13,7 +13,7 @@ public class OrderService {
         String result = "";
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT hoadon.MAHD from hoadon ORDER BY MAHD DESC LIMIT 1");
+                ResultSet rs = statement.executeQuery("SELECT BILLS.BILL_ID from BILLS ORDER BY BILL_ID DESC LIMIT 1");
                 while (rs.next()){
                     result = rs.getString(1);
                 }
@@ -27,31 +27,31 @@ public class OrderService {
     }
 
     public static void addOrder(Order order){
-        Statement stm = DBConnect.getInstall().get();
-        String stt = getLastMaHD().substring(2);
-        String mahd = "HD" + (Integer.parseInt(stt) + 1);
-        order.setId(mahd);
-        String makh = order.getUser().getId();
-        String sql = "INSERT INTO HOADON VALUES('" + mahd + "', '" + makh + "', '"
-                + order.getBuyDate()  + "', '" + order.getNote() + "',"
-                +order.totalMoney()+ "," + order.getTrangthai()+");";
-        if(stm!= null) {
-            try {
-                stm.executeUpdate(sql);
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }else{
-            System.out.println("No find");
-        }
+//        Statement stm = DBConnect.getInstall().get();
+//        String stt = getLastMaHD().substring(2);
+//        String mahd = "HD" + (Integer.parseInt(stt) + 1);
+//        order.setId(mahd);
+//        String makh = order.getUser().getAccount_id();
+//        String sql = "INSERT INTO BILLS VALUES('" + mahd + "', '" + makh + "', '"
+//                + order.getBuyDate()  + "', '" + order.getNote() + "',"
+//                +order.totalMoney()+ "," + order.getTrangthai()+");";
+//        if(stm!= null) {
+//            try {
+//                stm.executeUpdate(sql);
+//            } catch (SQLException se) {
+//                se.printStackTrace();
+//            }
+//        }else{
+//            System.out.println("No find");
+//        }
     }
-    public static void addCTHD(Order order){
+    public static void addCTHD(Order order, String note){
         Statement stm = DBConnect.getInstall().get();
         String sql = "";
         if(stm!= null) {
             try {
                 for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
-                     sql = "INSERT INTO CTHD VALUES('" + order.getId() + "','" + entry.getValue().getSp().getId() + "'," + entry.getValue().getSoLgMua() + ",'" +order.getNote()+"');";
+                     sql = "INSERT INTO BILL_DETAIL VALUES('" + order.getId() + "','" + entry.getValue().getSp().getId() + "'," + entry.getValue().getSoLgMua() + ",'" +note+"');";
                     stm.executeUpdate(sql);
 
                 }
@@ -65,7 +65,7 @@ public class OrderService {
         String sql = "";
         if(stm!= null) {
             try {
-                 sql = "INSERT INTO giaohang VALUES('" + order.getId() + "','" + order.getGiaohang().getNgayGiao() + "',' " + order.getGiaohang().getDiachigiao()+"');";
+                 sql = "INSERT INTO DELIVERY VALUES('" + order.getId() + "','" + order.getGiaohang().getNgayGiao() + "',' "+ order.getGiaohang().getDiachigiao() + "',' "+ order.getGiaohang().getEmail() + "',' "+ order.getGiaohang().getPhone() + "',' " + order.getGiaohang().getTenKH()+"');";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -84,7 +84,7 @@ public class OrderService {
                 for(Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()){
                     Product p = entry.getValue().getSp();
                     int solgConLai = p.getDetail().getInventory() - entry.getValue().getSoLgMua();
-                    String sql = "UPDATE ctsp set ctsp.tonKho = "+solgConLai+" WHERE ctsp.MaSP ='"+p.getId()+"'";
+                    String sql = "UPDATE productDetails set productDetails.inventory = "+solgConLai+" WHERE productDetails.idProduct ='"+p.getId()+"'";
                     stm.executeUpdate(sql);
 
                 }

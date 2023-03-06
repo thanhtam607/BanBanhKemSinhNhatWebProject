@@ -1,8 +1,7 @@
 package vn.edu.hcmuaf.fit.controller;
 
-import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Order;
-import vn.edu.hcmuaf.fit.model.Ship;
+import vn.edu.hcmuaf.fit.model.Delivery;
 import vn.edu.hcmuaf.fit.service.OrderService;
 
 import javax.servlet.*;
@@ -25,23 +24,27 @@ public class AddNewOrder extends HttpServlet {
         String diachi = request.getParameter("diachi");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
-        String ghichu = request.getParameter("ghichu");
+        String ghichu = request.getParameter("ghichu") +", "+ request.getParameter("haveDisk");
+        String ghichuDetail = request.getParameter("ghichuDetail");
 
         Date today = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayFM = formatter.format(today);
         order.setBuyDate(todayFM);
 
-        Ship gh = new Ship();
+        Delivery gh = new Delivery();
         gh.setDiachigiao(diachi);
         gh.setNgayGiao(todayFM);
-
+        gh.setEmail(email);
+        gh.setPhone(phone);
+        gh.setTenKH(ten);
 
         order.setGiaohang(gh);
         order.setNote(ghichu);
 
+
         OrderService.addOrder(order);
-        OrderService.addCTHD(order);
+        OrderService.addCTHD(order, ghichuDetail);
         OrderService.addGiaoHang(order);
         OrderService.updateTonKhoWhenAdd(order);
 

@@ -37,13 +37,8 @@ public class DBConnect {
 
     }
     public static Connection getConn(){
-        Connection con = null;
-        try {
-            con = DriverManager.getConnection(URL, user, pass);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return con;
+
+        return conn;
     }
 
     public static void main(String[] args) {
