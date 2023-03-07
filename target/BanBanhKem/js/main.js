@@ -716,49 +716,26 @@ function check(email) {
 /*-------------------
    addNewOrder
   --------------------- */
-function addOrder(i){
+
+function addOrder(){
     var ten = document.getElementById("ten").value;
     var diachi = document.getElementById("diachi").value;
     var phone = document.getElementById("phone").value;
     var email = document.getElementById("email").value;
     var ghichu = document.getElementById("ghichu").value;
-    var ghichuDetail = document.getElementById(i).value;
-    var haveDisk = document.getElementById("payment3").labels;
+    var lenght = document.getElementsByName("noteD").length;
+    var note = new Array();
+    for(var i =0; i<lenght;i++){
+        note[i] = document.getElementsByName("noteD")[i].value+"/";
+        if(i=== lenght-1){
+            note[i] = document.getElementsByName("noteD")[i].value;
+        }
 
-    var url  ="AddNewOrder";
-    $.ajax({
-        url: url,
-        type: "GET",
-        data: {ten:ten,
-            diachi:diachi,
-            phone:phone,
-            email:email,
-            ghichu: ghichu,
-            ghichuDetail:ghichuDetail,
-            haveDisk: haveDisk},
-        success: function (){
-            document.getElementById("totalPro").innerHTML="0";
-            document.getElementById("totalPro1").innerHTML="0";
-            document.getElementById("emptyPro").innerHTML = "" +
-                "                                <h4>Đơn hàng</h4>\n" +
-                "                                <div class=\"checkout__order__products\">Sản Phẩm <span>Tổng</span></div>\n" +
-                "                                <ul class=\"\">\n" +
-                "                                    <li>\n" +
-                "                                    </li>\n" +
-                "                                </ul>\n" +
-                "                                <div class=\"checkout__order__subtotal\">Tạm tính <span>0 VND</span></div>\n" +
-                "                                <div class=\"checkout__order__total\">Tổng <span>0 VND</span></div>\n" +
-                "\n" +
-                "\n" +
-                "                                <div class=\"checkout__input__checkbox\">\n" +
-                "                                    <label for=\"payment\" >\n" +
-                "                                       Thanh Toán Khi Nhận Hàng\n" +
-                "                                        <input type=\"checkbox\" id=\"payment\">\n" +
-                "                                        <span class=\"checkmark\"></span>\n" +
-                "                                    </label>\n" +
-                "                                </div>\n" +
-                "                                <button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>\n" +
-                "                            ";
+    }
+    console.log(note.toString())
+    var haveDisk = document.getElementById("payment3").value;
+    var url1  ="AddNewOrder?ten" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
+
 
             Swal.fire({
                 text:'Đặt hàng thành công!',
@@ -768,7 +745,7 @@ function addOrder(i){
                 confirmButtonText: 'Xem đơn đặt',
                 confirmButtonColor: '#ff96b7'}).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = "MyOrder";
+                    location.href = url1;
                 }
                 else{
                     location.href = "ListProduct";
@@ -776,8 +753,6 @@ function addOrder(i){
             }
             );
 
-        }
-    });
 }
 function cartEmpty(){
     Swal.fire({

@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.CartService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -225,16 +226,16 @@
                                        id="diachi" value="<%=customer.getDIACHI()%>">
                             </div>
 
-                            <% int i = 0;
-                            for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
-
+                            <%
+                            List<ItemProductInCart> listItemC =(List<ItemProductInCart>) session.getAttribute("itemCart");
+                            for (ItemProductInCart item : listItemC) {
                             %>
                             <div class="checkout__input">
-                                <p><%=entry.getValue().getSp().getName()%></p>
-                                <input type="text" id="<%=i%>" placeholder="Lời chúc bạn muốn ghi lên bánh">
+                                <p><%=item.getSp().getName()%></p>
+                                <input type="text" name="noteD" placeholder="Lời chúc bạn muốn ghi lên bánh">
                             </div>
 
-                            <%i++;}%>
+                            <%}%>
 
                             <div class="checkout__input">
                                 <p>Ghi chú cho cửa hàng<span>*</span></p>
@@ -244,7 +245,7 @@
                             <div class="col-lg-6 checkout__input__checkbox">
                                 <label for="payment3" >
                                     Lấy dụng cụ ăn uống,...
-                                    <input type="radio" id="payment3" name="yes">
+                                    <input type="radio" id="payment3" name="yes" value="Lấy dụng cụ ăn uống,...">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -255,31 +256,30 @@
                                 <h4>Đơn hàng</h4>
                                 <div class="checkout__order__products">Sản Phẩm <span>Tổng</span></div>
                                 <ul >
-                                    <% for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
-                                    %>
+                                    <%for (ItemProductInCart item : listItemC) {%>
                                     <li>
-                                        <span style="float: left" class="breaklineNamePro"><%=entry.getValue().getSp().getName()%></span>
-                                        <span ><%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND</span>
+                                        <span style="float: left" class="breaklineNamePro"><%=item.getSp().getName()%></span>
+                                        <span ><%=item.formatNum(item.getPrice())%> VND</span>
                                     </li>
                                     <%}%>
                                 </ul>
-                                <div class="checkout__order__subtotal">Tạm tính <span><%= order.formatNum(order.totalMoney())%> VND</span></div>
-                                <div class="checkout__order__total">Tổng <span><%= order.formatNum(order.totalMoney())%> VND</span></div>
+                                <div class="checkout__order__subtotal">Tạm tính <span><%= CartService.formatNum(CartService.totalPrice(listItemC))%> VND</span></div>
+                                <div class="checkout__order__total">Tổng <span><%= CartService.formatNum(CartService.totalPrice(listItemC))%> VND</span></div>
 
 
                                 <div class="checkout__input__checkbox">
                                     <label for="payment" >
                                        Thanh Toán Khi Nhận Hàng
-                                        <input type="radio" id="payment" name="isPayment">
+                                        <input type="radio" id="payment" name="isPayment" value="Thanh Toán Khi Nhận Hàng">
                                         <span class="checkmark"></span>
                                     </label>
                                     <label for="payment_onl" >
                                        Thanh Toán Qua Chuyển Khoản
-                                        <input type="radio" id="payment_onl" name="isPayment">
+                                        <input type="radio" id="payment_onl" name="isPayment" value="Thanh Toán Qua Chuyển Khoản">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <button onclick="addOrder('<%=i%>')" type="submit" class="site-btn" >ĐẶT HÀNG</button>
+                                <button onclick="addOrder()" type="submit" class="site-btn" >ĐẶT HÀNG</button>
                             </div>
                         </div>
                     </div>

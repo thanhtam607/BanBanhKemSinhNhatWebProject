@@ -1,10 +1,12 @@
 package vn.edu.hcmuaf.fit.model;
 
 import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.service.CartService;
 
 import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 public class  Order {
     private String id;
@@ -14,14 +16,14 @@ public class  Order {
     private String note;
     private int trangthai;
     private Delivery giaohang;
-    private HashMap<String, ItemProductInCart> data;
+    List<ItemProductInCart> data;
     public Order() {
 
 
     }
 
     public Order(String id, User user, String buyDate, double priceTotal, String note,
-                 int trangthai, HashMap<String, ItemProductInCart> data, Delivery gh) {
+                 int trangthai, List<ItemProductInCart> data  , Delivery gh) {
         this.id = id;
         this.user = user;
         this.buyDate = buyDate;
@@ -30,21 +32,29 @@ public class  Order {
         this.trangthai = trangthai;
         this.data = data;
         this.giaohang = gh;
-    }
-
-    public Order(HashMap<String, ItemProductInCart> data) {
+}
+    public Order( User user, List<ItemProductInCart> data, String buyDate, double priceTotal, String note, Delivery gh ) {
+        this.id = null;
+        this.user = user;
+        this.buyDate = buyDate;
+        this.priceTotal = priceTotal;
+        this.note = note;
+        this.trangthai = 0;
         this.data = data;
+        this.giaohang = gh;
     }
 
-    public ItemProductInCart get(String id) {
-        return data.get(id);
+    public Order(List<ItemProductInCart> data) {
+        this.data = data;
+        this.trangthai = 0;
     }
 
-    public HashMap<String, ItemProductInCart> getData() {
+
+    public List<ItemProductInCart> getData() {
         return data;
     }
 
-    public void setData(HashMap<String, ItemProductInCart> data) {
+    public void setData(List<ItemProductInCart> data) {
         this.data = data;
     }
 
@@ -56,15 +66,6 @@ public class  Order {
         this.giaohang = giaohang;
     }
 
-    public boolean remove(String id) {
-        return data.remove(id) == null;
-    }
-
-
-
-    public Collection<ItemProductInCart> list(){
-        return  data.values();
-    }
 
     public String getId() {
         return id;
@@ -122,11 +123,10 @@ public class  Order {
         String result = vn.format(num);
         return result;
     }
-    public int totalProduct(){
-        int total = 0;
-        for (ItemProductInCart i: list()){
-            total+= i.getSoLgMua();
-        }
-        return total;
+    public double getPriceTotal(){
+        return this.priceTotal;
+    }
+    public void setPriceTotal(double priceToTal){
+        this.priceTotal = priceToTal;
     }
 }

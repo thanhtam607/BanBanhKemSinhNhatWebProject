@@ -209,7 +209,7 @@
                   <div class="col-12">
                     <input id="" class="form__btn" type="submit"  value="Lưu thông tin">
                   </div>
-                  <% }} %>
+<%--                  <% }} %>--%>
                 </div>
               </form>
             </div>
