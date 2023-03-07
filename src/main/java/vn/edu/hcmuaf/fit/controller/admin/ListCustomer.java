@@ -9,6 +9,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @WebServlet(name = "ListCustomer", value = "/admin/ListCustomer")
@@ -17,6 +19,25 @@ public class ListCustomer extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Customer> listCus = CustomerService.getListCustomer();
         request.setAttribute("listCus", listCus);
+        String sort = request.getParameter("sortValue");
+        if (sort != null) {
+            if (sort.equals("Sắp xếp theo tên")) {
+                Collections.sort(listCus, new Comparator<Customer>() {
+                    @Override
+                    public int compare(Customer o1, Customer o2) {
+                        return o1.getTENKH().compareTo(o2.getTENKH());
+                    }
+                });
+            }
+            if (sort.equals("Sắp xếp theo địa chỉ")) {
+                Collections.sort(listCus, new Comparator<Customer>() {
+                    @Override
+                    public int compare(Customer o1, Customer o2) {
+                        return o1.getDIACHI().compareTo(o2.getDIACHI());
+                    }
+                });
+            }
+        }
         request.getRequestDispatcher("customers.jsp").forward(request,response);
     }
 
