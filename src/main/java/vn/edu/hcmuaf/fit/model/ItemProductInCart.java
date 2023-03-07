@@ -8,6 +8,7 @@ public class ItemProductInCart {
     private int soLgMua;
     private Product sp;
     private Order order;
+    private String note;
     public ItemProductInCart() {
     }
 
@@ -88,5 +89,11 @@ public class ItemProductInCart {
         NumberFormat vn = NumberFormat.getInstance();
         String result = vn.format(num);
         return result;
+    }
+    public void setNote(String s){
+        this.note = s;
+    }
+    public String getNote(){
+        return this.note;
     }
 }

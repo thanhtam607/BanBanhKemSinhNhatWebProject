@@ -27,38 +27,42 @@ public class OrderService {
     }
 
     public static void addOrder(Order order){
-//        Statement stm = DBConnect.getInstall().get();
-//        String stt = getLastMaHD().substring(2);
-//        String mahd = "HD" + (Integer.parseInt(stt) + 1);
-//        order.setId(mahd);
-//        String makh = order.getUser().getAccount_id();
-//        String sql = "INSERT INTO BILLS VALUES('" + mahd + "', '" + makh + "', '"
-//                + order.getBuyDate()  + "', '" + order.getNote() + "',"
-//                +order.totalMoney()+ "," + order.getTrangthai()+");";
-//        if(stm!= null) {
-//            try {
-//                stm.executeUpdate(sql);
-//            } catch (SQLException se) {
-//                se.printStackTrace();
-//            }
-//        }else{
-//            System.out.println("No find");
-//        }
-    }
-    public static void addCTHD(Order order, String note){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "";
+        String stt = getLastMaHD().substring(2);
+        String mahd = "HD" + (Integer.parseInt(stt) + 1);
+        order.setId(mahd);
+        String makh = order.getUser().getAccount_id();
+        String sql = "INSERT INTO BILLS VALUES('" + mahd + "', '" + makh + "', '"
+                + order.getBuyDate()  + "', '" + order.getNote() + "',"
+                +order.getPriceTotal()+ "," + order.getTrangthai()+");";
         if(stm!= null) {
             try {
-                for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
-                     sql = "INSERT INTO BILL_DETAIL VALUES('" + order.getId() + "','" + entry.getValue().getSp().getId() + "'," + entry.getValue().getSoLgMua() + ",'" +note+"');";
-                    stm.executeUpdate(sql);
+                stm.executeUpdate(sql);
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }else{
+            System.out.println("No find");
+        }
+        addCTHD(order);
+        clearCart(order);
 
-                }
+    }
+    public static void addCTHD(Order order){
+        Statement stm = DBConnect.getInstall().get();
+        String sql="";
+        System.out.println(order.getData().size());
+            for (ItemProductInCart item: order.getData()) {
+
+                sql = "INSERT INTO BILL_DETAIL VALUES('" + order.getId() + "','" +item.getSp().getId() + "'," + item.getSoLgMua() + ",'" +item.getNote()+"');";
+            try {
+                    stm.executeUpdate(sql);
+                    System.out.println(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }
         }
+
     }
     public static void addGiaoHang(Order order){
         Statement stm = DBConnect.getInstall().get();
@@ -74,16 +78,17 @@ public class OrderService {
     }
     public static void clearCart(Order order){
         order.getData().clear();
-        order.setBuyDate(null);
+        CartService.removeAllCart(order.getUser().getAccount_id());
+
     }
     public static void updateTonKhoWhenAdd(Order order){
         Statement stm = DBConnect.getInstall().get();
 
         if(stm!= null) {
             try {
-                for(Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()){
-                    Product p = entry.getValue().getSp();
-                    int solgConLai = p.getDetail().getInventory() - entry.getValue().getSoLgMua();
+                for(ItemProductInCart item: order.getData()){
+                    Product p = item.getSp();
+                    int solgConLai = p.getDetail().getInventory() - item.getSoLgMua();
                     String sql = "UPDATE productDetails set productDetails.inventory = "+solgConLai+" WHERE productDetails.idProduct ='"+p.getId()+"'";
                     stm.executeUpdate(sql);
 
@@ -94,9 +99,4 @@ public class OrderService {
         }
     }
 
-    public static void main(String[] args) {
-//        addGiaoHang();
-        String a = getLastMaHD().substring(2);
-        System.out.println(Integer.parseInt(a)+1);
-    }
 }
