@@ -73,11 +73,12 @@ public class CartService {
             addItemCart(cusId,idProduct,qty);
          }
      }
-     public static void removeToCart(int id){
-         String sql = "delete from cartItems where id=? ";
+     public static void removeToCart(String cusId, String idPro){
+         String sql = "delete from cartItems where idProduct=? and customer_id =? ";
          try{
              PreparedStatement ps = DBConnect.getInstall().getConn().prepareStatement(sql);
-             ps.setInt(1,id);
+             ps.setString(1,idPro);
+             ps.setString(2, cusId);
              ps.executeUpdate();
          }catch (SQLException e) {
              throw new RuntimeException(e);
@@ -94,6 +95,16 @@ public class CartService {
         NumberFormat vn = NumberFormat.getInstance();
         String result = vn.format(num);
         return result;
+    }
+    public static void removeAllCart(String cusId){
+        String sql = "delete from cartItems where customer_id =? ";
+        try{
+            PreparedStatement ps = DBConnect.getInstall().getConn().prepareStatement(sql);
+            ps.setString(1, cusId);
+            ps.executeUpdate();
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     public static void main(String[] args) {
 //       addToCart("AD03", "B004",4);

@@ -360,16 +360,11 @@ function removeCart(id){
 
 }
 function removeAll(){
-    var item = document.getElementsByClassName("cart-item");
-    for(var i=0; i<item.length;i++) {
-        var row = item[i];
-        var id = row.getElementsByClassName("idPro")[0].value;
-        removeCart(id);
-    }
+    var url = "RemoveAllCart";
     $.ajax({
+        url: url,
+        type: "POST",
         success: function (){
-
-
             document.getElementById("totalPro").innerHTML="0";
             document.getElementById("totalPro1").innerHTML="0";
 

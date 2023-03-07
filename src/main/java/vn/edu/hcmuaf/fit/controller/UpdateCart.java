@@ -30,7 +30,7 @@ public class UpdateCart extends HttpServlet {
             if (request.getParameter("masp") != null) {
                 String maSP = request.getParameter("masp");
                 Product product = ProductService.findById(maSP);
-                if (product != null) { System.out.println(solgmua);
+                if (product != null) {
                     CartService.updateQty(auth.getAccount_id(),maSP,solgmua);
                     List<ItemProductInCart> listItemC = CartService.findItemCartByIdUser(auth.getAccount_id());
                     session.setAttribute("itemCart", listItemC);
