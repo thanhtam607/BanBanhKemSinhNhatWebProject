@@ -49,6 +49,8 @@ public class AddBlog extends HttpServlet {
         String imgblog = "img/blog/" + idblog+"/" + filename;
         Blog b = new Blog(idnew, imgblog, title, date, content, category, season, i);
         BlogService.addBlog(b);
-       response.sendRedirect("./EditBlog?idB="+ idblog);
-    }
+       response.sendRedirect("/admin/EditBlog?idB="+ idnew);
+        }
+
+
 }

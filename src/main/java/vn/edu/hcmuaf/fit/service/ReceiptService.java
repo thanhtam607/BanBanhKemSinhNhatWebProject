@@ -376,7 +376,7 @@ public class ReceiptService {
 
     public static void updateRole(int role, String id) {
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE ACCOUNTS set  ACCOUNT_ROLE = " + role + " where ACCOUNTS.id = '" + id + "'";
+        String sql = "UPDATE ACCOUNTS set  ACCOUNT_ROLE = " + role + " where ACCOUNT_ID = '" + id + "'";
 
         try {
             statement.executeUpdate(sql);
