@@ -88,6 +88,7 @@
 			<a href="./ListBlog-admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
 			<a href="./ListReceipt_full_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
 			<a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
+			<a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
             <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
             <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
 			<!--  -->
@@ -115,6 +116,7 @@
                                     <input type="button" value="Tin tức">
                                     <span></span>
                                 </div>
+
                                 <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort" style="width: 200px">
                                     <%List<String> listOption = new ArrayList<String>();
                                         listOption.add("Mặc định");
@@ -147,10 +149,7 @@
                     </div>
                 </div>
                 <!-- end main title -->
-                <div class="paginator-wrap">
-                    <span><a href="add-blog.jsp" style="color: white;"> Thêm tin tức mới</a></span>
-                </div>
-                <!-- paginator -->
+
                 <!-- users -->
                 <div class="col-12 bg-pink">
                     <div class="main__table-wrap">
@@ -264,6 +263,8 @@
                     </div>
                 </div>
                 <!-- end users -->
+
+                <!-- paginator -->
                 <div class="col-12">
                     <div class="paginator-wrap">
                         <span><%=blogList.size()%>/<%=blogList.size()%> Bài viết</span>
