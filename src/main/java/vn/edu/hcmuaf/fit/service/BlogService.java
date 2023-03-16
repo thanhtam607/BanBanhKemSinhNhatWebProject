@@ -175,7 +175,6 @@ public static void addBlog(Blog b){
         se.printStackTrace();
     }
 }
-
     public static void main(String[] args) {
 //            List<Blog> li = BlogService.getData();
 //        for(Blog b: li){

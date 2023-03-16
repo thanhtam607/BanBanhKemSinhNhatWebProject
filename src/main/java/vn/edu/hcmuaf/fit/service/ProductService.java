@@ -472,6 +472,89 @@ public class ProductService {
         }
         return detail;
     }
+    public static String idMaxType(){
+        String res ="";
+        String sql= "SELECT max(idType) from typeofcake";
+        Statement statement = DBConnect.getInstall().get();
+        try {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                res = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        String s = "";
+        int n = Integer.parseInt(res.substring(2));
+        if(n < 9) {
+            s  = "LB0" + (n + 1);
+        } else {
+            s = "LB" + (n + 1);
+        }
+        return s;
+    }
+    public static void addTypePro(String id, String type){
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "INSERT into typeofcake VALUES('" + id + "', '"+ type+"')";
+        try {
+            stm.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+    }
+    public static List<TypeOfCake> getType() {
+        List<TypeOfCake> res = new ArrayList<>();
+        Statement stm = DBConnect.getInstall().get();
+        ResultSet rs = null;
+        try {
+            rs = stm.executeQuery("SELECT idType, name FROM typeOfCake;");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        while (true) {
+            try {
+                if (!rs.next()) break;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                res.add(new TypeOfCake(rs.getString(1), rs.getString(2)));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return res;
+    }
+    public static void updateType(String id, String newtype){
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "UPDATE typeofcake SET name = '" + newtype + "' WHERE idType = '" + id +"'";
+        try {
+            stm.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public  static void deleteType(String id){
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "DELETE FROM typeofcake WHERE idType = '" + id + "'";
+        try {
+            stm.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static void addTyofcake(TypeOfCake toc){
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "INSERT INTO typeofcake VALUES('" + toc.getIdType() + "', '" + toc.getName() + "')";
+        try {
+            stm.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
     public static void main(String[] args) throws SQLException {
 //        for(Product p : getDiscountProduct()){
 //            System.out.println(p.getId());
@@ -493,7 +576,7 @@ public class ProductService {
 //        System.out.println(getLastComment("B001").getBinhLuan());
 //       System.out.println(getPaginationPage(1).toString());
         // addComment(new Comment("B002", "Thanh Tâm","Bánh mềm mịn vô cùng hòa quyện với  phần kem mịn màng, vị ngọt thanh vừa ăn lại có thêm phần tiramisu khá lạ miệng khiến cho người ăn cảm thấy thích thú.","2022/12/8"), "AD02");
-//        System.out.print(getListSize().toString());
+//        System.out.print(listTypeCake());
     }
 
 }
