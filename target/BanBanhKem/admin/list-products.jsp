@@ -4,7 +4,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
-<!DOCTYPE html>
+        <%@ page import="java.util.ArrayList" %>
+        <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
 <meta http-equiv="Content-Type" charset="UTF-8">
@@ -115,14 +116,27 @@
                                 <span class="filter__item-label">Sắp xếp:</span>
 
                                 <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <input type="button" value="Tên">
+                                    <input type="button" value="Sản phẩm">
                                     <span></span>
                                 </div>
 
                                 <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-                                    <li>Ngày sản xuất</li>
-                                    <li>Tên</li>
-                                    <li>Ngày hết hạn</li>
+                                    <%List<String> listOption = new ArrayList<String>();
+                                        listOption.add("Mặc định");
+                                        listOption.add("Giá từ thấp đến cao");
+                                        listOption.add("Giá từ cao đến thấp");
+                                        listOption.add("Sắp xếp theo tên");
+                                        listOption.add("Sắp xếp theo loại");
+                                        String val;
+                                        for(String s: listOption){
+                                            val = request.getParameter("sortValue");
+                                            if(s.equals(val)){%>
+                                    <li><a class ="text-pink" href="ListProduct_Admin?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></a></li>
+                                    <%}
+                                    else{%>
+                                    <li><a id="sortValue" class ="text-pink" href="ListProduct_Admin?sortValue=<%=s%>" value="<%=s%>"><%=s%></a></li>
+                                    <%}%>
+                                    <%}%>
                                 </ul>
                             </div>
                             <!-- end filter sort -->

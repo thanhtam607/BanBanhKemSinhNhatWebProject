@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,14 +113,26 @@
                                 <span class="filter__item-label">Sắp xếp:</span>
 
                                 <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <input type="button" value="Tên">
+                                    <input type="button" value="Tin tức">
                                     <span></span>
                                 </div>
 
-                                <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-                                    <li>Tiêu đề</li>
-                                    <li>Ngày đăng</li>
-                                    
+                                <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort" style="width: 200px">
+                                    <%List<String> listOption = new ArrayList<String>();
+                                        listOption.add("Mặc định");
+                                        listOption.add("Theo tiêu đề");
+                                        listOption.add("Theo danh mục");
+                                        listOption.add("Theo ngày đăng");
+                                        String val;
+                                        for(String s: listOption){
+                                            val = request.getParameter("sortValue");
+                                            if(s.equals(val)){%>
+                                    <li><a class ="text-pink" href="ListBlog-admin?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></a></li>
+                                    <%}
+                                    else{%>
+                                    <li><a id="sortValue" class ="text-pink" href="ListBlog-admin?sortValue=<%=s%>" value="<%=s%>"><%=s%></a></li>
+                                    <%}%>
+                                    <%}%>
                                 </ul>
                             </div>
                             <!-- end filter sort -->

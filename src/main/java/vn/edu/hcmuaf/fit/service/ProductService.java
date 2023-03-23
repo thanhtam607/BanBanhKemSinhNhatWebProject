@@ -472,7 +472,7 @@ public class ProductService {
         }
         return detail;
     }
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 //        for(Product p : getDiscountProduct()){
 //            System.out.println(p.getId());
 //        }
