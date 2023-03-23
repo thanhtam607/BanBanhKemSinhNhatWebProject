@@ -51,13 +51,11 @@ public class OrderService {
     public static void addCTHD(Order order){
         Statement stm = DBConnect.getInstall().get();
         String sql="";
-        System.out.println(order.getData().size());
             for (ItemProductInCart item: order.getData()) {
 
                 sql = "INSERT INTO BILL_DETAIL VALUES('" + order.getId() + "','" +item.getSp().getId() + "'," + item.getSoLgMua() + ",'" +item.getNote()+"');";
             try {
                     stm.executeUpdate(sql);
-                    System.out.println(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }
