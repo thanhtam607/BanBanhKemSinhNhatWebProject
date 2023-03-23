@@ -735,7 +735,34 @@ function addOrder(){
     console.log(note.toString())
     var haveDisk = document.getElementById("payment3").value;
     var url1  ="AddNewOrder?ten" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
+    $.ajax({
+        url: url1,
+        type: "GET",
 
+        success: function () {
+            document.getElementById("totalPro").innerHTML = "0";
+            document.getElementById("totalPro1").innerHTML = "0";
+            document.getElementById("emptyPro").innerHTML = "" +
+                "                                <h4>Đơn hàng</h4>\n" +
+                "                                <div class=\"checkout__order__products\">Sản Phẩm <span>Tổng</span></div>\n" +
+                "                                <ul class=\"\">\n" +
+                "                                    <li>\n" +
+                "                                    </li>\n" +
+                "                                </ul>\n" +
+                "                                <div class=\"checkout__order__subtotal\">Tạm tính <span>0 VND</span></div>\n" +
+                "                                <div class=\"checkout__order__total\">Tổng <span>0 VND</span></div>\n" +
+                "\n" +
+                "\n" +
+                "                                <div class=\"checkout__input__checkbox\">\n" +
+                "                                    <label for=\"payment\" >\n" +
+                "                                       Thanh Toán Khi Nhận Hàng\n" +
+                "                                        <input type=\"checkbox\" id=\"payment\">\n" +
+                "                                        <span class=\"checkmark\"></span>\n" +
+                "                                    </label>\n" +
+                "                                </div>\n" +
+                "                                <button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>\n" +
+                "                            ";
+        }});
 
             Swal.fire({
                 text:'Đặt hàng thành công!',
@@ -745,7 +772,7 @@ function addOrder(){
                 confirmButtonText: 'Xem đơn đặt',
                 confirmButtonColor: '#ff96b7'}).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = url1;
+                    location.href = "MyOrder";
                 }
                 else{
                     location.href = "ListProduct";
