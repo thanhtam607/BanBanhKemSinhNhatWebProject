@@ -129,23 +129,11 @@
                                         </div>
                                     <div class="col-12 col-sm-6 col-md-12">
                                         <label class="text-dark" for="textdm">Danh mục:</label>
-                                        <% List<String> listcate = BlogService.listcate();
-                                           List<String> listss = BlogService.listss();%>
-                                        <select id = "textdm" class="form__input"  name="category">
-                                            <%for(int i = 0; i < listcate.size(); i++){
-                                                String cate = listcate.get(i);%>
-                                            <option value="<%=cate%>"><%=cate%></option>
-                                            <% } %>
-                                        </select>
+                                        <input id = "textdm" class="form__input"  name="category">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-12">
                                         <label class="text-dark" for="textcd">Chủ đề:</label>
-                                        <select id="textcd" class="form__input"  name="season">
-                                            <%for(int i = 0; i < listss.size(); i++){
-                                                String season = listss.get(i);%>
-                                            <option value="<%=season%>"><%=season%></option>
-                                            <% } %>
-                                        </select>
+                                        <input id="textcd" class="form__input"  name="season">
                                     </div>
                                 </div>
                             </div>

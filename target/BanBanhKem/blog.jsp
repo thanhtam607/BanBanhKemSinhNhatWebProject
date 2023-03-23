@@ -272,11 +272,7 @@
                                                     <li><i class="fa fa-calendar-o"></i><%=b.getDate()%></li>
                                                 </ul>
                                                 <h5><a href="BlogDetails?id=<%=b.getId()%>"><%=b.getTitle()%></a></h5>
-                                                <% if(rs[0].length() < 100) {%>
-                                                <p class="text-justify"><%=rs[0] + rs[1]%></p>
-                                                <% } else {%>
                                                 <p class="text-justify"><%=rs[0]%></p>
-                                                <% } %>
                                                 <a href="BlogDetails?id=<%=b.getId()%>" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
                                             </div>
                                         </div>
