@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -17,7 +18,12 @@ import java.util.List;
 public class Catalog_admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<TypeOfCake> listType = ProductService.getType();
+        List<TypeOfCake> listType = null;
+        try {
+            listType = ProductService.getListType();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         request.setAttribute("listType", listType);
         String sort = request.getParameter("sortValue");
         if (sort != null) {

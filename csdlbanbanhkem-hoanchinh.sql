@@ -1021,5 +1021,52 @@ create table cartItems(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 											idProduct char(4) , 
 											quantity int ,FOREIGN KEY (customer_id)REFERENCES CUSTOMERS(CUSTOMER_ID),
 											FOREIGN KEY (idProduct)REFERENCES products(idProduct));
+create table general_infor(id char(5) NOT NULL PRIMARY KEY,
+                           type varchar(20) not null,
+                           content text);
+insert into general_infor values('GI001', 'SlideShow', 'img/slideshow/GI001.jpg');
+insert into general_infor values('GI002', 'SlideShow', 'img/slideshow/GI002.jpg');
+insert into general_infor values('GI003', 'LogoWeb', 'img/logo_web.jpg');
+insert into general_infor values('GI004', 'Introduce', '<h1 style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><strong><span style="font-size:22px">1. Ch&uacute;ng t&ocirc;i l&agrave; Tiệm b&aacute;nh hạnh ph&uacute;c.</span></strong></span></h1>
 
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">&nbsp; &nbsp; &nbsp;Được th&agrave;nh lập v&agrave;o năm 2022 bởi một đội ngũ đầy nhiệt huyết, b&aacute;nh sinh nhật của tiệm b&aacute;nh ch&uacute;ng t&ocirc;i l&agrave; những chiếc b&aacute;nh tươi ngon được nướng h&agrave;ng ng&agrave;y v&agrave; chau chuốt tỉ mỉ đến từng chi tiết. Với mong muốn mang đến những chiếc b&aacute;nh kh&ocirc;ng chỉ ngon miệng m&agrave; c&ograve;n đẹp mắt, với nguồn nguy&ecirc;n liệu chất lượng cao, c&ocirc;ng thức chế biến điều chỉnh ph&ugrave; hợp với thị hiếu, v&agrave; một vẻ ngo&agrave;i hợp xu hướng v&agrave; độc đ&aacute;o.</span></p>
+
+<p><span style="font-family:Times New Roman,Times,serif"><img src="http://localhost:8080/img/about/anh2.jpg" /></span></p>
+
+<h1><span style="font-family:Times New Roman,Times,serif"><span style="font-size:22px"><strong>2. Điểm kh&aacute;c biệt.</strong></span></span></h1>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">&nbsp; &nbsp; &nbsp; &nbsp;Với thợ bếp đam m&ecirc; v&agrave; gi&agrave;u kinh nghiệm, ch&uacute;ng t&ocirc;i cũng đ&aacute;p ứng những y&ecirc;u cầu đặc biệt của kh&aacute;ch h&agrave;ng để tạo n&ecirc;n những chiếc b&aacute;nh đặc biệt cho mỗi sự kiện quan trọng. Sản phẩm của Tiệm b&aacute;nh hạnh ph&uacute;c th&iacute;ch hợp cho mọi dịp đặc biệt như sinh nhật, khai trương, kỉ niệm, lễ cầu h&ocirc;n, tiệc cưới, lễ đầy th&aacute;ng, v&agrave; cả những ng&agrave;y thường bỗng dưng th&egrave;m một ch&uacute;t ngọt ng&agrave;o v&agrave; tươi tắn.</span></p>
+
+<p><span style="font-family:Times New Roman,Times,serif"><img src="http://localhost:8080/img/about/anh1.jpg" /></span></p>
+
+<h1><span style="font-family:Times New Roman,Times,serif"><strong><span style="font-size:22px">3. Trải nghiệm online v&agrave; tại cửa h&agrave;ng.</span></strong></span></h1>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">&nbsp;Website của ch&uacute;ng t&ocirc;i lu&ocirc;n được cập nhật c&aacute;c mẫu b&aacute;nh mới nhất v&agrave; ph&ugrave; hợp với nhiều kh&aacute;ch h&agrave;ng. Ch&uacute;ng t&ocirc;i mang đến trải nghiệm mua sắm v&agrave; chọn b&aacute;n tuyệt vời d&ugrave; l&agrave; bạn đang li&ecirc;n hệ với ch&uacute;ng t&ocirc;i qua website.</span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">&nbsp;Hiện tại, ch&uacute;ng t&ocirc;i c&oacute; cửa h&agrave;ng tại Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM. Ch&uacute;ng t&ocirc;i nhận đặt h&agrave;ng trước với c&aacute;c loại b&aacute;nh sinh nhật, giao trực tiếp tại cửa h&agrave;ng hoặc giao h&agrave;ng tận nơi v&agrave; một số loại b&aacute;nh c&oacute; thể mua trực tiếp.</span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">H&atilde;y gh&eacute; thăm cửa h&agrave;ng hoặc li&ecirc;n hệ Hotline +84 987654321 để ch&uacute;ng t&ocirc;i tư vấn bạn nhanh nhất nh&eacute;!</span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="color:#9b59b6"><strong>&nbsp; &nbsp; &nbsp; &nbsp;Xin tr&acirc;n trọng cảm ơn!</strong></span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">&nbsp; &nbsp; &nbsp; Cảm ơn qu&yacute; kh&aacute;ch đ&atilde; lựa chọn v&agrave; đồng h&agrave;nh c&ugrave;ng ch&uacute;ng t&ocirc;i trong những chặng đường qua!</span></p>
+');
+insert into general_infor values('GI005', 'Address', 'Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM');
+insert into general_infor values('GI006', 'PhoneNumber', '0987654321');
+insert into general_infor values('GI007', 'Email', 'tiembanhhanhphuc@gmail.com');
+insert into general_infor values('GI008', 'TimeShop', 'T2 - T6');
+insert into general_infor values('GI009', 'TimeShop', '8:00 sáng - 22:00 tối');
+insert into general_infor values('GI010', 'TimeShop', 'T7 & CN');
+insert into general_infor values('GI011', 'TimeShop', '13:00 chiều - 18:00 tối');
+insert into general_infor values('GI012', 'SpecialOffer', 'Thưởng thức bánh miễn phí');
+insert into general_infor values('GI013', 'SpecialOffer', 'Thứ sáu hàng tuần tại cửa hàng vào lúc 14h00-14h30');
+insert into general_infor values('GI014', 'SpecialOffer', 'img/footer/img-footer.jpeg');
+insert into general_infor values('GI015', 'SocialNetwork', 'https://www.facebook.com/mai.thuan.52438/');
+insert into general_infor values('GI016', 'SocialNetwork', 'https://www.messenger.com/t/100017755062615');
+insert into general_infor values('GI017', 'SocialNetwork', 'https://www.instagram.com/maizecorn1542/');
+insert into general_infor values('GI018', 'Delivery', 'Miễn phí giao hàng nội thành TP.HCM');
+insert into general_infor values('GI019', 'GoogleMap', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18773.836012880063!2d106.75738369035878!3d10.863314618235568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRwLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1657022439109!5m2!1svi!2s');
+insert into general_infor values('GI020', 'IndexSlogan', 'Tận hưởng thế giới ngọt ngào của bạn.');
+insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh ngọt, đây là sự yêu thương.');
+insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
 /*================================================================Query=========================================================
