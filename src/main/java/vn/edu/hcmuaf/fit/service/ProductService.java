@@ -504,29 +504,6 @@ public class ProductService {
         }
 
     }
-    public static List<TypeOfCake> getType() {
-        List<TypeOfCake> res = new ArrayList<>();
-        Statement stm = DBConnect.getInstall().get();
-        ResultSet rs = null;
-        try {
-            rs = stm.executeQuery("SELECT idType, name FROM typeOfCake;");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        while (true) {
-            try {
-                if (!rs.next()) break;
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                res.add(new TypeOfCake(rs.getString(1), rs.getString(2)));
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return res;
-    }
     public static void updateType(String id, String newtype){
         Statement stm = DBConnect.getInstall().get();
         String sql = "UPDATE typeofcake SET name = '" + newtype + "' WHERE idType = '" + id +"'";
@@ -564,3 +541,4 @@ class IDComparator implements Comparator<Product> {
         return p2.getId().compareTo(p1.getName());
     }
 }
+
