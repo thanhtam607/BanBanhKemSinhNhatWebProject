@@ -1014,4 +1014,15 @@ create table cartItems(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 											quantity int ,FOREIGN KEY (customer_id)REFERENCES CUSTOMERS(CUSTOMER_ID),
 											FOREIGN KEY (idProduct)REFERENCES products(idProduct));
 
-/*================================================================Query=========================================================
+/*================================================================Query=========================================================*/
+-- Lấy ra tên sp bán chạy tháng 7
+
+SELECT products.productName, sum(bill_detail.AMOUNT) as slg
+from products, bills, bill_detail
+WHERE  bills.BILL_ID = bill_detail.BILL_ID and products.idProduct = bill_detail.idProduct 
+and bills.BILL_STATUS != 2 and month(bills.EXPORT_DATE) = month(CURRENT_DATE) and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)
+GROUP BY  products.idProduct
+ORDER BY slg DESC
+ 
+ SELECT* from bill_detail
+ 
