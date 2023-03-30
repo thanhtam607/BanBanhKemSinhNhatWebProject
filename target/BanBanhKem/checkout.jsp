@@ -246,7 +246,7 @@
                             <div class="col-lg-6 checkout__input__checkbox">
                                 <label for="payment3" >
                                     Lấy dụng cụ ăn uống,...
-                                    <input type="radio" id="payment3" name="yes" value="Lấy dụng cụ ăn uống,...">
+                                    <input type="radio" id="payment3" value="Lấy dụng cụ ăn uống,...">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>

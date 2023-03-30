@@ -743,17 +743,7 @@ function addOrder() {
     var ghichu = document.getElementById("ghichu").value;
     var lenght = document.getElementsByName("noteD").length;
     var note = new Array();
-    // for (var i = 0; i < length; i++) {
-    //     note[i] = document.getElementsByName("noteD")[i].value + "/";
-    //     if (i === length - 1) {
-    //         note[i] = document.getElementsByName("noteD")[i].value;
-    //     }
-    // }
-    // var noteToString = note.toString();
-    // var haveDisk = document.getElementById("payment3").value;
-    // var haveDiskYes = document.getElementById("payment3");
-    // var url1 = "AddNewOrder";
-    // $.ajax({
+
     for(var i =0; i<lenght;i++){
         note[i] = document.getElementsByName("noteD")[i].value+"/";
         if(i=== lenght-1){
@@ -763,12 +753,10 @@ function addOrder() {
     }
     console.log(note.toString())
     var haveDisk = document.getElementById("payment3").value;
-    var haveDiskYes = document.getElementById("payment3");
-    var url1  ="AddNewOrder?ten" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString()+"&haveDiskYes="+haveDiskYes;
+    var url1  ="AddNewOrder?ten" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
     $.ajax({
         url: url1,
         type: "GET",
-
         success: function () {
             document.getElementById("totalPro").innerHTML = "0";
             document.getElementById("totalPro1").innerHTML = "0";

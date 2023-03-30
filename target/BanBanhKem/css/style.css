@@ -3887,3 +3887,7 @@ font-size: 24px;
 	border: solid #ff96b7 3px;
 	font-weight: 600;
 }
+.text-right{
+	margin: 0 0 0 217px;
+	font-weight: 600;
+}

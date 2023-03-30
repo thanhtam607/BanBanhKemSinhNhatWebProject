@@ -33,10 +33,8 @@ public class AddNewOrder extends HttpServlet {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String ghichu = request.getParameter("ghichu");
-        if(ghichu!=null && request.getParameter("haveDiskYes")!=null){
+        if(ghichu!=null && request.getParameter("haveDisk")!=null){
             ghichu +=", "+ request.getParameter("haveDisk");
-        }else{
-            ghichu = "Không có, Không dụng cụ ăn uống";
         }
         String notes = request.getParameter("note");
         String[] notesForDetail = notes.split("/,");
@@ -57,7 +55,6 @@ public class AddNewOrder extends HttpServlet {
         if(notesForDetail!=null){
         for(int i =0; i< notesForDetail.length ;i++){
             order.getData().get(i).setNote(notesForDetail[i]);
-            System.out.println(order.getData().get(i).getNote());
         }}
         OrderService.addOrder(order);
         OrderService.addGiaoHang(order);
