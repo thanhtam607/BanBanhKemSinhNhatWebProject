@@ -472,29 +472,68 @@ public class ProductService {
         }
         return detail;
     }
-    public static void main(String[] args) throws SQLException {
-//        for(Product p : getDiscountProduct()){
-//            System.out.println(p.getId());
-//        }
 
-//            deleteImage("img/product/B001/banh1.jpg");
-//            Product p = findById("B100");
-//            addProDuct(p);
-//        String s = "img/product/B001/banh1.jpg";
-//        upProductImg("img/product/B001/banh5.jpg", s);
-//        updateDetail("B001", 20,10,"12-1-2022", "13-2-2022");
-//        updateProduct("B001", "LB01","Bánh cánh đồng hoa", "Vừa",500,"Bánh kem phong cách hoa Hàn Quốc, ngon và đẹp, chất lượng luôn tươi mới, nguyên liệu hoàn toàn cao cấp được chọn lọc kỹ càng, đảm bảo an toàn vệ sinh thực phẩm, bảo vệ sức khỏe cho người dùng đó chính là điều mà chúng tôi muốn mang lại cho quý khách hàng. Phần hoa của bánh sẽ được làm từ kem bơ, kem tươi tạo nên vị bánh cũng rất ấn tượng, ngọt dịu, không gây ngán. Các thợ làm bánh phải bắt từng bông hoa, để cho thật lạnh để hoa đông cứng rồi mới sắp xếp lên bánh cho hài hoà. Vì vậy cần rất nhiều thời gian, sự kiên nhẫn và cả sự khéo léo. Mỗi chiếc bánh thật sự là một tác phẩm nghệ thuật.","Trong những dịp lễ, ngày kỷ niệm hay sinh nhật, không cần một món quà quá khoa trương, đơn giản chỉ là một chiếc bánh kem được trang trí bằng những bông hoa sắc màu, bắt mắt cũng khiến bữa tiệc trở nên lung linh mà người nhận thì vui vẻ rồi. Bánh thích hợp tặng chị gái, mẹ, cô giáo.",450000);
-//        List<Product> li = ProductService.getHotProduct();
-//               for(Product p: li){
-//            System.out.println(p.getId());
-//          System.out.println(getHotProduct().size());
-//          Product p = ProductService.findById("B001");
-//          System.out.println(p.getListImg().get(0));
-//        System.out.println(getLastComment("B001").getBinhLuan());
-//       System.out.println(getPaginationPage(1).toString());
-        // addComment(new Comment("B002", "Thanh Tâm","Bánh mềm mịn vô cùng hòa quyện với  phần kem mịn màng, vị ngọt thanh vừa ăn lại có thêm phần tiramisu khá lạ miệng khiến cho người ăn cảm thấy thích thú.","2022/12/8"), "AD02");
-//        System.out.print(getListSize().toString());
+    public static String idMaxType(){
+        String res ="";
+        String sql= "SELECT max(idType) from typeofcake";
+        Statement statement = DBConnect.getInstall().get();
+        try {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                res = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        String s = "";
+        int n = Integer.parseInt(res.substring(2));
+        if(n < 9) {
+            s  = "LB0" + (n + 1);
+        } else {
+            s = "LB" + (n + 1);
+        }
+        return s;
     }
+    public static void addTypePro(String id, String type){
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "INSERT into typeofcake VALUES('" + id + "', '"+ type+"')";
+        try {
+            stm.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+    }
+    public static void updateType(String id, String newtype){
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "UPDATE typeofcake SET name = '" + newtype + "' WHERE idType = '" + id +"'";
+        try {
+            stm.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public  static void deleteType(String id){
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "DELETE FROM typeofcake WHERE idType = '" + id + "'";
+        try {
+            stm.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static void addTyofcake(TypeOfCake toc){
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "INSERT INTO typeofcake VALUES('" + toc.getIdType() + "', '" + toc.getName() + "')";
+        try {
+            stm.executeUpdate(sql);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+
 
 }
 class IDComparator implements Comparator<Product> {
@@ -502,3 +541,4 @@ class IDComparator implements Comparator<Product> {
         return p2.getId().compareTo(p1.getName());
     }
 }
+

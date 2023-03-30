@@ -360,16 +360,11 @@ function removeCart(id){
 
 }
 function removeAll(){
-    var item = document.getElementsByClassName("cart-item");
-    for(var i=0; i<item.length;i++) {
-        var row = item[i];
-        var id = row.getElementsByClassName("idPro")[0].value;
-        removeCart(id);
-    }
+    var url = "RemoveAllCart";
     $.ajax({
+        url: url,
+        type: "POST",
         success: function (){
-
-
             document.getElementById("totalPro").innerHTML="0";
             document.getElementById("totalPro1").innerHTML="0";
 
@@ -721,29 +716,32 @@ function check(email) {
 /*-------------------
    addNewOrder
   --------------------- */
-function addOrder(i){
+
+function addOrder(){
     var ten = document.getElementById("ten").value;
     var diachi = document.getElementById("diachi").value;
     var phone = document.getElementById("phone").value;
     var email = document.getElementById("email").value;
     var ghichu = document.getElementById("ghichu").value;
-    var ghichuDetail = document.getElementById(i).value;
-    var haveDisk = document.getElementById("payment3").labels;
+    var lenght = document.getElementsByName("noteD").length;
+    var note = new Array();
+    for(var i =0; i<lenght;i++){
+        note[i] = document.getElementsByName("noteD")[i].value+"/";
+        if(i=== lenght-1){
+            note[i] = document.getElementsByName("noteD")[i].value;
+        }
 
-    var url  ="AddNewOrder";
+    }
+    console.log(note.toString())
+    var haveDisk = document.getElementById("payment3").value;
+    var url1  ="AddNewOrder?ten" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
     $.ajax({
-        url: url,
+        url: url1,
         type: "GET",
-        data: {ten:ten,
-            diachi:diachi,
-            phone:phone,
-            email:email,
-            ghichu: ghichu,
-            ghichuDetail:ghichuDetail,
-            haveDisk: haveDisk},
-        success: function (){
-            document.getElementById("totalPro").innerHTML="0";
-            document.getElementById("totalPro1").innerHTML="0";
+
+        success: function () {
+            document.getElementById("totalPro").innerHTML = "0";
+            document.getElementById("totalPro1").innerHTML = "0";
             document.getElementById("emptyPro").innerHTML = "" +
                 "                                <h4>Đơn hàng</h4>\n" +
                 "                                <div class=\"checkout__order__products\">Sản Phẩm <span>Tổng</span></div>\n" +
@@ -764,6 +762,7 @@ function addOrder(i){
                 "                                </div>\n" +
                 "                                <button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>\n" +
                 "                            ";
+        }});
 
             Swal.fire({
                 text:'Đặt hàng thành công!',
@@ -781,8 +780,6 @@ function addOrder(i){
             }
             );
 
-        }
-    });
 }
 function cartEmpty(){
     Swal.fire({

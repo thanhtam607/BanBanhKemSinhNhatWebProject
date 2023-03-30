@@ -9,6 +9,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.ProductDetail" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.TypeOfCake" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -57,7 +61,7 @@
     <div class="header__content">
         <!-- header logo -->
         <a href="./ListReceipt_Admin" class="header__logo">
-            <img src="../img/logo_web.jpg" alt="">
+            <img src="../<%=InforService.getImgLogo().get(0).getContent()%>" alt="">
         </a>
         <!-- end header logo -->
 
@@ -88,13 +92,14 @@
         </div>
         <div class="navbar-nav w-100">
             <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+            <a href="general_Management.jsp" class="nav-item nav-link"><i class="fa fa-user"></i>Quản lý chung</a>
             <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
             <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-            <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
-            <a href="./ListReceipt_full_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
-            <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-            <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
+            <a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+            <a href="./ListReceipt_full_Admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
             <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
+            <a href="catalog_Management.jsp" class="nav-item nav-link active"><i class="fa fa-file"></i>QL danh mục</a>
+            <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
             <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
             <!--  -->
         </div>
@@ -103,6 +108,7 @@
 <!-- Sidebar End -->
 
 <!-- main content -->
+<% List<TypeOfCake> list = ProductService.getListType();%>
 <main class="main bg-white">
     <div class="container-fluid bg-white">
         <div class="row">
@@ -110,22 +116,30 @@
             <div class="col-12">
                 <div class="main__title">
                     <h2>Danh mục sản phẩm</h2>
-                    <span class="main__title-stat">10 danh mục</span>
-
+                    <span class="main__title-stat"><%=list.size()%> danh mục</span>
                     <div class="main__title-wrap">
                         <!-- filter sort -->
                         <div class="filter" id="filter__sort">
                             <span class="filter__item-label">Sắp xếp:</span>
 
                             <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <input type="button" value="Tên">
+                                <input type="button" value="Loại bánh">
                                 <span></span>
                             </div>
-
-                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-                                <li>Ngày sản xuất</li>
-                                <li>Tên</li>
-                                <li>Ngày hết hạn</li>
+                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort" style="width: 200px">
+                                <%List<String> listOption = new ArrayList<String>();
+                                    listOption.add("Mặc định");
+                                    listOption.add("Theo loại");
+                                    String val;
+                                    for(String s: listOption){
+                                        val = request.getParameter("sortValue");
+                                        if(s.equals(val)){%>
+                                <li><a class ="text-pink" href="Catalog_admin?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></a></li>
+                                <%}
+                                else{%>
+                                <li><a id="sortValue" class ="text-pink" href="Catalog_admin?sortValue=<%=s%>" value="<%=s%>"><%=s%></a></li>
+                                <%}%>
+                                <%}%>
                             </ul>
                         </div>
                         <!-- end filter sort -->
@@ -151,111 +165,90 @@
                         <tr>
                             <th>STT</th>
                             <th>Tên danh mục</th>
-                            <th>Trạng thái</th>
                             <th>Tùy chọn</th>
                         </tr>
                         </thead>
+                        <% for (int i = 0; i < list.size(); i++){ %>
                         <tbody>
                         <tr>
                             <td>
-                                <div class="main__table-text">1</div>
+                                <div class="main__table-text"><%=i + 1%></div>
                             </td>
                             <td>
                                 <div class="main__user">
                                     <div class="main__meta">
-                                        <h3>Bánh kem</h3>
+                                        <h3><%=list.get(i).getName()%></h3>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <div class="main__table-text">Còn hiệu lực</div>
-                            </td>
-                            <td>
                                 <div class="main__table-btns">
 
-                                    <a href="#modal-edit" class="main__table-btn main__table-btn--edit open-modal">
+                                    <a href="#modal-edit<%=i%>" class="main__table-btn main__table-btn--edit open-modal">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+                                    <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="main__table-text">2</div>
-                            </td>
-                            <td>
-                                <div class="main__user">
-                                    <div class="main__meta">
-                                        <h3>Bánh kem</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="main__table-text">Còn hiệu lực</div>
-                            </td>
-                            <td>
-                                <div class="main__table-btns">
-
-                                    <a href="#modal-edit" class="main__table-btn main__table-btn--edit open-modal">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        <!-- modal delete -->
+                        <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal" style="height: 200px">
+                            <form method="post" action="deleteTypeCake">
+                            <h6 class="modal__title">Xóa danh mục</h6>
+                            <p class="modal__text">Bạn có chắc muốn xóa danh mục này?</p>
+                            <div class="modal__btns">
+                                <input style="display: none" name="idType" value="<%=list.get(i).getIdType()%>">
+                                <button class="modal__btn modal__btn--apply" type="submit">Xóa</button>
+                                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                            </div>
+                            </form>
+                        </div>
+                        <!-- end modal delete -->
+                        <!-- modal edit -->
+                        <div id="modal-edit<%=i%>" class="zoom-anim-dialog mfp-hide modal" style="height: 370px">
+                            <form method="post" action="update_TypeCake">
+                            <h6 class="modal__title">Sửa danh mục</h6>
+                            <label class="form__label" for="name" style="color: white;">Tên danh mục</label>
+                            <input id="name" type="text" name="nameType" class="form__input" value="<%=list.get(i).getName()%>">
+                            <input style="display: none" name="idType" value="<%=list.get(i).getIdType()%>">
+                            <label class="form__label" style="color: white">Trạng thái</label>
+                            <select class="form-select form__input" name="status" >
+                                <option>Còn hiệu lực</option>
+                                <option>Hết hiệu lực</option>
+                            </select>
+                            <div class="modal__btns">
+                                <button class="modal__btn modal__btn--apply" type="submit">Sửa</button>
+                                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                            </div>
+                            </form>
+                        </div>
+                        <!-- end modal edit -->
                         </tbody>
+                        <!-- modal add -->
+                        <div id="modal-add" class="zoom-anim-dialog mfp-hide modal" style="height: 370px">
+                            <form method="post" action="addTypeCake">
+                            <h6 class="modal__title">Thêm danh mục</h6>
+                            <label class="form__label" for="add-name" style="color: white;">Tên danh mục</label>
+                            <input id="add-name" type="text" name="nameType" class="form__input" placeholder="Thêm tên danh mục">
+                            <label class="form__label" style="color: white">Trạng thái</label>
+                            <select class="form-select form__input" name="status" >
+                                <option>Còn hiệu lực</option>
+                                <option>Hết hiệu lực</option>
+                            </select>
+                            <div class="modal__btns">
+                                <button class="modal__btn modal__btn--apply" type="submit">Thêm</button>
+                                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                            </div>
+                            </form>
+                        </div>
+                        <!-- end modal add -->
+                        <% } %>
                     </table>
                     <div class="paginator-wrap">
                         <span  href="#modal-add"  class="open-modal" type="button">Thêm danh mục</span>
                     </div>
-                    <!-- modal add -->
-                    <div id="modal-add" class="zoom-anim-dialog mfp-hide modal" style="height: 370px">
-                        <h6 class="modal__title">Thêm danh mục</h6>
-                        <input value = "LB01" style="display: none">
-                        <label class="form__label" for="add-name" style="color: white;">Tên danh mục</label>
-                        <input id="add-name" type="text" name="add-name" class="form__input" placeholder="Thêm tên danh mục">
-                        <label class="form__label" style="color: white">Trạng thái</label>
-                        <select class="form-select form__input" name="status" >
-                            <option>Còn hiệu lực</option>
-                            <option>Hết hiệu lực</option>
-                        </select>
-                        <div class="modal__btns">
-                            <button class="modal__btn modal__btn--apply" type="button">Thêm</button>
-                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                        </div>
-                    </div>
-                    <!-- end modal add -->
-                    <!-- modal delete -->
-                    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal" style="height: 200px">
-                        <h6 class="modal__title">Xóa danh mục</h6>
-                        <p class="modal__text">Bạn có chắc muốn xóa danh mục này?</p>
-                        <div class="modal__btns">
-                            <button class="modal__btn modal__btn--apply" type="button">Xóa</button>
-                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                        </div>
-                    </div>
-                    <!-- end modal delete -->
-                    <!-- modal edit -->
-                    <div id="modal-edit" class="zoom-anim-dialog mfp-hide modal" style="height: 370px">
-                        <h6 class="modal__title">Sửa danh mục</h6>
-                        <label class="form__label" for="name" style="color: white;">Tên danh mục</label>
-                        <input id="name" type="text" name="name" class="form__input" value="Bánh kem">
-                        <label class="form__label" style="color: white">Trạng thái</label>
-                        <select class="form-select form__input" name="status" >
-                            <option>Còn hiệu lực</option>
-                            <option>Hết hiệu lực</option>
-                        </select>
-                        <div class="modal__btns">
-                            <button class="modal__btn modal__btn--apply" type="button">Sửa</button>
-                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                        </div>
-                    </div>
-                    <!-- end modal edit -->
                 </div>
             </div>
             <!-- end users -->

@@ -1,15 +1,22 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.ItemProductInCart;
 import vn.edu.hcmuaf.fit.model.Order;
 import vn.edu.hcmuaf.fit.model.Delivery;
+import vn.edu.hcmuaf.fit.service.CartService;
 import vn.edu.hcmuaf.fit.service.OrderService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet(name = "AddNewOrder", value = "/AddNewOrder")
 public class AddNewOrder extends HttpServlet {
@@ -18,19 +25,23 @@ public class AddNewOrder extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(true);
-        Order order =(Order) session.getAttribute("order");
+        User auth = (User) session.getAttribute("auth");
+        List<ItemProductInCart> listItemC =(List<ItemProductInCart>) session.getAttribute("itemCart");
 
         String ten = request.getParameter("ten");
         String diachi = request.getParameter("diachi");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
-        String ghichu = request.getParameter("ghichu") +", "+ request.getParameter("haveDisk");
-        String ghichuDetail = request.getParameter("ghichuDetail");
+        String ghichu = request.getParameter("ghichu");
+        if(ghichu!=null && request.getParameter("haveDisk")!=null){
+            ghichu +=", "+ request.getParameter("haveDisk");
+        }
+        String notes = request.getParameter("note");
+        String[] notesForDetail = notes.split("/,");
 
         Date today = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayFM = formatter.format(today);
-        order.setBuyDate(todayFM);
 
         Delivery gh = new Delivery();
         gh.setDiachigiao(diachi);
@@ -39,16 +50,19 @@ public class AddNewOrder extends HttpServlet {
         gh.setPhone(phone);
         gh.setTenKH(ten);
 
-        order.setGiaohang(gh);
-        order.setNote(ghichu);
+        Order order =new Order(auth, listItemC, todayFM,CartService.totalPrice(listItemC), ghichu,gh);
 
-
+        if(notesForDetail!=null){
+        for(int i =0; i< notesForDetail.length ;i++){
+            order.getData().get(i).setNote(notesForDetail[i]);
+            System.out.println(order.getData().get(i).getNote());
+        }}
         OrderService.addOrder(order);
-        OrderService.addCTHD(order, ghichuDetail);
         OrderService.addGiaoHang(order);
-        OrderService.updateTonKhoWhenAdd(order);
 
-        OrderService.clearCart(order);
+//        OrderService.updateTonKhoWhenAdd(order);
+        session.setAttribute("itemCart",null);
+        response.sendRedirect("MyOrder");
     }
 
     @Override

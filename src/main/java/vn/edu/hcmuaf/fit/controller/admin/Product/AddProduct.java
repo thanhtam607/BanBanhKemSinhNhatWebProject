@@ -57,7 +57,7 @@ public class AddProduct extends HttpServlet {
                     String newImg = realPa + "/" + filename;
 //                    part.write(location);
                     part.write(newImg);
-                    System.out.println(newImg);
+
                     String idImg = "ASP"+masp.substring(1)+"-"+(i);
                     String img = "img/product/" + masp+"/" + filename;
                     listImg.add(new Image(idImg, masp, img, 0));

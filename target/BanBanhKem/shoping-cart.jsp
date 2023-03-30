@@ -229,7 +229,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%for(ItemProductInCart item : CartService.findItemCartByIdUser(auth.getAccount_id())){
+                        <%List<ItemProductInCart> listItemC =  CartService.findItemCartByIdUser(auth.getAccount_id());
+                        int price=0;
+                            for(ItemProductInCart item :listItemC){
+                                if(item.getSp().getPromotional()!=0){
+                                    price = item.getSp().getPromotional();
+                                }else{
+                                    price = item.getSp().getPrice();
+                                }
                         %>
                             <tr id="<%=item.getSp().getId()%>" class="cart-item">
                                 <td  class="shoping__cart__item">
@@ -239,12 +246,12 @@
                                     <% break;
                                     }
                                     }%>
-                                    <h5><a href="ProductDetail?id=<%=item.getSp().getId()%>"><%=item.getSp().getName()%></a>/h5>
+                                    <a href="ProductDetail?id=<%=item.getSp().getId()%>"><h5><%=item.getSp().getName()%></h5></a>
                                     <input class="idPro" id="idProduct" type="text" value="<%=item.getSp().getId()%>" style="display: none">
                                 </td>
                                 <td class="shoping__cart__price">
-                                    <input id="<%="price"+item.getSp().getId()%>" class="price" type="number" value="<%=item.getSp().getPrice()%>" style="display: none">
-                                    <%=item.getSp().formatNum(item.getSp().getPrice())%> VND
+                                    <input id="<%="price"+item.getSp().getId()%>" class="price" type="number" value="<%=price%>" style="display: none">
+                                    <%=item.formatNum(price)%> VND
                                 </td>
                                 <td class="shoping__cart__quantity" >
                                     <div class="quantity">
@@ -256,7 +263,7 @@
                                     </div>
                                 </td>
                                 <td  class="shoping__cart__total">
-                                    <%=item.formatNum(item.giaSanPhamTrongGioHang()) %> VND
+                                    <%=item.formatNum(item.getPrice()) %> VND
                                 </td>
                                 <td class="shoping__cart__item__close" >
                                     <span ><a onclick="removeCart('<%=item.getSp().getId()%>')" class="remove_prod_style icon_close" ></a></span>

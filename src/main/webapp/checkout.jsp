@@ -6,6 +6,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.CartService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -48,7 +50,7 @@
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
-        <a href="#"><img src="img/logo_web.jpg" alt=""></a>
+        <a href="#"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt=""></a>
     </div>
     <div class="humberger__menu__cart">
         <ul>
@@ -88,14 +90,14 @@
     </nav>
     <div id="mobile-menu-wrap"></div>
     <div class="header__top__right__social">
-        <a href="https://www.facebook.com/mai.thuan.52438/" target="blank"><i class="fa fa-facebook"></i></a>
-        <a href="https://www.messenger.com/t/100017755062615" target="blank"><i class="fa fa-comment"></i></a>
-        <a href="https://www.instagram.com/maizecorn1542/" target="blank"><i class="fa fa-instagram"></i></a>
+        <a href="<%=InforService.getInformation("SocialNetwork").get(0).getContent()%>" target="blank"><i class="fa fa-facebook"></i></a>
+        <a href="<%=InforService.getInformation("SocialNetwork").get(1).getContent()%>" target="blank"><i class="fa fa-comment"></i></a>
+        <a href="<%=InforService.getInformation("SocialNetwork").get(2).getContent()%>" target="blank"><i class="fa fa-instagram"></i></a>
     </div>
     <div class="humberger__menu__contact">
         <ul>
-            <li><i class="fa fa-envelope"></i> tiembanhhanhphuc@gmail.com</li>
-            <li>Miễn phí giao hàng nội thành TP HCM</li>
+            <li><i class="fa fa-envelope"></i> <%=InforService.getInformation("Email").get(0).getContent()%></li>
+            <li><%=InforService.getInformation("Delivery").get(0).getContent()%></li>
         </ul>
     </div>
 </div>
@@ -107,7 +109,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                    <a href="Index"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
@@ -159,11 +161,11 @@
 
                     <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">
-                            <a href="tel:0987654321" class="fa fa-phone cursor"></a>
+                            <a href="tel:<%=InforService.getInformation("PhoneNumber").get(0).getContent()%>" class="fa fa-phone cursor"></a>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>+84 987654321</h5>
-                            <span>Mở cửa từ 8h - 22h</span>
+                            <h5><%=InforService.getInformation("PhoneNumber").get(0).getContent()%></h5>
+                            <span><%=InforService.getInformation("TimeShop").get(1).getContent()%></span>
                         </div>
                     </div>
                 </div>
@@ -175,7 +177,7 @@
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="./img/banner/breadcrumb.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="<%=InforService.getInformation("ImageMenu").get(0).getContent()%>">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -225,16 +227,16 @@
                                        id="diachi" value="<%=customer.getDIACHI()%>">
                             </div>
 
-                            <% int i = 0;
-                            for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
-
+                            <%
+                            List<ItemProductInCart> listItemC =(List<ItemProductInCart>) session.getAttribute("itemCart");
+                            for (ItemProductInCart item : listItemC) {
                             %>
                             <div class="checkout__input">
-                                <p><%=entry.getValue().getSp().getName()%></p>
-                                <input type="text" id="<%=i%>" placeholder="Lời chúc bạn muốn ghi lên bánh">
+                                <p><%=item.getSp().getName()%></p>
+                                <input type="text" name="noteD" placeholder="Lời chúc bạn muốn ghi lên bánh">
                             </div>
 
-                            <%i++;}%>
+                            <%}%>
 
                             <div class="checkout__input">
                                 <p>Ghi chú cho cửa hàng<span>*</span></p>
@@ -244,7 +246,7 @@
                             <div class="col-lg-6 checkout__input__checkbox">
                                 <label for="payment3" >
                                     Lấy dụng cụ ăn uống,...
-                                    <input type="radio" id="payment3" name="yes">
+                                    <input type="radio" id="payment3" name="yes" value="Lấy dụng cụ ăn uống,...">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -255,31 +257,30 @@
                                 <h4>Đơn hàng</h4>
                                 <div class="checkout__order__products">Sản Phẩm <span>Tổng</span></div>
                                 <ul >
-                                    <% for (Map.Entry<String, ItemProductInCart> entry : order.getData().entrySet()) {
-                                    %>
+                                    <%for (ItemProductInCart item : listItemC) {%>
                                     <li>
-                                        <span style="float: left" class="breaklineNamePro"><%=entry.getValue().getSp().getName()%></span>
-                                        <span ><%=entry.getValue().getSp().formatNum(entry.getValue().getSp().getPrice())%> VND</span>
+                                        <span style="float: left" class="breaklineNamePro"><%=item.getSp().getName()%></span>
+                                        <span ><%=item.formatNum(item.getPrice())%> VND</span>
                                     </li>
                                     <%}%>
                                 </ul>
-                                <div class="checkout__order__subtotal">Tạm tính <span><%= order.formatNum(order.totalMoney())%> VND</span></div>
-                                <div class="checkout__order__total">Tổng <span><%= order.formatNum(order.totalMoney())%> VND</span></div>
+                                <div class="checkout__order__subtotal">Tạm tính <span><%= CartService.formatNum(CartService.totalPrice(listItemC))%> VND</span></div>
+                                <div class="checkout__order__total">Tổng <span><%= CartService.formatNum(CartService.totalPrice(listItemC))%> VND</span></div>
 
 
                                 <div class="checkout__input__checkbox">
                                     <label for="payment" >
                                        Thanh Toán Khi Nhận Hàng
-                                        <input type="radio" id="payment" name="isPayment">
+                                        <input type="radio" id="payment" name="isPayment" value="Thanh Toán Khi Nhận Hàng">
                                         <span class="checkmark"></span>
                                     </label>
                                     <label for="payment_onl" >
                                        Thanh Toán Qua Chuyển Khoản
-                                        <input type="radio" id="payment_onl" name="isPayment">
+                                        <input type="radio" id="payment_onl" name="isPayment" value="Thanh Toán Qua Chuyển Khoản">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <button onclick="addOrder('<%=i%>')" type="submit" class="site-btn" >ĐẶT HÀNG</button>
+                                <button onclick="addOrder()" type="submit" class="site-btn" >ĐẶT HÀNG</button>
                             </div>
                         </div>
                     </div>

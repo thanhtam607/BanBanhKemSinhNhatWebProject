@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -52,7 +53,7 @@
   <div class="header__content">
     <!-- header logo -->
     <a href="./ListReceipt_Admin" class="header__logo">
-      <img src="../img/logo_web.jpg" alt="">
+      <img src="../<%=InforService.getImgLogo().get(0).getContent()%>" alt="">
     </a>
     <!-- end header logo -->
 
@@ -83,13 +84,14 @@
     </div>
     <div class="navbar-nav w-100">
       <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+      <a href="general_Management.jsp" class="nav-item nav-link"><i class="fa fa-user"></i>Quản lý chung</a>
       <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
       <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-      <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+      <a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Tin Tức</a>
       <a href="./ListReceipt_full_Admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
-      <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-      <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
       <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
+      <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file"></i>QL danh mục</a>
+      <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
       <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
       <!--  -->
     </div>
@@ -109,18 +111,30 @@
           <span class="main__title-stat"><%=receiptList.size()%></span>
           <div class="main__title-wrap">
             <!-- filter sort -->
+            <!-- filter sort -->
             <div class="filter" id="filter__sort">
               <span class="filter__item-label">Sắp xếp:</span>
 
               <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <input type="button" value="Tên">
+                <input type="button" value="Đơn hàng">
                 <span></span>
               </div>
 
               <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-                <li>Giá</li>
-                <li>Ngày mua</li>
-
+                <%List<String> listOption = new ArrayList<String>();
+                  listOption.add("Mặc định");
+                  listOption.add("Theo ngày đặt");
+                  listOption.add("Theo đơn giá");
+                  String val;
+                  for(String s: listOption){
+                    val = request.getParameter("sortValue");
+                    if(s.equals(val)){%>
+                <li><a class ="text-pink" href="ListReceipt_full_Admin?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></a></li>
+                <%}
+                else{%>
+                <li><a id="sortValue" class ="text-pink" href="ListReceipt_full_Admin?sortValue=<%=s%>" value="<%=s%>"><%=s%></a></li>
+                <%}%>
+                <%}%>
               </ul>
             </div>
             <!-- end filter sort -->
