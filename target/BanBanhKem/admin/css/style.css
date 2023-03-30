@@ -14,9 +14,9 @@
     z-index: 99;
 }
 .back-to-top:hover {
-background-color: #ffffff;
-color: #ff96b7;
-border: 3px solid #ff96b7;
+    background-color: #ffffff;
+    color: #ff96b7;
+    border: 3px solid #ff96b7;
 }
 /*** chi tiet hoa don ***/
 .margin-top-50px{
@@ -334,7 +334,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .title-sg{
     text-align: center;
     margin-bottom: 10%;
-   display: block;
+    display: block;
     font-size: 40px;
     font-weight: bolder;
 }
@@ -347,7 +347,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     background-color: #fdf3f4;
 }
 .form-check-input{
-background-color: #ff96b7;
+    background-color: #ff96b7;
 }
 
 .icon__user{
@@ -364,8 +364,8 @@ background-color: #ff96b7;
 /* check password signin */
 #insertTextHere{
     color: red;
-   font-style: italic;
-   margin-bottom: 20px;
+    font-style: italic;
+    margin-bottom: 20px;
 }
 
 /*box trạng thaí đơn hag*/
@@ -438,4 +438,30 @@ background-color: #ff96b7;
 .button_right a{
     float: right;
     margin-right: 30px;
+}
+.product__item__price{
+    color: red;
+    font-weight: 600;
+}
+.product__item__price span{
+    text-decoration: line-through;
+    margin-left: 3px;
+    font-size: 13px;
+    color: gray;
+}
+.product-image{
+
+}
+.check{
+    width: 125px;
+}
+.filter-product{
+    display: flex;
+}
+.select-all{
+    margin-top: -20px;
+    display: flow;
+}
+.select-all div{
+    float: right;
 }
