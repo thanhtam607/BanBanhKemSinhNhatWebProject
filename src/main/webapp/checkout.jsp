@@ -232,7 +232,7 @@
                             for (ItemProductInCart item : listItemC) {
                             %>
                             <div class="checkout__input">
-                                <p><%=item.getSp().getName()%></p>
+                                <p style="color: #ff96b7; font-weight: 600"><%=item.getSp().getName()%></p>
                                 <input type="text" name="noteD" placeholder="Lời chúc bạn muốn ghi lên bánh">
                             </div>
 

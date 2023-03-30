@@ -882,13 +882,13 @@ ul {
 }
 
 .main__table-btn--view {
-    background-color: rgba(255, 195, 18, 0.08);
-    color: #ffc312;
+    background-color: rgba(23, 162, 184, 0.08);
+    color: #17a2b8;
 }
 
 .main__table-btn--view:hover {
-    color: rgba(255, 195, 18, 0.8);
-    background-color: rgba(255, 195, 18, 0.2);
+    color: rgba(23, 162, 184, 0.8);
+    background-color: rgba(23, 162, 184, 0.2);
 }
 
 .main__user {
@@ -1175,7 +1175,7 @@ ul {
     display: block;
     width: 16px;
     height: 2px;
-    background-color: #fff;
+    background-color: #6c7293;
     left: 0;
     top: 50%;
     transition: 0.4s ease;

@@ -6,6 +6,7 @@
     Version: 1.0
     Created: Colorlib
 ---------------------------------------------------------  */
+
 /*Read more*/
 function myFunction() {
     var x = document.getElementById('bld1');
@@ -18,6 +19,7 @@ function myFunction() {
         btnrm.innerText = "Thu gọn lại"
     }
 }
+
 'use strict';
 
 (function ($) {
@@ -106,7 +108,7 @@ function myFunction() {
     });
 
 
-    $('.hero__categories__all').on('click', function(){
+    $('.hero__categories__all').on('click', function () {
         $('.hero__categories ul').slideToggle(400);
     });
 
@@ -217,14 +219,13 @@ function myFunction() {
     proQty.on('click', '.qtybtn', function () {
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
-        var newVal=parseInt(oldValue);
+        var newVal = parseInt(oldValue);
         if ($button.hasClass('inc')) {
-            newVal +=1;
-        }
-        else {
+            newVal += 1;
+        } else {
             // Don't allow decrementing below zero
             if (oldValue > 1) {
-                newVal-=1;
+                newVal -= 1;
             } else {
                 newVal = 1;
             }
@@ -236,8 +237,8 @@ function myFunction() {
 
 })(jQuery);
 
-  // Back to top button
-  $(window).scroll(function () {
+// Back to top button
+$(window).scroll(function () {
     if ($(this).scrollTop() > 100) {
         $('.back-to-top').fadeIn('slow');
     } else {
@@ -248,33 +249,39 @@ $('.back-to-top').click(function () {
     $('html, body').animate({scrollTop: 0}, 1000, 'easeInOutExpo');
     return false;
 });
+
 /*-------------------
    notification
   --------------------- */
 
-function notLogged(){
+function notLogged() {
     Swal.fire({
-        text:'Đăng nhập để tiếp tục!',
+        text: 'Đăng nhập để tiếp tục!',
         icon: 'error',
         showCancelButton: true,
-        cancelButtonText:'Thoát',
+        cancelButtonText: 'Thoát',
         confirmButtonText: 'Đăng nhập',
-        confirmButtonColor: '#ff96b7'}).then((result) => {
+        confirmButtonColor: '#ff96b7'
+    }).then((result) => {
             if (result.isConfirmed) {
-                location.href = "signin.jsp";}
+                location.href = "signin.jsp";
+            }
         }
     );
 };
-function removeAllCart(){
+
+function removeAllCart() {
     Swal.fire({
-        text:'Bạn có chắc muốn xóa tất cả sản phẩm trong giỏ hàng?',
+        text: 'Bạn có chắc muốn xóa tất cả sản phẩm trong giỏ hàng?',
         icon: 'question',
         showCancelButton: true,
-        cancelButtonText:'Hủy',
+        cancelButtonText: 'Hủy',
         confirmButtonText: 'Xác nhận',
-        confirmButtonColor: '#ff96b7'}).then((result) => {
+        confirmButtonColor: '#ff96b7'
+    }).then((result) => {
             if (result.isConfirmed) {
-                removeAll()}
+                removeAll()
+            }
         }
     );
 };
@@ -282,26 +289,27 @@ function removeAllCart(){
 /*-------------------
    addToCart
   --------------------- */
-function addToCartI(id){
+function addToCartI(id) {
 
     var qty = 1;
 
-    var url  ="AddToCart?masp=" +id+"&soluong="+ qty;
+    var url = "AddToCart?masp=" + id + "&soluong=" + qty;
     var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
     $.ajax({
         url: url,
         type: "GET",
-        success: function (){
-            totalPro+=1;
-            document.getElementById("totalPro").innerHTML=totalPro.toString();
-            document.getElementById("totalPro1").innerHTML=totalPro.toString();
+        success: function () {
+            totalPro += 1;
+            document.getElementById("totalPro").innerHTML = totalPro.toString();
+            document.getElementById("totalPro1").innerHTML = totalPro.toString();
             Swal.fire({
-                text:'Thêm sản phẩm thành công!',
+                text: 'Thêm sản phẩm thành công!',
                 icon: 'success',
                 showCancelButton: true,
                 cancelButtonText: 'Mua tiếp',
                 confirmButtonText: 'Đi đến giỏ hàng',
-                confirmButtonColor: '#ff96b7'}).then((result) => {
+                confirmButtonColor: '#ff96b7'
+            }).then((result) => {
                     if (result.isConfirmed) {
                         location.href = "shoping-cart.jsp";
                     }
@@ -311,37 +319,38 @@ function addToCartI(id){
         }
     });
 };
+
 // xóa cart
-function removeCart(id){
+function removeCart(id) {
     var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
-    var qty = parseInt(document.getElementById('qty'+id).value);
-    var priceR = parseInt(document.getElementById("price"+id).value);
-    var url = "RemoveToCart?masp="+id;
+    var qty = parseInt(document.getElementById('qty' + id).value);
+    var priceR = parseInt(document.getElementById("price" + id).value);
+    var url = "RemoveToCart?masp=" + id;
     $.ajax({
         url: url,
         type: "GET",
-        success: function (){
-            totalPro-=qty;
+        success: function () {
+            totalPro -= qty;
             var totalMoney = 0;
             var item = document.getElementsByClassName("cart-item");
-            for(var i=0; i<item.length;i++) {
+            for (var i = 0; i < item.length; i++) {
                 var row = item[i];
                 var price = parseInt(row.getElementsByClassName("price")[0].value);
                 var qty1 = parseInt(row.getElementsByClassName("qty")[0].value);
                 totalMoney += (price * qty1);
 
             }
-            totalMoney-=(priceR*qty);
+            totalMoney -= (priceR * qty);
             console.log(totalMoney);
             document.getElementById("totalMoney").innerHTML = totalMoney.toLocaleString('en-US') + " VND";
 
 
-            document.getElementById("totalPro").innerHTML=totalPro.toString();
-            document.getElementById("totalPro1").innerHTML=totalPro.toString();
+            document.getElementById("totalPro").innerHTML = totalPro.toString();
+            document.getElementById("totalPro1").innerHTML = totalPro.toString();
             document.getElementById(id).remove();
-            if(totalPro == 0){
+            if (totalPro == 0) {
                 document.getElementById("container-cart").remove();
-                document.getElementById("shoping-cart").outerHTML=" <div class=\"cartEmpty\" name=\"cartEmpty\">\n" +
+                document.getElementById("shoping-cart").outerHTML = " <div class=\"cartEmpty\" name=\"cartEmpty\">\n" +
                     "            <img src=\"./img/null.png\" alt=\"Giỏ hàng của bạn đang trống\" class=\"d-block m-auto\" width=\"250\" />\n" +
                     "            <p class=\"text-center font-weight-bold\" style=\"opacity: .6;\">Giỏ hàng của bạn trống</p>\n" +
                     "        </div>\n" +
@@ -359,87 +368,55 @@ function removeCart(id){
 
 
 }
-function removeAll(){
+
+function removeAll() {
     var url = "RemoveAllCart";
     $.ajax({
         url: url,
         type: "POST",
-        success: function (){
-            document.getElementById("totalPro").innerHTML="0";
-            document.getElementById("totalPro1").innerHTML="0";
+        success: function () {
+            document.getElementById("totalPro").innerHTML = "0";
+            document.getElementById("totalPro1").innerHTML = "0";
 
             document.getElementById("container-cart").remove();
-            document.getElementById("shoping-cart").outerHTML=" <div class=\"cartEmpty\" name=\"cartEmpty\">\n" +
-                    "            <img src=\"./img/null.png\" alt=\"Giỏ hàng của bạn đang trống\" class=\"d-block m-auto\" width=\"250\" />\n" +
-                    "            <p class=\"text-center font-weight-bold\" style=\"opacity: .6;\">Giỏ hàng của bạn trống</p>\n" +
-                    "        </div>\n" +
-                    "        <div class=\"col-lg-12\">\n" +
-                    "            <div class=\"shoping__cart__btns\" style=\"text-align: center\">\n" +
-                    "                <a href=\"./ListProduct\" class=\"primary-btn cart-btn\" >Xem thêm sản phẩm </a>\n" +
-                    "\n" +
-                    "            </div>\n" +
-                    "        </div>";
+            document.getElementById("shoping-cart").outerHTML = " <div class=\"cartEmpty\" name=\"cartEmpty\">\n" +
+                "            <img src=\"./img/null.png\" alt=\"Giỏ hàng của bạn đang trống\" class=\"d-block m-auto\" width=\"250\" />\n" +
+                "            <p class=\"text-center font-weight-bold\" style=\"opacity: .6;\">Giỏ hàng của bạn trống</p>\n" +
+                "        </div>\n" +
+                "        <div class=\"col-lg-12\">\n" +
+                "            <div class=\"shoping__cart__btns\" style=\"text-align: center\">\n" +
+                "                <a href=\"./ListProduct\" class=\"primary-btn cart-btn\" >Xem thêm sản phẩm </a>\n" +
+                "\n" +
+                "            </div>\n" +
+                "        </div>";
 
-            }
+        }
 
 
     });
 
 
 }
+
 /*-------------------
    FIND BY PRICE
   --------------------- */
-function FilterbyPrice(){
+function FilterbyPrice() {
     var pr1 = document.getElementById("minamount").value;
     var pr2 = document.getElementById("maxamount").value;
     var p1 = parseInt(pr1);
     var p2 = parseInt(pr2);
-    var title = "Giá từ " + p1.toLocaleString('en-US')+" VND đến "+ p2.toLocaleString('en-US')+" VND";
-    var url = "ProductFilter?pricemin=" + p1 +"&pricemax="+ p2+"&title="+ title;
-    location.href=url;
+    var title = "Giá từ " + p1.toLocaleString('en-US') + " VND đến " + p2.toLocaleString('en-US') + " VND";
+    var url = "ProductFilter?pricemin=" + p1 + "&pricemax=" + p2 + "&title=" + title;
+    location.href = url;
 }
+
 /*-------------------
   update cart
   --------------------- */
 
-function updateCartInc(id){
-        var newQty = parseInt(document.getElementById('qty'+id).value)+1;
-        var url = "UpdateCart?masp=" + id + "&soluong=" + newQty;
-        var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
-        var item = document.getElementsByClassName("cart-item");
-
-        $.ajax({
-            url: url,
-            type: "POST",
-            success: function () {
-                var total = 0;
-                totalPro = 0;
-                var totalMoney = 0;
-
-                for(var i=0; i<item.length;i++) {
-                    var row = item[i];
-                var price = parseInt(row.getElementsByClassName("price")[0].value);
-                var qty = parseInt(row.getElementsByClassName("qty")[0].value);
-
-                totalPro+= qty;
-                total = (price * qty);
-                totalMoney += total;
-
-                row.getElementsByClassName("shoping__cart__total")[0].innerHTML = total.toLocaleString('en-US') + " VND";
-
-                }
-                document.getElementById("totalPro").innerHTML = totalPro.toString();
-                document.getElementById("totalPro1").innerHTML = totalPro.toString();
-                document.getElementById("totalMoney").innerHTML = totalMoney.toLocaleString('en-US') + " VND";
-                document.getElementById("payment").innerHTML = totalMoney.toLocaleString('en-US') + " VND";
-
-            }
-        });
-
-};
-function updateCartDec(id){
-    var newQty = parseInt(document.getElementById('qty'+id).value)-1;
+function updateCartInc(id) {
+    var newQty = parseInt(document.getElementById('qty' + id).value) + 1;
     var url = "UpdateCart?masp=" + id + "&soluong=" + newQty;
     var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
     var item = document.getElementsByClassName("cart-item");
@@ -452,12 +429,12 @@ function updateCartDec(id){
             totalPro = 0;
             var totalMoney = 0;
 
-            for(var i=0; i<item.length;i++) {
+            for (var i = 0; i < item.length; i++) {
                 var row = item[i];
                 var price = parseInt(row.getElementsByClassName("price")[0].value);
                 var qty = parseInt(row.getElementsByClassName("qty")[0].value);
 
-                totalPro+= qty;
+                totalPro += qty;
                 total = (price * qty);
                 totalMoney += total;
 
@@ -473,25 +450,63 @@ function updateCartDec(id){
     });
 
 };
+
+function updateCartDec(id) {
+    var newQty = parseInt(document.getElementById('qty' + id).value) - 1;
+    var url = "UpdateCart?masp=" + id + "&soluong=" + newQty;
+    var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
+    var item = document.getElementsByClassName("cart-item");
+
+    $.ajax({
+        url: url,
+        type: "POST",
+        success: function () {
+            var total = 0;
+            totalPro = 0;
+            var totalMoney = 0;
+
+            for (var i = 0; i < item.length; i++) {
+                var row = item[i];
+                var price = parseInt(row.getElementsByClassName("price")[0].value);
+                var qty = parseInt(row.getElementsByClassName("qty")[0].value);
+
+                totalPro += qty;
+                total = (price * qty);
+                totalMoney += total;
+
+                row.getElementsByClassName("shoping__cart__total")[0].innerHTML = total.toLocaleString('en-US') + " VND";
+
+            }
+            document.getElementById("totalPro").innerHTML = totalPro.toString();
+            document.getElementById("totalPro1").innerHTML = totalPro.toString();
+            document.getElementById("totalMoney").innerHTML = totalMoney.toLocaleString('en-US') + " VND";
+            document.getElementById("payment").innerHTML = totalMoney.toLocaleString('en-US') + " VND";
+
+        }
+    });
+
+};
+
 /*-------------------
        add to favorites
    --------------------- */
-function addToFav(id){
-    var url = "Favorite?masp="+ id;
+function addToFav(id) {
+    var url = "Favorite?masp=" + id;
     console.log(id);
     var totalFav = parseInt(document.getElementById("totalFav").innerHTML);
     $.ajax({
         url: url,
         type: "GET",
         success: function () {
-            totalFav+=1;
+            totalFav += 1;
             Swal.fire({
-                text:'Sản phẩm đã được thêm vào danh mục yêu thích!',
+                text: 'Sản phẩm đã được thêm vào danh mục yêu thích!',
                 icon: 'success',
-                confirmButtonColor: '#ff96b7'});
-            document.getElementById("totalFav").innerHTML=totalFav.toString();
-            document.getElementById("totalFav1").innerHTML=totalFav.toString();
-            document.getElementById("totalFav2").innerHTML=totalFav.toString();
+                confirmButtonColor: '#ff96b7'
+            });
+            document.getElementById("totalFav").innerHTML = totalFav.toString();
+            document.getElementById("totalFav1").innerHTML = totalFav.toString();
+            document.getElementById("totalFav2").innerHTML = totalFav.toString();
         }
 
     });
@@ -499,35 +514,37 @@ function addToFav(id){
 };
 
 
-function removeToFav(id){
-    var url = "RemoveFavorites?masp="+ id;
+function removeToFav(id) {
+    var url = "RemoveFavorites?masp=" + id;
     var totalFav = parseInt(document.getElementById("totalFav").innerHTML);
     $.ajax({
         url: url,
         type: "GET",
         success: function () {
-            totalFav-=1;
+            totalFav -= 1;
 
-            document.getElementById("fav"+id).remove();
-            document.getElementById("totalFav").innerHTML=totalFav.toString();
-            document.getElementById("totalFav1").innerHTML=totalFav.toString();
-            document.getElementById("totalFav2").innerHTML=totalFav.toString();
+            document.getElementById("fav" + id).remove();
+            document.getElementById("totalFav").innerHTML = totalFav.toString();
+            document.getElementById("totalFav1").innerHTML = totalFav.toString();
+            document.getElementById("totalFav2").innerHTML = totalFav.toString();
         }
     });
 
 };
+
 /*-------------------
    check email
   --------------------- */
-function  checkEmail(x) {
+function checkEmail(x) {
     var atposition = x.indexOf("@");
     var dotposition = x.lastIndexOf(".");
     if (atposition < 1 || dotposition < (atposition + 2)
         || (dotposition + 2) >= x.length) {
         return false;
     }
-        return true;
+    return true;
 }
+
 /*-------------------
    forgot password
   --------------------- */
@@ -539,8 +556,8 @@ async function forgotPassword() {
         inputPlaceholder: 'Nhập email của bạn...',
         confirmButtonColor: '#ff96b7',
         showCancelButton: true,
-        cancelButtonText:'Hủy',
-        confirmButtonText:'Tiếp tục',
+        cancelButtonText: 'Hủy',
+        confirmButtonText: 'Tiếp tục',
         inputValidator: (value) => {
             return new Promise((resolve) => {
                 if (!checkEmail(value)) {
@@ -552,29 +569,29 @@ async function forgotPassword() {
             })
         }
     })
-    if(email){
-        var url="ForgotPassword?email="+ email.toString();
+    if (email) {
+        var url = "ForgotPassword?email=" + email.toString();
         $.ajax({
             url: url,
             type: "GET",
             success: async function (response) {
-                if (parseInt(response) ===1) {
+                if (parseInt(response) === 1) {
 
                     Swal.fire({
-                        text:"Tài khoản không tồn tại!",
+                        text: "Tài khoản không tồn tại!",
                         icon: 'error',
-                        confirmButtonColor: '#ff96b7'});
-                }
-                else {
+                        confirmButtonColor: '#ff96b7'
+                    });
+                } else {
                     const {value: code} = await Swal.fire({
                         title: 'Xác minh tài khoản',
                         input: 'number',
                         inputLabel: 'Mã xác nhận',
                         inputPlaceholder: 'Nhập mã xác nhận...',
                         confirmButtonColor: '#ff96b7',
-                        confirmButtonText:'Xác nhận',
+                        confirmButtonText: 'Xác nhận',
                     })
-                    if(checkCode(parseInt(code), parseInt(response))) {
+                    if (checkCode(parseInt(code), parseInt(response))) {
                         removePass(email);
                     }
                 }
@@ -587,9 +604,9 @@ async function forgotPassword() {
 
 function checkCode(c1, c2) {
     if (c1 === c2) {
-     return true;
+        return true;
 
-    }else {
+    } else {
         Swal.fire({
             text: 'Mã xác nhận không đúng!',
             icon: 'error',
@@ -598,8 +615,8 @@ function checkCode(c1, c2) {
             if (result.isConfirmed) {
                 location.reload();
 
-        }
-            });
+            }
+        });
         return false;
     }
 }
@@ -608,7 +625,7 @@ function checkCode(c1, c2) {
 /*-------------------
    remove password
   --------------------- */
-async function checkPass(email,pass) {
+async function checkPass(email, pass) {
     const {value: password} = await Swal.fire({
         title: 'Mật khẩu hiện tại',
         input: 'password',
@@ -622,28 +639,29 @@ async function checkPass(email,pass) {
     })
 
     if (password) {
-        var url = "UpdatePassword?oldPass=" +password.toString();
+        var url = "UpdatePassword?oldPass=" + password.toString();
         $.ajax({
             url: url,
             type: "GET",
             success: function (response) {
                 console.log(response.toString());
 
-                if(parseInt(response) === 1){
+                if (parseInt(response) === 1) {
 
                     removePass(email);
-                }
-                else{
+                } else {
                     Swal.fire({
-                        text:'Mật khẩu đã nhập không đúng!',
+                        text: 'Mật khẩu đã nhập không đúng!',
                         icon: 'error',
-                        confirmButtonColor: '#ff96b7'});
+                        confirmButtonColor: '#ff96b7'
+                    });
                 }
             }
         });
 
     }
 }
+
 async function removePass(email) {
     const {value: formValues} = await Swal.fire({
         title: 'Đặt lại mật khẩu',
@@ -661,8 +679,7 @@ async function removePass(email) {
             if (p1 == p2) {
                 return [p1];
 
-            }
-            else{
+            } else {
                 return 0;
             }
         }
@@ -689,6 +706,7 @@ async function removePass(email) {
     }
 
 }
+
 function check(email) {
 
     var url = "Signup?email=" + email;
@@ -717,7 +735,7 @@ function check(email) {
    addNewOrder
   --------------------- */
 
-function addOrder(){
+function addOrder() {
     var ten = document.getElementById("ten").value;
     var diachi = document.getElementById("diachi").value;
     var phone = document.getElementById("phone").value;
@@ -725,6 +743,17 @@ function addOrder(){
     var ghichu = document.getElementById("ghichu").value;
     var lenght = document.getElementsByName("noteD").length;
     var note = new Array();
+    // for (var i = 0; i < length; i++) {
+    //     note[i] = document.getElementsByName("noteD")[i].value + "/";
+    //     if (i === length - 1) {
+    //         note[i] = document.getElementsByName("noteD")[i].value;
+    //     }
+    // }
+    // var noteToString = note.toString();
+    // var haveDisk = document.getElementById("payment3").value;
+    // var haveDiskYes = document.getElementById("payment3");
+    // var url1 = "AddNewOrder";
+    // $.ajax({
     for(var i =0; i<lenght;i++){
         note[i] = document.getElementsByName("noteD")[i].value+"/";
         if(i=== lenght-1){
@@ -734,7 +763,8 @@ function addOrder(){
     }
     console.log(note.toString())
     var haveDisk = document.getElementById("payment3").value;
-    var url1  ="AddNewOrder?ten" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
+    var haveDiskYes = document.getElementById("payment3");
+    var url1  ="AddNewOrder?ten" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString()+"&haveDiskYes="+haveDiskYes;
     $.ajax({
         url: url1,
         type: "GET",
@@ -762,85 +792,92 @@ function addOrder(){
                 "                                </div>\n" +
                 "                                <button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>\n" +
                 "                            ";
-        }});
+        }
+    });
 
-            Swal.fire({
-                text:'Đặt hàng thành công!',
-                icon: 'success',
-                showCancelButton: true,
-                cancelButtonText:'Mua tiếp',
-                confirmButtonText: 'Xem đơn đặt',
-                confirmButtonColor: '#ff96b7'}).then((result) => {
-                if (result.isConfirmed) {
-                    location.href = "MyOrder";
-                }
-                else{
-                    location.href = "ListProduct";
-                }
+    Swal.fire({
+        text: 'Đặt hàng thành công!',
+        icon: 'success',
+        showCancelButton: true,
+        cancelButtonText: 'Mua tiếp',
+        confirmButtonText: 'Xem đơn đặt',
+        confirmButtonColor: '#ff96b7'
+    }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = "MyOrder";
+            } else {
+                location.href = "ListProduct";
             }
-            );
+        }
+    );
 
 }
-function cartEmpty(){
+
+function cartEmpty() {
     Swal.fire({
-        text:'Giỏ hàng của bạn đang trống!',
+        text: 'Giỏ hàng của bạn đang trống!',
         icon: 'error',
         confirmButtonText: 'Thêm sản phẩm',
-        confirmButtonColor: '#ff96b7'}).then((result) => {
+        confirmButtonColor: '#ff96b7'
+    }).then((result) => {
             if (result.isConfirmed) {
                 location.href = "/ListProduct";
             }
         }
     );
 }
-function cancelOrder(mdh){
-    var url  = "RemoveOrder";
+
+function cancelOrder(mdh) {
+    var url = "RemoveOrder";
 
     $.ajax({
         url: url,
         type: "GET",
-        data: {mahd:mdh},
-        success: function (){
+        data: {mahd: mdh},
+        success: function () {
 
             Swal.fire({
-                text:'Bạn có chắc muốn hủy đơn hàng này không?',
+                text: 'Bạn có chắc muốn hủy đơn hàng này không?',
                 icon: 'question',
                 showCancelButton: true,
-                cancelButtonText:'Quay lại',
+                cancelButtonText: 'Quay lại',
                 confirmButtonText: 'Hủy Đơn Hàng',
-                confirmButtonColor: '#ff96b7'}).then((result) => {
+                confirmButtonColor: '#ff96b7'
+            }).then((result) => {
                     if (result.isConfirmed) {
-                        document.getElementById(mdh).innerHTML = "<button onclick=\"buyAgain('"+mdh+"')\" type=\"submit\" style=\"border:1px solid #ccc;\" class=\"btn rounded-0 py-2 ml-2\" >\n" +
+                        document.getElementById(mdh).innerHTML = "<button onclick=\"buyAgain('" + mdh + "')\" type=\"submit\" style=\"border:1px solid #ccc;\" class=\"btn rounded-0 py-2 ml-2\" >\n" +
                             "                                    Mua lại\n" +
                             "                                </button>";
-                        document.getElementById("statusName"+mdh).innerHTML = "<span>ĐÃ HỦY</span>";
+                        document.getElementById("statusName" + mdh).innerHTML = "<span>ĐÃ HỦY</span>";
                     }
                 }
             );
         }
     });
 }
-function buyAgain(mdh){
-    var url  = "BuyAgain";
+
+function buyAgain(mdh) {
+    var url = "BuyAgain";
 
     $.ajax({
         url: url,
         type: "GET",
-        data: {mahd:mdh},
-        success: function (){
+        data: {mahd: mdh},
+        success: function () {
 
             Swal.fire({
-                text:'Bạn muốn mua lại đơn hàng này?',
+                text: 'Bạn muốn mua lại đơn hàng này?',
                 icon: 'question',
                 showCancelButton: true,
-                cancelButtonText:'Quay lại',
+                cancelButtonText: 'Quay lại',
                 confirmButtonText: 'Mua lại',
-                confirmButtonColor: '#ff96b7'}).then((result) => {
+                confirmButtonColor: '#ff96b7'
+            }).then((result) => {
                     if (result.isConfirmed) {
-                        document.getElementById(mdh).innerHTML = " <button onclick=\"cancelOrder('"+mdh+"')\" type=\"submit\" style=\"border:1px solid #ccc;\" class=\"btn rounded-0 py-2 ml-2\" >\n" +
+                        document.getElementById(mdh).innerHTML = " <button onclick=\"cancelOrder('" + mdh + "')\" type=\"submit\" style=\"border:1px solid #ccc;\" class=\"btn rounded-0 py-2 ml-2\" >\n" +
                             "                                            Hủy đơn hàng\n" +
                             "                                </button>";
-                        document.getElementById("statusName"+mdh).innerHTML = "<span>CHỜ XÁC NHẬN</span>";
+                        document.getElementById("statusName" + mdh).innerHTML = "<span>CHỜ XÁC NHẬN</span>";
                     }
                 }
             );
@@ -851,26 +888,28 @@ function buyAgain(mdh){
 /*-------------------
    change profile user
   --------------------- */
-function changeProfile(){
+function changeProfile() {
     var ten = document.getElementById("ten").value;
     var diachi = document.getElementById("diachi").value;
     var phone = document.getElementById("phone").value;
     var email = document.getElementById("email").value;
-    var url  ="EditUserProfile";
+    var url = "EditUserProfile";
     $.ajax({
         url: url,
         type: "GET",
-        data: {ten:ten,
-            diachi:diachi,
-            phone:phone,
-            email:email
-            },
-        success: function (){
+        data: {
+            ten: ten,
+            diachi: diachi,
+            phone: phone,
+            email: email
+        },
+        success: function () {
             Swal.fire({
-                text:'Lưu thay đổi thành công!',
+                text: 'Lưu thay đổi thành công!',
                 icon: 'success',
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#ff96b7'})
+                confirmButtonColor: '#ff96b7'
+            })
 
         }
     });

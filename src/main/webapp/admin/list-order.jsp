@@ -202,7 +202,7 @@
               <td>
                 <div class="main__table-btns">
 
-                  <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn bg-info">
+                  <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn main__table-btn--view">
                     <i class="fas fa-info"></i>
                   </a>
                   <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">

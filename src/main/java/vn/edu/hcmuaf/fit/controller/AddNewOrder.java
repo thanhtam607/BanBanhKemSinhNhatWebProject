@@ -33,8 +33,10 @@ public class AddNewOrder extends HttpServlet {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String ghichu = request.getParameter("ghichu");
-        if(ghichu!=null && request.getParameter("haveDisk")!=null){
+        if(ghichu!=null && request.getParameter("haveDiskYes")!=null){
             ghichu +=", "+ request.getParameter("haveDisk");
+        }else{
+            ghichu = "Không có, Không dụng cụ ăn uống";
         }
         String notes = request.getParameter("note");
         String[] notesForDetail = notes.split("/,");
