@@ -21,7 +21,7 @@ public class ProductService {
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT idImg, productImgs.idProduct,productImgs.img, status from productImgs");
                     List<Image> listImg = new LinkedList<Image>();
-                    rsCmt = stmt1.executeQuery("SELECT idProduct, ACCOUNTS.ACCOUNT_NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ACCOUNT_ID = Comments.ID");
+                    rsCmt = stmt1.executeQuery("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select idProduct, quantity, inventory, dateOfManufacture, expirationDate from productDetails");
                     String s1 = rs.getString(1);
@@ -432,7 +432,7 @@ public class ProductService {
     public static List<Comment> findCommentsByIdProduct(String idProduct){
         List<Comment> list = new ArrayList<>();
         try{
-        PreparedStatement stm = con.prepareStatement("SELECT idProduct, ACCOUNTS.ACCOUNT_NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ACCOUNT_ID = Comments.ID and idProduct=?");
+        PreparedStatement stm = con.prepareStatement("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID and idProduct=?");
         stm.setString(1,idProduct);
         ResultSet rsCmt = stm.executeQuery();
         while(rsCmt.next()){

@@ -3888,6 +3888,9 @@ font-size: 24px;
 	font-weight: 600;
 }
 .text-right{
+	font-weight: 600;
+}
+.text-right-admin{
 	margin: 0 0 0 217px;
 	font-weight: 600;
 }

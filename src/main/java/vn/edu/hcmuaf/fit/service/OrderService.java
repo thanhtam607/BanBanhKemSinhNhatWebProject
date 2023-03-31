@@ -13,7 +13,7 @@ public class OrderService {
         String result = "";
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILLS.BILL_ID from BILLS ORDER BY BILL_ID DESC LIMIT 1");
+                ResultSet rs = statement.executeQuery("SELECT BILLS.ID from BILLS ORDER BY ID DESC LIMIT 1");
                 while (rs.next()){
                     result = rs.getString(1);
                 }
@@ -31,10 +31,10 @@ public class OrderService {
         String stt = getLastMaHD().substring(2);
         String mahd = "HD" + (Integer.parseInt(stt) + 1);
         order.setId(mahd);
-        String makh = order.getUser().getAccount_id();
+        String makh = order.getUser().getId();
         String sql = "INSERT INTO BILLS VALUES('" + mahd + "', '" + makh + "', '"
                 + order.getBuyDate()  + "', '" + order.getNote() + "',"
-                +order.getPriceTotal()+ "," + order.getTrangthai()+");";
+                +order.getPriceTotal()+ "," + order.getTrangthai()+", null);";
         if(stm!= null) {
             try {
                 stm.executeUpdate(sql);
@@ -76,7 +76,7 @@ public class OrderService {
     }
     public static void clearCart(Order order){
         order.getData().clear();
-        CartService.removeAllCart(order.getUser().getAccount_id());
+        CartService.removeAllCart(order.getUser().getId());
 
     }
     public static void updateTonKhoWhenAdd(Order order){

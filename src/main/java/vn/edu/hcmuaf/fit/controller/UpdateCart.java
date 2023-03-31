@@ -31,8 +31,8 @@ public class UpdateCart extends HttpServlet {
                 String maSP = request.getParameter("masp");
                 Product product = ProductService.findById(maSP);
                 if (product != null) {
-                    CartService.updateQty(auth.getAccount_id(),maSP,solgmua);
-                    List<ItemProductInCart> listItemC = CartService.findItemCartByIdUser(auth.getAccount_id());
+                    CartService.updateQty(auth.getId(),maSP,solgmua);
+                    List<ItemProductInCart> listItemC = CartService.findItemCartByIdUser(auth.getId());
                     session.setAttribute("itemCart", listItemC);
                 }
             }

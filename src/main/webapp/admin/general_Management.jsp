@@ -78,13 +78,13 @@
         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
       </div>
       <div class="ms-3">
-        <h6 class="mb-0"><%= auth != null ? auth.getAccount_name():"ADMIN"%></h6>
+        <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
         <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
       </div>
     </div>
     <div class="navbar-nav w-100">
       <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
-      <a href="general_Management.jsp" class="nav-item nav-link active"><i class="fa fa-user me-2"></i>Quản lý chung</a>
+<%--      <a href="general_Management.jsp" class="nav-item nav-link active"><i class="fa fa-user me-2"></i>Quản lý chung</a>--%>
       <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
       <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
       <a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Tin Tức</a>
@@ -106,7 +106,7 @@
       <!-- main title -->
       <div class="col-12">
         <div class="main__title">
-          <h2>Quản lý chung</h2>
+          <h2>Quản lý cửa hàng</h2>
         </div>
       </div>
       <!-- end main title -->
@@ -122,12 +122,10 @@
             </div>
             <!-- or red -->
             <div class="profile__meta profile__meta--green">
-              <h3 class="text--green">Nhãn hiệu của trang web</h3>
+              <h3 class="text--green">Tên cửa hàng</h3>
             </div>
           </div>
           <!-- end profile user -->
-
-
           <!-- profile btns -->
           <div class="profile__actions">
             <a href="#modal-update" class="main__table-btn main__table-btn--edit open-modal"><i class="fa fa-edit"></i></a>

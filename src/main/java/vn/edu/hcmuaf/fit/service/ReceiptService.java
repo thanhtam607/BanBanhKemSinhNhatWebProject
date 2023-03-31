@@ -11,14 +11,14 @@ public class ReceiptService {
         List<Receipt> list = new ArrayList<Receipt>();
         Statement statement = DBConnect.getInstall().get();
         Statement stmt1 = DBConnect.getInstall().get();
-        String sql = "select BILLS.BILL_ID, CUSTOMERS.CUSTOMER_NAME, products.productName, CUSTOMERS.CUSTOMER_PHONE, BILLS.EXPORT_DATE, DELIVERY.DELIVERY_DATE, DELIVERY.DELIVERY_ADDRESS, BILLS.NOTES, products.price, BILLS.TOTAL_BILL,  BILLS.BILL_STATUS, CUSTOMERS.CUSTOMER_ID, products.idProduct, ACCOUNTS.ACCOUNT_NAME,ACCOUNTS.ACCOUNT_ROLE, ACCOUNTS.ACCOUNT_EMAIL\n" +
-                "from products, BILLS, CUSTOMERS, BILL_DETAIL, DELIVERY, ACCOUNTS where BILLS.BILL_ID = BILL_DETAIL.BILL_ID and BILL_DETAIL.idProduct = products.idProduct and DELIVERY.BILL_ID = BILLS.BILL_ID and CUSTOMERS.CUSTOMER_ID = BILLS.CUSTOMER_ID and ACCOUNTS.ACCOUNT_ID = CUSTOMERS.CUSTOMER_ID \n" +
-                "group by BILLS.BILL_ID ORDER BY BILLS.EXPORT_DATE desc;";
+        String sql = "select BILLS.ID, CUSTOMERS.NAME, products.productName, CUSTOMERS.PHONE, BILLS.EXPORT_DATE, DELIVERY.DELIVERY_DATE, DELIVERY.ADDRESS, BILLS.NOTES, products.price, BILLS.TOTAL_BILL,  BILLS.STATUS, CUSTOMERS.ID, products.idProduct, ACCOUNTS.NAME,ACCOUNTS.ROLE, ACCOUNTS.EMAIL\n" +
+                "from products, BILLS, CUSTOMERS, BILL_DETAIL, DELIVERY, ACCOUNTS where BILLS.ID = BILL_DETAIL.ID and BILL_DETAIL.idProduct = products.idProduct and DELIVERY.ID = BILLS.ID and CUSTOMERS.ID = BILLS.CUSTOMER_ID and ACCOUNTS.ID = CUSTOMERS.ID \n" +
+                "group by BILLS.ID ORDER BY BILLS.EXPORT_DATE desc;";
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery(sql);
                 while (rs.next()) {
-                    ResultSet rsCmt = stmt1.executeQuery("SELECT idProduct, ACCOUNTS.ACCOUNT_NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ACCOUNT_ID = Comments.ID");
+                    ResultSet rsCmt = stmt1.executeQuery("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID");
                     List<Comment> listCmts = new ArrayList<Comment>();
                     String s1 = rs.getString(13);
                     while (rsCmt.next()) {
@@ -53,9 +53,9 @@ public class ReceiptService {
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILL_ID, CUSTOMER_ID, EXPORT_DATE, NOTES, TOTAL_BILL, BILL_STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
+                ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES, TOTAL_BILL, STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
                 while (rs.next()) {
-                    ResultSet rsDiaChiGiao = stmt1.executeQuery("SELECT DELIVERY.DELIVERY_ADDRESS, DELIVERY.BILL_ID FROM DELIVERY");
+                    ResultSet rsDiaChiGiao = stmt1.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID FROM DELIVERY");
                     String diachi = "";
                     while (rsDiaChiGiao.next()) {
                         String s2 = rsDiaChiGiao.getString(2);
@@ -81,10 +81,10 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILL_ID, CUSTOMER_ID, EXPORT_DATE, NOTES, TOTAL_BILL, BILL_STATUS FROM BILLS\n" +
+                ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES, TOTAL_BILL, STATUS FROM BILLS\n" +
                         "WHERE date(EXPORT_DATE) = date(CURRENT_DATE) \n" +
-                        "and MONTH(EXPORT_DATE) = MONTH(CURRENT_DATE) and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE) and BILL_STATUS != 4\n" +
-                        "ORDER BY BILLS.BILL_ID DESC");
+                        "and MONTH(EXPORT_DATE) = MONTH(CURRENT_DATE) and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE) and  STATUS != 4\n" +
+                        "ORDER BY BILLS.ID DESC");
                 while (rs.next()) {
                     Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
                             rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
@@ -104,9 +104,9 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILL_ID, CUSTOMER_ID, EXPORT_DATE, NOTES, TOTAL_BILL, BILL_STATUS FROM BILLS\n" +
+                ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES, TOTAL_BILL,  STATUS FROM BILLS\n" +
                         "WHERE MONTH(EXPORT_DATE) = month(CURRENT_DATE) and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE)\n" +
-                        "ORDER BY BILLS.BILL_ID DESC");
+                        "ORDER BY BILLS.ID DESC");
                 while (rs.next()) {
                     Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
                             rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
@@ -125,10 +125,10 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT products.productName, sum(bill_detail.AMOUNT) as slg\n" +
-                        "from products, bills, bill_detail\n" +
-                        "WHERE  bills.BILL_ID = bill_detail.BILL_ID and products.idProduct = bill_detail.idProduct \n" +
-                        "and bills.BILL_STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)\n" +
+                ResultSet rs = statement.executeQuery("SELECT products.productName, sum(BILL_DETAIL.AMOUNT) as slg\n" +
+                        "from products, bills, BILL_DETAIL\n" +
+                        "WHERE  bills.ID = BILL_DETAIL.ID and products.idProduct = BILL_DETAIL.idProduct \n" +
+                        "and bills.STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)\n" +
                         "GROUP BY  products.idProduct\n" +
                         "ORDER BY slg DESC");
                 while (rs.next()) {
@@ -147,9 +147,9 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILLS.BILL_ID, sum(BILL_DETAIL.AMOUNT) FROM BILL_DETAIL, BILLS\n" +
+                ResultSet rs = statement.executeQuery("SELECT BILLS.ID, sum(BILL_DETAIL.AMOUNT) FROM  BILL_DETAIL, BILLS\n" +
                         "WHERE date(EXPORT_DATE) = date(CURRENT_DATE) and MONTH(EXPORT_DATE) = month(CURRENT_DATE) and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE)\n" +
-                        "and BILLS.BILL_ID = BILL_DETAIL.BILL_ID and BILLS.BILL_STATUS != 4");
+                        "and BILLS.ID =  BILL_DETAIL.ID and BILLS.STATUS != 4");
                 while (rs.next()) {
                     result = rs.getInt(2);
                 }
@@ -167,8 +167,8 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILL_DETAIL.BILL_ID, BILL_DETAIL.idProduct, products.productName, products.price, BILL_DETAIL.AMOUNT, BILL_DETAIL.NOTES from BILLS, BILL_DETAIL, products\n" +
-                        "WHERE BILL_DETAIL.BILL_ID = BILLS.BILL_ID and BILL_DETAIL.idProduct = products.idProduct ORDER BY BILL_DETAIL.BILL_ID DESC ");
+                ResultSet rs = statement.executeQuery("SELECT BILL_DETAIL.ID, BILL_DETAIL.idProduct, products.productName, products.price, BILL_DETAIL.AMOUNT, BILL_DETAIL.NOTES from BILLS, BILL_DETAIL, products\n" +
+                        "WHERE BILL_DETAIL.ID = BILLS.ID and BILL_DETAIL.idProduct = products.idProduct ORDER BY BILL_DETAIL.ID DESC ");
                 while (rs.next()) {
 
                     Bill_Detail billDetail = new Bill_Detail(rs.getString(1),
@@ -252,7 +252,7 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILL_ID, DELIVERY_DATE, DELIVERY_ADDRESS,DELIVERY_EMAIL,DELIVERY_PHONE,DELIVERY_NAME  from DELIVERY");
+                ResultSet rs = statement.executeQuery("SELECT ID, DELIVERY_DATE, ADDRESS,EMAIL,PHONE,NAME  from DELIVERY");
                 while (rs.next()) {
                     Delivery delivery = new Delivery(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6));
                     list.add(delivery);
@@ -271,7 +271,7 @@ public class ReceiptService {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE BILLS set BILLS.BILL_STATUS = 4 WHERE BILLS.BILL_ID ='" + mahd + "'";
+                String sql = "UPDATE BILLS set BILLS.STATUS = 4 WHERE BILLS.ID ='" + mahd + "'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -283,7 +283,7 @@ public class ReceiptService {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE BILLS set BILLS.BILL_STATUS = 0 WHERE BILLS.BILL_ID ='" + mahd + "'";
+                String sql = "UPDATE BILLS set BILLS.STATUS = 0 WHERE BILLS.ID ='" + mahd + "'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -335,7 +335,7 @@ public class ReceiptService {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE BILLS set BILLS.BILL_STATUS = 2 WHERE BILLS.BILL_ID ='" + mahd + "'";
+                String sql = "UPDATE BILLS set BILLS.STATUS = 2 WHERE BILLS.ID ='" + mahd + "'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -347,7 +347,7 @@ public class ReceiptService {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE BILLS set BILLS.BILL_STATUS = 1 WHERE BILLS.BILL_ID ='" + mahd + "'";
+                String sql = "UPDATE BILLS set BILLS.STATUS = 1 WHERE BILLS.ID ='" + mahd + "'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -358,13 +358,13 @@ public class ReceiptService {
 
     public static void updateStatus(String id) {
         Statement statement = DBConnect.getInstall().get();
-        int status = UserService.findById(id).getAccount_status();
+        int status = UserService.findById(id).getStatus();
         if (status != -1) {
             status = -1;
         } else {
             status = 0;
         }
-        String sql = "UPDATE ACCOUNTS set  ACCOUNT_STATUS = " + status + " where ACCOUNTS.ACCOUNT_ID = '" + id + "'";
+        String sql = "UPDATE ACCOUNTS set  STATUS = " + status + " where ACCOUNTS.ID = '" + id + "'";
 
         try {
             statement.executeUpdate(sql);
@@ -376,7 +376,7 @@ public class ReceiptService {
 
     public static void updateRole(int role, String id) {
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE ACCOUNTS set  ACCOUNT_ROLE = " + role + " where ACCOUNTS.account_id = '" + id + "'";
+        String sql = "UPDATE ACCOUNTS set ROLE = " + role + " where ACCOUNTS.id = '" + id + "'";
         try {
             statement.executeUpdate(sql);
 

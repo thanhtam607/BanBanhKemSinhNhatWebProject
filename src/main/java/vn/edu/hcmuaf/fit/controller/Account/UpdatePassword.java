@@ -18,7 +18,7 @@ public class UpdatePassword extends HttpServlet {
             HttpSession session = request.getSession(true);
             User user =(User) session.getAttribute("auth");
             String oldPass = request.getParameter("oldPass");
-            String p = user.getAccount_pass();
+            String p = user.getPass();
             PrintWriter out = response.getWriter();
            if( p.equals(UserService.hashPassword(oldPass))){
                out.println(1);

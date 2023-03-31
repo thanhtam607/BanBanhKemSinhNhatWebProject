@@ -24,7 +24,7 @@ public class MyOrder extends HttpServlet {
         User auth = (User) session.getAttribute("auth");
 
         if(auth != null){
-            List<Receipt> receipts = ReceiptService.getReceiptByMakh(auth.getAccount_id());
+            List<Receipt> receipts = ReceiptService.getReceiptByMakh(auth.getId());
 
             session.setAttribute("listRe", receipts);
 

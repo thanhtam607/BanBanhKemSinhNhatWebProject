@@ -16,7 +16,7 @@ public class CustomerService {
         Statement statement = DBConnect.getInstall().get();
         if(statement !=null){
             try{
-                ResultSet rs = statement.executeQuery("SELECT CUSTOMER_ID, CUSTOMER_NAME, CUSTOMER_ADDRESS, CUSTOMER_PHONE, ACCOUNTS.ACCOUNT_ROLE from CUSTOMERS, ACCOUNTS where ACCOUNTS.ACCOUNT_ID = CUSTOMERS.CUSTOMER_ID");
+                ResultSet rs = statement.executeQuery("SELECT CUSTOMERS.ID,  CUSTOMERS.NAME,  CUSTOMERS.ADDRESS,  CUSTOMERS.PHONE, ACCOUNTS.ROLE from CUSTOMERS, ACCOUNTS where ACCOUNTS.ID = CUSTOMERS.ID");
                 while(rs.next()){
                     listC.add(new Customer(rs.getString(1),
                             rs.getString(2),
@@ -41,7 +41,7 @@ public class CustomerService {
         String result = "";
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT CUSTOMERS.CUSTOMER_ID from CUSTOMERS ORDER BY CUSTOMER_ID DESC LIMIT 1");
+                ResultSet rs = statement.executeQuery("SELECT CUSTOMERS.ID from CUSTOMERS ORDER BY CUSTOMERS.ID DESC LIMIT 1");
                 while (rs.next()){
                     result = rs.getString(1);
                 }
@@ -55,14 +55,14 @@ public class CustomerService {
     }
     public static void registerKH(Customer acc, User user){
         Statement stm = DBConnect.getInstall().get();
-        String ID = user.getAccount_id();
+        String ID = user.getId();
         acc.setMAKH(ID);
         acc.setDIACHI("TPHCM");
         acc.setSDT("0356407289");
         String sql = " ";
         if(stm!= null) {
             try {
-                 sql = "insert into CUSTOMERS values ('" + ID + "', '" + user.getAccount_name() + "', '"
+                 sql = "insert into CUSTOMERS values ('" + ID + "', '" + user.getName() + "', '"
                            + acc.getDIACHI() + "'," + acc.getSDT()+");";
                 System.out.println(sql);
                 stm.executeUpdate(sql);
