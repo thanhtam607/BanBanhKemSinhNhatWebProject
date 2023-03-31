@@ -197,7 +197,7 @@
                                     <td>
                                         <% String main__table = " ";
                                             String main__btn ="";
-                                            if(UserService.findById(customer.getMAKH()).getAccount_status() == -1){
+                                            if(UserService.findById(customer.getMAKH()).getStatus() == -1){
                                                 main__btn = "main__table-btn--delete";
                                             }else{
                                                 main__btn = "main__table-btn--banned";

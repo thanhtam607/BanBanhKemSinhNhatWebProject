@@ -211,11 +211,13 @@
                     <div class="bg-pink rounded h-100 p-4">
                         <h6 class="mb-4 bg-pink">Sản phẩm bán chạy trong tháng này </h6>
                         <ul class="list-group">
-                            <%Map<String, Integer> map = (Map<String, Integer>) request.getAttribute("map");
+                            <%Map<String, Integer> map = (Map<String, Integer>) request.getAttribute("map-hot");
 
                                 for(Map.Entry<String, Integer> entry: map.entrySet()){
                             %>
-                            <li class="list-group-item bg-pink"><%=entry.getKey()%> : <span class="text-right-admin"><%=entry.getValue()%></span></li>
+                            <li class="list-group-item bg-pink" style="display: flex; justify-content: space-between">
+                                <span><%=entry.getKey()%></span>
+                                <span><%=entry.getValue()%></span></li>
 
                             <% }%>
                         </ul>

@@ -893,7 +893,6 @@ INSERT INTO BILL_DETAIL VALUES('HD14', 'B088', 1, 'Chúc mừng sinh nhật 23 t
 INSERT INTO BILL_DETAIL VALUES('HD15', 'B090', 1, 'Chúc mừng sinh nhật 20 tuổi');
 
 /*=============================================DELIVERY=======================================*/
-
 CREATE TABLE DELIVERY(ID CHAR(4),
 										    DELIVERY_DATE DATETIME NOT NULL,
 												ADDRESS VARCHAR(60) NOT NULL,
@@ -901,7 +900,7 @@ CREATE TABLE DELIVERY(ID CHAR(4),
 												PHONE VARCHAR(12),
 												NAME VARCHAR(60),
 												CONSTRAINT f_mhdgh FOREIGN KEY(ID) REFERENCES BILLS(ID));
---
+												
 INSERT INTO DELIVERY VALUES('HD01', '2022/10/14', 'Q1, TP HCM', null, null,null);
 INSERT INTO DELIVERY VALUES('HD02', '2022/10/23', 'Q3, TP HCM', null, null,null);
 INSERT INTO DELIVERY VALUES('HD03', '2022/10/15', 'TP.THỦ ĐỨC TP HCM', null, null,null);
@@ -1058,6 +1057,12 @@ insert into general_infor values('GI019', 'GoogleMap', 'https://www.google.com/m
 insert into general_infor values('GI020', 'IndexSlogan', 'Tận hưởng thế giới ngọt ngào của bạn.');
 insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh ngọt, đây là sự yêu thương.');
 insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
-
-								
-				
+-- 
+-- SELECT products.productName, sum(BILL_DETAIL.AMOUNT) as slg
+--                         from products, bills, BILL_DETAIL
+--                         WHERE  bills.ID = BILL_DETAIL.ID and products.idProduct = BILL_DETAIL.idProduct
+--                         and bills.STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)
+--                         GROUP BY  products.idProduct
+-- 												HAVING slg > 2
+--                         ORDER BY slg DESC LIMIT 10
+												

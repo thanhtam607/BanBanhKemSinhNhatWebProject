@@ -5,6 +5,8 @@ import vn.edu.hcmuaf.fit.model.*;
 
 import java.sql.*;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ReceiptService {
     public static List<Receipt> getData() {
@@ -120,6 +122,7 @@ public class ReceiptService {
         }
         return list;
     }
+
     public static Map<String,Integer> getAllCakeThisMonth() {
         Map<String,Integer> map = new HashMap<>();
         Statement statement = DBConnect.getInstall().get();
@@ -128,9 +131,10 @@ public class ReceiptService {
                 ResultSet rs = statement.executeQuery("SELECT products.productName, sum(BILL_DETAIL.AMOUNT) as slg\n" +
                         "from products, bills, BILL_DETAIL\n" +
                         "WHERE  bills.ID = BILL_DETAIL.ID and products.idProduct = BILL_DETAIL.idProduct \n" +
-                        "and bills.STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)\n" +
-                        "GROUP BY  products.idProduct\n" +
-                        "ORDER BY slg DESC");
+                        "and bills.STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) " +
+                        "and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)\n" +
+                        "GROUP BY  products.idProduct\n HAVING slg > 2\n" +
+                        "ORDER BY slg DESC LIMIT 10");
                 while (rs.next()) {
                    map.put(rs.getString(1), rs.getInt(2));
                 }
@@ -140,8 +144,16 @@ public class ReceiptService {
         else {
             System.out.println("Không có  hóa đơn");
         }
-        return map;
+        LinkedHashMap<String, Integer> sortedMap = map.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+        return sortedMap;
     }
+
     public static int getNumberProToDay() {
         int result = 0;
         Statement statement = DBConnect.getInstall().get();
@@ -407,9 +419,10 @@ public class ReceiptService {
 
 
     public static void main(String[] args) {
-        for (Receipt r : getData()) {
-            System.out.println(r.getCommentList().toString());
-        }
+//        for (Map.Entry<String, Integer> r : getAllCakeThisMonth().entrySet()) {
+//            System.out.println(r.toString());
+//        }
+//        System.out.println(getAllCakeThisMonth());
 
     }
 

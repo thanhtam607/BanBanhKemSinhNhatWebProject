@@ -202,7 +202,7 @@
                 <p>Điền đầy đủ thông tin của bạn để theo dõi đơn hàng dễ dàng</p>
                 <div>
                     <div class="row">
-                        <div class="col-lg-8 col-md-6">
+                        <div class="col-lg-7 col-md-6">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
@@ -252,11 +252,11 @@
                             </div>
 
                         </div>
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-5 col-md-6">
                             <div id="emptyPro" class="checkout__order">
                                 <h4>Đơn hàng</h4>
                                 <div class="checkout__order__products">Sản Phẩm <span>Tổng</span></div>
-                                <ul >
+                                <ul style="overflow: hidden">
                                     <%for (ItemProductInCart item : listItemC) {%>
                                     <li>
                                         <span style="float: left" class="breaklineNamePro"><%=item.getSp().getName()%></span>

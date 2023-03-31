@@ -197,7 +197,7 @@
                                     <td>
                                         <% String main__table = " ";
                                             String main__btn ="";
-                                            if(UserService.findById(customer.getMAKH()).getAccount_status() == -1){
+                                            if(UserService.findById(customer.getMAKH()).getStatus() == -1){
                                                 main__btn = "main__table-btn--delete";
                                             }else{
                                                 main__btn = "main__table-btn--banned";
@@ -214,7 +214,7 @@
 
                                     <td>
                                         <div class="main__table-btns">
-                                            <%if(UserService.findById(customer.getMAKH()).getAccount_status() == -1){%>
+                                            <%if(UserService.findById(customer.getMAKH()).getStatus() == -1){%>
                                             <a href="#modal-status-unlock<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
