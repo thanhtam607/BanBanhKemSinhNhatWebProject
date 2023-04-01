@@ -22,6 +22,7 @@ public class Receipt {
     String TenTK;
     int role;
     String email;
+    String createBy;
 
     public Receipt() {
     }
@@ -53,7 +54,7 @@ public class Receipt {
         this.money = money;
         this.state = state;
     }
-    public Receipt(String id, String makh, String export_date, String note, int money, int state, String dc) {
+    public Receipt(String id, String makh, String export_date, String note, int money, int state, String dc, String createBy) {
         this.id = id;
         this.makh = makh;
         this.export_date = export_date;
@@ -61,6 +62,15 @@ public class Receipt {
         this.money = money;
         this.state = state;
         this.address = dc;
+        this.createBy = createBy;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 
     public String getNote() {
@@ -83,7 +93,7 @@ public class Receipt {
         if(this.state == 0){
             return "Chờ Xác Nhận";
         }else if(this.state == 1){
-            return "Chờ Lấy Hàng";
+            return "Gói Hàng";
         }else if(this.state == 2){
             return "Đang Giao";
         }else if(this.state == 3){
@@ -209,9 +219,6 @@ public class Receipt {
         TenTK = tenTK;
     }
 
-    public int getRoleInt() {
-        return role;
-    }
 
     public String getRoleName() {
         if(this.role == 0){

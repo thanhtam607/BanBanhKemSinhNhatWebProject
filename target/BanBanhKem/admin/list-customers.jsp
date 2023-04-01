@@ -214,7 +214,7 @@
 
                                     <td>
                                         <div class="main__table-btns">
-                                            <%if(UserService.findById(customer.getMAKH()).getAccount_status() == -1){%>
+                                            <%if(UserService.findById(customer.getMAKH()).getStatus() == -1){%>
                                             <a href="#modal-status-unlock<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>

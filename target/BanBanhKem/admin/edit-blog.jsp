@@ -281,7 +281,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <button class="form__btn" type="submit"><a><i class="fa fa-save"></i> </a> Lưu lại</button>
+                                                <button class="form__btn" type="submit"><a><i class="fa fa-save me-2"></i> </a> Lưu lại</button>
                                             </div>
                                         </div>
                                     </form>

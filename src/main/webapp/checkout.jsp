@@ -241,7 +241,7 @@
                             <div class="checkout__input">
                                 <p>Ghi chú cho cửa hàng<span>*</span></p>
                                 <input type="text"
-                                    placeholder="Lời nhắn khác" id="ghichu">
+                                    placeholder="Lời nhắn khác" id="ghichu" required>
                             </div>
                             <div class="col-lg-6 checkout__input__checkbox">
                                 <label for="payment3" >

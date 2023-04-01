@@ -55,7 +55,7 @@ public class ReceiptService {
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES, TOTAL_BILL, STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
+                ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES, TOTAL_BILL, STATUS, CREATE_BY FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = stmt1.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID FROM DELIVERY");
                     String diachi = "";
@@ -66,7 +66,7 @@ public class ReceiptService {
                         }
                     }
                     Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
-                            rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), diachi);
+                            rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), diachi, rs.getString(7));
                     list.add(rc);
                 }
             } catch (SQLException e) {

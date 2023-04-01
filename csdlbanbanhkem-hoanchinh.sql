@@ -841,7 +841,7 @@ CREATE TABLE CUSTOMERS(ID CHAR(4) PRIMARY KEY NOT NULL,
 
  /*==============================BILLS=====================================*/
 CREATE TABLE BILLS(ID CHAR(4) PRIMARY KEY,
-											CUSTOMER_ID CHAR(4) NOT NULL,
+											CUSTOMER_ID CHAR(4),
 											EXPORT_DATE DATETIME NOT NULL,
 											NOTES LONGTEXT,
 											TOTAL_BILL FLOAT,

@@ -177,10 +177,11 @@
                                         <div class="form__group">
                                             <label class="form__label" for="rights">Trạng thái ĐH</label>
                                             <select class="form__input" id="rights" name="">
-                                                <option selected value="0">Chờ Xử lý</option>
+                                                <option selected value="0">Chờ Xác Nhận</option>
                                                 <option value="1">Gói hàng</option>
-                                                <option value="2">Đang vận chuyển</option>
+                                                <option value="2">Đang giao</option>
                                                 <option value="3">Giao thành công</option>
+                                                <option value="4">Đã hủy</option>
                                             </select>
                                         </div>
                                     </div>

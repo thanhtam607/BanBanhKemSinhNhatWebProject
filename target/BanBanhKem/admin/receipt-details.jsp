@@ -117,9 +117,13 @@
         </div>
       </div>
     <div class="col-12 pt-2 pb-2 rounded bg-pink">
-        <h5 style="margin-bottom: 25px">Tên KH: <%=tenkh%> - SĐT: <%=receipt.getPhone()%></h5>
+            <div class="col-12 d-flex justify-content-between form__content pl-0 pr-0">
+              <h5 style="margin-bottom: 25px">Tên KH: <%=tenkh%> - SĐT: <%=receipt.getPhone()%></h5>
+               <h5 style="margin-bottom: 25px"> Mã ĐH: <%=receipt.getId()%> </h5>
+            </div>
             <div class="col-12 d-flex form__content pl-0 pr-0">
               <div class="col-6 pl-0 pr-0">
+                <p>Người Tạo: <%=receipt.getCreateBy()%></p>
                 <p>Ngày Lập: <%=receipt.getExport_date()%></p>
                 <p>Ngày Giao Hàng: <%=receipt.getDelivery_date()%></p>
               </div>

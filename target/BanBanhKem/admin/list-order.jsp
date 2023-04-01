@@ -205,9 +205,11 @@
                   <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn main__table-btn--view">
                     <i class="fas fa-info"></i>
                   </a>
+                  <%if(rc.getStateInt() == 0){%>
                   <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">
                     <i class="fa fa-check"></i>
                   </a>
+                  <%}%>
                   <a href="AdminEditOrder?id=<%=rc.getId()%>" class="main__table-btn main__table-btn--edit">
                     <i class="fa fa-edit"></i>
                   </a>
@@ -248,11 +250,11 @@
             <div id="modal-status<%=i%>" class="zoom-anim-dialog mfp-hide modal">
               <h6 class="modal__title">Thông Báo</h6>
 
-              <p class="modal__text">Bạn có chắc muốn chuyển ĐH cho đơn vị vận chuyển?</p>
+              <p class="modal__text">Bạn có chắc muốn xác nhận đơn hàng này?</p>
 
               <div class="modal__btns">
                 <a href="adminChangeStateOrder?mahd=<%=rc.getId()%>" class="modal__btn modal__btn--apply" type="button">
-                  OK
+                  Xác nhận
                 </a>
                 <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
               </div>
