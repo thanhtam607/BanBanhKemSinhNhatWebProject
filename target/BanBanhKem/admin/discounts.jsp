@@ -88,13 +88,14 @@
         </div>
         <div class="navbar-nav w-100">
             <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
-            <a href="./ListProduct_Admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
+            <a href="general_Management.jsp" class="nav-item nav-link"><i class="fa fa-user"></i>Quản lý chung</a>
+            <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Sản Phẩm</a>
             <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
             <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
             <a href="./ListReceipt_full_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
-            <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-            <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
             <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
+            <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file"></i>QL danh mục</a>
+            <a href="List_Discounts" class="nav-item nav-link active"><i class="fa fa-birthday-cake me-2"></i>Khuyến mãi</a>
             <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
             <!--  -->
         </div>
@@ -156,7 +157,12 @@
                 </div>
             </div>
             <!-- end main title -->
+            <div class="button">
+                <div class="button_left">
+                    <a class="button_product" href="Add_Discount">Thêm khuyến mãi</a>
+                </div>
 
+            </div>
 
             <div class="col-12 bg-pink">
 
@@ -231,7 +237,7 @@
                     <ul class="paginator">
                         <% int tag = (int) request.getAttribute("tag");%>
                         <li class="paginator__item paginator__item--prev">
-                            <a href="ListProduct_Admin?page=<%=tag - 1%>"><i class="fa fa-chevron-left"></i></a>
+                            <a href="List_Discounts?page=<%=tag - 1%>"><i class="fa fa-chevron-left"></i></a>
                         </li>
                         <% int endPage = (int) request.getAttribute("endPage");
                             for (int i = tag - 1; i <= tag + 2; i++) {

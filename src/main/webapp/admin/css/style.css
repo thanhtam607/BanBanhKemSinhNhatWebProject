@@ -428,6 +428,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     content: "";
     opacity: 0;
 }
+.button{
+    margin-bottom: 10px;
+    margin-top: -20px;
+
+}
 
 .button_right{
     width: 100%;
@@ -437,7 +442,27 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 .button_right a{
     float: right;
-    margin-right: 30px;
+}
+.button_left a{
+    float: left;
+}
+.button_product{
+     border-radius: 20px;
+     border: #ff96b7 2px solid;
+     padding: 5px 20px;
+     text-align: center;
+     background: #ff96b7;
+     color: white;
+     font-weight: 600;
+ }
+.button_product:hover{
+    border-radius: 20px;
+    border: #ff96b7 2px solid;
+    padding: 5px 20px;
+    text-align: center;
+    background:white ;
+    color: #ff96b7;
+    font-weight: 600;
 }
 .product__item__price{
     color: red;
@@ -449,8 +474,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     font-size: 13px;
     color: gray;
 }
+
 .check{
-    width: 125px;
+   text-align: center;
 }
 .filter-product{
     display: flex;
@@ -461,4 +487,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 .select-all div{
     float: right;
+}
+.table-striped img{
+   width: 40px;
+    height: 40px;
 }
