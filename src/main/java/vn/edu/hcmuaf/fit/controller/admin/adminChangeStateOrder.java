@@ -19,7 +19,7 @@ public class adminChangeStateOrder extends HttpServlet {
         HttpSession session = request.getSession(true);
         String mahd = request.getParameter("mahd");
 
-        ReceiptService.updateStateAccept(mahd);
+        ReceiptService.updateState(mahd, 1);
         response.sendRedirect("./ListReceipt_full_Admin");
     }
 

@@ -173,6 +173,25 @@ public class ReceiptService {
         }
         return result;
     }
+    public static int getDoanhThuToDay() {
+        int rs = 0;
+        for (Receipt r : getAllReceiptToDay()) {
+            if (r.getStateInt() != 4) {
+                rs += r.getMoney();
+            }
+        }
+        return rs;
+    }
+
+    public static int getDoanhThuThisMonth() {
+        int rs = 0;
+        for (Receipt r : getAllReceiptThisMonth()) {
+            if (r.getStateInt() != 4) {
+                rs += r.getMoney();
+            }
+        }
+        return rs;
+    }
 
     public static List<Bill_Detail> getListCTHD() {
         List<Bill_Detail> list = new ArrayList<>();
@@ -250,11 +269,10 @@ public class ReceiptService {
     public static List<String> getAllStatusNameOrder() {
         List<String> list = new ArrayList<>();
         list.add("Chờ Xác Nhận");
-        list.add("Chờ Lấy Hàng");
+        list.add("Gói Hàng");
         list.add("Đang Giao");
         list.add( "Giao Thành Công");
         list.add( "Đã hủy");
-
         return list;
     }
 
@@ -343,11 +361,45 @@ public class ReceiptService {
         }
     }
 
-    public static void updateStateMove(String mahd) {
+
+    public static void updateState(String mahd, int st) {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE BILLS set BILLS.STATUS = 2 WHERE BILLS.ID ='" + mahd + "'";
+                String sql = "UPDATE BILLS set BILLS.STATUS = "+ st +" WHERE BILLS.ID ='" + mahd + "'";
+                stm.executeUpdate(sql);
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+    public static void updateInfoCustomerInBill(String id, String name, String phone) {
+        Statement stm = DBConnect.getInstall().get();
+        if (stm != null) {
+            try {
+                String sql = "UPDATE customers, bills set customers.NAME = '"+name+"', customers.PHONE = '"+phone+"' WHERE bills.ID ='"+id+"' and customers.id = bills.CUSTOMER_ID";
+                stm.executeUpdate(sql);
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+    public static void updateDeliveryInBill(String id, String deliveryDate, String address) {
+        Statement stm = DBConnect.getInstall().get();
+        if (stm != null) {
+            try {
+                String sql = "UPDATE DELIVERY set DELIVERY_DATE = '"+deliveryDate+"', ADDRESS = '"+address+"' WHERE DELIVERY.ID = '"+id+"'";
+                stm.executeUpdate(sql);
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+    public static void updateNoteInBill(String id, String note) {
+        Statement stm = DBConnect.getInstall().get();
+        if (stm != null) {
+            try {
+                String sql = "UPDATE BILLS set NOTES = '"+note+"' WHERE BILLS.ID = '"+id+"'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -355,20 +407,8 @@ public class ReceiptService {
         }
     }
 
-    public static void updateStateAccept(String mahd) {
-        Statement stm = DBConnect.getInstall().get();
-        if (stm != null) {
-            try {
-                String sql = "UPDATE BILLS set BILLS.STATUS = 1 WHERE BILLS.ID ='" + mahd + "'";
-                stm.executeUpdate(sql);
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-    }
 
-
-    public static void updateStatus(String id) {
+    public static void updateStatusUser(String id) {
         Statement statement = DBConnect.getInstall().get();
         int status = UserService.findById(id).getStatus();
         if (status != -1) {
@@ -397,32 +437,11 @@ public class ReceiptService {
         }
     }
 
-    public static int getDoanhThuToDay() {
-        int rs = 0;
-        for (Receipt r : getAllReceiptToDay()) {
-            if (r.getStateInt() != 4) {
-                rs += r.getMoney();
-            }
-        }
-        return rs;
-    }
 
-    public static int getDoanhThuThisMonth() {
-        int rs = 0;
-        for (Receipt r : getAllReceiptThisMonth()) {
-            if (r.getStateInt() != 4) {
-                rs += r.getMoney();
-            }
-        }
-        return rs;
-    }
 
 
     public static void main(String[] args) {
-//        for (Map.Entry<String, Integer> r : getAllCakeThisMonth().entrySet()) {
-//            System.out.println(r.toString());
-//        }
-//        System.out.println(getAllCakeThisMonth());
+
 
     }
 

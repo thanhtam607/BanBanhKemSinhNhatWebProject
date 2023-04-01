@@ -1057,12 +1057,10 @@ insert into general_infor values('GI019', 'GoogleMap', 'https://www.google.com/m
 insert into general_infor values('GI020', 'IndexSlogan', 'Tận hưởng thế giới ngọt ngào của bạn.');
 insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh ngọt, đây là sự yêu thương.');
 insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
+
 -- 
--- SELECT products.productName, sum(BILL_DETAIL.AMOUNT) as slg
---                         from products, bills, BILL_DETAIL
---                         WHERE  bills.ID = BILL_DETAIL.ID and products.idProduct = BILL_DETAIL.idProduct
---                         and bills.STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)
---                         GROUP BY  products.idProduct
--- 												HAVING slg > 2
---                         ORDER BY slg DESC LIMIT 10
-												
+-- SELECT*from customers
+-- SELECT*from bills
+-- SELECT*from delivery
+-- UPDATE customers, bills set customers.NAME = 'thuy', customers.PHONE = '345346' WHERE bills.ID ='hd01' and customers.id = bills.CUSTOMER_ID
+-- update bills set bills.NOTES 

@@ -1,5 +1,7 @@
 package vn.edu.hcmuaf.fit.controller.admin;
 
+import vn.edu.hcmuaf.fit.model.Bill_Detail;
+import vn.edu.hcmuaf.fit.model.Receipt;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.*;
@@ -15,6 +17,14 @@ public class AdminEditOrder extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String madh = request.getParameter("id");
         request.setAttribute("listStatus", ReceiptService.getAllStatusNameOrder());
+
+        String tenKH = request.getParameter("tenkh");
+        Receipt receipt = ReceiptService.getReceiptByMahd(madh);
+        List<Bill_Detail> listcthdOfKH = ReceiptService.getcthdUser(madh);
+        request.setAttribute("listcthdOfKH", listcthdOfKH);
+        request.setAttribute("receipt", receipt);
+        request.setAttribute("tenkh", tenKH);
+
         request.getRequestDispatcher("edit-order.jsp").forward(request, response);
     }
 

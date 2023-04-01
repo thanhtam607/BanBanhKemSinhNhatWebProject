@@ -133,7 +133,7 @@
                             <div class="profile__meta">
                                 <% String main__table = " ";
                                 String profile__text ="";
-                                    if(user.getAccount_status() == -1){
+                                    if(user.getStatus() == -1){
                                         main__table = "main__table-text--red";
                                         profile__text = "profile__action--delete";
 
@@ -184,7 +184,7 @@
 
                         <!-- profile btns -->
                         <div class="profile__actions">
-                            <%if(user.getAccount_status() == -1){%>
+                            <%if(user.getStatus() == -1){%>
                             <a href="#modal-status-unlock" class="profile__action <%=profile__text%> open-modal">
                                 <i class="fa fa-lock"></i>
                             </a>
