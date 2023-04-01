@@ -50,7 +50,6 @@ public class FilterProductForDiscount extends HttpServlet {
         if(totalProduct % 10 != 0){
             endPage++;
         }
-        System.out.println(loaiBanh);
         request.setAttribute("type", request.getParameter("loaiBanh"));
         request.setAttribute("endPage", endPage);
         request.setAttribute("tag", page);

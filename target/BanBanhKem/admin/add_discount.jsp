@@ -250,9 +250,9 @@
                   </table>
 
                                                         <!-- paginator -->
-                  <div class="col-2" style="text-align: center">
+                  <div class="col-12 show-more" >
                       <input type="number" id="page" style="display: none" value="<%=1%>">
-                                  <a href="#" onclick="filterProduct(true)"><i class="fa fa-chevron-right"></i></a>
+                      <a href="#" onclick="filterProduct(true)" >Xem thêm</a>
                   </div>
             <!-- end paginator -->
               </div>
