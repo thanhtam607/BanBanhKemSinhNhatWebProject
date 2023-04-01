@@ -78,6 +78,34 @@
 <div class="sidebar pe-4 pb-3">
   <nav class="navbar bg-pink navbar-dark">
 
+<<<<<<< HEAD
+        <div class="d-flex align-items-center ms-4 mb-4">
+            <div class="position-relative">
+                <i class="fa fa-user icon__user"></i>
+                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+            </div>
+            <div class="ms-3">
+                <h6 class="mb-0"><%= auth != null ? auth.getName() : "ADMIN"%>
+                </h6>
+                <span><%= auth != null ? auth.getRoleName() : "Admin"%></span>
+            </div>
+        </div>
+        <div class="navbar-nav w-100">
+            <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+            <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
+            <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
+            <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+            <a href="./ListReceipt_full_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
+            <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản
+                Phẩm</a>
+<%--            <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>--%>
+            <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
+            <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang
+                chủ</a>
+            <!--  -->
+        </div>
+    </nav>
+=======
     <div class="d-flex align-items-center ms-4 mb-4">
       <div class="position-relative">
         <i class="fa fa-user icon__user"></i>
@@ -102,6 +130,7 @@
       <!--  -->
     </div>
   </nav>
+>>>>>>> 55d0e6dc96b70262716cc608fa693405693086bd
 </div>
 <!-- Sidebar End -->
 
@@ -172,6 +201,135 @@
     <div class="tab-content bg-pink" id="myTabContent">
       <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
         <div class="col-12">
+<<<<<<< HEAD
+            <div class="main__title">
+                <h2>Chỉnh sửa đơn hàng</h2>
+            </div>
+        </div>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
+                <div class="col-12">
+                    <div class="row">
+                        <!-- details form -->
+                        <div class="col-12 col-lg-6">
+                            <form action="" method="post" class="form form--profile">
+                                <div class="row row--form">
+                                    <h4 class="form__title">Thông tin khách hàng</h4>
+                                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="form__group">
+                                            <label class="form__label" for="username">Tên khách hàng</label>
+                                            <input id="username" type="text" name="username" class="form__input"
+                                                   value="thanh">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="form__group">
+                                            <label class="form__label" for="email">SĐT</label>
+                                            <input id="email" type="tel" name="phone" class="form__input text-lowercase"
+                                                   value="0987878679">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <input class="form__btn" type="submit" value="Lưu thông tin">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <form action="" method="post" class="form form--profile">
+                                <div class="row row--form">
+                                    <h4 class="form__title">Thông tin giao hàng</h4>
+                                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="form__group">
+                                            <label class="form__label" for="email">Ngày lập</label>
+                                            <input type="date" name="dayE" class="form__input text-lowercase"
+                                                   value="20-12-22">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="form__group">
+                                            <label class="form__label" for="email">Ngày giao</label>
+                                            <input type="date" name="dayD" class="form__input text-lowercase"
+                                                   value="20-12-22">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="form__group">
+                                            <label class="form__label" for="email">Địa chỉ giao</label>
+                                            <input type="text" name="address" class="form__input text-lowercase"
+                                                   value="TPHCM">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="form__group">
+                                            <label class="form__label" for="rights">Trạng thái ĐH</label>
+                                            <select class="form__input" id="rights" name="">
+                                                <option selected value="0">Chờ Xác Nhận</option>
+                                                <option value="1">Gói hàng</option>
+                                                <option value="2">Đang giao</option>
+                                                <option value="3">Giao thành công</option>
+                                                <option value="4">Đã hủy</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 mt-lg-4">
+                                        <input class="form__btn" type="submit" value="Lưu thông tin">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-12">
+                            <div class="form__group">
+                                <label class="form__label" for="email">Ghi chú</label>
+                                <input type="text" name="note" class="form__input text-lowercase"
+                                       value="Mang nến 25 tuổi nhé">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="table-responsive margin-top-20px col-12 pl-0">
+                                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                    <thead>
+                                    <tr class="text-black">
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Tên sản phẩm</th>
+                                        <th scope="col">Ghi chú</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Đơn giá</th>
+                                        <th scope="col">Tổng</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Bánh Hoa</td>
+                                        <td>Mang muỗng nĩa</td>
+                                        <td>3</td>
+                                        <td>300,000 VNĐ</td>
+                                        <td>900,000 VNĐ</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-5 margin-top-20px">
+                                <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;
+                                <span class="text-danger text-uppercase text-pink" id="total">900,000 VND</span>
+                            </div>
+
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <a href="#" type="button" class="form__btn">Thêm sản phẩm</a>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <input class="form__btn" type="submit" value="Lưu thông tin">
+                                </div>
+                            </div>
+                        </div>
+=======
           <div class="row">
             <!-- details form -->
             <div class="col-12">
@@ -185,6 +343,7 @@
                     <div class="form__group">
                       <label class="form__label" for="username">Tên tài khoản</label>
                       <input id="username" type="text" name="username" class="form__input" value="thanh">
+>>>>>>> 55d0e6dc96b70262716cc608fa693405693086bd
                     </div>
                   </div>
 

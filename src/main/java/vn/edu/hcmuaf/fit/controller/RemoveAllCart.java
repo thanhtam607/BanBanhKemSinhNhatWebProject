@@ -24,7 +24,7 @@ public class RemoveAllCart extends HttpServlet {
             User auth = (User) session.getAttribute("auth");
             List<ItemProductInCart> listItemC =null;
             if (auth != null) {
-                CartService.removeAllCart(auth.getAccount_id());
+                CartService.removeAllCart(auth.getId());
             }
             session.setAttribute("itemCart", listItemC);
             response.sendRedirect("shoping-cart.jsp");

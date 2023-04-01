@@ -34,7 +34,7 @@ public class AddToFavorite extends HttpServlet {
                 listFavorite.setData(listItems);
                 if (product != null) {
                     item.setSp(product);
-                    item.setCustomer_id(auth.getAccount_id());
+                    item.setCustomer_id(auth.getId());
 //                    item.setPrice(product.getPrice());
 
                     if (session.getAttribute("listFavorite") == null) {

@@ -27,8 +27,8 @@ public class RemoveToCart extends HttpServlet {
                 String maSP = request.getParameter("masp");
                 Product product = ProductService.findById(maSP);
                 if (product != null) {
-                    CartService.removeToCart(auth.getAccount_id(),maSP);
-                    listItemC= CartService.findItemCartByIdUser(auth.getAccount_id());
+                    CartService.removeToCart(auth.getId(),maSP);
+                    listItemC= CartService.findItemCartByIdUser(auth.getId());
 
 
                 }

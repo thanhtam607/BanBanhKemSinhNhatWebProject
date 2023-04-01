@@ -35,10 +35,10 @@ public class Signin extends HttpServlet {
             }
             HttpSession session = request.getSession(true);
             session.setAttribute("auth", user);
-            Customer customer = CustomerService.getCusByIdAcc(user.getAccount_id());
+            Customer customer = CustomerService.getCusByIdAcc(user.getId());
             session.setAttribute("cust", customer);
 
-            List<ItemProductInCart> listItemCart = CartService.findItemCartByIdUser(user.getAccount_id());
+            List<ItemProductInCart> listItemCart = CartService.findItemCartByIdUser(user.getId());
             session.setAttribute("itemCart",listItemCart);
             response.sendRedirect(request.getContextPath() + "/Index");
         }

@@ -9,6 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @WebServlet(name = "ListReceipt_Admin", value = "/admin/ListReceipt_Admin")
 public class ListReceipt_Admin extends HttpServlet {
@@ -30,7 +31,7 @@ public class ListReceipt_Admin extends HttpServlet {
         request.setAttribute("soDHhomnay", soDHhomnay);
 
         Map<String, Integer> map = ReceiptService.getAllCakeThisMonth();
-        request.setAttribute("map", map);
+        request.setAttribute("map-hot", map);
 
         request.getRequestDispatcher("admin-web.jsp").forward(request,response);
 
