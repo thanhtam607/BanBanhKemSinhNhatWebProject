@@ -99,7 +99,8 @@
                 <div class="navbar-nav align-items-center ms-auto">
 
                     <div class="nav-item dropdown">
-                        <a href="<%= auth != null ? "./sigin.jsp":"#"%>" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <%String url = auth != null ? "#":"../signin.jsp";%>
+                        <a href="<%=url%>" class="nav-link <%=auth != null ?"dropdown-toggle":""%>" <%=auth != null ?"data-bs-toggle=\"dropdown\"": ""%>>
                             <i class="fa fa-user icon__user__small"></i>
                             <span class="d-none d-lg-inline-flex"><%= auth != null ? auth.getName():"Đăng nhập"%></span>
                         </a>
