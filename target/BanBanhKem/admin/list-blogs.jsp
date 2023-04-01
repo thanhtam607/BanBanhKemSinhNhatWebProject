@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +53,7 @@
         <div class="header__content">
             <!-- header logo -->
             <a href="./ListReceipt_Admin" class="header__logo">
-				<img src="../img/logo_web.jpg" alt="">
+				<img src="../<%=InforService.getImgLogo().get(0).getContent()%>" alt="">
 			</a>
             <!-- end header logo -->
 
@@ -81,18 +82,19 @@
                 <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
 			</div>
 		</div>
-		<div class="navbar-nav w-100">
-			<a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
-			<a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
-			<a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-			<a href="./ListBlog-admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
-			<a href="./ListReceipt_full_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
-			<a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-			<a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
+        <div class="navbar-nav w-100">
+            <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+            <a href="general_Management.jsp" class="nav-item nav-link"><i class="fa fa-user"></i>Quản lý chung</a>
+            <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Sản Phẩm</a>
+            <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
+            <a href="./ListBlog-admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+            <a href="./ListReceipt_full_Admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
             <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
+            <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file"></i>QL danh mục</a>
+            <a href="List_Discounts" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Khuyến mãi</a>
             <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
-			<!--  -->
-		</div>
+            <!--  -->
+        </div>
 	</nav>
     </div>
     <!-- Sidebar End -->
@@ -149,7 +151,9 @@
                     </div>
                 </div>
                 <!-- end main title -->
-
+                <div class="paginator-wrap" style="margin-top: -10px">
+                    <span><a href="add-blog.jsp" style="color: white;"> Thêm tin tức mới</a></span>
+                </div>
                 <!-- users -->
                 <div class="col-12 bg-pink">
                     <div class="main__table-wrap">
