@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.model;
 
 public class Discount {
+    int id;
     String idProduct;
     double discount;
     String startDate;
@@ -10,6 +11,21 @@ public class Discount {
         this.discount = discount;
         this.startDate = startDate;
         this.expiryDate = expiryDate;
+    }
+    public Discount(int id, String idProduct, double discount, String startDate, String expiryDate){
+        this.id=id;
+        this.idProduct = idProduct;
+        this.discount = discount;
+        this.startDate = startDate;
+        this.expiryDate = expiryDate;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setIdProduct(String idProduct) {

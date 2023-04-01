@@ -15,9 +15,9 @@ public class DiscountService {
         List<Discount> list = new ArrayList<>();
         Statement stm = DBConnect.getInstall().get();
         try{
-            ResultSet rs = stm.executeQuery("SELECT idProduct, discount, startDate, expiryDate from discounts GROUP BY idProduct, startDate, expiryDate HAVING DATEDIFF(CURRENT_DATE, expiryDate) < 0;");
+            ResultSet rs = stm.executeQuery("SELECT id,idProduct, discount, startDate, expiryDate from discounts GROUP BY idProduct, startDate, expiryDate HAVING DATEDIFF(CURRENT_DATE, expiryDate) < 0;");
             while (rs.next()){
-                list.add(new Discount(rs.getString(1), rs.getDouble(2), rs.getString(3),rs.getString(4)));
+                list.add(new Discount(rs.getInt(1),rs.getString(2), rs.getDouble(3), rs.getString(4),rs.getString(5)));
             }
         }catch (SQLException e) {
             throw new RuntimeException(e);
@@ -27,24 +27,17 @@ public class DiscountService {
     public static Discount findByIdProduct(String idProduct){
         Discount dis = null;
         try {
-            PreparedStatement stm = con.prepareStatement("SELECT idProduct, discount, startDate, expiryDate from discounts where idProduct= ? GROUP BY idProduct, startDate, expiryDate HAVING DATEDIFF(CURRENT_DATE, expiryDate) < 0;");
+            PreparedStatement stm = con.prepareStatement("SELECT id,idProduct, discount, startDate, expiryDate from discounts where idProduct= ? GROUP BY idProduct, startDate, expiryDate HAVING DATEDIFF(CURRENT_DATE, expiryDate) < 0;");
             stm.setString(1,idProduct);
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
-                dis = (new Discount(rs.getString(1), rs.getDouble(2), rs.getString(3),rs.getString(4)));
+                dis = (new Discount(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4),rs.getString(5)));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         return dis;
-    }
-    public List<Discount> createListDiscount(List<String> listIdProducts, double discount, String startDate, String endDate){
-        List<Discount> res = new ArrayList<>();
-        for(String id : listIdProducts){
-            res.add(new Discount(id, discount, startDate, endDate));
-        }
-        return res;
     }
     public static void addDiscount(Discount discount){
         try{
@@ -61,6 +54,15 @@ public class DiscountService {
     public static void addListDiscounts(List<Discount> discounts){
         for (Discount disc: discounts) {
             addDiscount(disc);
+        }
+    }
+    public static void removeDiscount(int id){
+        try{
+            PreparedStatement stm = con.prepareStatement("delete from discounts where id=?");
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

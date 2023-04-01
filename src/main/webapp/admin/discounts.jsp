@@ -174,8 +174,8 @@
                             <th>Tên sản phẩm</th>
                             <th>Loại</th>
                             <th>Giá (VND)</th>
-
                             <th>Giảm giá</th>
+                            <th>Tùy chọn</th>
                         </tr>
                         </thead>
                         <% List<Product> listPa = (List<Product>) request.getAttribute("listPa");
@@ -219,7 +219,22 @@
 
                             </td>
                             <td>
-                                <div class="main__table-text"><%=DiscountService.findByIdProduct(pro.getId()).getDiscount()%></div>
+                                <%Discount discount =pro.getDiscount(); %>
+                                <div class="main__table-text"><%=discount.getDiscount()%></div>
+                            </td>
+                            <td>
+                                <div class="main__table-btns">
+                                    <a href="#modal-delete<%=discount.getId()%>" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
+                                    <div id="modal-delete<%=discount.getId()%>" class="zoom-anim-dialog mfp-hide modal">
+                                        <h6 class="modal__title">Xóa khuyến mãi</h6>
+                                        <p class="modal__text">Bạn có chắc muốn hủy khuyến mãi này?</p>
+                                        <%String urlq = "RemoveDiscount?id=" + discount.getId();%>
+                                        <div class="modal__btns">
+                                            <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=urlq%>')" type="button">Xóa</button>
+                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         </tbody>

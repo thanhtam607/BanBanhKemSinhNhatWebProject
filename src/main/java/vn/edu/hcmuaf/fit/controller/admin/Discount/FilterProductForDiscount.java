@@ -24,11 +24,11 @@ public class FilterProductForDiscount extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        List<Product> listProduct =ProductService.getListProductForAdmin();
+        List<Product> listProduct =ProductService.getProductsNotDiscount();
         String loaiBanh = request.getParameter("loaiBanh");
         if(!loaiBanh.equals("Tất cả")){
             System.out.println(loaiBanh);
-            listProduct =  ProductService.findByType(loaiBanh, ProductService.getListProductForAdmin());
+            listProduct =  ProductService.findByType(loaiBanh, ProductService.getProductsNotDiscount());
         }
 
         String numPage = request.getParameter("page");

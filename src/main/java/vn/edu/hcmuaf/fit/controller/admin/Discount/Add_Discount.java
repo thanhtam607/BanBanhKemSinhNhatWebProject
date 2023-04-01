@@ -18,7 +18,7 @@ import java.util.List;
 public class Add_Discount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> listProduct = ProductService.getListProductForAdmin();
+        List<Product> listProduct = ProductService.getProductsNotDiscount();
         request.setAttribute("listProduct", listProduct);
         String numPage = request.getParameter("page");
         if(numPage == null || numPage.equals("0")){
@@ -57,7 +57,7 @@ public class Add_Discount extends HttpServlet {
         String end = request.getParameter("end").replace("-","/");
         if(request.getParameter("loaiBanh")!=null){
         String loaiBanh= request.getParameter("loaiBanh");
-        listProduct = ProductService.findByType(loaiBanh, ProductService.getListProductForAdmin());
+        listProduct = ProductService.findByType(loaiBanh, ProductService.getDiscountProduct());
         }else{
             String[] listId= request.getParameter("ids").split(",");
             for(String id: listId){
