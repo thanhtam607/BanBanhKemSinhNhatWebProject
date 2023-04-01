@@ -272,3 +272,105 @@ function chooseFile(fileInput){
 function  changeHref(link){
     location.href=link;
 }
+let checkAll;
+document.getElementById("select-all").onclick = function ()
+{
+    var checkboxes = document.getElementsByName("check");
+
+    for (var i = 0; i < checkboxes.length; i++){
+        if(checkAll==false || checkAll==null){
+            checkboxes[i].checked = true;
+        }
+        else{
+            checkboxes[i].checked = false;
+        }
+    }
+    if( checkAll) checkAll= false;
+    else checkAll=true;
+};
+
+function filterProduct(showMore, type){
+    if(type ==null) type = document.getElementById("type").value;
+    var page =parseInt(document.getElementById("page").value) ;
+    if(showMore){
+        ++page;
+        document.getElementById("page").value=(page);
+    }else{
+        page=1;
+        document.getElementById("page").value=(page);
+    }
+
+    $.ajax({
+        url: "FilterProductForDiscount",
+        type: "POST",
+        data: {loaiBanh: type,  page: page},
+        success: function (response){
+            var productS = document.getElementById("product_table");
+            if(showMore) {productS.innerHTML += response;
+               }
+            else productS.innerHTML = response;
+        }
+    });
+    if(document.getElementById("select-all").checked== true){
+        document.getElementById("select-all").checked=false;
+        checkAll=false;
+    }
+
+}
+
+function addDiscount(){
+    var type = document.getElementById("type").value;
+    var discount = document.getElementById("giamGia").value;
+    var start = document.getElementById("start").value;
+    var end = document.getElementById("end").value;
+
+    if(checkAll){
+        $.ajax({
+            url: "Add_Discount",
+            type: "POST",
+            data: {loaiBanh: type,
+            discount: discount,
+            start: start, end: end},
+            success: function (){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thêm khuyến mãi thành công!'
+                }).then((result) => {
+                    location.reload();
+                });
+            }
+
+        });
+    }
+    else{
+        var checkbox = document.getElementsByName('check');
+        var listIdPros= new Array();
+        var listId;
+
+        for(let i=0; i<checkbox.length; i++){
+            if(checkbox[i].checked==true){
+                listIdPros.push(checkbox[i].value);
+            }
+        }
+        listId = listIdPros.toString();
+        console.log(listId);
+        $.ajax({
+            url: "Add_Discount",
+            type: "POST",
+            data: {ids: listId,
+                discount: discount,
+                start: start, end: end},
+            success: function (){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thêm khuyến mãi thành công!'
+                }).then((result) => {
+                    location.reload();
+                });
+            }
+
+        });
+
+
+    }
+}

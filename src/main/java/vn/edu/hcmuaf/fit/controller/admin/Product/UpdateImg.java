@@ -35,7 +35,7 @@ public class UpdateImg extends HttpServlet {
             p.write(img);
             ProductService.upProductImg(oldImg, "img/product/" + masp+"/" + filename);
 
-        response.sendRedirect("../ListProduct_Admin");
+        response.sendRedirect("../Edit_Product?idP="+masp);
 
 
     }

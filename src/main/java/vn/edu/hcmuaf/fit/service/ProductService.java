@@ -424,8 +424,19 @@ public class ProductService {
         List<Product> res = new ArrayList<Product>();
         for (Discount d: DiscountService.getListDiscount()) {
             Product p = findById(d.getIdProduct());
-//            p.setDiscount(d);
+            p.setDiscount(d);
             res.add(p);
+        }
+        return res;
+    }
+    public static List<Product> getProductsNotDiscount() {
+        List<Product> res = new ArrayList<Product>();
+        List<String> discounts = new ArrayList<>();
+        for(Product product: getDiscountProduct()){
+            discounts.add(product.getId());
+        }
+        for (Product p : getListProductForAdmin()) {
+            if(!discounts.contains(p.getId())){ res.add(p);}
         }
         return res;
     }
