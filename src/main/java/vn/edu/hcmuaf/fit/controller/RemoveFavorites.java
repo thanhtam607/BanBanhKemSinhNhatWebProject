@@ -34,7 +34,6 @@ public class RemoveFavorites extends HttpServlet {
             }
         }
             response.sendRedirect("Favorite");
-//        request.getRequestDispatcher("favorites.jsp").forward(request, response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

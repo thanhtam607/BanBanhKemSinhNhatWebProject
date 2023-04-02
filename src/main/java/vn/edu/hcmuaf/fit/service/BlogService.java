@@ -19,7 +19,7 @@ public class BlogService {
 
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  blogs.idblog, blogs.imgblog,blogs.title, blogs.date, blogs.content, blogs.category, blogs.season, blogs.status from BLOGS ");
+                ResultSet rs = statement.executeQuery("SELECT  blogs.id, blogs.img,blogs.title, blogs.date, blogs.content, blogs.category, blogs.season, blogs.status from BLOGS ");
                 while(rs.next()) {
                     Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
                     list.add(b);
@@ -63,7 +63,7 @@ public class BlogService {
     }
     public static void updateBlog(String idblog, String date, String cont, String category, String season){
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE blogs set  DATE='" +date+ "', CONTENT= '"+ cont+ "', CATEGORY= '"+ category+ "', SEASON= '"+ season+ "' Where  IDBLOG= '" + idblog+ "' ;";
+        String sql = "UPDATE blogs set  DATE='" +date+ "', CONTENT= '"+ cont+ "', CATEGORY= '"+ category+ "', SEASON= '"+ season+ "' Where  ID= '" + idblog+ "' ;";
         try {
             statement.executeUpdate(sql);
 
@@ -73,7 +73,7 @@ public class BlogService {
     }
     public static void updateStatus(String id, int status) {
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE blogs set  status= " + status + " where blogs.idblog = '" + id + "'";
+        String sql = "UPDATE blogs set  status= " + status + " where blogs.id = '" + id + "'";
         try {
             statement.executeUpdate(sql);
 
@@ -83,7 +83,7 @@ public class BlogService {
     }
  public  static void deleteBlog(String idblog){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "DELETE FROM blogs WHERE IDBLOG = '" + idblog + "'";
+        String sql = "DELETE FROM blogs WHERE ID = '" + idblog + "'";
      try {
          stm.executeUpdate(sql);
 
@@ -93,7 +93,7 @@ public class BlogService {
  }
 public static  void updateImgBlog(String img,String imgnew){
     Statement stm = DBConnect.getInstall().get();
-    String sql = "UPDATE blogs SET IMGBLOG = '" + imgnew + "' WHERE IMGBLOG = '" + img +"'";
+    String sql = "UPDATE blogs SET IMG = '" + imgnew + "' WHERE IMG = '" + img +"'";
     try {
         stm.executeUpdate(sql);
 
@@ -103,7 +103,7 @@ public static  void updateImgBlog(String img,String imgnew){
 }
 public static void  updateTitle(String idblog, String title ){
     Statement stm = DBConnect.getInstall().get();
-    String sql = "UPDATE blogs SET TITLE = '" + title + "' WHERE IDBLOG = '" + idblog +"'";
+    String sql = "UPDATE blogs SET TITLE = '" + title + "' WHERE ID = '" + idblog +"'";
     try {
         stm.executeUpdate(sql);
 
@@ -113,7 +113,7 @@ public static void  updateTitle(String idblog, String title ){
 }
 public  static String getNewIdBlog(){
     String res ="";
-    String sql= "SELECT max(idblog) from blogs";
+    String sql= "SELECT max(id) from blogs";
     Statement statement = DBConnect.getInstall().get();
     try {
         ResultSet rs = statement.executeQuery(sql);
@@ -134,7 +134,7 @@ public  static String getNewIdBlog(){
 }
     public  static String getMaxIdBlog(){
         String res ="";
-        String sql= "SELECT max(idblog) from blogs";
+        String sql= "SELECT max(id) from blogs";
         Statement statement = DBConnect.getInstall().get();
         try {
             ResultSet rs = statement.executeQuery(sql);
@@ -176,22 +176,6 @@ public static void addBlog(Blog b){
     }
 }
     public static void main(String[] args) {
-//            List<Blog> li = BlogService.getData();
-//        for(Blog b: li){
-//            System.out.print(b.getCategory()+"\t");
-//        }
-//        List<Blog> l = BlogService.getDanhMuc("Đời Sống");
-//        for(Blog b: l) {
-//            System.out.println(b.getId());
-//        }
-//        Blog b1 = BlogService.findById("BL01");
-//        String[] rs = b1.getCont().split("\\n");
-//        for (int i = 0; i < rs.length; i++){
-//            System.out.print(rs[i] + '\n');
-//        }
-//        System.out.println(BlogService.getMaxIdBlog());
-//        System.out.println(BlogService.listss());
-//        String rs = BlogService.listcate().get(0);
-//        System.out.println(BlogService.ListCategory(rs));
+//
     }
 }

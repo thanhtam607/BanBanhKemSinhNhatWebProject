@@ -804,12 +804,12 @@ INSERT INTO productDetails VALUES('B099', 10, 10, '2022/10/12', '2022/10/15');
 INSERT INTO productDetails VALUES('B100', 10, 10, '2022/10/12', '2022/10/15');
 
 /*=========================================ACCOUNTS=========================================*/
-CREATE TABLE ACCOUNTS(ACCOUNT_ID CHAR(4) PRIMARY KEY,
-									ACCOUNT_EMAIL VARCHAR(255),
-									 ACCOUNT_PASS VARCHAR(255) NOT NULL,
-									 ACCOUNT_NAME VARCHAR(100),
-									 ACCOUNT_ROLE tinyint(4) NOT NULL DEFAULT 0,
-									ACCOUNT_STATUS tinyint(4) DEFAULT 0 );
+CREATE TABLE ACCOUNTS(ID CHAR(4) PRIMARY KEY,
+									EMAIL VARCHAR(255),
+									 PASS VARCHAR(255) NOT NULL,
+									 NAME VARCHAR(100),
+									 ROLE tinyint(4) NOT NULL DEFAULT 0,
+									STATUS tinyint(4) DEFAULT 0 );
 INSERT INTO ACCOUNTS VALUES('AD01', 'thanhthuy@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Thanh Thùy', 1,0);
 INSERT INTO ACCOUNTS VALUES('AD02', 'thanhtam@gmail.com', 'b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0', 'Thanh Tâm', 1,0);
 INSERT INTO ACCOUNTS VALUES('AD03', 'thanhthuan@gmail.com', '35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281', 'Thanh Thuận', 1,0);
@@ -822,11 +822,11 @@ INSERT INTO ACCOUNTS VALUES('AD09', 'nhom274@gmail.com', '8a050fa1b4e6ed4a406292
 INSERT INTO ACCOUNTS VALUES('AD10', 'nhom275@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 275', 0,0);
 
 /*==============================CUSTOMERS=====================================*/
-CREATE TABLE CUSTOMERS(CUSTOMER_ID CHAR(4) PRIMARY KEY NOT NULL,
-											 CUSTOMER_NAME VARCHAR(40),
-											 CUSTOMER_ADDRESS VARCHAR(60),
-											 CUSTOMER_PHONE VARCHAR(10),
-											 CONSTRAINT f_mTK FOREIGN KEY (CUSTOMER_ID) REFERENCES ACCOUNTS(ACCOUNT_ID));
+CREATE TABLE CUSTOMERS(ID CHAR(4) PRIMARY KEY NOT NULL,
+											 NAME VARCHAR(40),
+											 ADDRESS VARCHAR(60),
+											 PHONE VARCHAR(10),
+											 CONSTRAINT f_mTK FOREIGN KEY (ID) REFERENCES ACCOUNTS(ID));
  INSERT INTO CUSTOMERS VALUES('AD01', 'Thanh Thuỳ Huỳnh','TP.HCM', '0978675678');
  INSERT INTO CUSTOMERS VALUES('AD02', 'Thanh Tâm Nguyễn', 'TP.HCM', '0987675435');
  INSERT INTO CUSTOMERS VALUES('AD03', 'Mai Thanh Thuận','TP.HCM', '0987863764');
@@ -838,50 +838,39 @@ CREATE TABLE CUSTOMERS(CUSTOMER_ID CHAR(4) PRIMARY KEY NOT NULL,
  INSERT INTO CUSTOMERS VALUES('AD09', 'Lê Hữu Phước', 'LONG AN', '0978365627');
  INSERT INTO CUSTOMERS VALUES('AD10', 'Huỳnh Văn Biên', 'TP.HCM', '0987362567');
 
-/*==============================STAFFS=====================================*/
-CREATE TABLE STAFFS(STAFF_ID CHAR(4) PRIMARY KEY NOT NULL,
-											 STAFF_NAME VARCHAR(40),
-											 STAFF_GENDER INT,
-											 STAFF_ADDRESS VARCHAR(60),
-											 STAFF_PHONE VARCHAR(10),
-											 CONSTRAINT f_mNV FOREIGN KEY (STAFF_ID) REFERENCES ACCOUNTS(ACCOUNT_ID));
-											 
- INSERT INTO STAFFS VALUES('AD01', 'Thanh Thuỳ Huỳnh', 0,'TP.HCM', '0978675678');
- INSERT INTO STAFFS VALUES('AD02', 'Thanh Tâm Nguyễn', 0, 'TP.HCM', '0987675435');
- INSERT INTO STAFFS VALUES('AD03', 'Mai Thanh Thuận', 1,'TP.HCM', '0987863764');
-
 
  /*==============================BILLS=====================================*/
-CREATE TABLE BILLS(BILL_ID CHAR(4) PRIMARY KEY,
-											CUSTOMER_ID CHAR(4) NOT NULL,
+CREATE TABLE BILLS(ID CHAR(4) PRIMARY KEY,
+											CUSTOMER_ID CHAR(4),
 											EXPORT_DATE DATETIME NOT NULL,
 											NOTES LONGTEXT,
 											TOTAL_BILL FLOAT,
-											BILL_STATUS int DEFAULT 0,
-											CONSTRAINT f_mkh FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID));
-INSERT INTO BILLS VALUES('HD01', 'AD02', '2022/10/12','Giao sớm, đúng địa chỉ nha shop ơi', 900000, 0);
-INSERT INTO BILLS VALUES('HD02', 'AD04', '2022/10/19','Giao sớm, đúng địa chỉ nha shop ơi', 330000, 1);
-INSERT INTO BILLS VALUES('HD03', 'AD05', '2022/10/12','Giao sớm, đúng địa chỉ nha shop ơi', 950000, 0);
-INSERT INTO BILLS VALUES('HD04', 'AD02', '2022/9/23','Giao sớm, đúng địa chỉ nha shop ơi', 300000, 1);
-INSERT INTO BILLS VALUES('HD05', 'AD01', '2022/10/21','Giao sớm, đúng địa chỉ nha shop ơi', 1230000, 0);
-INSERT INTO BILLS VALUES('HD06', 'AD03', '2022/10/12','Giao sớm, đúng địa chỉ nha shop ơi', 900000, 0);
-INSERT INTO BILLS VALUES('HD07', 'AD03', '2022/5/6','Giao sớm, đúng địa chỉ nha shop ơi', 380000, 2);
-INSERT INTO BILLS VALUES('HD08', 'AD01', '2022/8/12','Giao sớm, đúng địa chỉ nha shop ơi', 400000, 0);
-INSERT INTO BILLS VALUES('HD09', 'AD06', '2022/7/15','Giao sớm, đúng địa chỉ nha shop ơi', 400000, 1);
-INSERT INTO BILLS VALUES('HD10', 'AD07', '2022/11/7','Giao sớm, đúng địa chỉ nha shop ơi', 650000, 0);
-INSERT INTO BILLS VALUES('HD11', 'AD01', '2022/1/19','Giao sớm, đúng địa chỉ nha shop ơi', 1950000, 1);
-INSERT INTO BILLS VALUES('HD12', 'AD02', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi', 350000, 0);
-INSERT INTO BILLS VALUES('HD13', 'AD01', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi', 500000, 2);
-INSERT INTO BILLS VALUES('HD14', 'AD09', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi', 300000, 0);
-INSERT INTO BILLS VALUES('HD15', 'AD02', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi', 300000, 0);
+											STATUS int DEFAULT 0,
+											CREATE_BY CHAR(4) DEFAULT NULL,
+											CONSTRAINT f_kh FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(ID ));
+INSERT INTO BILLS VALUES('HD01', 'AD02', '2022/10/12','Giao sớm, đúng địa chỉ nha shop ơi', 900000, 0,NULL);
+INSERT INTO BILLS VALUES('HD02', 'AD04', '2022/10/19','Giao sớm, đúng địa chỉ nha shop ơi', 330000, 1,NULL);
+INSERT INTO BILLS VALUES('HD03', 'AD05', '2022/10/12','Giao sớm, đúng địa chỉ nha shop ơi', 950000, 0,NULL);
+INSERT INTO BILLS VALUES('HD04', 'AD02', '2022/9/23','Giao sớm, đúng địa chỉ nha shop ơi', 300000, 1,NULL);
+INSERT INTO BILLS VALUES('HD05', 'AD01', '2022/10/21','Giao sớm, đúng địa chỉ nha shop ơi', 1230000, 0,NULL);
+INSERT INTO BILLS VALUES('HD06', 'AD03', '2022/10/12','Giao sớm, đúng địa chỉ nha shop ơi', 900000, 0,NULL);
+INSERT INTO BILLS VALUES('HD07', 'AD03', '2022/5/6','Giao sớm, đúng địa chỉ nha shop ơi', 380000, 2,NULL);
+INSERT INTO BILLS VALUES('HD08', 'AD01', '2022/8/12','Giao sớm, đúng địa chỉ nha shop ơi', 400000, 0,NULL);
+INSERT INTO BILLS VALUES('HD09', 'AD06', '2022/7/15','Giao sớm, đúng địa chỉ nha shop ơi', 400000, 1,NULL);
+INSERT INTO BILLS VALUES('HD10', 'AD07', '2022/11/7','Giao sớm, đúng địa chỉ nha shop ơi', 650000, 0,NULL);
+INSERT INTO BILLS VALUES('HD11', 'AD01', '2022/1/19','Giao sớm, đúng địa chỉ nha shop ơi', 1950000, 1,NULL);
+INSERT INTO BILLS VALUES('HD12', 'AD02', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi', 350000, 0,NULL);
+INSERT INTO BILLS VALUES('HD13', 'AD01', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi', 500000, 2,NULL);
+INSERT INTO BILLS VALUES('HD14', 'AD09', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi', 300000, 0,NULL);
+INSERT INTO BILLS VALUES('HD15', 'AD02', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi', 300000, 0,NULL);
 
 /*==============================BILL_DETAIL=====================================*/
-CREATE TABLE BILL_DETAIL(BILL_ID CHAR(4),
+CREATE TABLE BILL_DETAIL(ID CHAR(4),
 									 idProduct CHAR(4),
 										AMOUNT INT,
 										NOTES LONGTEXT,
 										CONSTRAINT f_mhdcthd FOREIGN KEY(idProduct) REFERENCES products(idProduct),
-										CONSTRAINT f_mspcthd FOREIGN KEY (BILL_ID) REFERENCES BILLS(BILL_ID)  );
+										CONSTRAINT f_mspcthd FOREIGN KEY (ID) REFERENCES BILLS(ID));
 INSERT INTO BILL_DETAIL VALUES('HD01', 'B001', 2, 'Chúc mừng sinh nhật 2 tuổi');
 INSERT INTO BILL_DETAIL VALUES('HD02', 'B005', 1, 'Chúc mừng sinh nhật 32 tuổi');
 INSERT INTO BILL_DETAIL VALUES('HD03', 'B039', 1, 'Chúc mừng sinh nhật 25 tuổi');
@@ -904,15 +893,14 @@ INSERT INTO BILL_DETAIL VALUES('HD14', 'B088', 1, 'Chúc mừng sinh nhật 23 t
 INSERT INTO BILL_DETAIL VALUES('HD15', 'B090', 1, 'Chúc mừng sinh nhật 20 tuổi');
 
 /*=============================================DELIVERY=======================================*/
-
-CREATE TABLE DELIVERY(BILL_ID CHAR(4),
+CREATE TABLE DELIVERY(ID CHAR(4),
 										    DELIVERY_DATE DATETIME NOT NULL,
-												DELIVERY_ADDRESS VARCHAR(60) NOT NULL,
-												DELIVERY_EMAIL VARCHAR(60),
-												DELIVERY_PHONE VARCHAR(12),
-												DELIVERY_NAME VARCHAR(60),
-												CONSTRAINT f_mhdgh FOREIGN KEY(BILL_ID) REFERENCES BILLS(BILL_ID));
---
+												ADDRESS VARCHAR(60) NOT NULL,
+												EMAIL VARCHAR(60),
+												PHONE VARCHAR(12),
+												NAME VARCHAR(60),
+												CONSTRAINT f_mhdgh FOREIGN KEY(ID) REFERENCES BILLS(ID));
+												
 INSERT INTO DELIVERY VALUES('HD01', '2022/10/14', 'Q1, TP HCM', null, null,null);
 INSERT INTO DELIVERY VALUES('HD02', '2022/10/23', 'Q3, TP HCM', null, null,null);
 INSERT INTO DELIVERY VALUES('HD03', '2022/10/15', 'TP.THỦ ĐỨC TP HCM', null, null,null);
@@ -937,8 +925,8 @@ CREATE table Comments(IdCmt INT PRIMARY KEY AUTO_INCREMENT,idProduct CHAR(4) not
 INSERT into Comments VALUES(1,'B001','AD02',"Lần đầu đặt bánh ở tiệm này thấy rất hài lòng, cầm chiếc bánh trên tay đi tặng được mọi người khen . Rất hài lòng, trang trí sang trọng, đẹp mắt.", '2022/11/22', 0);
 INSERT into Comments VALUES(2,'B002','AD01',"Đặt bánh ở tiệm này thấy rất hài lòng, cầm chiếc bánh trên tay đi tặng được mọi người khen . Rất hài lòng, trang trí sang trọng, đẹp mắt.", '2023/03/02', 0);
 /*========================================= BLOG =========================================*/
-CREATE TABLE BLOGS (IDBLOG CHAR(4) PRIMARY KEY,
-                    IMGBLOG VARCHAR(255) NOT NULL,
+CREATE TABLE BLOGS (ID CHAR(4) PRIMARY KEY,
+                    IMG VARCHAR(255) NOT NULL,
                     TITLE VARCHAR(255),
                     DATE DATETIME,
                     CONTENT TEXT NOT NULL,
@@ -1008,18 +996,18 @@ create table FEEDBACKS(id INT AUTO_INCREMENT PRIMARY KEY,
 												feedback longtext, 
 												fbDate datetime);
 
-CREATE table LOGS(LOGS_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
-										LOGS_LEVEL TINYINT(4) not null DEFAULT(0), 
+CREATE table LOGS(ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+										LEVEL TINYINT(4) not null DEFAULT(0), 
 										ACCOUNT_ID char(4), 
-										LOGS_SRC longtext not null DEFAULT('none'), 
-										LOGS_CONTENT LONGTEXT,
-										LOGS_CREATE_AT datetime DEFAULT(NOW()), 
-										LOGS_STATUS TINYINT(4) not null DEFAULT(0));
+										SRC longtext not null DEFAULT('none'), 
+										CONTENT LONGTEXT,
+										CREATE_AT datetime DEFAULT(NOW()), 
+										STATUS TINYINT(4) not null DEFAULT(0));
 										
 create table cartItems(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
 											customer_id char(4) , 
 											idProduct char(4) , 
-											quantity int ,FOREIGN KEY (customer_id)REFERENCES CUSTOMERS(CUSTOMER_ID),
+											quantity int ,FOREIGN KEY (customer_id)REFERENCES CUSTOMERS(ID),
 											FOREIGN KEY (idProduct)REFERENCES products(idProduct));
 create table general_infor(id char(5) NOT NULL PRIMARY KEY,
                            type varchar(20) not null,
@@ -1069,4 +1057,10 @@ insert into general_infor values('GI019', 'GoogleMap', 'https://www.google.com/m
 insert into general_infor values('GI020', 'IndexSlogan', 'Tận hưởng thế giới ngọt ngào của bạn.');
 insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh ngọt, đây là sự yêu thương.');
 insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
-/*================================================================Query=========================================================
+
+-- 
+-- SELECT*from customers
+-- SELECT*from bills
+-- SELECT*from delivery
+-- UPDATE customers, bills set customers.NAME = 'thuy', customers.PHONE = '345346' WHERE bills.ID ='hd01' and customers.id = bills.CUSTOMER_ID
+-- update bills set bills.NOTES 

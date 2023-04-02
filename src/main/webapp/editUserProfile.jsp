@@ -38,7 +38,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");
-    Customer customer = CustomerService.getCusByIdAcc(auth.getAccount_id());%>
+    Customer customer = CustomerService.getCusByIdAcc(auth.getId());%>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -64,10 +64,10 @@
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getAccount_name():"Đăng nhập"%></a>
+            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getName():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
-                <a onclick="checkPass('<%=auth.getAccount_email()%>','<%=auth.getAccount_pass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
+                <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
                 <% if(auth.checkRole()) { %>
                 <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
@@ -202,7 +202,7 @@
                             <div class="col-lg-12">
                                 <div class="checkout__input">
                                     <p>Tên Đăng Nhập</p>
-                                    <input type="text" id="ten" value="<%=auth.getAccount_name()%>">
+                                    <input type="text" id="ten" value="<%=auth.getName()%>">
                                 </div>
                             </div>
                         </div>
@@ -222,7 +222,7 @@
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Email</p>
-                                    <input type="email" id="email" value="<%=auth.getAccount_email()%>">
+                                    <input type="email" id="email" value="<%=auth.getEmail()%>">
                                 </div>
                             </div>
                         </div>

@@ -38,7 +38,7 @@ public class ListCustomer extends HttpServlet {
                 });
             }
         }
-        request.getRequestDispatcher("customers.jsp").forward(request,response);
+        request.getRequestDispatcher("list-customers.jsp").forward(request,response);
     }
 
     @Override
