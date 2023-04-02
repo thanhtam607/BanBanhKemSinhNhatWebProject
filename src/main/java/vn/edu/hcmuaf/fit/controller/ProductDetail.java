@@ -15,10 +15,13 @@ public class ProductDetail extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Product product = ProductService.findById(request.getParameter("id"));
+        if(product.isHide()|| product.delete()){
+            request.getRequestDispatcher("blank_page.jsp").forward(request,response);
+        }else{
         request.setAttribute("getDetail", product);
         List<Product> listsplq = ProductService.findByType(product.getType(), ProductService.getListProduct());
         request.setAttribute("splq", listsplq);
-        request.getRequestDispatcher("shop-details.jsp").forward(request,response);
+        request.getRequestDispatcher("shop-details.jsp").forward(request,response);}
     }
 
     @Override
