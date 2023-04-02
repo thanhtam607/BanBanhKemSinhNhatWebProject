@@ -178,7 +178,7 @@
                             <td>
                                 <div class="main__table-text"><%=fb.getDate()%></div>
                             </td>
-                           
+
                         </tr>
                         </tbody>
                         <% } %>
