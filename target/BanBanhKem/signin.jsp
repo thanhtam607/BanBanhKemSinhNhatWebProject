@@ -85,6 +85,9 @@
                             <a style="cursor: pointer" onclick="forgotPassword()" >Quên mật khẩu?</a>
                         </div>
                         <button type="submit" id="login-button" class="btn btn-primary py-3 w-100 mb-4">Đăng nhập</button>
+                        <div class="btn-google col-12">
+                            <button type="button" class="google col-12" ><img src="img/google.png" height="25" width="25" style="margin-bottom: 2px"/>Đăng nhập với Google</button>
+                        </div>
                         <p class="text-center mb-0">Bạn chưa có tài khoản? <a href="signup.jsp">Đăng ký ngay</a></p>
                     </form>
                 </div>
