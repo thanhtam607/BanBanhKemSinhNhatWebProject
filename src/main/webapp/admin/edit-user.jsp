@@ -92,11 +92,11 @@
             <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
 
             <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-            <a href="./ListBlog-admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+            <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
             <a href="./ListReceipt_full_Admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
             <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
 
-            <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file"></i>QL danh mục</a>
+            <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file me-2"></i>QL danh mục</a>
             <a href="List_Discounts" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Khuyến mãi</a>
             <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
             <!--  -->
@@ -133,7 +133,7 @@
                             <div class="profile__meta">
                                 <% String main__table = " ";
                                 String profile__text ="";
-                                    if(user.getAccount_status() == -1){
+                                    if(user.getStatus() == -1){
                                         main__table = "main__table-text--red";
                                         profile__text = "profile__action--delete";
 
@@ -184,7 +184,7 @@
 
                         <!-- profile btns -->
                         <div class="profile__actions">
-                            <%if(user.getAccount_status() == -1){%>
+                            <%if(user.getStatus() == -1){%>
                             <a href="#modal-status-unlock" class="profile__action <%=profile__text%> open-modal">
                                 <i class="fa fa-lock"></i>
                             </a>
