@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +57,7 @@
     <div class="header__content">
         <!-- header logo -->
         <a href="./ListReceipt_Admin" class="header__logo">
-            <img src="../img/logo_web.jpg" alt="">
+            <img src="../<%=InforService.getImgLogo().get(0).getContent()%>" alt="">
         </a>
         <!-- end header logo -->
 
@@ -81,19 +82,22 @@
                 <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
             </div>
             <div class="ms-3">
-                <h6 class="mb-0"><%= auth != null ? auth.getAccount_name():"ADMIN"%></h6>
+                <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
                 <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
             </div>
         </div>
         <div class="navbar-nav w-100">
             <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+            <%--                    <a href="general_Management.jsp" class="nav-item nav-link"><i class="fa fa-user"></i>Quản lý chung</a>--%>
             <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
-            <a href="./ListCustomer" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-            <a href="./ListBlog-admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+
+            <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
+            <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
             <a href="./ListReceipt_full_Admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
-            <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-            <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
             <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
+
+            <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file me-2"></i>QL danh mục</a>
+            <a href="List_Discounts" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Khuyến mãi</a>
             <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
             <!--  -->
         </div>
@@ -129,7 +133,7 @@
                             <div class="profile__meta">
                                 <% String main__table = " ";
                                 String profile__text ="";
-                                    if(user.getAccount_status() == -1){
+                                    if(user.getStatus() == -1){
                                         main__table = "main__table-text--red";
                                         profile__text = "profile__action--delete";
 
@@ -180,7 +184,7 @@
 
                         <!-- profile btns -->
                         <div class="profile__actions">
-                            <%if(user.getAccount_status() == -1){%>
+                            <%if(user.getStatus() == -1){%>
                             <a href="#modal-status-unlock" class="profile__action <%=profile__text%> open-modal">
                                 <i class="fa fa-lock"></i>
                             </a>
@@ -278,7 +282,7 @@
                                                         <option value="<%=r%>"><%=r%></option>
                                                         <%}}%>
                                                     </select>
-                                            </div>
+                                                </div>
                                             </div>
                                             <div class="col-12">
                                             <input id="" class="form__btn" type="submit"  value="Lưu thông tin">

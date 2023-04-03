@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -44,7 +45,7 @@
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
-        <a href="#"><img src="img/logo_web.jpg" alt=""></a>
+        <a href="#"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt=""></a>
     </div>
     <div class="humberger__menu__cart">
         <ul>
@@ -61,10 +62,10 @@
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getAccount_name():"Đăng nhập"%></a>
+            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getName():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
-                <a onclick="checkPass('<%=auth.getAccount_email()%>','<%=auth.getAccount_pass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
+                <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
                 <% if(auth.checkRole()) { %>
                 <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
@@ -84,14 +85,14 @@
     </nav>
     <div id="mobile-menu-wrap"></div>
     <div class="header__top__right__social">
-        <a href="https://www.facebook.com/mai.thuan.52438/" target="blank"><i class="fa fa-facebook"></i></a>
-        <a href="https://www.messenger.com/t/100017755062615" target="blank"><i class="fa fa-comment"></i></a>
-        <a href="https://www.instagram.com/maizecorn1542/" target="blank"><i class="fa fa-instagram"></i></a>
+        <a href="<%=InforService.getInformation("SocialNetwork").get(0).getContent()%>" target="blank"><i class="fa fa-facebook"></i></a>
+        <a href="<%=InforService.getInformation("SocialNetwork").get(1).getContent()%>" target="blank"><i class="fa fa-comment"></i></a>
+        <a href="<%=InforService.getInformation("SocialNetwork").get(2).getContent()%>" target="blank"><i class="fa fa-instagram"></i></a>
     </div>
     <div class="humberger__menu__contact">
         <ul>
-            <li><i class="fa fa-envelope"></i> tiembanhhanhphuc@gmail.com</li>
-            <li>Miễn phí giao hàng nội thành TP HCM</li>
+            <li><i class="fa fa-envelope"></i><%=InforService.getInformation("Email").get(0).getContent()%></li>
+            <li><%=InforService.getInformation("Delivery").get(0).getContent()%></li>
         </ul>
     </div>
 </div>
@@ -104,7 +105,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                    <a href="Index"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
@@ -156,11 +157,11 @@
 
                     <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">
-                            <a href="tel:0987654321" class="fa fa-phone cursor"></a>
+                            <a href="tel:<%=InforService.getInformation("PhoneNumber").get(0).getContent()%>" class="fa fa-phone cursor"></a>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>+84 987654321</h5>
-                            <span>Mở cửa từ 8h - 22h</span>
+                            <h5><%=InforService.getInformation("PhoneNumber").get(0).getContent()%></h5>
+                            <span><%=InforService.getInformation("TimeShop").get(1).getContent()%>h</span>
                         </div>
                     </div>
                 </div>
@@ -169,7 +170,7 @@
     </div>
 </section>
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="./img/banner/breadcrumb.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="<%=InforService.getInformation("ImageMenu").get(0).getContent()%>">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -194,28 +195,28 @@
                     <div class="contact__widget">
                         <span class="icon_phone"></span>
                         <h4>Điện thoại</h4>
-                        <p>+84 987654321</p>
+                        <p><%=InforService.getInformation("PhoneNumber").get(0).getContent()%></p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_pin_alt"></span>
                         <h4>Địa chỉ</h4>
-                        <p>Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM</p>
+                        <p><%=InforService.getInformation("Address").get(0).getContent()%></p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_clock_alt"></span>
                         <h4>Mở cửa hàng ngày</h4>
-                        <p>8:00 sáng - 22:00 tối</p>
+                        <p><%=InforService.getInformation("TimeShop").get(1).getContent()%></p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_mail_alt"></span>
                         <h4>Email</h4>
-                        <p>tiembanhhanhphuc@gmail.com</p>
+                        <p><%=InforService.getInformation("Email").get(0).getContent()%></p>
                     </div>
                 </div>
             </div>
@@ -226,7 +227,7 @@
     <!-- Map Begin -->
     <div class="map">
         <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18773.836012880063!2d106.75738369035878!3d10.863314618235568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRwLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1657022439109!5m2!1svi!2s"
+                src="<%=InforService.getInformation("GoogleMap").get(0).getContent()%>"
                 height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
         <div class="map-inside">
         </div>

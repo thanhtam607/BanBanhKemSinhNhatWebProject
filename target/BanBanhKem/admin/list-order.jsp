@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -52,7 +53,7 @@
   <div class="header__content">
     <!-- header logo -->
     <a href="./ListReceipt_Admin" class="header__logo">
-      <img src="../img/logo_web.jpg" alt="">
+      <img src="../<%=InforService.getImgLogo().get(0).getContent()%>" alt="">
     </a>
     <!-- end header logo -->
 
@@ -77,19 +78,22 @@
         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
       </div>
       <div class="ms-3">
-        <h6 class="mb-0"><%= auth != null ? auth.getAccount_name():"ADMIN"%></h6>
+        <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
         <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
       </div>
     </div>
     <div class="navbar-nav w-100">
       <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+      <%--                    <a href="general_Management.jsp" class="nav-item nav-link"><i class="fa fa-user"></i>Quản lý chung</a>--%>
       <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
+
       <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
       <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
       <a href="./ListReceipt_full_Admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
-      <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-      <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
       <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
+
+      <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file me-2"></i>QL danh mục</a>
+      <a href="List_Discounts" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Khuyến mãi</a>
       <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
       <!--  -->
     </div>
@@ -200,12 +204,14 @@
               <td>
                 <div class="main__table-btns">
 
-                  <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn bg-info">
+                  <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn main__table-btn--view">
                     <i class="fas fa-info"></i>
                   </a>
+                  <%if(rc.getStateInt() == 0){%>
                   <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">
                     <i class="fa fa-check"></i>
                   </a>
+                  <%}%>
                   <a href="AdminEditOrder?id=<%=rc.getId()%>" class="main__table-btn main__table-btn--edit">
                     <i class="fa fa-edit"></i>
                   </a>
@@ -246,11 +252,11 @@
             <div id="modal-status<%=i%>" class="zoom-anim-dialog mfp-hide modal">
               <h6 class="modal__title">Thông Báo</h6>
 
-              <p class="modal__text">Bạn có chắc muốn chuyển ĐH cho đơn vị vận chuyển?</p>
+              <p class="modal__text">Bạn có chắc muốn xác nhận đơn hàng này?</p>
 
               <div class="modal__btns">
                 <a href="adminChangeStateOrder?mahd=<%=rc.getId()%>" class="modal__btn modal__btn--apply" type="button">
-                  OK
+                  Xác nhận
                 </a>
                 <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
               </div>

@@ -7,6 +7,10 @@ public class TypeOfCake {
         this.idType=idType;
         this.name=name;
     }
+    public TypeOfCake( String name){
+        this.idType= null;
+        this.name=name;
+    }
 
     public String getIdType() {
         return idType;

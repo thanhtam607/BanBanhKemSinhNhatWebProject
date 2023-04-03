@@ -21,7 +21,7 @@ public class ProductService {
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT idImg, productImgs.idProduct,productImgs.img, status from productImgs");
                     List<Image> listImg = new LinkedList<Image>();
-                    rsCmt = stmt1.executeQuery("SELECT idProduct, ACCOUNTS.ACCOUNT_NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ACCOUNT_ID = Comments.ID");
+                    rsCmt = stmt1.executeQuery("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID");
                     List<Comment> listCmts = new LinkedList<Comment>();
                     ResultSet rspd = stmt2.executeQuery("select idProduct, quantity, inventory, dateOfManufacture, expirationDate from productDetails");
                     String s1 = rs.getString(1);
@@ -424,15 +424,26 @@ public class ProductService {
         List<Product> res = new ArrayList<Product>();
         for (Discount d: DiscountService.getListDiscount()) {
             Product p = findById(d.getIdProduct());
-//            p.setDiscount(d);
+            p.setDiscount(d);
             res.add(p);
+        }
+        return res;
+    }
+    public static List<Product> getProductsNotDiscount() {
+        List<Product> res = new ArrayList<Product>();
+        List<String> discounts = new ArrayList<>();
+        for(Product product: getDiscountProduct()){
+            discounts.add(product.getId());
+        }
+        for (Product p : getListProductForAdmin()) {
+            if(!discounts.contains(p.getId())){ res.add(p);}
         }
         return res;
     }
     public static List<Comment> findCommentsByIdProduct(String idProduct){
         List<Comment> list = new ArrayList<>();
         try{
-        PreparedStatement stm = con.prepareStatement("SELECT idProduct, ACCOUNTS.ACCOUNT_NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ACCOUNT_ID = Comments.ID and idProduct=?");
+        PreparedStatement stm = con.prepareStatement("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID and idProduct=?");
         stm.setString(1,idProduct);
         ResultSet rsCmt = stm.executeQuery();
         while(rsCmt.next()){

@@ -1,7 +1,6 @@
 package vn.edu.hcmuaf.fit.model;
 
 public class Account {
-
     String email;
     String name;
     String password;

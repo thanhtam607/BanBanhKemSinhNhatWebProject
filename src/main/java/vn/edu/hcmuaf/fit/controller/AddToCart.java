@@ -31,8 +31,8 @@ public class AddToCart extends HttpServlet {
                 String maSP = request.getParameter("masp");
                 Product product = ProductService.findById(maSP);
                 if (product != null && product.isExistNumber(solgmua)) {
-                        CartService.addToCart(auth.getAccount_id(), maSP, solgmua);
-                        listItemC = CartService.findItemCartByIdUser(auth.getAccount_id());
+                        CartService.addToCart(auth.getId(), maSP, solgmua);
+                        listItemC = CartService.findItemCartByIdUser(auth.getId());
                         session.setAttribute("itemCart", listItemC);
                 }
 //                request.getRequestDispatcher("/shoping-cart.jsp").forward(request, response);

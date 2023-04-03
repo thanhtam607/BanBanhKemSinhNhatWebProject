@@ -58,10 +58,10 @@
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getAccount_name():"Đăng nhập"%></a>
+            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getName():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
-                <a onclick="checkPass('<%=auth.getAccount_email()%>', '<%=auth.getAccount_pass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
+                <a onclick="checkPass('<%=auth.getEmail()%>', '<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
                 <% if(auth.checkRole()) { %>
                 <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
@@ -236,7 +236,7 @@
                                         </a>
                                     </div>
                                     <div class="text-dark" style="font-size:14px">x <%=c.getSolg()%></div>
-                                    <div class="text-dark" style="font-size:14px">Lời chúc trên bánh: <%=c.getNote()%></div>
+                                    <div class="text-dark" style="font-size:14px">Lời chúc trên bánh: <%=c.getNote() != null ? c.getNote(): "Không có"%></div>
                                 </div>
                             </div>
                             <div class="col-3 mt-3">
@@ -253,7 +253,7 @@
                         <div class="card-body my-0">
                             <div class="card-text text-dark border-bottom pb-2">
                                 <span class=" text-dark font-italic">
-                                    GHI CHÚ CHUNG: <%=r.getNote()%>
+                                    GHI CHÚ CHUNG: <%=r.getNote() != null? r.getNote(): "Không có"%>
                                 </span>
                             </div>
                             <div class="card-text text-dark pt-2">

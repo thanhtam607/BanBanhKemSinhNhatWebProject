@@ -83,19 +83,22 @@
         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
       </div>
       <div class="ms-3">
-        <h6 class="mb-0"><%= auth != null ? auth.getAccount_name():"ADMIN"%></h6>
+        <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
         <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
       </div>
     </div>
     <div class="navbar-nav w-100">
       <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+      <%--                    <a href="general_Management.jsp" class="nav-item nav-link"><i class="fa fa-user"></i>Quản lý chung</a>--%>
       <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
+
       <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
       <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
-      <a href="./ListReceipt_full_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
-      <a href="add-product.jsp" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Thêm Sản Phẩm</a>
-      <a href="add-blog.jsp" class="nav-item nav-link"><i class="fa fa-blog me-2"></i>Thêm Tin Tức</a>
+      <a href="./ListReceipt_full_Admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
       <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
+
+      <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file me-2"></i>QL danh mục</a>
+      <a href="List_Discounts" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Khuyến mãi</a>
       <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
       <!--  -->
     </div>
@@ -116,9 +119,13 @@
         </div>
       </div>
     <div class="col-12 pt-2 pb-2 rounded bg-pink">
-        <h5 style="margin-bottom: 25px">Tên KH: <%=tenkh%> - SĐT: <%=receipt.getPhone()%></h5>
+            <div class="col-12 d-flex justify-content-between form__content pl-0 pr-0">
+              <h5 style="margin-bottom: 25px">Tên KH: <%=tenkh%> - SĐT: <%=receipt.getPhone()%></h5>
+               <h5 style="margin-bottom: 25px"> Mã ĐH: <%=receipt.getId()%> </h5>
+            </div>
             <div class="col-12 d-flex form__content pl-0 pr-0">
               <div class="col-6 pl-0 pr-0">
+                <p>Người Tạo: <%=receipt.getCreateBy()%></p>
                 <p>Ngày Lập: <%=receipt.getExport_date()%></p>
                 <p>Ngày Giao Hàng: <%=receipt.getDelivery_date()%></p>
               </div>

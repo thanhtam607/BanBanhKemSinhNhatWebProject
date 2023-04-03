@@ -37,13 +37,13 @@ public class JDBIConnector {
         return jdbi;
     }
 
-    public static void main(String[] args) {
-        List<User> users = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from taikhoan")
-                    .mapToBean(User.class).stream().collect(Collectors.toList());
-        });
-        System.out.println(users);
-    }
+//    public static void main(String[] args) {
+//        List<User> users = JDBIConnector.get().withHandle(handle -> {
+//            return handle.createQuery("select * from taikhoan")
+//                    .mapToBean(User.class).stream().collect(Collectors.toList());
+//        });
+//        System.out.println(users);
+//    }
 }
 
 

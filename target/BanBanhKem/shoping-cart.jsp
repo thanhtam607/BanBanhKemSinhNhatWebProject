@@ -2,6 +2,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.CartService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <html lang="xzz">
@@ -45,7 +46,7 @@
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
-        <a href="#"><img src="img/logo_web.jpg" alt=""></a>
+        <a href="#"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt=""></a>
     </div>
     <div class="humberger__menu__cart">
         <ul>
@@ -56,9 +57,9 @@
             <li><a href="Favorite"><i class="fa fa-heart"></i> <span id="totalFav1"><%=listFavorite != null ? listFavorite.totalProduct() : "0"%></span></a></li>
 
             <%}
-                List<ItemProductInCart>listItemCart = (List<ItemProductInCart>) session.getAttribute("itemCart");
-            int status=0 ;
-            if(listItemCart==null){
+                List<ItemProductInCart> listItemCart = (List<ItemProductInCart>) session.getAttribute("itemCart");
+            int status=0;
+            if(listItemCart == null){
                 status=1;
             }else{
                 status=0;
@@ -68,10 +69,10 @@
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getAccount_name():"Đăng nhập"%></a>
+            <a href="<%=auth == null ?"signin.jsp":"#"%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getName():"Đăng nhập"%></a>
             <% if(auth != null) { %>
             <div class="header__top__right__auth__dropdown">
-                <a onclick="checkPass('<%=auth.getAccount_email()%>','<%=auth.getAccount_pass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
+                <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
                 <% if(auth.checkRole()) { %>
                 <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
@@ -91,14 +92,14 @@
     </nav>
     <div id="mobile-menu-wrap"></div>
     <div class="header__top__right__social">
-        <a href="https://www.facebook.com/mai.thuan.52438/" target="blank"><i class="fa fa-facebook"></i></a>
-        <a href="https://www.messenger.com/t/100017755062615" target="blank"><i class="fa fa-comment"></i></a>
-        <a href="https://www.instagram.com/maizecorn1542/" target="blank"><i class="fa fa-instagram"></i></a>
+        <a href="<%=InforService.getInformation("SocialNetwork").get(0).getContent()%>" target="blank"><i class="fa fa-facebook"></i></a>
+        <a href="<%=InforService.getInformation("SocialNetwork").get(1).getContent()%>" target="blank"><i class="fa fa-comment"></i></a>
+        <a href="<%=InforService.getInformation("SocialNetwork").get(2).getContent()%>" target="blank"><i class="fa fa-instagram"></i></a>
     </div>
     <div class="humberger__menu__contact">
         <ul>
-            <li><i class="fa fa-envelope"></i> tiembanhhanhphuc@gmail.com</li>
-            <li>Miễn phí giao hàng nội thành TP HCM</li>
+            <li><i class="fa fa-envelope"></i> <%=InforService.getInformation("Email").get(0).getContent()%></li>
+            <li><%=InforService.getInformation("Delivery").get(0).getContent()%></li>
         </ul>
     </div>
 </div>
@@ -111,7 +112,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="Index"><img src="./img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                    <a href="Index"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
@@ -162,11 +163,11 @@
 
                     <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">
-                            <a href="tel:0987654321" class="fa fa-phone cursor"></a>
+                            <a href="tel:<%=InforService.getInformation("PhoneNumber").get(0).getContent()%>" class="fa fa-phone cursor"></a>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>+84 987654321</h5>
-                            <span>Mở cửa từ 8h - 22h</span>
+                            <h5><%=InforService.getInformation("PhoneNumber").get(0).getContent()%></h5>
+                            <span><%=InforService.getInformation("TimeShop").get(1).getContent()%></span>
                         </div>
                     </div>
                 </div>
@@ -177,7 +178,7 @@
 </section>
 <!-- Hero Section End -->
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="./img/banner/breadcrumb.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="<%=InforService.getInformation("ImageMenu").get(0).getContent()%>">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -229,7 +230,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%List<ItemProductInCart> listItemC =  CartService.findItemCartByIdUser(auth.getAccount_id());
+                        <%List<ItemProductInCart> listItemC =  CartService.findItemCartByIdUser(auth.getId());
                         int price=0;
                             for(ItemProductInCart item :listItemC){
                                 if(item.getSp().getPromotional()!=0){

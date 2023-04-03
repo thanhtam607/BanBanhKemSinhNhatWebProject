@@ -21,7 +21,7 @@ public class AdminLockCusInEditUser extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String makh = request.getParameter("makh");
         request.setAttribute("mkh", makh);
-        ReceiptService.updateStatus(makh);
+        ReceiptService.updateStatusUser(makh);
         response.sendRedirect("./EditUser?makh="+ request.getParameter("makh"));
     }
 }
