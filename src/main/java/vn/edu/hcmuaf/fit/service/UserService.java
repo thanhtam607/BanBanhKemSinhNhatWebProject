@@ -3,13 +3,10 @@ package vn.edu.hcmuaf.fit.service;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
-import vn.edu.hcmuaf.fit.model.Account;
-import vn.edu.hcmuaf.fit.model.Order;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -39,7 +36,7 @@ public class UserService {
     }
     public User checkLogin(String email, String password) {
         List<User> users = JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT ACCOUNTS.id, ACCOUNTS.email, ACCOUNTS.pass, ACCOUNTS.name, ACCOUNTS.role, ACCOUNTS.status FROM ACCOUNTS WHERE ACCOUNTS.email = ?")
+                h.createQuery("SELECT ACCOUNTS.id, ACCOUNTS.email, ACCOUNTS.pass, ACCOUNTS.name, ACCOUNTS.role, ACCOUNTS.status,ACCOUNTS.type  FROM ACCOUNTS WHERE ACCOUNTS.email = ?")
                         .bind(0, email)
                         .mapToBean(User.class)
                         .stream()
@@ -79,9 +76,9 @@ public class UserService {
         Statement statement = DBConnect.getInstall().get();
         if(statement !=null){
             try{
-                ResultSet rsAcc = statement.executeQuery("select ID, EMAIL, PASS, NAME, ROLE, STATUS from ACCOUNTS;");
+                ResultSet rsAcc = statement.executeQuery("select ID, EMAIL, PASS, NAME, ROLE, STATUS, TYPE from ACCOUNTS;");
                 while(rsAcc.next()){
-                    list.add(new User(rsAcc.getString(1), rsAcc.getString(2), rsAcc.getString(3), rsAcc.getString(4), rsAcc.getInt(5), rsAcc.getInt(6)));
+                    list.add(new User(rsAcc.getString(1), rsAcc.getString(2), rsAcc.getString(3), rsAcc.getString(4), rsAcc.getInt(5), rsAcc.getInt(6), rsAcc.getString(7)));
                 }
             }
             catch (SQLException e){
@@ -129,8 +126,20 @@ public class UserService {
         acc.setId(ID);
         if(stm!= null) {
             try {
-                String sql = "insert into ACCOUNTS values('" + ID + "', '" + acc.getEmail() + "', '" + hashPassword(acc.getPass())  + "', '" + acc.getName() + "'," + acc.getRole() +","+ acc.getStatus()+");";
+                String sql = "insert into ACCOUNTS values('" + ID + "', '" + acc.getEmail() + "', '" + hashPassword(acc.getPass())  + "', '" + acc.getName() + "'," + acc.getRole() +","+ acc.getStatus()+","+acc.getType()+");";
                 stm.executeUpdate(sql);
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+    public static void addAccGG(User acc){
+        Statement stm = DBConnect.getInstall().get();
+        if(stm!= null) {
+            try {
+                String sql = "insert into ACCOUNTS(ID,EMAIL,NAME,ROLE, STATUS,TYPE) values('" + acc.getId() + "', '" + acc.getEmail() + "', '" + acc.getName() + "'," + acc.getRole() +","+ acc.getStatus()+",'"+acc.getType()+"');";
+                stm.executeUpdate(sql);
+                System.out.println(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }
@@ -233,6 +242,26 @@ public class UserService {
             se.printStackTrace();
         }
     }
+    public static User findByEmail(String email){
+        for(User u: getListAcc()){
+            if(!checkEmail(email)){
+                return u;
+            }
+
+        }
+        return null;
+    }
+    public static void updateType(String email, String type)  {
+        String sql = "UPDATE ACCOUNTS set TYPE = '"+type+"' where EMAIL like "+ "'"+email+"'";
+        Statement stm  =  DBConnect.getInstall().get();
+        try {
+            stm.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {
 //        UserService userService = new UserService();
 //       System.out.println(userService.checkLogin("thanhthuy@gmail.com", "123").toString());

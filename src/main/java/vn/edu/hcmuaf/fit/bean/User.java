@@ -10,18 +10,20 @@ public class User implements Serializable {
     private String  name;
     private int  role;
     private int  status;
+    private  String type;
 
     public User(){
 
     }
 
-    public User(String  id, String  email, String  pass, String  name, int  role, int  status) {
+    public User(String  id, String  email, String  pass, String  name, int  role, int  status, String type) {
          this.id =  id;
          this.email =  email;
          this.pass =  pass;
          this.name =  name;
          this.role =  role;
          this.status =  status;
+         this.type=type;
     }
 
     public User(String  email, String  pass, String  name){
@@ -31,6 +33,17 @@ public class User implements Serializable {
          this.name =  name;
          this.role=0;
          this.status=0;
+        this.type=null;
+    }
+
+
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getId() {

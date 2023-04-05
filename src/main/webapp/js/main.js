@@ -707,11 +707,15 @@ async function removePass(email) {
 
 }
 
-function check(email) {
-
+function check() {
+    var email = document.getElementById("email").value;
+    var user = document.getElementById("name").value;
+    var pass= document.getElementById("pass").value;
+    var repass = document.getElementById("repass").value;
+    var saveLogin = document.getElementById("save-login").checked;
     var url = "Signup?email=" + email;
-
-
+    var urlSignup = "Signup?email="+email+"&pass="+pass+"&saveLogin="+ saveLogin+"&name="+user;
+    if(repass == pass){
     $.ajax({
         url: url,
         type: "POST",
@@ -725,10 +729,40 @@ function check(email) {
                 confirmButtonText: 'Xác nhận',
             })
 
-            checkCode(parseInt(code), parseInt(response));
+            if(checkCode(parseInt(code), parseInt(response))){
+                $.ajax({
+                    url: urlSignup,
+                    type: "POST",
+                    success: async function (response) {
+                        Swal.fire({
+                            text: 'Đăng ký thành công!',
+                            icon: 'success',
+                            confirmButtonColor: '#ff96b7'
+                        }).then((result) => {
+                            location.href=response.toString();
+                        });
+                    }
+                });
+            }else{
+                Swal.fire({
+                    text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
+                    icon: 'error',
+                    confirmButtonColor: '#ff96b7'
+                }).then((result) => {
+                    location.reload();
+                });
+
+            }
 
         }
-    });
+    });}
+    else{
+        Swal.fire({
+            text: 'Mật khẩu nhập lại không đúng. Vui lòng kiểm tra lại!',
+            icon: 'error',
+            confirmButtonColor: '#ff96b7'
+        })
+    }
 }
 
 /*-------------------
