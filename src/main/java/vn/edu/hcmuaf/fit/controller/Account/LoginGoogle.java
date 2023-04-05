@@ -52,9 +52,9 @@ public class LoginGoogle extends HttpServlet {
         String code = request.getParameter("code");
         String accessToken = getToken(code);
         UserGoogleDTO userGG = getUserInfo(accessToken);
-        User user = UserService.findByEmail(userGG.getEmail());
-        if(user==null){
-            user=new User();
+        User user = new User();
+        if(UserService.checkEmail(userGG.getEmail())){
+
             user.setId(userGG.getId());
             user.setName(userGG.getName());
             user.setEmail(userGG.getEmail());
@@ -66,6 +66,7 @@ public class LoginGoogle extends HttpServlet {
             newCus.setTENKH(user.getName());
             CustomerService.registerKH(newCus,user);
         }else{
+            user=UserService.findByEmail(userGG.getEmail());
         user.setType("google");
         UserService.updateType(userGG.getEmail(), "google");}
 

@@ -116,7 +116,7 @@ public class UserService {
         }
         if (!listEmail.contains(email)) {
             return true;
-        }
+        }else
         return false;
     }
     public static void register(User acc){
@@ -244,7 +244,7 @@ public class UserService {
     }
     public static User findByEmail(String email){
         for(User u: getListAcc()){
-            if(!checkEmail(email)){
+            if(!checkEmail(email) && u.getEmail().equals(email)){
                 return u;
             }
 
