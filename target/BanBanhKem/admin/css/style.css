@@ -500,3 +500,28 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     text-align: center;
     font-weight: 600;
 }
+.google{
+    text-align: left;
+    border: none;
+    background: white;
+    padding: 5px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.fa-google {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-size: 22px;
+     margin-right: 20px;
+    margin-left: 10px;
+}
+.google:hover{
+    text-decoration: underline;
+    font-weight: 500;
+    border: 2px solid blue;
+    margin-bottom: 16px;
+    border-radius: 5px;
+}

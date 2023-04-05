@@ -152,7 +152,7 @@
                             <th>Email</th>
                             <th>Đánh giá</th>
                             <th>Ngày đăng</th>
-                            <th>Tùy chọn</th>
+
                         </tr>
                         </thead>
                         <% for (int i = 0; i < feedbacks.size(); i++) {
@@ -179,15 +179,7 @@
                             <td>
                                 <div class="main__table-text"><%=fb.getDate()%></div>
                             </td>
-                            <td>
-                                <div class="main__table-btns">
 
-                                    <a href="" class="main__table-btn main__table-btn--edit">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-
-                                </div>
-                            </td>
                         </tr>
                         </tbody>
                         <% } %>

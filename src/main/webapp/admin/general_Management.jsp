@@ -188,7 +188,7 @@
                       </div>
                     </div>
                     <!-- Carousel End -->
-                    <form action="UpdateSloganIndex" method="post">
+                    <form action="UpdateSloganIndex" method="post" class="form">
                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                       <div class="form__group">
                         <input type="hidden" name="idslogan1" class="form__input" style="display: none" value="<%=InforService.getInformation("IndexSlogan").get(0).getId()%>">
@@ -217,7 +217,7 @@
                     </div>
                     <% List<General_information> listIntro = InforService.getIntroduce();%>
                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                      <form action="UpdateIntroduce"  method="POST" id="infor-intro">
+                      <form action="UpdateIntroduce"  method="POST" id="infor-intro" class="form">
                         <div class="form__group">
                         <input type="text" class="form__input" name="idintro" style="display: none" value="<%=listIntro.get(0).getId()%>">
                         <label class="form__label text--green font-size-20" for="contentintro">Nội dung trang giới thiệu:</label>
@@ -253,7 +253,7 @@
                     <div class="col-12">
                       <h4 class="form__title text--green">Thông tin chung</h4>
                     </div>
-                    <form action="UpdateGeneral_Infor" method="post">
+                    <form action="UpdateGeneral_Infor" method="post" class="form">
                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                       <div class="form__group">
                         <input id="idaddress" type="hidden" name="idaddress" class="form__input" style="display: none" value="<%=InforService.getInformation("Address").get(0).getId()%>">
@@ -287,7 +287,7 @@
                   <div class="col-12">
                     <h4 class="form__title text--green">Thông tin mạng xã hội</h4>
                   </div>
-                  <form method="post" action="UpdateSocialNetwork">
+                  <form method="post" action="UpdateSocialNetwork" class="form">
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
                       <input id="idfacebook" type="hidden" name="idfacebook" class="form__input" style="display: none" value="<%=InforService.getInformation("SocialNetwork").get(0).getId()%>">
@@ -344,13 +344,13 @@
               <!-- end details form -->
 
               <!-- password form -->
-              <div class="col-12 col-lg-4" style="margin-top: -920px">
+              <div class="col-12 col-lg-4" style="margin-top: -1044px">
                 <div class="form form--profile">
                   <div class="row row--form">
                     <div class="col-12">
                       <h4 class="form__title text--green">Thông tin cuối trang</h4>
                     </div>
-                    <form action="UpdateShopInfor" method="post">
+                    <form action="UpdateShopInfor" method="post" class="form">
                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                       <div class="form__group">
                         <input type="hidden" name="idopendate" class="form__input" style="display: none" value="<%=InforService.getInformation("TimeShop").get(0).getId()%>">
@@ -482,6 +482,8 @@
   </form>
 </div>
 <% } %>
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 <!-- end modal updateImg -->
 
 <!-- JS -->
