@@ -373,11 +373,12 @@ public class ReceiptService {
             }
         }
     }
+
     public static void updateInfoCustomerInBill(String id, String name, String phone) {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE customers, bills set customers.NAME = '"+name+"', customers.PHONE = '"+phone+"' WHERE bills.ID ='"+id+"' and customers.id = bills.CUSTOMER_ID";
+                String sql = "UPDATE customers, bills set customers.NAME = '"+name+"', customers.PHONE = '"+phone+"' WHERE bills.ID ='"+id+"' and customers.id = bills.CUSTOMER_ID and bills.EXPORT_DATE = "+"'"+getReceiptByMahd(id)+"'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
