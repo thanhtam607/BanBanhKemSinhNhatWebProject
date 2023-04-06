@@ -787,10 +787,20 @@ function addOrder() {
     }
     console.log(note.toString())
     var haveDisk = document.getElementById("payment3").value;
-    var url1  ="AddNewOrder?ten" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
+    // var url1  ="AddNewOrder?ten=" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
+    var url1  ="AddNewOrder";
     $.ajax({
         url: url1,
         type: "GET",
+        data:{
+            ten: ten,
+            email: email,
+            diachi: diachi,
+            phone: phone,
+            ghichu: ghichu,
+            haveDisk: haveDisk,
+            note: note.toString()
+        },
         success: function () {
             document.getElementById("totalPro").innerHTML = "0";
             document.getElementById("totalPro1").innerHTML = "0";

@@ -8,6 +8,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,22 +134,26 @@
                                     <h4 class="form__title">Thông tin khách hàng</h4>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
-                                            <label class="form__label" for="username">Tên khách hàng</label>
-                                            <input id="username" type="text" name="username" class="form__input"
-                                                   value="<%=receipt.getNamecustomer()%>">
+                                            <label class="form__label" for="usernameRE">Người nhận</label>
+                                            <input id="usernameRE" type="text" name="usernameRE" class="form__input"
+                                                   value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getTenKH()%>">
+                                        </div>
+                                        <div class="form__group">
+                                            <label class="form__label" for="phoneRE">SĐT người nhận</label>
+                                            <input id="phoneRE" type="text" name="phoneRE" class="form__input"
+                                                   value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getPhone()%>">
+                                        </div>
+                                        <div class="form__group">
+                                            <label class="form__label" for="mailRE">Email người nhận</label>
+                                            <input id="mailRE" type="email" name="mailRE" class="form__input"
+                                                   value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getEmail()%>">
                                         </div>
                                     </div>
+
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
-                                            <label class="form__label" for="email">SĐT</label>
-                                            <input id="email" type="tel" name="phone" class="form__input text-lowercase"
-                                                   value="<%=receipt.getPhone()%>">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                        <div class="form__group">
-                                            <label class="form__label" for="email">Ghi chú ĐH</label>
-                                            <input type="text" name="note" class="form__input text-lowercase"
+                                            <label class="form__label" for="note">Ghi chú ĐH</label>
+                                            <input type="text" id="note" name="note" class="form__input text-lowercase"
                                                    value="<%=receipt.getNote()%>">
                                         </div>
                                     </div>
@@ -165,22 +170,22 @@
                                     <h4 class="form__title">Thông tin giao hàng</h4>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
-                                            <label class="form__label" for="email">Ngày lập</label>
-                                            <input type="datetime" class="form__input text-lowercase" readonly
+                                            <label class="form__label" for="dayE">Ngày lập</label>
+                                            <input type="datetime" id="dayE" class="form__input text-lowercase" readonly
                                                    value="<%=receipt.getExport_date()%>">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
-                                            <label class="form__label" for="email">Ngày giao</label>
-                                            <input type="datetime" name="dayD" class="form__input text-lowercase"
+                                            <label class="form__label" for="dayD">Ngày giao</label>
+                                            <input type="datetime" id="dayD" name="dayD" class="form__input text-lowercase"
                                                    value="<%=receipt.getDelivery_date()%>">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
-                                            <label class="form__label" for="email">Địa chỉ giao</label>
-                                            <input type="text" name="address" class="form__input text-lowercase"
+                                            <label class="form__label" for="address">Địa chỉ giao</label>
+                                            <input type="text" id="address" name="address" class="form__input text-lowercase"
                                                    value="<%=receipt.getAddress()%>">
                                         </div>
                                     </div>
@@ -204,7 +209,6 @@
                                 </div>
                             </form>
                         </div>
-
                         <div class="col-12">
                             <div class="table-responsive margin-top-20px col-12 pl-0">
                                 <table class="table text-start align-middle table-bordered table-hover mb-0">

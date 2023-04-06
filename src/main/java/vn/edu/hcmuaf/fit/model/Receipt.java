@@ -19,7 +19,6 @@ public class Receipt {
     int status;
     int state;
     List<Comment> commentList;
-    String TenTK;
     int role;
     String email;
     String createBy;
@@ -27,7 +26,7 @@ public class Receipt {
     public Receipt() {
     }
 
-    public Receipt(String id, String makh, String namecustomer, String namecake, String phone, String export_date, String delivery_date, String address, String note, int price, int total, int status, List<Comment> commentList, String TenTK, int role, String email) {
+    public Receipt(String id,  String namecustomer, String namecake, String phone, String export_date, String delivery_date, String address, String note, int price, int total, int status,String makh, List<Comment> commentList, int role, String email) {
         this.id = id;
         this.makh = makh;
         this.namecustomer = namecustomer;
@@ -41,7 +40,6 @@ public class Receipt {
         this.total = total;
         this.state = status;
         this.commentList = commentList;
-        this.TenTK = TenTK;
         this.role = role;
         this.email =  email;
     }
@@ -211,23 +209,8 @@ public class Receipt {
         this.commentList = commentList;
     }
 
-    public String getTenTK() {
-        return TenTK;
-    }
-
-    public void setTenTK(String tenTK) {
-        TenTK = tenTK;
-    }
 
 
-    public String getRoleName() {
-        if(this.role == 0){
-            return "Thường";
-        }else if(this.role == 1){
-            return "Admin";
-        }
-        return "Quản Lí";
-    }
     public void setRole(int role) {
         this.role = role;
     }

@@ -66,7 +66,6 @@ public class UserService {
             if(Id.equals(u.getId())){
                 return u;
             }
-
         }
         return null;
     }

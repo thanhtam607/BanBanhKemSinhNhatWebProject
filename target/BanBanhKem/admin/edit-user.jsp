@@ -261,7 +261,7 @@
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="username">Tên tài khoản</label>
-                                                    <input id="username" type="text" name="username" class="form__input" value="<%=rc.getTenTK()%>">
+                                                    <input id="username" type="text" name="username" class="form__input" value="<%=rc.getNamecustomer()%>">
                                                 </div>
                                             </div>
 
@@ -277,7 +277,7 @@
                                                     <select class="form__input" id="rights" name="role">
                                                         <%List<String> listRole = (List<String>) request.getAttribute("listRole");
                                                             for(String r : listRole){
-                                                                if(r == rc.getRoleName()){%>
+                                                                if(r == UserService.findById(rc.getMakh()).getRoleName()){%>
                                                         <option selected value="<%=r%>"><%=r%></option>
                                                         <% } else {%>
                                                         <option value="<%=r%>"><%=r%></option>

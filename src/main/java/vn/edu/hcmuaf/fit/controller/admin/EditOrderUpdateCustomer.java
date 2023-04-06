@@ -18,11 +18,12 @@ public class EditOrderUpdateCustomer extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        String nameCus = request.getParameter("username");
-        String phoneCus = request.getParameter("phone");
+        String usernameRE = request.getParameter("usernameRE");
+        String phoneRE = request.getParameter("phoneRE");
+        String mailRE = request.getParameter("mailRE");
         String note = request.getParameter("note");
         String id = request.getParameter("id");
-        ReceiptService.updateInfoCustomerInBill(id, nameCus, phoneCus);
+        ReceiptService.updateInfoCustomerInBill(id, usernameRE, phoneRE, mailRE);
         ReceiptService.updateNoteInBill(id, note);
         response.sendRedirect("./AdminEditOrder?id="+ request.getParameter("id"));
     }

@@ -223,16 +223,6 @@
                   <%}%>
                 </div>
               </td>
-<%--              <td>--%>
-<%--                <div class="checkout__input__checkbox">--%>
-<%--                  <label for="payment<%=i%>" >--%>
-<%--                    Chọn--%>
-<%--                    <input type="checkbox" id="payment<%=i%>">--%>
-<%--                    <span class="checkmark"></span>--%>
-<%--                  </label>--%>
-<%--                </div>--%>
-<%--               --%>
-<%--              </td>--%>
             </tr>
             </tbody>
             <!-- modal delete -->

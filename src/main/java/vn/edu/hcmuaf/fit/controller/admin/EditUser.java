@@ -18,15 +18,19 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<String> listRole = new ArrayList<String>();
+        String makh = request.getParameter("makh");
+
+        List<String> listRole = new ArrayList<>();
         listRole.add("Thường");
         listRole.add("Admin");
         listRole.add("Quản Lí");
         request.setAttribute("listRole", listRole);
-        String makh = request.getParameter("makh");
+
         List<Receipt> listctkh = ReceiptService.getctkh(makh);
+
         request.setAttribute("listmakh", listctkh);
         request.setAttribute("mkh", makh);
+
         request.getRequestDispatcher("edit-user.jsp").forward(request, response);
     }
 

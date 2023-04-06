@@ -50,6 +50,7 @@ public class AddNewOrder extends HttpServlet {
         gh.setPhone(phone);
         gh.setTenKH(ten);
 
+
         Order order =new Order(auth, listItemC, todayFM,CartService.totalPrice(listItemC), ghichu,gh);
 
         if(notesForDetail!=null){

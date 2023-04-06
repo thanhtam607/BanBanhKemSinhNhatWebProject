@@ -121,16 +121,19 @@
       </div>
     <div class="col-12 pt-2 pb-2 rounded bg-pink">
             <div class="col-12 d-flex justify-content-between form__content pl-0 pr-0">
-              <h5 style="margin-bottom: 25px">Tên KH: <%=tenkh%> - SĐT: <%=receipt.getPhone()%></h5>
+              <h5 style="margin-bottom: 25px">Tên Tài Khoản: <%=tenkh%> - SĐT: <%=receipt.getPhone()%></h5>
                <h5 style="margin-bottom: 25px"> Mã ĐH: <%=receipt.getId()%> </h5>
             </div>
             <div class="col-12 d-flex form__content pl-0 pr-0">
               <div class="col-6 pl-0 pr-0">
-                <p>Người Tạo: <%=receipt.getCreateBy()%></p>
-                <p>Ngày Lập: <%=receipt.getExport_date()%></p>
-                <p>Ngày Giao Hàng: <%=receipt.getDelivery_date()%></p>
+                <p>Người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getTenKH() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getTenKH():"" %></p>
+                <p>SĐT người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getPhone() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getPhone():""%></p>
+                <p>Email người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getEmail() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getEmail():""%></p>
+                <p>Nhân Viên Tạo: <%=receipt.getCreateBy()%></p>
               </div>
               <div class="col-6 pl-0 pr-0">
+                <p>Ngày Lập: <%=receipt.getExport_date()%></p>
+                <p>Ngày Giao Hàng: <%=receipt.getDelivery_date()%></p>
                 <p>Địa Chỉ Giao: <%=receipt.getAddress()%></p>
                 <p>Trạng Thái: <%=receipt.getStatusName()%></p>
               </div>
