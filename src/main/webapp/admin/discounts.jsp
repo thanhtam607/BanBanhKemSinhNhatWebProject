@@ -8,6 +8,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Image" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Discount" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.DiscountService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -47,7 +48,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
-    <title>Admin | Shop Bánh Kem</title>
+    <title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
 </head>
 
 <body>

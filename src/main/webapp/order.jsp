@@ -11,7 +11,7 @@
 
 <head>
 
-    <title>Shop Bánh Kem | Đơn hàng</title>
+    <title> <%=InforService.getInformation("NameShop").get(0).getContent()%> | Đơn hàng</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -1,3 +1,4 @@
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -5,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Admin | Shop Bánh Kem</title>
+    <title><%=InforService.getInformation("NameShop").get(0).getContent()%> | Sign up</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
