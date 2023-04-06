@@ -7,6 +7,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,7 +106,9 @@
     </nav>
 </div>
 <!-- Sidebar End -->
-<% List<Receipt> listre = (List<Receipt>) request.getAttribute("listmakh");%>
+<%
+    List<Receipt> listre = (List<Receipt>) request.getAttribute("listmakh");
+String mkh = (String) request.getAttribute("mkh"); %>
     <!-- main content -->
     <main class="main">
         <div class="container-fluid">
@@ -130,7 +133,7 @@
                             <% for (int i = 0; i <= 0; i ++){
                                 if(!listre.isEmpty()){
                                 Receipt rc = listre.get(i);
-                                User user = UserService.findById(rc.getMakh());%>
+                                User user = UserService.findById(mkh);%>
                             <div class="profile__meta">
                                 <% String main__table = " ";
                                 String profile__text ="";
@@ -142,8 +145,8 @@
                                         main__table = "main__table-text--green";
                                         profile__text = "profile__action--banned";
                                     }%>
-                                <h3><%=rc.getNamecustomer()%> <span class="<%=main__table%>">(<%=user.getStatusName()%>)</span></h3>
-                                <span name = "makh" value="<%=rc.getMakh()%>"> ID: <%=rc.getMakh()%></span>
+                                <h3><%=UserService.findById(mkh).getName()%> <span class="<%=main__table%>">(<%=user.getStatusName()%>)</span></h3>
+                                <span name = "makh" value="<%=mkh%>"> ID: <%=mkh%></span>
                             </div>
                         </div>
                         <!-- end profile user -->
@@ -198,7 +201,7 @@
                         </div>
                         <!-- end profile btns -->
                         <!-- modal status -->
-                        <% String mkh = (String) request.getAttribute("mkh");%>
+
                         <div id="modal-status-lock" class="zoom-anim-dialog mfp-hide modal">
                             <form method="post" action="AdminLockCusInEditUser">
                                 <h6 class="modal__title">Chặn Người Dùng</h6>
@@ -252,23 +255,31 @@
                             <div class="row">
                                 <!-- details form -->
                                 <div class="col-12">
-                                    <form action="UpdateRole" method="post" class="form form--profile">
+                                    <form action="AdminUpdateUser" method="post" class="form form--profile">
                                         <div class="row row--form">
                                             <div class="col-12">
                                                 <h4 class="form__title">Thông tin tài khoản</h4>
                                             </div>
-                                           <input name = "makh" value="<%=rc.getMakh()%>" style="display: none">
+                                           <input name ="makh" value="<%=mkh%>" style="display: none">
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="username">Tên tài khoản</label>
-                                                    <input id="username" type="text" name="username" class="form__input" value="<%=rc.getNamecustomer()%>">
+                                                    <input id="username" type="text" name="username" class="form__input" value="<%=UserService.findById(mkh).getName()%>">
+                                                </div>
+                                                <div class="form__group">
+                                                    <label class="form__label" for="phone">SĐT</label>
+                                                    <input id="phone" type="tel" name="phone" class="form__input text-lowercase" value="<%=CustomerService.getCusByIdAcc(mkh).getSDT()%>">
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="email">Email</label>
-                                                    <input id="email" type="text" name="email" class="form__input text-lowercase" value="<%=rc.getEmail()%>">
+                                                    <input id="email" type="email" name="email" class="form__input text-lowercase" value="<%=UserService.findById(mkh).getEmail()%>">
+                                                </div>
+                                                <div class="form__group">
+                                                    <label class="form__label" for="address">Địa chỉ</label>
+                                                    <input id="address" type="text" name="address" class="form__input text-lowercase" value="<%=CustomerService.getCusByIdAcc(mkh).getDIACHI()%>">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
@@ -277,7 +288,7 @@
                                                     <select class="form__input" id="rights" name="role">
                                                         <%List<String> listRole = (List<String>) request.getAttribute("listRole");
                                                             for(String r : listRole){
-                                                                if(r == UserService.findById(rc.getMakh()).getRoleName()){%>
+                                                                if(r == UserService.findById(mkh).getRoleName()){%>
                                                         <option selected value="<%=r%>"><%=r%></option>
                                                         <% } else {%>
                                                         <option value="<%=r%>"><%=r%></option>
@@ -344,7 +355,7 @@
                                                     <p class="modal__text">Bạn có chắc muốn hủy đơn hàng này?</p>
 
                                                     <div class="modal__btns">
-                                                        <a href="adminRemoveOrderCTKH?mahd=<%=r.getId()%>&makhCTKH=<%=r.getMakh()%>" class="modal__btn modal__btn--apply" type="button">
+                                                        <a href="adminRemoveOrderCTKH?mahd=<%=r.getId()%>&makhCTKH=<%=mkh%>" class="modal__btn modal__btn--apply" type="button">
                                                             Hủy Đơn Hàng
                                                         </a>
                                                         <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
@@ -383,7 +394,7 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div class="main__table-text"><%=r.getMakh()%></div>
+                                                <div class="main__table-text"><%=mkh%></div>
                                             </td>
                                             <td>
                                                 <div class="main__table-text"><a href="#"><%=r.getNamecake()%></a></div>
@@ -421,7 +432,7 @@
                                                     <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
 
                                                     <div class="modal__btns">
-                                                        <% String url ="DeleteCommentListReceipt?makh="+r.getMakh()+"&idCmt="+listCmt.get(i).getIdcmt()+"&id="+ i; %>
+                                                        <% String url ="DeleteCommentListReceipt?makh="+mkh+"&idCmt="+listCmt.get(i).getIdcmt()+"&id="+ i; %>
                                                         <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>') ">Xóa</button>
                                                         <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                     </div>

@@ -196,14 +196,15 @@
             <h4>Thông Tin Tài Khoản</h4>
             <div>
                 <div class="row">
-                    <div class="col-lg-8 col-md-6">
+                    <div class="col-lg-7 col-md-6">
                         <div class="row">
 
                             <div class="col-lg-12">
                                 <div class="checkout__input">
                                     <p>Tên Đăng Nhập</p>
-                                    <input type="text" id="ten" value="<%=auth.getName()%>">
+                                    <input type="text" id="ten" value="<%=auth.getName() %>">
                                 </div>
+
                             </div>
                         </div>
                         <div class="checkout__input">
@@ -231,6 +232,7 @@
                             Lưu Thay Đổi
                         </button>
                     </div>
+
 
                 </div>
             </div>

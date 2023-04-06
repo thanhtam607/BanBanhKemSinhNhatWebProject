@@ -222,6 +222,16 @@ public class ReceiptService {
     }
 
 
+//    public static List<Receipt> getctkh(String makh) {
+//        List<Receipt> list = getAllReceipt();
+//        List<Receipt> rs = new ArrayList<>();
+//        for (Receipt rc : list) {
+//            if (rc.getMakh().equals(makh)) {
+//                rs.add(rc);
+//            }
+//        }
+//        return rs;
+//    }
     public static List<Receipt> getctkh(String makh) {
         List<Receipt> list = getData();
         List<Receipt> rs = new ArrayList<>();
