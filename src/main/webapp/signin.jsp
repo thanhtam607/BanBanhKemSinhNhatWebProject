@@ -86,6 +86,10 @@
                             <a style="cursor: pointer" onclick="forgotPassword()" >Quên mật khẩu?</a>
                         </div>
                         <button type="submit" id="login-button" class="btn btn-primary py-3 w-100 mb-4">Đăng nhập</button>
+                        <div class="btn-google col-12">
+                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&20openid&redirect_uri=http://localhost:8080/LoginGoogle&response_type=code
+		   &client_id=344697106441-26mu1s28srer7nnpb5pqc7l502dodjv9.apps.googleusercontent.com&approval_prompt=force" type="button" class="google col-12" ><i class="fab fa-google"></i>Đăng nhập với Google</a>
+                        </div>
                         <p class="text-center mb-0">Bạn chưa có tài khoản? <a href="signup.jsp">Đăng ký ngay</a></p>
                     </form>
                 </div>

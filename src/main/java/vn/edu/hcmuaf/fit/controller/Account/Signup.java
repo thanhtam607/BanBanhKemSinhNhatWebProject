@@ -1,7 +1,6 @@
 package vn.edu.hcmuaf.fit.controller.Account;
 
 import vn.edu.hcmuaf.fit.bean.User;
-import vn.edu.hcmuaf.fit.model.Account;
 import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.UserService;
@@ -12,7 +11,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 @WebServlet(name = "Signup", value = "/Signup")
 public class Signup extends HttpServlet {
@@ -37,12 +35,8 @@ public class Signup extends HttpServlet {
         else{
         String user = request.getParameter("name");
         String pass = request.getParameter("pass");
-        String repass = request.getParameter("repass");
-        if(!pass.equals(repass)){
-            request.setAttribute("Error", "Mật khẩu nhập lại không khớp!");
-            request.getRequestDispatcher("signup.jsp").forward(request,response);
-        }
-        else if (!UserService.checkEmail(email)) {
+
+            if (!UserService.checkEmail(email)) {
             request.setAttribute("Error", "Email đã được sử dụng!!");
             request.getRequestDispatcher("signup.jsp").forward(request,response);
         }
@@ -53,16 +47,17 @@ public class Signup extends HttpServlet {
             UserService.register(newUser);
             newCus.setTENKH(newUser.getName());
             CustomerService.registerKH(newCus,newUser);
-
+                PrintWriter out= response.getWriter();
             String url = null;
-            if (request.getParameter("save-login") != null) {
+            if (request.getParameter("saveLogin").equals("true")) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("auth", newUser);
-                url = "./Index";
+                out.println("./Index");
             } else {
-                url = "signin.jsp";
+                out.println("signin.jsp");
             }
-            response.sendRedirect(url);
+
+
         }
         }
     }

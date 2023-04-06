@@ -804,25 +804,25 @@ INSERT INTO productDetails VALUES('B099', 10, 10, '2022/10/12', '2022/10/15');
 INSERT INTO productDetails VALUES('B100', 10, 10, '2022/10/12', '2022/10/15');
 
 /*=========================================ACCOUNTS=========================================*/
-CREATE TABLE ACCOUNTS(ID CHAR(4) PRIMARY KEY,
+CREATE TABLE ACCOUNTS(ID CHAR(50) PRIMARY KEY not null,
 									EMAIL VARCHAR(255),
-									 PASS VARCHAR(255) NOT NULL,
+									 PASS VARCHAR(255),
 									 NAME VARCHAR(100),
 									 ROLE tinyint(4) NOT NULL DEFAULT 0,
-									STATUS tinyint(4) DEFAULT 0 );
-INSERT INTO ACCOUNTS VALUES('AD01', 'thanhthuy@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Thanh Thùy', 1,0);
-INSERT INTO ACCOUNTS VALUES('AD02', 'thanhtam@gmail.com', 'b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0', 'Thanh Tâm', 1,0);
-INSERT INTO ACCOUNTS VALUES('AD03', 'thanhthuan@gmail.com', '35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281', 'Thanh Thuận', 1,0);
-INSERT INTO ACCOUNTS VALUES('AD04', 'nhom27@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 27', 1,0);
-INSERT INTO ACCOUNTS VALUES('AD05', 'nhom270@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 270', 1,0);
-INSERT INTO ACCOUNTS VALUES('AD06', 'nhom271@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 271', 0,0);
-INSERT INTO ACCOUNTS VALUES('AD07', 'nhom272@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 272', 0,0);
-INSERT INTO ACCOUNTS VALUES('AD08', 'nhom273@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 273', 0,0);
-INSERT INTO ACCOUNTS VALUES('AD09', 'nhom274@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 274', 0,0);
-INSERT INTO ACCOUNTS VALUES('AD10', 'nhom275@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 275', 0,0);
+									STATUS tinyint(4) DEFAULT 0, TYPE VARCHAR(10) );
+INSERT INTO ACCOUNTS VALUES('AD01', 'thanhthuy@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Thanh Thùy', 1,0,null);
+INSERT INTO ACCOUNTS VALUES('AD02', 'thanhtam@gmail.com', 'b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0', 'Thanh Tâm', 1,0,null);
+INSERT INTO ACCOUNTS VALUES('AD03', 'thanhthuan@gmail.com', '35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281', 'Thanh Thuận', 1,0,null);
+INSERT INTO ACCOUNTS VALUES('AD04', 'nhom27@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 27', 1,0,null);
+INSERT INTO ACCOUNTS VALUES('AD05', 'nhom270@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 270', 1,0,null);
+INSERT INTO ACCOUNTS VALUES('AD06', 'nhom271@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 271', 0,0,null);
+INSERT INTO ACCOUNTS VALUES('AD07', 'nhom272@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 272', 0,0,null);
+INSERT INTO ACCOUNTS VALUES('AD08', 'nhom273@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 273', 0,0,null);
+INSERT INTO ACCOUNTS VALUES('AD09', 'nhom274@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 274', 0,0,null);
+INSERT INTO ACCOUNTS VALUES('AD10', 'nhom275@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 275', 0,0,null);
 
 /*==============================CUSTOMERS=====================================*/
-CREATE TABLE CUSTOMERS(ID CHAR(4) PRIMARY KEY NOT NULL,
+CREATE TABLE CUSTOMERS(ID CHAR(50) PRIMARY KEY NOT NULL,
 											 NAME VARCHAR(40),
 											 ADDRESS VARCHAR(60),
 											 PHONE VARCHAR(10),
@@ -841,7 +841,7 @@ CREATE TABLE CUSTOMERS(ID CHAR(4) PRIMARY KEY NOT NULL,
 
  /*==============================BILLS=====================================*/
 CREATE TABLE BILLS(ID CHAR(4) PRIMARY KEY,
-											CUSTOMER_ID CHAR(4),
+											CUSTOMER_ID CHAR(50),
 											EXPORT_DATE DATETIME NOT NULL,
 											NOTES LONGTEXT,
 											TOTAL_BILL FLOAT,
@@ -920,7 +920,7 @@ INSERT INTO DELIVERY VALUES('HD15', '2023/1/13', 'Q1, TP HCM', null, null,null);
 
 /*=========================================Comments=========================================*/
 
-CREATE table Comments(IdCmt INT PRIMARY KEY AUTO_INCREMENT,idProduct CHAR(4) not null, ID CHAR(4)  not null , comment longtext, date datetime, STATUS tinyint(4) DEFAULT 0);
+CREATE table Comments(IdCmt INT PRIMARY KEY AUTO_INCREMENT,idProduct CHAR(4) not null, ID CHAR(50)  not null , comment longtext, date datetime, STATUS tinyint(4) DEFAULT 0);
 
 INSERT into Comments VALUES(1,'B001','AD02',"Lần đầu đặt bánh ở tiệm này thấy rất hài lòng, cầm chiếc bánh trên tay đi tặng được mọi người khen . Rất hài lòng, trang trí sang trọng, đẹp mắt.", '2022/11/22', 0);
 INSERT into Comments VALUES(2,'B002','AD01',"Đặt bánh ở tiệm này thấy rất hài lòng, cầm chiếc bánh trên tay đi tặng được mọi người khen . Rất hài lòng, trang trí sang trọng, đẹp mắt.", '2023/03/02', 0);
@@ -998,14 +998,14 @@ create table FEEDBACKS(id INT AUTO_INCREMENT PRIMARY KEY,
 
 CREATE table LOGS(ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
 										LEVEL TINYINT(4) not null DEFAULT(0), 
-										ACCOUNT_ID char(4), 
+										ACCOUNT_ID char(50), 
 										SRC longtext not null DEFAULT('none'), 
 										CONTENT LONGTEXT,
 										CREATE_AT datetime DEFAULT(NOW()), 
 										STATUS TINYINT(4) not null DEFAULT(0));
 										
 create table cartItems(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
-											customer_id char(4) , 
+											customer_id char(50) , 
 											idProduct char(4) , 
 											quantity int ,FOREIGN KEY (customer_id)REFERENCES CUSTOMERS(ID),
 											FOREIGN KEY (idProduct)REFERENCES products(idProduct));
