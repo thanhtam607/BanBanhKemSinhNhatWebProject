@@ -117,7 +117,7 @@
                                 <span class="filter__item-label">Sắp xếp:</span>
 
                                 <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <input type="button" value="Tin tức">
+                                    <input type="button" value="">
                                     <span></span>
                                 </div>
 
