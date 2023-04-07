@@ -1,5 +1,8 @@
 package vn.edu.hcmuaf.fit.controller.admin;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.ServletException;
@@ -22,6 +25,15 @@ public class adminRemoveOrderCTKH extends HttpServlet {
 
         ReceiptService.updateTonKhoWhenCancelOrder(mhd);
         ReceiptService.cancelOrder(mhd);
+
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(3);
+        log.setSrc(request.getServletPath());
+        log.setContent("Hủy đơn hàng: "+ mhd);
+        log.setUser(user.getId());
+        LogService.addLog(log);
 
         response.sendRedirect("./EditUser?makh="+ mh );
 

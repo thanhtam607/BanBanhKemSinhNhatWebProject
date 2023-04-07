@@ -1,6 +1,9 @@
 package vn.edu.hcmuaf.fit.controller.admin;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.model.TypeOfCake;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
@@ -23,6 +26,17 @@ public class addTypeCake extends HttpServlet {
         String id = ProductService.idMaxType();
         TypeOfCake toc = new TypeOfCake(id, name);
         ProductService.addTyofcake(toc);
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(1);
+        log.setSrc(request.getServletPath());
+        log.setContent("Thêm loại bánh: "+ id);
+        log.setUser(user.getId());
+        LogService.addLog(log);
+
+
         response.sendRedirect("./Catalog_admin");
     }
 }

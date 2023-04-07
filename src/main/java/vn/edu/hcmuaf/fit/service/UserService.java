@@ -139,7 +139,6 @@ public class UserService {
             try {
                 String sql = "insert into ACCOUNTS(ID,EMAIL,NAME,ROLE, STATUS,TYPE) values('" + acc.getId() + "', '" + acc.getEmail() + "', '" + acc.getName() + "'," + acc.getRole() +","+ acc.getStatus()+",'"+acc.getType()+"');";
                 stm.executeUpdate(sql);
-                System.out.println(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }

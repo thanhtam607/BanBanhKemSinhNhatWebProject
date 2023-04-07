@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.controller.Account;
 
 import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.UserService;
 
 import javax.servlet.*;
@@ -13,28 +15,33 @@ import java.io.PrintWriter;
 public class UpdatePassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        Log log = new Log();
+        log.setLevel(2);
+        log.setSrc(request.getServletPath());
         if(request.getParameter("oldPass")!=null){
             HttpSession session = request.getSession(true);
             User user =(User) session.getAttribute("auth");
             String oldPass = request.getParameter("oldPass");
             String p = user.getPass();
             PrintWriter out = response.getWriter();
+            log.setUser(user.getId());
+
            if( p.equals(UserService.hashPassword(oldPass))){
                out.println(1);
+               log.setContent("Đặt lại mật khẩu thành công");
            }
            else{
                out.println(0);
+               log.setContent("Đặt lại mật khẩu thất bại");
            }
         }
         else{
             String pass= request.getParameter("password");
             String email = request.getParameter("email");
             UserService.updatePass(email, UserService.hashPassword(pass));
+            log.setContent("Đặt lại mật khẩu thành công");
         }
-
-
-
+        LogService.addLog(log);
     }
 
     @Override

@@ -27,7 +27,6 @@ public class FilterProductForDiscount extends HttpServlet {
         List<Product> listProduct =ProductService.getProductsNotDiscount();
         String loaiBanh = request.getParameter("loaiBanh");
         if(!loaiBanh.equals("Tất cả")){
-            System.out.println(loaiBanh);
             listProduct =  ProductService.findByType(loaiBanh, ProductService.getProductsNotDiscount());
         }
 

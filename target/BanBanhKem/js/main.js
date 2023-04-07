@@ -576,7 +576,6 @@ async function forgotPassword() {
             type: "GET",
             success: async function (response) {
                 if (parseInt(response) === 1) {
-
                     Swal.fire({
                         text: "Tài khoản không tồn tại!",
                         icon: 'error',
@@ -593,7 +592,29 @@ async function forgotPassword() {
                     })
                     if (checkCode(parseInt(code), parseInt(response))) {
                         removePass(email);
+
+                    }else{
+                        $.ajax({
+                            url:"AddLog",
+                            type: "POST",
+                            data:{content: "Nhập sai mã xác thực", src:location.pathname.toString(),
+                            email: email, level: 2},
+                            success: function () {
+                                Swal.fire({
+                                    text: 'Mã xác nhận không đúng!',
+                                    icon: 'error',
+                                    confirmButtonColor: '#ff96b7'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+
+                                    }
+                                });
+                            }
+                        });
+
                     }
+
                 }
             }
         });
@@ -607,16 +628,7 @@ function checkCode(c1, c2) {
         return true;
 
     } else {
-        Swal.fire({
-            text: 'Mã xác nhận không đúng!',
-            icon: 'error',
-            confirmButtonColor: '#ff96b7'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                location.reload();
 
-            }
-        });
         return false;
     }
 }

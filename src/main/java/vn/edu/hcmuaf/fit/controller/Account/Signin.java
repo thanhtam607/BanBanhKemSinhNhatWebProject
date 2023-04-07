@@ -3,8 +3,10 @@ package vn.edu.hcmuaf.fit.controller.Account;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.ItemProductInCart;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.service.CartService;
 import vn.edu.hcmuaf.fit.service.CustomerService;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.UserService;
 
 import javax.servlet.*;
@@ -28,25 +30,35 @@ public class Signin extends HttpServlet {
             request.getRequestDispatcher("/signin.jsp").forward(request, response);
         }else {
             User user = UserService.getInstance().checkLogin(uname, pass);
-
+            Log log = new Log();
+            log.setSrc(request.getServletPath() );
             if (user == null) {
+                log.setLevel(2);
+                log.setUser(uname);
+                log.setContent("Nhập sai thông tin đăng nhập");
                 request.setAttribute("Error", "Tên đăng nhập hoặc mật khẩu không đúng!!!");
                 request.getRequestDispatcher("/signin.jsp").forward(request, response);
             } else {
+                log.setLevel(1);
+                log.setUser(user.getId());
                 if (user.checkStatus()) {
                     request.setAttribute("Error", "Tài Khoản Của Bạn Đã Bị Khóa! Không Thể Đăng Nhập!!");
                     request.getRequestDispatcher("/signin.jsp").forward(request, response);
+                    log.setContent("Đăng nhập vào trang web thất bại(do tài khoản bị khóa)");
                 }
                 HttpSession session = request.getSession(true);
                 session.setAttribute("auth", user);
                 Customer customer = CustomerService.getCusByIdAcc(user.getId());
                 session.setAttribute("cust", customer);
-
+                log.setContent("Đăng nhập thành công vào trang web");
                 List<ItemProductInCart> listItemCart = CartService.findItemCartByIdUser(user.getId());
                 session.setAttribute("itemCart", listItemCart);
+
+
+
                 response.sendRedirect(request.getContextPath() + "/Index");
             }
-
+            LogService.addLog(log);
         }
 
     }
