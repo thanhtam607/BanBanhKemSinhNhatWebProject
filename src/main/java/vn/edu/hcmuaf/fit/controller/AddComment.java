@@ -42,7 +42,7 @@ public class AddComment extends HttpServlet {
                     "                                <p >"+newCmt.getBinhLuan()+"</p>\n" +
                     "                                </div>");
 
-
+        out.close();
 
         Log log = new Log();
         log.setLevel(1);

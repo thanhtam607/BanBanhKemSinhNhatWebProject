@@ -72,6 +72,7 @@ public class FilterProductForDiscount extends HttpServlet {
                     "                          <td>"+p.getPrice()+"</td>\n" +
                     "                      </tr>");
         }
+        out.close();
 
     }
 }

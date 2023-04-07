@@ -106,7 +106,7 @@ public class Sort extends HttpServlet {
             );
         }
 
-
+        out.close();
     }
 
 }
