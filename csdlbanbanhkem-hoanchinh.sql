@@ -1057,6 +1057,7 @@ insert into general_infor values('GI019', 'GoogleMap', 'https://www.google.com/m
 insert into general_infor values('GI020', 'IndexSlogan', 'Tận hưởng thế giới ngọt ngào của bạn.');
 insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh ngọt, đây là sự yêu thương.');
 insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
+insert into general_infor values('GI023', 'NameShop', 'Shop Bánh Kem');
 
 -- 
 -- SELECT*from customers
