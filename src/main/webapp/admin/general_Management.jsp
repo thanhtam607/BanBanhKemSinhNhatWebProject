@@ -42,7 +42,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="author" content="Dmitry Volkov">
-  <title>Admin | Shop Bánh Kem</title>
+  <title>Admin | <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
   <script src="libraries/ckeditor/ckeditor.js"></script>
 </head>
 
@@ -89,7 +89,7 @@
       <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
 
       <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-      <a href="./ListBlog-admin" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+      <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
       <a href="./ListReceipt_full_Admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
       <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
 
@@ -131,7 +131,7 @@
           <!-- end profile user -->
           <!-- profile btns -->
           <div class="profile__actions">
-            <a href="#modal-update" class="main__table-btn main__table-btn--edit open-modal"><i class="fa fa-edit"></i></a>
+            <a href="#modal-changename" class="main__table-btn main__table-btn--edit open-modal"><i class="fa fa-edit"></i></a>
           </div>
         </div>
       </div>
@@ -158,6 +158,7 @@
                             <img class="w-100 rounded" src="../<%=listInfor.get(0).getContent()%>" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center distance">
                               <div class="col-12">
+                                <p class="text-white fs-3 fw-bold" style="margin-top: 50px"><%=InforService.getInformation("IndexSlogan").get(0).getContent()%></p>
                                 <div class="paginator-wrap" style="display: block; margin-left: auto; margin-right: auto; width: 120px">
                                   <span><a href="#modal-slideshow1" class="open-modal" style="color: white;">Đổi hình ảnh</a></span>
                                 </div>
@@ -168,6 +169,7 @@
                             <img class="w-100 rounded" src="../<%=listInfor.get(1).getContent()%>" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center distance">
                               <div class="col-12">
+                                <p class="text-white fs-3 fw-bold mt-2" style="margin-top: 50px"><%=InforService.getInformation("IndexSlogan").get(1).getContent()%></p>
                                 <div class="paginator-wrap" style="display: block; margin-left: auto; margin-right: auto; width: 120px">
                                   <span><a href="#modal-slideshow2" class="open-modal" style="color: white;">Đổi hình ảnh</a></span>
                                 </div>
@@ -327,7 +329,7 @@
                   <div class="col-12">
                     <h4 class="form__title text--green">Thông tin giao hàng</h4>
                   </div>
-                  <form action="UpdateDelivery" method="post">
+                  <form action="UpdateDelivery" method="post" class="form">
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
                       <input id="iddelivery" type="hidden" name="iddelivery" class="form__input" style="display: none" value="<%=InforService.getInformation("Delivery").get(0).getId()%>">
@@ -344,8 +346,8 @@
               <!-- end details form -->
 
               <!-- password form -->
-              <div class="col-12 col-lg-4" style="margin-top: -1044px">
-                <div class="form form--profile">
+              <div class="col-12 col-lg-4" style="margin-top: -1105px">
+                <div class="form--profile">
                   <div class="row row--form">
                     <div class="col-12">
                       <h4 class="form__title text--green">Thông tin cuối trang</h4>
@@ -436,6 +438,20 @@
   </form>
 </div>
 <!-- end modal update -->
+<!-- modal updatenameshop -->
+<div id="modal-changename" class="zoom-anim-dialog mfp-hide modal">
+  <form action="UpdateNameShop"  method="POST">
+    <h6 class="modal__title">Thay đổi tên cửa hàng</h6>
+    <p class="modal__text">Tên cửa hàng mới</p>
+    <input type="text" class="form__input" name="idname" style="display: none"  value="<%=InforService.getInformation("NameShop").get(0).getId()%>">
+    <input type="text" class="form__input" name="newname" placeholder="Nhập tên cửa hàng của bạn">
+    <div class="modal__btns">
+      <button class="modal__btn modal__btn--apply" type="submit">Xong</button>
+      <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+    </div>
+  </form>
+</div>
+<!-- end modal update -->
 <!-- modal imgfoodter -->
 <div id="modal-imgfooter" class="zoom-anim-dialog mfp-hide modal">
   <form action="UpdateImgFooter"  method="POST" enctype="multipart/form-data">
@@ -482,10 +498,9 @@
   </form>
 </div>
 <% } %>
+<!-- end modal updateImg -->
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-<!-- end modal updateImg -->
-
 <!-- JS -->
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>

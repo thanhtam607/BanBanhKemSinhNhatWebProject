@@ -1,8 +1,11 @@
 package vn.edu.hcmuaf.fit.controller.admin;
 
+import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Customer;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.model.Receipt;
 import vn.edu.hcmuaf.fit.service.CustomerService;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
@@ -30,6 +33,16 @@ public class EditUser extends HttpServlet {
 
         request.setAttribute("listmakh", listctkh);
         request.setAttribute("mkh", makh);
+
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(2);
+        log.setSrc(request.getServletPath());
+        log.setContent("Sửa thông tin người dùng: "+ makh);
+        log.setUser(user.getId());
+        LogService.addLog(log);
 
         request.getRequestDispatcher("edit-user.jsp").forward(request, response);
     }

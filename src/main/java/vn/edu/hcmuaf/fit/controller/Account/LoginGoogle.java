@@ -10,8 +10,10 @@ import org.apache.http.client.fluent.Request;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.ItemProductInCart;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.service.CartService;
 import vn.edu.hcmuaf.fit.service.CustomerService;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.UserService;
 
 
@@ -26,8 +28,7 @@ import java.util.List;
 
 @WebServlet(name = "LoginGoogle", value = "/LoginGoogle")
 public class LoginGoogle extends HttpServlet {
-    public static String getToken(String code) throws ClientProtocolException, IOException {
-        // call api to get token
+    public static String getToken(String code) throws  IOException {
         String response = Request.Post(Constants.GOOGLE_LINK_GET_TOKEN)
                 .bodyForm(Form.form().add("client_id", Constants.GOOGLE_CLIENT_ID)
                         .add("client_secret", Constants.GOOGLE_CLIENT_SECRET)
@@ -39,12 +40,10 @@ public class LoginGoogle extends HttpServlet {
         String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
         return accessToken;
     }
-    public static UserGoogleDTO getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
+    public static UserGoogleDTO getUserInfo(final String accessToken) throws IOException {
         String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.Get(link).execute().returnContent().asString();
-
         UserGoogleDTO googlePojo = new Gson().fromJson(response, UserGoogleDTO.class);
-
         return googlePojo;
     }
 
@@ -75,6 +74,13 @@ public class LoginGoogle extends HttpServlet {
 
         Customer customer = CustomerService.getCusByIdAcc(user.getId());
         session.setAttribute("cust", customer);
+
+        Log log = new Log();
+        log.setLevel(1);
+        log.setUser(user.getId());
+        log.setSrc(request.getServletPath());
+        log.setContent("Đăng nhập bằng tài khoản Google thành công vào trang web");
+        LogService.addLog(log);
 
         List<ItemProductInCart> listItemCart = CartService.findItemCartByIdUser(user.getId());
         session.setAttribute("itemCart", listItemCart);

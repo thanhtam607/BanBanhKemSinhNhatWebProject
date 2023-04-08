@@ -130,8 +130,8 @@
           </div>
           <!-- end profile user -->
           <!-- profile btns -->
-          <div class="profile__actions">
-            <a href="#modal-update" class="main__table-btn main__table-btn--edit open-modal"><i class="fa fa-edit"></i></a>
+          <div class="">
+            <a href="#modal-changename" class="main__table-btn main__table-btn--edit open-modal"><i class="fa fa-edit"></i></a>
           </div>
         </div>
       </div>
@@ -422,6 +422,20 @@
       <!-- end content tabs -->
 </main>
 <!-- end main content -->
+<!-- modal changename -->
+<div id="modal-changename" class="zoom-anim-dialog mfp-hide modal">
+  <form action="UpdateNameShop"  method="POST">
+    <h6 class="modal__title">Thay đổi tên shop</h6>
+    <p class="modal__text">Nhập tên shop mới</p>
+    <input type="text" class="form__input" name="idname" style="display: none" value="<%=InforService.getInformation("NameShop").get(0).getId()%>">
+    <input type="text" class="form__input" name="newname">
+    <div class="modal__btns">
+      <button class="modal__btn modal__btn--apply" type="submit">Xong</button>
+      <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+    </div>
+  </form>
+</div>
+<!-- end modal changename -->
 <!-- modal update -->
 <div id="modal-update" class="zoom-anim-dialog mfp-hide modal">
   <form action="UpdateImgLogo"  method="POST" enctype="multipart/form-data">
@@ -485,7 +499,6 @@
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 <!-- end modal updateImg -->
-
 <!-- JS -->
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>

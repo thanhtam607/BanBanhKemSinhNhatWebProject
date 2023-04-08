@@ -1,6 +1,9 @@
 package vn.edu.hcmuaf.fit.controller.admin;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.service.BlogService;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.*;
@@ -25,6 +28,17 @@ public class HideBlog extends HttpServlet {
         request.setAttribute("mbl", mablog);
         request.setAttribute("st", status);
         BlogService.updateStatus(mablog, sta);
+
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(2);
+        log.setSrc(request.getServletPath());
+        log.setContent("Ẩn bài viết: "+ mablog);
+        log.setUser(user.getId());
+        LogService.addLog(log);
+
         response.sendRedirect("./ListBlog-admin");
     }
 }

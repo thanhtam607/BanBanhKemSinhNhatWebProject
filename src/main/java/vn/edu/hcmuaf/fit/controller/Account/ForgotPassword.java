@@ -1,5 +1,8 @@
 package vn.edu.hcmuaf.fit.controller.Account;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.UserService;
 
 import javax.mail.MessagingException;
@@ -18,9 +21,14 @@ public class ForgotPassword extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
         PrintWriter out= response.getWriter();
+        Log log = new Log();
+        log.setLevel(1);
+        log.setUser(email);
+        log.setSrc(request.getServletPath());
         int status = 0;
         if(UserService.checkEmail(email)) {
            status=1;
+            log.setContent("Yêu cầu cấp lại mật khẩu không thành thành công (tài khoản không tồn tại)");
         }
         else{
             int code = UserService.randomCode();
@@ -30,8 +38,10 @@ public class ForgotPassword extends HttpServlet {
                 throw new RuntimeException(e);
             }
             status=code;
+            log.setContent("Yêu cầu cấp lại mật khẩu thành công");
         }
         out.println(status);
+        LogService.addLog(log);
 
 
 }

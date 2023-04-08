@@ -1,6 +1,9 @@
 package vn.edu.hcmuaf.fit.controller.admin.Blog;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.service.BlogService;
+import vn.edu.hcmuaf.fit.service.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -29,6 +32,16 @@ public class UpdateImgBlog extends HttpServlet {
         String img = path + "/" + filename;
             p.write(img);
         BlogService.updateImgBlog(oldImg, "img/blog/" + idblog+"/" + filename);
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("auth");
+        Log log = new Log();
+        log.setLevel(2);
+        log.setSrc(request.getServletPath());
+        log.setContent("Sửa hình ảnh bài viết" + idblog);
+        log.setUser(user.getId());
+        LogService.addLog(log);
+
         response.sendRedirect("./EditBlog?idB=" + request.getParameter("idblog"));
     }
 }

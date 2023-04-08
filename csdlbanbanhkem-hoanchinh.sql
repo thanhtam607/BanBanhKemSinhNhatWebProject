@@ -998,7 +998,7 @@ create table FEEDBACKS(id INT AUTO_INCREMENT PRIMARY KEY,
 
 CREATE table LOGS(ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
 										LEVEL TINYINT(4) not null DEFAULT(0), 
-										ACCOUNT_ID char(50), 
+										USER char(50), 
 										SRC longtext not null DEFAULT('none'), 
 										CONTENT LONGTEXT,
 										CREATE_AT datetime DEFAULT(NOW()), 
@@ -1057,4 +1057,5 @@ insert into general_infor values('GI019', 'GoogleMap', 'https://www.google.com/m
 insert into general_infor values('GI020', 'IndexSlogan', 'Tận hưởng thế giới ngọt ngào của bạn.');
 insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh ngọt, đây là sự yêu thương.');
 insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
+insert into general_infor values('GI023', 'NameShop', 'Shop Bánh Kem');
 

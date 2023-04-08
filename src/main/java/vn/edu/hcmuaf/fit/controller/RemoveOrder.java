@@ -1,6 +1,9 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.model.Order;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.*;
@@ -15,12 +18,17 @@ public class RemoveOrder extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(true);
-        Order order =(Order) session.getAttribute("order");
-
         String mahd = request.getParameter("mahd");
-
+        User auth = (User) session.getAttribute("auth");
         ReceiptService.updateTonKhoWhenCancelOrder(mahd);
         ReceiptService.cancelOrder(mahd);
+
+        Log log = new Log();
+        log.setLevel(3);
+        log.setSrc(request.getServletPath());
+        log.setContent("Xóa đơn hàng: "+ mahd);
+        log.setUser(auth.getId());
+        LogService.addLog(log);
 
         response.sendRedirect("order.jsp");
 

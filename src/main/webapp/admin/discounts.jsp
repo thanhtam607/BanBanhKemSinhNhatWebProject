@@ -8,6 +8,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Image" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Discount" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.DiscountService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -47,7 +48,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
-    <title>Admin | Shop Bánh Kem</title>
+    <title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
 </head>
 
 <body>
@@ -231,7 +232,7 @@
                                     <div id="modal-delete<%=discount.getId()%>" class="zoom-anim-dialog mfp-hide modal">
                                         <h6 class="modal__title">Xóa khuyến mãi</h6>
                                         <p class="modal__text">Bạn có chắc muốn hủy khuyến mãi này?</p>
-                                        <%String urlq = "RemoveDiscount?id=" + discount.getId();%>
+                                        <%String urlq = "RemoveDiscount?id=" + discount.getId()+"&idProduct="+ discount.getIdProduct();%>
                                         <div class="modal__btns">
                                             <button class="modal__btn modal__btn--apply" onclick="changeHref('<%=urlq%>')" type="button">Xóa</button>
                                             <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>

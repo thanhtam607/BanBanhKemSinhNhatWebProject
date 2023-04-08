@@ -1,11 +1,12 @@
- <!DOCTYPE html>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
 <meta http-equiv="Content-Type" charset="UTF-8">
 
 <head>
     <meta charset="utf-8">
-    <title>Admin | Shop Bánh Kem</title>
+    <title><%=InforService.getInformation("NameShop").get(0).getContent()%> | Sign in </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -109,6 +110,7 @@
     <script src="admin/lib/tempusdominus/js/moment.min.js"></script>
     <script src="admin/lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="admin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="js/main.js"></script>
 
 
     <!-- Template Javascript -->

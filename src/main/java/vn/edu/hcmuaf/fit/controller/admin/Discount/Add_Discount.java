@@ -1,9 +1,12 @@
 package vn.edu.hcmuaf.fit.controller.admin.Discount;
 
+import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Discount;
 import vn.edu.hcmuaf.fit.model.Image;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.service.DiscountService;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
@@ -40,6 +43,8 @@ public class Add_Discount extends HttpServlet {
             endPage++;
         }
 
+
+
         request.setAttribute("loaiBanh", "Tất cả");
         request.setAttribute("endPage", endPage);
         request.setAttribute("tag", page);
@@ -68,7 +73,16 @@ public class Add_Discount extends HttpServlet {
         for(Product p: listProduct){
             listDiscount.add(new Discount(p.getId(), discount,start,end));
         }
-            DiscountService.addListDiscounts(listDiscount);
+        DiscountService.addListDiscounts(listDiscount);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(1);
+        log.setSrc(request.getServletPath());
+        log.setContent("Thêm khuyến mãi sản phẩm");
+        log.setUser(user.getId());
+        LogService.addLog(log);
 
     }
 }

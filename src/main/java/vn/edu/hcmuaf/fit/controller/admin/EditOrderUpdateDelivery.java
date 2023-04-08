@@ -1,5 +1,8 @@
 package vn.edu.hcmuaf.fit.controller.admin;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.*;
@@ -39,6 +42,16 @@ public class EditOrderUpdateDelivery extends HttpServlet {
         }
         ReceiptService.updateDeliveryInBill(id, dayD, address);
         ReceiptService.updateState(id, st);
+
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(2);
+        log.setSrc(request.getServletPath());
+        log.setContent("Sửa thông tin giao hàng của đơn hàng: "+ id);
+        log.setUser(user.getId());
+        LogService.addLog(log);
         response.sendRedirect("./AdminEditOrder?id="+ request.getParameter("id"));
     }
 }
