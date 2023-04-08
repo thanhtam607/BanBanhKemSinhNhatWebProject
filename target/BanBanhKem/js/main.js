@@ -645,9 +645,7 @@ async function checkPass(email, pass) {
             type: "GET",
             success: function (response) {
                 console.log(response.toString());
-
                 if (parseInt(response) === 1) {
-
                     removePass(email);
                 } else {
                     Swal.fire({
@@ -944,5 +942,6 @@ function changeProfile() {
             })
 
         }
+
     });
 }

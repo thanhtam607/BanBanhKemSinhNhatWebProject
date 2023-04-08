@@ -193,43 +193,6 @@ public class UserService {
         }
     }
 
-//    public static void updateProfileEmail(String email, User auth)  {
-//        if(email == null) return;
-//        String idACC = auth.getId();
-//        String sql = "UPDATE ACCOUNTS set EMAIL = '"+email+"' where ID = "+ "'"+idACC+"'";
-//        Statement stm  =  DBConnect.getInstall().get();
-//        try {
-//            stm.executeUpdate(sql);
-//            auth.setEmail(email);
-//        } catch (SQLException se) {
-//            se.printStackTrace();
-//        }
-//    }
-//    public static void updateProfileTenTk(String tentk,User auth)  {
-//        if(tentk == null) return;
-//        String idACC = auth.getId();
-//        String sql = "UPDATE ACCOUNTS set NAME = '"+tentk+"' where ID = "+ "'"+idACC+"'";
-//        Statement stm  =  DBConnect.getInstall().get();
-//        try {
-//            stm.executeUpdate(sql);
-//            auth.setName(tentk);
-//        } catch (SQLException se) {
-//            se.printStackTrace();
-//        }
-//    }
-//    public static void updateProfileAddress(String diachi, User auth)  {
-//        if(diachi == null) return;
-//        String idACC = auth.getId();
-//        String sql1 = "UPDATE CUSTOMERS set CUSTOMERS.ADDRESS = '"+diachi+"'where CUSTOMERS.ID = "+ "'"+idACC+"'";
-//        Statement stm  =  DBConnect.getInstall().get();
-//        try {
-//            stm.executeUpdate(sql1);
-//            CustomerService.getCusByIdAcc(auth.getId()).setDIACHI(diachi);
-//        } catch (SQLException se) {
-//            se.printStackTrace();
-//        }
-//    }
-
     public static void updateProfile(String name, String sdt, String diachi, String mail, String id)  {
         if(name == null || sdt == null || diachi == null || mail == null) return;
         String sql1 = "UPDATE CUSTOMERS, ACCOUNTS set CUSTOMERS.ADDRESS = '"+diachi+"', " +
@@ -281,5 +244,6 @@ public class UserService {
     }
 
     public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {
+        System.out.println(hashPassword("f6c399579fa934b6b7ec5d23facca98828f33acf3a857af87ce037b8b499ff15"));
     }
 }

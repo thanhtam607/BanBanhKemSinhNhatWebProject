@@ -810,7 +810,7 @@ CREATE TABLE ACCOUNTS(ID CHAR(50) PRIMARY KEY not null,
 									 NAME VARCHAR(100),
 									 ROLE tinyint(4) NOT NULL DEFAULT 0,
 									STATUS tinyint(4) DEFAULT 0, 
-									TYPE VARCHAR(10) );
+									TYPE VARCHAR(10));
 INSERT INTO ACCOUNTS VALUES('AD01', 'thanhthuy@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Thanh Thùy', 1,0,null);
 INSERT INTO ACCOUNTS VALUES('AD02', 'thanhtam@gmail.com', 'b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0', 'Thanh Tâm', 1,0,null);
 INSERT INTO ACCOUNTS VALUES('AD03', 'thanhthuan@gmail.com', '35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281', 'Thanh Thuận', 1,0,null);
@@ -1058,6 +1058,3 @@ insert into general_infor values('GI020', 'IndexSlogan', 'Tận hưởng thế g
 insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh ngọt, đây là sự yêu thương.');
 insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
 
-												
--- UPDATE DELIVERY set DELIVERY.NAME = 'fhdsj', DELIVERY.PHONE = '32432', DELIVERY.EMAIL = 'kjsdh' WHERE DELIVERY.id = 'HD11'
--- SELECT*from delivery  WHERE DELIVERY.id = 'HD11'

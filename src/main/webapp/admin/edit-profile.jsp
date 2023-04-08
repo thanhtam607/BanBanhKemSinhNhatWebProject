@@ -120,8 +120,9 @@
             <!-- form -->
             <div class="col-12">
                 <div class="row">
-                    <div class="col-lg-8 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <form action="AdminUpdateProfile" method="post" class="form form--profile">
+
                             <div class="row row--form">
                                 <div class="col-12">
                                     <h4 class="form__title">Thông tin tài khoản</h4>
@@ -167,8 +168,8 @@
                         </form>
                     </div>
                     <%--                password form --%>
-                    <div class="col-lg-4 col-md-6">
-                        <form action="#" class="form form--profile">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form form--profile">
                             <div class="row row--form">
                                 <div class="col-12">
                                     <h4 class="form__title">Đổi mật khẩu</h4>
@@ -176,30 +177,33 @@
 
                                 <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                     <div class="form__group">
-                                        <label class="form__label" for="oldpass">Mật khẩu cũ</label>
-                                        <input id="oldpass" type="password" name="oldpass" class="form__input">
+                                        <label class="form__label" for="oldpass">Mật khẩu hiện tại</label>
+                                        <input id="oldpass" type="password" name="oldpass" class="form__input m-0">
+                                        <p id="error" class="text-danger m-0 small"></p>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                     <div class="form__group">
                                         <label class="form__label" for="newpass">Mật khẩu mới</label>
-                                        <input id="newpass" type="password" name="newpass" class="form__input">
+                                        <input id="newpass" type="password" name="newpass" class="form__input m-0" minlength="">
+                                        <p class="text-danger m-0 small">* Phải từ 8 kí tự trở lên</p>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                     <div class="form__group">
                                         <label class="form__label" for="confirmpass">Xác nhận mật khẩu</label>
-                                        <input id="confirmpass" type="password" name="confirmpass" class="form__input">
+                                        <input id="confirmpass" type="password" name="confirmpass" class="form__input m-0" minlength="">
+                                        <p id="errorText"  class="text-danger m-0 small">* Phải từ 8 kí tự trở lên</p>
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <button class="form__btn" type="button">Đổi mật khẩu</button>
+                                    <button onclick="changePass()" class="form__btn" type="button">Đổi mật khẩu</button>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <!-- end password form -->
 
@@ -224,6 +228,9 @@
 <script src="js/select2.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/admin.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </body>

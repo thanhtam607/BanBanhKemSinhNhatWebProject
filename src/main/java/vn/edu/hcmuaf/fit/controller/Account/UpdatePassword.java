@@ -22,9 +22,13 @@ public class UpdatePassword extends HttpServlet {
             PrintWriter out = response.getWriter();
            if( p.equals(UserService.hashPassword(oldPass))){
                out.println(1);
+//               out.flush();
+//               out.close();
            }
            else{
                out.println(0);
+//               out.flush();
+//               out.close();
            }
         }
         else{

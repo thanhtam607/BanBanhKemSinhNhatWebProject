@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "AdminUpdateProfile", value = "/admin/AdminUpdateProfile")
 public class AdminUpdateProfile extends HttpServlet {
@@ -28,7 +29,8 @@ public class AdminUpdateProfile extends HttpServlet {
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
 
+
         UserService.updateProfile(username, phone, address, email, auth);
-        response.sendRedirect("edit-profile.jsp");
+        request.getRequestDispatcher("edit-profile.jsp").forward(request, response);
     }
 }
