@@ -15,7 +15,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shop Bánh Kem | Sản phẩm</title>
+    <title> <%=InforService.getInformation("NameShop").get(0).getContent()%> | Sản phẩm</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -285,14 +285,16 @@
 
                             <div class="product__details__tab__desc" id="list-comments">
                                 <%List<Comment> cmtList = pro.getComments();
-                                    for(Comment cmt : cmtList){%>
+                                    for(Comment cmt : cmtList){
+                                        if(cmt.getStatus() != -1){
+                                %>
                                 <div class="comment">
                                 <h6 style="margin-bottom: 10px;"><%= cmt.getkhachhang()%></h6>
                                 <i class="fa fa-calendar-o"></i> <span style="font-size: 13px; color: rgb(179, 178, 178);"><%=cmt.getDate()%></span>
                                 <p ><%=cmt.getBinhLuan()%></p>
                                 </div>
 
-                            <%}%>
+                            <%}}%>
                             </div>
                             <% if(auth!= null){%>
                             <div class = "input-comment">

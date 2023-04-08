@@ -3,11 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.*" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,6 +105,7 @@
 <!-- Sidebar End -->
 <%
     List<Receipt> listre = (List<Receipt>) request.getAttribute("listmakh");
+    List<Comment> listcmt = (List<Comment>) request.getAttribute("listcmt");
 String mkh = (String) request.getAttribute("mkh"); %>
     <!-- main content -->
     <main class="main">
@@ -340,9 +338,9 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="Bill_detail_Admin?mahd=<%=r.getId()%>&tenkh=<%=r.getNamecustomer()%>" class="main__table-btn main__table-btn--edit">
-														<i class="fa fa-eye"></i>
-													</a>
+                                                    <a href="Bill_detail_Admin?mahd=<%=r.getId()%>&tenkh=<%=r.getNamecustomer()%>" class="main__table-btn main__table-btn--view">
+                                                        <i class="fas fa-info"></i>
+                                                    </a>
                                                     <a href="#modal-deletehd<%=j%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
@@ -388,22 +386,21 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                             <th>Tùy Chọn</th>
                                         </tr>
                                     </thead>
-                                    <%for(Receipt r: listre){%>
-                                    <%List<Comment> listCmt = r.getCommentList();
-                                        for(int i = 0; i<listCmt.size();i++){%>
+                                    <% for(int i = 0; i<listcmt.size();i++){
+                                        if(listcmt.get(i).getStatus() != -1){ %>
                                     <tbody>
                                         <tr>
                                             <td>
                                                 <div class="main__table-text"><%=mkh%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><a href="#"><%=r.getNamecake()%></a></div>
+                                                <div class="main__table-text"><a href="#"><%=ProductService.findById(listcmt.get(i).getIdProduct()).getName()%></a></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><%=r.getNamecustomer()%></div>
+                                                <div class="main__table-text"><%=listcmt.get(i).getkhachhang()%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><%=r.getCommentList().get(i).getDate()%></div>
+                                                <div class="main__table-text"><%=listcmt.get(i).getDate()%></div>
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
@@ -413,16 +410,15 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                     <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
-
                                                 </div>
                                                 <!-- modal view -->
                                                 <div id="modal-view<%=i%>" class="zoom-anim-dialog mfp-hide modal modal--view">
                                                     <div class="reviews__autor">
                                                         <img class="reviews__avatar" src="img/user.svg" alt="">
-                                                        <span class="reviews__name"><%=r.getNamecake()%></span>
-                                                        <span class="reviews__time"><%=r.getCommentList().get(i).getDate()%> by <%=r.getCommentList().get(i).getkhachhang()%></span>
+                                                        <span class="reviews__name"><%=ProductService.findById(listcmt.get(i).getIdProduct()).getName()%> - <%=listcmt.get(i).getIdProduct()%></span>
+                                                        <span class="reviews__time"><%=listcmt.get(i).getDate()%> by <%=listcmt.get(i).getkhachhang()%></span>
                                                     </div>
-                                                    <p class="reviews__text"><%=r.getCommentList().get(i).getBinhLuan()%></p>
+                                                    <p class="reviews__text"><%=listcmt.get(i).getBinhLuan()%></p>
                                                 </div>
                                                 <!-- end modal view -->
                                                 <!-- end modal delete -->
@@ -432,16 +428,16 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                     <p class="modal__text">Bạn có chắc muốn xóa bình luận này?</p>
 
                                                     <div class="modal__btns">
-                                                        <% String url ="DeleteCommentListReceipt?makh="+mkh+"&idCmt="+listCmt.get(i).getIdcmt()+"&id="+ i; %>
+                                                        <% String url ="DeleteCommentListReceipt?makh="+mkh+"&idCmt="+listcmt.get(i).getIdcmt()+"&id="+ i; %>
                                                         <button class="modal__btn modal__btn--apply" type="button" onclick="changeHref('<%=url%>') ">Xóa</button>
                                                         <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <% } %>
+                                            <% }} %>
                                         </tr>
                                     </tbody>
-                                    <% } %>
+<%--                                    <% } %>--%>
                                 </table>
                             </div>
                         </div>

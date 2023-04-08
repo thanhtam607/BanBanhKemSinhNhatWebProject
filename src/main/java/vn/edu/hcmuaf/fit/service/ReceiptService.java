@@ -24,21 +24,21 @@ public class ReceiptService {
                 ResultSet rs = statement.executeQuery(sql);
                 while (rs.next()) {
                     ResultSet rsCmt = stmt1.executeQuery("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID");
-                    List<Comment> listCmts = new ArrayList<Comment>();
-                    String s1 = rs.getString(13);
-                    while (rsCmt.next()) {
-                        String s2 = rsCmt.getString(1);
-                        if (s1.equals(s2)) {
-                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
-                        }
-                    }
+//                    List<Comment> listCmts = new ArrayList<Comment>();
+//                    String s1 = rs.getString(13);
+//                    while (rsCmt.next()) {
+//                        String s2 = rsCmt.getString(1);
+//                        if (s1.equals(s2)) {
+//                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
+//                        }
+//                    }
                     Receipt rc = new Receipt(rs.getString(1),
                             rs.getString(2), rs.getString(3),
                             rs.getString(4), rs.getString(5),
                             rs.getString(6), rs.getString(7),
                             rs.getString(8), rs.getInt(9),
                             rs.getInt(10), rs.getInt(11),
-                            rs.getString(12), listCmts, rs.getInt(14),
+                            rs.getString(12), rs.getInt(14),
                             rs.getString(15));
                     list.add(rc);
                 }
@@ -47,6 +47,25 @@ public class ReceiptService {
             }
         else {
             System.out.println("Không có  hóa đơn");
+        }
+        return list;
+    }
+    public static List<Comment> getListComment(String id) {
+        List<Comment> list = new ArrayList<Comment>();
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                    ResultSet rsCmt = statement.executeQuery("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID and ACCOUNTS.ID = '"+id+"'");
+                    while (rsCmt.next()) {
+                            list.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
+                    }
+
+                }
+        catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có");
         }
         return list;
     }
@@ -396,7 +415,6 @@ public class ReceiptService {
                         "DELIVERY.PHONE = '"+phone+"', DELIVERY.EMAIL = '"+mail+"' " +
                         "WHERE DELIVERY.id = '"+id+"'";
                 stm.executeUpdate(sql);
-                System.out.println(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }

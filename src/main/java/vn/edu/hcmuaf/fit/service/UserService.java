@@ -192,7 +192,7 @@ public class UserService {
         }
     }
 
-    public static void updateProfile(String name, String sdt, String diachi, String mail, String id)  {
+    public static void updateProfile(String name, String sdt, String diachi, String mail, String id, User user)  {
         if(name == null || sdt == null || diachi == null || mail == null) return;
         String sql1 = "UPDATE CUSTOMERS, ACCOUNTS set CUSTOMERS.ADDRESS = '"+diachi+"', " +
                 "CUSTOMERS.PHONE = '"+sdt+"', ACCOUNTS.EMAIL = '"+mail+"'," +
@@ -201,6 +201,10 @@ public class UserService {
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql1);
+            user.setEmail(mail);
+            user.setName(name);
+            CustomerService.getCusByIdAcc(id).setSDT(sdt);
+            CustomerService.getCusByIdAcc(id).setDIACHI(diachi);
         } catch (SQLException se) {
             se.printStackTrace();
         }

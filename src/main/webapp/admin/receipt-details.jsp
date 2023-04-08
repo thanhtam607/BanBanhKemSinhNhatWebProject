@@ -127,16 +127,16 @@
             </div>
             <div class="col-12 d-flex form__content pl-0 pr-0">
               <div class="col-6 pl-0 pr-0">
-                <p>Người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getTenKH() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getTenKH():"" %></p>
-                <p>SĐT người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getPhone() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getPhone():""%></p>
-                <p>Email người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getEmail() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getEmail():""%></p>
-                <p>Nhân Viên Tạo: <%=receipt.getCreateBy()%></p>
+                <p class="border px-3">Người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getTenKH() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getTenKH():"" %></p>
+                <p class="border px-3">SĐT người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getPhone() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getPhone():""%></p>
+                <p class="border px-3">Email người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getEmail() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getEmail():""%></p>
+                <p class="border px-3">Nhân Viên Tạo: <%=receipt.getCreateBy()%></p>
               </div>
               <div class="col-6 pl-0 pr-0">
-                <p>Ngày Lập: <%=receipt.getExport_date()%></p>
-                <p>Ngày Giao Hàng: <%=receipt.getDelivery_date()%></p>
-                <p>Địa Chỉ Giao: <%=receipt.getAddress()%></p>
-                <p>Trạng Thái: <%=receipt.getStatusName()%></p>
+                <p class="border px-3">Ngày Lập: <%=receipt.getExport_date()%></p>
+                <p class="border px-3">Ngày Giao Hàng: <%=receipt.getDelivery_date()%></p>
+                <p class="border px-3">Địa Chỉ Giao: <%=receipt.getAddress()%></p>
+                <p class="border px-3">Trạng Thái: <%=receipt.getStatusName()%></p>
               </div>
             </div>
         <p>Ghi Chú Chung: <%=receipt.getNote()%></p>

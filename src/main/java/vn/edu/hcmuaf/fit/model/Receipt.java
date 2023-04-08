@@ -26,7 +26,7 @@ public class Receipt {
     public Receipt() {
     }
 
-    public Receipt(String id,  String namecustomer, String namecake, String phone, String export_date, String delivery_date, String address, String note, int price, int total, int status,String makh, List<Comment> commentList, int role, String email) {
+    public Receipt(String id,  String namecustomer, String namecake, String phone, String export_date, String delivery_date, String address, String note, int price, int total, int status,String makh, int role, String email) {
         this.id = id;
         this.makh = makh;
         this.namecustomer = namecustomer;
@@ -39,7 +39,6 @@ public class Receipt {
         this.price = price;
         this.total = total;
         this.state = status;
-        this.commentList = commentList;
         this.role = role;
         this.email =  email;
     }
