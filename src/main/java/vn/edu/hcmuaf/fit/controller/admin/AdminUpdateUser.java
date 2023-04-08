@@ -49,7 +49,7 @@ public class AdminUpdateUser extends HttpServlet {
         Log log = new Log();
         log.setLevel(2);
         log.setSrc(request.getServletPath());
-        log.setContent("Cập nhật quyền cho người dùng: "+ makh);
+        log.setContent("Cập nhật thông tin và quyền cho người dùng: "+ makh);
         log.setUser(user.getId());
         LogService.addLog(log);
         response.sendRedirect("./EditUser?makh="+ request.getParameter("makh"));
