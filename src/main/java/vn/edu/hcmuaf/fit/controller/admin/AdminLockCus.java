@@ -1,5 +1,8 @@
 package vn.edu.hcmuaf.fit.controller.admin;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.*;
@@ -20,6 +23,17 @@ public class AdminLockCus extends HttpServlet {
         String makh = request.getParameter("makh");
         request.setAttribute("mkh", makh);
         ReceiptService.updateStatusUser(makh);
+
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(2);
+        log.setSrc(request.getServletPath());
+        log.setContent("Khóa người dùng: "+ makh);
+        log.setUser(user.getId());
+        LogService.addLog(log);
+
         response.sendRedirect("./ListCustomer");
     }
 }

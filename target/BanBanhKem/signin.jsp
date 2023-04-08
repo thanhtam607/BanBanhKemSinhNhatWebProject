@@ -109,6 +109,7 @@
     <script src="admin/lib/tempusdominus/js/moment.min.js"></script>
     <script src="admin/lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="admin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="js/main.js"></script>
 
 
     <!-- Template Javascript -->

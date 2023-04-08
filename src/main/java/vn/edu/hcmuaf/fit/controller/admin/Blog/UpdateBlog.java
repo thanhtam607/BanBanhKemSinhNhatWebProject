@@ -1,7 +1,10 @@
 package vn.edu.hcmuaf.fit.controller.admin.Blog;
 
+import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Blog;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.service.BlogService;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
@@ -28,6 +31,16 @@ public class UpdateBlog extends HttpServlet {
             String category = request.getParameter("category");
             String season = request.getParameter("season");
             BlogService.updateBlog(idblog, dateblog, content, category, season);
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("auth");
+        Log log = new Log();
+        log.setLevel(2);
+        log.setSrc(request.getServletPath());
+        log.setContent("Sửa bài viết" + idblog);
+        log.setUser(user.getId());
+        LogService.addLog(log);
+
             response.sendRedirect("../ListBlog-admin");
         }
 

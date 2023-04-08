@@ -1,7 +1,10 @@
 package vn.edu.hcmuaf.fit.controller.admin.Product;
 
+import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Image;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.model.Product;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
@@ -66,6 +69,16 @@ public class AddProduct extends HttpServlet {
             }
         Product p = new Product(masp, tensp,loai,kichthuoc,khoiLg, mota,noidung,listImg,gia);
         ProductService.addProDuct(p);
+
+            HttpSession session = request.getSession(true);
+            User user = (User) session.getAttribute("auth");
+
+            Log log = new Log();
+            log.setLevel(1);
+            log.setSrc(request.getServletPath());
+            log.setContent("Thêm sản phẩm: "+ p.getId());
+            log.setUser(user.getId());
+            LogService.addLog(log);
         response.sendRedirect("ListProduct_Admin"); }
     }
 }

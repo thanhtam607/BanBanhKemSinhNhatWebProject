@@ -1,6 +1,9 @@
 package vn.edu.hcmuaf.fit.controller.admin.Product;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.model.ProductDetail;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
@@ -32,6 +35,16 @@ public class UpdateDetails extends HttpServlet {
             ngayhh= ProductService.findById(masp).getDetail().getOod();
         }
         ProductService.updateDetail(new ProductDetail(masp,soLuong,tonKho,ngaysx,ngayhh));
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(2);
+        log.setSrc(request.getServletPath());
+        log.setContent("Cập nhật thông tin sản phẩm: "+ masp);
+        log.setUser(user.getId());
+        LogService.addLog(log);
+
         response.sendRedirect("../ListProduct_Admin");
 
     }

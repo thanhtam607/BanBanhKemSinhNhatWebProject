@@ -2,12 +2,10 @@ package vn.edu.hcmuaf.fit.controller;
 
 //import com.sun.org.apache.xpath.internal.operations.Or;
 import vn.edu.hcmuaf.fit.bean.User;
-import vn.edu.hcmuaf.fit.model.Customer;
-import vn.edu.hcmuaf.fit.model.ItemProductInCart;
-import vn.edu.hcmuaf.fit.model.Order;
-import vn.edu.hcmuaf.fit.model.Product;
+import vn.edu.hcmuaf.fit.model.*;
 import vn.edu.hcmuaf.fit.service.CartService;
 import vn.edu.hcmuaf.fit.service.CustomerService;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
@@ -38,7 +36,16 @@ public class AddToCart extends HttpServlet {
 //                request.getRequestDispatcher("/shoping-cart.jsp").forward(request, response);
             }
         }
-            response.sendRedirect("shoping-cart.jsp");
+
+
+        Log log = new Log();
+        log.setLevel(1);
+        log.setSrc(request.getServletPath());
+        log.setContent("Thêm sản phẩm vào giỏ hàng");
+        log.setUser(auth.getId());
+        LogService.addLog(log);
+
+        response.sendRedirect("shoping-cart.jsp");
     }
 
     @Override

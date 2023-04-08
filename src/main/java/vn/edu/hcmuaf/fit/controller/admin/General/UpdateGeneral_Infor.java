@@ -1,6 +1,9 @@
 package vn.edu.hcmuaf.fit.controller.admin.General;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.service.InforService;
+import vn.edu.hcmuaf.fit.service.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -27,6 +30,18 @@ public class UpdateGeneral_Infor extends HttpServlet {
         InforService.updateContent(idaddress, address);
         InforService.updateContent(idemail, email);
         InforService.updateContent(idphone, phone);
+
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(2);
+        log.setSrc(request.getServletPath());
+        log.setContent("Cập nhật thông tin liên hệ trong trang web");
+        log.setUser(user.getId());
+        LogService.addLog(log);
+
+
         response.sendRedirect("general_Management.jsp");
     }
 }

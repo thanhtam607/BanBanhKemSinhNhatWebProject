@@ -1,7 +1,10 @@
 package vn.edu.hcmuaf.fit.controller.admin.Blog;
 
+import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Blog;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.service.BlogService;
+import vn.edu.hcmuaf.fit.service.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -49,6 +52,17 @@ public class AddBlog extends HttpServlet {
         String imgblog = "img/blog/" + idblog+"/" + filename;
         Blog b = new Blog(idnew, imgblog, title, date, content, category, season, i);
         BlogService.addBlog(b);
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("auth");
+        //lưu log
+        Log log = new Log();
+        log.setLevel(1);
+        log.setSrc(request.getServletPath());
+        log.setContent("Thêm bài viết" + idnew);
+        log.setUser(user.getId());
+        LogService.addLog(log);
+
        response.sendRedirect("./ListBlog-admin");
+
     }
 }

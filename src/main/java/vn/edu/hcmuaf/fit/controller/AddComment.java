@@ -3,7 +3,9 @@ package vn.edu.hcmuaf.fit.controller;
 import com.google.protobuf.TextFormat;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Comment;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.model.Product;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 import vn.edu.hcmuaf.fit.service.UserService;
 
@@ -39,6 +41,16 @@ public class AddComment extends HttpServlet {
                     "                                <i class=\"fa fa-calendar-o\"></i> <span style=\"font-size: 13px; color: rgb(179, 178, 178);\">"+newCmt.getDate()+"</span>\n" +
                     "                                <p >"+newCmt.getBinhLuan()+"</p>\n" +
                     "                                </div>");
+
+        out.close();
+
+        Log log = new Log();
+        log.setLevel(1);
+        log.setSrc(request.getServletPath());
+        log.setContent("Thêm bình luận về sản phẩm: "+ maSp);
+        log.setUser(user.getId());
+        LogService.addLog(log);
+
 
     }
 }
