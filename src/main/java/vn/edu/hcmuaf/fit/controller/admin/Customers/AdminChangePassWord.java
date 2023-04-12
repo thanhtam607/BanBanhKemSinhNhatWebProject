@@ -31,24 +31,26 @@ public class AdminChangePassWord extends HttpServlet {
                 out.println(loi);
                 out.flush();
                 out.close();
-                request.getRequestDispatcher("edit-profile.jsp").forward(request, response);
+//                request.getRequestDispatcher("edit-profile.jsp").forward(request, response);
             }
-            if(!auth.getPass().equals(UserService.hashPassword(oldpass))){
+           else if(!auth.getPass().equals(UserService.hashPassword(oldpass))){
                 PrintWriter out1 = response.getWriter();
                 loi = 2;
                 out1.println(loi);
                 out1.flush();
                 out1.close();
+//                request.getRequestDispatcher("edit-profile.jsp").forward(request, response);
+            }else{
+                UserService.updatePass(email, UserService.hashPassword(newpass));
+                auth.setPass(UserService.hashPassword(newpass));
+
+                PrintWriter ou = response.getWriter();
+                ou.println(loi);
+                ou.flush();
+                ou.close();
                 request.getRequestDispatcher("edit-profile.jsp").forward(request, response);
             }
-            UserService.updatePass(email, UserService.hashPassword(newpass));
-            auth.setPass(UserService.hashPassword(newpass));
 
-            PrintWriter ou = response.getWriter();
-            ou.println(loi);
-            ou.flush();
-            ou.close();
-            request.getRequestDispatcher("edit-profile.jsp").forward(request, response);
 
         }
 
