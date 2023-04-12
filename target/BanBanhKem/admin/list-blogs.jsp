@@ -43,7 +43,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
-	<title>Admin | Shop Bánh Kem</title>
+	<title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
 </head>
 
 <body>
@@ -117,7 +117,7 @@
                                 <span class="filter__item-label">Sắp xếp:</span>
 
                                 <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <input type="button" value="">
+                                    <input type="button" id="type">
                                     <span></span>
                                 </div>
 
@@ -131,10 +131,10 @@
                                         for(String s: listOption){
                                             val = request.getParameter("sortValue");
                                             if(s.equals(val)){%>
-                                    <li><a class ="text-pink" href="ListBlog-admin?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></a></li>
+                                    <li><a class ="text-pink" onclick="filterProduct(false, '<%=val%>')" href="ListBlog-admin?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></a></li>
                                     <%}
                                     else{%>
-                                    <li><a id="sortValue" class ="text-pink" href="ListBlog-admin?sortValue=<%=s%>" value="<%=s%>"><%=s%></a></li>
+                                    <li><a id="sortValue" class ="text-pink" href="ListBlog-admin?sortValue=<%=s%>" onclick="filterProduct(false, '<%=s%>')" value="<%=s%>"><%=s%></a></li>
                                     <%}%>
                                     <%}%>
                                 </ul>

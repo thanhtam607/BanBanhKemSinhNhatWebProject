@@ -11,7 +11,7 @@
 
 <head>
 
-    <title>Shop Bánh Kem | Trang chủ</title>
+    <title> <%=InforService.getInformation("NameShop").get(0).getContent()%> | Trang chủ</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -177,7 +177,7 @@
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center distance">
                                 <div class="p-3" style="max-width: 900px;">
                                     <h4 class="text-white text-uppercase mb-md-3 slogun_slide">Truyền thống & hiện đại</h4>
-                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide">Tận hưởng thế giới ngọt ngào của bạn.</h1>
+                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide"><%=InforService.getInformation("IndexSlogan").get(0).getContent()%></h1>
                                     <a href="./ListProduct" class="btn btn_pink py-md-3 px-md-5 mt-2">Đặt bánh ngay <i class="fa fa-hand-o-down"></i></a>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center distance">
                                 <div class="p-3" style="max-width: 900px;">
                                     <h4 class="text-white text-uppercase mb-md-3 slogun_slide">Truyền thống & hiện đại</h4>
-                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide">Không chỉ là bánh ngọt, đây là sự yêu thương.</h1>
+                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide"><%=InforService.getInformation("IndexSlogan").get(1).getContent()%></h1>
                                     <a href="./ListProduct" class="btn btn_pink py-md-3 px-md-5 mt-2">Đặt bánh ngay <i class="fa fa-hand-o-down"></i> </a>
                             </div>
                         </div>

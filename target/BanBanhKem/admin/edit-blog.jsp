@@ -41,7 +41,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
-    <title>Admin | Shop Bánh Kem</title>
+    <title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
     <script src="libraries/ckeditor/ckeditor.js"></script>
 </head>
 

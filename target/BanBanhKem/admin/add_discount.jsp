@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Image"%>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -47,7 +48,7 @@
   <meta name="keywords" content="">
   <meta name="author" content="Dmitry Volkov">
 
-  <title>Admin | Shop Bánh Kem</title>
+  <title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
 
 </head>
 
@@ -193,7 +194,7 @@
                         <li><a class ="text-pink" onclick="filterProduct(false, '<%=lb.getName()%>')" href="#" selected="true" value="<%=lb.getName()%>"><%=lb.getName()%></a></li>
                         <%}
                         else{%>
-                        <li><a class ="text-pink" href="#" onclick="filterProduct(false, '<%=lb.getName() %>')" value="<%=lb.getName() %>"><%=lb.getName()%></a></li>
+                        <li><a class ="text-pink" href="#" onclick="filterProduct(false, '<%=lb.getName()%>')" value="<%=lb.getName() %>"><%=lb.getName()%></a></li>
                         <%}}%>
                       </ul>
                     </div>

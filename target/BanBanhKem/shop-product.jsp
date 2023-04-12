@@ -13,7 +13,7 @@
 <meta http-equiv="Content-Type" charset="UTF-8">
 <head>
 
-    <title>Shop Bánh Kem | Sản phẩm</title>
+    <title> <%=InforService.getInformation("NameShop").get(0).getContent()%> | Sản phẩm</title>
 
    <!-- Google Font -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
