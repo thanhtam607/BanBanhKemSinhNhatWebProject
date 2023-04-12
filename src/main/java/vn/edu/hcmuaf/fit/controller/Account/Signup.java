@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.controller.Account;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Customer;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.UserService;
 
@@ -57,7 +58,11 @@ public class Signup extends HttpServlet {
                 out.println("signin.jsp");
             }
 
-
+                Log log = new Log();
+                log.setLevel(1);
+                log.setUser(email);
+                log.setSrc(request.getServletPath());
+                log.setContent("Đăng ký tài khoản thành công");
         }
         }
     }

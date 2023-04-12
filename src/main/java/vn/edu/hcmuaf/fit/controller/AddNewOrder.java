@@ -2,9 +2,11 @@ package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.ItemProductInCart;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.model.Order;
 import vn.edu.hcmuaf.fit.model.Delivery;
 import vn.edu.hcmuaf.fit.service.CartService;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.OrderService;
 
 import javax.servlet.*;
@@ -61,6 +63,17 @@ public class AddNewOrder extends HttpServlet {
 
 //        OrderService.updateTonKhoWhenAdd(order);
         session.setAttribute("itemCart",null);
+
+
+
+        Log log = new Log();
+        log.setLevel(1);
+        log.setSrc(request.getServletPath());
+        log.setContent("Thêm đơn đặt hàng mới");
+        log.setUser(auth.getId());
+        LogService.addLog(log);
+
+
         response.sendRedirect("MyOrder");
     }
 

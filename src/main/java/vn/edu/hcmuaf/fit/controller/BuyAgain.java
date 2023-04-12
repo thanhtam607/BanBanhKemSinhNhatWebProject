@@ -1,6 +1,9 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.model.Order;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.ServletException;
@@ -24,6 +27,15 @@ public class BuyAgain extends HttpServlet {
 
         ReceiptService.updateTonKhoWhenBuyAgain(mahd);
         ReceiptService.buyAgain(mahd);
+
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(1);
+        log.setSrc(request.getServletPath());
+        log.setContent("Mua lại đơn hàng: "+ mahd);
+        log.setUser(user.getId());
+        LogService.addLog(log);
 
         response.sendRedirect("order.jsp");
 

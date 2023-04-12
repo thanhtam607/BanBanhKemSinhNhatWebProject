@@ -998,7 +998,7 @@ create table FEEDBACKS(id INT AUTO_INCREMENT PRIMARY KEY,
 
 CREATE table LOGS(ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
 										LEVEL TINYINT(4) not null DEFAULT(0), 
-										ACCOUNT_ID char(50), 
+										USER char(50), 
 										SRC longtext not null DEFAULT('none'), 
 										CONTENT LONGTEXT,
 										CREATE_AT datetime DEFAULT(NOW()), 

@@ -1,5 +1,8 @@
 package vn.edu.hcmuaf.fit.controller.admin.Product;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
@@ -34,6 +37,15 @@ public class UpdateImg extends HttpServlet {
         String img = realPa + "/" + filename;
             p.write(img);
             ProductService.upProductImg(oldImg, "img/product/" + masp+"/" + filename);
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(2);
+        log.setSrc(request.getServletPath());
+        log.setContent("Cập nhật hình ảnh sản phẩm: "+ masp);
+        log.setUser(user.getId());
+        LogService.addLog(log);
 
         response.sendRedirect("../Edit_Product?idP="+masp);
 

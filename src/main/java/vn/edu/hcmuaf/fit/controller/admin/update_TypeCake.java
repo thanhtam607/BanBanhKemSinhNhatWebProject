@@ -1,5 +1,8 @@
 package vn.edu.hcmuaf.fit.controller.admin;
 
+import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
@@ -19,6 +22,16 @@ public class update_TypeCake extends HttpServlet {
         String name = request.getParameter("nameType");
         String id = request.getParameter("idType");
         ProductService.updateType(id, name);
+
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("auth");
+
+        Log log = new Log();
+        log.setLevel(2);
+        log.setSrc(request.getServletPath());
+        log.setContent("Sửa thông tin loại bánh: "+ id);
+        log.setUser(user.getId());
+        LogService.addLog(log);
         response.sendRedirect("./Catalog_admin");
     }
 }
