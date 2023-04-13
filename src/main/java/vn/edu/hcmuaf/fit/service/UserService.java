@@ -61,12 +61,18 @@ public class UserService {
         }
     }
     public static User findById(String Id){
-        List<User> list = getListAcc();
-        for (User u: list) {
-            if(Id.equals(u.getId())){
-                return u;
+        Statement stm = DBConnect.getInstall().get();
+        User user;
+        try {
+            ResultSet rs = stm.executeQuery("SELECT ID, EMAIL, PASS, NAME, ROLE, STATUS, TYPE  FROM accounts WHERE  accounts.ID = '"+ Id+"'");
+            while(rs.next()) {
+                user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7));
+                if (user != null) {
+                    return user;
+                }
             }
-
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return null;
     }
@@ -273,5 +279,6 @@ public class UserService {
 //        System.out.println(UserService.checkEmail("thanh@gmail.com"));
 //        sendMail("thanhtamv14717@gmail.com", randomCode());
 //        updatePass("thanhtamv14717@gmail.com", hashPassword("123"));
+
     }
 }

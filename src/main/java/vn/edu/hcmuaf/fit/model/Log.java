@@ -9,13 +9,14 @@ public class Log {
     String createAt;
     int status;
     public Log(){};
-    public Log(int id, int level, String user, String content, String createAt, int status){
+    public Log(int id, int level, String user, String content,String src, String createAt, int status){
         this.id=id;
         this.level=level;
         this.user=user;
         this.content=content;
         this.createAt=createAt;
         this.status=status;
+        this.src = src;
     }
 
     public void setId(int id) {

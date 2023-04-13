@@ -43,7 +43,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="author" content="Dmitry Volkov">
-  <title>Admin | Shop Bánh Kem</title>
+  <title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
 </head>
 
 <body>
@@ -118,7 +118,7 @@
               <span class="filter__item-label">Sắp xếp:</span>
 
               <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <input type="button" value="Đơn hàng">
+                <input type="button" id="type">
                 <span></span>
               </div>
 

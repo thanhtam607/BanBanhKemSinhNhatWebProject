@@ -39,6 +39,9 @@ public class UpdatePassword extends HttpServlet {
             String pass= request.getParameter("password");
             String email = request.getParameter("email");
             UserService.updatePass(email, UserService.hashPassword(pass));
+            HttpSession session = request.getSession(true);
+            User auth = (User) session.getAttribute("auth");
+            auth.setPass( UserService.hashPassword(pass));
             log.setContent("Đặt lại mật khẩu thành công");
         }
         LogService.addLog(log);
