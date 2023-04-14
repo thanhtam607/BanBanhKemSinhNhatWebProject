@@ -62,6 +62,7 @@ public class OrderService {
         }
 
     }
+
     public static void addGiaoHang(Order order){
         Statement stm = DBConnect.getInstall().get();
         String sql = "";
@@ -95,6 +96,9 @@ public class OrderService {
                 se.printStackTrace();
             }
         }
+    }
+
+    public static void main(String[] args) {
     }
 
 }

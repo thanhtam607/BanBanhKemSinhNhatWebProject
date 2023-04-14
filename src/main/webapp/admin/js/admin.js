@@ -415,3 +415,95 @@ function changePass(){
         }
     });
 }
+function changeProfileAdmin(){
+  var username = $('#username').val();
+  var phone = $('#phone').val();
+  var email = $('#email').val();
+  var address = $('#address').val();
+    $.ajax({
+        url: "AdminUpdateProfile",
+        type: "POST",
+        data:{
+            email:email,
+            username: username,
+            phone: phone,
+            address: address
+        },
+        success: function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Lưu thay đổi thành công!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                })
+
+        }
+    });
+}
+function adminRemoveProInOrder(i){
+  var idRe = $('#idRe');
+  var msp = $('#table-msp');
+  var slg = $('#table-slg');
+    $.ajax({
+        url: "adminRemoveProInOrder",
+        type: "GET",
+        data:{
+            msp:msp,
+            slg: slg,
+            idRe: idRe
+        },
+        success: function () {
+            $('tr#'+i).text("");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Xóa thành công!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                })
+
+        }
+    });
+}
+function adminAddProInOrder(){
+  var idRec = $('#idRec').val();
+  var msp = $('#msp').val();
+  var slg = $('#slg').val();
+  var notes = $('#notes').val();
+    $.ajax({
+        url: "adminAddProInOrder",
+        type: "GET",
+        data:{
+            msp:msp,
+            slg: slg,
+            idRec: idRec,
+            notes: notes
+        },
+        success: function (response) {
+            if(parseInt(response) === 1) {
+                // $('#error').text("Sản phẩm đã được tăng số lượng!");
+                // $('#msp').val("");
+                $("#table_bill_details tr").each(function(rowIndex, row) {
+                    // Lặp qua từng hàng
+                    $(row).find("td").each(function(colIndex, col) {
+                        // Lấy giá trị từng cột
+                        var value = $(col).text();
+                        if(value === msp){
+                            var slg_td = $(row).find("td:eq(4)").text();
+                            var new_slg = parseInt(slg_td)+ 1;
+                            $(row).find("td:eq(4)").text(new_slg);
+                        }
+                    });
+                });
+                $.magnificPopup.close();
+            }else {
+                $("#table_bill_details > tbody > tr:last").after(response);
+                $.magnificPopup.close();
+            }
+
+        },
+        error: function (){
+            $('#error').text("Không tìm thấy sản phẩm!");
+            $('#msp').val("");
+        }
+    });
+}

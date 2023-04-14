@@ -182,9 +182,9 @@
                                     </td>
                                     <td>
                                         <div class="main__user">
-                                            <div class="main__avatar">
-                                                <img src="img/user.svg" alt="">
-                                            </div>
+<%--                                            <div class="main__avatar">--%>
+<%--                                                <img src="img/user.svg" alt="">--%>
+<%--                                            </div>--%>
                                             <div class="main__meta">
                                                 <h3><%=UserService.findById(customer.getMAKH()).getName()%></h3>
                                             </div>

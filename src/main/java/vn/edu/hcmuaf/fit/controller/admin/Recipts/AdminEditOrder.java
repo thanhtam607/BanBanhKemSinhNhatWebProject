@@ -3,8 +3,10 @@ package vn.edu.hcmuaf.fit.controller.admin.Recipts;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Bill_Detail;
 import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.model.Receipt;
 import vn.edu.hcmuaf.fit.service.LogService;
+import vn.edu.hcmuaf.fit.service.ProductService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.*;
@@ -27,6 +29,7 @@ public class AdminEditOrder extends HttpServlet {
         request.setAttribute("listcthdOfKH", listcthdOfKH);
         request.setAttribute("receipt", receipt);
         request.setAttribute("tenkh", tenKH);
+
 
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("auth");

@@ -17,7 +17,6 @@ public class Receipt {
     int total;
     int money;
     int status;
-    int state;
     List<Comment> commentList;
     int role;
     String email;
@@ -38,26 +37,26 @@ public class Receipt {
         this.note = note;
         this.price = price;
         this.total = total;
-        this.state = status;
+        this.status = status;
         this.role = role;
         this.email =  email;
     }
 
-    public Receipt(String id, String makh, String export_date, String note, int money, int state) {
+    public Receipt(String id, String makh, String export_date, String note, int money, int status) {
         this.id = id;
         this.makh = makh;
         this.export_date = export_date;
         this.note = note;
         this.money = money;
-        this.state = state;
+        this.status = status;
     }
-    public Receipt(String id, String makh, String export_date, String note, int money, int state, String dc, String createBy) {
+    public Receipt(String id, String makh, String export_date, String note, int money, int status, String dc, String createBy) {
         this.id = id;
         this.makh = makh;
         this.export_date = export_date;
         this.note = note;
         this.money = money;
-        this.state = state;
+        this.status = status;
         this.address = dc;
         this.createBy = createBy;
     }
@@ -87,28 +86,22 @@ public class Receipt {
     }
 
     public String getStatusName() {
-        if(this.state == 0){
+        if(this.status == 0){
             return "Chờ Xác Nhận";
-        }else if(this.state == 1){
+        }else if(this.status == 1){
             return "Gói Hàng";
-        }else if(this.state == 2){
+        }else if(this.status == 2){
             return "Đang Giao";
-        }else if(this.state == 3){
+        }else if(this.status == 3){
         return "Giao Thành Công";
         }
         return "Đã hủy";
     }
     public boolean checkState(){
-        if(this.state == 0 || this.state == 1) return true;
+        if(this.status == 0 || this.status == 1) return true;
         return false;
     }
-    public int getStateInt() {
-        return this.state;
-    }
 
-    public void setState(int state) {
-        this.state = state;
-    }
 
     public String getMakh() {
         return makh;

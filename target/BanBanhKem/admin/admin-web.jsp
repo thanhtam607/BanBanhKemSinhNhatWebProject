@@ -174,7 +174,7 @@
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Thành tiền</th>
                                     <th scope="col">Trạng thái đơn hàng</th>
-                                    <th scope="col">Chi tiết</th>
+                                    <th scope="col">Tùy Chọn</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -191,8 +191,11 @@
                                         <div class="main__table-text"><%=rc.getStatusName()%></div>
                                     </td>
                                     <td>
-                                        <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit">
+                                        <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit px-1">
                                             <i class="fas fa-info-circle text-center"></i>
+                                        </a>
+                                        <a href="AdminEditOrder?id=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit px-1">
+                                            <i class="fas fa-edit text-center"></i>
                                         </a>
                                     </td>
                                 </tr>

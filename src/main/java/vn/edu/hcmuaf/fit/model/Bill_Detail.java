@@ -23,6 +23,13 @@ public class Bill_Detail {
         this.namePro = namePro;
 
     }
+    public Bill_Detail(String mahd, String masp,int solg, String note) {
+        this.mahd = mahd;
+        this.masp = masp;
+        this.solg = solg;
+        this.note = note;
+
+    }
 
     public int getToTalPrice(){
         int res = 0;
@@ -83,4 +90,16 @@ public class Bill_Detail {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Bill_Detail{" +
+                "mahd='" + mahd + '\'' +
+                ", masp='" + masp + '\'' +
+                ", namePro='" + namePro + '\'' +
+                ", solg=" + solg +
+                ", price=" + price +
+                ", note='" + note + '\'' +
+                "\n"+
+                '}';
+    }
 }

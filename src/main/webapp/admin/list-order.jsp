@@ -155,7 +155,7 @@
       </div>
       <!-- end main title -->
 
-      <!-- users -->
+      <!-- table -->
       <div class="col-12 bg-pink">
         <div class="main__table-wrap">
           <table class="main__table">
@@ -208,7 +208,7 @@
                   <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn main__table-btn--view">
                     <i class="fas fa-info"></i>
                   </a>
-                  <%if(rc.getStateInt() == 0){%>
+                  <%if(rc.getStatus() == 0){%>
                   <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">
                     <i class="fa fa-check"></i>
                   </a>
@@ -216,7 +216,7 @@
                   <a href="AdminEditOrder?id=<%=rc.getId()%>" class="main__table-btn main__table-btn--edit">
                     <i class="fa fa-edit"></i>
                   </a>
-                  <%if(rc.getStateInt() != 4){%>
+                  <%if(rc.getStatus() != 4){%>
                   <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                     <i class="fa fa-trash"></i>
                   </a>
