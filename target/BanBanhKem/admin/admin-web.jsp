@@ -2,6 +2,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -9,7 +10,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Admin | Shop Bánh Kem</title>
+    <title>Admin | <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -40,13 +41,7 @@
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
     <div class="container-fluid position-relative d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-pink position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
+        <jsp:include page="spinner.jsp"></jsp:include>
 
 
           <!-- Sidebar Start -->
@@ -105,7 +100,7 @@
                             <span class="d-none d-lg-inline-flex"><%= auth != null ? auth.getName():"Đăng nhập"%></span>
                         </a>
                         <%if(auth != null) {%>
-                            <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
+                            <div class="dropdown-menu dropdown-menu-end rounded-0 rounded-bottom m-0">
                                 <a href="general_Management.jsp" class="dropdown-item">Quản lí cửa hàng</a>
                                 <a href="edit-profile.jsp" class="dropdown-item">Hồ sơ của tôi</a>
                                 <a href="/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>

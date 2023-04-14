@@ -48,6 +48,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
+<jsp:include page="spinner.jsp"></jsp:include>
 <!-- header -->
 <header class="header">
   <div class="header__content">
@@ -222,16 +223,6 @@
                   <%}%>
                 </div>
               </td>
-<%--              <td>--%>
-<%--                <div class="checkout__input__checkbox">--%>
-<%--                  <label for="payment<%=i%>" >--%>
-<%--                    Chọn--%>
-<%--                    <input type="checkbox" id="payment<%=i%>">--%>
-<%--                    <span class="checkmark"></span>--%>
-<%--                  </label>--%>
-<%--                </div>--%>
-<%--               --%>
-<%--              </td>--%>
             </tr>
             </tbody>
             <!-- modal delete -->
@@ -304,6 +295,7 @@
 <script src="js/jquery.mousewheel.min.js"></script>
 <script src="js/jquery.mCustomScrollbar.min.js"></script>
 <script src="js/select2.min.js"></script>
+<script src="js/main.js"></script>
 <script src="js/admin.js"></script>
 
 

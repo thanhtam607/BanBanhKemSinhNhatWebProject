@@ -189,13 +189,6 @@ function updateDetail(id){
 
 }
 
-function updateRole(id){
-    var user = document.getElementById("username").value;
-    var email = document.getElementById("email").value;
-    var fisrt = document.getElementById("firstname").value;
-    var last = document.getElementById("lastname").value;
-    location.href="Product/EditUser?makh =" + id + "username=" + user + "&email=" + email + "&firstname=" + fisrt + "&lastname=" + last ;
-}
 /*==============================
 hiển thị file
 ==============================*/
@@ -373,4 +366,52 @@ function addDiscount(){
 
 
     }
+}
+function changePass(){
+  var email = $('#email').val();
+  var newpass = $('#newpass').val();
+  var confirmpass = $('#confirmpass').val();
+  var oldpass = $('#oldpass').val();
+    $.ajax({
+        url: "AdminChangePassWord",
+        type: "GET",
+        data:{
+            email:email,
+            oldpass: oldpass,
+            confirmpass: confirmpass,
+            newpass: newpass
+        },
+        success: function (response) {
+            if (parseInt(response) === 0) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đổi mật khẩu thành công!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                }).then((result) => {
+                    location.reload();
+                });
+            } else if (parseInt(response) === 1){
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Mật khẩu xác nhận không khớp!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                }).then((result) => {
+                    location.reload();
+                });
+
+            }else if (parseInt(response) === 2){
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Mật khẩu hiện tại không đúng!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                }).then((result) => {
+                    location.reload();
+                });
+            }
+
+        }
+    });
 }

@@ -40,13 +40,14 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
-	<title>Admin | Shop Bánh Kem</title>
+	<title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
     <script src="libraries/ckeditor/ckeditor.js"></script>
 
 </head>
 
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
+<jsp:include page="spinner.jsp"></jsp:include>
     <!-- header -->
     <header class="header">
         <div class="header__content">
@@ -150,7 +151,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="form__btn" type="submit">Thêm</button>
+                                <button class="form__btn" type="submit" style="background-color: pink">Thêm</button>
                             </div>
                         </div>
                     </form>

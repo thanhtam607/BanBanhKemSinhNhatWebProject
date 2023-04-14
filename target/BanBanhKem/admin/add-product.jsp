@@ -41,7 +41,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
-	<title>Admin | Shop Bánh Kem</title>
+	<title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
     <style>
         .row input:not(:placeholder-shown) {
             border-color: hsl(0, 76%, 50%);
@@ -57,6 +57,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
+<jsp:include page="spinner.jsp"></jsp:include>
     <!-- header -->
     <header class="header">
         <div class="header__content">

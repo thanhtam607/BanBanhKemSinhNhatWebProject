@@ -13,7 +13,10 @@ public class ReceiptService {
         List<Receipt> list = new ArrayList<Receipt>();
         Statement statement = DBConnect.getInstall().get();
         Statement stmt1 = DBConnect.getInstall().get();
-        String sql = "select BILLS.ID, CUSTOMERS.NAME, products.productName, CUSTOMERS.PHONE, BILLS.EXPORT_DATE, DELIVERY.DELIVERY_DATE, DELIVERY.ADDRESS, BILLS.NOTES, products.price, BILLS.TOTAL_BILL,  BILLS.STATUS, CUSTOMERS.ID, products.idProduct, ACCOUNTS.NAME,ACCOUNTS.ROLE, ACCOUNTS.EMAIL\n" +
+        String sql = "select BILLS.ID, ACCOUNTS.NAME, products.productName, " +
+                "CUSTOMERS.PHONE, BILLS.EXPORT_DATE, DELIVERY.DELIVERY_DATE," +
+                " DELIVERY.ADDRESS, BILLS.NOTES, products.price, BILLS.TOTAL_BILL, " +
+                " BILLS.STATUS, CUSTOMERS.ID, products.idProduct,ACCOUNTS.ROLE, ACCOUNTS.EMAIL\n" +
                 "from products, BILLS, CUSTOMERS, BILL_DETAIL, DELIVERY, ACCOUNTS where BILLS.ID = BILL_DETAIL.ID and BILL_DETAIL.idProduct = products.idProduct and DELIVERY.ID = BILLS.ID and CUSTOMERS.ID = BILLS.CUSTOMER_ID and ACCOUNTS.ID = CUSTOMERS.ID \n" +
                 "group by BILLS.ID ORDER BY BILLS.EXPORT_DATE desc;";
         if (statement != null)
@@ -21,23 +24,22 @@ public class ReceiptService {
                 ResultSet rs = statement.executeQuery(sql);
                 while (rs.next()) {
                     ResultSet rsCmt = stmt1.executeQuery("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID");
-                    List<Comment> listCmts = new ArrayList<Comment>();
-                    String s1 = rs.getString(13);
-                    while (rsCmt.next()) {
-                        String s2 = rsCmt.getString(1);
-                        if (s1.equals(s2)) {
-                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
-                        }
-                    }
+//                    List<Comment> listCmts = new ArrayList<Comment>();
+//                    String s1 = rs.getString(13);
+//                    while (rsCmt.next()) {
+//                        String s2 = rsCmt.getString(1);
+//                        if (s1.equals(s2)) {
+//                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
+//                        }
+//                    }
                     Receipt rc = new Receipt(rs.getString(1),
-                            rs.getString(12), rs.getString(2),
-                            rs.getString(3), rs.getString(4),
-                            rs.getString(5), rs.getString(6),
-                            rs.getString(7), rs.getString(8),
-                            rs.getInt(9), rs.getInt(10),
-                            rs.getInt(11), listCmts,
-                            rs.getString(14), rs.getInt(15),
-                            rs.getString(16));
+                            rs.getString(2), rs.getString(3),
+                            rs.getString(4), rs.getString(5),
+                            rs.getString(6), rs.getString(7),
+                            rs.getString(8), rs.getInt(9),
+                            rs.getInt(10), rs.getInt(11),
+                            rs.getString(12), rs.getInt(14),
+                            rs.getString(15));
                     list.add(rc);
                 }
             } catch (SQLException e) {
@@ -45,6 +47,25 @@ public class ReceiptService {
             }
         else {
             System.out.println("Không có  hóa đơn");
+        }
+        return list;
+    }
+    public static List<Comment> getListComment(String id) {
+        List<Comment> list = new ArrayList<Comment>();
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                    ResultSet rsCmt = statement.executeQuery("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID and ACCOUNTS.ID = '"+id+"'");
+                    while (rsCmt.next()) {
+                            list.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
+                    }
+
+                }
+        catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có");
         }
         return list;
     }
@@ -133,7 +154,7 @@ public class ReceiptService {
                         "WHERE  bills.ID = BILL_DETAIL.ID and products.idProduct = BILL_DETAIL.idProduct \n" +
                         "and bills.STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) " +
                         "and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)\n" +
-                        "GROUP BY  products.idProduct\n HAVING slg > 2\n" +
+                        "GROUP BY  products.idProduct\n HAVING slg > 0\n" +
                         "ORDER BY slg DESC LIMIT 10");
                 while (rs.next()) {
                    map.put(rs.getString(1), rs.getInt(2));
@@ -220,6 +241,16 @@ public class ReceiptService {
     }
 
 
+//    public static List<Receipt> getctkh(String makh) {
+//        List<Receipt> list = getAllReceipt();
+//        List<Receipt> rs = new ArrayList<>();
+//        for (Receipt rc : list) {
+//            if (rc.getMakh().equals(makh)) {
+//                rs.add(rc);
+//            }
+//        }
+//        return rs;
+//    }
     public static List<Receipt> getctkh(String makh) {
         List<Receipt> list = getData();
         List<Receipt> rs = new ArrayList<>();
@@ -277,14 +308,16 @@ public class ReceiptService {
     }
 
 
-    public static List<Delivery> getListGiaoHang() {
+    public static Delivery getListGiaoHang(String id) {
         List<Delivery> list = new ArrayList<Delivery>();
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT ID, DELIVERY_DATE, ADDRESS,EMAIL,PHONE,NAME  from DELIVERY");
+                ResultSet rs = statement.executeQuery("SELECT ID, DELIVERY_DATE, ADDRESS,EMAIL,PHONE,NAMECUSTOMER  from DELIVERY where ID ="+"'"+id+"'");
                 while (rs.next()) {
-                    Delivery delivery = new Delivery(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6));
+                    Delivery delivery = new Delivery(rs.getString(1), rs.getString(6),
+                            rs.getString(2), rs.getString(3),
+                            rs.getString(4),rs.getString(5));
                     list.add(delivery);
                 }
             } catch (SQLException e) {
@@ -293,7 +326,7 @@ public class ReceiptService {
         else {
             System.out.println("Không có ");
         }
-        return list;
+        return list.get(0);
     }
 
 
@@ -373,11 +406,14 @@ public class ReceiptService {
             }
         }
     }
-    public static void updateInfoCustomerInBill(String id, String name, String phone) {
+
+    public static void updateInfoCustomerInBill(String id, String name, String phone, String mail){
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE customers, bills set customers.NAME = '"+name+"', customers.PHONE = '"+phone+"' WHERE bills.ID ='"+id+"' and customers.id = bills.CUSTOMER_ID";
+                String sql = "UPDATE DELIVERY set DELIVERY.NAMECUSTOMER = '"+name+"', " +
+                        "DELIVERY.PHONE = '"+phone+"', DELIVERY.EMAIL = '"+mail+"' " +
+                        "WHERE DELIVERY.id = '"+id+"'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -441,8 +477,6 @@ public class ReceiptService {
 
 
     public static void main(String[] args) {
-
-
     }
 
 

@@ -8,6 +8,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,11 +49,12 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="author" content="Dmitry Volkov">
-  <title>Admin | Shop Bánh Kem</title>
+  <title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
 </head>
 
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
+<jsp:include page="spinner.jsp"></jsp:include>
 <!-- header -->
 <header class="header">
   <div class="header__content">
@@ -120,18 +122,21 @@
       </div>
     <div class="col-12 pt-2 pb-2 rounded bg-pink">
             <div class="col-12 d-flex justify-content-between form__content pl-0 pr-0">
-              <h5 style="margin-bottom: 25px">Tên KH: <%=tenkh%> - SĐT: <%=receipt.getPhone()%></h5>
+              <h5 style="margin-bottom: 25px">Tên Tài Khoản: <%=tenkh%> - SĐT: <%=receipt.getPhone()%></h5>
                <h5 style="margin-bottom: 25px"> Mã ĐH: <%=receipt.getId()%> </h5>
             </div>
             <div class="col-12 d-flex form__content pl-0 pr-0">
               <div class="col-6 pl-0 pr-0">
-                <p>Người Tạo: <%=receipt.getCreateBy()%></p>
-                <p>Ngày Lập: <%=receipt.getExport_date()%></p>
-                <p>Ngày Giao Hàng: <%=receipt.getDelivery_date()%></p>
+                <p class="border px-3">Người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getTenKH() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getTenKH():"" %></p>
+                <p class="border px-3">SĐT người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getPhone() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getPhone():""%></p>
+                <p class="border px-3">Email người nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getEmail() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getEmail():""%></p>
+                <p class="border px-3">Nhân Viên Tạo: <%=receipt.getCreateBy()%></p>
               </div>
               <div class="col-6 pl-0 pr-0">
-                <p>Địa Chỉ Giao: <%=receipt.getAddress()%></p>
-                <p>Trạng Thái: <%=receipt.getStatusName()%></p>
+                <p class="border px-3">Ngày Lập: <%=receipt.getExport_date()%></p>
+                <p class="border px-3">Ngày Giao Hàng: <%=receipt.getDelivery_date()%></p>
+                <p class="border px-3">Địa Chỉ Giao: <%=receipt.getAddress()%></p>
+                <p class="border px-3">Trạng Thái: <%=receipt.getStatusName()%></p>
               </div>
             </div>
         <p>Ghi Chú Chung: <%=receipt.getNote()%></p>
@@ -191,6 +196,7 @@
 <script src="js/jquery.mousewheel.min.js"></script>
 <script src="js/jquery.mCustomScrollbar.min.js"></script>
 <script src="js/select2.min.js"></script>
+<script src="js/main.js"></script>
 <script src="js/admin.js"></script>
 
 

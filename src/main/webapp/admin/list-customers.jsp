@@ -49,6 +49,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
+<jsp:include page="spinner.jsp"></jsp:include>
     <!-- header -->
     <header class="header">
         <div class="header__content">
@@ -185,7 +186,7 @@
                                                 <img src="img/user.svg" alt="">
                                             </div>
                                             <div class="main__meta">
-                                                <h3><%=customer.getTENKH()%></h3>
+                                                <h3><%=UserService.findById(customer.getMAKH()).getName()%></h3>
                                             </div>
                                         </div>
                                     </td>
@@ -319,8 +320,9 @@
     <script src="js/jquery.mousewheel.min.js"></script>
     <script src="js/jquery.mCustomScrollbar.min.js"></script>
     <script src="js/select2.min.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/admin.js"></script>
-	
+
   
 </body>
 

@@ -52,10 +52,11 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
-    <title>Admin | Shop Bánh Kem</title>
+    <title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
 </head>
 
 <body>
+<jsp:include page="spinner.jsp"></jsp:include>
 <!-- header -->
 <header class="header">
     <div class="header__content">
@@ -125,7 +126,7 @@
                             <span class="filter__item-label">Sắp xếp:</span>
 
                             <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <input type="button" value="Loại bánh">
+                                <input type="button" value="">
                                 <span></span>
                             </div>
                             <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort" style="width: 200px">
@@ -270,6 +271,7 @@
 <script src="js/jquery.mousewheel.min.js"></script>
 <script src="js/jquery.mCustomScrollbar.min.js"></script>
 <script src="js/select2.min.js"></script>
+<script src="js/main.js"></script>
 <script src="js/admin.js"></script>
 
 
