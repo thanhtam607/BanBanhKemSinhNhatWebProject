@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -85,6 +86,7 @@
 
 
         <!-- Content Start -->
+        <% User user = UserService.findById(auth.getId()); %>
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-pink navbar-dark sticky-top px-4 py-0">
@@ -107,7 +109,11 @@
                         </a>
                         <%if(auth != null) {%>
                             <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
+                                <% if(user.getRole() == 2) { %>
                                 <a href="general_Management.jsp" class="dropdown-item">Quản lí cửa hàng</a>
+                                <a href="AdminDecentralization.jsp" class="dropdown-item">Phân quyền cấp cao</a>
+                                <% } else { %>
+                                <% } %>
                                 <a href="edit-profile.jsp" class="dropdown-item">Hồ sơ của tôi</a>
                                 <a href="/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                             </div>

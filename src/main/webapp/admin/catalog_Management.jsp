@@ -13,6 +13,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -57,6 +59,7 @@
 
 <body>
 <!-- header -->
+<% User auth = (User) session.getAttribute("auth");%>
 <header class="header">
     <div class="header__content">
         <!-- header logo -->
@@ -86,8 +89,8 @@
                 <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
             </div>
             <div class="ms-3">
-                <h6 class="mb-0">Thanh Thùy</h6>
-                <span>Admin</span>
+                <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
+                <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
             </div>
         </div>
         <div class="navbar-nav w-100">
@@ -111,6 +114,7 @@
 
 <!-- main content -->
 <% List<TypeOfCake> list = ProductService.getListType();%>
+<% User user = UserService.findById(auth.getId()); %>
 <main class="main bg-white">
     <div class="container-fluid bg-white">
         <div class="row">
@@ -158,7 +162,12 @@
                 </div>
             </div>
             <!-- end main title -->
-
+            <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
+            <div class="paginator-wrap" style="margin-top: -20px">
+                <span  href="#modal-add"  class="open-modal" type="button">Thêm danh mục</span>
+            </div>
+            <% } else { %>
+            <% } %>
             <!-- users -->
             <div class="col-12 bg-pink">
                 <div class="main__table-wrap">
@@ -185,13 +194,18 @@
                             </td>
                             <td>
                                 <div class="main__table-btns">
-
+                                    <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                     <a href="#modal-edit<%=i%>" class="main__table-btn main__table-btn--edit open-modal">
                                         <i class="fa fa-edit"></i>
                                     </a>
+                                    <% } else { %>
+                                    <% } %>
+                                    <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                                     <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                                         <i class="fa fa-trash"></i>
                                     </a>
+                                    <% } else { %>
+                                    <% } %>
                                 </div>
                             </td>
                         </tr>
@@ -248,9 +262,6 @@
                         <!-- end modal add -->
                         <% } %>
                     </table>
-                    <div class="paginator-wrap">
-                        <span  href="#modal-add"  class="open-modal" type="button">Thêm danh mục</span>
-                    </div>
                 </div>
             </div>
             <!-- end users -->

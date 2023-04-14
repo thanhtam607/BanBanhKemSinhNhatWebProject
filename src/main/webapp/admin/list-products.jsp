@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
         <%@ page import="java.util.ArrayList" %>
         <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+        <%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
         <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -104,6 +105,7 @@
     <!-- Sidebar End -->
 
     <!-- main content -->
+<% User user = UserService.findById(auth.getId()); %>
     <main class="main bg-white">
         <div class="container-fluid bg-white">
             <div class="row">
@@ -158,12 +160,17 @@
                 </div>
                 <!-- end main title -->
                 <div class="button">
-                    <div class="button_left">
-
+                    <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
+                    <div class="button_left" style="display: block">
                         <a class="button_product" href="add-product.jsp">Thêm sản phẩm</a>
                     </div>
+                    <% } else { %>
+                    <% } %>
+                    <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                     <div class="button_right">
-                        <a class="button_product" href="ListProductRemoved">Sản phẩm đã xóa (<%=ProductService.getListProductRemove().size()%>)</a>
+                        <a class="button_product" href="ListProductRemoved">Sản phẩm đã xóa(<%=ProductService.getListProductRemove().size()%>)</a>
+                        <% } else { %>
+                        <% } %>
                     </div>
                 </div>
 
@@ -229,7 +236,7 @@
 
                                         <td>
                                             <div class="main__table-btns">
-
+                                                <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                                 <a href="Edit_Product?idP=<%=pro.getId()%>" class="main__table-btn main__table-btn--edit">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
@@ -242,8 +249,15 @@
                                                     <i class="fa fa-eye" style="color: #24cc63"></i>
                                                 </a>
                                                 <%}%>
-
+                                                <% } else { %>
+                                                <a href="Edit_Product?idP=<%=pro.getId()%>" class="main__table-btn main__table-btn--edit">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                 <% } %>
+                                                <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                                                 <a href="#modal-delete<%=pro.getId()%>" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
+                                                <% } else { %>
+                                                <% } %>
                                             </div>
                                             <!-- modal hiden -->
                                             <div id="modal-hiden<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">

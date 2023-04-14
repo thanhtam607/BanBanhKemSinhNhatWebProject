@@ -238,16 +238,16 @@
                             </div>
 
                         </div>
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12 col-lg-6">
-                                    <a href="#" type="button" class="form__btn">Thêm sản phẩm</a>
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <input class="form__btn" type="submit" value="Lưu thông tin">
-                                </div>
-                            </div>
-                        </div>
+<%--                        <div class="col-12">--%>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-12 col-lg-6">--%>
+<%--                                    <a href="#" type="button" class="form__btn">Thêm sản phẩm</a>--%>
+<%--                                </div>--%>
+<%--                                <div class="col-12 col-lg-6">--%>
+<%--                                    <input class="form__btn" type="submit" value="Lưu thông tin">--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                     </div>
                 </div>
             </div>

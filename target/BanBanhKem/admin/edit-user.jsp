@@ -105,6 +105,7 @@
 </div>
 <!-- Sidebar End -->
 <% List<Receipt> listre = (List<Receipt>) request.getAttribute("listmakh");%>
+<% User user = UserService.findById(auth.getId()); %>
     <!-- main content -->
     <main class="main">
         <div class="container-fluid">
@@ -112,7 +113,7 @@
                 <!-- main title -->
                 <div class="col-12">
                     <div class="main__title">
-                        <h2>Thông tin nguời dùng</h2>
+                        <h2>Thông tin người dùng</h2>
                     </div>
                 </div>
                 <!-- end main title -->
@@ -129,11 +130,11 @@
                             <% for (int i = 0; i <= 0; i ++){
                                 if(!listre.isEmpty()){
                                 Receipt rc = listre.get(i);
-                                User user = UserService.findById(rc.getMakh());%>
+                                User us = UserService.findById(rc.getMakh());%>
                             <div class="profile__meta">
                                 <% String main__table = " ";
                                 String profile__text ="";
-                                    if(user.getStatus() == -1){
+                                    if(us.getStatus() == -1){
                                         main__table = "main__table-text--red";
                                         profile__text = "profile__action--delete";
 
@@ -141,7 +142,7 @@
                                         main__table = "main__table-text--green";
                                         profile__text = "profile__action--banned";
                                     }%>
-                                <h3><%=rc.getNamecustomer()%> <span class="<%=main__table%>">(<%=user.getStatusName()%>)</span></h3>
+                                <h3><%=rc.getNamecustomer()%> <span class="<%=main__table%>">(<%=us.getStatusName()%>)</span></h3>
                                 <span name = "makh" value="<%=rc.getMakh()%>"> ID: <%=rc.getMakh()%></span>
                             </div>
                         </div>
@@ -183,8 +184,9 @@
                         <!-- end profile mobile tabs nav -->
 
                         <!-- profile btns -->
+                        <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                         <div class="profile__actions">
-                            <%if(user.getStatus() == -1){%>
+                            <%if(us.getStatus() == -1){%>
                             <a href="#modal-status-unlock" class="profile__action <%=profile__text%> open-modal">
                                 <i class="fa fa-lock"></i>
                             </a>
@@ -195,6 +197,8 @@
                             <%}%>
 <%--                            <a href="#modal-delete" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>--%>
                         </div>
+                        <% } else { %>
+                        <% } %>
                         <!-- end profile btns -->
                         <!-- modal status -->
                         <% String mkh = (String) request.getAttribute("mkh");%>
@@ -272,6 +276,7 @@
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
+                                                    <% if(user.getRole() == 2) { %>
                                                     <label class="form__label" for="rights">Quyền Hạn</label>
                                                     <select class="form__input" id="rights" name="role">
                                                         <%List<String> listRole = (List<String>) request.getAttribute("listRole");
@@ -282,6 +287,9 @@
                                                         <option value="<%=r%>"><%=r%></option>
                                                         <%}}%>
                                                     </select>
+                                                    <% } else { %>
+                                                    <p>Quyền Hạn:  <span class="font-size-20 text--green"><%=rc.getRoleName()%></span></p>
+                                                    <% } %>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -331,9 +339,12 @@
                                                     <a href="Bill_detail_Admin?mahd=<%=r.getId()%>&tenkh=<%=r.getNamecustomer()%>" class="main__table-btn main__table-btn--edit">
 														<i class="fa fa-eye"></i>
 													</a>
+                                                    <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                                                     <a href="#modal-deletehd<%=j%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
+                                                    <% } else { %>
+                                                    <% } %>
                                                 </div>
 
                                                 <!-- modal delete hd-->
