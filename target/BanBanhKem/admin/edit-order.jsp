@@ -112,7 +112,6 @@
 <!-- main content -->
 <% Receipt receipt = (Receipt) request.getAttribute("receipt");
     List<Bill_Detail> receiptsDt = (List<Bill_Detail>) request.getAttribute("listcthdOfKH");
-    String tenkh = (String) request.getAttribute("tenkh");
     List<String> statusName = (List<String>) request.getAttribute("listStatus");%>
 <main class="main bg-white">
     <div class="container-fluid bg-white">
@@ -128,11 +127,13 @@
                     <div class="row">
                         <!-- details form -->
                         <div class="col-12 col-lg-6">
-                            <form action="EditOrderUpdateCustomer?id=<%=receipt.getId()%>" method="post" class="form form--profile">
+<%--                            <form action="EditOrderUpdateCustomer?id=<%=receipt.getId()%>" method="post" class="form form--profile">--%>
+                            <form onsubmit="editOrderUpdateCustomer()" class="form form--profile">
                                 <div class="row row--form">
                                     <h4 class="form__title">Thông tin khách hàng</h4>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
+                                            <input class="d-none" id="idRec2" name="idRec2" value="<%=receipt.getId()%>">
                                             <label class="form__label" for="usernameRE">Người nhận</label>
                                             <input id="usernameRE" type="text" name="usernameRE" class="form__input"
                                                    value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getTenKH()%>">
@@ -140,7 +141,7 @@
                                         <div class="form__group">
                                             <label class="form__label" for="phoneRE">SĐT người nhận</label>
                                             <input id="phoneRE" type="text" name="phoneRE" class="form__input"
-                                                   value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getPhone()%>">
+                                                   value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getPhone()%>" maxlength="10">
                                         </div>
                                         <div class="form__group">
                                             <label class="form__label" for="mailRE">Email người nhận</label>
@@ -158,24 +159,27 @@
                                     </div>
 
                                     <div class="col-6">
-                                        <input class="form__btn" type="submit" value="Lưu thông tin">
+<%--                                        <input class="form__btn" type="submit" value="Lưu thông tin">--%>
+                                        <button onclick="editOrderUpdateCustomer()" type="button" class="form__btn flex-row-reverse">Lưu thay đổi</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="col-12 col-lg-6">
-                            <form action="EditOrderUpdateDelivery?id=<%=receipt.getId()%>" method="post" class="form form--profile">
+<%--                            <form action="EditOrderUpdateDelivery?id=<%=receipt.getId()%>" method="post" class="form form--profile">--%>
+                            <form class="form form--profile">
                                 <div class="row row--form">
                                     <h4 class="form__title">Thông tin giao hàng</h4>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
                                             <label class="form__label" for="dayE">Ngày lập</label>
-                                            <input type="datetime" id="dayE" class="form__input text-lowercase" readonly
+                                            <input type="datetime" id="dayE" class="form__input text-lowercase form-check-input is-invalid" readonly
                                                    value="<%=receipt.getExport_date()%>">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
+                                            <input class="d-none" id="idR" name="idR" value="<%=receipt.getId()%>">
                                             <label class="form__label" for="dayD">Ngày giao</label>
                                             <input type="datetime" id="dayD" name="dayD" class="form__input text-lowercase"
                                                    value="<%=receipt.getDelivery_date()%>">
@@ -191,7 +195,7 @@
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
                                             <label class="form__label" for="rights">Trạng thái ĐH</label>
-                                            <select class="form__input" id="rights" name="state">
+                                            <select class="form__input state" id="rights" name="rights">
                                                 <% for(String status : statusName){
                                                         if(status.equals(receipt.getStatusName())){%>
                                                 <option selected value="<%=status%>"><%=status%></option>
@@ -207,7 +211,8 @@
                                     </div>
 
                                     <div class="col-6 mt-lg-4">
-                                        <input class="form__btn" type="submit" value="Lưu thông tin">
+<%--                                        <input class="form__btn" type="submit" value="Lưu thông tin">--%>
+                                        <button onclick="editOrderUpdateDelivery()" type="button" class="form__btn flex-row-reverse">Lưu thay đổi</button>
                                     </div>
                                 </div>
                             </form>
@@ -247,24 +252,6 @@
                                             <%}%>
                                         </td>
                                     </tr>
-                                        <%--                                            <a href="#modal-delete<%=i%>" class=" main__table-btn main__table-btn--delete px-1 open-modal">--%>
-                                        <%--                                                <i class="fas fa-trash text-center"></i>--%>
-                                        <%--                                            </a>--%>
-                                        <!-- modal delete -->
-<%--                                        <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">--%>
-<%--                                            <h6 class="modal__title">Thông Báo</h6>--%>
-
-<%--                                            <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này khỏi đơn hàng?</p>--%>
-<%--                                            <p id="modal__error_text modal__text" class="text-danger mb-2"></p>--%>
-
-<%--                                            <div class="modal__btns">--%>
-<%--                                                <a href="adminRemoveProInOrder?msp=<%=rcs.getMasp()%>&&slg=<%=rcs.getSolg()%>&&id=<%=rcs.getMahd()%>" class="modal__btn modal__btn--apply" type="button">--%>
-<%--                                                    Xóa--%>
-<%--                                                </a>--%>
-<%--                                                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-                                        <!-- end modal delete -->
 
                                     </tbody>
 
@@ -313,7 +300,7 @@
                             </div>
                             <div class="col-5 margin-top-20px">
                                 <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;
-                                <span class="text-danger text-uppercase text-pink" id="total"><%=receipt.formatNum(receipt.getTotal())%> VND</span>
+                                <span style="font-weight: 600; font-size: 30px;" class="text-danger text-uppercase" id="total"><%=receipt.formatNum(receipt.getTotal())%> VND</span>
                             </div>
 
                         </div>

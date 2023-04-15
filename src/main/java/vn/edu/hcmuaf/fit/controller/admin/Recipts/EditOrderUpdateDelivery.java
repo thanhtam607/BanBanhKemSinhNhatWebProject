@@ -54,6 +54,7 @@ public class EditOrderUpdateDelivery extends HttpServlet {
         log.setContent("Sửa thông tin giao hàng của đơn hàng: "+ id);
         log.setUser(user.getId());
         LogService.addLog(log);
-        response.sendRedirect("./AdminEditOrder?id="+ request.getParameter("id"));
+        request.setAttribute("id", id);
+//        response.sendRedirect("./AdminEditOrder?id="+ id);
     }
 }

@@ -264,6 +264,8 @@
            </form>
         </div>
     </div>
+
+<span class="d-none" id="url"></span>
     <!-- Contact Form End -->
 <jsp:include page="footer.jsp"></jsp:include>
     <!-- Js Plugins -->
@@ -295,6 +297,8 @@
                 }
             });
         }
+        $("#url").text(location.href);
+        console.log($("#url").text(location.href));
     </script>
 
 

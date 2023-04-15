@@ -440,6 +440,62 @@ function changeProfileAdmin(){
         }
     });
 }
+function editOrderUpdateCustomer(){
+  var usernameRE = $('#usernameRE').val();
+  var phoneRE = $('#phoneRE').val();
+  var mailRE = $('#mailRE').val();
+  var note = $('#note').val();
+  var id = $('#idRec2').val();
+  console.log(usernameRE, phoneRE, mailRE, note, id);
+    $.ajax({
+        url: "EditOrderUpdateCustomer",
+        type: "POST",
+        data:{
+            usernameRE:usernameRE,
+            phoneRE: phoneRE,
+            mailRE: mailRE,
+            note: note,
+            id: id
+        },
+        success: function () {
+                Swal.fire({
+                    icon: 'success',
+                    text: 'Lưu thay đổi thành công!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                })
+
+        }
+    });
+}
+function editOrderUpdateDelivery(){
+  var dayD = $('#dayD').val();
+  var address = $('#address').val();
+  var state = $('.state').val();
+  var idR = $('#idR').val();
+    $.ajax({
+        url: "EditOrderUpdateDelivery",
+        type: "POST",
+        data:{
+            dayD:dayD,
+            address: address,
+            state: state,
+            id: idR
+        },
+        success: function () {
+                Swal.fire({
+                    icon: 'success',
+                    text: 'Lưu thay đổi thành công!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                })
+                //     .then(() => {
+                //     location.reload();
+                // });
+
+        }
+    });
+}
 function adminRemoveProInOrder(index){
   var id = $('#idRe').text();
   var i = $("tr#"+index).children().first().text();
