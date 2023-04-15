@@ -319,7 +319,7 @@
                         </div>
                         <div class="col-12">
                             <div class="row">
-                                <%if(receipt.getStatus() != 4 || receipt.getStatus() != 3){%>
+                                <%if(receipt.getStatus() == 0 || receipt.getStatus() == 1 || receipt.getStatus() == 2){%>
                                 <div class="col-12 col-lg-6">
                                     <a href="#modal-view"  type="button" class="form__btn open-modal">Thêm sản phẩm</a>
                                 </div>

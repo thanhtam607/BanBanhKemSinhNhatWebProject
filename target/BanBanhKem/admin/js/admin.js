@@ -445,6 +445,8 @@ function adminRemoveProInOrder(index){
   var i = $("tr#"+index).children().first().text();
   var msp = msp;
   var sl = 0;
+  var sum = 0;
+    // dung hang co stt đc nhan vao de lay msp
     $('#table_bill_details tr').each(function(rowIndex, row) {
         // Lặp qua từng hàng
         $(row).find("td:eq(0)").each(function(colIndex, col) {
@@ -456,6 +458,7 @@ function adminRemoveProInOrder(index){
         });
 
     });
+    // dung hang chua msp de lay slg
     $('#table_bill_details tr').each(function(rowIndex, row) {
         // Lặp qua từng hàng
         $(row).find("td").each(function(colIndex, col) {
@@ -507,13 +510,22 @@ function adminRemoveProInOrder(index){
                         });
                         $("#table_bill_details tr").each(function(rowIndex, row) {
                             $(row).find("td:first").text(rowIndex);
+
+                            $(row).find("td:eq(6)").each(function(colIndex, col) {
+                                // Lấy giá trị từng cột
+                                var value = $(col).text();
+                                sum = sum + parseInt(value.replace(/,/g, ''));
+                            });
                         });
+
                         Swal.fire({
                             text: 'Xóa thành công',
                             icon: 'success',
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#ff96b7'
                         })
+                        // $('#total').text(sum+",000");
+                        $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
                     }
                 }, error: function (){
                     Swal.fire({
@@ -534,6 +546,7 @@ function adminAddProInOrder(){
   var msp = $('#msp').val();
   var slg = $('#slg').val();
   var notes = $('#notes').val();
+  var sum = 0;
     $.ajax({
         url: "adminAddProInOrder",
         type: "GET",
@@ -552,13 +565,23 @@ function adminAddProInOrder(){
                         var value = $(col).text();
                         if(value === msp){
                             var slg_td = $(row).find("td:eq(4)").text();
-                            var new_slg = parseInt(slg_td)+ 1;
+                            var price = $(row).find("td:eq(5)").text();
+                            var new_slg = parseInt(slg_td) + parseInt(slg);
+                            var new_price = parseInt(price.replace(/,/g, '')) * new_slg;
                             $(row).find("td:eq(4)").text(new_slg);
+                            $(row).find("td:eq(6)").text(new_price.toLocaleString('en-US'));
                         }
                     });
+                    $(row).find("td:eq(6)").each(function(colIndex, col) {
+                        // Lấy giá trị từng cột
+                        var value = $(col).text();
+                        sum = sum + parseInt(value.replace(/,/g, ''));
+                    });
                 });
+
                 $('#msp').val("");
                 $('#notes').val("");
+                $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
                 $.magnificPopup.close();
             }else if (parseInt(response) === 2){
                 $('#error').text("Thêm sản phẩm không thành công, xem lại trạng thái đơn hàng!");
@@ -567,8 +590,17 @@ function adminAddProInOrder(){
             }
             else {
                 $("#table_bill_details > tbody > tr:last").after(response);
+                $("#table_bill_details tr").each(function(rowIndex, row) {
+                    // Lặp qua từng hàng
+                    $(row).find("td:eq(6)").each(function(colIndex, col) {
+                        // Lấy giá trị từng cột
+                        var value = $(col).text();
+                        sum = sum + parseInt(value.replace(/,/g, ''));
+                    });
+                });
                 $('#msp').val("");
                 $('#notes').val("");
+                $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
                 $.magnificPopup.close();
             }
 
