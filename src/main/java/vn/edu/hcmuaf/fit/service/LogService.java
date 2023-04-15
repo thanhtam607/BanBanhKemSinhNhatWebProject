@@ -38,11 +38,152 @@ public class LogService {
                         if(user != null){
                             userN = user.getName();
                         }
-                        listLog.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
+                        if(rs.getInt(7)!= -1) {
+                            listLog.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
+                        }
                     }
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
             }
             return listLog;
         }
+        public static List<Log> findByUserName(String userName){
+            List<Log> res = new ArrayList<>();
+          for(Log log : getListLog()){
+              if(log.getUser().equals(userName))
+                  res.add(log);
+          }
+            return res;
+        }
+    public static String getDate(String datetime){
+        String[] date = datetime.split(" ");
+        return  date[0];
+    }
+        public static List<Log> findByDate(String date){
+            List<Log> res = new ArrayList<>();
+            String[] d = getDate(date).split("-");
+            String userN;
+            User user;
+            try {
+                PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM logs WHERE year(CREATE_AT)= ? AND MONTH(CREATE_AT) =? AND DAY(CREATE_AT) = ?; ");
+                stm.setString(1,d[0]);
+                stm.setString(2,d[1]);
+                stm.setString(3,d[2]);
+
+                ResultSet rs = stm.executeQuery();
+                while(rs.next()){
+                    userN = rs.getString(3);
+                    user = UserService.findById(userN);
+                    if(user != null){
+                        userN = user.getName();
+                    }
+                    res.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
+                     }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return res;
+        }
+    public static List<Log> findByDate(String fromDate, String toDate){
+        List<Log> res = new ArrayList<>();
+        String userN;
+        User user;
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM logs WHERE CREATE_AT between ? and ?;");
+            stm.setString(1,fromDate);
+            stm.setString(2, toDate);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                userN = rs.getString(3);
+                user = UserService.findById(userN);
+                if(user != null){
+                    userN = user.getName();
+                }
+                res.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+    public static List<Log> findByContent(String content){
+        List<Log> res = new ArrayList<>();
+        String userN;
+        User user;
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM logs WHERE CONTENT = ?;");
+            stm.setString(1,content);
+
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                userN = rs.getString(3);
+                user = UserService.findById(userN);
+                if(user != null){
+                    userN = user.getName();
+                }
+                res.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+    public static List<Log> findByLevle(int level){
+        List<Log> res = new ArrayList<>();
+        String userN;
+        User user;
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM logs WHERE LEVEL = ?;");
+            stm.setInt(1,level);
+
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                userN = rs.getString(3);
+                user = UserService.findById(userN);
+                if(user != null){
+                    userN = user.getName();
+                }
+                res.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+    public static List<String> getListUser(){
+            List<String> res = new ArrayList<>();
+        String userN;
+        User user;
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT distinct USER FROM logs ");
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                userN = rs.getString(1);
+                user = UserService.findById(userN);
+                if(user != null){
+                    userN = user.getName();
+                }
+                res.add(userN);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+    public static List<String> getListContent(){
+        List<String> res = new ArrayList<>();
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT distinct CONTENT FROM logs ");
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                res.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+    public static void main(String[] args) {
+        System.out.println(getListUser().toString());
+    }
 }

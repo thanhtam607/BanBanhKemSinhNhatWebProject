@@ -207,7 +207,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 .sidebar .navbar .dropdown-item {
-    padding-left: 25px;
+
     border-radius: 0 30px 30px 0;
     color: var(--light);
 }
@@ -485,7 +485,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     margin-top: -20px;
     display: flow;
 }
-.select-all div{
+.select-all div, .choose-all div{
     float: right;
 }
 .table-striped img{
@@ -522,7 +522,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     border-radius: 5px;
 }
 .log{
-    font-size: 15px;
+    font-size: 14px;
+    margin: 0px;
 }
 .log th{
     margin-left: 20px;
@@ -530,3 +531,20 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .level-log{
     text-align: center;
 }
+.btn-group{
+    margin-left: 20px;
+}
+.dropdown-item span{
+    float: right;
+}
+.choose-all #select-all{
+    margin-bottom: 20px;
+
+}
+.level-log{
+    text-align: left;
+}
+.level-log i{
+    margin-left: 10px;
+}
+

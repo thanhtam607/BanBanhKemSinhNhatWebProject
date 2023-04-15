@@ -118,12 +118,10 @@
                             <!-- filter sort -->
                             <div class="filter" id="filter__sort">
                                 <span class="filter__item-label">Sắp xếp:</span>
-
                                 <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <input type="button" id="type">
+                                    <input type="button" id="type" value="<%=request.getParameter("sortValue")%>">
                                     <span></span>
                                 </div>
-
                                 <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
                                     <%List<String> listOption = new ArrayList<String>();
                                         listOption.add("Mặc định");
@@ -135,10 +133,10 @@
                                         for(String s: listOption){
                                             val = request.getParameter("sortValue");
                                             if(s.equals(val)){%>
-                                    <li><a class ="text-pink" href="ListProduct_Admin?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></a></li>
+                                    <li><a  href="ListProduct_Admin?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></a></li>
                                     <%}
                                     else{%>
-                                    <li><a id="sortValue" class ="text-pink" href="ListProduct_Admin?sortValue=<%=s%>" value="<%=s%>"><%=s%></a></li>
+                                    <li><a class ="text-pink" href="ListProduct_Admin?sortValue=<%=s%>" value="<%=s%>"><%=s%></a></li>
                                     <%}%>
                                     <%}%>
                                 </ul>

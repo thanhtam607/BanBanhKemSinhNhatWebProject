@@ -118,19 +118,82 @@
       <!-- content tabs -->
 
       <div class="col-12">
+
         <div class="row">
+          <div class="choose-all">
+            <div>
+              <input class="form-check-input" type="checkbox" id="select-all" > Chọn tất cả</div>
+          </div>
             <div class="form form--profile">
               <div class="row row--form">
                 <div class="col-12">
-                <div class="col-12 col-md-12 col-lg-12 col-xl-12" >
                   <table class="table table-striped log">
                     <thead>
                     <tr>
-                      <th scope="col">Thời gian</th>
-                      <th scope="col">Level</th>
-                      <th scope="col">Người dùng</th>
-                      <th scope="col">Hoạt động</th>
+                      <th scope="col">Thời gian
+                        <div class="btn-group">
+                          <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="time">
+                          </div>
+                            <div class="dropdown-menu p-4">
+                              <div class="form-group">
+                                <label for="exampleDropdownFormEmail2">Từ ngày</label>
+                                <input type="date" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleDropdownFormPassword2">Đến ngày</label>
+                                <input type="date" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
+                              </div>
+                              <button class="btn" >Lọc</button>
+                            </div>
+                          </div>
+                        </th>
+                      <th scope="col">Level
+                        <div class="filter" id="filter__level__log">
+                          <span class="filter__item-label"></span>
+                          <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-level-log" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <input type="button" id="type">
+                          </div>
+                          <ul class="filter__item-menu list-group dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
+                            <li><a class ="text-pink dropdown-item" href="#" selected="true" value="0">Tất cả</a></li>
+                            <li><a   class ="text-success dropdown-item"href="#" value="1">Thành công
+                              <span class="text-success"><i class="bi bi-check-circle-fill"></i></span></a></li>
+                            <li><a class ="text-warning dropdown-item" href="#" value="2">Cảnh báo
+                              <span class="text-warning">
+                              <i class="bi bi-exclamation-circle-fill"></i>
+                            </span></a></li>
+                            <li><a class ="text-danger dropdown-item" href="#" value="3">Nguy hiểm
+                              <span class="text-danger"><i class="bi bi-x-circle-fill"></i></span></a></li>
+
+                          </ul>
+                        </div>
+                      </th>
+                      <th scope="col">Người dùng
+                        <div class="btn-group">
+                        <span class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="user">
+                        </span>
+                        <div class="dropdown-menu">
+                          <%List<String> listUser = (List<String>) request.getAttribute("listUser");
+                          if(listUser.size()!=0){
+                          for(String s: listUser){%>
+                          <a class="dropdown-item" href="#"><%=s%></a>
+                          <%}}%>
+                        </div>
+                      </div>
+                      </th>
+                      <th scope="col">Hoạt động
+                        <div class="btn-group">
+                          <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                          </button>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </div>
+                        </div>
+                      </th>
                       <th scope="col">Source</th>
+                      <th scope="col">Chọn</th>
                     </tr>
                     </thead>
                     <tbody >
@@ -138,10 +201,18 @@
                     for(Log log: listLog){%>
                     <tr >
                       <td><%=log.getCreateAt()%></td>
-                      <td class="level-log"><%=log.getLevel()%></td>
+                      <td class="level-log"><%if(log.getLevel()==1){%>
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                      <%}else if(log.getLevel()==2){%>
+                        <i class="bi bi-exclamation-circle-fill text-warning"></i>
+                        <%}else%> <i class="bi bi-x-circle-fill text-danger"></i>
+                      </td>
                       <td><%=log.getUser()%></td>
                       <td><%=log.getContent()%></td>
                       <td><%=log.getSrc()%></td>
+                      <td class="check" >
+                        <input class="form-check-input" type="checkbox" name="check" value="<%=log.getId()%>"></td>
+                      <td>
                     </tr>
                     <%}%>
 
@@ -179,7 +250,6 @@
                     </div>
                   </div>
                   <!-- end paginator -->
-                </div>
               </div>
             </div>
           </div>

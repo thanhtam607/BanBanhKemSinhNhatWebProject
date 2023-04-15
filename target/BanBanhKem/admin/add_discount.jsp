@@ -214,7 +214,7 @@
             </div>
               <div class="col-12 col-md-12 col-lg-12 col-xl-12" >
                   <div class="select-all">
-                      <div href="ListProductRemoved">
+                      <div>
                           <input class="form-check-input" type="checkbox" id="select-all" > Chọn tất cả</div>
                   </div>
 
