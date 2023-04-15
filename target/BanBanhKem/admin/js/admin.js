@@ -440,30 +440,95 @@ function changeProfileAdmin(){
         }
     });
 }
-function adminRemoveProInOrder(i){
-  var idRe = $('#idRe');
-  var msp = $('#table-msp');
-  var slg = $('#table-slg');
-    $.ajax({
-        url: "adminRemoveProInOrder",
-        type: "GET",
-        data:{
-            msp:msp,
-            slg: slg,
-            idRe: idRe
-        },
-        success: function () {
-            $('tr#'+i).text("");
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Xóa thành công!',
-                    confirmButtonText: 'OK',
-                    confirmButtonColor: '#ff96b7'
-                })
+function adminRemoveProInOrder(index){
+  var id = $('#idRe').text();
+  var i = $("tr#"+index).children().first().text();
+  var msp = msp;
+  var sl = 0;
+    $('#table_bill_details tr').each(function(rowIndex, row) {
+        // Lặp qua từng hàng
+        $(row).find("td:eq(0)").each(function(colIndex, col) {
+            var value = $(col).text();
+            if (value === i) {
+               msp = $(row).find("td:eq(1)").text();
 
-        }
+            }
+        });
+
     });
+    $('#table_bill_details tr').each(function(rowIndex, row) {
+        // Lặp qua từng hàng
+        $(row).find("td").each(function(colIndex, col) {
+            var value = $(col).text();
+            if (value === msp) {
+                var slg_t = $(row).find("td:eq(4)").text();
+                sl = parseInt(slg_t);
+            }
+        });
+
+    });
+
+    Swal.fire({
+        text: 'Bạn có chắc muốn xóa sản phẩm này không?',
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Quay lại',
+        confirmButtonText: 'Xóa',
+        confirmButtonColor: '#ff96b7'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "adminRemoveProInOrder",
+                type: "GET",
+                data:{
+                    msp:msp,
+                    slg: sl,
+                    id: id
+                },
+                success: function (rep) {
+
+                    if(parseInt(rep) === 1){
+                        Swal.fire({
+                            text: 'Xóa không thành công',
+                            icon: 'error',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#ff96b7'
+                        })
+                    }else{
+                        $('#table_bill_details tr').each(function(rowIndex, row) {
+                            // Lặp qua từng hàng
+                            $(row).find("td:eq(1)").each(function(colIndex, col) {
+                                var value = $(col).text();
+                                if (value === msp) {
+                                    $(row).remove();
+                                }
+                            });
+
+                        });
+                        $("#table_bill_details tr").each(function(rowIndex, row) {
+                            $(row).find("td:first").text(rowIndex);
+                        });
+                        Swal.fire({
+                            text: 'Xóa thành công',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#ff96b7'
+                        })
+                    }
+                }, error: function (){
+                    Swal.fire({
+                        text: 'Xóa không thành công',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#ff96b7'
+                    })
+                }
+            });
+        }
+    }
+    );
 }
+
 function adminAddProInOrder(){
   var idRec = $('#idRec').val();
   var msp = $('#msp').val();
@@ -480,8 +545,6 @@ function adminAddProInOrder(){
         },
         success: function (response) {
             if(parseInt(response) === 1) {
-                // $('#error').text("Sản phẩm đã được tăng số lượng!");
-                // $('#msp').val("");
                 $("#table_bill_details tr").each(function(rowIndex, row) {
                     // Lặp qua từng hàng
                     $(row).find("td").each(function(colIndex, col) {
@@ -494,9 +557,18 @@ function adminAddProInOrder(){
                         }
                     });
                 });
+                $('#msp').val("");
+                $('#notes').val("");
                 $.magnificPopup.close();
-            }else {
+            }else if (parseInt(response) === 2){
+                $('#error').text("Thêm sản phẩm không thành công, xem lại trạng thái đơn hàng!");
+                $('#msp').val("");
+                $('#notes').val("");
+            }
+            else {
                 $("#table_bill_details > tbody > tr:last").after(response);
+                $('#msp').val("");
+                $('#notes').val("");
                 $.magnificPopup.close();
             }
 
@@ -504,6 +576,10 @@ function adminAddProInOrder(){
         error: function (){
             $('#error').text("Không tìm thấy sản phẩm!");
             $('#msp').val("");
+            $('#notes').val("");
         }
     });
+}
+function save(){
+    location.reload();
 }

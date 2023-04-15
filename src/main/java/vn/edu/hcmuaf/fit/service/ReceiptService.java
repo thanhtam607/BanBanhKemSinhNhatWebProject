@@ -507,23 +507,53 @@ public class ReceiptService {
 
     public static void deleteProInCTHD(String id, String msp, int slg) {
         Statement stm = DBConnect.getInstall().get();
-        String sql,sql2 = "";
+        String sql, sql2 = "";
 
         int oldTotal = getReceiptByMahd(id).getTotal();
         int newTotal = oldTotal - (ProductService.findById(msp).getPrice() * slg);
         getReceiptByMahd(id).setTotal(newTotal);
-
         sql = "DELETE FROM bill_detail WHERE bill_detail.ID = '"+id+"' and bill_detail.idProduct = '"+msp+"'";
+
         sql2 = "UPDATE BILLS set BILLS.TOTAL_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
         try {
-            stm.executeUpdate(sql);
-            stm.executeUpdate(sql2);
+            if(getListMaSpCTHD(id).size() != 1){
+                stm.executeUpdate(sql);
+                stm.executeUpdate(sql2);
+            }
         } catch (SQLException se) {
             se.printStackTrace();
         }
 
 
     }
+//    public static void saveAdd(String id, String msp, int slg) {
+//        Statement stm = DBConnect.getInstall().get();
+//       String sql = "";
+//       int oldTotal = getReceiptByMahd(id).getTotal();
+//        int newTotal = oldTotal + (ProductService.findById(msp).getPrice() * slg);
+//        getReceiptByMahd(id).setTotal(newTotal);
+//
+//        sql = "UPDATE BILLS set BILLS.TOTAL_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
+//        try {
+//           stm.executeUpdate(sql);
+//        } catch (SQLException se) {
+//            se.printStackTrace();
+//        }
+//    }
+//    public static void saveRemove(String id, String msp, int slg) {
+//        Statement stm = DBConnect.getInstall().get();
+//       String sql = "";
+//       int oldTotal = getReceiptByMahd(id).getTotal();
+//        int newTotal = oldTotal - (ProductService.findById(msp).getPrice() * slg);
+//        getReceiptByMahd(id).setTotal(newTotal);
+//
+//        sql = "UPDATE BILLS set BILLS.TOTAL_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
+//        try {
+//           stm.executeUpdate(sql);
+//        } catch (SQLException se) {
+//            se.printStackTrace();
+//        }
+//    }
 
     public static void main(String[] args) {
 //        addCTHD("HD13", "B054", 2, "CMSN");

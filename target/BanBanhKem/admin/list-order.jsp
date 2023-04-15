@@ -213,10 +213,10 @@
                     <i class="fa fa-check"></i>
                   </a>
                   <%}%>
+                  <%if(rc.getStatus() == 0 || rc.getStatus() == 1){%>
                   <a href="AdminEditOrder?id=<%=rc.getId()%>" class="main__table-btn main__table-btn--edit">
                     <i class="fa fa-edit"></i>
                   </a>
-                  <%if(rc.getStatus() != 4){%>
                   <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                     <i class="fa fa-trash"></i>
                   </a>

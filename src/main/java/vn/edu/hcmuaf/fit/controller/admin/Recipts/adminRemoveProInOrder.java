@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "adminRemoveProInOrder", value = "/admin/adminRemoveProInOrder")
 public class adminRemoveProInOrder extends HttpServlet {
@@ -23,10 +24,15 @@ public class adminRemoveProInOrder extends HttpServlet {
         String id = request.getParameter("id");
         String msp = request.getParameter("msp");
         int slg = Integer.parseInt(request.getParameter("slg"));
-
-        ReceiptService.deleteProInCTHD(id, msp, slg);
-
-        response.sendRedirect("./AdminEditOrder?id="+id);
+        if(ReceiptService.getListMaSpCTHD(id).size() == 1 || ReceiptService.getReceiptByMahd(id).getStatus() == 3
+        || ReceiptService.getReceiptByMahd(id).getStatus() == 4){
+            PrintWriter out = response.getWriter();
+            out.println(1);
+            out.close();
+        }else{
+            ReceiptService.deleteProInCTHD(id, msp, slg);
+        }
+//            response.sendRedirect("./AdminEditOrder?id="+id);
     }
 
     @Override

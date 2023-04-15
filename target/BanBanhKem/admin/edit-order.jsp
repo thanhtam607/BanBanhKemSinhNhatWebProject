@@ -119,7 +119,7 @@
         <!-- main title -->
         <div class="col-12">
             <div class="main__title">
-                <h2 id="idRe">Chỉnh sửa đơn hàng - <%=receipt.getId()%></h2>
+                <h2>Chỉnh sửa đơn hàng - <span id="idRe"><%=receipt.getId()%></span></h2>
             </div>
         </div>
         <div class="tab-content" id="myTabContent">
@@ -238,27 +238,36 @@
                                         <td><%=rcs.getSolg()%></td>
                                         <td><%=rcs.formatNum(rcs.getPrice())%></td>
                                         <td><%=rcs.formatNum(rcs.getToTalPrice())%></td>
+
                                         <td>
-                                            <a href="#modal-delete<%=i%>" class=" main__table-btn main__table-btn--delete px-1 open-modal">
+                                            <%if(receipt.getStatus() != 4 || receipt.getStatus() != 3){%>
+                                            <button onclick="adminRemoveProInOrder('<%=i+1%>')" class=" main__table-btn main__table-btn--delete px-1">
                                                 <i class="fas fa-trash text-center"></i>
-                                            </a>
+                                            </button>
+                                            <%}%>
                                         </td>
                                     </tr>
+                                        <%--                                            <a href="#modal-delete<%=i%>" class=" main__table-btn main__table-btn--delete px-1 open-modal">--%>
+                                        <%--                                                <i class="fas fa-trash text-center"></i>--%>
+                                        <%--                                            </a>--%>
+                                        <!-- modal delete -->
+<%--                                        <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">--%>
+<%--                                            <h6 class="modal__title">Thông Báo</h6>--%>
+
+<%--                                            <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này khỏi đơn hàng?</p>--%>
+<%--                                            <p id="modal__error_text modal__text" class="text-danger mb-2"></p>--%>
+
+<%--                                            <div class="modal__btns">--%>
+<%--                                                <a href="adminRemoveProInOrder?msp=<%=rcs.getMasp()%>&&slg=<%=rcs.getSolg()%>&&id=<%=rcs.getMahd()%>" class="modal__btn modal__btn--apply" type="button">--%>
+<%--                                                    Xóa--%>
+<%--                                                </a>--%>
+<%--                                                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+                                        <!-- end modal delete -->
+
                                     </tbody>
-                                    <!-- modal delete -->
-                                    <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">
-                                        <h6 class="modal__title">Thông Báo</h6>
 
-                                        <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này khỏi đơn hàng?</p>
-
-                                        <div class="modal__btns">
-                                            <a href="adminRemoveProInOrder?id=<%=receipt.getId()%>&&msp=<%=rcs.getMasp()%>&&slg=<%=rcs.getSolg()%>" class="modal__btn modal__btn--apply" type="button">
-                                            Xóa
-                                            </a>
-                                            <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
-                                        </div>
-                                    </div>
-                                    <!-- end modal delete -->
                                     <!-- modal status -->
                                     <div id="modal-view" class="zoom-anim-dialog mfp-hide modal modal--view">
                                         <h6 class="modal__title">Thêm Sản Phẩm</h6>
@@ -287,13 +296,15 @@
 
                                             </div>
                                             <div class="modal__btns">
+<%--                                                <button class="modal__btn modal__btn--apply" type="submit">--%>
+<%--                                                    Xác nhận và đóng--%>
+<%--                                                </button>--%>
                                                 <button onclick="adminAddProInOrder()" class="modal__btn modal__btn--apply" type="submit">
                                                     Xác nhận và đóng
                                                 </button>
                                                 <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                                             </div>
                                         </div>
-
 
                                     </div>
                                     <!-- end modal status -->
@@ -308,9 +319,14 @@
                         </div>
                         <div class="col-12">
                             <div class="row">
+                                <%if(receipt.getStatus() != 4 || receipt.getStatus() != 3){%>
                                 <div class="col-12 col-lg-6">
                                     <a href="#modal-view"  type="button" class="form__btn open-modal">Thêm sản phẩm</a>
                                 </div>
+                                <div class="col-12 col-lg-6">
+                                    <button onclick="save()" type="button" class="form__btn flex-row-reverse">Lưu thay đổi</button>
+                                </div>
+                                <%}%>
                             </div>
                         </div>
                     </div>
@@ -325,6 +341,8 @@
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 <!-- JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/jquery.magnific-popup.min.js"></script>

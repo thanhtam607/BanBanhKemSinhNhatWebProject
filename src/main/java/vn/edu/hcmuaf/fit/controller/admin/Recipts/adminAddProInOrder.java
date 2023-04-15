@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.controller.admin.Recipts;
 
 import vn.edu.hcmuaf.fit.bean.User;
+import vn.edu.hcmuaf.fit.model.Receipt;
 import vn.edu.hcmuaf.fit.service.OrderService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
@@ -33,22 +34,30 @@ public class adminAddProInOrder extends HttpServlet {
         PrintWriter out = response.getWriter();
 
             if(ReceiptService.getListMaSpCTHD(idRec).contains(msp)){
+                ReceiptService.addCTHD(idRec, msp, slg, notes);
                 out.println(1);
-            }else {
-                out.println("<tr><td>" + index + "</td>\n" +
-                        "      <td>" + msp + "</td>\n" +
-                        "      <td>" + namePro + "</td>\n" +
-                        "      <td>" + notes + "</td>\n" +
-                        "      <td>" + slg + "</td>\n" +
-                        "      <td>" + pricePro + "</td>\n" +
-                        "      <td>" + totalPrice + "</td>\n" +
-                        "      <td>\n" +
-                        "          <a href=\"#modal-delete"+index+"\" class=\" main__table-btn main__table-btn--delete px-1 open-modal\">\n" +
-                        "              <i class=\"fas fa-trash text-center\"></i>\n" +
-                        "          </a>\n" +
-                        "           </td></tr>");
+            } else if (ReceiptService.getReceiptByMahd(idRec).getStatus() == 3 || ReceiptService.getReceiptByMahd(idRec).getStatus() == 4) {
+                out.println(2);
+            } else {
+//
+                    out.println("                                 <tr id=\""+index+"\">\n" +
+                            "                                        <td>"+index+"</td>\n" +
+                            "                                        <td>"+msp+"</td>\n" +
+                            "                                        <td>"+namePro+"</td>\n" +
+                            "                                        <td>"+notes+"</td>\n" +
+                            "                                        <td>"+slg+"</td>\n" +
+                            "                                        <td>"+Receipt.formatNum(pricePro)+"</td>\n" +
+                            "                                        <td>"+Receipt.formatNum(totalPrice)+"</td>\n" +
+                            "\n" +
+                            "                                        <td>\n" +
+                            "                                            <button onclick=\"adminRemoveProInOrder('"+index+"')\" class=\" main__table-btn main__table-btn--delete px-1\">\n" +
+                            "                                                <i class=\"fas fa-trash text-center\"></i>\n" +
+                            "                                            </button>\n" +
+                            "                                        </td>\n" +
+                            "                                    </tr>");
+                ReceiptService.addCTHD(idRec, msp, slg, notes);
+
             }
-        ReceiptService.addCTHD(idRec, msp, slg, notes);
 
     }
 

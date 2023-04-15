@@ -41,7 +41,9 @@ public class EditOrderUpdateDelivery extends HttpServlet {
             st = 4;
         }
         ReceiptService.updateDeliveryInBill(id, dayD, address);
+
         ReceiptService.updateState(id, st);
+
 
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("auth");
