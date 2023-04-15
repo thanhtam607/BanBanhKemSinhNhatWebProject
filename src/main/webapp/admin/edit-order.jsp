@@ -1,14 +1,13 @@
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
-<%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
-<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%--<%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>--%>
+<%--<%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>--%>
+<%--<%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>--%>
+<%--<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>--%>
 <%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.*" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,7 +119,7 @@
         <!-- main title -->
         <div class="col-12">
             <div class="main__title">
-                <h2>Chỉnh sửa đơn hàng</h2>
+                <h2>Chỉnh sửa đơn hàng - <span id="idRe"><%=receipt.getId()%></span></h2>
             </div>
         </div>
         <div class="tab-content" id="myTabContent">
@@ -194,9 +193,13 @@
                                             <label class="form__label" for="rights">Trạng thái ĐH</label>
                                             <select class="form__input" id="rights" name="state">
                                                 <% for(String status : statusName){
-                                                        if(status == receipt.getStatusName()){%>
+                                                        if(status.equals(receipt.getStatusName())){%>
                                                 <option selected value="<%=status%>"><%=status%></option>
-                                                <% } else {%>
+                                                <% } else if (receipt.getStatus() == 3) {%>
+                                                     <option disabled value="<%=status%>"><%=status%></option>
+                                                <%} else if (receipt.getStatus() == 2) {%>
+                                                <option <%=status.equals("Đã hủy") ? "disabled": " "%> value="<%=status%>"><%=status%></option>
+                                                <%} else {%>
                                                 <option value="<%=status%>"><%=status%></option>
                                                 <%}}%>
                                             </select>
@@ -211,29 +214,100 @@
                         </div>
                         <div class="col-12">
                             <div class="table-responsive margin-top-20px col-12 pl-0">
-                                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                <table id="table_bill_details" class="table text-start align-middle table-bordered table-hover mb-0">
                                     <thead>
                                     <tr class="text-black">
                                         <th scope="col">STT</th>
+                                        <th scope="col">Mã sản phẩm</th>
                                         <th scope="col">Tên sản phẩm</th>
                                         <th scope="col">Ghi chú</th>
                                         <th scope="col">Số lượng</th>
                                         <th scope="col">Đơn giá</th>
                                         <th scope="col">Tổng</th>
+                                        <th scope="col">Tùy chọn</th>
                                     </tr>
                                     </thead>
                                     <% for (int i = 0; i < receiptsDt.size(); i++){
                                         Bill_Detail rcs = receiptsDt.get(i);%>
                                     <tbody>
-                                    <tr>
+                                    <tr id="<%=i + 1%>">
                                         <td><%=i + 1%></td>
+                                        <td><%=rcs.getMasp()%></td>
                                         <td><%=rcs.getNamePro()%></td>
                                         <td><%=rcs.getNote()%></td>
                                         <td><%=rcs.getSolg()%></td>
                                         <td><%=rcs.formatNum(rcs.getPrice())%></td>
                                         <td><%=rcs.formatNum(rcs.getToTalPrice())%></td>
+
+                                        <td>
+                                            <%if(receipt.getStatus() != 4 || receipt.getStatus() != 3){%>
+                                            <button onclick="adminRemoveProInOrder('<%=i+1%>')" class=" main__table-btn main__table-btn--delete px-1">
+                                                <i class="fas fa-trash text-center"></i>
+                                            </button>
+                                            <%}%>
+                                        </td>
                                     </tr>
+                                        <%--                                            <a href="#modal-delete<%=i%>" class=" main__table-btn main__table-btn--delete px-1 open-modal">--%>
+                                        <%--                                                <i class="fas fa-trash text-center"></i>--%>
+                                        <%--                                            </a>--%>
+                                        <!-- modal delete -->
+<%--                                        <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">--%>
+<%--                                            <h6 class="modal__title">Thông Báo</h6>--%>
+
+<%--                                            <p class="modal__text">Bạn có chắc muốn xóa sản phẩm này khỏi đơn hàng?</p>--%>
+<%--                                            <p id="modal__error_text modal__text" class="text-danger mb-2"></p>--%>
+
+<%--                                            <div class="modal__btns">--%>
+<%--                                                <a href="adminRemoveProInOrder?msp=<%=rcs.getMasp()%>&&slg=<%=rcs.getSolg()%>&&id=<%=rcs.getMahd()%>" class="modal__btn modal__btn--apply" type="button">--%>
+<%--                                                    Xóa--%>
+<%--                                                </a>--%>
+<%--                                                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+                                        <!-- end modal delete -->
+
                                     </tbody>
+
+                                    <!-- modal status -->
+                                    <div id="modal-view" class="zoom-anim-dialog mfp-hide modal modal--view">
+                                        <h6 class="modal__title">Thêm Sản Phẩm</h6>
+
+                                        <div class="form form--profile">
+                                            <div class="row row--form">
+                                                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                    <div class="form__group">
+                                                        <label class="form__label" for="msp">Mã Sản Phẩm</label>
+                                                        <input class="d-none" id="idRec" name="idRec" value="<%=receipt.getId()%>">
+                                                        <input id="msp" type="text" name="msp" class="form__input"
+                                                               value="" placeholder="Vui lòng nhập chính xác mã sản phẩm..." required>
+                                                        <p id="error" class="text-danger mb-2"></p>
+                                                    </div>
+                                                    <div class="form__group">
+                                                        <label class="form__label" for="slg">Số lượng mua</label>
+                                                        <input id="slg" type="number" name="slg" class="form__input"
+                                                               value="1">
+                                                    </div>
+                                                    <div class="form__group">
+                                                        <label class="form__label" for="notes">Lời chúc trên bánh</label>
+                                                        <input type="text" id="notes" name="notes" class="form__input text-lowercase"
+                                                               placeholder="Chúc mừng sinh nhật....">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal__btns">
+<%--                                                <button class="modal__btn modal__btn--apply" type="submit">--%>
+<%--                                                    Xác nhận và đóng--%>
+<%--                                                </button>--%>
+                                                <button onclick="adminAddProInOrder()" class="modal__btn modal__btn--apply" type="submit">
+                                                    Xác nhận và đóng
+                                                </button>
+                                                <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- end modal status -->
                                     <% } %>
                                 </table>
                             </div>
@@ -245,12 +319,14 @@
                         </div>
                         <div class="col-12">
                             <div class="row">
+                                <%if(receipt.getStatus() == 0 || receipt.getStatus() == 1 || receipt.getStatus() == 2){%>
                                 <div class="col-12 col-lg-6">
-                                    <a href="#" type="button" class="form__btn">Thêm sản phẩm</a>
+                                    <a href="#modal-view"  type="button" class="form__btn open-modal">Thêm sản phẩm</a>
                                 </div>
                                 <div class="col-12 col-lg-6">
-                                    <input class="form__btn" type="submit" value="Lưu thông tin">
+                                    <button onclick="save()" type="button" class="form__btn flex-row-reverse">Lưu thay đổi</button>
                                 </div>
+                                <%}%>
                             </div>
                         </div>
                     </div>
@@ -259,12 +335,14 @@
         </div>
     </div>
 </main>
-<!-- end modal delete -->
+
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 <!-- JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/jquery.magnific-popup.min.js"></script>

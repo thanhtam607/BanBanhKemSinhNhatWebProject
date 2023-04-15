@@ -45,11 +45,8 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
-<<<<<<< HEAD
-    <title>Admin | Shop Bánh Kem</title>
-=======
+
 	<title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
->>>>>>> 28d2b9ca9be011583e87ab33a2d7505895a85865
 </head>
 
 <body>

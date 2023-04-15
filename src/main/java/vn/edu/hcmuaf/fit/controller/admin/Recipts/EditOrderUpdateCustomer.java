@@ -2,13 +2,16 @@ package vn.edu.hcmuaf.fit.controller.admin.Recipts;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.service.LogService;
+import vn.edu.hcmuaf.fit.service.ProductService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "EditOrderUpdateCustomer", value = "/admin/EditOrderUpdateCustomer")
 public class EditOrderUpdateCustomer extends HttpServlet {
@@ -26,6 +29,9 @@ public class EditOrderUpdateCustomer extends HttpServlet {
         String mailRE = request.getParameter("mailRE");
         String note = request.getParameter("note");
         String id = request.getParameter("id");
+
+
+
         ReceiptService.updateInfoCustomerInBill(id, usernameRE, phoneRE, mailRE);
         ReceiptService.updateNoteInBill(id, note);
 

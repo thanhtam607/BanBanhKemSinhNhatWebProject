@@ -53,7 +53,7 @@ public class AddNewOrder extends HttpServlet {
         gh.setTenKH(ten);
 
 
-        Order order =new Order(auth, listItemC, todayFM,CartService.totalPrice(listItemC), ghichu,gh);
+        Order order = new Order(auth, listItemC, todayFM,CartService.totalPrice(listItemC), ghichu,gh);
 
         if(notesForDetail!=null){
         for(int i =0; i< notesForDetail.length ;i++){

@@ -421,7 +421,7 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                     <p class="reviews__text"><%=listcmt.get(i).getBinhLuan()%></p>
                                                 </div>
                                                 <!-- end modal view -->
-                                                <!-- end modal delete -->
+                                                <!--  modal delete -->
                                                 <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal">
                                                     <h6 class="modal__title">Xóa Bình Luận</h6>
 

@@ -122,7 +122,7 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <form action="AdminUpdateProfile" method="post" class="form form--profile">
+                        <div class="form form--profile">
 
                             <div class="row row--form">
                                 <div class="col-12">
@@ -148,7 +148,7 @@
                                 <div class="col-12">
                                     <div class="form__group">
                                         <label class="form__label" for="email">Email</label>
-                                        <input type="text" id="email" name="email" class="form__input"
+                                        <input type="email" id="email" name="email" class="form__input" required
                                                value="<%=auth.getEmail()%>" placeholder="Email">
                                     </div>
                                 </div>
@@ -163,10 +163,10 @@
 
                             </div>
                             <div class="col-6" style="padding: 0;">
-                                <button type="submit" class="form__btn">Lưu thay đổi</button>
+                                <button onclick="changeProfileAdmin()" type="button" class="form__btn">Lưu thay đổi</button>
                             </div>
 
-                        </form>
+                        </div>
                     </div>
                     <%--                password form --%>
                     <div class="col-lg-6 col-md-6">

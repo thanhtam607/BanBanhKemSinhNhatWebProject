@@ -29,7 +29,6 @@ public class AdminUpdateProfile extends HttpServlet {
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
 
-
         UserService.updateProfile(username, phone, address, email, auth);
         request.getRequestDispatcher("edit-profile.jsp").forward(request, response);
     }

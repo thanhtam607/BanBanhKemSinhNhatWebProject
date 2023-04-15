@@ -23,15 +23,6 @@ public class ReceiptService {
             try {
                 ResultSet rs = statement.executeQuery(sql);
                 while (rs.next()) {
-                    ResultSet rsCmt = stmt1.executeQuery("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID");
-//                    List<Comment> listCmts = new ArrayList<Comment>();
-//                    String s1 = rs.getString(13);
-//                    while (rsCmt.next()) {
-//                        String s2 = rsCmt.getString(1);
-//                        if (s1.equals(s2)) {
-//                            listCmts.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
-//                        }
-//                    }
                     Receipt rc = new Receipt(rs.getString(1),
                             rs.getString(2), rs.getString(3),
                             rs.getString(4), rs.getString(5),
@@ -50,18 +41,18 @@ public class ReceiptService {
         }
         return list;
     }
+
     public static List<Comment> getListComment(String id) {
         List<Comment> list = new ArrayList<Comment>();
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                    ResultSet rsCmt = statement.executeQuery("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID and ACCOUNTS.ID = '"+id+"'");
-                    while (rsCmt.next()) {
-                            list.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
-                    }
-
+                ResultSet rsCmt = statement.executeQuery("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID and ACCOUNTS.ID = '" + id + "'");
+                while (rsCmt.next()) {
+                    list.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
                 }
-        catch (SQLException e) {
+
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         else {
@@ -144,8 +135,8 @@ public class ReceiptService {
         return list;
     }
 
-    public static Map<String,Integer> getAllCakeThisMonth() {
-        Map<String,Integer> map = new HashMap<>();
+    public static Map<String, Integer> getAllCakeThisMonth() {
+        Map<String, Integer> map = new HashMap<>();
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
@@ -157,7 +148,7 @@ public class ReceiptService {
                         "GROUP BY  products.idProduct\n HAVING slg > 0\n" +
                         "ORDER BY slg DESC LIMIT 10");
                 while (rs.next()) {
-                   map.put(rs.getString(1), rs.getInt(2));
+                    map.put(rs.getString(1), rs.getInt(2));
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -194,10 +185,11 @@ public class ReceiptService {
         }
         return result;
     }
+
     public static int getDoanhThuToDay() {
         int rs = 0;
         for (Receipt r : getAllReceiptToDay()) {
-            if (r.getStateInt() != 4) {
+            if (r.getStatus() != 4) {
                 rs += r.getMoney();
             }
         }
@@ -207,7 +199,7 @@ public class ReceiptService {
     public static int getDoanhThuThisMonth() {
         int rs = 0;
         for (Receipt r : getAllReceiptThisMonth()) {
-            if (r.getStateInt() != 4) {
+            if (r.getStatus() != 4) {
                 rs += r.getMoney();
             }
         }
@@ -240,17 +232,26 @@ public class ReceiptService {
         return list;
     }
 
+    public static List<String> getListMaSpCTHD(String id) {
+        List<String> list = new ArrayList<>();
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT BILL_DETAIL.idProduct \n" +
+                        "from BILL_DETAIL WHERE BILL_DETAIL.ID = '" + id + "' ORDER BY BILL_DETAIL.ID DESC");
+                while (rs.next()) {
+                    list.add(rs.getString(1));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có msp");
+        }
+        return list;
+    }
 
-//    public static List<Receipt> getctkh(String makh) {
-//        List<Receipt> list = getAllReceipt();
-//        List<Receipt> rs = new ArrayList<>();
-//        for (Receipt rc : list) {
-//            if (rc.getMakh().equals(makh)) {
-//                rs.add(rc);
-//            }
-//        }
-//        return rs;
-//    }
+
     public static List<Receipt> getctkh(String makh) {
         List<Receipt> list = getData();
         List<Receipt> rs = new ArrayList<>();
@@ -285,7 +286,6 @@ public class ReceiptService {
         return null;
     }
 
-
     public static List<Receipt> getReceiptByMakh(String makh) {
         List<Receipt> list = getAllReceipt();
         List<Receipt> rs = new ArrayList<>();
@@ -297,13 +297,14 @@ public class ReceiptService {
 
         return rs;
     }
+
     public static List<String> getAllStatusNameOrder() {
         List<String> list = new ArrayList<>();
-        list.add("Chờ Xác Nhận");
-        list.add("Gói Hàng");
-        list.add("Đang Giao");
-        list.add( "Giao Thành Công");
-        list.add( "Đã hủy");
+        list.add("Chờ Xác Nhận"); //0
+        list.add("Gói Hàng");//1
+        list.add("Đang Giao");//2
+        list.add("Giao Thành Công");//3
+        list.add("Đã hủy");//4
         return list;
     }
 
@@ -313,11 +314,11 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT ID, DELIVERY_DATE, ADDRESS,EMAIL,PHONE,NAMECUSTOMER  from DELIVERY where ID ="+"'"+id+"'");
+                ResultSet rs = statement.executeQuery("SELECT ID, DELIVERY_DATE, ADDRESS,EMAIL,PHONE,NAMECUSTOMER  from DELIVERY where ID =" + "'" + id + "'");
                 while (rs.next()) {
                     Delivery delivery = new Delivery(rs.getString(1), rs.getString(6),
                             rs.getString(2), rs.getString(3),
-                            rs.getString(4),rs.getString(5));
+                            rs.getString(4), rs.getString(5));
                     list.add(delivery);
                 }
             } catch (SQLException e) {
@@ -399,7 +400,7 @@ public class ReceiptService {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE BILLS set BILLS.STATUS = "+ st +" WHERE BILLS.ID ='" + mahd + "'";
+                String sql = "UPDATE BILLS set BILLS.STATUS = " + st + " WHERE BILLS.ID ='" + mahd + "'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -407,35 +408,37 @@ public class ReceiptService {
         }
     }
 
-    public static void updateInfoCustomerInBill(String id, String name, String phone, String mail){
+    public static void updateInfoCustomerInBill(String id, String name, String phone, String mail) {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE DELIVERY set DELIVERY.NAMECUSTOMER = '"+name+"', " +
-                        "DELIVERY.PHONE = '"+phone+"', DELIVERY.EMAIL = '"+mail+"' " +
-                        "WHERE DELIVERY.id = '"+id+"'";
+                String sql = "UPDATE DELIVERY set DELIVERY.NAMECUSTOMER = '" + name + "', " +
+                        "DELIVERY.PHONE = '" + phone + "', DELIVERY.EMAIL = '" + mail + "' " +
+                        "WHERE DELIVERY.id = '" + id + "'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }
         }
     }
+
     public static void updateDeliveryInBill(String id, String deliveryDate, String address) {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE DELIVERY set DELIVERY_DATE = '"+deliveryDate+"', ADDRESS = '"+address+"' WHERE DELIVERY.ID = '"+id+"'";
+                String sql = "UPDATE DELIVERY set DELIVERY_DATE = '" + deliveryDate + "', ADDRESS = '" + address + "' WHERE DELIVERY.ID = '" + id + "'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }
         }
     }
+
     public static void updateNoteInBill(String id, String note) {
         Statement stm = DBConnect.getInstall().get();
         if (stm != null) {
             try {
-                String sql = "UPDATE BILLS set NOTES = '"+note+"' WHERE BILLS.ID = '"+id+"'";
+                String sql = "UPDATE BILLS set NOTES = '" + note + "' WHERE BILLS.ID = '" + id + "'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -473,10 +476,90 @@ public class ReceiptService {
         }
     }
 
+    public static void addCTHD(String id, String msp, int slg, String notes) {
+            List<String> listMsp = getListMaSpCTHD(id);
+            if(msp != null && ProductService.findById(msp) != null) {
+                Statement stm = DBConnect.getInstall().get();
+                String sql1, sql2 = "";
+                int oldTotal = getReceiptByMahd(id).getTotal();
+                int newTotal = oldTotal + (ProductService.findById(msp).getPrice() * slg);
+                getReceiptByMahd(id).setTotal(newTotal);
+
+                sql1 = "INSERT INTO BILL_DETAIL VALUES('" + id + "','" + msp + "'," + slg + ",'" + notes + "');";
+                sql2 = "UPDATE BILLS set BILLS.TOTAL_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
+                String sql3 = "UPDATE bill_detail set bill_detail.AMOUNT = bill_detail.AMOUNT+" + slg + "" +
+                        " WHERE bill_detail.idProduct = '" + msp + "' and bill_detail.ID = '" + id + "'";
+                try {
+                    if (listMsp.contains(msp)) {
+                        stm.executeUpdate(sql3);
+                    } else {
+                        stm.executeUpdate(sql1);
+                    }
+                    stm.executeUpdate(sql2);
+                } catch (SQLException se) {
+                    se.printStackTrace();
+                }
+            }
+
+    }
 
 
+
+    public static void deleteProInCTHD(String id, String msp, int slg) {
+        Statement stm = DBConnect.getInstall().get();
+        String sql, sql2 = "";
+
+        int oldTotal = getReceiptByMahd(id).getTotal();
+        int newTotal = oldTotal - (ProductService.findById(msp).getPrice() * slg);
+        getReceiptByMahd(id).setTotal(newTotal);
+        sql = "DELETE FROM bill_detail WHERE bill_detail.ID = '"+id+"' and bill_detail.idProduct = '"+msp+"'";
+
+        sql2 = "UPDATE BILLS set BILLS.TOTAL_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
+        try {
+            if(getListMaSpCTHD(id).size() != 1){
+                stm.executeUpdate(sql);
+                stm.executeUpdate(sql2);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+
+    }
+//    public static void saveAdd(String id, String msp, int slg) {
+//        Statement stm = DBConnect.getInstall().get();
+//       String sql = "";
+//       int oldTotal = getReceiptByMahd(id).getTotal();
+//        int newTotal = oldTotal + (ProductService.findById(msp).getPrice() * slg);
+//        getReceiptByMahd(id).setTotal(newTotal);
+//
+//        sql = "UPDATE BILLS set BILLS.TOTAL_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
+//        try {
+//           stm.executeUpdate(sql);
+//        } catch (SQLException se) {
+//            se.printStackTrace();
+//        }
+//    }
+//    public static void saveRemove(String id, String msp, int slg) {
+//        Statement stm = DBConnect.getInstall().get();
+//       String sql = "";
+//       int oldTotal = getReceiptByMahd(id).getTotal();
+//        int newTotal = oldTotal - (ProductService.findById(msp).getPrice() * slg);
+//        getReceiptByMahd(id).setTotal(newTotal);
+//
+//        sql = "UPDATE BILLS set BILLS.TOTAL_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
+//        try {
+//           stm.executeUpdate(sql);
+//        } catch (SQLException se) {
+//            se.printStackTrace();
+//        }
+//    }
 
     public static void main(String[] args) {
+//        addCTHD("HD13", "B054", 2, "CMSN");
+//        System.out.println(getListCTHD("HD13"));
+//        deleteProInCTHD("HD13", "B054", 6);
+        System.out.println(getListMaSpCTHD("HD16"));
     }
 
 

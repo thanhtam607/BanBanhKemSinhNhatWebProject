@@ -271,7 +271,7 @@
                                 <button onclick="cancelOrder('<%=r.getId()%>')" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2" >
                                             Hủy đơn hàng
                                 </button>
-                                <%}if(r.getStateInt() == 4){%>
+                                <%}if(r.getStatus() == 4){%>
                                 <button onclick="buyAgain('<%=r.getId()%>')" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2" >
                                     Mua lại
                                 </button>
