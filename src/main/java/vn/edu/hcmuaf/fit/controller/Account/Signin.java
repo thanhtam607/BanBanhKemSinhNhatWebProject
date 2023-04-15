@@ -50,13 +50,19 @@ public class Signin extends HttpServlet {
                 session.setAttribute("auth", user);
                 Customer customer = CustomerService.getCusByIdAcc(user.getId());
                 session.setAttribute("cust", customer);
+
+                String previousPageUrl = (String) session.getAttribute("previousPageUrl");
+                if (previousPageUrl != null) {
+
+                    response.sendRedirect(previousPageUrl);
+                } else {
+                    response.sendRedirect("/Index");
+                }
+
                 log.setContent("Đăng nhập thành công vào trang web");
                 List<ItemProductInCart> listItemCart = CartService.findItemCartByIdUser(user.getId());
                 session.setAttribute("itemCart", listItemCart);
 
-
-
-                response.sendRedirect(request.getContextPath() + "/Index");
             }
             LogService.addLog(log);
         }

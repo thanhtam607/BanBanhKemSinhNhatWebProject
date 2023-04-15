@@ -188,6 +188,7 @@
                         <thead>
                         <tr>
                             <th>STT</th>
+                            <th>Mã SP</th>
                             <th>Tên sản phẩm</th>
                             <th>Loại</th>
                             <th>Giá (VND)</th>
@@ -208,6 +209,10 @@
                         <tr>
                             <td>
                                 <div class="main__table-text"><%=tag * 15 + 1 + i%>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="main__table-text"><%=pro.getId()%>
                                 </div>
                             </td>
                             <td>

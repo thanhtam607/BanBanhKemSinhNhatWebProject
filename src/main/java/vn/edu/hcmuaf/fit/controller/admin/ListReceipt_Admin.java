@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller.admin;
 
+import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Receipt;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
@@ -33,6 +34,13 @@ public class ListReceipt_Admin extends HttpServlet {
         Map<String, Integer> map = ReceiptService.getAllCakeThisMonth();
         request.setAttribute("map-hot", map);
 
+//        HttpSession session = request.getSession();
+//        User auth= (User) session.getAttribute("auth");
+//        if(auth==null || !auth.checkRole()){
+//            request.setAttribute("error","Bạn không có quyền truy cập");
+//            response.sendRedirect("../blank_page.jsp");
+//            return;
+//        }
         request.getRequestDispatcher("admin-web.jsp").forward(request,response);
 
     }
