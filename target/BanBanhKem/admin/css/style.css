@@ -286,7 +286,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 .bootstrap-datetimepicker-widget.dropdown-menu {
     padding: 10px;
-    border-radius: 2px;
+    /*border-radius: 2px;*/
+    border-bottom: 1px #ff96b7;
+    border-left: 1px #ff96b7;
+    border-right: 1px #ff96b7;
+
 }
 
 .bootstrap-datetimepicker-widget table td.active,

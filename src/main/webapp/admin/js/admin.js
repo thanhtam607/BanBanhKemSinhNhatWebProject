@@ -189,13 +189,6 @@ function updateDetail(id){
 
 }
 
-function updateRole(id){
-    var user = document.getElementById("username").value;
-    var email = document.getElementById("email").value;
-    var fisrt = document.getElementById("firstname").value;
-    var last = document.getElementById("lastname").value;
-    location.href="Product/EditUser?makh =" + id + "username=" + user + "&email=" + email + "&firstname=" + fisrt + "&lastname=" + last ;
-}
 /*==============================
 hiển thị file
 ==============================*/
@@ -370,6 +363,7 @@ function addDiscount(){
         });
     }
 }
+
 function cancelCheck(){
     if(document.getElementById("all").checked == true){
         document.getElementById("all").checked = false;
@@ -460,5 +454,253 @@ function filterLog(type, value){
             document.getElementById("listLog").innerHTML = response;
         }
     });
+}
+function changePass(){
+  var email = $('#email').val();
+  var newpass = $('#newpass').val();
+  var confirmpass = $('#confirmpass').val();
+  var oldpass = $('#oldpass').val();
+    $.ajax({
+        url: "AdminChangePassWord",
+        type: "GET",
+        data:{
+            email:email,
+            oldpass: oldpass,
+            confirmpass: confirmpass,
+            newpass: newpass
+        },
+        success: function (response) {
+            if (parseInt(response) === 0) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đổi mật khẩu thành công!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                }).then((result) => {
+                    location.reload();
+                });
+            } else if (parseInt(response) === 1){
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Mật khẩu xác nhận không khớp!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                }).then((result) => {
+                    location.reload();
+                });
+
+            }else if (parseInt(response) === 2){
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Mật khẩu hiện tại không đúng!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                }).then((result) => {
+                    location.reload();
+                });
+            }
+
+        }
+    });
+}
+function changeProfileAdmin(){
+  var username = $('#username').val();
+  var phone = $('#phone').val();
+  var email = $('#email').val();
+  var address = $('#address').val();
+    $.ajax({
+        url: "AdminUpdateProfile",
+        type: "POST",
+        data:{
+            email:email,
+            username: username,
+            phone: phone,
+            address: address
+        },
+        success: function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Lưu thay đổi thành công!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                })
+
+        }
+    });
+}
+function adminRemoveProInOrder(index){
+  var id = $('#idRe').text();
+  var i = $("tr#"+index).children().first().text();
+  var msp = msp;
+  var sl = 0;
+  var sum = 0;
+    // dung hang co stt đc nhan vao de lay msp
+    $('#table_bill_details tr').each(function(rowIndex, row) {
+        // Lặp qua từng hàng
+        $(row).find("td:eq(0)").each(function(colIndex, col) {
+            var value = $(col).text();
+            if (value === i) {
+               msp = $(row).find("td:eq(1)").text();
+
+            }
+        });
+
+    });
+    // dung hang chua msp de lay slg
+    $('#table_bill_details tr').each(function(rowIndex, row) {
+        // Lặp qua từng hàng
+        $(row).find("td").each(function(colIndex, col) {
+            var value = $(col).text();
+            if (value === msp) {
+                var slg_t = $(row).find("td:eq(4)").text();
+                sl = parseInt(slg_t);
+            }
+        });
+
+    });
+
+    Swal.fire({
+        text: 'Bạn có chắc muốn xóa sản phẩm này không?',
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Quay lại',
+        confirmButtonText: 'Xóa',
+        confirmButtonColor: '#ff96b7'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "adminRemoveProInOrder",
+                type: "GET",
+                data:{
+                    msp:msp,
+                    slg: sl,
+                    id: id
+                },
+                success: function (rep) {
+
+                    if(parseInt(rep) === 1){
+                        Swal.fire({
+                            text: 'Xóa không thành công',
+                            icon: 'error',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#ff96b7'
+                        })
+                    }else{
+                        $('#table_bill_details tr').each(function(rowIndex, row) {
+                            // Lặp qua từng hàng
+                            $(row).find("td:eq(1)").each(function(colIndex, col) {
+                                var value = $(col).text();
+                                if (value === msp) {
+                                    $(row).remove();
+                                }
+                            });
+
+                        });
+                        $("#table_bill_details tr").each(function(rowIndex, row) {
+                            $(row).find("td:first").text(rowIndex);
+
+                            $(row).find("td:eq(6)").each(function(colIndex, col) {
+                                // Lấy giá trị từng cột
+                                var value = $(col).text();
+                                sum = sum + parseInt(value.replace(/,/g, ''));
+                            });
+                        });
+
+                        Swal.fire({
+                            text: 'Xóa thành công',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#ff96b7'
+                        })
+                        // $('#total').text(sum+",000");
+                        $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
+                    }
+                }, error: function (){
+                    Swal.fire({
+                        text: 'Xóa không thành công',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#ff96b7'
+                    })
+                }
+            });
+        }
+    }
+    );
+}
+
+function adminAddProInOrder(){
+  var idRec = $('#idRec').val();
+  var msp = $('#msp').val();
+  var slg = $('#slg').val();
+  var notes = $('#notes').val();
+  var sum = 0;
+    $.ajax({
+        url: "adminAddProInOrder",
+        type: "GET",
+        data:{
+            msp:msp,
+            slg: slg,
+            idRec: idRec,
+            notes: notes
+        },
+        success: function (response) {
+            if(parseInt(response) === 1) {
+                $("#table_bill_details tr").each(function(rowIndex, row) {
+                    // Lặp qua từng hàng
+                    $(row).find("td").each(function(colIndex, col) {
+                        // Lấy giá trị từng cột
+                        var value = $(col).text();
+                        if(value === msp){
+                            var slg_td = $(row).find("td:eq(4)").text();
+                            var price = $(row).find("td:eq(5)").text();
+                            var new_slg = parseInt(slg_td) + parseInt(slg);
+                            var new_price = parseInt(price.replace(/,/g, '')) * new_slg;
+                            $(row).find("td:eq(4)").text(new_slg);
+                            $(row).find("td:eq(6)").text(new_price.toLocaleString('en-US'));
+                        }
+                    });
+                    $(row).find("td:eq(6)").each(function(colIndex, col) {
+                        // Lấy giá trị từng cột
+                        var value = $(col).text();
+                        sum = sum + parseInt(value.replace(/,/g, ''));
+                    });
+                });
+
+                $('#msp').val("");
+                $('#notes').val("");
+                $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
+                $.magnificPopup.close();
+            }else if (parseInt(response) === 2){
+                $('#error').text("Thêm sản phẩm không thành công, xem lại trạng thái đơn hàng!");
+                $('#msp').val("");
+                $('#notes').val("");
+            }
+            else {
+                $("#table_bill_details > tbody > tr:last").after(response);
+                $("#table_bill_details tr").each(function(rowIndex, row) {
+                    // Lặp qua từng hàng
+                    $(row).find("td:eq(6)").each(function(colIndex, col) {
+                        // Lấy giá trị từng cột
+                        var value = $(col).text();
+                        sum = sum + parseInt(value.replace(/,/g, ''));
+                    });
+                });
+                $('#msp').val("");
+                $('#notes').val("");
+                $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
+                $.magnificPopup.close();
+            }
+
+        },
+        error: function (){
+            $('#error').text("Không tìm thấy sản phẩm!");
+            $('#msp').val("");
+            $('#notes').val("");
+        }
+    });
+}
+function save(){
+    location.reload();
 }
 

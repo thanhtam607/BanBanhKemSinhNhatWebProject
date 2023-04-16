@@ -4,6 +4,7 @@ import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.ProductService;
+import vn.edu.hcmuaf.fit.service.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -25,7 +26,7 @@ public class ListCustomer extends HttpServlet {
                 Collections.sort(listCus, new Comparator<Customer>() {
                     @Override
                     public int compare(Customer o1, Customer o2) {
-                        return o1.getTENKH().compareTo(o2.getTENKH());
+                        return UserService.findById(o1.getMAKH()).getName().compareTo(UserService.findById(o2.getMAKH()).getName());
                     }
                 });
             }

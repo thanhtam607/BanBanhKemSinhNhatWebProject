@@ -809,34 +809,34 @@ CREATE TABLE ACCOUNTS(ID CHAR(50) PRIMARY KEY not null,
 									 PASS VARCHAR(255),
 									 NAME VARCHAR(100),
 									 ROLE tinyint(4) NOT NULL DEFAULT 0,
-									STATUS tinyint(4) DEFAULT 0, TYPE VARCHAR(10) );
+									STATUS tinyint(4) DEFAULT 0, 
+									TYPE VARCHAR(10));
 INSERT INTO ACCOUNTS VALUES('AD01', 'thanhthuy@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Thanh Thùy', 1,0,null);
 INSERT INTO ACCOUNTS VALUES('AD02', 'thanhtam@gmail.com', 'b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0', 'Thanh Tâm', 1,0,null);
 INSERT INTO ACCOUNTS VALUES('AD03', 'thanhthuan@gmail.com', '35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281', 'Thanh Thuận', 1,0,null);
-INSERT INTO ACCOUNTS VALUES('AD04', 'nhom27@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 27', 1,0,null);
-INSERT INTO ACCOUNTS VALUES('AD05', 'nhom270@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 270', 1,0,null);
-INSERT INTO ACCOUNTS VALUES('AD06', 'nhom271@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 271', 0,0,null);
-INSERT INTO ACCOUNTS VALUES('AD07', 'nhom272@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 272', 0,0,null);
-INSERT INTO ACCOUNTS VALUES('AD08', 'nhom273@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 273', 0,0,null);
-INSERT INTO ACCOUNTS VALUES('AD09', 'nhom274@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 274', 0,0,null);
-INSERT INTO ACCOUNTS VALUES('AD10', 'nhom275@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nhóm 275', 0,0,null);
+INSERT INTO ACCOUNTS VALUES('AD04', 'nhom27@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nguyễn Văn Dũng', 1,0,null);
+INSERT INTO ACCOUNTS VALUES('AD05', 'nhom270@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nguyễn Văn Hữu Cảnh', 1,0,null);
+INSERT INTO ACCOUNTS VALUES('AD06', 'nhom271@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nguyễn Văn Tuấn Tú', 0,0,null);
+INSERT INTO ACCOUNTS VALUES('AD07', 'nhom272@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Nguyễn Thị Thu Thuý', 0,0,null);
+INSERT INTO ACCOUNTS VALUES('AD08', 'nhom273@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Trần Phi Hùng', 0,0,null);
+INSERT INTO ACCOUNTS VALUES('AD09', 'nhom274@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Lê Hữu Phước', 0,0,null);
+INSERT INTO ACCOUNTS VALUES('AD10', 'nhom275@gmail.com', '8a050fa1b4e6ed4a40629264f4f833da8bb5592e782d3c7ed9a4da7c3a3b5c53', 'Huỳnh Văn Biên', 0,0,null);
 
 /*==============================CUSTOMERS=====================================*/
 CREATE TABLE CUSTOMERS(ID CHAR(50) PRIMARY KEY NOT NULL,
-											 NAME VARCHAR(40),
 											 ADDRESS VARCHAR(60),
 											 PHONE VARCHAR(10),
 											 CONSTRAINT f_mTK FOREIGN KEY (ID) REFERENCES ACCOUNTS(ID));
- INSERT INTO CUSTOMERS VALUES('AD01', 'Thanh Thuỳ Huỳnh','TP.HCM', '0978675678');
- INSERT INTO CUSTOMERS VALUES('AD02', 'Thanh Tâm Nguyễn', 'TP.HCM', '0987675435');
- INSERT INTO CUSTOMERS VALUES('AD03', 'Mai Thanh Thuận','TP.HCM', '0987863764');
- INSERT INTO CUSTOMERS VALUES('AD04', 'Nguyễn Văn Dũng', 'TP.HCM', '0987467536');
- INSERT INTO CUSTOMERS VALUES('AD05', 'Nguyễn Văn Hữu Cảnh', 'BINH DUONG', '0987463578');
- INSERT INTO CUSTOMERS VALUES('AD06', 'Nguyễn Văn Tuấn Tú', 'DONG NAI', '0978365478');
- INSERT INTO CUSTOMERS VALUES('AD07', 'Nguyễn Thị Thu Thuý ', 'TP.HCM', '0987425367');
- INSERT INTO CUSTOMERS VALUES('AD08', 'Trần Phi Hùng', 'TP.HCM', '0976456736');
- INSERT INTO CUSTOMERS VALUES('AD09', 'Lê Hữu Phước', 'LONG AN', '0978365627');
- INSERT INTO CUSTOMERS VALUES('AD10', 'Huỳnh Văn Biên', 'TP.HCM', '0987362567');
+ INSERT INTO CUSTOMERS VALUES('AD01','TP.HCM', '0978675678');
+ INSERT INTO CUSTOMERS VALUES('AD02', 'TP.HCM', '0987675435');
+ INSERT INTO CUSTOMERS VALUES('AD03', 'TP.HCM', '0987863764');
+ INSERT INTO CUSTOMERS VALUES('AD04', 'TP.HCM', '0987467536');
+ INSERT INTO CUSTOMERS VALUES('AD05', 'BINH DUONG', '0987463578');
+ INSERT INTO CUSTOMERS VALUES('AD06',  'DONG NAI', '0978365478');
+ INSERT INTO CUSTOMERS VALUES('AD07',  'TP.HCM', '0987425367');
+ INSERT INTO CUSTOMERS VALUES('AD08',  'TP.HCM', '0976456736');
+ INSERT INTO CUSTOMERS VALUES('AD09',  'LONG AN', '0978365627');
+ INSERT INTO CUSTOMERS VALUES('AD10', 'TP.HCM', '0987362567');
 
 
  /*==============================BILLS=====================================*/
@@ -898,7 +898,7 @@ CREATE TABLE DELIVERY(ID CHAR(4),
 												ADDRESS VARCHAR(60) NOT NULL,
 												EMAIL VARCHAR(60),
 												PHONE VARCHAR(12),
-												NAME VARCHAR(60),
+												NAMECUSTOMER VARCHAR(60),
 												CONSTRAINT f_mhdgh FOREIGN KEY(ID) REFERENCES BILLS(ID));
 												
 INSERT INTO DELIVERY VALUES('HD01', '2022/10/14', 'Q1, TP HCM', null, null,null);
@@ -1059,9 +1059,3 @@ insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh
 insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
 insert into general_infor values('GI023', 'NameShop', 'Shop Bánh Kem');
 
--- 
--- SELECT*from customers
--- SELECT*from bills
--- SELECT*from delivery
--- UPDATE customers, bills set customers.NAME = 'thuy', customers.PHONE = '345346' WHERE bills.ID ='hd01' and customers.id = bills.CUSTOMER_ID
--- update bills set bills.NOTES 

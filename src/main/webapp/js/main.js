@@ -657,9 +657,7 @@ async function checkPass(email, pass) {
             type: "GET",
             success: function (response) {
                 console.log(response.toString());
-
                 if (parseInt(response) === 1) {
-
                     removePass(email);
                 } else {
                     Swal.fire({
@@ -799,10 +797,20 @@ function addOrder() {
     }
     console.log(note.toString())
     var haveDisk = document.getElementById("payment3").value;
-    var url1  ="AddNewOrder?ten" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
+    // var url1  ="AddNewOrder?ten=" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
+    var url1  ="AddNewOrder";
     $.ajax({
         url: url1,
         type: "GET",
+        data:{
+            ten: ten,
+            email: email,
+            diachi: diachi,
+            phone: phone,
+            ghichu: ghichu,
+            haveDisk: haveDisk,
+            note: note.toString()
+        },
         success: function () {
             document.getElementById("totalPro").innerHTML = "0";
             document.getElementById("totalPro1").innerHTML = "0";
@@ -863,60 +871,73 @@ function cartEmpty() {
 
 function cancelOrder(mdh) {
     var url = "RemoveOrder";
+    Swal.fire({
+        text: 'Bạn có chắc muốn hủy đơn hàng này không?',
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Quay lại',
+        confirmButtonText: 'Hủy Đơn Hàng',
+        confirmButtonColor: '#ff96b7'
+    }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(mdh).innerHTML = "<button onclick=\"buyAgain('" + mdh + "')\" type=\"submit\" style=\"border:1px solid #ccc;\" class=\"btn rounded-0 py-2 ml-2\" >\n" +
+                    "                                    Mua lại\n" +
+                    "                                </button>";
+                document.getElementById("statusName" + mdh).innerHTML = "<span>ĐÃ HỦY</span>";
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    data: {mahd: mdh},
+                    success: function () {
+                        Swal.fire({
+                            text: 'Hủy đơn hàng thành công',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#ff96b7'
+                        })
 
-    $.ajax({
-        url: url,
-        type: "GET",
-        data: {mahd: mdh},
-        success: function () {
-
-            Swal.fire({
-                text: 'Bạn có chắc muốn hủy đơn hàng này không?',
-                icon: 'question',
-                showCancelButton: true,
-                cancelButtonText: 'Quay lại',
-                confirmButtonText: 'Hủy Đơn Hàng',
-                confirmButtonColor: '#ff96b7'
-            }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById(mdh).innerHTML = "<button onclick=\"buyAgain('" + mdh + "')\" type=\"submit\" style=\"border:1px solid #ccc;\" class=\"btn rounded-0 py-2 ml-2\" >\n" +
-                            "                                    Mua lại\n" +
-                            "                                </button>";
-                        document.getElementById("statusName" + mdh).innerHTML = "<span>ĐÃ HỦY</span>";
                     }
-                }
-            );
+                });
+            }
         }
-    });
+    );
+
 }
 
 function buyAgain(mdh) {
     var url = "BuyAgain";
+    Swal.fire({
+        text: 'Bạn muốn mua lại đơn hàng này?',
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Quay lại',
+        confirmButtonText: 'Mua lại',
+        confirmButtonColor: '#ff96b7'
+    }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(mdh).innerHTML = " <button onclick=\"cancelOrder('" + mdh + "')\" type=\"submit\" style=\"border:1px solid #ccc;\" class=\"btn rounded-0 py-2 ml-2\" >\n" +
+                    "                                            Hủy đơn hàng\n" +
+                    "                                </button>";
+                document.getElementById("statusName" + mdh).innerHTML = "<span>CHỜ XÁC NHẬN</span>";
 
-    $.ajax({
-        url: url,
-        type: "GET",
-        data: {mahd: mdh},
-        success: function () {
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    data: {mahd: mdh},
+                    success: function () {
+                        Swal.fire({
+                            text: 'Xác nhận mua lại thành công!',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#ff96b7'
+                        })
 
-            Swal.fire({
-                text: 'Bạn muốn mua lại đơn hàng này?',
-                icon: 'question',
-                showCancelButton: true,
-                cancelButtonText: 'Quay lại',
-                confirmButtonText: 'Mua lại',
-                confirmButtonColor: '#ff96b7'
-            }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById(mdh).innerHTML = " <button onclick=\"cancelOrder('" + mdh + "')\" type=\"submit\" style=\"border:1px solid #ccc;\" class=\"btn rounded-0 py-2 ml-2\" >\n" +
-                            "                                            Hủy đơn hàng\n" +
-                            "                                </button>";
-                        document.getElementById("statusName" + mdh).innerHTML = "<span>CHỜ XÁC NHẬN</span>";
                     }
-                }
-            );
+                });
+            }
         }
-    });
+    );
+
 }
 
 /*-------------------
@@ -946,5 +967,6 @@ function changeProfile() {
             })
 
         }
+
     });
 }

@@ -21,21 +21,13 @@ public class EditUserProfile extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
-//        Customer customer = CustomerService.getCusByIdAcc(auth.getId());
 
         String ten = request.getParameter("ten");
         String diachi = request.getParameter("diachi");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
 
-        UserService.updateProfileEmail(email, auth);
-
-        UserService.updateProfileTenTk(ten, auth);
-
-        UserService.updateProfileAddress(diachi, auth);
-
-        UserService.updateProfilePhoneNo(phone, auth);
-
+        UserService.updateProfile(ten, phone, diachi, email, auth);
 
 
         Log log = new Log();

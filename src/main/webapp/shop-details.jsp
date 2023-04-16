@@ -285,14 +285,16 @@
 
                             <div class="product__details__tab__desc" id="list-comments">
                                 <%List<Comment> cmtList = pro.getComments();
-                                    for(Comment cmt : cmtList){%>
+                                    for(Comment cmt : cmtList){
+                                        if(cmt.getStatus() != -1){
+                                %>
                                 <div class="comment">
                                 <h6 style="margin-bottom: 10px;"><%= cmt.getkhachhang()%></h6>
                                 <i class="fa fa-calendar-o"></i> <span style="font-size: 13px; color: rgb(179, 178, 178);"><%=cmt.getDate()%></span>
                                 <p ><%=cmt.getBinhLuan()%></p>
                                 </div>
 
-                            <%}%>
+                            <%}}%>
                             </div>
                             <% if(auth!= null){%>
                             <div class = "input-comment">
