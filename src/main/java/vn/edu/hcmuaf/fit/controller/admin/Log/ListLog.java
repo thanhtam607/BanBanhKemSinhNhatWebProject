@@ -21,9 +21,11 @@ public class ListLog  extends HttpServlet {
         request.setAttribute("listLog", listLog);
 
         List<String> listUser = LogService.getListUser();
+        listUser.add(0,"Tất cả");
         request.setAttribute("listUser", listUser);
 
         List<String> listContent = LogService.getListContent();
+        listContent.add(0,"Tất cả");
         request.setAttribute("listContent", listContent);
 
         List<String> listLevel = new ArrayList<>();

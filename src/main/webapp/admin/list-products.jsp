@@ -119,7 +119,7 @@
                             <div class="filter" id="filter__sort">
                                 <span class="filter__item-label">Sắp xếp:</span>
                                 <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <input type="button" id="type" value="<%=request.getParameter("sortValue")%>">
+                                    <input type="button" id="type" value="<%=request.getParameter("sortValue")==null?"":request.getParameter("sortValue")%>">
                                     <span></span>
                                 </div>
                                 <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">

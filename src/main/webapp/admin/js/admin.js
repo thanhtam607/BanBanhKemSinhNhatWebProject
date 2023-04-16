@@ -346,14 +346,12 @@ function addDiscount(){
         var checkbox = document.getElementsByName('check');
         var listIdPros= new Array();
         var listId;
-
         for(let i=0; i<checkbox.length; i++){
             if(checkbox[i].checked==true){
                 listIdPros.push(checkbox[i].value);
             }
         }
         listId = listIdPros.toString();
-        console.log(listId);
         $.ajax({
             url: "Add_Discount",
             type: "POST",
@@ -370,7 +368,97 @@ function addDiscount(){
             }
 
         });
-
-
     }
 }
+function cancelCheck(){
+    if(document.getElementById("all").checked == true){
+        document.getElementById("all").checked = false;
+    }
+}
+function filterTime() {
+    var from =document.getElementById("from").value;
+    var to =document.getElementById("to").value;
+    if(document.getElementById("all").checked == true){
+        document.getElementById("time").value = "Tất cả";
+        document.getElementById("error").innerText="";
+        document.getElementById("from").value=null;
+        document.getElementById("to").value=null;
+    }
+   else{
+       if(!to && !from){
+           document.getElementById("time").value = "Tất cả";
+       document.getElementById("error").innerText="";
+       document.getElementById("all").checked = true;
+    }
+   else
+       if(!to && from){
+        from = new Date(document.getElementById("from").value);
+        document.getElementById("time").value = from.getFullYear() +"-"+(from.getMonth()+1)+"-"+ from.getDate();
+       document.getElementById("error").innerText="";
+       document.getElementById("all").checked = false;
+   }
+    else{
+        from = new Date(document.getElementById("from").value);
+        to =  new Date(document.getElementById("to").value);
+        if(from>to){
+            document.getElementById("error").innerText="Ngày sau phải lớn hơn ngày trước đó";
+        }else
+        document.getElementById("time").value ="Từ "+ from.getFullYear() +"-"+(from.getMonth()+1)+"-"+ from.getDate() + " đến "+ to.getFullYear() +"-"+(to.getMonth()+1)+"-"+ to.getDate();
+       document.getElementById("error").innerText="";
+       document.getElementById("all").checked = false;
+    }}
+
+}
+function filterLog(type, value){
+    filterTime()
+    var from = new Date(document.getElementById("from").value);
+    var to = new Date(document.getElementById("to").value);
+    var user = document.getElementById("user").value;
+    var level = document.getElementById("level").value;
+    var content = document.getElementById("content").value;
+    var page = document.getElementById("pageNumber").value;
+    var fDate;
+    var tDate;
+    if(!document.getElementById("from").value){
+        fDate =null;
+
+    }
+    if(!document.getElementById("to").value){
+        tDate = null;
+    }
+    if(type == 'user'){
+        user = value;
+        console.log(value);
+    }
+    else if(type =='level'){
+        level = value;
+        document.getElementById("level").value = value;
+    }
+    else if(type== 'content'){
+        content = value;
+    }
+
+    else if(type ='time'){
+       if(document.getElementById("from").value) {fDate = from.getFullYear() +"-"+(from.getMonth()+1)+"-"+ from.getDate();}
+        if(document.getElementById("to").value){
+            tDate = to.getFullYear() +"-"+(to.getMonth()+1)+"-"+ to.getDate();
+        }
+    }
+    console.log(content)
+    var url = "LogFilter?level="+level+"&user="+user+"&content="+content+"&from="+ fDate+"&to="+tDate+"&page="+page;
+    $.ajax({
+        // url: "LogFilter",
+        url: url,
+        type: "POST",
+        // data: {user: user,
+        //     level: level,
+        //     page: page,
+        //     content:content,
+        //     from: fDate,
+        //     to: tDate},
+        success: function (response){
+            document.getElementById("listLog").innerHTML = response;
+        }
+    });
+}
+

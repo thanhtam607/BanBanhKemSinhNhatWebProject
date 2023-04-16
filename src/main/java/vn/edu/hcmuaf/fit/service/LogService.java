@@ -47,10 +47,10 @@ public class LogService {
             }
             return listLog;
         }
-        public static List<Log> findByUserName(String userName){
+        public static List<Log> findByUserName(String userName, List<Log> list){
             List<Log> res = new ArrayList<>();
-          for(Log log : getListLog()){
-              if(log.getUser().equals(userName))
+          for(Log log : list){
+              if(userName.equals(log.getUser()))
                   res.add(log);
           }
             return res;
@@ -106,13 +106,13 @@ public class LogService {
         }
         return res;
     }
-    public static List<Log> findByContent(String content){
+    public static List<Log> findByContent(String content, List<Log> list){
         List<Log> res = new ArrayList<>();
         String userN;
         User user;
         try {
-            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM logs WHERE CONTENT = ?;");
-            stm.setString(1,content);
+            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM logs WHERE CONTENT like ?;");
+            stm.setString(1,"%"+content+"%");
 
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
@@ -120,15 +120,19 @@ public class LogService {
                 user = UserService.findById(userN);
                 if(user != null){
                     userN = user.getName();
+                }Log log = new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7));
+                for(Log l: list){
+                    if(log.getId()== l.getId()){
+                        res.add(log);
+                    }
                 }
-                res.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return res;
     }
-    public static List<Log> findByLevle(int level){
+    public static List<Log> findByLevel(int level, List<Log> list){
         List<Log> res = new ArrayList<>();
         String userN;
         User user;
@@ -143,11 +147,17 @@ public class LogService {
                 if(user != null){
                     userN = user.getName();
                 }
-                res.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
+                Log log = new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7));
+               for(Log l: list){
+                   if(log.getId()== l.getId()){
+                       res.add(log);
+                   }
+               }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         return res;
     }
     public static List<String> getListUser(){
@@ -173,7 +183,7 @@ public class LogService {
     public static List<String> getListContent(){
         List<String> res = new ArrayList<>();
         try {
-            PreparedStatement stm = con.prepareStatement("SELECT distinct CONTENT FROM logs ");
+            PreparedStatement stm = con.prepareStatement("  SELECT DISTINCT if(content like '%:%', SUBSTRING(CONTENT,1,CHARACTER_LENGTH(CONTENT)-6), content) FROM logs  ");
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
                 res.add(rs.getString(1));
@@ -183,7 +193,12 @@ public class LogService {
         }
         return res;
     }
+
+
+
+
+
     public static void main(String[] args) {
-        System.out.println(getListUser().toString());
+
     }
 }

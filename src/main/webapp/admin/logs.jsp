@@ -1,6 +1,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
+
 
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Log" %>
@@ -131,72 +131,78 @@
                     <thead>
                     <tr>
                       <th scope="col">Thời gian
-                        <div class="btn-group">
-                          <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="time">
+                        <div class="filter col-12" id="filter__time__log">
+                          <span class="filter__item-label"></span>
+                          <div class="filter__item-btn dropdown-toggle col-12" role="navigation" id="filter-time-log" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <input type="button" id="time" value="Tất cả">
                           </div>
-                            <div class="dropdown-menu p-4">
+                            <div class="dropdown-menu p-4" id="filter_time">
                               <div class="form-group">
-                                <label for="exampleDropdownFormEmail2">Từ ngày</label>
-                                <input type="date" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
+                                <div>
+                                  <input class="form-check-input" type="checkbox"  checked="true" id="all" > Tất cả
+                                </div>
+
+                                <label for="from">Từ ngày</label>
+                                <input type="date" class="form-control" id="from" onchange="cancelCheck()" placeholder="email@example.com">
                               </div>
                               <div class="form-group">
-                                <label for="exampleDropdownFormPassword2">Đến ngày</label>
-                                <input type="date" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
+                                <label for="to">Đến ngày</label>
+                                <input type="date" class="form-control" id="to" onchange="cancelCheck()" placeholder="Password">
                               </div>
-                              <button class="btn" >Lọc</button>
+                              <div class="error" id="error"></div>
+                              <button class="button_product right col-6"  onclick="filterLog('time','')">Lọc</button>
                             </div>
                           </div>
                         </th>
-                      <th scope="col">Level
-                        <div class="filter" id="filter__level__log">
+                      <th class="level-log" scope="col">Level
+                        <div class="filter col-12" id="filter__level__log">
                           <span class="filter__item-label"></span>
-                          <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-level-log" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <input type="button" id="type">
-                          </div>
+                          <div class="filter__item-btn dropdown-toggle col-12" role="navigation" id="filter-level-log" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <input type="button"  value="Tất cả">
+
+                          </div><input type="hidden" id="level" value="0">
                           <ul class="filter__item-menu list-group dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-                            <li><a class ="text-pink dropdown-item" href="#" selected="true" value="0">Tất cả</a></li>
-                            <li><a   class ="text-success dropdown-item"href="#" value="1">Thành công
-                              <span class="text-success"><i class="bi bi-check-circle-fill"></i></span></a></li>
-                            <li><a class ="text-warning dropdown-item" href="#" value="2">Cảnh báo
-                              <span class="text-warning">
-                              <i class="bi bi-exclamation-circle-fill"></i>
-                            </span></a></li>
-                            <li><a class ="text-danger dropdown-item" href="#" value="3">Nguy hiểm
-                              <span class="text-danger"><i class="bi bi-x-circle-fill"></i></span></a></li>
+                            <li><a class="dropdown-item" onclick="filterLog('level',0)" selected="true" value="0">Tất cả</a></li>
+                            <li><a class ="text-success dropdown-item" onclick="filterLog('level',1)" value="1">Thành công</a></li>
+                            <li><a class ="text-warning dropdown-item" onclick="filterLog('level',2)" value="2">Cảnh báo</a></li>
+                            <li><a class ="text-danger dropdown-item" onclick="filterLog('level',3)" value="3">Nguy hiểm</a></li>
 
                           </ul>
                         </div>
                       </th>
                       <th scope="col">Người dùng
-                        <div class="btn-group">
-                        <span class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="user">
-                        </span>
-                        <div class="dropdown-menu">
+                        <div class="filter col-12" id="filter__user__log">
+                          <span class="filter__item-label"></span>
+                          <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-user-log" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <input type="button" id="user" value="Tất cả">
+                          </div>
+                          <ul class="filter__item-menu list-group dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
                           <%List<String> listUser = (List<String>) request.getAttribute("listUser");
-                          if(listUser.size()!=0){
                           for(String s: listUser){%>
-                          <a class="dropdown-item" href="#"><%=s%></a>
-                          <%}}%>
+                            <li><a class ="dropdown-item" onclick="filterLog('user','<%=s%>')" ><%=s%></a></li>
+                          <%}%>
+                          </ul>
                         </div>
-                      </div>
                       </th>
                       <th scope="col">Hoạt động
-                        <div class="btn-group">
-                          <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                          </button>
-                          <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="filter col-12" id="filter__content__log">
+                          <span class="filter__item-label"></span>
+                          <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-content-log" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <input type="button" id="content" value="Tất cả">
                           </div>
+                          <ul class="filter__item-menu list-group dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
+                            <%List<String> listContent = (List<String>) request.getAttribute("listContent");
+                              for(String s: listContent){%>
+                            <li><a class ="dropdown-item" onclick="filterLog('content','<%=s%>')" value="<%=s%>"><%=s%></a></li>
+                            <%}%>
+                          </ul>
                         </div>
                       </th>
-                      <th scope="col">Source</th>
-                      <th scope="col">Chọn</th>
+                      <th class="bottom" scope="col">Source</th>
+                      <th class="bottom" scope="col">Chọn</th>
                     </tr>
                     </thead>
-                    <tbody >
+                    <tbody id="listLog">
                     <% List<Log> listLog = (List<Log>) request.getAttribute("listPa");
                     for(Log log: listLog){%>
                     <tr >
@@ -225,6 +231,7 @@
                       <span><%=listLog.size()%>/<%=listTotal.size()%> Hoạt động</span>
                       <ul class="paginator">
                         <% int tag = (int) request.getAttribute("tag");%>
+                        <input type="number" id="pageNumber" style="display: none" value="<%=tag%>">
                         <li class="paginator__item paginator__item--prev">
                           <a href="ListLog?page=<%=tag - 1%>"><i class="fa fa-chevron-left"></i></a>
                         </li>
@@ -269,7 +276,7 @@
 <script src="js/jquery.mCustomScrollbar.min.js"></script>
 <script src="js/select2.min.js"></script>
 <script src="js/admin.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>
