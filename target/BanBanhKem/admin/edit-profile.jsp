@@ -4,10 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
-<<<<<<< HEAD
-=======
 <%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
->>>>>>> f41837f456156f7615ea91ffb4abd1dee2b1fbbe
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>

@@ -194,11 +194,7 @@
                         <li><a class ="text-pink" onclick="filterProduct(false, '<%=lb.getName()%>')" href="#" selected="true" value="<%=lb.getName()%>"><%=lb.getName()%></a></li>
                         <%}
                         else{%>
-<<<<<<< HEAD
                         <li><a class ="text-pink" href="#" onclick="filterProduct(false,'<%=lb.getName()%>')" value="<%=lb.getName() %>"><%=lb.getName()%></a></li>
-=======
-                        <li><a class ="text-pink" href="#" onclick="filterProduct(false, '<%=lb.getName()%>')" value="<%=lb.getName() %>"><%=lb.getName()%></a></li>
->>>>>>> f41837f456156f7615ea91ffb4abd1dee2b1fbbe
                         <%}}%>
                       </ul>
                     </div>

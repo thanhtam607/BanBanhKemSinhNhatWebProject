@@ -4,6 +4,10 @@ import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,15 +15,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
-
-
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.io.UnsupportedEncodingException;
 
 
 public class UserService {
@@ -64,9 +63,9 @@ public class UserService {
         Statement stm = DBConnect.getInstall().get();
         User user;
         try {
-            ResultSet rs = stm.executeQuery("SELECT ID, EMAIL, PASS, NAME, ROLE, STATUS, TYPE  FROM accounts WHERE  accounts.ID = '"+ Id+"'");
+            ResultSet rs = stm.executeQuery("SELECT ID, EMAIL, PASS, NAME, ROLE, STATUS, TYPE ,ISADD,ISEDIT,ISDELETE FROM accounts WHERE  accounts.ID = '"+ Id+"'");
             while(rs.next()) {
-                user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7));
+                user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7),rs.getInt(8), rs.getInt(9), rs.getInt(10));
                 if (user != null) {
                     return user;
                 }
@@ -84,9 +83,29 @@ public class UserService {
         Statement statement = DBConnect.getInstall().get();
         if(statement !=null){
             try{
-                ResultSet rsAcc = statement.executeQuery("select ID, EMAIL, PASS, NAME, ROLE, STATUS, TYPE from ACCOUNTS;");
+                ResultSet rsAcc = statement.executeQuery("select ID, EMAIL, PASS, NAME, ROLE, STATUS, TYPE, ISADD, ISEDIT, ISDELETE from ACCOUNTS;");
                 while(rsAcc.next()){
-                    list.add(new User(rsAcc.getString(1), rsAcc.getString(2), rsAcc.getString(3), rsAcc.getString(4), rsAcc.getInt(5), rsAcc.getInt(6), rsAcc.getString(7)));
+                    list.add(new User(rsAcc.getString(1), rsAcc.getString(2), rsAcc.getString(3), rsAcc.getString(4), rsAcc.getInt(5), rsAcc.getInt(6), rsAcc.getString(7), rsAcc.getInt(8), rsAcc.getInt(9), rsAcc.getInt(10)));
+                }
+            }
+            catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        else{
+            System.out.println("Không có tai khoan");
+        }
+        return list;
+
+    }
+    public static List<User> getListUser(){
+        List<User> list = new ArrayList<User>();
+        Statement statement = DBConnect.getInstall().get();
+        if(statement !=null){
+            try{
+                ResultSet rsAcc = statement.executeQuery("select  ACCOUNTS.ID, ACCOUNTS.EMAIL, ACCOUNTS.PASS, ACCOUNTS.NAME, ACCOUNTS.ROLE, ACCOUNTS.STATUS, ACCOUNTS.TYPE, ACCOUNTS.ISADD, ACCOUNTS.ISEDIT, ACCOUNTS.ISDELETE from ACCOUNTS");
+                while(rsAcc.next()){
+                    list.add(new User(rsAcc.getString(1), rsAcc.getString(2), rsAcc.getString(3), rsAcc.getString(4), rsAcc.getInt(5), rsAcc.getInt(6), rsAcc.getString(7), rsAcc.getInt(8), rsAcc.getInt(9), rsAcc.getInt(10)));
                 }
             }
             catch (SQLException e){
@@ -134,8 +153,9 @@ public class UserService {
         acc.setId(ID);
         if(stm!= null) {
             try {
-                String sql = "insert into ACCOUNTS values('" + ID + "', '" + acc.getEmail() + "', '" + hashPassword(acc.getPass())  + "', '" + acc.getName() + "'," + acc.getRole() +","+ acc.getStatus()+","+acc.getType()+");";
+                String sql = "insert into ACCOUNTS values('" + ID + "', '" + acc.getEmail() + "', '" + hashPassword(acc.getPass())  + "', '" + acc.getName() + "'," + acc.getRole() +","+ acc.getStatus()+","+acc.getType()+",0,0,0);";
                 stm.executeUpdate(sql);
+
             } catch (SQLException se) {
                 se.printStackTrace();
             }
@@ -145,8 +165,9 @@ public class UserService {
         Statement stm = DBConnect.getInstall().get();
         if(stm!= null) {
             try {
-                String sql = "insert into ACCOUNTS(ID,EMAIL,NAME,ROLE, STATUS,TYPE) values('" + acc.getId() + "', '" + acc.getEmail() + "', '" + acc.getName() + "'," + acc.getRole() +","+ acc.getStatus()+",'"+acc.getType()+"');";
+                String sql = "insert into ACCOUNTS(ID,EMAIL,NAME,ROLE, STATUS,TYPE, ISADD, ISEDIT, ISDELETE) values('" + acc.getId() + "', '" + acc.getEmail() + "', '" + acc.getName() + "'," + acc.getRole() +","+ acc.getStatus()+",'"+acc.getType()+"',0,0,0);";
                 stm.executeUpdate(sql);
+                System.out.println(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }
@@ -254,6 +275,46 @@ public class UserService {
             se.printStackTrace();
         }
     }
+  public static List<User> getListEmployee(){
+        List<User> listuser = UserService.getListUser();
+        List<User> listemp = new LinkedList<>();
+        for(User u: listuser){
+            if(u.getRole() == 1){
+                listemp.add(u);
+            }
+        }
+        return listemp;
+    }
+    public static void updateAdd(String id, int n)  {
+        String sql = "UPDATE ACCOUNTS set ISADD = '"+n+"' where ID = '"+id+"'";
+        Statement stm  =  DBConnect.getInstall().get();
+        try {
+            stm.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static void updateEdit(String id, int n)  {
+        String sql = "UPDATE ACCOUNTS set ISEDIT = '"+n+"' where ID = '"+id+"'";
+        Statement stm  =  DBConnect.getInstall().get();
+        try {
+            stm.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static void updateDelete(String id, int n)  {
+        String sql = "UPDATE ACCOUNTS set ISDELETE = '"+n+"' where ID = '"+id+"'";
+        Statement stm  =  DBConnect.getInstall().get();
+        try {
+            stm.executeUpdate(sql);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {
 
@@ -268,6 +329,12 @@ public class UserService {
 //        System.out.println(UserService.checkEmail("thanh@gmail.com"));
 //        sendMail("thanhtamv14717@gmail.com", randomCode());
 //        updatePass("thanhtamv14717@gmail.com", hashPassword("123"));
+        User user = new User();
+        user.setId("fdfgrf");
+        user.setEmail("dfdf");
+        user.setType("fdfdcd");
+        user.setName("dfw");
+        addAccGG(user);
 
 
     }

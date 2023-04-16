@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <html lang="xzz">
@@ -45,10 +46,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Dmitry Volkov">
-<<<<<<< HEAD
-=======
 
->>>>>>> f41837f456156f7615ea91ffb4abd1dee2b1fbbe
 	<title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
 </head>
 
@@ -111,6 +109,7 @@
 <!-- Sidebar End -->
 
 <!-- main content -->
+<% User user = UserService.findById(auth.getId()); %>
 <main class="main bg-white">
     <div class="container-fluid bg-white">
         <div class="row">
@@ -121,34 +120,7 @@
                     <% List<Product> productList = (List<Product>) request.getAttribute("listpro");%>
                     <span class="main__title-stat"><%=productList.size()%> sản phẩm</span>
 
-<<<<<<< HEAD
-                        <div class="main__title-wrap">
-                            <!-- filter sort -->
-                            <div class="filter" id="filter__sort">
-                                <span class="filter__item-label">Sắp xếp:</span>
-                                <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <input type="button" id="type" value="<%=request.getParameter("sortValue")==null?"":request.getParameter("sortValue")%>">
-                                    <span></span>
-                                </div>
-                                <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-                                    <%List<String> listOption = new ArrayList<String>();
-                                        listOption.add("Mặc định");
-                                        listOption.add("Giá từ thấp đến cao");
-                                        listOption.add("Giá từ cao đến thấp");
-                                        listOption.add("Sắp xếp theo tên");
-                                        listOption.add("Sắp xếp theo loại");
-                                        String val;
-                                        for(String s: listOption){
-                                            val = request.getParameter("sortValue");
-                                            if(s.equals(val)){%>
-                                    <li><a  href="ListProduct_Admin?sortValue=<%=val%>" selected="true" value="<%=val%>"><%=val%></a></li>
-                                    <%}
-                                    else{%>
-                                    <li><a class ="text-pink" href="ListProduct_Admin?sortValue=<%=s%>" value="<%=s%>"><%=s%></a></li>
-                                    <%}%>
-                                    <%}%>
-                                </ul>
-=======
+
                     <div class="main__title-wrap">
                         <!-- filter sort -->
                         <div class="filter" id="filter__sort">
@@ -159,7 +131,6 @@
                                 <input type="button" value="Sản phẩm">
                                 <span></span>
 
->>>>>>> f41837f456156f7615ea91ffb4abd1dee2b1fbbe
                             </div>
 
                             <ul class="filter__item-menu dropdown-menu scrollbar-dropdown"
@@ -202,14 +173,19 @@
             </div>
             <!-- end main title -->
             <div class="button">
+                <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
                 <div class="button_left">
-
                     <a class="button_product" href="add-product.jsp">Thêm sản phẩm</a>
                 </div>
+                <% } else { %>
+                <% } %>
+                <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                 <div class="button_right">
                     <a class="button_product" href="ListProductRemoved">Sản phẩm đã xóa
                         (<%=ProductService.getListProductRemove().size()%>)</a>
                 </div>
+                <% } else { %>
+                <% } %>
             </div>
 
 
@@ -281,11 +257,11 @@
 
                             <td>
                                 <div class="main__table-btns">
-
                                     <a href="Edit_Product?idP=<%=pro.getId()%>"
                                        class="main__table-btn main__table-btn--edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
+                                    <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                     <%if (pro.isHide()) {%>
                                     <a href="#modal-unHiden<%=pro.getId()%>"
                                        class="main__table-btn main__table-btn--banned open-modal">
@@ -297,10 +273,14 @@
                                         <i class="fa fa-eye" style="color: #24cc63"></i>
                                     </a>
                                     <%}%>
-
+                                    <% } else { %>
+                                    <% } %>
+                                    <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                                     <a href="#modal-delete<%=pro.getId()%>"
                                        class="profile__action profile__action--delete open-modal"><i
                                             class="fa fa-trash"></i></a>
+                                    <% } else { %>
+                                    <% } %>
                                 </div>
                                 <!-- modal hiden -->
                                 <div id="modal-hiden<%=pro.getId()%>" class="zoom-anim-dialog mfp-hide modal">

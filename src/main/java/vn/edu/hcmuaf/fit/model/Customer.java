@@ -1,7 +1,5 @@
 package vn.edu.hcmuaf.fit.model;
 
-import vn.edu.hcmuaf.fit.bean.User;
-
 public class Customer {
     private String MAKH;
     private String DIACHI;
@@ -61,6 +59,7 @@ public class Customer {
     public void setRole(int role) {
         this.role = role;
     }
+
 
     @Override
     public String toString() {

@@ -363,7 +363,7 @@ function addDiscount(){
         });
     }
 }
-<<<<<<< HEAD
+
 function cancelCheck(){
     if(document.getElementById("all").checked == true){
         document.getElementById("all").checked = false;
@@ -439,24 +439,22 @@ function filterLog(type, value){
         }
     }
     console.log(content)
-    var url = "LogFilter?level="+level+"&user="+user+"&content="+content+"&from="+ fDate+"&to="+tDate+"&page="+page;
+    // var url = "LogFilter?level="+level+"&user="+user+"&content="+content+"&from="+ fDate+"&to="+tDate+"&page="+page;
     $.ajax({
-        // url: "LogFilter",
-        url: url,
+        url: "LogFilter",
+        // url: url,
         type: "POST",
-        // data: {user: user,
-        //     level: level,
-        //     page: page,
-        //     content:content,
-        //     from: fDate,
-        //     to: tDate},
+        data: {user: user,
+            level: level,
+            page: page,
+            content:content,
+            from: fDate,
+            to: tDate},
         success: function (response){
             document.getElementById("listLog").innerHTML = response;
         }
     });
 }
-
-=======
 function changePass(){
   var email = $('#email').val();
   var newpass = $('#newpass').val();
@@ -705,4 +703,4 @@ function adminAddProInOrder(){
 function save(){
     location.reload();
 }
->>>>>>> f41837f456156f7615ea91ffb4abd1dee2b1fbbe
+

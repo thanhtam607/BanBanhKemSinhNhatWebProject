@@ -168,7 +168,14 @@ public class Receipt {
         this.address = address;
     }
 
-
+    public String getRoleName() {
+        if(this.role == 0){
+            return "Thường";
+        }else if(this.role == 1){
+            return "Admin";
+        }
+        return "Quản Lí";
+    }
     public int getPrice() {
         return price;
     }

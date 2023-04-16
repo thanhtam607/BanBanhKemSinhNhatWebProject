@@ -108,6 +108,7 @@
     List<Comment> listcmt = (List<Comment>) request.getAttribute("listcmt");
 String mkh = (String) request.getAttribute("mkh"); %>
     <!-- main content -->
+<% User user = UserService.findById(auth.getId()); %>
     <main class="main">
         <div class="container-fluid">
             <div class="row">
@@ -131,11 +132,11 @@ String mkh = (String) request.getAttribute("mkh"); %>
                             <% for (int i = 0; i <= 0; i ++){
                                 if(!listre.isEmpty()){
                                 Receipt rc = listre.get(i);
-                                User user = UserService.findById(mkh);%>
+                                User us = UserService.findById(mkh);%>
                             <div class="profile__meta">
                                 <% String main__table = " ";
                                 String profile__text ="";
-                                    if(user.getStatus() == -1){
+                                    if(us.getStatus() == -1){
                                         main__table = "main__table-text--red";
                                         profile__text = "profile__action--delete";
 
@@ -143,7 +144,7 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                         main__table = "main__table-text--green";
                                         profile__text = "profile__action--banned";
                                     }%>
-                                <h3><%=UserService.findById(mkh).getName()%> <span class="<%=main__table%>">(<%=user.getStatusName()%>)</span></h3>
+                                <h3><%=UserService.findById(mkh).getName()%> <span class="<%=main__table%>">(<%=us.getStatusName()%>)</span></h3>
                                 <span name = "makh" value="<%=mkh%>"> ID: <%=mkh%></span>
                             </div>
                         </div>
@@ -186,7 +187,8 @@ String mkh = (String) request.getAttribute("mkh"); %>
 
                         <!-- profile btns -->
                         <div class="profile__actions">
-                            <%if(user.getStatus() == -1){%>
+                            <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
+                            <%if(us.getStatus() == -1){%>
                             <a href="#modal-status-unlock" class="profile__action <%=profile__text%> open-modal">
                                 <i class="fa fa-lock"></i>
                             </a>
@@ -195,6 +197,8 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                 <i class="fa fa-unlock"></i>
                             </a>
                             <%}%>
+                            <% } else { %>
+                            <% } %>
 <%--                            <a href="#modal-delete" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>--%>
                         </div>
                         <!-- end profile btns -->
@@ -281,6 +285,7 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                                <% if(user.getRole() == 2) { %>
                                                 <div class="form__group">
                                                     <label class="form__label" for="rights">Quyền Hạn</label>
                                                     <select class="form__input" id="rights" name="role">
@@ -293,10 +298,16 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                         <%}}%>
                                                     </select>
                                                 </div>
+                                                <% } else { %>
+                                                <p>Quyền Hạn:  <span class="font-size-20 text--green"><%=rc.getRoleName()%></span></p>
+                                                <% } %>
                                             </div>
+                                            <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                             <div class="col-12">
                                             <input id="" class="form__btn" type="submit"  value="Lưu thông tin">
                                             </div>
+                                            <% } else { %>
+                                            <% } %>
                                             <% }} %>
                                         </div>
                                     </form>
@@ -341,9 +352,12 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                     <a href="Bill_detail_Admin?mahd=<%=r.getId()%>&tenkh=<%=r.getNamecustomer()%>" class="main__table-btn main__table-btn--view">
                                                         <i class="fas fa-info"></i>
                                                     </a>
+                                                    <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                                                     <a href="#modal-deletehd<%=j%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
+                                                    <% } else { %>
+                                                    <% } %>
                                                 </div>
 
                                                 <!-- modal delete hd-->
@@ -407,9 +421,12 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                     <a href="#modal-view<%=i%>" class="main__table-btn main__table-btn--edit open-modal">
 														<i class="fa fa-eye"></i>
 													</a>
+                                                    <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                                                     <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
 														<i class="fa fa-trash"></i>
 													</a>
+                                                    <% } else { %>
+                                                    <% } %>
                                                 </div>
                                                 <!-- modal view -->
                                                 <div id="modal-view<%=i%>" class="zoom-anim-dialog mfp-hide modal modal--view">

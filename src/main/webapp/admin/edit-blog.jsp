@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,6 +103,7 @@
 <!-- Sidebar End -->
 
     <!-- main content -->
+<% User user = UserService.findById(auth.getId()); %>
 <% Blog b = (Blog) request.getAttribute("blg"); %>
     <main class="main">
         <div class="container-fluid">
@@ -119,9 +121,15 @@
                     <div class="profile__content">
                         <!-- profile user -->
                         <div class="profile__user">
+                            <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                             <div class="profile__avatar">
                                 <img src="../<%=b.getImg()%>" alt="" href="#modal-update" class="open-modal">
                             </div>
+                            <% } else { %>
+                            <div class="profile__avatar">
+                                <img src="../<%=b.getImg()%>" alt="">
+                            </div>
+                            <% } %>
                             <!-- or red -->
                             <div class="profile__meta profile__meta--green">
                                 <h3>Tên bài viết: <%=b.getTitle()%></h3>
@@ -154,6 +162,7 @@
                                 }else{
                                     main__btn = "main__table-btn--banned";
                                 }%>
+                            <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                             <%if(BlogService.findById(b.getId()).getStatus() == -1){%>
                             <a href="#modal-status-unlock" class="main__table-btn <%=main__btn%> open-modal">
                                 <i class="fa fa-lock"></i>
@@ -164,13 +173,18 @@
                             </a>
                             <%}%>
                             <a href="#modal-update-title" class="main__table-btn main__table-btn--edit open-modal"><i class="fa fa-edit"></i></a>
+                            <% } else { %>
+                            <% } %>
+                            <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                             <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
                                 <i class="fa fa-trash"></i>
                             </a>
+                            <% } else { %>
+                            <% } %>
                             <!-- modal update title-->
                             <div id="modal-update-title" class="zoom-anim-dialog mfp-hide modal">
                                 <form method="post" action="UpdateTitle">
-                                    <h6 class="modal__title">Ẩn tin tức</h6>
+                                    <h6 class="modal__title">Đổi tên tin tức</h6>
                                     <label class="form__label" for="update-name" style="color: white;">Tên danh mục</label>
                                     <input id="update-name" type="text" name="title" class="form__input" value="<%=b.getTitle()%>">
                                     <input name = "idb" value="<%=b.getId()%>" style="display: none">
@@ -283,9 +297,12 @@
                                                     <input id="dateblog" type="datetime-local" name="dateblog" class="form__input" value="<%=b.getDate()%>">
                                                 </div>
                                             </div>
+                                            <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                             <div class="col-12">
                                                 <button class="form__btn" type="submit"><a><i class="fa fa-save me-2"></i> </a> Lưu lại</button>
                                             </div>
+                                            <% } else { %>
+                                            <% } %>
                                         </div>
                                     </form>
                                 </div>

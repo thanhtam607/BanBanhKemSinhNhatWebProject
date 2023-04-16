@@ -31,11 +31,11 @@ public class LogFilter  extends HttpServlet {
         String level = request.getParameter("level");
         String user = request.getParameter("user");
         String content = request.getParameter("content");
-        System.out.println(level);
-        System.out.println(user);
-        System.out.println(content);
-        System.out.println(fromDate);
-        System.out.println(toDate);
+//        System.out.println(level);
+//        System.out.println(user);
+//        System.out.println(content);
+//        System.out.println(fromDate);
+//        System.out.println(toDate);
 //        if(fromDate !=null && toDate ==null){
 //            listLog = LogService.findByDate(fromDate);
 //        }else if(fromDate!= null && toDate != null){

@@ -79,7 +79,7 @@ public class LoginGoogle extends HttpServlet {
         log.setLevel(1);
         log.setUser(user.getId());
         log.setSrc(request.getServletPath());
-        log.setContent("Đăng nhập bằng tài khoản Google thành công vào trang web");
+        log.setContent("Đăng nhập thành công vào trang web bằng tài khoản Google");
         LogService.addLog(log);
 
         List<ItemProductInCart> listItemCart = CartService.findItemCartByIdUser(user.getId());
