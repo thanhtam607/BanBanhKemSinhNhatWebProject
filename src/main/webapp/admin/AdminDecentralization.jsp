@@ -124,8 +124,8 @@
           <div class="row">
             <!-- details form -->
             <% List<User> listuser = (List<User>) UserService.getListEmployee();
-                   for(int i = 0; i < listuser.size(); i++){
-                        User u = listuser.get(i);%>
+              for(int i = 0; i < listuser.size(); i++){
+                User u = listuser.get(i);%>
             <div class="col-12 col-lg-6 ">
               <form method="post" action="UpdateAuthority">
                 <div class="row row--form form">
@@ -138,13 +138,13 @@
                     <div class="form__group">
                       <input name="idnv<%=i%>" value="<%=u.getId()%>" style="display: none">
                       <p>Tên nhân viên:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20 text-uppercase"><%=u.getName()%></span></p>
-<%--                      <p>Tên nhân viên:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20 text-uppercase">ssssssss</span></p>--%>
+                      <%--                      <p>Tên nhân viên:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20 text-uppercase">ssssssss</span></p>--%>
                     </div>
                   </div>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
                       <p>Địa chỉ Email:<span>&nbsp;&nbsp;&nbsp;</span> <span class = "text--green font-size-20"><%=u.getEmail()%></span></p>
-<%--                      <p>Địa chỉ Email:<span>&nbsp;&nbsp;&nbsp;</span> <span class = "text--green font-size-20">aaaaaaaaaa</span></p>--%>
+                      <%--                      <p>Địa chỉ Email:<span>&nbsp;&nbsp;&nbsp;</span> <span class = "text--green font-size-20">aaaaaaaaaa</span></p>--%>
                     </div>
                   </div>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
@@ -188,11 +188,9 @@
               </form>
             </div>
             <% } %>
-<%--                <div class="col-6">--%>
-<%--                  <input class="form__btn" type="submit" value="Lưu thông tin">--%>
-<%--                </div>--%>
-              </div>
-            </div>
+            <%--                <div class="col-6">--%>
+            <%--                  <input class="form__btn" type="submit" value="Lưu thông tin">--%>
+            <%--                </div>--%>
           </div>
         </div>
       </div>
@@ -213,29 +211,29 @@
 <script src="js/select2.min.js"></script>
 <script src="js/admin.js"></script>
 <script>
-    <% for(int i = 0; i < listuser.size(); i++){%>
-    document.querySelector('input[name="add<%=i%>"]').addEventListener('change', function(event) {
-        if (event.target.checked) {
-            document.querySelector('input[name="isadd<%=i%>"]').value = 1;
-        } else {
-            document.querySelector('input[name="isadd<%=i%>"]').value = 0;
-        }
-    })
-    document.querySelector('input[name="edit<%=i%>"]').addEventListener('change', function(event) {
-        if (event.target.checked) {
-            document.querySelector('input[name="isedit<%=i%>"]').value = 1;
-        } else {
-            document.querySelector('input[name="isedit<%=i%>"]').value = 0;
-        }
-    })
-    document.querySelector('input[name="delete<%=i%>"]').addEventListener('change', function(event) {
-        if (event.target.checked) {
-            document.querySelector('input[name="isdelete<%=i%>"]').value = 1;
-        } else {
-            document.querySelector('input[name="isdelete<%=i%>"]').value = 0;
-        }
-    })
-    <% } %>
+  <% for(int i = 0; i < listuser.size(); i++){%>
+  document.querySelector('input[name="add<%=i%>"]').addEventListener('change', function(event) {
+    if (event.target.checked) {
+      document.querySelector('input[name="isadd<%=i%>"]').value = 1;
+    } else {
+      document.querySelector('input[name="isadd<%=i%>"]').value = 0;
+    }
+  })
+  document.querySelector('input[name="edit<%=i%>"]').addEventListener('change', function(event) {
+    if (event.target.checked) {
+      document.querySelector('input[name="isedit<%=i%>"]').value = 1;
+    } else {
+      document.querySelector('input[name="isedit<%=i%>"]').value = 0;
+    }
+  })
+  document.querySelector('input[name="delete<%=i%>"]').addEventListener('change', function(event) {
+    if (event.target.checked) {
+      document.querySelector('input[name="isdelete<%=i%>"]').value = 1;
+    } else {
+      document.querySelector('input[name="isdelete<%=i%>"]').value = 0;
+    }
+  })
+  <% } %>
 </script>
 </body>
 
