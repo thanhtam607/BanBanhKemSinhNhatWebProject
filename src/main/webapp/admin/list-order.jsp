@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -104,6 +105,7 @@
 
 <!-- main content -->
 <% List<Receipt> receiptList = (List<Receipt>) request.getAttribute("listreceipt-full");%>
+<% User user = UserService.findById(auth.getId()); %>
 <main class="main bg-white">
   <div class="container-fluid bg-white">
     <div class="row">
@@ -208,18 +210,27 @@
                   <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn main__table-btn--view">
                     <i class="fas fa-info"></i>
                   </a>
+                  <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                   <%if(rc.getStatus() == 0){%>
                   <a href="#modal-status<%=i%>" class="main__table-btn main__table-btn--banned open-modal">
                     <i class="fa fa-check"></i>
                   </a>
                   <%}%>
+                  <% } else { %>
+                  <% } %>
                   <%if(rc.getStatus() == 0 || rc.getStatus() == 1){%>
+                  <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                   <a href="AdminEditOrder?id=<%=rc.getId()%>" class="main__table-btn main__table-btn--edit">
                     <i class="fa fa-edit"></i>
                   </a>
+                  <% } else { %>
+                  <% } %>
+                  <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                   <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                     <i class="fa fa-trash"></i>
                   </a>
+                  <% } else { %>
+                  <% } %>
                   <%}%>
                 </div>
               </td>

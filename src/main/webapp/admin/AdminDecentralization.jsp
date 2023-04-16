@@ -7,6 +7,8 @@
 --%>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,43 +123,62 @@
         <div class="col-12">
           <div class="row">
             <!-- details form -->
+            <% List<User> listuser = (List<User>) UserService.getListEmployee();
+              for(int i = 0; i < listuser.size(); i++){
+                User u = listuser.get(i);%>
             <div class="col-12 col-lg-6 ">
-              <form>
+              <form method="post" action="UpdateAuthority">
                 <div class="row row--form form">
                   <h4 class="form__title text-pink font-size-30 text-center">Thông tin nhân viên</h4>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
-                      <div class="profile__avatar ml-lg-auto mr-auto">
-                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg" alt="">
-                      </div><br>
                     </div>
                   </div>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
-                      <p>Tên nhân viên:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20 text-uppercase">Mai Thanh Thuận</span></p>
+                      <input name="idnv<%=i%>" value="<%=u.getId()%>" style="display: none">
+                      <p>Tên nhân viên:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20 text-uppercase"><%=u.getName()%></span></p>
+                      <%--                      <p>Tên nhân viên:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20 text-uppercase">ssssssss</span></p>--%>
                     </div>
                   </div>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
-                      <p>Số điện thoại:<span>&nbsp;&nbsp;&nbsp;</span> <span class = "text--green font-size-20">0927682822</span></p>
+                      <p>Địa chỉ Email:<span>&nbsp;&nbsp;&nbsp;</span> <span class = "text--green font-size-20"><%=u.getEmail()%></span></p>
+                      <%--                      <p>Địa chỉ Email:<span>&nbsp;&nbsp;&nbsp;</span> <span class = "text--green font-size-20">aaaaaaaaaa</span></p>--%>
                     </div>
                   </div>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
-                      <p>Địa chỉ:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20">TP Thủ Đức, TP HCM</span></p>
+                      <p>Địa chỉ:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20">TP HCM</span></p>
                     </div>
                   </div>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
                       <label class="form__label" >Quyền hạn:</label>
-                      <input class="form-check-input" type="checkbox" name="check3" value="Quản lý cửa hàng">
-                      <label>Quản lý</label>&ensp;
-                      <input class="form-check-input" type="checkbox" name="check" value="Admin">
-                      <label>Admin</label>&ensp;
-                      <input class="form-check-input" type="checkbox" name="check2"  value="Nhân viên bán hàng">
-                      <label>Bán hàng</label>&ensp;
-                      <input class="form-check-input" type="checkbox" name="check4" value="Khóa">
-                      <label>Khóa</label>
+                      <% if(u.getIsadd() == 1) {%>
+                      <input name="isadd<%=i%>" value="1" style="display: none">
+                      <input class="form-check-input" type = "checkbox" checked = "true" name = "add<%=i%>">
+                      <% } else { %>
+                      <input name="isadd<%=i%>" value="0" style="display: none">
+                      <input class="form-check-input" type = "checkbox" name = "add<%=i%>">
+                      <% } %>
+                      <label>Thêm</label>&ensp;
+                      <% if(u.getIsedit() == 1) {%>
+                      <input name="isedit<%=i%>" value="1" style="display: none">
+                      <input class="form-check-input" type = "checkbox" checked = "true" name = "edit<%=i%>">
+                      <% } else { %>
+                      <input name="isedit<%=i%>" value="0" style="display: none">
+                      <input class="form-check-input" type = "checkbox" name = "edit<%=i%>">
+                      <% } %>
+                      <label>Sửa</label>&ensp;
+                      <% if(u.getIsdelete() == 1) {%>
+                      <input name="isdelete<%=i%>" value="1" style="display: none">
+                      <input class="form-check-input" type = "checkbox" checked = "true" name = "delete<%=i%>">
+                      <% } else { %>
+                      <input name="isdelete<%=i%>" value="0" style="display: none">
+                      <input class="form-check-input" type = "checkbox" name = "delete<%=i%>">
+                      <% } %>
+                      <label>Xóa</label>&ensp;
                     </div>
                   </div>
                   <div class="col-6">
@@ -166,49 +187,10 @@
                 </div>
               </form>
             </div>
-            <div class="col-12 col-lg-6 ">
-              <div class="row row--form form">
-                <h4 class="form__title text-pink font-size-30 text-center">Thông tin nhân viên</h4>
-                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                  <div class="form__group">
-                    <div class="profile__avatar ml-lg-auto mr-auto">
-                      <img src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg" alt="">
-                    </div><br>
-                  </div>
-                </div>
-                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                  <div class="form__group">
-                    <p>Tên nhân viên:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20 text-uppercase">Mai Thanh Thuận</span></p>
-                  </div>
-                </div>
-                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                  <div class="form__group">
-                    <p>Số điện thoại:<span>&nbsp;&nbsp;&nbsp;</span> <span class = "text--green font-size-20">0927682822</span></p>
-                  </div>
-                </div>
-                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                  <div class="form__group">
-                    <p>Địa chỉ:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20">TP Thủ Đức, TP HCM</span></p>
-                  </div>
-                </div>
-                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                  <div class="form__group">
-                    <label class="form__label" >Quyền hạn:</label>
-                    <input class="form-check-input" type="checkbox" name="check3" value="Quản lý cửa hàng">
-                    <label>Quản lý</label>&ensp;
-                    <input class="form-check-input" type="checkbox" name="check" value="Admin">
-                    <label>Admin</label>&ensp;
-                    <input class="form-check-input" type="checkbox" name="check2"  value="Nhân viên bán hàng">
-                    <label>Bán hàng</label>&ensp;
-                    <input class="form-check-input" type="checkbox" name="check4" value="Khóa">
-                    <label>Khóa</label>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <input class="form__btn" type="submit" value="Lưu thông tin">
-                </div>
-              </div>
-            </div>
+            <% } %>
+            <%--                <div class="col-6">--%>
+            <%--                  <input class="form__btn" type="submit" value="Lưu thông tin">--%>
+            <%--                </div>--%>
           </div>
         </div>
       </div>
@@ -228,8 +210,31 @@
 <script src="js/jquery.mCustomScrollbar.min.js"></script>
 <script src="js/select2.min.js"></script>
 <script src="js/admin.js"></script>
-
-
+<script>
+  <% for(int i = 0; i < listuser.size(); i++){%>
+  document.querySelector('input[name="add<%=i%>"]').addEventListener('change', function(event) {
+    if (event.target.checked) {
+      document.querySelector('input[name="isadd<%=i%>"]').value = 1;
+    } else {
+      document.querySelector('input[name="isadd<%=i%>"]').value = 0;
+    }
+  })
+  document.querySelector('input[name="edit<%=i%>"]').addEventListener('change', function(event) {
+    if (event.target.checked) {
+      document.querySelector('input[name="isedit<%=i%>"]').value = 1;
+    } else {
+      document.querySelector('input[name="isedit<%=i%>"]').value = 0;
+    }
+  })
+  document.querySelector('input[name="delete<%=i%>"]').addEventListener('change', function(event) {
+    if (event.target.checked) {
+      document.querySelector('input[name="isdelete<%=i%>"]').value = 1;
+    } else {
+      document.querySelector('input[name="isdelete<%=i%>"]').value = 0;
+    }
+  })
+  <% } %>
+</script>
 </body>
 
 </html>

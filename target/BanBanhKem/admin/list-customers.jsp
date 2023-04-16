@@ -104,6 +104,7 @@
     <!-- Sidebar End -->
 <%List<Customer> listC = (List<Customer>) request.getAttribute("listCus");%>
     <!-- main content -->
+<% User user = UserService.findById(auth.getId()); %>
     <main class="main bg-white">
         <div class="container-fluid bg-white">
             <div class="row">
@@ -217,6 +218,7 @@
 
                                     <td>
                                         <div class="main__table-btns">
+                                            <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                             <%if(UserService.findById(customer.getMAKH()).getStatus() == -1){%>
                                             <a href="#modal-status-unlock<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
                                                 <i class="fa fa-lock"></i>
@@ -226,6 +228,8 @@
                                                 <i class="fa fa-unlock"></i>
                                             </a>
                                             <%}%>
+                                            <% } else { %>
+                                            <% } %>
                                             <a href="./EditUser?makh=<%=customer.getMAKH()%>" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
