@@ -7,7 +7,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Image" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -55,7 +54,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
-
+<jsp:include page="spinner.jsp"></jsp:include>
 <!-- header -->
 <header class="header">
     <div class="header__content">
@@ -110,7 +109,6 @@
 <!-- Sidebar End -->
 
 <!-- main content -->
-<% User user = UserService.findById(auth.getId()); %>
 <main class="main">
     <div class="container-fluid">
         <div class="row">
@@ -179,12 +177,11 @@
                     </div>
                     <!-- end profile mobile tabs nav -->
 
-                    <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
+
                     <div class="profile__actions">
                         <a href="#modal-delete<%=p.getId()%>" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
                     </div>
-                    <% } else { %>
-                    <% } %>
+
                 </div>
             </div>
             <div id="modal-delete<%=p.getId()%>" class="zoom-anim-dialog mfp-hide modal">
@@ -269,12 +266,10 @@
                                                 <textarea class="form__input "  id="introduce" name="intro" form="info-product" ><%=p.getIntroduction()%></textarea>
                                             </div>
                                         </div>
-                                        <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
+
                                         <div class="col-12">
-                                            <input class="form__btn" type="submit" value="Lưu thông tin">
+                                            <input class="form__btn" type="submit" value="Lưu thông tin"></input>
                                         </div>
-                                        <% } else { %>
-                                        <% } %>
                                     </div>
                                 </form>
                             </div>
@@ -314,12 +309,10 @@
                                                 <input id="tonkho" type="number" min="1" class="form__input" value="<%=p.getDetail().getInventory()%>">
                                             </div>
                                         </div>
-                                        <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
+
                                         <div class="col-12">
                                             <button class="form__btn" type="button" onclick="updateDetail('<%=p.getId()%>')">Lưu thay đổi</button>
                                         </div>
-                                        <% } else { %>
-                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -330,10 +323,7 @@
 
                 <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
                     <!-- table -->
-                    <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
                     <div class="col-11" style="text-align: right; font-size: 25px; color: #e83e8c"><a href="#modal-deleteimg<%=(listSize.size()+1)%>" class="open-modal"><i class="bi bi-plus-square-dotted " ></i></a></div>
-                    <% } else { %>
-                    <% } %>
                     <!-- modal delete -->
                     <div id="modal-deleteimg<%=(listSize.size()+1)%>" class="zoom-anim-dialog mfp-hide modal">
                         <form action="AddImage"  method="POST" enctype="multipart/form-data">
@@ -381,12 +371,9 @@
 
                                     <td>
                                         <div class="main__table-btns">
-                                            <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                             <a href="#modal-deleteimg<%=i-1%>" class="main__table-btn main__table-btn--edit open-modal">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <% } else { %>
-                                            <% } %>
                                             <!-- modal delete -->
                                             <div id="modal-deleteimg<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
                                                 <form action="Product/UpdateImg"  method="POST" enctype="multipart/form-data">
@@ -401,7 +388,6 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                             <%if (img.isHide()){%>
                                             <a href="#modal-unHiden<%=i-1%>" class="main__table-btn main__table-btn--delete open-modal">
                                                 <i class="fas fa-eye-slash" ></i>
@@ -411,8 +397,6 @@
                                                 <i class="fa fa-eye" style="color: #24cc63"></i>
                                             </a>
                                             <%}%>
-                                            <% } else { %>
-                                            <% } %>
                                             <!-- modal hiden -->
                                             <div id="modal-hiden<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
                                                 <h6 class="modal__title">Ẩn hình ảnh</h6>
@@ -439,12 +423,10 @@
                                             </div>
                                             <!-- end modal unHiden -->
 
-                                            <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
+
                                             <a href="#modal-deleteA<%=i-1%>" class="main__table-btn main__table-btn--delete open-modal">
                                                 <i class="fa fa-trash"></i>
                                             </a>
-                                            <% } else { %>
-                                            <% } %>
                                             <!-- modal delete -->
                                             <div id="modal-deleteA<%=i-1%>" class="zoom-anim-dialog mfp-hide modal">
                                                 <h6 class="modal__title">Xóa hình ảnh</h6>
@@ -499,12 +481,9 @@
                                     </td>
                                     <td>
                                         <div class="main__table-btns">
-                                            <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                                             <a href="#modal-delete<%=index%>" class="main__table-btn main__table-btn--delete open-modal">
                                                 <i class="fa fa-trash"></i>
                                             </a>
-                                            <% } else { %>
-                                            <% } %>
                                             <!-- modal delete -->
                                             <div id="modal-delete<%=index%>" class="zoom-anim-dialog mfp-hide modal">
                                                 <h6 class="modal__title">Xóa Bình Luận</h6>
@@ -600,6 +579,7 @@
 <script src="js/jquery.mousewheel.min.js"></script>
 <script src="js/jquery.mCustomScrollbar.min.js"></script>
 <script src="js/select2.min.js"></script>
+<script src="js/main.js"></script>
 <script src="js/admin.js"></script>
 <script>
 

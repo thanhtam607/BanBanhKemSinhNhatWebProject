@@ -4,6 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
@@ -50,6 +51,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
+<jsp:include page="spinner.jsp"></jsp:include>
 <!-- header -->
 <header class="header">
     <div class="header__content">
@@ -97,13 +99,13 @@
 
             <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file me-2"></i>QL danh mục</a>
             <a href="List_Discounts" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Khuyến mãi</a>
-            <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
+            <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang
+                chủ</a>
             <!--  -->
         </div>
     </nav>
 </div>
 <!-- Sidebar End -->
-
 <!-- main content -->
 <main class="main bg-white">
     <div class="container-fluid bg-white">
@@ -119,69 +121,93 @@
             <!-- form -->
             <div class="col-12">
                 <div class="row">
-                    <div class="col-10">
-                        <form action="#" class="form form--profile">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form form--profile">
+
                             <div class="row row--form">
+                                <div class="col-12">
+                                    <h4 class="form__title">Thông tin tài khoản</h4>
+                                </div>
                                 <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                     <div class="form__group">
-                                        <label class="form__label" for="name_user">Tên</label>
-                                        <input type="text" id="name_user" name="name_user" class="form__input" placeholder="Thanh Thùy">
+                                        <label class="form__label" for="username">Tên</label>
+                                        <input type="text" id="username" name="username" class="form__input"
+                                               value="<%=auth.getName() != null ? auth.getName():"null"%>"
+                                               placeholder="Tên">
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                     <div class="form__group">
                                         <label class="form__label" for="phone">SĐT</label>
-                                        <input type="tel" id="phone" name="phone" class="form__input" placeholder="0356402438"></input>
+                                        <input type="tel" id="phone" name="phone" class="form__input"
+                                               value="<%=CustomerService.getCusByIdAcc(auth.getId()).getSDT()%>"
+                                               placeholder="Số điện thoại">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form__group">
                                         <label class="form__label" for="email">Email</label>
-                                        <input type="text" id="email" name="email" class="form__input" placeholder="Email"></input>
+                                        <input type="email" id="email" name="email" class="form__input" required
+                                               value="<%=auth.getEmail()%>" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form__group">
                                         <label class="form__label" for="address">Địa chỉ</label>
-                                        <input type="text" id="address" name="address" class="form__input" placeholder="Địa chỉ"></input>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                    <div class="form__group">
-                                        <label class="form__label" for="rights">Quyền Hạn</label>
-                                        <select class="form__input" id="rights" name="">
-                                            <option selected value="0">Quản lí cấp cao</option>
-                                            <option value="1">Admin</option>
-                                        </select>
+                                        <input type="text" id="address" name="address" class="form__input"
+                                               placeholder="Địa chỉ"
+                                               value="<%=CustomerService.getCusByIdAcc(auth.getId()).getDIACHI()%>">
                                     </div>
                                 </div>
 
                             </div>
                             <div class="col-6" style="padding: 0;">
-                                <button type="submit" class="form__btn">Lưu thay đổi</button>
+                                <button onclick="changeProfileAdmin()" type="button" class="form__btn">Lưu thay đổi</button>
                             </div>
 
-                        </form>
+                        </div>
                     </div>
-                    <!-- <div class="col-12 col-lg-6">
-                        <div class="row row--form form__content">
-                            <div class="col-12 col-sm-6">
-                                <input type="text" class="form__input" placeholder="Giá bán">
-                            </div>
+                    <%--                password form --%>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form form--profile">
+                            <div class="row row--form">
+                                <div class="col-12">
+                                    <h4 class="form__title">Đổi mật khẩu</h4>
+                                </div>
 
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <input type="text" class="form__input" placeholder="Tình trạng">
-                            </div>
+                                <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                    <div class="form__group">
+                                        <label class="form__label" for="oldpass">Mật khẩu hiện tại</label>
+                                        <input id="oldpass" type="password" name="oldpass" class="form__input m-0">
+                                        <p id="error" class="text-danger m-0 small"></p>
+                                    </div>
+                                </div>
 
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <input type="text" class="form__input" placeholder="Giao hàng">
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <input type="text" class="form__input" placeholder="Khối lượng">
+                                <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                    <div class="form__group">
+                                        <label class="form__label" for="newpass">Mật khẩu mới</label>
+                                        <input id="newpass" type="password" name="newpass" class="form__input m-0" minlength="">
+                                        <p class="text-danger m-0 small">* Phải từ 8 kí tự trở lên</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                    <div class="form__group">
+                                        <label class="form__label" for="confirmpass">Xác nhận mật khẩu</label>
+                                        <input id="confirmpass" type="password" name="confirmpass" class="form__input m-0" minlength="">
+                                        <p id="errorText"  class="text-danger m-0 small">* Phải từ 8 kí tự trở lên</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button onclick="changePass()" class="form__btn" type="button">Đổi mật khẩu</button>
+                                </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+                    <!-- end password form -->
+
                 </div>
 
             </div>
@@ -201,7 +227,11 @@
 <script src="js/jquery.mousewheel.min.js"></script>
 <script src="js/jquery.mCustomScrollbar.min.js"></script>
 <script src="js/select2.min.js"></script>
+<script src="js/main.js"></script>
 <script src="js/admin.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </body>

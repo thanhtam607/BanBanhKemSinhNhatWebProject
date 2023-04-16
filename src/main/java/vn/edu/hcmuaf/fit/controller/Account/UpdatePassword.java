@@ -18,9 +18,9 @@ public class UpdatePassword extends HttpServlet {
         Log log = new Log();
         log.setLevel(2);
         log.setSrc(request.getServletPath());
+        HttpSession session = request.getSession(true);
+        User user =(User) session.getAttribute("auth");
         if(request.getParameter("oldPass")!=null){
-            HttpSession session = request.getSession(true);
-            User user =(User) session.getAttribute("auth");
             String oldPass = request.getParameter("oldPass");
             String p = user.getPass();
             PrintWriter out = response.getWriter();
@@ -39,6 +39,7 @@ public class UpdatePassword extends HttpServlet {
             String pass= request.getParameter("password");
             String email = request.getParameter("email");
             UserService.updatePass(email, UserService.hashPassword(pass));
+            user.setPass(UserService.hashPassword(pass));
             log.setContent("Đặt lại mật khẩu thành công");
         }
         LogService.addLog(log);

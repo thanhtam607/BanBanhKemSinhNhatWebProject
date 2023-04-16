@@ -3,7 +3,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -42,13 +41,7 @@
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
     <div class="container-fluid position-relative d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-pink position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
+        <jsp:include page="spinner.jsp"></jsp:include>
 
 
           <!-- Sidebar Start -->
@@ -86,7 +79,6 @@
 
 
         <!-- Content Start -->
-        <% User user = UserService.findById(auth.getId()); %>
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-pink navbar-dark sticky-top px-4 py-0">
@@ -108,12 +100,8 @@
                             <span class="d-none d-lg-inline-flex"><%= auth != null ? auth.getName():"Đăng nhập"%></span>
                         </a>
                         <%if(auth != null) {%>
-                            <div class="dropdown-menu dropdown-menu-end bg-pink border-0 rounded-0 rounded-bottom m-0">
-                                <% if(user.getRole() == 2) { %>
+                            <div class="dropdown-menu dropdown-menu-end rounded-0 rounded-bottom m-0">
                                 <a href="general_Management.jsp" class="dropdown-item">Quản lí cửa hàng</a>
-                                <a href="AdminDecentralization.jsp" class="dropdown-item">Phân quyền cấp cao</a>
-                                <% } else { %>
-                                <% } %>
                                 <a href="edit-profile.jsp" class="dropdown-item">Hồ sơ của tôi</a>
                                 <a href="/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                             </div>
@@ -186,7 +174,7 @@
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Thành tiền</th>
                                     <th scope="col">Trạng thái đơn hàng</th>
-                                    <th scope="col">Chi tiết</th>
+                                    <th scope="col">Tùy Chọn</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -203,9 +191,14 @@
                                         <div class="main__table-text"><%=rc.getStatusName()%></div>
                                     </td>
                                     <td>
-                                        <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit">
+                                        <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit px-1">
                                             <i class="fas fa-info-circle text-center"></i>
                                         </a>
+                                        <%if(rc.getStatus() == 0 || rc.getStatus() == 1 || rc.getStatus() == 2){%>
+                                        <a href="AdminEditOrder?id=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit px-1">
+                                            <i class="fas fa-edit text-center"></i>
+                                        </a>
+                                        <%}%>
                                     </td>
                                 </tr>
                             </tbody>

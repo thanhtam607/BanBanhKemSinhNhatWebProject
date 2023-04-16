@@ -62,7 +62,6 @@ public class LoginGoogle extends HttpServlet {
             user.setType("google");
             UserService.addAccGG(user);
             Customer newCus = new Customer();
-            newCus.setTENKH(user.getName());
             CustomerService.registerKH(newCus,user);
         }else{
             user=UserService.findByEmail(userGG.getEmail());

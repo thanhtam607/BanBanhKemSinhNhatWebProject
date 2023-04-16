@@ -47,6 +47,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
+<jsp:include page="spinner.jsp"></jsp:include>
     <!-- header -->
     <header class="header">
         <div class="header__content">

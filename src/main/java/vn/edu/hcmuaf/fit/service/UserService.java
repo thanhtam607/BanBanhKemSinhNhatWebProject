@@ -65,7 +65,6 @@ public class UserService {
             if(Id.equals(u.getId())){
                 return u;
             }
-
         }
         return null;
     }
@@ -212,49 +211,36 @@ public class UserService {
         }
     }
 
-    public static void updateProfileEmail(String email, User auth)  {
-        if(email == null) return;
-        String idACC = auth.getId();
-        String sql = "UPDATE ACCOUNTS set EMAIL = '"+email+"' where ID = "+ "'"+idACC+"'";
-        Statement stm  =  DBConnect.getInstall().get();
-        try {
-            stm.executeUpdate(sql);
-            auth.setEmail(email);
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-    }
-    public static void updateProfileTenTk(String tentk,User auth)  {
-        if(tentk == null) return;
-        String idACC = auth.getId();
-        String sql = "UPDATE ACCOUNTS set NAME = '"+tentk+"' where ID = "+ "'"+idACC+"'";
-        Statement stm  =  DBConnect.getInstall().get();
-        try {
-            stm.executeUpdate(sql);
-            auth.setName(tentk);
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-    }
-    public static void updateProfileAddress(String diachi, User auth)  {
-        if(diachi == null) return;
-        String idACC = auth.getId();
-        String sql1 = "UPDATE CUSTOMERS set CUSTOMERS.ADDRESS = '"+diachi+"'where CUSTOMERS.ID = "+ "'"+idACC+"'";
+    public static void updateProfile(String name, String sdt, String diachi, String mail, String id, User user)  {
+        if(name == null || sdt == null || diachi == null || mail == null) return;
+        String sql1 = "UPDATE CUSTOMERS, ACCOUNTS set CUSTOMERS.ADDRESS = '"+diachi+"', " +
+                "CUSTOMERS.PHONE = '"+sdt+"', ACCOUNTS.EMAIL = '"+mail+"'," +
+                " ACCOUNTS.NAME='" +name+"'" +
+                " WHERE CUSTOMERS.id = '"+id+"' and CUSTOMERS.id = ACCOUNTS.id";
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql1);
+            user.setEmail(mail);
+            user.setName(name);
+            CustomerService.getCusByIdAcc(id).setSDT(sdt);
+            CustomerService.getCusByIdAcc(id).setDIACHI(diachi);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+    public static void updateProfile(String name, String sdt, String diachi, String mail, User auth)  {
+        if(name == null || sdt == null || diachi == null || mail == null) return;
+        String idACC = auth.getId();
+        String sql1 = "UPDATE CUSTOMERS, ACCOUNTS set CUSTOMERS.ADDRESS = '"+diachi+"', " +
+                "CUSTOMERS.PHONE = '"+sdt+"', ACCOUNTS.EMAIL = '"+mail+"'," +
+                " ACCOUNTS.NAME='" +name+"'" +
+                " WHERE CUSTOMERS.id = '"+idACC+"' and CUSTOMERS.id = ACCOUNTS.id";
+        Statement stm  =  DBConnect.getInstall().get();
+        try {
+            stm.executeUpdate(sql1);
+            auth.setName(name);
+            auth.setEmail(mail);
             CustomerService.getCusByIdAcc(auth.getId()).setDIACHI(diachi);
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-    }
-    public static void updateProfilePhoneNo(String sdt, User auth)  {
-        if(sdt == null) return;
-        String idACC = auth.getId();
-        String sql1 = "UPDATE CUSTOMERS set CUSTOMERS.PHONE = '"+sdt+"' where CUSTOMERS.ID = "+ "'"+idACC+"'";
-        Statement stm  =  DBConnect.getInstall().get();
-        try {
-            stm.executeUpdate(sql1);
             CustomerService.getCusByIdAcc(auth.getId()).setSDT(sdt);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -265,7 +251,6 @@ public class UserService {
             if(!checkEmail(email) && u.getEmail().equals(email)){
                 return u;
             }
-
         }
         return null;
     }
@@ -321,16 +306,6 @@ public class UserService {
     }
 
     public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {
-//        UserService userService = new UserService();
-//       System.out.println(userService.checkLogin("thanhthuy@gmail.com", "123").toString());
-//       System.out.println(userService.hashPassword("123"));
-//       System.out.println(userService.hashPassword("456"));
-//       System.out.println(userService.hashPassword("789"));
-//       System.out.println(userService.hashPassword("nhom27"));
-//        UserService.register(new Account("Thanh@gmail.com","12","Thanh"));
-
-//        System.out.println(UserService.checkEmail("thanh@gmail.com"));
-//        sendMail("thanhtamv14717@gmail.com", randomCode());
-//        updatePass("thanhtamv14717@gmail.com", hashPassword("123"));
+        System.out.println(hashPassword("f6c399579fa934b6b7ec5d23facca98828f33acf3a857af87ce037b8b499ff15"));
     }
 }

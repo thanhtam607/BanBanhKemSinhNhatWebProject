@@ -826,20 +826,19 @@ INSERT INTO ACCOUNTS VALUES('AD10', 'nhom275@gmail.com', '8a050fa1b4e6ed4a406292
 
 /*==============================CUSTOMERS=====================================*/
 CREATE TABLE CUSTOMERS(ID CHAR(50) PRIMARY KEY NOT NULL,
-											 NAME VARCHAR(40),
 											 ADDRESS VARCHAR(60),
 											 PHONE VARCHAR(10),
 											 CONSTRAINT f_mTK FOREIGN KEY (ID) REFERENCES ACCOUNTS(ID));
- INSERT INTO CUSTOMERS VALUES('AD01', 'Thanh Thuỳ Huỳnh','TP.HCM', '0978675678');
- INSERT INTO CUSTOMERS VALUES('AD02', 'Thanh Tâm Nguyễn', 'TP.HCM', '0987675435');
- INSERT INTO CUSTOMERS VALUES('AD03', 'Mai Thanh Thuận','TP.HCM', '0987863764');
- INSERT INTO CUSTOMERS VALUES('AD04', 'Nguyễn Văn Dũng', 'TP.HCM', '0987467536');
- INSERT INTO CUSTOMERS VALUES('AD05', 'Nguyễn Văn Hữu Cảnh', 'BINH DUONG', '0987463578');
- INSERT INTO CUSTOMERS VALUES('AD06', 'Nguyễn Văn Tuấn Tú', 'DONG NAI', '0978365478');
- INSERT INTO CUSTOMERS VALUES('AD07', 'Nguyễn Thị Thu Thuý ', 'TP.HCM', '0987425367');
- INSERT INTO CUSTOMERS VALUES('AD08', 'Trần Phi Hùng', 'TP.HCM', '0976456736');
- INSERT INTO CUSTOMERS VALUES('AD09', 'Lê Hữu Phước', 'LONG AN', '0978365627');
- INSERT INTO CUSTOMERS VALUES('AD10', 'Huỳnh Văn Biên', 'TP.HCM', '0987362567');
+ INSERT INTO CUSTOMERS VALUES('AD01','TP.HCM', '0978675678');
+ INSERT INTO CUSTOMERS VALUES('AD02', 'TP.HCM', '0987675435');
+ INSERT INTO CUSTOMERS VALUES('AD03', 'TP.HCM', '0987863764');
+ INSERT INTO CUSTOMERS VALUES('AD04', 'TP.HCM', '0987467536');
+ INSERT INTO CUSTOMERS VALUES('AD05', 'BINH DUONG', '0987463578');
+ INSERT INTO CUSTOMERS VALUES('AD06',  'DONG NAI', '0978365478');
+ INSERT INTO CUSTOMERS VALUES('AD07',  'TP.HCM', '0987425367');
+ INSERT INTO CUSTOMERS VALUES('AD08',  'TP.HCM', '0976456736');
+ INSERT INTO CUSTOMERS VALUES('AD09',  'LONG AN', '0978365627');
+ INSERT INTO CUSTOMERS VALUES('AD10', 'TP.HCM', '0987362567');
 
 
  /*==============================BILLS=====================================*/
@@ -901,7 +900,7 @@ CREATE TABLE DELIVERY(ID CHAR(4),
 												ADDRESS VARCHAR(60) NOT NULL,
 												EMAIL VARCHAR(60),
 												PHONE VARCHAR(12),
-												NAME VARCHAR(60),
+												NAMECUSTOMER VARCHAR(60),
 												CONSTRAINT f_mhdgh FOREIGN KEY(ID) REFERENCES BILLS(ID));
 												
 INSERT INTO DELIVERY VALUES('HD01', '2022/10/14', 'Q1, TP HCM', null, null,null);
@@ -1062,9 +1061,3 @@ insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh
 insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
 insert into general_infor values('GI023', 'NameShop', 'Shop Bánh Kem');
 
--- 
--- SELECT*from customers
--- SELECT*from bills
--- SELECT*from delivery
--- UPDATE customers, bills set customers.NAME = 'thuy', customers.PHONE = '345346' WHERE bills.ID ='hd01' and customers.id = bills.CUSTOMER_ID
--- update bills set bills.NOTES 

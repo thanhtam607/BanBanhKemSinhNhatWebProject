@@ -14,8 +14,9 @@ import java.io.IOException;
 public class DeleteCommentListReceipt extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("idCmt");
-        ProductService.deleteCommemt(id);
+        String idCmt = request.getParameter("idCmt");
+        ProductService.deleteCommemt(idCmt);
+        String id = request.getParameter("id");
 
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("auth");

@@ -9,7 +9,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Discount" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.DiscountService" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -54,6 +53,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
+<jsp:include page="spinner.jsp"></jsp:include>
 <!-- header -->
 <header class="header">
     <div class="header__content">
@@ -108,7 +108,6 @@
 <!-- Sidebar End -->
 
 <!-- main content -->
-<% User user = UserService.findById(auth.getId()); %>
 <main class="main bg-white">
     <div class="container-fluid bg-white">
         <div class="row">
@@ -163,12 +162,10 @@
             </div>
             <!-- end main title -->
             <div class="button">
-                <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
                 <div class="button_left">
                     <a class="button_product" href="Add_Discount">Thêm khuyến mãi</a>
                 </div>
-                <% } else { %>
-                <% } %>
+
             </div>
 
             <div class="col-12 bg-pink">
@@ -231,10 +228,7 @@
                             </td>
                             <td>
                                 <div class="main__table-btns">
-                                    <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                                     <a href="#modal-delete<%=discount.getId()%>" class="profile__action profile__action--delete open-modal"><i class="fa fa-trash"></i></a>
-                                    <% } else { %>
-                                    <% } %>
                                     <div id="modal-delete<%=discount.getId()%>" class="zoom-anim-dialog mfp-hide modal">
                                         <h6 class="modal__title">Xóa khuyến mãi</h6>
                                         <p class="modal__text">Bạn có chắc muốn hủy khuyến mãi này?</p>
@@ -316,6 +310,7 @@
 <script src="js/jquery.mousewheel.min.js"></script>
 <script src="js/jquery.mCustomScrollbar.min.js"></script>
 <script src="js/select2.min.js"></script>
+<script src="js/main.js"></script>
 <script src="js/admin.js"></script>
 
 

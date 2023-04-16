@@ -2,15 +2,13 @@ package vn.edu.hcmuaf.fit.model;
 
 public class Customer {
     private String MAKH;
-    private String TENKH;
     private String DIACHI;
     private String SDT;
     private int role;
 
-    public Customer(String MAKH, String TENKH, String DIACHI, String SDT, int role) {
+    public Customer(String MAKH, String DIACHI, String SDT, int role) {
 
         this.MAKH = MAKH;
-        this.TENKH = TENKH;
         this.DIACHI = DIACHI;
         this.SDT = SDT;
         this.role = role;
@@ -28,13 +26,6 @@ public class Customer {
         this.MAKH = MAKH;
     }
 
-    public String getTENKH() {
-        return TENKH;
-    }
-
-    public void setTENKH(String TENKH) {
-        this.TENKH = TENKH;
-    }
 
     public String getDIACHI() {
         return DIACHI;
@@ -74,7 +65,6 @@ public class Customer {
     public String toString() {
         return "Customer{" +
                 "MAKH='" + MAKH + '\'' +
-                ", TENKH='" + TENKH + '\'' +
                 ", DIACHI='" + DIACHI + '\'' +
                 ", SDT='" + SDT + '\'' +
                 '}';

@@ -33,7 +33,8 @@ public class  Order {
         this.data = data;
         this.giaohang = gh;
 }
-    public Order( User user, List<ItemProductInCart> data, String buyDate, double priceTotal, String note, Delivery gh ) {
+    public Order( User user, List<ItemProductInCart> data, String buyDate, double priceTotal,
+                  String note, Delivery gh ) {
         this.id = null;
         this.user = user;
         this.buyDate = buyDate;
