@@ -1,6 +1,5 @@
-package vn.edu.hcmuaf.fit.controller.Log;
+package vn.edu.hcmuaf.fit.controller.admin.Log;
 
-import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.service.LogService;
 

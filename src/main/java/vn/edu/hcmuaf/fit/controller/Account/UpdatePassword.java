@@ -40,6 +40,7 @@ public class UpdatePassword extends HttpServlet {
             String email = request.getParameter("email");
             UserService.updatePass(email, UserService.hashPassword(pass));
             user.setPass(UserService.hashPassword(pass));
+
             log.setContent("Đặt lại mật khẩu thành công");
         }
         LogService.addLog(log);

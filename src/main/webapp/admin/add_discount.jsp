@@ -194,7 +194,7 @@
                         <li><a class ="text-pink" onclick="filterProduct(false, '<%=lb.getName()%>')" href="#" selected="true" value="<%=lb.getName()%>"><%=lb.getName()%></a></li>
                         <%}
                         else{%>
-                        <li><a class ="text-pink" href="#" onclick="filterProduct(false, '<%=lb.getName()%>')" value="<%=lb.getName() %>"><%=lb.getName()%></a></li>
+                        <li><a class ="text-pink" href="#" onclick="filterProduct(false,'<%=lb.getName()%>')" value="<%=lb.getName() %>"><%=lb.getName()%></a></li>
                         <%}}%>
                       </ul>
                     </div>
@@ -214,8 +214,8 @@
             </div>
               <div class="col-12 col-md-12 col-lg-12 col-xl-12" >
                   <div class="select-all">
-                      <div href="ListProductRemoved">
-                          <input class="form-check-input" type="checkbox" id="select-all" > Chọn tất cả</div>
+                      <div>
+                          <input class="form-check-input" type="checkbox" id="select-all"> Chọn tất cả</div>
                   </div>
 
                   <table class="table table-striped">

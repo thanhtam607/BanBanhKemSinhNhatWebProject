@@ -29,7 +29,7 @@ public class ProductFilter extends HttpServlet {
             listFilter = ProductService.findByType(request.getParameter("filter"),ProductService.getListProduct());
         }
 
-        if(listFilter.isEmpty()){
+        else if(listFilter.isEmpty()){
             listFilter = ProductService.findByName(request.getParameter("search"), ProductService.getListProduct());
             title= "Kết quả tìm kiếm '" + request.getParameter("search")+"'";
 
@@ -37,10 +37,10 @@ public class ProductFilter extends HttpServlet {
         else {
             int min = 0;
             int max = 10000000;
-            if (p_min != null) {
+            if (request.getParameter("pricemin") != null) {
                 min = Integer.parseInt(p_min);
             }
-            if (p_max != null) {
+            if (request.getParameter("pricemax") != null) {
                 max = Integer.parseInt(p_max);
             }
             if (listFilter.isEmpty()) {
@@ -48,6 +48,7 @@ public class ProductFilter extends HttpServlet {
                 NumberFormat vn = NumberFormat.getInstance();
                 title = "Giá từ " + vn.format(min) + " VND -> " + vn.format(max) + " VND";
             }
+
         }
         String sort = request.getParameter("sortValue");
         if(sort != null ){
