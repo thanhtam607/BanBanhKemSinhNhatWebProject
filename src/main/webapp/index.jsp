@@ -34,7 +34,9 @@
 
 <body>
 
-    <% User auth = (User) session.getAttribute("auth");%>
+    <% User auth = (User) session.getAttribute("auth");
+
+    %>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -371,6 +373,7 @@
             </div>
         </div>
     </section>
+
     <!-- Blog Section End -->
     <jsp:include page="footer.jsp"></jsp:include>
 

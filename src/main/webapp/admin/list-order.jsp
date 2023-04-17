@@ -156,7 +156,12 @@
         </div>
       </div>
       <!-- end main title -->
+      <div class="button">
+        <div class="button_left">
+          <a class="button_product" href="add-new-bill.jsp">Tạo đơn hàng</a>
+        </div>
 
+      </div>
       <!-- table -->
       <div class="col-12 bg-pink">
         <div class="main__table-wrap">

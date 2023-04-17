@@ -1,13 +1,11 @@
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Blog" %>
-<%--<%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>--%>
-<%--<%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>--%>
-<%--<%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>--%>
-<%--<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>--%>
-<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Receipt" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.ReceiptService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +57,7 @@
     <div class="header__content">
         <!-- header logo -->
         <a href="ListReceipt_Admin" class="header__logo">
-            <img src="../<%=InforService.getImgLogo().get(0).getContent()%>" alt="">
+            <img src="../img/logo_web.jpg" alt="">
         </a>
         <!-- end header logo -->
 
@@ -101,8 +99,7 @@
 
             <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file me-2"></i>QL danh mục</a>
             <a href="List_Discounts" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Khuyến mãi</a>
-            <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang
-                chủ</a>
+            <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang chủ</a>
             <!--  -->
         </div>
     </nav>
@@ -118,7 +115,7 @@
         <!-- main title -->
         <div class="col-12">
             <div class="main__title">
-                <h2>Chỉnh sửa đơn hàng - <span id="idRe"><%=receipt.getId()%></span></h2>
+                <h2>Chỉnh sửa đơn hàng - <span id="idRe">HD23</span></h2>
             </div>
         </div>
         <div class="tab-content" id="myTabContent">
@@ -127,26 +124,26 @@
                     <div class="row">
                         <!-- details form -->
                         <div class="col-12 col-lg-6">
-<%--                            <form action="EditOrderUpdateCustomer?id=<%=receipt.getId()%>" method="post" class="form form--profile">--%>
+                            <%-- <form action="EditOrderUpdateCustomer?id=<%=receipt.getId()%>" method="post" class="form form--profile">--%>
                             <form onsubmit="editOrderUpdateCustomer()" class="form form--profile">
                                 <div class="row row--form">
                                     <h4 class="form__title">Thông tin khách hàng</h4>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
-                                            <input class="d-none" id="idRec2" name="idRec2" value="<%=receipt.getId()%>">
+                                            <input class="d-none" id="idRec2" name="idRec2" value="HD23">
                                             <label class="form__label" for="usernameRE">Người nhận</label>
                                             <input id="usernameRE" type="text" name="usernameRE" class="form__input"
-                                                   value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getTenKH()%>">
+                                                   value="hai ba con lơn">
                                         </div>
                                         <div class="form__group">
                                             <label class="form__label" for="phoneRE">SĐT người nhận</label>
                                             <input id="phoneRE" type="text" name="phoneRE" class="form__input"
-                                                   value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getPhone()%>" maxlength="10">
+                                                   value="34324435" maxlength="10">
                                         </div>
                                         <div class="form__group">
                                             <label class="form__label" for="mailRE">Email người nhận</label>
                                             <input id="mailRE" type="email" name="mailRE" class="form__input"
-                                                   value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getEmail()%>">
+                                                   value="32455@gami">
                                         </div>
                                     </div>
 
@@ -154,19 +151,19 @@
                                         <div class="form__group">
                                             <label class="form__label" for="note">Ghi chú ĐH</label>
                                             <input type="text" id="note" name="note" class="form__input text-lowercase"
-                                                   value="<%=receipt.getNote()%>">
+                                                   value="fdsf,à">
                                         </div>
                                     </div>
 
                                     <div class="col-6">
-<%--                                        <input class="form__btn" type="submit" value="Lưu thông tin">--%>
+                                        <%--   <input class="form__btn" type="submit" value="Lưu thông tin">--%>
                                         <button onclick="editOrderUpdateCustomer()" type="button" class="form__btn flex-row-reverse">Lưu thay đổi</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="col-12 col-lg-6">
-<%--                            <form action="EditOrderUpdateDelivery?id=<%=receipt.getId()%>" method="post" class="form form--profile">--%>
+                            <%--  <form action="EditOrderUpdateDelivery?id=<%=receipt.getId()%>" method="post" class="form form--profile">--%>
                             <form class="form form--profile">
                                 <div class="row row--form">
                                     <h4 class="form__title">Thông tin giao hàng</h4>
@@ -174,44 +171,45 @@
                                         <div class="form__group">
                                             <label class="form__label" for="dayE">Ngày lập</label>
                                             <input type="datetime" id="dayE" class="form__input text-lowercase form-check-input is-invalid" readonly
-                                                   value="<%=receipt.getExport_date()%>">
+                                                   value="3452">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
-                                            <input class="d-none" id="idR" name="idR" value="<%=receipt.getId()%>">
+<%--                                            <input class="d-none" id="idR" name="idR" value="<%=receipt.getId()%>">--%>
                                             <label class="form__label" for="dayD">Ngày giao</label>
                                             <input type="datetime" id="dayD" name="dayD" class="form__input text-lowercase"
-                                                   value="<%=receipt.getDelivery_date()%>">
+                                                   value="32456">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
                                             <label class="form__label" for="address">Địa chỉ giao</label>
                                             <input type="text" id="address" name="address" class="form__input text-lowercase"
-                                                   value="<%=receipt.getAddress()%>">
+                                                   value="tphcmjsalk">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
                                             <label class="form__label" for="rights">Trạng thái ĐH</label>
                                             <select class="form__input state" id="rights" name="rights">
-                                                <% for(String status : statusName){
-                                                        if(status.equals(receipt.getStatusName())){%>
-                                                <option selected value="<%=status%>"><%=status%></option>
-                                                <% } else if (receipt.getStatus() == 3) {%>
-                                                     <option disabled value="<%=status%>"><%=status%></option>
-                                                <%} else if (receipt.getStatus() == 2) {%>
-                                                <option <%=status.equals("Đã hủy") ? "disabled": " "%> value="<%=status%>"><%=status%></option>
-                                                <%} else {%>
-                                                <option value="<%=status%>"><%=status%></option>
-                                                <%}}%>
+<%--                                                <% for(String status : statusName){--%>
+<%--                                                    if(status.equals(receipt.getStatusName())){%>--%>
+<%--                                                <option selected value="<%=status%>"><%=status%></option>--%>
+<%--                                                <% } else if (receipt.getStatus() == 3) {%>--%>
+<%--                                                <option disabled value="<%=status%>"><%=status%></option>--%>
+<%--                                                <%} else if (receipt.getStatus() == 2) {%>--%>
+<%--                                                <option <%=status.equals("Đã hủy") ? "disabled": " "%> value="<%=status%>"><%=status%></option>--%>
+<%--                                                <%} else {%>--%>
+<%--                                                <option value="<%=status%>"><%=status%></option>--%>
+<%--                                                <%}}%>--%>
+                                                    <option selected value="0">chờ</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="col-6 mt-lg-4">
-<%--                                        <input class="form__btn" type="submit" value="Lưu thông tin">--%>
+                                        <%-- <input class="form__btn" type="submit" value="Lưu thông tin">--%>
                                         <button onclick="editOrderUpdateDelivery()" type="button" class="form__btn flex-row-reverse">Lưu thay đổi</button>
                                     </div>
                                 </div>
@@ -232,26 +230,26 @@
                                         <th scope="col">Tùy chọn</th>
                                     </tr>
                                     </thead>
-                                    <% for (int i = 0; i < receiptsDt.size(); i++){
-                                        Bill_Detail rcs = receiptsDt.get(i);%>
+<%--                                    <% for (int i = 0; i < receiptsDt.size(); i++){--%>
+<%--                                        Bill_Detail rcs = receiptsDt.get(i);%>--%>
                                     <tbody>
-                                    <tr id="<%=i + 1%>">
-                                        <td><%=i + 1%></td>
-                                        <td><%=rcs.getMasp()%></td>
-                                        <td><%=rcs.getNamePro()%></td>
-                                        <td><%=rcs.getNote()%></td>
-                                        <td><%=rcs.getSolg()%></td>
-                                        <td><%=rcs.formatNum(rcs.getPrice())%></td>
-                                        <td><%=rcs.formatNum(rcs.getToTalPrice())%></td>
+<%--                                    <tr id="<%=i + 1%>">--%>
+<%--                                        <td><%=i + 1%></td>--%>
+<%--                                        <td><%=rcs.getMasp()%></td>--%>
+<%--                                        <td><%=rcs.getNamePro()%></td>--%>
+<%--                                        <td><%=rcs.getNote()%></td>--%>
+<%--                                        <td><%=rcs.getSolg()%></td>--%>
+<%--                                        <td><%=rcs.formatNum(rcs.getPrice())%></td>--%>
+<%--                                        <td><%=rcs.formatNum(rcs.getToTalPrice())%></td>--%>
 
-                                        <td>
-                                            <%if(receipt.getStatus() != 4 || receipt.getStatus() != 3){%>
-                                            <button onclick="adminRemoveProInOrder('<%=i+1%>')" class=" main__table-btn main__table-btn--delete px-1">
-                                                <i class="fas fa-trash text-center"></i>
-                                            </button>
-                                            <%}%>
-                                        </td>
-                                    </tr>
+<%--                                        <td>--%>
+<%--                                            <%if(receipt.getStatus() != 4 || receipt.getStatus() != 3){%>--%>
+<%--                                            <button onclick="adminRemoveProInOrder('<%=i+1%>')" class=" main__table-btn main__table-btn--delete px-1">--%>
+<%--                                                <i class="fas fa-trash text-center"></i>--%>
+<%--                                            </button>--%>
+<%--                                            <%}%>--%>
+<%--                                        </td>--%>
+<%--                                    </tr>--%>
 
                                     </tbody>
 
@@ -264,7 +262,7 @@
                                                 <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                     <div class="form__group">
                                                         <label class="form__label" for="msp">Mã Sản Phẩm</label>
-                                                        <input class="d-none" id="idRec" name="idRec" value="<%=receipt.getId()%>">
+                                                        <input class="d-none" id="idRec" name="idRec" value="Hi90">
                                                         <input id="msp" type="text" name="msp" class="form__input"
                                                                value="" placeholder="Vui lòng nhập chính xác mã sản phẩm..." required>
                                                         <p id="error" class="text-danger mb-2"></p>
@@ -283,9 +281,9 @@
 
                                             </div>
                                             <div class="modal__btns">
-<%--                                                <button class="modal__btn modal__btn--apply" type="submit">--%>
-<%--                                                    Xác nhận và đóng--%>
-<%--                                                </button>--%>
+                                                <%--                                                <button class="modal__btn modal__btn--apply" type="submit">--%>
+                                                <%--                                                    Xác nhận và đóng--%>
+                                                <%--                                                </button>--%>
                                                 <button onclick="adminAddProInOrder()" class="modal__btn modal__btn--apply" type="submit">
                                                     Xác nhận và đóng
                                                 </button>
@@ -295,25 +293,24 @@
 
                                     </div>
                                     <!-- end modal status -->
-                                    <% } %>
+<%--                                    <% } %>--%>
                                 </table>
                             </div>
                             <div class="col-5 margin-top-20px">
                                 <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;
-                                <span style="font-weight: 600; font-size: 30px;" class="text-danger text-uppercase" id="total"><%=receipt.formatNum(receipt.getTotal())%> VND</span>
+                                <span style="font-weight: 600; font-size: 30px;" class="text-danger text-uppercase" id="total">4392342 VND</span>
                             </div>
 
                         </div>
                         <div class="col-12">
                             <div class="row">
-                                <%if(receipt.getStatus() == 0 || receipt.getStatus() == 1 || receipt.getStatus() == 2){%>
+
                                 <div class="col-12 col-lg-6">
                                     <a href="#modal-view"  type="button" class="form__btn open-modal">Thêm sản phẩm</a>
-                                </div>
+                                     </div>
                                 <div class="col-12 col-lg-6">
-                                    <button onclick="save()" type="button" class="form__btn flex-row-reverse">Lưu thay đổi</button>
-                                </div>
-                                <%}%>
+                             <button onclick="save()" type="button" class="form__btn flex-row-reverse">Lưu thay đổi</button>
+                               </div>
                             </div>
                         </div>
                     </div>
@@ -323,13 +320,12 @@
     </div>
 </main>
 
+<!-- end main content -->
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 <!-- JS -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/jquery.magnific-popup.min.js"></script>

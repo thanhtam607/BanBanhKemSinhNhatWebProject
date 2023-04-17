@@ -1,4 +1,4 @@
-
+<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
