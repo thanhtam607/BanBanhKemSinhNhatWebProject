@@ -80,10 +80,10 @@ public class LogFilter  extends HttpServlet {
             if(log.getLevel()==1){
                 i = "<i class=\"bi bi-check-circle-fill text-success\"></i>\n";
             }else if(log.getLevel()==2){
-               i= "  <i class=\"bi bi-exclamation-circle-fill text-warning\"></i>\n" ;
+               i= "   <i class=\"fas fa-exclamation-triangle text-warning\"></i>\n" ;
             }
             else{
-                i=  " <i class=\"bi bi-x-circle-fill text-danger\"></i>\n";
+                i=  " <i class=\"fas fa-skull-crossbones text-danger\"></i>\n";
             }
             out.println("<tr >\n" +
                     "                      <td>"+log.getCreateAt()+"</td>\n" +

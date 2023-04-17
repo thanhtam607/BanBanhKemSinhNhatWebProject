@@ -163,7 +163,7 @@
                           </div><input type="hidden" id="level" value="0">
                           <ul class="filter__item-menu list-group dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
                             <li><a class="dropdown-item" onclick="filterLog('level',0)" selected="true" value="0">Tất cả</a></li>
-                            <li><a class ="text-success dropdown-item" onclick="filterLog('level',1)" value="1">Thành công</a></li>
+                            <li><a class ="text-success dropdown-item" onclick="filterLog('level',1)" value="1">Bình thường</a></li>
                             <li><a class ="text-warning dropdown-item" onclick="filterLog('level',2)" value="2">Cảnh báo</a></li>
                             <li><a class ="text-danger dropdown-item" onclick="filterLog('level',3)" value="3">Nguy hiểm</a></li>
 
@@ -210,8 +210,8 @@
                       <td class="level-log"><%if(log.getLevel()==1){%>
                         <i class="bi bi-check-circle-fill text-success"></i>
                       <%}else if(log.getLevel()==2){%>
-                        <i class="bi bi-exclamation-circle-fill text-warning"></i>
-                        <%}else%> <i class="bi bi-x-circle-fill text-danger"></i>
+                        <i class="fas fa-exclamation-triangle text-warning"></i>
+                        <%}else%> <i class="fas fa-skull-crossbones text-danger"></i>
                       </td>
                       <td><%=log.getUser()%></td>
                       <td><%=log.getContent()%></td>
