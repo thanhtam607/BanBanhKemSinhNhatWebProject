@@ -120,6 +120,7 @@
                     <% List<Product> productList = (List<Product>) request.getAttribute("listpro");%>
                     <span class="main__title-stat"><%=productList.size()%> sản phẩm</span>
 
+
                     <div class="main__title-wrap">
                         <!-- filter sort -->
                         <div class="filter" id="filter__sort">

@@ -1181,9 +1181,9 @@ ul {
     top: 100%;
     left: 0;
     margin-top: 0;
-    min-width: 200px;
-    padding: 20px;
-    background-color: #222028;
+    min-width: 150px;
+    padding: 5px;
+    background-color: #ffffff;
     display: block;
     transition: 0.4s ease;
     position: absolute;
@@ -1199,8 +1199,8 @@ ul {
     position: relative;
     cursor: pointer;
     transition: 0.4s ease;
-    margin-bottom: 15px;
-    padding: 0 12px;
+    margin-bottom: 5px;
+    padding: 0 10px;
 }
 
 .filter__item-menu li:last-child {
@@ -1218,14 +1218,14 @@ ul {
 }
 
 @media (min-width: 768px) {
-    .filter {
-        margin-right: 50px;
+    .main__title-form {
+        margin-left: 50px;
     }
 }
 
 @media (min-width: 1200px) {
-    .filter {
-        margin-right: 60px;
+    .main__title-form {
+        margin-left: 60px;
     }
 }
 
