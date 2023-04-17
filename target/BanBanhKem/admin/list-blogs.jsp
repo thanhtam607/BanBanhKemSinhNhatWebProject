@@ -4,6 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,6 +105,7 @@
 
     <!-- main content -->
     <% List<Blog> blogList = (List<Blog>) request.getAttribute("list");%>
+<% User user = UserService.findById(auth.getId()); %>
     <main class="main bg-white">
         <div class="container-fluid bg-white">
             <div class="row">
@@ -154,9 +156,12 @@
                     </div>
                 </div>
                 <!-- end main title -->
+                <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
                 <div class="paginator-wrap" style="margin-top: -10px">
                     <span><a href="add-blog.jsp" style="color: white;"> Thêm tin tức mới</a></span>
                 </div>
+                <% } else { %>
+                <% } %>
                 <!-- users -->
                 <div class="col-12 bg-pink">
                     <div class="main__table-wrap">
@@ -207,6 +212,7 @@
 
                                     <td>
                                         <div class="main__table-btns">
+                                            <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                             <%if(BlogService.findById(blog.getId()).getStatus() == -1){%>
                                             <a href="#modal-status-unlock<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
                                                 <i class="fa fa-lock"></i>
@@ -216,12 +222,17 @@
                                                 <i class="fa fa-unlock"></i>
                                             </a>
                                             <%}%>
+                                            <% } else { %>
+                                            <% } %>
                                             <a href="EditBlog?idB=<%=blog.getId()%>" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
+                                            <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                                             <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                                                 <i class="fa fa-trash"></i>
                                             </a>
+                                            <% } else { %>
+                                            <% } %>
                                         </div>
                                 </td>
                                 </tr>

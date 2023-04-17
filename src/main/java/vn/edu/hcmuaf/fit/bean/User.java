@@ -11,12 +11,15 @@ public class User implements Serializable {
     private int  role;
     private int  status;
     private  String type;
+    private int isadd;
+    private int isedit;
+    private int isdelete;
 
     public User(){
 
     }
 
-    public User(String  id, String  email, String  pass, String  name, int  role, int  status, String type) {
+    public User(String  id, String  email, String  pass, String  name, int  role, int  status, String type, int isadd, int isedit, int isdelete) {
          this.id =  id;
          this.email =  email;
          this.pass =  pass;
@@ -24,6 +27,9 @@ public class User implements Serializable {
          this.role =  role;
          this.status =  status;
          this.type=type;
+        this.isadd = isadd;
+        this.isedit = isedit;
+        this.isdelete = isdelete;
     }
 
     public User(String  email, String  pass, String  name){
@@ -116,5 +122,27 @@ public class User implements Serializable {
         if(this.status == -1) return true;
         return false;
     }
+    public int getIsadd() {
+        return isadd;
+    }
 
+    public void setIsadd(int isadd) {
+        this.isadd = isadd;
+    }
+
+    public int getIsedit() {
+        return isedit;
+    }
+
+    public void setIsedit(int isedit) {
+        this.isedit = isedit;
+    }
+
+    public int getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(int isdelete) {
+        this.isdelete = isdelete;
+    }
 }
