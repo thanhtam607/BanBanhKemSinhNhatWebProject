@@ -36,6 +36,7 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
+
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -264,6 +265,8 @@
            </form>
         </div>
     </div>
+
+
     <!-- Contact Form End -->
 <jsp:include page="footer.jsp"></jsp:include>
     <!-- Js Plugins -->
@@ -295,8 +298,9 @@
                 }
             });
         }
-    </script>
 
+
+    </script>
 
 </body>
 </html>

@@ -18,6 +18,8 @@ public class SignOut extends HttpServlet {
             User user = (User) session.getAttribute("auth");
             session.invalidate();
 
+            response.sendRedirect("/signin.jsp");
+
             Log log = new Log();
             log.setLevel(1);
             log.setUser(user.getId());
@@ -25,8 +27,7 @@ public class SignOut extends HttpServlet {
             log.setContent("Đăng xuất khỏi trang web");
             LogService.addLog(log);
 
-            response.sendRedirect("Index");
-            request.getRequestDispatcher("index.jsp");
+
         }
     }
 

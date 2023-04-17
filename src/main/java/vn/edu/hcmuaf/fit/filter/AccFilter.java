@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "AccFilter", urlPatterns = {"/admin/Admin","/admin/EditUser"})
+@WebFilter(filterName = "AccFilter", urlPatterns = {"/admin/ListReceipt_Admin", "/admin/ListReceipt_full_Admin","/admin/EditUser","/admin/ListProduct_Admin","/admin/ListCustomer"})
 public class AccFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
 
@@ -25,11 +25,11 @@ public class AccFilter implements Filter {
         HttpSession session = httpServletRequest.getSession(true);
 
         User auth = (User) session.getAttribute("auth");
-        if(auth != null){
-
+        if(auth != null && auth.checkRole()){
             chain.doFilter(request, response);
         }else{
-            ((HttpServletResponse) response).sendRedirect("/signin.jsp");
+            ((HttpServletResponse) response).sendRedirect("../blank_page.jsp");
+//            ((HttpServletResponse) response).sendRedirect("/signin.jsp");
         }
     }
 }

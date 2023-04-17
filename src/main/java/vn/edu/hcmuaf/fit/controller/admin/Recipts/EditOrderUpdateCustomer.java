@@ -45,6 +45,7 @@ public class EditOrderUpdateCustomer extends HttpServlet {
         log.setUser(user.getId());
         LogService.addLog(log);
 
-        response.sendRedirect("./AdminEditOrder?id="+ request.getParameter("id"));
+        request.setAttribute("id", id);
+//        response.sendRedirect("./AdminEditOrder?id="+ request.getParameter("id"));
     }
 }

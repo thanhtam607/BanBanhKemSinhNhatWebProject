@@ -202,7 +202,7 @@
                                             <i class="fas fa-info-circle text-center"></i>
                                         </a>
                                         <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
-                                        <%if(rc.getStatus() == 0 || rc.getStatus() == 1 || rc.getStatus() == 2){%>
+                                        <%if(rc.getStatus() != 3){%>
                                         <a href="AdminEditOrder?id=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit px-1">
                                             <i class="fas fa-edit text-center"></i>
                                         </a>
@@ -258,7 +258,6 @@
             <!-- Footer End -->
         </div>
         <!-- Content End -->
-
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
