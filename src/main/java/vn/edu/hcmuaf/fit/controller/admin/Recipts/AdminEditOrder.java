@@ -42,7 +42,6 @@ public class AdminEditOrder extends HttpServlet {
         LogService.addLog(log);
 
 
-//        response.sendRedirect("edit-order.jsp");
         request.getRequestDispatcher("edit-order.jsp").forward(request, response);
     }
 
