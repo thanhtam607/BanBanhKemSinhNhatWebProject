@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -101,7 +102,12 @@
                         </a>
                         <%if(auth != null) {%>
                             <div class="dropdown-menu dropdown-menu-end rounded-0 rounded-bottom m-0">
+                                <% User user = UserService.findById(auth.getId()); %>
+                                <% if(user.getRole() == 2) { %>
                                 <a href="general_Management.jsp" class="dropdown-item">Quản lí cửa hàng</a>
+                                <a href="AdminDecentralization.jsp" class="dropdown-item">Phân quyền cấp cao</a>
+                                <% } else { %>
+                                <% } %>
                                 <a href="edit-profile.jsp" class="dropdown-item">Hồ sơ của tôi</a>
                                 <a href="/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                             </div>
@@ -158,6 +164,7 @@
             <!-- Sale & Revenue End -->
 
              <!-- Recent Sales Start -->
+            <% User user = UserService.findById(auth.getId()); %>
              <div class="container-fluid pt-4 px-4">
                 <div class="bg-pink text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
@@ -194,11 +201,14 @@
                                         <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit px-1">
                                             <i class="fas fa-info-circle text-center"></i>
                                         </a>
+                                        <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                         <%if(rc.getStatus() != 3){%>
                                         <a href="AdminEditOrder?id=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit px-1">
                                             <i class="fas fa-edit text-center"></i>
                                         </a>
                                         <%}%>
+                                        <% } else { %>
+                                        <% } %>
                                     </td>
                                 </tr>
                             </tbody>
@@ -248,7 +258,6 @@
             <!-- Footer End -->
         </div>
         <!-- Content End -->
-
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
