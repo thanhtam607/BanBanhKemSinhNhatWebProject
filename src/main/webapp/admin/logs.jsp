@@ -135,23 +135,31 @@
                           <span class="filter__item-label"></span>
                           <div class="filter__item-btn dropdown-toggle col-12" role="navigation" id="filter-time-log" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <input type="button" id="time" value="Tất cả">
-                          </div>
-                            <div class="dropdown-menu p-4" id="filter_time">
-                              <div class="form-group">
-                                <div>
-                                  <input class="form-check-input" type="checkbox"  checked="true" id="all" > Tất cả
-                                </div>
+                          </div> <div class="error" id="error"></div>
+                          <ul class=" dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
+                            <li><a class="dropdown-item" onclick="filterLog('time',0)" selected="true" value="0">Tất cả</a></li>
+                            <li><a class ="dropdown-item" onclick="filterLog('time',1)" value="1">Từ ngày...đến ngày</a></li>
+                            <li><a class="dropdown-item" onclick="filterLog('time',2)"  value="2">Theo ngày</a></li>
+                          </ul>
+                          <input type="hidden" id="from" value=0>
+                          <input type="hidden"  id="to" value=0>
+                          <input type="hidden"  id="date" value=0>
+<%--                            <div class="dropdown-menu p-4" id="filter_time">--%>
+<%--                              <div class="form-group">--%>
+<%--                                <div>--%>
+<%--                                  <input class="form-check-input" type="checkbox"  checked="true" id="all" > Tất cả--%>
+<%--                                </div>--%>
 
-                                <label for="from">Từ ngày</label>
-                                <input type="date" class="form-control" id="from" onchange="cancelCheck()" placeholder="email@example.com">
-                              </div>
-                              <div class="form-group">
-                                <label for="to">Đến ngày</label>
-                                <input type="date" class="form-control" id="to" onchange="cancelCheck()" placeholder="Password">
-                              </div>
-                              <div class="error" id="error"></div>
-                              <button class="button_product right col-6"  onclick="filterLog('time','')">Lọc</button>
-                            </div>
+<%--                                <label for="from">Từ ngày</label>--%>
+
+<%--                              </div>--%>
+<%--                              <div class="form-group">--%>
+<%--                                <label for="to">Đến ngày</label>--%>
+
+<%--                              </div>--%>
+<%--
+<%--                              <button class="button_product right col-6"  onclick="filterLog('time','')">Lọc</button>--%>
+<%--                            </div>--%>
                           </div>
                         </th>
                       <th class="level-log" scope="col">Level
@@ -163,7 +171,7 @@
                           </div><input type="hidden" id="level" value="0">
                           <ul class="filter__item-menu list-group dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
                             <li><a class="dropdown-item" onclick="filterLog('level',0)" selected="true" value="0">Tất cả</a></li>
-                            <li><a class ="text-success dropdown-item" onclick="filterLog('level',1)" value="1">Thành công</a></li>
+                            <li><a class ="text-success dropdown-item" onclick="filterLog('level',1)" value="1">Bình thường</a></li>
                             <li><a class ="text-warning dropdown-item" onclick="filterLog('level',2)" value="2">Cảnh báo</a></li>
                             <li><a class ="text-danger dropdown-item" onclick="filterLog('level',3)" value="3">Nguy hiểm</a></li>
 
@@ -210,8 +218,8 @@
                       <td class="level-log"><%if(log.getLevel()==1){%>
                         <i class="bi bi-check-circle-fill text-success"></i>
                       <%}else if(log.getLevel()==2){%>
-                        <i class="bi bi-exclamation-circle-fill text-warning"></i>
-                        <%}else%> <i class="bi bi-x-circle-fill text-danger"></i>
+                        <i class="fas fa-exclamation-triangle text-warning"></i>
+                        <%}else%> <i class="fas fa-skull-crossbones text-danger"></i>
                       </td>
                       <td><%=log.getUser()%></td>
                       <td><%=log.getContent()%></td>
@@ -226,14 +234,13 @@
                   </table>
                   <!-- paginator -->
                   <div class="col-12">
-                    <div class="paginator-wrap">
-                      <%List<Log> listTotal = (List<Log>) request.getAttribute("listLog");%>
-                      <span><%=listLog.size()%>/<%=listTotal.size()%> Hoạt động</span>
-                      <ul class="paginator">
-                        <% int tag = (int) request.getAttribute("tag");%>
+                    <div class="paginator-wrap wrap col-12" >
+
+                      <ul class="paginator" id="paginator">
+                        <% int tag =1;%>
                         <input type="number" id="pageNumber" style="display: none" value="<%=tag%>">
                         <li class="paginator__item paginator__item--prev">
-                          <a href="ListLog?page=<%=tag - 1%>"><i class="fa fa-chevron-left"></i></a>
+                          <a onclick="filterLog('page',<%=tag-1%>)"><i class="fa fa-chevron-left"></i></a>
                         </li>
                         <%
                           for (int i = tag - 1; i <= tag + 2; i++) {
@@ -241,17 +248,14 @@
                               continue;
                             }
                             if (i == tag) {%>
-                        <li class="paginator__item paginator__item--active"><a href="ListLog?page=<%=i%>">
+                        <li class="paginator__item paginator__item--active"><a onclick="filterLog('page',<%=i%>)">
                           <%=tag%></a></li>
                         <%} else {%>
-                        <li class="paginator__item"><a href="ListLog?page=<%=i%>"><%=i%></a></li>
+                        <li class="paginator__item"><a onclick="filterLog('page', <%=i%>)"><%=i%></a></li>
                         <%}
                         }%>
                         <li class="paginator__item paginator__item--next">
-                          <a href="ListLog?page=<%=tag + 1%>"><i class="fa fa-chevron-right"></i></a>
-                        </li>
-
-
+                          <a onclick="filterLog('page', <%=tag+1%>)"><i class="fa fa-chevron-right"></i></a>
                         </li>
                       </ul>
                     </div>
@@ -276,6 +280,7 @@
 <script src="js/jquery.mCustomScrollbar.min.js"></script>
 <script src="js/select2.min.js"></script>
 <script src="js/admin.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 
