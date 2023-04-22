@@ -59,7 +59,7 @@ public class LogService {
         String[] date = datetime.split(" ");
         return  date[0];
     }
-        public static List<Log> findByDate(String date){
+        public static List<Log> findByDate(String date, List<Log> list){
             List<Log> res = new ArrayList<>();
             String[] d = getDate(date).split("-");
             String userN;
@@ -77,17 +77,23 @@ public class LogService {
                     if(user != null){
                         userN = user.getName();
                     }
-                    res.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
-                     }
+                    Log log = new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7));
+                    for(Log l: list){
+                        if(log.getId()== l.getId()){
+                            res.add(log);
+                        }
+                    }
+                    }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             return res;
         }
-    public static List<Log> findByDate(String fromDate, String toDate){
+    public static List<Log> findByDate(String fromDate, String toDate, List<Log> list){
         List<Log> res = new ArrayList<>();
         String userN;
         User user;
+        if(!fromDate.equals("0") && !toDate.equals("0")){
         try {
             PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM logs WHERE CREATE_AT between ? and ?;");
             stm.setString(1,fromDate);
@@ -99,12 +105,69 @@ public class LogService {
                 if(user != null){
                     userN = user.getName();
                 }
-                res.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
+                Log log = new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7));
+                for(Log l: list){
+                    if(log.getId()== l.getId()){
+                        res.add(log);
+                    }
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }return res;
         }
-        return res;
+        else if(!fromDate.equals("0") && toDate.equals("0")){
+            try {
+                PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM logs WHERE CREATE_AT >= ?;");
+                stm.setString(1,fromDate);
+
+                ResultSet rs = stm.executeQuery();
+                while(rs.next()){
+                    userN = rs.getString(3);
+                    user = UserService.findById(userN);
+                    if(user != null){
+                        userN = user.getName();
+                    }
+                    Log log = new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7));
+                    for(Log l: list){
+                        if(log.getId()== l.getId()){
+                            res.add(log);
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return res;
+        }
+        else if(fromDate.equals("0") && !toDate.equals("0")){
+            try {
+                PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM logs WHERE CREATE_AT <= ?;");
+                stm.setString(1,toDate);
+
+                ResultSet rs = stm.executeQuery();
+                while(rs.next()){
+                    userN = rs.getString(3);
+                    user = UserService.findById(userN);
+                    if(user != null){
+                        userN = user.getName();
+                    }
+                    Log log = new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7));
+                    for(Log l: list){
+                        if(log.getId()== l.getId()){
+                            res.add(log);
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return res;
+        }
+        else{
+            return list;
+        }
+
     }
     public static List<Log> findByContent(String content, List<Log> list){
         List<Log> res = new ArrayList<>();

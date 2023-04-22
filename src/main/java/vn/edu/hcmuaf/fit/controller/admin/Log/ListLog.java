@@ -48,14 +48,7 @@ public class ListLog  extends HttpServlet {
         for (int i = begin; i < endList; i++) {
             listPa.add(listLog.get(i));
         }
-        int total = listLog.size();
-        int endPage = total / 10;
-        if(total % 10 != 0){
-            endPage++;
-        }
 
-        request.setAttribute("endPage", endPage);
-        request.setAttribute("tag", page);
         request.setAttribute("listPa", listPa);
         request.getRequestDispatcher("logs.jsp").forward(request,response);
     }

@@ -31,33 +31,35 @@ public class LogFilter  extends HttpServlet {
         String level = request.getParameter("level");
         String user = request.getParameter("user");
         String content = request.getParameter("content");
-//        System.out.println(level);
-//        System.out.println(user);
-//        System.out.println(content);
-//        System.out.println(fromDate);
-//        System.out.println(toDate);
-//        if(fromDate !=null && toDate ==null){
-//            listLog = LogService.findByDate(fromDate);
-//        }else if(fromDate!= null && toDate != null){
-//            listLog = LogService.findByDate(fromDate, toDate);
-//        }else{
-//            listLog = LogService.getListLog();
-//        }
+        String date = request.getParameter("date");
+
+
+
         if(!content.equals("Tất cả")){
             listLog = LogService.findByContent(content, listLog);
         }
         if(!level.equals("0")){
             listLog = LogService.findByLevel(Integer.parseInt(level), listLog);
-        }
 
+        }
         if(!user.equals("Tất cả")){
             listLog= LogService.findByUserName(user, listLog);
+        }
+        if(!date.equals("0")){
+            listLog = LogService.findByDate(date, listLog);
+
+        }
+
+        if (!fromDate.equals("0") || !toDate.equals("0") && date.equals("0")) {
+                listLog = LogService.findByDate(fromDate, toDate, listLog);
+
         }
 
         String numPage = request.getParameter("page");
         if(numPage == null || numPage.equals("0")){
             numPage = "1";
         }
+
 
         int page = Integer.parseInt(numPage);
         List<Log> listPa = new ArrayList<>();
@@ -69,21 +71,17 @@ public class LogFilter  extends HttpServlet {
         for (int i = begin; i < endList; i++) {
             listPa.add(listLog.get(i));
         }
-        int total = listLog.size();
-        int endPage = total / 10;
-        if(total % 10 != 0){
-            endPage++;
-        }
+
         String i = "";
         PrintWriter out = response.getWriter();
         for(Log log: listPa){
             if(log.getLevel()==1){
                 i = "<i class=\"bi bi-check-circle-fill text-success\"></i>\n";
             }else if(log.getLevel()==2){
-               i= "  <i class=\"bi bi-exclamation-circle-fill text-warning\"></i>\n" ;
+               i= "   <i class=\"fas fa-exclamation-triangle text-warning\"></i>\n" ;
             }
             else{
-                i=  " <i class=\"bi bi-x-circle-fill text-danger\"></i>\n";
+                i=  " <i class=\"fas fa-skull-crossbones text-danger\"></i>\n";
             }
             out.println("<tr >\n" +
                     "                      <td>"+log.getCreateAt()+"</td>\n" +
@@ -98,8 +96,7 @@ public class LogFilter  extends HttpServlet {
                     "                    </tr>");
         }
 
-        request.setAttribute("endPage", endPage);
-        request.setAttribute("tag", page);
+
         request.setAttribute("listPa", listPa);
 
     }

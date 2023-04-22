@@ -364,94 +364,167 @@ function addDiscount(){
     }
 }
 
-function cancelCheck(){
-    if(document.getElementById("all").checked == true){
-        document.getElementById("all").checked = false;
-    }
-}
-function filterTime() {
-    var from =document.getElementById("from").value;
-    var to =document.getElementById("to").value;
-    if(document.getElementById("all").checked == true){
-        document.getElementById("time").value = "Tất cả";
+
+function showFilterDate(from, to, error) {
+    if(error){
+        document.getElementById("error").innerText = error.toString();
+    }else{
         document.getElementById("error").innerText="";
-        document.getElementById("from").value=null;
-        document.getElementById("to").value=null;
+        document.getElementById("from").value=from;
+        document.getElementById("to").value=to;
+        if(to ==0 && from!=0){
+        document.getElementById("time").value = "Từ "+ from +" đến hiện tại";
+        document.getElementById("date").value=0;
+
+         }
+        else if(to!=0 && from==0){
+        document.getElementById("time").value = "Từ "+to + " trở về trước";
+            document.getElementById("date").value=0;
+
+        }
+        else if(from && to){
+            document.getElementById("time").value = "Từ "+ from +" đến "+to;
+            document.getElementById("date").value=0;
+
+        }
+
     }
-   else{
-       if(!to && !from){
-           document.getElementById("time").value = "Tất cả";
-       document.getElementById("error").innerText="";
-       document.getElementById("all").checked = true;
-    }
-   else
-       if(!to && from){
-        from = new Date(document.getElementById("from").value);
-        document.getElementById("time").value = from.getFullYear() +"-"+(from.getMonth()+1)+"-"+ from.getDate();
-       document.getElementById("error").innerText="";
-       document.getElementById("all").checked = false;
-   }
-    else{
-        from = new Date(document.getElementById("from").value);
-        to =  new Date(document.getElementById("to").value);
-        if(from>to){
-            document.getElementById("error").innerText="Ngày sau phải lớn hơn ngày trước đó";
-        }else
-        document.getElementById("time").value ="Từ "+ from.getFullYear() +"-"+(from.getMonth()+1)+"-"+ from.getDate() + " đến "+ to.getFullYear() +"-"+(to.getMonth()+1)+"-"+ to.getDate();
-       document.getElementById("error").innerText="";
-       document.getElementById("all").checked = false;
-    }}
+
+
 
 }
-function filterLog(type, value){
-    filterTime()
-    var from = new Date(document.getElementById("from").value);
-    var to = new Date(document.getElementById("to").value);
+async function filterLog(type, val) {
     var user = document.getElementById("user").value;
     var level = document.getElementById("level").value;
     var content = document.getElementById("content").value;
     var page = document.getElementById("pageNumber").value;
-    var fDate;
-    var tDate;
-    if(!document.getElementById("from").value){
-        fDate =null;
+    var fDate =document.getElementById("from").value;
+    var tDate =document.getElementById("to").value;
+    var dateF=document.getElementById("date").value;
+    if (type == 'user') {
+        user = val;
 
+    } else if (type == 'level') {
+        level = val;
+        document.getElementById("level").value = val;
+    } else if (type == 'content') {
+        content = val;
     }
-    if(!document.getElementById("to").value){
-        tDate = null;
-    }
-    if(type == 'user'){
-        user = value;
-        console.log(value);
-    }
-    else if(type =='level'){
-        level = value;
-        document.getElementById("level").value = value;
-    }
-    else if(type== 'content'){
-        content = value;
-    }
+    else if (type =='time') {
+        if (val== 1) {
+            const {value: formValues} = await Swal.fire({
+                title: 'Lọc theo ngày',
+                html:
+                    '<label class="text-left col-5 mr-5" for="swal-input1">Từ ngày:</label>' +
+                    '<label class="text-left col-5 " for="swal-input2">Đến ngày:</label>' +
+                    '<input type="date" class="form__input col-5 mr-5" id="swal-input1">' +
+                    '<input type="date" class="form__input col-5" id="swal-input2">',
+                preConfirm: () => {
+                    var from = document.getElementById("swal-input1").value;
+                    var fromD = null;
+                    var toD =null;
+                    var error="";
+                    if(from){
+                      fromD = new Date(from);
+                        fDate = fromD.getFullYear() +"-"+ (fromD.getMonth()+1)+"-"+ fromD.getDate();
+                    }else{ fDate=0; }
+                    var to =document.getElementById("swal-input2").value;
+                    if(to){
+                        toD = new Date(to);
+                        tDate = toD.getFullYear() +"-"+ (toD.getMonth()+1)+"-"+ toD.getDate();
+                    }else{ tDate=0;}
+                    if(to && from && fromD>toD){
+                        tDate=0;
+                        fDate=0;
+                        error = "Ngày sau phải lớn hơn ngày trước đó!"
+                    }
+                    return[fDate,tDate, error]
+                }
+            })
+            showFilterDate(formValues[0], formValues[1],  formValues[2]);
+            if(formValues){
+                dateF=0;
+            }
+        }
+        else if(val==2){
+            const { value: date } = await Swal.fire({
+                title: 'Lọc theo ngày',
+                html:    '<label  class="col-12" for="swal-input1">Ngày cần lọc:</label>' +
+                    '<input type="date" class="form__input col-9" id="swal-input1">',
+                preConfirm: () => {
+                    var date =null ;
+                    if(document.getElementById("swal-input1").value){
+                        date = new Date(document.getElementById("swal-input1").value);
+                        date = date.getFullYear() +"-"+ (date.getMonth()+1)+"-"+ date.getDate();
+                    }
+                    dateF=date;
+                    return dateF;
+                }
+            })
+            if (date) {
+                fDate=0;
+                tDate=0;
+               document.getElementById("time").value = date;
+                document.getElementById("date").value = date;
+                document.getElementById("from").value = 0;
+                document.getElementById("to").value = 0;
+                document.getElementById("error").innerText="";
+            }
+        }
+        else {
+            dateF = 0;
+            fDate= 0;
+            tDate=0;
+            document.getElementById("time").value="Tất cả";
+            document.getElementById("error").innerText="";
+            document.getElementById("from").value=0;
+            document.getElementById("to").value=0;
+            document.getElementById("date").value=0;
 
-    else if(type ='time'){
-       if(document.getElementById("from").value) {fDate = from.getFullYear() +"-"+(from.getMonth()+1)+"-"+ from.getDate();}
-        if(document.getElementById("to").value){
-            tDate = to.getFullYear() +"-"+(to.getMonth()+1)+"-"+ to.getDate();
         }
     }
-    console.log(content)
-    // var url = "LogFilter?level="+level+"&user="+user+"&content="+content+"&from="+ fDate+"&to="+tDate+"&page="+page;
+    else {
+        page = val;
+    }
+    var paginator = "";
+    for (let i = page - 1; i <= (parseInt(page) + 2); i++) {
+        console.log(i)
+        if (i < 1) {
+            continue;
+        }
+        if (i == page) {
+            paginator+= '<li class="paginator__item paginator__item--active"><a onclick="filterLog(\'page\','+ i +')">'+i+' </a></li>';
+        } else {
+            paginator+=' <li class="paginator__item"><a onclick="filterLog(\'page\', '+i+')">'+i+'</a></li>';
+        }
+    }
+    // var url = "LogFilter?level="+level+"&user="+user+"&content="+content+"&from="+ fDate+"&to="+tDate+"&page="+page+"&date="+dateF;
     $.ajax({
         url: "LogFilter",
         // url: url,
         type: "POST",
-        data: {user: user,
+        data: {
+            user: user,
             level: level,
             page: page,
-            content:content,
+            content: content,
             from: fDate,
-            to: tDate},
-        success: function (response){
+            to: tDate,
+            date: dateF
+        },
+        success: function (response) {
             document.getElementById("listLog").innerHTML = response;
+            document.getElementById("paginator").innerHTML ='<li class="paginator__item paginator__item--prev">\n' +
+                ' <input type="number" id="pageNumber" style="display: none" value="'+page+'">'+
+                '                          <a onclick="filterLog(\'page\','+(page-1)+')"><i class="fa fa-chevron-left"></i></a>\n' +
+                '                        </li>'+
+                paginator +
+                '<li class="paginator__item paginator__item--next">\n' +
+                '                          <a onclick="filterLog(\'page\','+(page+1)+')"><i class="fa fa-chevron-right"></i></a>\n' +
+                '                        </li>\n' +
+                '                      </ul>';
+
+
         }
     });
 }
@@ -759,4 +832,16 @@ function adminAddProInOrder(){
 function save(){
     location.reload();
 }
+
+// function showFilterDateForLog(value){
+//
+//     else if(value ==2){
+//         Swal.fire({
+//             title: 'Ngày cần lọc',
+//             input: 'date'
+//
+//         })
+//
+//     }
+// }
 
