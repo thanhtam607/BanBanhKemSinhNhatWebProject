@@ -231,10 +231,6 @@ public class UserService {
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql1);
-            user.setEmail(mail);
-            user.setName(name);
-            CustomerService.getCusByIdAcc(id).setSDT(sdt);
-            CustomerService.getCusByIdAcc(id).setDIACHI(diachi);
         } catch (SQLException se) {
             se.printStackTrace();
         }

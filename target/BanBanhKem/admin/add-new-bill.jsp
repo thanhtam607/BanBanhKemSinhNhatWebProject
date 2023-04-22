@@ -115,7 +115,7 @@
         <!-- main title -->
         <div class="col-12">
             <div class="main__title">
-                <h2>Chỉnh sửa đơn hàng - <span id="idRe">HD23</span></h2>
+                <h2>Tạo đơn hàng mới - <span id="idRe">HD23</span></h2>
             </div>
         </div>
         <div class="tab-content" id="myTabContent">

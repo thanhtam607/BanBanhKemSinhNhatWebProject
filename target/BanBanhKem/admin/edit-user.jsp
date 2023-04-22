@@ -299,7 +299,7 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                     </select>
                                                 </div>
                                                 <% } else { %>
-                                                <p>Quyền Hạn:  <span class="font-size-20 text--green"><%=rc.getRoleName()%></span></p>
+                                                <p>Quyền Hạn:  <span class="font-size-20 text--green text-uppercase"><%=rc.getRoleName()%></span></p>
                                                 <% } %>
                                             </div>
                                             <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
