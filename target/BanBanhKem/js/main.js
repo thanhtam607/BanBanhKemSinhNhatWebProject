@@ -246,7 +246,7 @@ function myFunction() {
         });
     });
     /*-------------------
-           get fee in bill
+           get fee and leadtime in bill
           --------------------- */
     $("#inputGroupSelect03").change(function() {
         var to_dist_id = $("#inputGroupSelect02").val();
@@ -260,6 +260,9 @@ function myFunction() {
             },
             success: function (data) {
                 $(".checkout__order__fee span").text(data);
+                var oldTotal = $(".checkout__order__total span").text();
+                var newTotal = parseInt(oldTotal.replace(/,/g, '')) + parseInt( $(".checkout__order__fee span").text().replace(/,/g, ''));
+                $(".checkout__order__total span").text(newTotal.toLocaleString('en-US'));
 
             }
 
@@ -822,11 +825,22 @@ function check() {
   --------------------- */
 
 function addOrder() {
+    var selectElement1 = document.getElementById("inputGroupSelect01");
+    var selectElement2 = document.getElementById("inputGroupSelect02");
+    var selectElement3 = document.getElementById("inputGroupSelect03");
     var ten = document.getElementById("ten").value;
-    var diachi = document.getElementById("diachi").value;
+    var diachi = document.getElementById("diachi").value
+        +", "+ selectElement3.options[selectElement3.selectedIndex].textContent
+        +", "+ selectElement2.options[selectElement2.selectedIndex].textContent
+        +", "+ selectElement1.options[selectElement1.selectedIndex].textContent
+    ;
     var phone = document.getElementById("phone").value;
     var email = document.getElementById("email").value;
     var ghichu = document.getElementById("ghichu").value;
+    
+    var totalBilltext = document.getElementById("totalBill").innerText;
+    var totalBill = parseInt(totalBilltext.replace(/,/g, ''));
+
     var lenght = document.getElementsByName("noteD").length;
     var note = new Array();
 
@@ -850,7 +864,8 @@ function addOrder() {
             phone: phone,
             ghichu: ghichu,
             haveDisk: haveDisk,
-            note: note.toString()
+            note: note.toString(),
+            totalBill:totalBill
         },
         success: function () {
             document.getElementById("totalPro").innerHTML = "0";

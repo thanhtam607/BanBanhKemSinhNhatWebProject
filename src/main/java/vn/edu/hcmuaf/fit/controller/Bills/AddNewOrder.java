@@ -35,6 +35,8 @@ public class AddNewOrder extends HttpServlet {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String ghichu = request.getParameter("ghichu");
+        String totalBill = request.getParameter("totalBill");
+
         if(ghichu!=null && request.getParameter("haveDisk")!=null){
             ghichu +=", "+ request.getParameter("haveDisk");
         }
@@ -53,7 +55,7 @@ public class AddNewOrder extends HttpServlet {
         gh.setTenKH(ten);
 
 
-        Order order = new Order(auth, listItemC, todayFM,CartService.totalPrice(listItemC), ghichu,gh);
+        Order order = new Order(auth, listItemC, todayFM,Double.parseDouble(totalBill), ghichu,gh);
 
         if(notesForDetail!=null){
         for(int i =0; i< notesForDetail.length ;i++){

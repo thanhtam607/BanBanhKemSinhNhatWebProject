@@ -32,7 +32,7 @@ public class GetFee extends HttpServlet {
         double feeOfBill = controller.getCalculateFee(from_dist_id, from_ward_id, to_dist_id, to_ward_id, height, length, width, weight);
 
         PrintWriter out = response.getWriter();
-        out.println(CartService.formatNum(feeOfBill) + " VND");
+        out.println(CartService.formatNum(feeOfBill));
 //        int height = Integer.parseInt(request.getParameter(""));
 //        int length = Integer.parseInt(request.getParameter(""));
 //        int width = Integer.parseInt(request.getParameter(""));

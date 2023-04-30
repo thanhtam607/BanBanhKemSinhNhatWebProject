@@ -325,14 +325,14 @@
                                 <%}%>
                             </ul>
                             <div class="checkout__order__subtotal">Tạm tính
-                                <span><%= CartService.formatNum(CartService.totalPrice(listItemC))%> VND</span>
+                                <span><%= CartService.formatNum(CartService.totalPrice(listItemC))%> </span>(VND)
                             </div>
                             <div class="checkout__order__fee">Phí vận chuyển
-                                <span> 0 VND</span>
+                                <span> 0 </span>(VND)
                             </div>
                             <p class="text-info leadTime"></p>
-                            <div class="checkout__order__total">Tổng
-                                <span><%= CartService.formatNum(CartService.totalPrice(listItemC))%> VND</span>
+                            <div class="checkout__order__total" >Tổng
+                                <span id="totalBill"><%= CartService.formatNum(CartService.totalPrice(listItemC))%> </span>(VND)
                             </div>
 
 
