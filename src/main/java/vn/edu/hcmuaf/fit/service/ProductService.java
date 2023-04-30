@@ -136,7 +136,6 @@ public class ProductService {
         for (int i = begin; i < endList; i++) {
             result.add(data.get(i));
         }
-//        0 15 30 45 60 75 90
         return result;
     }
 
@@ -544,7 +543,21 @@ public class ProductService {
             se.printStackTrace();
         }
     }
-
+    public static List<String> findProducts(String keyword) {
+        List<String> result = new ArrayList<>();
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "SELECT products.productName FROM products \n" +
+                "WHERE idProduct like '%"+keyword+"20%' or productName LIKE '%"+keyword+"%'";
+        try {
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()){
+            result.add(rs.getString(1));
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return result;
+    }
 
 }
 class IDComparator implements Comparator<Product> {

@@ -741,7 +741,6 @@ function adminRemoveProInOrder(index){
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#ff96b7'
                         })
-                        // $('#total').text(sum+",000");
                         $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
                     }
                 }, error: function (){

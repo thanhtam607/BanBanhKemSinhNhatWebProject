@@ -1,13 +1,4 @@
-/*  ---------------------------------------------------mix
-    Template Name: Ogani
-    Description:  Ogani eCommerce  HTML Template
-    Author: Colorlib
-    Author URI: https://colorlib.com
-    Version: 1.0
-    Created: Colorlib
----------------------------------------------------------  */
 
-/*Read more*/
 function myFunction() {
     var x = document.getElementById('bld1');
     var btnrm = document.getElementById('readmore');
@@ -195,7 +186,7 @@ function myFunction() {
     /*--------------------------
         Select
     ----------------------------*/
-    $("select").niceSelect();
+    // $("select").niceSelect();
 
     /*------------------
 		Single Product
@@ -234,7 +225,58 @@ function myFunction() {
         $button.parent().find('input').val(newVal);
 
     });
+    /*-------------------
+       get ward name by distID
+      --------------------- */
+    $("#inputGroupSelect02").change(function() {
+        var distID = $(this).val();
+        var url = "GetWardName";
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                distID: distID
+            },
+            success: function (data) {
+                $("#inputGroupSelect03").html(data);
+                // $("select").niceSelect();
+                $("#inputGroupSelect03").removeAttr("disabled");
+            }
 
+        });
+    });
+    /*-------------------
+           get fee in bill
+          --------------------- */
+    $("#inputGroupSelect03").change(function() {
+        var to_dist_id = $("#inputGroupSelect02").val();
+        var to_ward_id = $(this).val();
+        $.ajax({
+            url: "GetFee",
+            type: "POST",
+            data: {
+                to_dist_id: to_dist_id,
+                to_ward_id: to_ward_id
+            },
+            success: function (data) {
+                $(".checkout__order__fee span").text(data);
+
+            }
+
+        });
+        $.ajax({
+            url: "GetLeadTime",
+            type: "POST",
+            data: {
+                to_dist_id: to_dist_id,
+                to_ward_id: to_ward_id
+            },
+            success: function (data) {
+                $(".leadTime").text(data);
+            }
+
+        });
+    });
 })(jQuery);
 
 // Back to top button
@@ -969,3 +1011,29 @@ function changeProfile() {
 
     });
 }
+/*-------------------
+   get ward name by distID
+  --------------------- */
+function getWardNameByDistID() {
+    var distID = document.getElementById("inputGroupSelect02").value;
+    var url = "GetWardName";
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            distID: distID
+        },
+        success: function (data) {
+            var listWard = document.getElementById("inputGroupSelect03");
+            listWard.innerHTML = data;
+            (function ($) {
+            $("#inputGroupSelect03").niceSelect();
+            })(jQuery);
+            // listWard.disable = false;
+            // console.log(data);
+            // console.log(listWard);
+        }
+
+    });
+}
+

@@ -154,7 +154,7 @@
                   </div>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
-                      <label class="form__label" >Quyền hạn:</label>
+                      <label class="form__label" >Quyền hạn: <span class="font-size-20 text--green text-uppercase"><%=u.getRoleName()%></span></label>
                       <% if(u.getIsadd() == 1) {%>
                       <input name="isadd<%=i%>" value="1" style="display: none">
                       <input class="form-check-input" type = "checkbox" checked = "true" name = "add<%=i%>">

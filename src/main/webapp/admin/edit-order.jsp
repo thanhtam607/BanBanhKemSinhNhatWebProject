@@ -268,11 +268,28 @@
                                                         <input id="msp" type="text" name="msp" class="form__input"
                                                                value="" placeholder="Vui lòng nhập chính xác mã sản phẩm..." required>
                                                         <p id="error" class="text-danger mb-2"></p>
+
+                                                        <!-- Search hint -->
+<%--                                                        <div class="header-search-history">--%>
+<%--                                                            <h3 class="header-search-history-heading">Lịch sử tìm kiếm</h3>--%>
+<%--                                                            <ul class="header-search-history-list">--%>
+<%--                                                                <li class="header-search-history-item">--%>
+<%--                                                                    <a href="">Bông tai</a>--%>
+<%--                                                                </li>--%>
+<%--                                                                <li class="header-search-history-item">--%>
+<%--                                                                    <a href="">Ốp điện thoại IP</a>--%>
+<%--                                                                </li>--%>
+<%--                                                                <li class="header-search-history-item">--%>
+<%--                                                                    <a href="">Bông tai dáng dài</a>--%>
+<%--                                                                </li>--%>
+<%--                                                            </ul>--%>
+<%--                                                        </div>--%>
+
                                                     </div>
                                                     <div class="form__group">
                                                         <label class="form__label" for="slg">Số lượng mua</label>
                                                         <input id="slg" type="number" name="slg" class="form__input"
-                                                               value="1">
+                                                               value="1" min = "1">
                                                     </div>
                                                     <div class="form__group">
                                                         <label class="form__label" for="notes">Lời chúc trên bánh</label>
