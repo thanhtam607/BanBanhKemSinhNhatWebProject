@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.model.logistic;
 
 import com.google.gson.*;
+import vn.edu.hcmuaf.fit.service.ReceiptService;
 //import com.restfb.json.Json;
 
 import java.io.BufferedReader;
@@ -227,7 +228,6 @@ public class LogisticController {
     public TransportOrder registerTranport(String fromDistrictID, String fromWardID, String toDistrictID, String toWardID, int height, int length, int width, int weight) throws IOException {
         String urlString = "http://140.238.54.136/api/registerTransport";
         String param = "?from_district_id=" + fromDistrictID + "&from_ward_id=" + fromWardID + "&to_district_id=" + toDistrictID + "&to_ward_id=" + toWardID + "&height=" + height + "&length=" + length + "&width=" + width + "&weight=" + weight;
-        System.out.println(urlString + param);
         URL url = new URL(urlString + param);
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -247,6 +247,24 @@ public class LogisticController {
             String id = logistic.get("id").getAsString();
             return new TransportOrder(fromDistrictID, fromWardID, toDistrictID, toWardID, height, length, width, weight, fee, leadTime, active, updatedAt, createdAt, id);
 
+        }
+        return null;
+
+    }
+    public String registerTranportMessage(String fromDistrictID, String fromWardID, String toDistrictID, String toWardID, int height, int length, int width, int weight) throws IOException {
+        String urlString = "http://140.238.54.136/api/registerTransport";
+        String param = "?from_district_id=" + fromDistrictID + "&from_ward_id=" + fromWardID + "&to_district_id=" + toDistrictID + "&to_ward_id=" + toWardID + "&height=" + height + "&length=" + length + "&width=" + width + "&weight=" + weight;
+        URL url = new URL(urlString + param);
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Authorization", "Bearer " + LOGISTIC_TOKEN);
+
+        int responseCode = connection.getResponseCode();
+        if (responseCode == 200 | responseCode == 201) {
+            JsonObject object = getJSONObjectFromConnection(connection);
+            String logistic = object.get("message").getAsString();
+            return logistic;
         }
         return null;
 
@@ -281,8 +299,9 @@ public class LogisticController {
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Authorization", "Bearer " + LOGISTIC_TOKEN);
 
+
         int responseCode = connection.getResponseCode();
-        if (responseCode == 200 | responseCode == 201) {
+        if (responseCode==200 | responseCode==201){
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();
@@ -303,19 +322,11 @@ public class LogisticController {
     public static void main(String[] args) throws URISyntaxException, IOException {
 //        ============================================== thuan =======================
         LogisticController controller = new LogisticController();
-//        register("thuann", "thannnn@gmail.com", "123456", "123456");
-//        System.out.println(controller.login("thuan@gmail.com","1234567"));
-        //changePass("123456","1234567","1234567");
-//        System.out.println(controller.infoUser());
-
-//        System.out.println(controller.login("thannnnthuy67@gmail.com", "1234536"));
-//        controller.login("nhom27@gmail.com", "123456");
-//        System.out.println(controller.registerTranport(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100));
-        System.out.println(controller.getCalculateFee(FROM_DISTRICT_ID,FROM_WARD_ID, "1454", "21201", 100, 100, 100, 100));
-//        System.out.println(controller.getLeadTime(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100));
+        System.out.println(controller.registerTranport(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100));
+//        System.out.println(controller.getCalculateFee(FROM_DISTRICT_ID,FROM_WARD_ID, "1454", "21201", 100, 100, 100, 100));
+//        System.out.println(controller.getLeadTime(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100).replaceAll("[TZ]", ""));
 //        System.out.println(controller.registerTranport("3695","90750", "2270", "231013", 100, 150, 100, 100));
-//       List<TransportOrder> transportOrders = controller.getAllInfoTransport();
-//       for(TransportOrder o: transportOrders) System.out.println(o);
+//
 //        System.out.println(controller.register("Nhom27", "nhom27@gmail.com", "123456", "123456"));
 //        controller.changePass("1234536", "123", "123");
 //        System.out.println(controller.infoUser());
@@ -323,14 +334,14 @@ public class LogisticController {
 //        List<Province> provinces = controller.getProvinces();
 //        for (Province province: provinces) System.out.println(province);
 
-        List<District> dis = controller.getDistrictByProvinceID("202");
-        for (District dt: dis) System.out.println(dt);
-
-        List<Ward> wards = controller.getWardByDistrictID("1454");
-        for (Ward w: wards) System.out.println(w);
+//        List<District> dis = controller.getDistrictByProvinceID("202");
+//        for (District dt: dis) System.out.println(dt);
+//
+//        List<Ward> wards = controller.getWardByDistrictID("1454");
+//        for (Ward w: wards) System.out.println(w);
 // phường 90750, quận 3695, tp 202
-//        for (TransportOrder tr: controller.getAllInfoTransport()) System.out.println(tr);
-
+//        System.out.println(controller.registerTranport(FROM_DISTRICT_ID, FROM_WARD_ID, FROM_DISTRICT_ID, "90767", 100, 200, 200, 300));
+//        System.out.println(controller.getAllInfoTransport());
     }
 
 

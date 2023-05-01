@@ -43,7 +43,9 @@ public class AddNewOrder extends HttpServlet {
         String ghichu = request.getParameter("ghichu");
         String totalBill = request.getParameter("totalBill");
         String fee = request.getParameter("fee");
-        String pro_bill = request.getParameter("pro_bill");
+//        String pro_bill = request.getParameter("pro_bill");
+        String huyen = request.getParameter("huyen");
+        String xa = request.getParameter("xa");
 
         String leadTime = request.getParameter("leadTime");
 
@@ -57,21 +59,16 @@ public class AddNewOrder extends HttpServlet {
         Date today = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayFM = formatter.format(today);
-//        String todayFM = "";
-        // SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//        try {
-//            Date date = formatter.parse(leadTime);
-//            todayFM = formatter.format(date);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
+
 
         Delivery gh = new Delivery();
         gh.setDiachigiao(diachi);
-        gh.setNgayGiao(todayFM);
+        gh.setNgayGiao(leadTime);
         gh.setEmail(email);
         gh.setPhone(phone);
         gh.setTenKH(ten);
+        gh.setHuyen(huyen);
+        gh.setXa(xa);
 
 
 

@@ -897,10 +897,10 @@ INSERT INTO BILL_DETAIL VALUES('HD15', 'B090', 1, 'Chúc mừng sinh nhật 20 t
 /*=============================================DELIVERY=======================================*/
 CREATE TABLE DELIVERY(ID CHAR(4),
 										    DELIVERY_DATE DATETIME NOT NULL,
-												ADDRESS VARCHAR(60) NOT NULL,
-												EMAIL VARCHAR(60),
+												ADDRESS LONGTEXT NOT NULL,
+												EMAIL VARCHAR(100),
 												PHONE VARCHAR(12),
-												NAMECUSTOMER VARCHAR(60),
+												NAMECUSTOMER VARCHAR(100),
 												CONSTRAINT f_mhdgh FOREIGN KEY(ID) REFERENCES BILLS(ID));
 												
 INSERT INTO DELIVERY VALUES('HD01', '2022/10/14', 'Q1, TP HCM', null, null,null);

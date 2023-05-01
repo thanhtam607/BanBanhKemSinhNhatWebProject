@@ -29,7 +29,7 @@ public class adminChangeStateOrder extends HttpServlet {
         Log log = new Log();
         log.setLevel(2);
         log.setSrc(request.getServletPath());
-        log.setContent("Cập nhật trạng thái đơn hàng: "+ mahd);
+        log.setContent("Xác nhận đơn hàng: "+ mahd+" và shop đang gói hàng");
         log.setUser(user.getId());
         LogService.addLog(log);
 

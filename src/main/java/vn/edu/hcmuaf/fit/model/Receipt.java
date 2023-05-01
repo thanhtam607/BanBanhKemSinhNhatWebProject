@@ -16,6 +16,7 @@ public class Receipt {
     private String email;
     private double fee_bill;
     private double pro_bill;
+    Delivery gh;
 
     public Receipt() {
     }

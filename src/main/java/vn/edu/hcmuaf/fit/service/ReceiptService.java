@@ -2,7 +2,9 @@ package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.*;
+import vn.edu.hcmuaf.fit.model.logistic.LogisticController;
 
+import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -474,8 +476,9 @@ public class ReceiptService {
     }
 
 
-    public static void updateState(String mahd, int st) {
+    public static void updateState(String mahd, int st){
         Statement stm = DBConnect.getInstall().get();
+
         if (stm != null) {
             try {
                 String sql = "UPDATE BILLS set BILLS.STATUS = " + st + " WHERE BILLS.ID ='" + mahd + "'";

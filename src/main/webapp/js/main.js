@@ -834,6 +834,13 @@ function addOrder() {
         +"- "+ selectElement2.options[selectElement2.selectedIndex].textContent
         +"- "+ selectElement1.options[selectElement1.selectedIndex].textContent
     ;
+
+
+    var huyentxt = selectElement2.options[selectElement3.selectedIndex].value;
+    var xatxt = selectElement3.options[selectElement3.selectedIndex].value;
+
+    var huyen = huyentxt.replace(/"/g, '');
+    var xa = xatxt.replace(/"/g, '');
     var diachi = diachitxt.replace(/"/g, '');
 
     var phone = document.getElementById("phone").value;
@@ -878,7 +885,9 @@ function addOrder() {
             totalBill:totalBill,
             fee:fee,
             pro_bill:pro_bill,
-            leadTime:leadTime
+            leadTime:leadTime,
+            huyen:huyen,
+            xa:xa
         },
         success: function () {
 

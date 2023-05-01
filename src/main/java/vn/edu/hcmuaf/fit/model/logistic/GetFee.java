@@ -26,7 +26,7 @@ public class GetFee extends HttpServlet {
         int height = 100;
         int length = 100;
         int width = 100;
-        int weight = 100;
+        int weight = 500;
 
         LogisticController controller = new LogisticController();
         double feeOfBill = controller.getCalculateFee(from_dist_id, from_ward_id, to_dist_id, to_ward_id, height, length, width, weight);

@@ -650,9 +650,7 @@ function editOrderUpdateDelivery(){
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#ff96b7'
                 })
-                //     .then(() => {
-                //     location.reload();
-                // });
+
 
         }
     });

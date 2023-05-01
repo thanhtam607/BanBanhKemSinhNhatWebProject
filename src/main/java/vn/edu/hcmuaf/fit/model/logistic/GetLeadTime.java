@@ -28,9 +28,11 @@ public class GetLeadTime extends HttpServlet {
         int weight = 100;
 
         LogisticController controller = new LogisticController();
-        String leadTime = controller.getLeadTime(from_dist_id, from_ward_id, to_dist_id, to_ward_id, height, length, width, weight);
+        String time = controller.getLeadTime(from_dist_id, from_ward_id, to_dist_id, to_ward_id, height, length, width, weight);
+        String leadTime1 = time.replaceAll("[T]", " ");
+        String leadTime2 = leadTime1.replaceAll("[Z]", " ");
 
         PrintWriter out = response.getWriter();
-        out.println(leadTime);
+        out.println(leadTime2);
     }
 }

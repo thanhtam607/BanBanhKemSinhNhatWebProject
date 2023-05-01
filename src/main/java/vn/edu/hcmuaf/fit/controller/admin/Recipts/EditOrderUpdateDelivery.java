@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.controller.admin.Recipts;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.model.logistic.LogisticController;
 import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
@@ -42,8 +43,13 @@ public class EditOrderUpdateDelivery extends HttpServlet {
         }
         ReceiptService.updateDeliveryInBill(id, dayD, address);
 
-        ReceiptService.updateState(id, st);
-
+        if(st == 2){
+            ReceiptService.updateState(id, st);
+            LogisticController controller = new LogisticController();
+            controller.registerTranport(controller.FROM_DISTRICT_ID, controller.FROM_WARD_ID, ReceiptService.getListGiaoHang(id).getHuyen(), ReceiptService.getListGiaoHang(id).getXa(), 100, 100,100, 400);
+        }else{
+            ReceiptService.updateState(id, st);
+        }
 
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("auth");
