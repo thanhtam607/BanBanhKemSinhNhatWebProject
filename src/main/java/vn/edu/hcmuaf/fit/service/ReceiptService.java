@@ -9,38 +9,57 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ReceiptService {
-    public static List<Receipt> getData() {
-        List<Receipt> list = new ArrayList<Receipt>();
-        Statement statement = DBConnect.getInstall().get();
-        Statement stmt1 = DBConnect.getInstall().get();
-        String sql = "select BILLS.ID, ACCOUNTS.NAME, products.productName, " +
-                "CUSTOMERS.PHONE, BILLS.EXPORT_DATE, DELIVERY.DELIVERY_DATE," +
-                " DELIVERY.ADDRESS, BILLS.NOTES, products.price, BILLS.TOTAL_BILL, " +
-                " BILLS.STATUS, CUSTOMERS.ID, products.idProduct,ACCOUNTS.ROLE, ACCOUNTS.EMAIL\n" +
-                "from products, BILLS, CUSTOMERS, BILL_DETAIL, DELIVERY, ACCOUNTS where BILLS.ID = BILL_DETAIL.ID and BILL_DETAIL.idProduct = products.idProduct and DELIVERY.ID = BILLS.ID and CUSTOMERS.ID = BILLS.CUSTOMER_ID and ACCOUNTS.ID = CUSTOMERS.ID \n" +
-                "group by BILLS.ID ORDER BY BILLS.EXPORT_DATE desc;";
-        if (statement != null)
-            try {
-                ResultSet rs = statement.executeQuery(sql);
-                while (rs.next()) {
-                    Receipt rc = new Receipt(rs.getString(1),
-                            rs.getString(2), rs.getString(3),
-                            rs.getString(4), rs.getString(5),
-                            rs.getString(6), rs.getString(7),
-                            rs.getString(8), rs.getInt(9),
-                            rs.getInt(10), rs.getInt(11),
-                            rs.getString(12), rs.getInt(14),
-                            rs.getString(15));
-                    list.add(rc);
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        else {
-            System.out.println("Không có  hóa đơn");
-        }
-        return list;
-    }
+//    public static List<Receipt> getData() {
+//        List<Receipt> list = new ArrayList<Receipt>();
+//        Statement statement = DBConnect.getInstall().get();
+//        Statement stmt1 = DBConnect.getInstall().get();
+//        String sql = "select BILLS.ID, ACCOUNTS.NAME, products.productName, " +
+//                "CUSTOMERS.PHONE, BILLS.EXPORT_DATE, DELIVERY.DELIVERY_DATE," +
+//                " DELIVERY.ADDRESS, BILLS.NOTES, products.price, BILLS.TOTAL_BILL, " +
+//                " BILLS.STATUS, CUSTOMERS.ID, products.idProduct,ACCOUNTS.ROLE, ACCOUNTS.EMAIL\n" +
+//                "from products, BILLS, CUSTOMERS, BILL_DETAIL, DELIVERY, ACCOUNTS where BILLS.ID = BILL_DETAIL.ID and BILL_DETAIL.idProduct = products.idProduct and DELIVERY.ID = BILLS.ID and CUSTOMERS.ID = BILLS.CUSTOMER_ID and ACCOUNTS.ID = CUSTOMERS.ID \n" +
+//                "group by BILLS.ID ORDER BY BILLS.EXPORT_DATE desc;";
+//        if (statement != null)
+//            try {
+//                ResultSet rs = statement.executeQuery(sql);
+//                while (rs.next()) {
+//                    Receipt rc = new Receipt(rs.getString(1),
+//                            rs.getString(2), rs.getString(3),
+//                            rs.getString(4), rs.getString(5),
+//                            rs.getString(6), rs.getString(7),
+//                            rs.getString(8), rs.getInt(9),
+//                            rs.getInt(10), rs.getInt(11),
+//                            rs.getString(12), rs.getInt(14),
+//                            rs.getString(15));
+//                    list.add(rc);
+//                }
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//        else {
+//            System.out.println("Không có  hóa đơn");
+//        }
+//        return list;
+//    }
+//    public int getFeeOfReceipt(String id){
+//        int fee = 0;
+//        Statement statement = DBConnect.getInstall().get();
+//        if (statement != null)
+//            try {
+//                ResultSet rs = statement.executeQuery("SELECT BILLS.TOTAL_BILL from BILLS where BILLS.ID ='" + id + "'");
+//                while (rs.next()) {
+//                    fee = rs.getInt(1);
+//                }
+//
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//        else {
+//            System.out.println("Không có");
+//        }
+//        return fee;
+//    }
+
 
     public static List<Comment> getListComment(String id) {
         List<Comment> list = new ArrayList<Comment>();
@@ -67,7 +86,7 @@ public class ReceiptService {
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES, TOTAL_BILL, STATUS, CREATE_BY FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
+                ResultSet rs = statement.executeQuery("SELECT  bills.ID, bills.CUSTOMER_ID, bills.EXPORT_DATE, bills.NOTES, bills.PRO_BILL, bills.FEE_BILL, bills.TOTAL_BILL, bills.STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = stmt1.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID FROM DELIVERY");
                     String diachi = "";
@@ -78,7 +97,7 @@ public class ReceiptService {
                         }
                     }
                     Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
-                            rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), diachi, rs.getString(7));
+                            rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), diachi);
                     list.add(rc);
                 }
             } catch (SQLException e) {
@@ -252,50 +271,101 @@ public class ReceiptService {
     }
 
 
-    public static List<Receipt> getctkh(String makh) {
-        List<Receipt> list = getData();
-        List<Receipt> rs = new ArrayList<>();
-        for (Receipt rc : list) {
-            if (rc.getMakh().equals(makh)) {
-                rs.add(rc);
-            }
-        }
-        return rs;
-    }
+//    public static List<Receipt> getctkh(String makh) {
+//        List<Receipt> list = getData();
+//        List<Receipt> rs = new ArrayList<>();
+//        for (Receipt rc : list) {
+//            if (rc.getMakh().equals(makh)) {
+//                rs.add(rc);
+//            }
+//        }
+//        return rs;
+//    }
 
-    public static List<Bill_Detail> getcthdUser(String mahd) {
-        List<Bill_Detail> list = getListCTHD();
-        List<Bill_Detail> rs = new ArrayList<>();
-        for (Bill_Detail rc : list) {
-            if (rc.getMahd().equals(mahd)) {
-                rs.add(rc);
-            }
-        }
+    public static List<Bill_Detail> getBill_DetailUser(String mahd) {
+        List<Bill_Detail> list = new ArrayList<>();
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT BILL_DETAIL.ID, BILL_DETAIL.idProduct, products.productName, products.price, BILL_DETAIL.AMOUNT, BILL_DETAIL.NOTES from BILLS, BILL_DETAIL, products\n" +
+                        "                        WHERE BILL_DETAIL.ID = BILLS.ID and BILL_DETAIL.idProduct = products.idProduct \n" +
+                        "and bills.ID = '"+mahd+"'");
+                while (rs.next()) {
 
-        return rs;
+                    Bill_Detail billDetail = new Bill_Detail(rs.getString(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getInt(4),
+                            rs.getInt(5),
+                            rs.getString(6));
+                    list.add(billDetail);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có cthd");
+        }
+        return list;
     }
 
     public static Receipt getReceiptByMahd(String mhd) {
-        List<Receipt> list = getData();
-        for (Receipt rc : list) {
-            if (rc.getId().equals(mhd)) {
-                return rc;
+        Receipt result = new Receipt();
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES, PRO_BILL, " +
+                        "FEE_BILL, TOTAL_BILL, STATUS FROM BILLS WHERE BILLS.ID ='"+mhd+"'");
+                while (rs.next()) {
+                    ResultSet rsDiaChiGiao = statement.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID FROM DELIVERY");
+                    String diachi = "";
+                    while (rsDiaChiGiao.next()) {
+                        String s2 = rsDiaChiGiao.getString(2);
+                        if (rs.getString(1).equals(s2)) {
+                            diachi = rsDiaChiGiao.getString(1);
+                        }
+                    }
+                    result = new Receipt(rs.getString(1), rs.getString(2),
+                            rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7),  rs.getInt(8), diachi);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
+        else {
+            System.out.println("Không có  hóa đơn");
         }
-
-        return null;
+        return result;
     }
 
     public static List<Receipt> getReceiptByMakh(String makh) {
-        List<Receipt> list = getAllReceipt();
-        List<Receipt> rs = new ArrayList<>();
-        for (Receipt rc : list) {
-            if (rc.getMakh().equals(makh)) {
-                rs.add(rc);
+        List<Receipt> result = new ArrayList<>();
+        Statement statement = DBConnect.getInstall().get();
+        Statement statement2 = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT bills.ID, bills.CUSTOMER_ID, bills.EXPORT_DATE, bills.NOTES, bills.PRO_BILL, bills.FEE_BILL, bills.TOTAL_BILL, bills.STATUS FROM BILLS, CUSTOMERS \n" +
+                        "WHERE bills.CUSTOMER_ID = customers.ID AND customers.ID = '"+makh+"' ORDER BY BILLS.EXPORT_DATE DESC");
+                while (rs.next()) {
+                    ResultSet rsDiaChiGiao = statement2.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID FROM DELIVERY");
+                    String diachi = "";
+                    while (rsDiaChiGiao.next()) {
+                        String s2 = rsDiaChiGiao.getString(2);
+                        if (rs.getString(1).equals(s2)) {
+                            diachi = rsDiaChiGiao.getString(1);
+                        }
+                    }
+                    Receipt re = new Receipt(rs.getString(1), rs.getString(2),
+                            rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7),  rs.getInt(8), diachi);
+                    result.add(re);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
+        else {
+            System.out.println("Không có  hóa đơn");
         }
 
-        return rs;
+        return result;
     }
 
     public static List<String> getAllStatusNameOrder() {
@@ -357,7 +427,7 @@ public class ReceiptService {
 
     public static void updateTonKhoWhenCancelOrder(String mahd) {
         Statement stm = DBConnect.getInstall().get();
-        List<Bill_Detail> billDetailList = getcthdUser(mahd);
+        List<Bill_Detail> billDetailList = getBill_DetailUser(mahd);
 
         if (stm != null) {
             try {
@@ -377,7 +447,7 @@ public class ReceiptService {
 
     public static void updateTonKhoWhenBuyAgain(String mahd) {
         Statement stm = DBConnect.getInstall().get();
-        List<Bill_Detail> billDetailList = getcthdUser(mahd);
+        List<Bill_Detail> billDetailList = getBill_DetailUser(mahd);
 
         if (stm != null) {
             try {
@@ -526,34 +596,6 @@ public class ReceiptService {
 
 
     }
-//    public static void saveAdd(String id, String msp, int slg) {
-//        Statement stm = DBConnect.getInstall().get();
-//       String sql = "";
-//       int oldTotal = getReceiptByMahd(id).getTotal();
-//        int newTotal = oldTotal + (ProductService.findById(msp).getPrice() * slg);
-//        getReceiptByMahd(id).setTotal(newTotal);
-//
-//        sql = "UPDATE BILLS set BILLS.TOTAL_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
-//        try {
-//           stm.executeUpdate(sql);
-//        } catch (SQLException se) {
-//            se.printStackTrace();
-//        }
-//    }
-//    public static void saveRemove(String id, String msp, int slg) {
-//        Statement stm = DBConnect.getInstall().get();
-//       String sql = "";
-//       int oldTotal = getReceiptByMahd(id).getTotal();
-//        int newTotal = oldTotal - (ProductService.findById(msp).getPrice() * slg);
-//        getReceiptByMahd(id).setTotal(newTotal);
-//
-//        sql = "UPDATE BILLS set BILLS.TOTAL_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
-//        try {
-//           stm.executeUpdate(sql);
-//        } catch (SQLException se) {
-//            se.printStackTrace();
-//        }
-//    }
 
     public static void main(String[] args) {
 //        addCTHD("HD13", "B054", 2, "CMSN");

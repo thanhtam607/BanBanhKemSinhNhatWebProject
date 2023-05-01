@@ -32,9 +32,7 @@ public class OrderService {
         String mahd = "HD" + (Integer.parseInt(stt) + 1);
         order.setId(mahd);
         String makh = order.getUser().getId();
-        String sql = "INSERT INTO BILLS VALUES('" + mahd + "', '" + makh + "', '"
-                + order.getBuyDate()  + "', '" + order.getNote() + "',"
-                +order.getPriceTotal()+ "," + order.getTrangthai()+", null);";
+        String sql = "INSERT INTO BILLS VALUES('"+mahd+"', '"+makh+"', '"+order.getBuyDate()+"', '"+order.getNote()+"',"+order.getPro_bill()+", "+order.getFee_bill()+", "+order.getPriceTotal()+", 0)";
         if(stm!= null) {
             try {
                 stm.executeUpdate(sql);

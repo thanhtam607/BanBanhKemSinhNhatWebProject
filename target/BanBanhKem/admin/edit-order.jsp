@@ -269,22 +269,6 @@
                                                                value="" placeholder="Vui lòng nhập chính xác mã sản phẩm..." required>
                                                         <p id="error" class="text-danger mb-2"></p>
 
-                                                        <!-- Search hint -->
-<%--                                                        <div class="header-search-history">--%>
-<%--                                                            <h3 class="header-search-history-heading">Lịch sử tìm kiếm</h3>--%>
-<%--                                                            <ul class="header-search-history-list">--%>
-<%--                                                                <li class="header-search-history-item">--%>
-<%--                                                                    <a href="">Bông tai</a>--%>
-<%--                                                                </li>--%>
-<%--                                                                <li class="header-search-history-item">--%>
-<%--                                                                    <a href="">Ốp điện thoại IP</a>--%>
-<%--                                                                </li>--%>
-<%--                                                                <li class="header-search-history-item">--%>
-<%--                                                                    <a href="">Bông tai dáng dài</a>--%>
-<%--                                                                </li>--%>
-<%--                                                            </ul>--%>
-<%--                                                        </div>--%>
-
                                                     </div>
                                                     <div class="form__group">
                                                         <label class="form__label" for="slg">Số lượng mua</label>
@@ -316,7 +300,15 @@
                                 </table>
                             </div>
                             <div class="col-5 margin-top-20px">
-                                <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;
+                                <label for="total">Tổng tiền hàng: </label>
+                                <span class="text-info text-uppercase" id="pro_bill"><%=receipt.formatNum((int) receipt.getPro_bill())%> VND</span>
+                            </div>
+                            <div class="col-5 margin-top-20px">
+                                <label for="total">Phí vận chuyển: </label>
+                                <span class="text-info text-uppercase" id="fee"><%=receipt.formatNum((int) receipt.getFee_bill())%> VND</span>
+                            </div>
+                            <div class="col-5 margin-top-20px">
+                                <label for="total">Tổng thanh toán: </label>
                                 <span style="font-weight: 600; font-size: 30px;" class="text-danger text-uppercase" id="total"><%=receipt.formatNum(receipt.getTotal())%> VND</span>
                             </div>
 

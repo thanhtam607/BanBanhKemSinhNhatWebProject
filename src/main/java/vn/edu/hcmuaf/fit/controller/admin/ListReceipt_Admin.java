@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class ListReceipt_Admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Receipt> lr = ReceiptService.getData();
+        List<Receipt> lr = ReceiptService.getAllReceipt();
         request.setAttribute("listreceipt", lr);
 
         String doanhthuthangnay = Receipt.formatNum(ReceiptService.getDoanhThuThisMonth());

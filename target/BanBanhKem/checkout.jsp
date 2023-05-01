@@ -261,7 +261,7 @@
                                 <div class="col-lg-4">
                                     <div class="checkout__input">
                                         <select class="form-select" id="inputGroupSelect02">
-                                             <option selected disabled>Quận/Huyện</option>
+                                             <option selected disabled value="0">Quận/Huyện</option>
                                             <%
                                                 LogisticController controller = new LogisticController();
                                                 List<District> districts = controller.getDistrictByProvinceID("202");
@@ -325,10 +325,10 @@
                                 <%}%>
                             </ul>
                             <div class="checkout__order__subtotal">Tạm tính
-                                <span><%= CartService.formatNum(CartService.totalPrice(listItemC))%> </span>(VND)
+                                <span id="pro_bill"><%= CartService.formatNum(CartService.totalPrice(listItemC))%> </span>(VND)
                             </div>
                             <div class="checkout__order__fee">Phí vận chuyển
-                                <span> 0 </span>(VND)
+                                <span id="fee"> 0 </span>(VND)
                             </div>
                             <p class="text-info leadTime"></p>
                             <div class="checkout__order__total" >Tổng

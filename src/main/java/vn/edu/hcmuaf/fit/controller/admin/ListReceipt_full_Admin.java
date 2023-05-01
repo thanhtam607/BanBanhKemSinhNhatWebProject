@@ -16,7 +16,7 @@ import java.util.List;
 public class ListReceipt_full_Admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Receipt> lr = ReceiptService.getData();
+        List<Receipt> lr = ReceiptService.getAllReceipt();
         request.setAttribute("listreceipt-full", lr);
         String sort = request.getParameter("sortValue");
         if (sort != null) {

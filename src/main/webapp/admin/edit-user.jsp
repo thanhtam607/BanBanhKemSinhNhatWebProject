@@ -339,7 +339,7 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                 <div class="main__table-text"><%=r.getId()%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><%=r.getNamecustomer()%></div>
+                                                <div class="main__table-text"><%=r.getMakh()%></div>
                                             </td>
                                             <td>
                                                 <div class="main__table-text"><%=r.getAddress()%></div>

@@ -36,12 +36,15 @@ public class AddNewOrder extends HttpServlet {
         String email = request.getParameter("email");
         String ghichu = request.getParameter("ghichu");
         String totalBill = request.getParameter("totalBill");
+        String fee = request.getParameter("fee");
+        String pro_bill = request.getParameter("pro_bill");
 
         if(ghichu!=null && request.getParameter("haveDisk")!=null){
             ghichu +=", "+ request.getParameter("haveDisk");
         }
         String notes = request.getParameter("note");
         String[] notesForDetail = notes.split("/,");
+
 
         Date today = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -55,12 +58,13 @@ public class AddNewOrder extends HttpServlet {
         gh.setTenKH(ten);
 
 
-        Order order = new Order(auth, listItemC, todayFM,Double.parseDouble(totalBill), ghichu,gh);
+        Order order = new Order(auth, listItemC, todayFM,Double.parseDouble(totalBill), ghichu,gh, Double.parseDouble(pro_bill), Double.parseDouble(fee));
 
         if(notesForDetail!=null){
         for(int i =0; i< notesForDetail.length ;i++){
             order.getData().get(i).setNote(notesForDetail[i]);
         }}
+
         OrderService.addOrder(order);
         OrderService.addGiaoHang(order);
 

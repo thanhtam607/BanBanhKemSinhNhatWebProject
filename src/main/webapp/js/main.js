@@ -838,6 +838,12 @@ function addOrder() {
     var email = document.getElementById("email").value;
     var ghichu = document.getElementById("ghichu").value;
 
+    var pro_bill_t = document.getElementById("pro_bill").innerText;
+    var pro_bill = parseInt(pro_bill_t.replace(/,/g, ''));
+
+    var feeTt = document.getElementById("fee").innerText;
+    var fee = parseInt(feeTt.replace(/,/g, ''));
+
     var totalBilltext = document.getElementById("totalBill").innerText;
     var totalBill = parseInt(totalBilltext.replace(/,/g, ''));
 
@@ -865,9 +871,12 @@ function addOrder() {
             ghichu: ghichu,
             haveDisk: haveDisk,
             note: note.toString(),
-            totalBill:totalBill
+            totalBill:totalBill,
+            fee:fee,
+            pro_bill:pro_bill
         },
         success: function () {
+
             document.getElementById("totalPro").innerHTML = "0";
             document.getElementById("totalPro1").innerHTML = "0";
             document.getElementById("emptyPro").innerHTML = "" +
@@ -890,24 +899,27 @@ function addOrder() {
                 "                                </div>\n" +
                 "                                <button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>\n" +
                 "                            ";
+            Swal.fire({
+                text: 'Đặt hàng thành công!',
+                icon: 'success',
+                showCancelButton: true,
+                cancelButtonText: 'Mua tiếp',
+                confirmButtonText: 'Xem đơn đặt',
+                confirmButtonColor: '#ff96b7'
+            }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "MyOrder";
+                    } else {
+                        location.href = "ListProduct";
+                    }
+                }
+            );
+
         }
+
     });
 
-    Swal.fire({
-        text: 'Đặt hàng thành công!',
-        icon: 'success',
-        showCancelButton: true,
-        cancelButtonText: 'Mua tiếp',
-        confirmButtonText: 'Xem đơn đặt',
-        confirmButtonColor: '#ff96b7'
-    }).then((result) => {
-            if (result.isConfirmed) {
-                location.href = "MyOrder";
-            } else {
-                location.href = "ListProduct";
-            }
-        }
-    );
+
 
 }
 
