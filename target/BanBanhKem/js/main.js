@@ -275,7 +275,7 @@ function myFunction() {
                 to_ward_id: to_ward_id
             },
             success: function (data) {
-                $(".leadTime").text(data);
+                $("#leadTime").text(data);
             }
 
         });
@@ -838,6 +838,8 @@ function addOrder() {
     var email = document.getElementById("email").value;
     var ghichu = document.getElementById("ghichu").value;
 
+    var leadTime = document.getElementById("leadTime").innerText;
+
     var pro_bill_t = document.getElementById("pro_bill").innerText;
     var pro_bill = parseInt(pro_bill_t.replace(/,/g, ''));
 
@@ -873,7 +875,8 @@ function addOrder() {
             note: note.toString(),
             totalBill:totalBill,
             fee:fee,
-            pro_bill:pro_bill
+            pro_bill:pro_bill,
+            leadTime:leadTime
         },
         success: function () {
 

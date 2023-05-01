@@ -31,6 +31,6 @@ public class GetLeadTime extends HttpServlet {
         String leadTime = controller.getLeadTime(from_dist_id, from_ward_id, to_dist_id, to_ward_id, height, length, width, weight);
 
         PrintWriter out = response.getWriter();
-        out.println("Dự kiến giao đến bạn vào "+ leadTime);
+        out.println(leadTime);
     }
 }

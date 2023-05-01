@@ -330,7 +330,7 @@
                             <div class="checkout__order__fee">Phí vận chuyển
                                 <span id="fee"> 0 </span>(VND)
                             </div>
-                            <p class="text-info leadTime"></p>
+                            <p class="text-info" >Dự kiến giao đến bạn vào <span class="text-info" id="leadTime"></span>  </p>
                             <div class="checkout__order__total" >Tổng
                                 <span id="totalBill"><%= CartService.formatNum(CartService.totalPrice(listItemC))%> </span>(VND)
                             </div>

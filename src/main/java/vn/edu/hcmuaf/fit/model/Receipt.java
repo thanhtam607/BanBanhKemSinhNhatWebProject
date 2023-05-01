@@ -12,11 +12,9 @@ public class Receipt {
     private String export_date;
     private String delivery_date;
     private int price;
-    private int total;
     private int money;
     private int status;
     private String email;
-    private String createBy;
     private double fee_bill;
     private double pro_bill;
 
@@ -31,10 +29,11 @@ public class Receipt {
         this.money = money;
         this.status = status;
     }
-    public Receipt(String id, String makh, String export_date, String note,double pro_bill,double fee_bill, int money, int status, String dc) {
+    public Receipt(String id, String makh, String export_date, String delivery_date, String note,double pro_bill,double fee_bill, int money, int status, String dc) {
         this.id = id;
         this.makh = makh;
         this.export_date = export_date;
+        this.delivery_date = delivery_date;
         this.note = note;
         this.pro_bill = pro_bill;
         this.fee_bill = fee_bill;
@@ -75,13 +74,6 @@ public class Receipt {
         this.pro_bill = pro_bill;
     }
 
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
 
     public String getNote() {
         return note;
@@ -143,29 +135,12 @@ public class Receipt {
     }
 
 
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
     }
 
     public int getStatus() {

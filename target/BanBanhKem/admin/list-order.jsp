@@ -190,7 +190,7 @@
                 <div class="main__user">
 
                   <div class="main__meta">
-                    <h3><%=rc.getNamecustomer()%></h3>
+                    <h3><%=UserService.findById(rc.getMakh()).getName()%></h3>
                   </div>
                 </div>
               </td>
@@ -204,7 +204,7 @@
                 <div class="main__user breaklineNamePro"><%=rc.getNote()%></div>
               </td>
               <td>
-                <div class="main__table-text"><%=rc.formatNum(rc.getTotal())%> VND</div>
+                <div class="main__table-text"><%=rc.formatNum(rc.getMoney())%> VND</div>
               </td>
               <td>
                 <div class="main__table-text"><%=rc.getStatusName()%></div>
@@ -212,7 +212,7 @@
               <td>
                 <div class="main__table-btns">
 
-                  <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn main__table-btn--view">
+                  <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=UserService.findById(rc.getMakh()).getName()%>" class="main__table-btn main__table-btn--view">
                     <i class="fas fa-info"></i>
                   </a>
                   <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>

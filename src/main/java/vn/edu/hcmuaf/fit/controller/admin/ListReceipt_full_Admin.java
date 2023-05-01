@@ -29,7 +29,7 @@ public class ListReceipt_full_Admin extends HttpServlet {
                 });
             }
             if (sort.equals("Theo đơn giá")) {
-                lr.sort((Receipt o1, Receipt o2) -> o2.getTotal() - o1.getTotal());
+                lr.sort((Receipt o1, Receipt o2) -> o2.getMoney() - o1.getMoney());
             }
         }
             request.getRequestDispatcher("list-order.jsp").forward(request, response);

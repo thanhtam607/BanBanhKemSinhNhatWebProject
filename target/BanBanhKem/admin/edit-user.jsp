@@ -339,7 +339,7 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                 <div class="main__table-text"><%=r.getId()%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><%=r.getNamecustomer()%></div>
+                                                <div class="main__table-text"><%=UserService.findById(r.getMakh()).getName()%></div>
                                             </td>
                                             <td>
                                                 <div class="main__table-text"><%=r.getAddress()%></div>
@@ -349,7 +349,7 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="Bill_detail_Admin?mahd=<%=r.getId()%>&tenkh=<%=r.getNamecustomer()%>" class="main__table-btn main__table-btn--view">
+                                                    <a href="Bill_detail_Admin?mahd=<%=r.getId()%>&tenkh=<%=UserService.findById(r.getMakh()).getName()%>" class="main__table-btn main__table-btn--view">
                                                         <i class="fas fa-info"></i>
                                                     </a>
                                                     <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>

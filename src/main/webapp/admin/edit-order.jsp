@@ -309,7 +309,7 @@
                             </div>
                             <div class="col-5 margin-top-20px">
                                 <label for="total">Tổng thanh toán: </label>
-                                <span style="font-weight: 600; font-size: 30px;" class="text-danger text-uppercase" id="total"><%=receipt.formatNum(receipt.getTotal())%> VND</span>
+                                <span style="font-weight: 600; font-size: 30px;" class="text-danger text-uppercase" id="total"><%=receipt.formatNum(receipt.getMoney())%> VND</span>
                             </div>
 
                         </div>

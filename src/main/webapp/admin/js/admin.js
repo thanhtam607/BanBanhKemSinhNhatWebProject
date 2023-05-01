@@ -794,10 +794,14 @@ function adminAddProInOrder(){
                         sum = sum + parseInt(value.replace(/,/g, ''));
                     });
                 });
+                // var fee = $("#fee").text();
+                // var pro_bill = $('#pro_bill').text();
+                // var totalBill = sum +
 
                 $('#msp').val("");
                 $('#notes').val("");
-                $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
+                $('#pro_bill').text(sum.toLocaleString('en-US')+ " VND");
+                $('#total').text(sum.toLocaleString('en-US')+ " VND");
                 $.magnificPopup.close();
             }else if (parseInt(response) === 2){
                 $('#error').text("Thêm sản phẩm không thành công, xem lại trạng thái đơn hàng!");

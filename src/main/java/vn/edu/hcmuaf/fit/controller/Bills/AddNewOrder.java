@@ -14,6 +14,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +40,8 @@ public class AddNewOrder extends HttpServlet {
         String fee = request.getParameter("fee");
         String pro_bill = request.getParameter("pro_bill");
 
+        String leadTime = request.getParameter("leadTime");
+
         if(ghichu!=null && request.getParameter("haveDisk")!=null){
             ghichu +=", "+ request.getParameter("haveDisk");
         }
@@ -49,6 +52,14 @@ public class AddNewOrder extends HttpServlet {
         Date today = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayFM = formatter.format(today);
+//        String todayFM = "";
+        // SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        try {
+//            Date date = formatter.parse(leadTime);
+//            todayFM = formatter.format(date);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 
         Delivery gh = new Delivery();
         gh.setDiachigiao(diachi);
