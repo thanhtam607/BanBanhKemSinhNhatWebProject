@@ -45,8 +45,8 @@ public class  Order {
         this.trangthai = 0;
         this.data = data;
         this.giaohang = gh;
-        this.fee_bill = fee_bill;
         this.pro_bill = pro_bill;
+        this.fee_bill = fee_bill;
     }
 
     public Order(List<ItemProductInCart> data) {

@@ -266,7 +266,7 @@
                                                 LogisticController controller = new LogisticController();
                                                 List<District> districts = controller.getDistrictByProvinceID("202");
                                                 for (District d : districts) { %>
-                                            <option value="<%=d.getDistrictID()%>"><%=d.getDistrictName()%></option>
+                                            <option value="<%=d.getDistrictID()%>"><%=d.getDistrictName().replace("\"", "")%></option>
                                             <%}%>
                                         </select>
                                     </div>

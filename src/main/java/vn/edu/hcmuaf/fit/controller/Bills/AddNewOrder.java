@@ -31,6 +31,11 @@ public class AddNewOrder extends HttpServlet {
         User auth = (User) session.getAttribute("auth");
         List<ItemProductInCart> listItemC =(List<ItemProductInCart>) session.getAttribute("itemCart");
 
+        double price_pro_bill = 0;
+        for(ItemProductInCart inCart: listItemC){
+            price_pro_bill += inCart.getPrice();
+        }
+
         String ten = request.getParameter("ten");
         String diachi = request.getParameter("diachi");
         String phone = request.getParameter("phone");
@@ -69,7 +74,8 @@ public class AddNewOrder extends HttpServlet {
         gh.setTenKH(ten);
 
 
-        Order order = new Order(auth, listItemC, todayFM,Double.parseDouble(totalBill), ghichu,gh, Double.parseDouble(pro_bill), Double.parseDouble(fee));
+
+        Order order = new Order(auth, listItemC, todayFM,Double.parseDouble(totalBill), ghichu,gh, price_pro_bill, Double.parseDouble(fee));
 
         if(notesForDetail!=null){
         for(int i =0; i< notesForDetail.length ;i++){

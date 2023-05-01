@@ -170,15 +170,15 @@
           </div>
 
           <div class="col-5 margin-top-20px">
-            <label for="total">Tổng tiền hàng: </label> &ensp;
-            <span class="text-danger text-uppercase text-pink" ><%=receipt.formatNum((int) receipt.getPro_bill())%> VND</span>
+            <label>Tổng tiền hàng: </label> &ensp;
+            <span class="text-danger text-uppercase text-pink"><%=receipt.formatNum((int) receipt.getPro_bill())%> VND</span>
           </div>
           <div class="col-5 margin-top-20px">
-            <label for="total">Phí vận chuyển: </label> &ensp;
+            <label>Phí vận chuyển: </label> &ensp;
             <span class="text-danger text-uppercase text-pink"><%=receipt.formatNum((int) receipt.getFee_bill())%> VND</span>
           </div>
           <div class="col-5 margin-top-20px">
-            <label for="total">Tổng thanh toán: </label> &ensp;
+            <label>Tổng thanh toán: </label> &ensp;
             <span class="text-danger text-uppercase text-pink"><%=receipt.formatNum(receipt.getMoney())%> VND</span>
           </div>
           <div class="main__table-btns">

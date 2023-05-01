@@ -11,7 +11,6 @@ public class Receipt {
     private String note;
     private String export_date;
     private String delivery_date;
-    private int price;
     private int money;
     private int status;
     private String email;
@@ -21,15 +20,14 @@ public class Receipt {
     public Receipt() {
     }
 
-    public Receipt(String id, String makh, String export_date, String note, int money, int status) {
+    public Receipt(String id, String makh, String export_date, String note, int status) {
         this.id = id;
         this.makh = makh;
         this.export_date = export_date;
         this.note = note;
-        this.money = money;
         this.status = status;
     }
-    public Receipt(String id, String makh, String export_date, String delivery_date, String note,double pro_bill,double fee_bill, int money, int status, String dc) {
+    public Receipt(String id, String makh, String export_date, String delivery_date, String note,double pro_bill,double fee_bill, int status, String dc) {
         this.id = id;
         this.makh = makh;
         this.export_date = export_date;
@@ -37,7 +35,6 @@ public class Receipt {
         this.note = note;
         this.pro_bill = pro_bill;
         this.fee_bill = fee_bill;
-        this.money = money;
         this.status = status;
         this.address = dc;
     }
@@ -84,7 +81,7 @@ public class Receipt {
     }
 
     public int getMoney() {
-        return money;
+        return (int) (this.fee_bill + this.pro_bill);
     }
 
     public void setMoney(int money) {

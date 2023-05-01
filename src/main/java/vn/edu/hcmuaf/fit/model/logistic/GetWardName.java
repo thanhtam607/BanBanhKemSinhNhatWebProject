@@ -28,7 +28,8 @@ public class GetWardName extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<option selected disabled value=\"0\">Chọn Xã/Phường</option>");
         for(Ward ward: wardList){
-            out.println("<option value="+ward.getWardCode()+">"+ward.getWardName()+"</option>");
+
+            out.println("<option value="+ward.getWardCode()+">"+ward.getWardName().replace("\"", "")+"</option>");
         }
     }
 }

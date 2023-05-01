@@ -829,11 +829,13 @@ function addOrder() {
     var selectElement2 = document.getElementById("inputGroupSelect02");
     var selectElement3 = document.getElementById("inputGroupSelect03");
     var ten = document.getElementById("ten").value;
-    var diachi = document.getElementById("diachi").value
-        +", "+ selectElement3.options[selectElement3.selectedIndex].textContent
-        +", "+ selectElement2.options[selectElement2.selectedIndex].textContent
-        +", "+ selectElement1.options[selectElement1.selectedIndex].textContent
+    var diachitxt = document.getElementById("diachi").value
+        +"- "+ selectElement3.options[selectElement3.selectedIndex].textContent
+        +"- "+ selectElement2.options[selectElement2.selectedIndex].textContent
+        +"- "+ selectElement1.options[selectElement1.selectedIndex].textContent
     ;
+    var diachi = diachitxt.replace(/"/g, '');
+
     var phone = document.getElementById("phone").value;
     var email = document.getElementById("email").value;
     var ghichu = document.getElementById("ghichu").value;
@@ -1041,29 +1043,6 @@ function changeProfile() {
 
     });
 }
-/*-------------------
-   get ward name by distID
-  --------------------- */
-function getWardNameByDistID() {
-    var distID = document.getElementById("inputGroupSelect02").value;
-    var url = "GetWardName";
-    $.ajax({
-        url: url,
-        type: "POST",
-        data: {
-            distID: distID
-        },
-        success: function (data) {
-            var listWard = document.getElementById("inputGroupSelect03");
-            listWard.innerHTML = data;
-            (function ($) {
-            $("#inputGroupSelect03").niceSelect();
-            })(jQuery);
-            // listWard.disable = false;
-            // console.log(data);
-            // console.log(listWard);
-        }
 
-    });
-}
+
 

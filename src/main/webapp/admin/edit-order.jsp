@@ -300,11 +300,11 @@
                                 </table>
                             </div>
                             <div class="col-5 margin-top-20px">
-                                <label for="total">Tổng tiền hàng: </label>
+                                <label >Tổng tiền hàng: </label>
                                 <span class="text-info text-uppercase" id="pro_bill"><%=receipt.formatNum((int) receipt.getPro_bill())%> VND</span>
                             </div>
                             <div class="col-5 margin-top-20px">
-                                <label for="total">Phí vận chuyển: </label>
+                                <label>Phí vận chuyển: </label>
                                 <span class="text-info text-uppercase" id="fee"><%=receipt.formatNum((int) receipt.getFee_bill())%> VND</span>
                             </div>
                             <div class="col-5 margin-top-20px">
