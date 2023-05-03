@@ -106,6 +106,7 @@
                                 <% if(user.getRole() == 2) { %>
                                 <a href="general_Management.jsp" class="dropdown-item">Quản lí cửa hàng</a>
                                 <a href="AdminDecentralization.jsp" class="dropdown-item">Phân quyền cấp cao</a>
+                                <a href="ListLog" class="dropdown-item">Nhật ký hoạt động</a>
                                 <% } else { %>
                                 <% } %>
                                 <a href="edit-profile.jsp" class="dropdown-item">Hồ sơ của tôi</a>
