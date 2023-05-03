@@ -82,7 +82,7 @@ public class AddNewOrder extends HttpServlet {
         OrderService.addOrder(order);
         OrderService.addGiaoHang(order);
 
-//        OrderService.updateTonKhoWhenAdd(order);
+        OrderService.updateTonKhoWhenAdd(order);
         session.setAttribute("itemCart",null);
 
 

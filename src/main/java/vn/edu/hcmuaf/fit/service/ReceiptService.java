@@ -236,7 +236,7 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILL_DETAIL.ID, BILL_DETAIL.idProduct, products.productName, products.price, BILL_DETAIL.AMOUNT, BILL_DETAIL.NOTES from BILLS, BILL_DETAIL, products\n" +
+                ResultSet rs = statement.executeQuery("SELECT BILL_DETAIL.ID, BILL_DETAIL.idProduct, products.productName,BILL_DETAIL.PRICE, BILL_DETAIL.AMOUNT, BILL_DETAIL.NOTES from BILLS, BILL_DETAIL, products\n" +
                         "WHERE BILL_DETAIL.ID = BILLS.ID and BILL_DETAIL.idProduct = products.idProduct ORDER BY BILL_DETAIL.ID DESC ");
                 while (rs.next()) {
 
@@ -293,7 +293,7 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILL_DETAIL.ID, BILL_DETAIL.idProduct, products.productName, products.price, BILL_DETAIL.AMOUNT, BILL_DETAIL.NOTES from BILLS, BILL_DETAIL, products\n" +
+                ResultSet rs = statement.executeQuery("SELECT BILL_DETAIL.ID, BILL_DETAIL.idProduct, products.productName,BILL_DETAIL.PRICE , BILL_DETAIL.AMOUNT, BILL_DETAIL.NOTES from BILLS, BILL_DETAIL, products\n" +
                         "                        WHERE BILL_DETAIL.ID = BILLS.ID and BILL_DETAIL.idProduct = products.idProduct \n" +
                         "and bills.ID = '"+mahd+"'");
                 while (rs.next()) {
@@ -563,10 +563,15 @@ public class ReceiptService {
                 Statement stm = DBConnect.getInstall().get();
                 String sql1, sql2 = "";
                 int oldTotal = (int) getReceiptByMahd(id).getPro_bill();
-                int newTotal = oldTotal + (ProductService.findById(msp).getPrice() * slg);
+                Product p = ProductService.findById(msp);
+                int price = p.getPromotional()!=0?p.getPromotional():p.getPrice();
+
+                int newTotal = oldTotal + ( price* slg);
+                System.out.println(price);
                 getReceiptByMahd(id).setPro_bill(newTotal);
 
-                sql1 = "INSERT INTO BILL_DETAIL VALUES('" + id + "','" + msp + "'," + slg + ",'" + notes + "');";
+                sql1 = "INSERT INTO BILL_DETAIL VALUES('" + id + "','" + msp + "'," + slg + ",'" + notes + "',"+ price +");";
+                System.out.println(sql1);
                 sql2 = "UPDATE BILLS set BILLS.PRO_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
                 String sql3 = "UPDATE bill_detail set bill_detail.AMOUNT = bill_detail.AMOUNT+" + slg + "" +
                         " WHERE bill_detail.idProduct = '" + msp + "' and bill_detail.ID = '" + id + "'";
@@ -589,9 +594,10 @@ public class ReceiptService {
     public static void deleteProInCTHD(String id, String msp, int slg) {
         Statement stm = DBConnect.getInstall().get();
         String sql, sql2 = "";
-
+        Product p = ProductService.findById(msp);
+        int price = p.getPromotional()!=0?p.getPromotional():p.getPrice();
         int oldTotal = (int) getReceiptByMahd(id).getPro_bill();
-        int newTotal = oldTotal - (ProductService.findById(msp).getPrice() * slg);
+        int newTotal = oldTotal - (price * slg);
         getReceiptByMahd(id).setPro_bill(newTotal);
         sql = "DELETE FROM bill_detail WHERE bill_detail.ID = '"+id+"' and bill_detail.idProduct = '"+msp+"'";
 
