@@ -13,56 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ReceiptService {
-//    public static List<Receipt> getData() {
-//        List<Receipt> list = new ArrayList<Receipt>();
-//        Statement statement = DBConnect.getInstall().get();
-//        Statement stmt1 = DBConnect.getInstall().get();
-//        String sql = "select BILLS.ID, ACCOUNTS.NAME, products.productName, " +
-//                "CUSTOMERS.PHONE, BILLS.EXPORT_DATE, DELIVERY.DELIVERY_DATE," +
-//                " DELIVERY.ADDRESS, BILLS.NOTES, products.price, BILLS.TOTAL_BILL, " +
-//                " BILLS.STATUS, CUSTOMERS.ID, products.idProduct,ACCOUNTS.ROLE, ACCOUNTS.EMAIL\n" +
-//                "from products, BILLS, CUSTOMERS, BILL_DETAIL, DELIVERY, ACCOUNTS where BILLS.ID = BILL_DETAIL.ID and BILL_DETAIL.idProduct = products.idProduct and DELIVERY.ID = BILLS.ID and CUSTOMERS.ID = BILLS.CUSTOMER_ID and ACCOUNTS.ID = CUSTOMERS.ID \n" +
-//                "group by BILLS.ID ORDER BY BILLS.EXPORT_DATE desc;";
-//        if (statement != null)
-//            try {
-//                ResultSet rs = statement.executeQuery(sql);
-//                while (rs.next()) {
-//                    Receipt rc = new Receipt(rs.getString(1),
-//                            rs.getString(2), rs.getString(3),
-//                            rs.getString(4), rs.getString(5),
-//                            rs.getString(6), rs.getString(7),
-//                            rs.getString(8), rs.getInt(9),
-//                            rs.getInt(10), rs.getInt(11),
-//                            rs.getString(12), rs.getInt(14),
-//                            rs.getString(15));
-//                    list.add(rc);
-//                }
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        else {
-//            System.out.println("Không có  hóa đơn");
-//        }
-//        return list;
-//    }
-//    public int getFeeOfReceipt(String id){
-//        int fee = 0;
-//        Statement statement = DBConnect.getInstall().get();
-//        if (statement != null)
-//            try {
-//                ResultSet rs = statement.executeQuery("SELECT BILLS.TOTAL_BILL from BILLS where BILLS.ID ='" + id + "'");
-//                while (rs.next()) {
-//                    fee = rs.getInt(1);
-//                }
-//
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        else {
-//            System.out.println("Không có");
-//        }
-//        return fee;
-//    }
+
 
 
     public static List<Comment> getListComment(String id) {
@@ -90,7 +41,7 @@ public class ReceiptService {
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  bills.ID, bills.CUSTOMER_ID, bills.EXPORT_DATE, bills.NOTES, bills.PRO_BILL, bills.FEE_BILL, bills.STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
+                ResultSet rs = statement.executeQuery("SELECT  BILLS.ID, BILLS.CUSTOMER_ID, BILLS.EXPORT_DATE, BILLS.NOTES, BILLS.PRO_BILL, BILLS.FEE_BILL, BILLS.STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = stmt1.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID,DELIVERY.DELIVERY_DATE  FROM DELIVERY");
                     String diachi = "";
@@ -166,6 +117,7 @@ public class ReceiptService {
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT products.productName, sum(BILL_DETAIL.AMOUNT) as slg\n" +
+
                         "from products, bills, BILL_DETAIL\n" +
                         "WHERE  bills.ID = BILL_DETAIL.ID and products.idProduct = BILL_DETAIL.idProduct \n" +
                         "and bills.STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) " +
@@ -277,16 +229,6 @@ public class ReceiptService {
     }
 
 
-//    public static List<Receipt> getctkh(String makh) {
-//        List<Receipt> list = getData();
-//        List<Receipt> rs = new ArrayList<>();
-//        for (Receipt rc : list) {
-//            if (rc.getMakh().equals(makh)) {
-//                rs.add(rc);
-//            }
-//        }
-//        return rs;
-//    }
 
     public static List<Bill_Detail> getBill_DetailUser(String mahd) {
         List<Bill_Detail> list = new ArrayList<>();
@@ -295,7 +237,7 @@ public class ReceiptService {
             try {
                 ResultSet rs = statement.executeQuery("SELECT BILL_DETAIL.ID, BILL_DETAIL.idProduct, products.productName,BILL_DETAIL.PRICE , BILL_DETAIL.AMOUNT, BILL_DETAIL.NOTES from BILLS, BILL_DETAIL, products\n" +
                         "                        WHERE BILL_DETAIL.ID = BILLS.ID and BILL_DETAIL.idProduct = products.idProduct \n" +
-                        "and bills.ID = '"+mahd+"'");
+                        "and BILLS.ID = '"+mahd+"'");
                 while (rs.next()) {
 
                     Bill_Detail billDetail = new Bill_Detail(rs.getString(1),
@@ -352,8 +294,8 @@ public class ReceiptService {
         Statement statement2 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT bills.ID, bills.CUSTOMER_ID, bills.EXPORT_DATE, bills.NOTES, bills.PRO_BILL, bills.FEE_BILL, bills.STATUS FROM BILLS, CUSTOMERS \n" +
-                        "WHERE bills.CUSTOMER_ID = customers.ID AND customers.ID = '"+makh+"' ORDER BY BILLS.EXPORT_DATE DESC");
+                ResultSet rs = statement.executeQuery("SELECT BILLS.ID, BILLS.CUSTOMER_ID, BILLS.EXPORT_DATE, BILLS.NOTES, BILLS.PRO_BILL, BILLS.FEE_BILL, BILLS.STATUS FROM BILLS, CUSTOMERS \n" +
+                        "WHERE BILLS.CUSTOMER_ID = CUSTOMERS.ID AND CUSTOMERS.ID = '"+makh+"' ORDER BY BILLS.EXPORT_DATE DESC");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = statement2.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID, DELIVERY.DELIVERY_DATE FROM DELIVERY");
                     String diachi = "";
@@ -495,7 +437,7 @@ public class ReceiptService {
             try {
                 String sql = "UPDATE DELIVERY set DELIVERY.NAMECUSTOMER = '" + name + "', " +
                         "DELIVERY.PHONE = '" + phone + "', DELIVERY.EMAIL = '" + mail + "' " +
-                        "WHERE DELIVERY.id = '" + id + "'";
+                        "WHERE DELIVERY.ID = '" + id + "'";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
@@ -548,7 +490,7 @@ public class ReceiptService {
 
     public static void updateRole(int role, String id) {
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE ACCOUNTS set ROLE = " + role + " where ACCOUNTS.id = '" + id + "'";
+        String sql = "UPDATE ACCOUNTS set ROLE = " + role + " where ACCOUNTS.ID = '" + id + "'";
         try {
             statement.executeUpdate(sql);
 
@@ -573,8 +515,8 @@ public class ReceiptService {
                 sql1 = "INSERT INTO BILL_DETAIL VALUES('" + id + "','" + msp + "'," + slg + ",'" + notes + "',"+ price +");";
                 System.out.println(sql1);
                 sql2 = "UPDATE BILLS set BILLS.PRO_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
-                String sql3 = "UPDATE bill_detail set bill_detail.AMOUNT = bill_detail.AMOUNT+" + slg + "" +
-                        " WHERE bill_detail.idProduct = '" + msp + "' and bill_detail.ID = '" + id + "'";
+                String sql3 = "UPDATE BILL_DETAIL set BILL_DETAIL.AMOUNT = BILL_DETAIL.AMOUNT+" + slg + "" +
+                        " WHERE BILL_DETAIL.idProduct = '" + msp + "' and BILL_DETAIL.ID = '" + id + "'";
                 try {
                     if (listMsp.contains(msp)) {
                         stm.executeUpdate(sql3);
@@ -599,7 +541,7 @@ public class ReceiptService {
         int oldTotal = (int) getReceiptByMahd(id).getPro_bill();
         int newTotal = oldTotal - (price * slg);
         getReceiptByMahd(id).setPro_bill(newTotal);
-        sql = "DELETE FROM bill_detail WHERE bill_detail.ID = '"+id+"' and bill_detail.idProduct = '"+msp+"'";
+        sql = "DELETE FROM BILL_DETAIL WHERE BILL_DETAIL.ID = '"+id+"' and BILL_DETAIL.idProduct = '"+msp+"'";
 
         sql2 = "UPDATE BILLS set BILLS.PRO_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
         try {
