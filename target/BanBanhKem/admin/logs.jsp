@@ -129,17 +129,17 @@
 
         <div class="row">
           <div class="button_right">
-            <a class="button_product" onclick="removeLog()"> Xóa nhật ký</a>
+<%--            <a class="button_product" onclick="removeLog()"> Xóa nhật ký</a>--%>
             </div>
 
             <div class="form form--profile">
               <div class="row row--form">
                 <div class="col-12">
                   <table class="table table-striped log">
-                    <div class="choose-all">
-                      <div>
-                        <input class="form-check-input" type="checkbox"  id="select-all" > Chọn tất cả</div>
-                    </div>
+<%--                    <div class="choose-all">--%>
+<%--                      <div>--%>
+<%--                        <input class="form-check-input" type="checkbox"  id="select-all" > Chọn tất cả</div>--%>
+<%--                    </div>--%>
                     <thead>
                     <tr>
                       <th scope="col">Thời gian
@@ -179,14 +179,12 @@
                           <span class="filter__item-label"></span>
                           <div class="filter__item-btn dropdown-toggle col-12" role="navigation" id="filter-level-log" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <input type="button"  value="Tất cả">
-
                           </div><input type="hidden" id="level" value="0">
                           <ul class="filter__item-menu list-group dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
                             <li><a class="dropdown-item" onclick="filterLog('level',0)" selected="true" value="0">Tất cả</a></li>
                             <li><a class ="text-success dropdown-item" onclick="filterLog('level',1)" value="1">Bình thường</a></li>
                             <li><a class ="text-warning dropdown-item" onclick="filterLog('level',2)" value="2">Cảnh báo</a></li>
                             <li><a class ="text-danger dropdown-item" onclick="filterLog('level',3)" value="3">Nguy hiểm</a></li>
-
                           </ul>
                         </div>
                       </th>
@@ -219,7 +217,7 @@
                         </div>
                       </th>
                       <th class="bottom" scope="col">Source</th>
-                      <th class="bottom" scope="col">Chọn</th>
+<%--                      <th class="bottom" scope="col">Chọn</th>--%>
                     </tr>
                     </thead>
                     <tbody id="listLog">
@@ -236,9 +234,9 @@
                       <td><%=log.getUser()%></td>
                       <td><%=log.getContent()%></td>
                       <td><%=log.getSrc()%></td>
-                      <td class="check" >
-                        <input class="form-check-input" type="checkbox" name="check" onclick="cancelSelectAll()" value="<%=log.getId()%>"></td>
-                      <td>
+<%--                      <td class="check" >--%>
+<%--                        <input class="form-check-input" type="checkbox" name="check" onclick="cancelSelectAll()" value="<%=log.getId()%>"></td>--%>
+<%--                      <td>--%>
                     </tr>
                     <%}%>
 
