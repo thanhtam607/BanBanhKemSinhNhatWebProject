@@ -90,7 +90,7 @@ public class ReceiptService {
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  bills.ID, bills.CUSTOMER_ID, bills.EXPORT_DATE, bills.NOTES, bills.PRO_BILL, bills.FEE_BILL, bills.STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
+                ResultSet rs = statement.executeQuery("SELECT  BILLS.ID, BILLS.CUSTOMER_ID, BILLS.EXPORT_DATE, BILLS.NOTES, BILLS.PRO_BILL, BILLS.FEE_BILL, BILLS.STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = stmt1.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID,DELIVERY.DELIVERY_DATE  FROM DELIVERY");
                     String diachi = "";
@@ -352,8 +352,8 @@ public class ReceiptService {
         Statement statement2 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT bills.ID, bills.CUSTOMER_ID, bills.EXPORT_DATE, bills.NOTES, bills.PRO_BILL, bills.FEE_BILL, bills.STATUS FROM BILLS, CUSTOMERS \n" +
-                        "WHERE bills.CUSTOMER_ID = customers.ID AND customers.ID = '"+makh+"' ORDER BY BILLS.EXPORT_DATE DESC");
+                ResultSet rs = statement.executeQuery("SELECT BILLS.ID, BILLS.CUSTOMER_ID, BILLS.EXPORT_DATE, BILLS.NOTES, BILLS.PRO_BILL, BILLS.FEE_BILL, BILLS.STATUS FROM BILLS, CUSTOMERS \n" +
+                        "WHERE BILLS.CUSTOMER_ID = CUSTOMERS.ID AND CUSTOMERS.ID = '"+makh+"' ORDER BY BILLS.EXPORT_DATE DESC");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = statement2.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID, DELIVERY.DELIVERY_DATE FROM DELIVERY");
                     String diachi = "";

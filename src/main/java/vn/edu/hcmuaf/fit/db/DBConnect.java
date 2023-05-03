@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBConnect {
-    static String URL = "jdbc:mysql://localhost:3306/banbanhkem";
+    static String URL = "jdbc:mysql://103.9.159.203:3306/banbanhkem";
     static String user= "root";
-    static String pass= "";
+    static String pass= "12345";
     static Connection conn;
     static DBConnect install;
      private DBConnect(){
