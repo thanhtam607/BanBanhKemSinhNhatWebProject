@@ -1,5 +1,8 @@
 package vn.edu.hcmuaf.fit.model;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class Customer {
     private String MAKH;
     private String DIACHI;
@@ -43,13 +46,13 @@ public class Customer {
         this.SDT = SDT;
     }
 
-    public String getRole() {
+    public String getRole() throws UnsupportedEncodingException {
         if(this.role == 0){
-            return "Thường";
+            return URLEncoder.encode("Thường", "UTF-8");
         }else if(this.role == 1){
-            return "Admin";
+            return URLEncoder.encode("Admin", "UTF-8");
         }
-        return "Quản Lí";
+        return URLEncoder.encode("Quản Lí", "UTF-8");
     }
     public int getRoleNo() {
         return this.role;
