@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
 
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
@@ -299,7 +303,7 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                     </select>
                                                 </div>
                                                 <% } else { %>
-                                                <p>Quyền Hạn:  <span class="font-size-20 text--green"><%=rc.getRoleName()%></span></p>
+                                                <p>Quyền Hạn:  <span class="font-size-20 text--green text-uppercase"><%=UserService.findById(mkh).getRoleName()%></span></p>
                                                 <% } %>
                                             </div>
                                             <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
@@ -339,7 +343,7 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                 <div class="main__table-text"><%=r.getId()%></div>
                                             </td>
                                             <td>
-                                                <div class="main__table-text"><%=r.getNamecustomer()%></div>
+                                                <div class="main__table-text"><%=UserService.findById(r.getMakh()).getName()%></div>
                                             </td>
                                             <td>
                                                 <div class="main__table-text"><%=r.getAddress()%></div>
@@ -349,7 +353,7 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                             </td>
                                             <td>
                                                 <div class="main__table-btns">
-                                                    <a href="Bill_detail_Admin?mahd=<%=r.getId()%>&tenkh=<%=r.getNamecustomer()%>" class="main__table-btn main__table-btn--view">
+                                                    <a href="Bill_detail_Admin?mahd=<%=r.getId()%>&tenkh=<%=UserService.findById(r.getMakh()).getName()%>" class="main__table-btn main__table-btn--view">
                                                         <i class="fas fa-info"></i>
                                                     </a>
                                                     <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>

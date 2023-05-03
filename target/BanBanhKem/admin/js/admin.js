@@ -663,9 +663,7 @@ function editOrderUpdateDelivery(){
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#ff96b7'
                 })
-                //     .then(() => {
-                //     location.reload();
-                // });
+
 
         }
     });
@@ -675,7 +673,12 @@ function adminRemoveProInOrder(index){
   var i = $("tr#"+index).children().first().text();
   var msp = msp;
   var sl = 0;
-  var sum = 0;
+
+    var sumtxt = $('#fee').text();
+    var fee = parseInt(sumtxt.replace(/,/g, ''));
+
+    var pro_bill = 0;
+
     // dung hang co stt đc nhan vao de lay msp
     $('#table_bill_details tr').each(function(rowIndex, row) {
         // Lặp qua từng hàng
@@ -744,7 +747,7 @@ function adminRemoveProInOrder(index){
                             $(row).find("td:eq(6)").each(function(colIndex, col) {
                                 // Lấy giá trị từng cột
                                 var value = $(col).text();
-                                sum = sum + parseInt(value.replace(/,/g, ''));
+                                pro_bill = pro_bill + parseInt(value.replace(/,/g, ''));
                             });
                         });
 
@@ -754,8 +757,9 @@ function adminRemoveProInOrder(index){
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#ff96b7'
                         })
-                        // $('#total').text(sum+",000");
-                        $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
+                        $('#pro_bill').text(pro_bill.toLocaleString('en-US')+ " VND") ;
+                        var total = fee + pro_bill;
+                        $('#total').text(total.toLocaleString('en-US')+ " VND");
                     }
                 }, error: function (){
                     Swal.fire({
@@ -776,7 +780,11 @@ function adminAddProInOrder(){
   var msp = $('#msp').val();
   var slg = $('#slg').val();
   var notes = $('#notes').val();
-  var sum = 0;
+
+  var sumtxt = $('#fee').text();
+  var fee = parseInt(sumtxt.replace(/,/g, ''));
+
+  var pro_bill = 0;
     $.ajax({
         url: "adminAddProInOrder",
         type: "GET",
@@ -805,13 +813,15 @@ function adminAddProInOrder(){
                     $(row).find("td:eq(6)").each(function(colIndex, col) {
                         // Lấy giá trị từng cột
                         var value = $(col).text();
-                        sum = sum + parseInt(value.replace(/,/g, ''));
+                        pro_bill = pro_bill + parseInt(value.replace(/,/g, ''));
                     });
                 });
 
                 $('#msp').val("");
                 $('#notes').val("");
-                $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
+                $('#pro_bill').text(pro_bill.toLocaleString('en-US')+ " VND");
+                var total = fee + pro_bill;
+                $('#total').text(total.toLocaleString('en-US')+ " VND");
                 $.magnificPopup.close();
             }else if (parseInt(response) === 2){
                 $('#error').text("Thêm sản phẩm không thành công, xem lại trạng thái đơn hàng!");
@@ -825,12 +835,14 @@ function adminAddProInOrder(){
                     $(row).find("td:eq(6)").each(function(colIndex, col) {
                         // Lấy giá trị từng cột
                         var value = $(col).text();
-                        sum = sum + parseInt(value.replace(/,/g, ''));
+                        pro_bill = pro_bill + parseInt(value.replace(/,/g, ''));
                     });
                 });
                 $('#msp').val("");
                 $('#notes').val("");
-                $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
+                $('#pro_bill').text(pro_bill.toLocaleString('en-US')+ " VND");
+                var total = fee + pro_bill;
+                $('#total').text(total.toLocaleString('en-US')+ " VND");
                 $.magnificPopup.close();
             }
 

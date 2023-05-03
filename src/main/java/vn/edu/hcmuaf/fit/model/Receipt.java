@@ -4,70 +4,74 @@ import java.text.NumberFormat;
 import java.util.List;
 
 public class Receipt {
-    String id;
-    String namecustomer;
-    String makh;
-    String namecake;
-    String export_date;
-    String phone;
-    String delivery_date;
-    String address;
-    String note;
-    int price;
-    int total;
-    int money;
-    int status;
-    List<Comment> commentList;
-    int role;
-    String email;
-    String createBy;
+    private String id;
+    private String makh;
+    private String phone;
+    private String address;
+    private String note;
+    private String export_date;
+    private String delivery_date;
+    private int money;
+    private int status;
+    private String email;
+    private double fee_bill;
+    private double pro_bill;
+    Delivery gh;
 
     public Receipt() {
     }
 
-    public Receipt(String id,  String namecustomer, String namecake, String phone, String export_date, String delivery_date, String address, String note, int price, int total, int status,String makh, int role, String email) {
+    public Receipt(String id, String makh, String export_date, String note, int status) {
         this.id = id;
         this.makh = makh;
-        this.namecustomer = namecustomer;
-        this.namecake = namecake;
-        this.phone = phone;
+        this.export_date = export_date;
+        this.note = note;
+        this.status = status;
+    }
+    public Receipt(String id, String makh, String export_date, String delivery_date, String note,double pro_bill,double fee_bill, int status, String dc) {
+        this.id = id;
+        this.makh = makh;
         this.export_date = export_date;
         this.delivery_date = delivery_date;
-        this.address = address;
         this.note = note;
-        this.price = price;
-        this.total = total;
-        this.status = status;
-        this.role = role;
-        this.email =  email;
-    }
-
-    public Receipt(String id, String makh, String export_date, String note, int money, int status) {
-        this.id = id;
-        this.makh = makh;
-        this.export_date = export_date;
-        this.note = note;
-        this.money = money;
-        this.status = status;
-    }
-    public Receipt(String id, String makh, String export_date, String note, int money, int status, String dc, String createBy) {
-        this.id = id;
-        this.makh = makh;
-        this.export_date = export_date;
-        this.note = note;
-        this.money = money;
+        this.pro_bill = pro_bill;
+        this.fee_bill = fee_bill;
         this.status = status;
         this.address = dc;
-        this.createBy = createBy;
     }
 
-    public String getCreateBy() {
-        return createBy;
+    public String getExport_date() {
+        return export_date;
     }
 
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
+    public void setExport_date(String export_date) {
+        this.export_date = export_date;
     }
+
+    public String getDelivery_date() {
+        return delivery_date;
+    }
+
+    public void setDelivery_date(String delivery_date) {
+        this.delivery_date = delivery_date;
+    }
+
+    public double getFee_bill() {
+        return fee_bill;
+    }
+
+    public void setFee_bill(double fee_bill) {
+        this.fee_bill = fee_bill;
+    }
+
+    public double getPro_bill() {
+        return pro_bill;
+    }
+
+    public void setPro_bill(double pro_bill) {
+        this.pro_bill = pro_bill;
+    }
+
 
     public String getNote() {
         return note;
@@ -78,7 +82,7 @@ public class Receipt {
     }
 
     public int getMoney() {
-        return money;
+        return (int) (this.fee_bill + this.pro_bill);
     }
 
     public void setMoney(int money) {
@@ -119,21 +123,6 @@ public class Receipt {
         this.id = id;
     }
 
-    public String getNamecustomer() {
-        return namecustomer;
-    }
-
-    public void setNamecustomer(String namecustomer) {
-        this.namecustomer = namecustomer;
-    }
-
-    public String getNamecake() {
-        return namecake;
-    }
-
-    public void setNamecake(String namecake) {
-        this.namecake = namecake;
-    }
 
     public String getPhone() {
         return phone;
@@ -143,22 +132,6 @@ public class Receipt {
         this.phone = phone;
     }
 
-    public String getExport_date() {
-        return export_date;
-    }
-
-    public void setExport_date(String export_date) {
-
-        export_date = export_date;
-    }
-
-    public String getDelivery_date() {
-        return delivery_date;
-    }
-
-    public void setDelivery_date(String delivery_date) {
-        delivery_date = delivery_date;
-    }
 
     public String getAddress() {
         return address;
@@ -166,30 +139,6 @@ public class Receipt {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getRoleName() {
-        if(this.role == 0){
-            return "Thường";
-        }else if(this.role == 1){
-            return "Admin";
-        }
-        return "Quản Lí";
-    }
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
     }
 
     public int getStatus() {
@@ -200,19 +149,6 @@ public class Receipt {
         this.status = status;
     }
 
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
-
-
-
-    public void setRole(int role) {
-        this.role = role;
-    }
 
     public String getEmail() {
         return email;

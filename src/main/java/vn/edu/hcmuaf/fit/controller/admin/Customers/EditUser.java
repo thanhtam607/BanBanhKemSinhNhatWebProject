@@ -30,7 +30,7 @@ public class EditUser extends HttpServlet {
         listRole.add("Quản Lí");
         request.setAttribute("listRole", listRole);
 
-        List<Receipt> listctkh = ReceiptService.getctkh(makh);
+        List<Receipt> listctkh = ReceiptService.getReceiptByMakh(makh);
         List<Comment> listcmt = ReceiptService.getListComment(makh);
 
         request.setAttribute("listmakh", listctkh);

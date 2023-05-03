@@ -15,6 +15,8 @@ public class  Order {
     private double priceTotal;
     private String note;
     private int trangthai;
+    private double fee_bill;
+    private double pro_bill;
     private Delivery giaohang;
     List<ItemProductInCart> data;
     public Order() {
@@ -34,7 +36,7 @@ public class  Order {
         this.giaohang = gh;
 }
     public Order( User user, List<ItemProductInCart> data, String buyDate, double priceTotal,
-                  String note, Delivery gh ) {
+                  String note, Delivery gh, double pro_bill, double fee_bill) {
         this.id = null;
         this.user = user;
         this.buyDate = buyDate;
@@ -43,11 +45,30 @@ public class  Order {
         this.trangthai = 0;
         this.data = data;
         this.giaohang = gh;
+        this.pro_bill = pro_bill;
+        this.fee_bill = fee_bill;
     }
 
     public Order(List<ItemProductInCart> data) {
         this.data = data;
         this.trangthai = 0;
+    }
+
+
+    public double getFee_bill() {
+        return fee_bill;
+    }
+
+    public void setFee_bill(double fee_bill) {
+        this.fee_bill = fee_bill;
+    }
+
+    public double getPro_bill() {
+        return pro_bill;
+    }
+
+    public void setPro_bill(double pro_bill) {
+        this.pro_bill = pro_bill;
     }
 
 
