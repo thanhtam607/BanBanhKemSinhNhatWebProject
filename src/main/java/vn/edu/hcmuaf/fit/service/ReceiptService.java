@@ -170,7 +170,7 @@ public class ReceiptService {
                         "WHERE  bills.ID = BILL_DETAIL.ID and products.idProduct = BILL_DETAIL.idProduct \n" +
                         "and bills.STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) " +
                         "and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)\n" +
-                        "GROUP BY  products.idProduct\n HAVING slg > 0\n" +
+                        "GROUP BY  products.idProduct, products.productName HAVING slg > 0\n" +
                         "ORDER BY slg DESC LIMIT 10");
                 while (rs.next()) {
                     map.put(rs.getString(1), rs.getInt(2));

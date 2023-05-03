@@ -78,7 +78,6 @@ public class OrderService {
     public static void clearCart(Order order){
         order.getData().clear();
         CartService.removeAllCart(order.getUser().getId());
-
     }
     public static void updateTonKhoWhenAdd(Order order){
         Statement stm = DBConnect.getInstall().get();
