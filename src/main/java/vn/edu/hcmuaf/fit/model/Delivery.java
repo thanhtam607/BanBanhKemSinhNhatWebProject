@@ -5,6 +5,8 @@ public class Delivery {
     private String tenKH;
     private String ngayGiao;
     private String diachigiao;
+    private String huyen;
+    private String xa;
     private String email;
     private String phone;
 
@@ -12,13 +14,39 @@ public class Delivery {
 
     }
 
-    public Delivery(String mahd, String tenKH, String ngayGiao, String diachigiao, String email, String phone) {
+    public Delivery(String mahd, String tenKH, String ngayGiao, String huyen, String xa,String diachigiao, String email, String phone) {
+        this.mahd = mahd;
+        this.tenKH = tenKH;
+        this.ngayGiao = ngayGiao;
+        this.huyen = huyen;
+        this.xa = xa;
+        this.diachigiao = diachigiao;
+        this.email = email;
+        this.phone = phone;
+    }
+    public Delivery(String mahd, String tenKH, String ngayGiao,String diachigiao, String email, String phone) {
         this.mahd = mahd;
         this.tenKH = tenKH;
         this.ngayGiao = ngayGiao;
         this.diachigiao = diachigiao;
         this.email = email;
         this.phone = phone;
+    }
+
+    public String getHuyen() {
+        return huyen;
+    }
+
+    public String getXa() {
+        return xa;
+    }
+
+    public void setHuyen(String huyen) {
+        this.huyen = huyen;
+    }
+
+    public void setXa(String xa) {
+        this.xa = xa;
     }
 
     public String getTenKH() {

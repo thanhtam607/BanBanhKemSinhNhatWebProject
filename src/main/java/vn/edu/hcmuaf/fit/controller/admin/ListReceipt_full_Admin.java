@@ -16,7 +16,7 @@ import java.util.List;
 public class ListReceipt_full_Admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Receipt> lr = ReceiptService.getData();
+        List<Receipt> lr = ReceiptService.getAllReceipt();
         request.setAttribute("listreceipt-full", lr);
         String sort = request.getParameter("sortValue");
         if (sort != null) {
@@ -29,7 +29,7 @@ public class ListReceipt_full_Admin extends HttpServlet {
                 });
             }
             if (sort.equals("Theo đơn giá")) {
-                lr.sort((Receipt o1, Receipt o2) -> o2.getTotal() - o1.getTotal());
+                lr.sort((Receipt o1, Receipt o2) -> o2.getMoney() - o1.getMoney());
             }
         }
             request.getRequestDispatcher("list-order.jsp").forward(request, response);

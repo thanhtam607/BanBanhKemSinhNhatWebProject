@@ -25,6 +25,10 @@
   <link rel="stylesheet" href="css/select2.min.css">
   <link rel="stylesheet" href="css/ionicons.min.css">
 
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
@@ -190,7 +194,7 @@
                 <div class="main__user">
 
                   <div class="main__meta">
-                    <h3><%=rc.getNamecustomer()%></h3>
+                    <h3><%=UserService.findById(rc.getMakh()).getName()%></h3>
                   </div>
                 </div>
               </td>
@@ -204,7 +208,7 @@
                 <div class="main__user breaklineNamePro"><%=rc.getNote()%></div>
               </td>
               <td>
-                <div class="main__table-text"><%=rc.formatNum(rc.getTotal())%> VND</div>
+                <div class="main__table-text"><%=rc.formatNum(rc.getMoney())%> VND</div>
               </td>
               <td>
                 <div class="main__table-text"><%=rc.getStatusName()%></div>
@@ -212,7 +216,7 @@
               <td>
                 <div class="main__table-btns">
 
-                  <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class="main__table-btn main__table-btn--view">
+                  <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=UserService.findById(rc.getMakh()).getName()%>" class="main__table-btn main__table-btn--view">
                     <i class="fas fa-info"></i>
                   </a>
                   <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>

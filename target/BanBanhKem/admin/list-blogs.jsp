@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
 
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
@@ -157,9 +161,14 @@
                 </div>
                 <!-- end main title -->
                 <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
-                <div class="paginator-wrap" style="margin-top: -10px">
-                    <span><a href="add-blog.jsp" style="color: white;"> Thêm tin tức mới</a></span>
-                </div>
+<%--                <div class="paginator-wrap" style="margin-top: -10px">--%>
+<%--                    <span><a href="add-blog.jsp" style="color: white;"> Thêm tin tức mới</a></span>--%>
+<%--                </div>--%>
+               <div class="button">
+                   <div class="button_left">
+                       <a class="button_product" href="add-blog.jsp">Thêm tin tức mới</a>
+                   </div>
+               </div>
                 <% } else { %>
                 <% } %>
                 <!-- users -->
