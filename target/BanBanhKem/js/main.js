@@ -593,6 +593,7 @@ function checkEmail(x) {
 /*-------------------
    forgot password
   --------------------- */
+
 async function forgotPassword() {
     const {value: email} = await Swal.fire({
         title: 'Quên mật khẩu',
@@ -627,6 +628,8 @@ async function forgotPassword() {
                         confirmButtonColor: '#ff96b7'
                     });
                 } else {
+                    let count = 30;
+                    // setTimeout(function (){count--;}, 500);
                     const {value: code} = await Swal.fire({
                         title: 'Xác minh tài khoản',
                         input: 'number',
@@ -634,32 +637,54 @@ async function forgotPassword() {
                         inputPlaceholder: 'Nhập mã xác nhận...',
                         confirmButtonColor: '#ff96b7',
                         confirmButtonText: 'Xác nhận',
+                        html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
+                        timer: 31000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                --count;
+                                b.textContent = count;
+                            }, 1000)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
                     })
+
                     if (checkCode(parseInt(code), parseInt(response))) {
                         removePass(email);
 
-                    }else{
-                        $.ajax({
-                            url:"AddLog",
-                            type: "POST",
-                            data:{content: "Nhập sai mã xác thực", src:location.pathname.toString(),
-                            email: email, level: 2},
-                            success: function () {
-                                Swal.fire({
-                                    text: 'Mã xác nhận không đúng!',
-                                    icon: 'error',
-                                    confirmButtonColor: '#ff96b7'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        location.reload();
+                    }else {
+                        if (count <= 0) {
+                            Swal.fire({
+                                text: 'Mã xác nhận hết hiệu lực!',
+                                icon: 'error',
+                                confirmButtonColor: '#ff96b7'
+                            })
+                        } else {
+                            $.ajax({
+                                url: "AddLog",
+                                type: "POST",
+                                data: {
+                                    content: "Nhập sai mã xác thực", src: location.pathname.toString(),
+                                    email: email, level: 2
+                                },
+                                success: function () {
+                                    Swal.fire({
+                                        text: 'Mã xác nhận không đúng! ',
+                                        icon: 'error',
+                                        confirmButtonColor: '#ff96b7'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
 
-                                    }
-                                });
-                            }
-                        });
-
+                                        }
+                                    });
+                                }
+                            });
+                        }
                     }
-
                 }
             }
         });
@@ -775,6 +800,7 @@ function check() {
         url: url,
         type: "POST",
         success: async function (response) {
+            let count =30;
             const {value: code} = await Swal.fire({
                 title: 'Xác minh tài khoản',
                 input: 'text',
@@ -782,6 +808,19 @@ function check() {
                 inputPlaceholder: 'Nhập mã xác nhận...',
                 confirmButtonColor: '#ff96b7',
                 confirmButtonText: 'Xác nhận',
+                html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
+                timer: 31000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        --count;
+                        b.textContent = count;
+                    }, 1000)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
             })
 
             if(checkCode(parseInt(code), parseInt(response))){
@@ -798,17 +837,24 @@ function check() {
                         });
                     }
                 });
-            }else{
-                Swal.fire({
-                    text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
-                    icon: 'error',
-                    confirmButtonColor: '#ff96b7'
-                }).then((result) => {
-                    location.reload();
-                });
+            }else {
+                if (count <= 0) {
+                    Swal.fire({
+                        text: 'Mã xác nhận hêt hiệu lực!',
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'
+                    });
+                } else {
+                    Swal.fire({
+                        text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'
+                    }).then((result) => {
+                        location.reload();
+                    });
 
+                }
             }
-
         }
     });}
     else{
