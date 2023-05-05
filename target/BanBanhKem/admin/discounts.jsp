@@ -109,7 +109,7 @@
 <!-- Sidebar End -->
 
 <!-- main content -->
-<%%>
+<% User user = UserService.findById(auth.getId()); %>
 <main class="main bg-white">
     <div class="container-fluid bg-white">
         <div class="row">
@@ -164,7 +164,7 @@
             </div>
             <!-- end main title -->
             <div class="button">
-                <% if(auth.getIsadd() == 1 || auth.getRole() == 2) { %>
+                <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
                 <div class="button_left">
                     <a class="button_product" href="Add_Discount">Thêm khuyến mãi</a>
                 </div>

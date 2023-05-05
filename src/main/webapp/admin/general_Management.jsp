@@ -4,6 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.General_information" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +71,7 @@
 <!-- end header -->
 
 <!-- Sidebar Start -->
+<% User user = UserService.findById(auth.getId()); %>
 <div class="sidebar pe-4 pb-3">
   <nav class="navbar bg-pink navbar-dark">
 
@@ -103,6 +105,7 @@
 <!-- Sidebar End -->
 
 <!-- main content -->
+<% if(user.getRole() == 2) { %>
 <main class="main">
   <div class="container-fluid">
     <div class="row">
@@ -492,10 +495,15 @@
       <img id="form__img" alt=" ">
     </div>
     <div class="modal__btns">
-      <input class="modal__btn modal__btn--apply" type="submit" style="background-color: #0d0d0d" value="Xong">
+      <input class="modal__btn modal__btn--apply bg-pink" type="submit" value="Xong">
       <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
     </div>
   </form>
+</div>
+<% } %>
+<% } else { %>
+<div class="w-100 h-100 ml-5">
+<h1 class="text-pink mt-5 text-center">Bạn không có quyền này</h1>
 </div>
 <% } %>
 <!-- end modal updateImg -->

@@ -832,7 +832,6 @@ function adminAddProInOrder(){
 function save(){
     location.reload();
 }
-
 // function showFilterDateForLog(value){
 //
 //     else if(value ==2){
