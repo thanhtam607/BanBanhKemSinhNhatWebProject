@@ -871,28 +871,29 @@ CREATE TABLE BILL_DETAIL(ID CHAR(4),
 									 idProduct CHAR(4),
 										AMOUNT INT,
 										NOTES LONGTEXT,
+										PRICE int,
 										CONSTRAINT f_mhdcthd FOREIGN KEY(idProduct) REFERENCES products(idProduct),
 										CONSTRAINT f_mspcthd FOREIGN KEY (ID) REFERENCES BILLS(ID));
-INSERT INTO BILL_DETAIL VALUES('HD01', 'B001', 2, 'Chúc mừng sinh nhật 2 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD02', 'B005', 1, 'Chúc mừng sinh nhật 32 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD03', 'B039', 1, 'Chúc mừng sinh nhật 25 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD03', 'B035', 2, 'Chúc mừng sinh nhật 2 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD04', 'B023', 1, 'Chúc mừng sinh nhật 27 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD05', 'B014', 1, 'Chúc mừng sinh nhật 2 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD05', 'B012', 2, 'Chúc mừng sinh nhật 52 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD05', 'B004', 1, 'Chúc mừng sinh nhật 12 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD06', 'B008', 2, 'Chúc mừng sinh nhật 2 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD07', 'B010', 1, 'Chúc mừng sinh nhật 22 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD08', 'B099', 1, 'Chúc mừng sinh nhật 21 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD09', 'B029', 1, 'Chúc mừng sinh nhật 25 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD10', 'B067', 1, 'Chúc mừng sinh nhật 28 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD11', 'B050', 3, 'Chúc mừng sinh nhật 62 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD12', 'B040', 1, 'Chúc mừng sinh nhật 29 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD13', 'B054', 1, 'Chúc mừng sinh nhật 30 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD13', 'B034', 1, 'Chúc mừng sinh nhật 24 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD13', 'B014', 3, 'Chúc mừng sinh nhật 24 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD14', 'B088', 1, 'Chúc mừng sinh nhật 23 tuổi');
-INSERT INTO BILL_DETAIL VALUES('HD15', 'B090', 1, 'Chúc mừng sinh nhật 20 tuổi');
+INSERT INTO BILL_DETAIL VALUES('HD01', 'B001', 2, 'Chúc mừng sinh nhật 2 tuổi',450000);
+INSERT INTO BILL_DETAIL VALUES('HD02', 'B005', 1, 'Chúc mừng sinh nhật 32 tuổi',330000);
+INSERT INTO BILL_DETAIL VALUES('HD03', 'B039', 1, 'Chúc mừng sinh nhật 25 tuổi',650000);
+INSERT INTO BILL_DETAIL VALUES('HD03', 'B035', 2, 'Chúc mừng sinh nhật 2 tuổi',150000);
+INSERT INTO BILL_DETAIL VALUES('HD04', 'B023', 1, 'Chúc mừng sinh nhật 27 tuổi',300000);
+INSERT INTO BILL_DETAIL VALUES('HD05', 'B014', 1, 'Chúc mừng sinh nhật 2 tuổi',180000);
+INSERT INTO BILL_DETAIL VALUES('HD05', 'B012', 2, 'Chúc mừng sinh nhật 52 tuổi',400000);
+INSERT INTO BILL_DETAIL VALUES('HD05', 'B004', 1, 'Chúc mừng sinh nhật 12 tuổi',250000);
+INSERT INTO BILL_DETAIL VALUES('HD06', 'B008', 2, 'Chúc mừng sinh nhật 2 tuổi',450000);
+INSERT INTO BILL_DETAIL VALUES('HD07', 'B010', 1, 'Chúc mừng sinh nhật 22 tuổi',380000);
+INSERT INTO BILL_DETAIL VALUES('HD08', 'B099', 1, 'Chúc mừng sinh nhật 21 tuổi',400000);
+INSERT INTO BILL_DETAIL VALUES('HD09', 'B029', 1, 'Chúc mừng sinh nhật 25 tuổi',400000);
+INSERT INTO BILL_DETAIL VALUES('HD10', 'B067', 1, 'Chúc mừng sinh nhật 28 tuổi',650000);
+INSERT INTO BILL_DETAIL VALUES('HD11', 'B050', 3, 'Chúc mừng sinh nhật 62 tuổi',650000);
+INSERT INTO BILL_DETAIL VALUES('HD12', 'B040', 1, 'Chúc mừng sinh nhật 29 tuổi',350000);
+INSERT INTO BILL_DETAIL VALUES('HD13', 'B054', 1, 'Chúc mừng sinh nhật 30 tuổi',350000);
+INSERT INTO BILL_DETAIL VALUES('HD13', 'B034', 1, 'Chúc mừng sinh nhật 24 tuổi',150000);
+INSERT INTO BILL_DETAIL VALUES('HD13', 'B014', 3, 'Chúc mừng sinh nhật 24 tuổi',180000);
+INSERT INTO BILL_DETAIL VALUES('HD14', 'B088', 1, 'Chúc mừng sinh nhật 23 tuổi',300000);
+INSERT INTO BILL_DETAIL VALUES('HD15', 'B090', 1, 'Chúc mừng sinh nhật 20 tuổi',300000);
 
 /*=============================================DELIVERY=======================================*/
 CREATE TABLE DELIVERY(ID CHAR(4),
