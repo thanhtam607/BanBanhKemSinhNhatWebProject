@@ -1,5 +1,7 @@
 package vn.edu.hcmuaf.fit.model;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.NumberFormat;
 import java.util.List;
 
@@ -89,17 +91,18 @@ public class Receipt {
         this.money = money;
     }
 
-    public String getStatusName() {
+    public String getStatusName() throws UnsupportedEncodingException {
+
         if(this.status == 0){
-            return "Chờ Xác Nhận";
+            return URLEncoder.encode("Chờ Xác Nhận", "UTF-8");
         }else if(this.status == 1){
-            return "Gói Hàng";
+            return URLEncoder.encode("Gói Hàng", "UTF-8");
         }else if(this.status == 2){
-            return "Đang Giao";
+            return URLEncoder.encode("Đang Giao", "UTF-8");
         }else if(this.status == 3){
-        return "Giao Thành Công";
+            return URLEncoder.encode("Giao Thành Công", "UTF-8");
         }
-        return "Đã hủy";
+        return URLEncoder.encode("Đã hủy", "UTF-8");
     }
     public boolean checkState(){
         if(this.status == 0 || this.status == 1) return true;
