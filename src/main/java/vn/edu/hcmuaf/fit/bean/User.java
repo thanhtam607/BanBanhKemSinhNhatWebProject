@@ -2,6 +2,8 @@ package vn.edu.hcmuaf.fit.bean;
 
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class User implements Serializable {
     private String  id;
@@ -100,18 +102,18 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    public String getRoleName() {
+    public String getRoleName() throws UnsupportedEncodingException {
         if(this.role == 0){
-            return "Thường";
+            return URLEncoder.encode("Thường", "UTF-8");
         }else if(this.role == 1){
-            return "Admin";
+            return URLEncoder.encode("Admin", "UTF-8");
         }
-        return "Quản Lí";
+        return URLEncoder.encode("Quản Lí", "UTF-8");
     }
 
-    public String getStatusName() {
-        if(this.status == 0) return "Hoạt Động";
-        return "Khóa";
+    public String getStatusName() throws UnsupportedEncodingException {
+        if(this.status == 0) return URLEncoder.encode("Hoạt Động", "UTF-8");
+        return URLEncoder.encode("Khóa", "UTF-8");
     }
 
     public boolean checkRole() {

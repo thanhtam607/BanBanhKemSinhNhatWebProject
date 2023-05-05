@@ -241,6 +241,7 @@
                             </div>
                             <div class="col-3 mt-3">
                                 <small class="text-dark" >
+                                   
                                     <%=c.formatNum(c.getToTalPrice())%> VND
                                 </small>
                             </div>
