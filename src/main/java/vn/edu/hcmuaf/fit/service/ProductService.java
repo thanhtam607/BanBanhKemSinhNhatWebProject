@@ -77,7 +77,7 @@ public class ProductService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT products.idProduct,products.STATUS ,sum(BILL_DETAIL.AMOUNT)as total FROM products, BILL_DETAIL WHERE products.idProduct = BILL_DETAIL.idProduct GROUP BY products.idProduct ORDER BY total DESC;");
+                ResultSet rs = statement.executeQuery("SELECT products.idProduct,products.STATUS ,sum(BILL_DETAIL.AMOUNT)as total FROM products, BILL_DETAIL WHERE products.idProduct = BILL_DETAIL.idProduct GROUP BY products.idProduct ,products.STATUS ORDER BY total DESC;");
                 while (rs.next()) {
                     int status = rs.getInt(2);
                     if(status==0) {

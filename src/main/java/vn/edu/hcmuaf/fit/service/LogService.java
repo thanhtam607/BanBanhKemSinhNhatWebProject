@@ -256,6 +256,20 @@ public class LogService {
         }
         return res;
     }
+    public static void removeListLog(String[] logIdArr){
+        for(String id:logIdArr){
+            removeLog(id);
+        }
+    }
+    public static void removeLog(String id){
+        try{
+            PreparedStatement stm = con.prepareStatement("UPDATE logs set STATUS = -1 WHERE id=?");
+            stm.setInt(1, Integer.parseInt(id));
+            stm.executeUpdate();
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     public static void main(String[] args) {

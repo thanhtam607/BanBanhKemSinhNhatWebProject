@@ -11,12 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
 public class BlogService {
     public static List<Blog> getData() {
         List<Blog> list = new LinkedList<Blog>();
         Statement statement = DBConnect.getInstall().get();
-
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT  blogs.id, blogs.img,blogs.title, blogs.date, blogs.content, blogs.category, blogs.season, blogs.status from BLOGS ");
@@ -66,7 +64,6 @@ public class BlogService {
         String sql = "UPDATE blogs set  DATE='" +date+ "', CONTENT= '"+ cont+ "', CATEGORY= '"+ category+ "', SEASON= '"+ season+ "' Where  ID= '" + idblog+ "' ;";
         try {
             statement.executeUpdate(sql);
-
         } catch (SQLException se) {
             se.printStackTrace();
         }
@@ -76,7 +73,6 @@ public class BlogService {
         String sql = "UPDATE blogs set  status= " + status + " where blogs.id = '" + id + "'";
         try {
             statement.executeUpdate(sql);
-
         } catch (SQLException se) {
             se.printStackTrace();
         }
@@ -86,7 +82,6 @@ public class BlogService {
         String sql = "DELETE FROM blogs WHERE ID = '" + idblog + "'";
      try {
          stm.executeUpdate(sql);
-
      } catch (SQLException se) {
          se.printStackTrace();
      }
@@ -106,7 +101,6 @@ public static void  updateTitle(String idblog, String title ){
     String sql = "UPDATE blogs SET TITLE = '" + title + "' WHERE ID = '" + idblog +"'";
     try {
         stm.executeUpdate(sql);
-
     } catch (SQLException se) {
         se.printStackTrace();
     }

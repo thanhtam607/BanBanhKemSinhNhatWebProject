@@ -219,7 +219,7 @@
               <div class="col-12 col-md-12 col-lg-12 col-xl-12" >
                   <div class="select-all">
                       <div>
-                          <input class="form-check-input" type="checkbox" id="select-all"> Chọn tất cả</div>
+                          <input class="form-check-input" type="checkbox" onclick="cancelSelectAll()" id="select-all"> Chọn tất cả</div>
                   </div>
 
                   <table class="table table-striped">
