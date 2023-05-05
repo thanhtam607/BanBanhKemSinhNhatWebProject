@@ -32,9 +32,7 @@ public class OrderService {
         String mahd = "HD" + (Integer.parseInt(stt) + 1);
         order.setId(mahd);
         String makh = order.getUser().getId();
-        String sql = "INSERT INTO BILLS VALUES('" + mahd + "', '" + makh + "', '"
-                + order.getBuyDate()  + "', '" + order.getNote() + "',"
-                +order.getPriceTotal()+ "," + order.getTrangthai()+", null);";
+        String sql = "INSERT INTO BILLS VALUES('"+mahd+"', '"+makh+"', '"+order.getBuyDate()+"', '"+order.getNote()+"',"+order.getPro_bill()+", "+order.getFee_bill()+", 0)";
         if(stm!= null) {
             try {
                 stm.executeUpdate(sql);
@@ -51,9 +49,11 @@ public class OrderService {
     public static void addCTHD(Order order){
         Statement stm = DBConnect.getInstall().get();
         String sql="";
-            for (ItemProductInCart item: order.getData()) {
 
-                sql = "INSERT INTO BILL_DETAIL VALUES('" + order.getId() + "','" +item.getSp().getId() + "'," + item.getSoLgMua() + ",'" +item.getNote()+"');";
+        for (ItemProductInCart item: order.getData()) {
+            Product p = ProductService.findById(item.getSp().getId());
+            int price = p.getPromotional()!=0?p.getPromotional():p.getPrice();
+                sql = "INSERT INTO BILL_DETAIL VALUES('" + order.getId() + "','" +item.getSp().getId() + "'," + item.getSoLgMua() + ",'" +item.getNote()+"',"+ price+");";
             try {
                     stm.executeUpdate(sql);
             } catch (SQLException se) {
@@ -78,7 +78,6 @@ public class OrderService {
     public static void clearCart(Order order){
         order.getData().clear();
         CartService.removeAllCart(order.getUser().getId());
-
     }
     public static void updateTonKhoWhenAdd(Order order){
         Statement stm = DBConnect.getInstall().get();

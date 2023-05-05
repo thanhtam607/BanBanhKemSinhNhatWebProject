@@ -77,7 +77,7 @@ public class ProductService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT products.idProduct,products.STATUS ,sum(BILL_DETAIL.AMOUNT)as total FROM products, BILL_DETAIL WHERE products.idProduct = BILL_DETAIL.idProduct GROUP BY products.idProduct ORDER BY total DESC;");
+                ResultSet rs = statement.executeQuery("SELECT products.idProduct,products.STATUS ,sum(BILL_DETAIL.AMOUNT)as total FROM products, BILL_DETAIL WHERE products.idProduct = BILL_DETAIL.idProduct GROUP BY products.idProduct ,products.STATUS ORDER BY total DESC;");
                 while (rs.next()) {
                     int status = rs.getInt(2);
                     if(status==0) {
@@ -136,7 +136,6 @@ public class ProductService {
         for (int i = begin; i < endList; i++) {
             result.add(data.get(i));
         }
-//        0 15 30 45 60 75 90
         return result;
     }
 
@@ -544,7 +543,21 @@ public class ProductService {
             se.printStackTrace();
         }
     }
-
+    public static List<String> findProducts(String keyword) {
+        List<String> result = new ArrayList<>();
+        Statement stm = DBConnect.getInstall().get();
+        String sql = "SELECT products.productName FROM products \n" +
+                "WHERE idProduct like '%"+keyword+"20%' or productName LIKE '%"+keyword+"%'";
+        try {
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()){
+            result.add(rs.getString(1));
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return result;
+    }
 
 }
 class IDComparator implements Comparator<Product> {

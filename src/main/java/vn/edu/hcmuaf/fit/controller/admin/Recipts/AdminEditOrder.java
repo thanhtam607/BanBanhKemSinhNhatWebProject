@@ -25,7 +25,7 @@ public class AdminEditOrder extends HttpServlet {
 
         String tenKH = request.getParameter("tenkh");
         Receipt receipt = ReceiptService.getReceiptByMahd(madh);
-        List<Bill_Detail> listcthdOfKH = ReceiptService.getcthdUser(madh);
+        List<Bill_Detail> listcthdOfKH = ReceiptService.getBill_DetailUser(madh);
         request.setAttribute("listcthdOfKH", listcthdOfKH);
         request.setAttribute("receipt", receipt);
         request.setAttribute("tenkh", tenKH);

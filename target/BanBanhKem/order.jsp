@@ -63,7 +63,7 @@
             <div class="header__top__right__auth__dropdown">
                 <a onclick="checkPass('<%=auth.getEmail()%>', '<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
                 <% if(auth.checkRole()) { %>
-                <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+                <a href="admin/ListReceipt_Admin" class="dropdown-item">Vào trang quản lí</a>
                 <%}%>
                 <a href="doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
             </div>
@@ -213,7 +213,7 @@
                             </div>
                         </div>
                     </div>
-                    <%List<Bill_Detail> billDetailList = ReceiptService.getcthdUser(r.getId());
+                    <%List<Bill_Detail> billDetailList = ReceiptService.getBill_DetailUser(r.getId());
                         for(Bill_Detail c: billDetailList){
                         %>
                     <div class="card border-left-0 border-right-0 border-bottom-0 mx-3">
@@ -241,6 +241,7 @@
                             </div>
                             <div class="col-3 mt-3">
                                 <small class="text-dark" >
+                                   
                                     <%=c.formatNum(c.getToTalPrice())%> VND
                                 </small>
                             </div>
@@ -264,7 +265,25 @@
 
                         </div>
                     </div>
-                    <div class="row mb-2" style="margin-top: -20px">
+                    <div class="row mb-2 flex-row-reverse" style="margin-top: -20px">
+                        <div class="col-12 my-2">
+                            <div class="text-right pr-5">
+                                <h6 class="d-inline text-dark">Tổng tiền hàng: </h6>
+                                <span class="d-inline" style="font-weight:400">
+                                    <%=r.formatNum((int) r.getPro_bill())%> VND
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12 my-2">
+                            <div class="text-right pr-5">
+                                <h6 class="d-inline text-dark">Phí vận chuyển: </h6>
+                                <span class="d-inline" style="font-weight: 400">
+                                    <%=r.formatNum((int) r.getFee_bill())%> VND
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2 mt-2" style="margin-top: -20px">
                         <div class="col-6 pt-2 pb-3">
                             <div id="<%=r.getId()%>" class="text-left mr-3">
                                 <%if(r.checkState()){%>
@@ -281,7 +300,7 @@
                         </div>
                         <div class="col-6 my-2">
                             <div class="text-right pr-5">
-                                <h6 class="d-inline text-dark">Thành tiền: </h6>
+                                <h6 class="d-inline text-dark">Tổng thanh toán: </h6>
                                 <h3 class="d-inline" style="color:#ee4d2d">
                                     <%=r.formatNum(r.getMoney())%> VND
                                 </h3>

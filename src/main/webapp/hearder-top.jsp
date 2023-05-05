@@ -35,7 +35,7 @@
               <a href="EditUserProfile" method="get" class="dropdown-item">Hồ sơ của tôi</a>
               <a onclick="checkPass('<%=auth.getEmail()%>','<%=auth.getPass()%>')" class="dropdown-item">Đặt lại mật khẩu</a>
               <% if(auth.checkRole()) { %>
-              <a href="admin/Admin" class="dropdown-item">Vào trang quản lí</a>
+              <a href="admin/ListReceipt_Admin" class="dropdown-item">Vào trang quản lí</a>
               <%}%>
               <a href="doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
             </div>

@@ -16,7 +16,7 @@ public class Bill_detail_Admin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tenKH = request.getParameter("tenkh");
         Receipt receipt = ReceiptService.getReceiptByMahd(request.getParameter("mahd"));
-        List<Bill_Detail> listcthdOfKH = ReceiptService.getcthdUser(request.getParameter("mahd"));
+        List<Bill_Detail> listcthdOfKH = ReceiptService.getBill_DetailUser(request.getParameter("mahd"));
         request.setAttribute("listcthdOfKH", listcthdOfKH);
         request.setAttribute("receipt", receipt);
         request.setAttribute("tenkh", tenKH);

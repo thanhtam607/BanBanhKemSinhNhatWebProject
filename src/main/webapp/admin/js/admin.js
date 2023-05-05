@@ -183,8 +183,7 @@ function updateDetail(id){
         var ngayhh = new Date( document.getElementById("ngayhh").value);
         nghh = ngayhh.getFullYear()+"-"+(ngayhh.getMonth()+1)+"-"+ ngayhh.getDate();
     }
-    console.log(ngsx);
-    console.log(nghh)
+
     location.href="Product/UpdateDetails?masp="+id+"&soluong="+sl+"&tonkho="+tonkho+"&ngaysx="+ ngsx.toString()+"&ngayhh="+nghh.toString();
 
 }
@@ -279,7 +278,21 @@ document.getElementById("select-all").onclick = function ()
         }
     }
     if( checkAll) checkAll= false;
-    else checkAll=true;
+
+    else{
+        var checkbox = document.getElementsByName('check');
+
+    for(let i=0; i<checkbox.length; i++){
+        if(checkbox[i].checked==false){
+            document.getElementById("select-all").checked=false;
+            checkAll=false;
+            break;
+        }
+        else
+            checkAll=true;
+
+    }
+        }
 };
 
 function filterProduct(showMore, type){
@@ -488,7 +501,7 @@ async function filterLog(type, val) {
     }
     var paginator = "";
     for (let i = page - 1; i <= (parseInt(page) + 2); i++) {
-        console.log(i)
+
         if (i < 1) {
             continue;
         }
@@ -607,7 +620,7 @@ function editOrderUpdateCustomer(){
   var mailRE = $('#mailRE').val();
   var note = $('#note').val();
   var id = $('#idRec2').val();
-  console.log(usernameRE, phoneRE, mailRE, note, id);
+
     $.ajax({
         url: "EditOrderUpdateCustomer",
         type: "POST",
@@ -650,9 +663,7 @@ function editOrderUpdateDelivery(){
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#ff96b7'
                 })
-                //     .then(() => {
-                //     location.reload();
-                // });
+
 
         }
     });
@@ -662,7 +673,12 @@ function adminRemoveProInOrder(index){
   var i = $("tr#"+index).children().first().text();
   var msp = msp;
   var sl = 0;
-  var sum = 0;
+
+    var sumtxt = $('#fee').text();
+    var fee = parseInt(sumtxt.replace(/,/g, ''));
+
+    var pro_bill = 0;
+
     // dung hang co stt đc nhan vao de lay msp
     $('#table_bill_details tr').each(function(rowIndex, row) {
         // Lặp qua từng hàng
@@ -731,7 +747,7 @@ function adminRemoveProInOrder(index){
                             $(row).find("td:eq(6)").each(function(colIndex, col) {
                                 // Lấy giá trị từng cột
                                 var value = $(col).text();
-                                sum = sum + parseInt(value.replace(/,/g, ''));
+                                pro_bill = pro_bill + parseInt(value.replace(/,/g, ''));
                             });
                         });
 
@@ -741,8 +757,9 @@ function adminRemoveProInOrder(index){
                             confirmButtonText: 'OK',
                             confirmButtonColor: '#ff96b7'
                         })
-                        // $('#total').text(sum+",000");
-                        $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
+                        $('#pro_bill').text(pro_bill.toLocaleString('en-US')+ " VND") ;
+                        var total = fee + pro_bill;
+                        $('#total').text(total.toLocaleString('en-US')+ " VND");
                     }
                 }, error: function (){
                     Swal.fire({
@@ -763,7 +780,11 @@ function adminAddProInOrder(){
   var msp = $('#msp').val();
   var slg = $('#slg').val();
   var notes = $('#notes').val();
-  var sum = 0;
+
+  var sumtxt = $('#fee').text();
+  var fee = parseInt(sumtxt.replace(/,/g, ''));
+
+  var pro_bill = 0;
     $.ajax({
         url: "adminAddProInOrder",
         type: "GET",
@@ -792,13 +813,15 @@ function adminAddProInOrder(){
                     $(row).find("td:eq(6)").each(function(colIndex, col) {
                         // Lấy giá trị từng cột
                         var value = $(col).text();
-                        sum = sum + parseInt(value.replace(/,/g, ''));
+                        pro_bill = pro_bill + parseInt(value.replace(/,/g, ''));
                     });
                 });
 
                 $('#msp').val("");
                 $('#notes').val("");
-                $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
+                $('#pro_bill').text(pro_bill.toLocaleString('en-US')+ " VND");
+                var total = fee + pro_bill;
+                $('#total').text(total.toLocaleString('en-US')+ " VND");
                 $.magnificPopup.close();
             }else if (parseInt(response) === 2){
                 $('#error').text("Thêm sản phẩm không thành công, xem lại trạng thái đơn hàng!");
@@ -812,12 +835,14 @@ function adminAddProInOrder(){
                     $(row).find("td:eq(6)").each(function(colIndex, col) {
                         // Lấy giá trị từng cột
                         var value = $(col).text();
-                        sum = sum + parseInt(value.replace(/,/g, ''));
+                        pro_bill = pro_bill + parseInt(value.replace(/,/g, ''));
                     });
                 });
                 $('#msp').val("");
                 $('#notes').val("");
-                $('#total').text(sum.toLocaleString('en-US')+ " VND") ;
+                $('#pro_bill').text(pro_bill.toLocaleString('en-US')+ " VND");
+                var total = fee + pro_bill;
+                $('#total').text(total.toLocaleString('en-US')+ " VND");
                 $.magnificPopup.close();
             }
 
@@ -832,15 +857,87 @@ function adminAddProInOrder(){
 function save(){
     location.reload();
 }
-// function showFilterDateForLog(value){
-//
-//     else if(value ==2){
-//         Swal.fire({
-//             title: 'Ngày cần lọc',
-//             input: 'date'
-//
-//         })
-//
-//     }
-// }
+function cancelSelectAll(){
+    var checkbox = document.getElementsByName('check');
+    if(checkAll){
+    for(let i=0; i<checkbox.length; i++) {
+        if (checkbox[i].checked == false) {
+            document.getElementById("select-all").checked = false;
+            checkAll = false;
+            break;
+
+        }
+    }
+    }
+}
+
+function removeLog(){
+    var user = document.getElementById("user").value;
+    var level = document.getElementById("level").value;
+    var content = document.getElementById("content").value;
+    var fDate = document.getElementById("from").value;
+    var tDate = document.getElementById("to").value;
+    var dateF = document.getElementById("date").value;
+    var url = "RemoveLogs?level="+level+"&user="+user+"&content="+content+"&from="+ fDate+"&to="+tDate+"&date="+dateF+"&all=1";
+
+    Swal.fire({
+        icon: 'warning',
+        title: 'Bạn có chắc muốn xóa nhật ký hoạt động?',
+        showCancelButton: true,
+        cancelButtonText: 'Quay lại',
+        confirmButtonText: 'Xóa',
+        confirmButtonColor: '#ff96b7'
+    }).then((result) => {
+        if(result.isConfirmed) {
+            if (checkAll) {
+
+                $.ajax({
+                    // url: "RemoveLogs",
+                    url: url,
+                    type: "POST",
+                    // data: {
+                    //     user: user,
+                    //     level: level,
+                    //     content: content,
+                    //     from: fDate,
+                    //     to: tDate,
+                    //     date: dateF,
+                    //       all: 1
+                    // },
+                    success: function () {
+                        location.reload();
+                    }
+                });
+
+            } else {
+
+
+                var checkbox = document.getElementsByName('check');
+                var listIdLog = new Array();
+                var listId;
+                for (let i = 0; i < checkbox.length; i++) {
+                    if (checkbox[i].checked == true) {
+                        listIdLog.push(checkbox[i].value);
+                    }
+                }
+                listId = listIdLog.toString();
+                $.ajax({
+                    url: "RemoveLogs",
+                    type: "POST",
+                    data: {
+                        ids: listId,
+                        all: 0
+                    },
+                    success: function () {
+                        location.reload();
+                    }
+
+                });
+            }
+        }
+        });
+
+}
+
+
 

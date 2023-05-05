@@ -29,6 +29,10 @@
     <link rel="stylesheet" href="css/ionicons.min.css">
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
@@ -268,11 +272,12 @@
                                                         <input id="msp" type="text" name="msp" class="form__input"
                                                                value="" placeholder="Vui lòng nhập chính xác mã sản phẩm..." required>
                                                         <p id="error" class="text-danger mb-2"></p>
+
                                                     </div>
                                                     <div class="form__group">
                                                         <label class="form__label" for="slg">Số lượng mua</label>
                                                         <input id="slg" type="number" name="slg" class="form__input"
-                                                               value="1">
+                                                               value="1" min = "1">
                                                     </div>
                                                     <div class="form__group">
                                                         <label class="form__label" for="notes">Lời chúc trên bánh</label>
@@ -299,8 +304,16 @@
                                 </table>
                             </div>
                             <div class="col-5 margin-top-20px">
-                                <i class="fa fa-money"></i> <label for="total">Tổng tiền: </label> &ensp;
-                                <span style="font-weight: 600; font-size: 30px;" class="text-danger text-uppercase" id="total"><%=receipt.formatNum(receipt.getTotal())%> VND</span>
+                                <label >Tổng tiền hàng: </label>
+                                <span class="text-info text-uppercase" id="pro_bill"><%=receipt.formatNum((int) receipt.getPro_bill())%> VND</span>
+                            </div>
+                            <div class="col-5 margin-top-20px">
+                                <label>Phí vận chuyển: </label>
+                                <span class="text-info text-uppercase" id="fee"><%=receipt.formatNum((int) receipt.getFee_bill())%> VND</span>
+                            </div>
+                            <div class="col-5 margin-top-20px">
+                                <label for="total">Tổng thanh toán: </label>
+                                <span style="font-weight: 600; font-size: 30px;" class="text-danger text-uppercase" id="total"><%=receipt.formatNum(receipt.getMoney())%> VND</span>
                             </div>
 
                         </div>

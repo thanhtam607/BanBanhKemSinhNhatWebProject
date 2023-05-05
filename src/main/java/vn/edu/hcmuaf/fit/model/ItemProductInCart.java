@@ -67,14 +67,7 @@ public class ItemProductInCart {
         return price;
     }
 
-    public void quantityUp(int solg) {
-        setSoLgMua(this.soLgMua + solg);
-    }
-    public double giaSanPhamTrongGioHang(){
-        double cost = 0;
-        cost = this.getSp().getPrice() * this.getSoLgMua();
-        return cost;
-    }
+
     @Override
     public String toString() {
         return "ItemProductInCart{" +

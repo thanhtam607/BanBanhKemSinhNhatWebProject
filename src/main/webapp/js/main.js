@@ -1,13 +1,4 @@
-/*  ---------------------------------------------------mix
-    Template Name: Ogani
-    Description:  Ogani eCommerce  HTML Template
-    Author: Colorlib
-    Author URI: https://colorlib.com
-    Version: 1.0
-    Created: Colorlib
----------------------------------------------------------  */
 
-/*Read more*/
 function myFunction() {
     var x = document.getElementById('bld1');
     var btnrm = document.getElementById('readmore');
@@ -195,7 +186,7 @@ function myFunction() {
     /*--------------------------
         Select
     ----------------------------*/
-    $("select").niceSelect();
+    // $("select").niceSelect();
 
     /*------------------
 		Single Product
@@ -234,7 +225,61 @@ function myFunction() {
         $button.parent().find('input').val(newVal);
 
     });
+    /*-------------------
+       get ward name by distID
+      --------------------- */
+    $("#inputGroupSelect02").change(function() {
+        var distID = $(this).val();
+        var url = "GetWardName";
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                distID: distID
+            },
+            success: function (data) {
+                $("#inputGroupSelect03").html(data);
+                // $("select").niceSelect();
+                $("#inputGroupSelect03").removeAttr("disabled");
+            }
 
+        });
+    });
+    /*-------------------
+           get fee and leadtime in bill
+          --------------------- */
+    $("#inputGroupSelect03").change(function() {
+        var to_dist_id = $("#inputGroupSelect02").val();
+        var to_ward_id = $(this).val();
+        $.ajax({
+            url: "GetFee",
+            type: "POST",
+            data: {
+                to_dist_id: to_dist_id,
+                to_ward_id: to_ward_id
+            },
+            success: function (data) {
+                $(".checkout__order__fee span").text(data);
+                var oldTotal = $(".checkout__order__total span").text();
+                var newTotal = parseInt(oldTotal.replace(/,/g, '')) + parseInt( $(".checkout__order__fee span").text().replace(/,/g, ''));
+                $(".checkout__order__total span").text(newTotal.toLocaleString('en-US'));
+
+            }
+
+        });
+        $.ajax({
+            url: "GetLeadTime",
+            type: "POST",
+            data: {
+                to_dist_id: to_dist_id,
+                to_ward_id: to_ward_id
+            },
+            success: function (data) {
+                $("#leadTime").text(data);
+            }
+
+        });
+    });
 })(jQuery);
 
 // Back to top button
@@ -548,6 +593,7 @@ function checkEmail(x) {
 /*-------------------
    forgot password
   --------------------- */
+
 async function forgotPassword() {
     const {value: email} = await Swal.fire({
         title: 'Quên mật khẩu',
@@ -582,6 +628,8 @@ async function forgotPassword() {
                         confirmButtonColor: '#ff96b7'
                     });
                 } else {
+                    let count = 30;
+                    // setTimeout(function (){count--;}, 500);
                     const {value: code} = await Swal.fire({
                         title: 'Xác minh tài khoản',
                         input: 'number',
@@ -589,32 +637,54 @@ async function forgotPassword() {
                         inputPlaceholder: 'Nhập mã xác nhận...',
                         confirmButtonColor: '#ff96b7',
                         confirmButtonText: 'Xác nhận',
+                        html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
+                        timer: 31000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                --count;
+                                b.textContent = count;
+                            }, 1000)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
                     })
+
                     if (checkCode(parseInt(code), parseInt(response))) {
                         removePass(email);
 
-                    }else{
-                        $.ajax({
-                            url:"AddLog",
-                            type: "POST",
-                            data:{content: "Nhập sai mã xác thực", src:location.pathname.toString(),
-                            email: email, level: 2},
-                            success: function () {
-                                Swal.fire({
-                                    text: 'Mã xác nhận không đúng!',
-                                    icon: 'error',
-                                    confirmButtonColor: '#ff96b7'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        location.reload();
+                    }else {
+                        if (count <= 0) {
+                            Swal.fire({
+                                text: 'Mã xác nhận hết hiệu lực!',
+                                icon: 'error',
+                                confirmButtonColor: '#ff96b7'
+                            })
+                        } else {
+                            $.ajax({
+                                url: "AddLog",
+                                type: "POST",
+                                data: {
+                                    content: "Nhập sai mã xác thực", src: location.pathname.toString(),
+                                    email: email, level: 2
+                                },
+                                success: function () {
+                                    Swal.fire({
+                                        text: 'Mã xác nhận không đúng! ',
+                                        icon: 'error',
+                                        confirmButtonColor: '#ff96b7'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
 
-                                    }
-                                });
-                            }
-                        });
-
+                                        }
+                                    });
+                                }
+                            });
+                        }
                     }
-
                 }
             }
         });
@@ -730,6 +800,7 @@ function check() {
         url: url,
         type: "POST",
         success: async function (response) {
+            let count =30;
             const {value: code} = await Swal.fire({
                 title: 'Xác minh tài khoản',
                 input: 'text',
@@ -737,6 +808,19 @@ function check() {
                 inputPlaceholder: 'Nhập mã xác nhận...',
                 confirmButtonColor: '#ff96b7',
                 confirmButtonText: 'Xác nhận',
+                html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
+                timer: 31000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        --count;
+                        b.textContent = count;
+                    }, 1000)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
             })
 
             if(checkCode(parseInt(code), parseInt(response))){
@@ -753,17 +837,24 @@ function check() {
                         });
                     }
                 });
-            }else{
-                Swal.fire({
-                    text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
-                    icon: 'error',
-                    confirmButtonColor: '#ff96b7'
-                }).then((result) => {
-                    location.reload();
-                });
+            }else {
+                if (count <= 0) {
+                    Swal.fire({
+                        text: 'Mã xác nhận hêt hiệu lực!',
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'
+                    });
+                } else {
+                    Swal.fire({
+                        text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'
+                    }).then((result) => {
+                        location.reload();
+                    });
 
+                }
             }
-
         }
     });}
     else{
@@ -780,11 +871,39 @@ function check() {
   --------------------- */
 
 function addOrder() {
+    var selectElement1 = document.getElementById("inputGroupSelect01");
+    var selectElement2 = document.getElementById("inputGroupSelect02");
+    var selectElement3 = document.getElementById("inputGroupSelect03");
     var ten = document.getElementById("ten").value;
-    var diachi = document.getElementById("diachi").value;
+    var diachitxt = document.getElementById("diachi").value
+        +"- "+ selectElement3.options[selectElement3.selectedIndex].textContent
+        +"- "+ selectElement2.options[selectElement2.selectedIndex].textContent
+        +"- "+ selectElement1.options[selectElement1.selectedIndex].textContent
+    ;
+
+
+    var huyentxt = selectElement2.options[selectElement3.selectedIndex].value;
+    var xatxt = selectElement3.options[selectElement3.selectedIndex].value;
+
+    var huyen = huyentxt.replace(/"/g, '');
+    var xa = xatxt.replace(/"/g, '');
+    var diachi = diachitxt.replace(/"/g, '');
+
     var phone = document.getElementById("phone").value;
     var email = document.getElementById("email").value;
     var ghichu = document.getElementById("ghichu").value;
+
+    var leadTime = document.getElementById("leadTime").innerText;
+
+    var pro_bill_t = document.getElementById("pro_bill").innerText;
+    var pro_bill = parseInt(pro_bill_t.replace(/,/g, ''));
+
+    var feeTt = document.getElementById("fee").innerText;
+    var fee = parseInt(feeTt.replace(/,/g, ''));
+
+    var totalBilltext = document.getElementById("totalBill").innerText;
+    var totalBill = parseInt(totalBilltext.replace(/,/g, ''));
+
     var lenght = document.getElementsByName("noteD").length;
     var note = new Array();
 
@@ -808,9 +927,16 @@ function addOrder() {
             phone: phone,
             ghichu: ghichu,
             haveDisk: haveDisk,
-            note: note.toString()
+            note: note.toString(),
+            totalBill:totalBill,
+            fee:fee,
+            pro_bill:pro_bill,
+            leadTime:leadTime,
+            huyen:huyen,
+            xa:xa
         },
         success: function () {
+
             document.getElementById("totalPro").innerHTML = "0";
             document.getElementById("totalPro1").innerHTML = "0";
             document.getElementById("emptyPro").innerHTML = "" +
@@ -833,24 +959,27 @@ function addOrder() {
                 "                                </div>\n" +
                 "                                <button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>\n" +
                 "                            ";
+            Swal.fire({
+                text: 'Đặt hàng thành công!',
+                icon: 'success',
+                showCancelButton: true,
+                cancelButtonText: 'Mua tiếp',
+                confirmButtonText: 'Xem đơn đặt',
+                confirmButtonColor: '#ff96b7'
+            }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "MyOrder";
+                    } else {
+                        location.href = "ListProduct";
+                    }
+                }
+            );
+
         }
+
     });
 
-    Swal.fire({
-        text: 'Đặt hàng thành công!',
-        icon: 'success',
-        showCancelButton: true,
-        cancelButtonText: 'Mua tiếp',
-        confirmButtonText: 'Xem đơn đặt',
-        confirmButtonColor: '#ff96b7'
-    }).then((result) => {
-            if (result.isConfirmed) {
-                location.href = "MyOrder";
-            } else {
-                location.href = "ListProduct";
-            }
-        }
-    );
+
 
 }
 
@@ -969,3 +1098,6 @@ function changeProfile() {
 
     });
 }
+
+
+

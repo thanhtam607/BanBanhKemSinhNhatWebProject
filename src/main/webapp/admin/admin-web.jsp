@@ -106,6 +106,7 @@
                                 <% if(user.getRole() == 2) { %>
                                 <a href="general_Management.jsp" class="dropdown-item">Quản lí cửa hàng</a>
                                 <a href="AdminDecentralization.jsp" class="dropdown-item">Phân quyền cấp cao</a>
+                                <a href="ListLog" class="dropdown-item">Nhật ký hoạt động</a>
                                 <% } else { %>
                                 <% } %>
                                 <a href="edit-profile.jsp" class="dropdown-item">Hồ sơ của tôi</a>
@@ -191,19 +192,19 @@
                                 <tr>
                                     <td><%=i+1%></td>
                                     <td><%=rc.getExport_date()%></td>
-                                    <td><%=rc.getNamecustomer()%></td>
+                                    <td><%=UserService.findById(rc.getMakh()).getName()%></td>
                                     <td><%=rc.getAddress()%></td>
-                                    <td><%=rc.formatNum(rc.getTotal())%> VND</td>
+                                    <td><%=rc.formatNum(rc.getMoney())%> VND</td>
                                     <td>
                                         <div class="main__table-text"><%=rc.getStatusName()%></div>
                                     </td>
                                     <td>
-                                        <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit px-1">
+                                        <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=UserService.findById(rc.getMakh()).getName()%>" class=" main__table-btn main__table-btn--edit px-1">
                                             <i class="fas fa-info-circle text-center"></i>
                                         </a>
                                         <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                         <%if(rc.getStatus() != 3){%>
-                                        <a href="AdminEditOrder?id=<%=rc.getId()%>&tenkh=<%=rc.getNamecustomer()%>" class=" main__table-btn main__table-btn--edit px-1">
+                                        <a href="AdminEditOrder?id=<%=rc.getId()%>&tenkh=<%=UserService.findById(rc.getMakh()).getName()%>" class=" main__table-btn main__table-btn--edit px-1">
                                             <i class="fas fa-edit text-center"></i>
                                         </a>
                                         <%}%>

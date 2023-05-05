@@ -30,6 +30,10 @@
   <link rel="stylesheet" href="css/ionicons.min.css">
   <link href="css/style.css" rel="stylesheet">
 
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
@@ -173,7 +177,7 @@
                   </div>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
-                      <label class="form__label" >Quyền hạn:</label>
+                      <label class="form__label" >Quyền hạn: <span class="font-size-20 text--green text-uppercase"><%=u.getRoleName()%></span></label>
                       <% if(u.getIsadd() == 1) {%>
                       <input name="isadd<%=i%>" value="1" style="display: none">
                       <input class="form-check-input" type = "checkbox" checked = "true" name = "add<%=i%>">

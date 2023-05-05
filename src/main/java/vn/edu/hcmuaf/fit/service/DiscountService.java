@@ -15,7 +15,7 @@ public class DiscountService {
         List<Discount> list = new ArrayList<>();
         Statement stm = DBConnect.getInstall().get();
         try{
-            ResultSet rs = stm.executeQuery("SELECT id,idProduct, discount, startDate, expiryDate from discounts GROUP BY idProduct, startDate, expiryDate HAVING DATEDIFF(CURRENT_DATE, expiryDate) < 0;");
+            ResultSet rs = stm.executeQuery("SELECT id,idProduct, discount, startDate, expiryDate from discounts GROUP BY id, idProduct, discount, startDate, expiryDate HAVING DATEDIFF(CURRENT_DATE, expiryDate) < 0;");
             while (rs.next()){
                 list.add(new Discount(rs.getInt(1),rs.getString(2), rs.getDouble(3), rs.getString(4),rs.getString(5)));
             }
@@ -27,7 +27,7 @@ public class DiscountService {
     public static Discount findByIdProduct(String idProduct){
         Discount dis = null;
         try {
-            PreparedStatement stm = con.prepareStatement("SELECT id,idProduct, discount, startDate, expiryDate from discounts where idProduct= ? GROUP BY idProduct, startDate, expiryDate HAVING DATEDIFF(CURRENT_DATE, expiryDate) < 0;");
+            PreparedStatement stm = con.prepareStatement("SELECT id,idProduct, discount, startDate, expiryDate from discounts where idProduct= ? GROUP BY id,idProduct, discount, startDate, expiryDate  HAVING DATEDIFF(CURRENT_DATE, expiryDate) < 0;");
             stm.setString(1,idProduct);
             ResultSet rs = stm.executeQuery();
             while(rs.next()){

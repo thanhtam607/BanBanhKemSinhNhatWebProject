@@ -35,7 +35,7 @@ public class UserService {
     }
     public User checkLogin(String email, String password) {
         List<User> users = JDBIConnector.get().withHandle(h ->
-                h.createQuery("SELECT ACCOUNTS.id, ACCOUNTS.email, ACCOUNTS.pass, ACCOUNTS.name, ACCOUNTS.role, ACCOUNTS.status,ACCOUNTS.type  FROM ACCOUNTS WHERE ACCOUNTS.email = ?")
+                h.createQuery("SELECT ACCOUNTS.ID, ACCOUNTS.EMAIL, ACCOUNTS.PASS, ACCOUNTS.NAME, ACCOUNTS.ROLE, ACCOUNTS.STATUS,ACCOUNTS.TYPE  FROM ACCOUNTS WHERE ACCOUNTS.EMAIL = ?")
                         .bind(0, email)
                         .mapToBean(User.class)
                         .stream()
@@ -63,7 +63,7 @@ public class UserService {
         Statement stm = DBConnect.getInstall().get();
         User user;
         try {
-            ResultSet rs = stm.executeQuery("SELECT ID, EMAIL, PASS, NAME, ROLE, STATUS, TYPE ,ISADD,ISEDIT,ISDELETE FROM accounts WHERE  accounts.ID = '"+ Id+"'");
+            ResultSet rs = stm.executeQuery("SELECT ID, EMAIL, PASS, NAME, ROLE, STATUS, TYPE ,ISADD,ISEDIT,ISDELETE FROM ACCOUNTS WHERE  ACCOUNTS.ID = '"+ Id+"'");
             while(rs.next()) {
                 user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7),rs.getInt(8), rs.getInt(9), rs.getInt(10));
                 if (user != null) {
@@ -167,7 +167,6 @@ public class UserService {
             try {
                 String sql = "insert into ACCOUNTS(ID,EMAIL,NAME,ROLE, STATUS,TYPE, ISADD, ISEDIT, ISDELETE) values('" + acc.getId() + "', '" + acc.getEmail() + "', '" + acc.getName() + "'," + acc.getRole() +","+ acc.getStatus()+",'"+acc.getType()+"',0,0,0);";
                 stm.executeUpdate(sql);
-                System.out.println(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
             }
@@ -227,14 +226,10 @@ public class UserService {
         String sql1 = "UPDATE CUSTOMERS, ACCOUNTS set CUSTOMERS.ADDRESS = '"+diachi+"', " +
                 "CUSTOMERS.PHONE = '"+sdt+"', ACCOUNTS.EMAIL = '"+mail+"'," +
                 " ACCOUNTS.NAME='" +name+"'" +
-                " WHERE CUSTOMERS.id = '"+id+"' and CUSTOMERS.id = ACCOUNTS.id";
+                " WHERE CUSTOMERS.ID = '"+id+"' and CUSTOMERS.ID = ACCOUNTS.ID";
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql1);
-            user.setEmail(mail);
-            user.setName(name);
-            CustomerService.getCusByIdAcc(id).setSDT(sdt);
-            CustomerService.getCusByIdAcc(id).setDIACHI(diachi);
         } catch (SQLException se) {
             se.printStackTrace();
         }
@@ -245,7 +240,7 @@ public class UserService {
         String sql1 = "UPDATE CUSTOMERS, ACCOUNTS set CUSTOMERS.ADDRESS = '"+diachi+"', " +
                 "CUSTOMERS.PHONE = '"+sdt+"', ACCOUNTS.EMAIL = '"+mail+"'," +
                 " ACCOUNTS.NAME='" +name+"'" +
-                " WHERE CUSTOMERS.id = '"+idACC+"' and CUSTOMERS.id = ACCOUNTS.id";
+                " WHERE CUSTOMERS.ID = '"+idACC+"' and CUSTOMERS.ID = ACCOUNTS.ID";
         Statement stm  =  DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql1);

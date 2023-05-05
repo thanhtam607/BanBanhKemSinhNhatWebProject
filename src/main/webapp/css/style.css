@@ -2479,7 +2479,7 @@ ol {
 	padding-top: 15px;
 }
 
-.checkout__order .checkout__order__subtotal span {
+.checkout__order .checkout__order__subtotal span, .checkout__order .checkout__order__fee span {
 	float: right;
 }
 
@@ -2487,7 +2487,7 @@ ol {
 	padding-left: 20px;
 }
 
-.checkout__order .checkout__order__total {
+.checkout__order .checkout__order__total, .checkout__order .checkout__order__fee {
 	font-size: 18px;
 	color: #1c1c1c;
 	font-weight: 700;
@@ -3893,4 +3893,12 @@ font-size: 24px;
 .text-right-admin{
 	margin: 0 0 0 217px;
 	font-weight: 600;
+}
+
+.form-select{
+	padding: 12px;
+	border: 1px #e1e1e1 solid;
+	border-radius: 5px;
+	width: 200px;
+	cursor: pointer;
 }
