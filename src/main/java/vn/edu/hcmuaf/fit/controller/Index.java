@@ -25,7 +25,6 @@ public class Index extends HttpServlet {
         request.setAttribute("listBanChay", listHotProduct);
         List<Product> listNewProduct = ProductService.getNewProduct(ProductService.getListProduct());
         request.setAttribute("listNewProduct", listNewProduct);
-
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -118,6 +119,8 @@
             <!-- Sidebar End -->
 
     <!-- main content -->
+<% User user = UserService.findById(auth.getId()); %>
+<% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
     <main class="main bg-white">
         <div class="container-fluid bg-white">
             <div class="row">
@@ -231,6 +234,11 @@
             </div>
         </div>
     </main>
+<% } else { %>
+<div class="w-100 h-100 ml-5">
+    <h1 class="text-pink mt-5 text-center">Bạn không có quyền này</h1>
+</div>
+<% } %>
     <!-- end main content -->
 
      <!-- Back to Top -->
