@@ -3,6 +3,7 @@
 
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.*" %>
+<%@ page import="java.net.URLDecoder" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -209,7 +210,7 @@
                         <div class="col-6 text-right  my-2 pt-2 ">
                             <small class="d-inline text-secondary">Trạng thái |</small>
                             <div id="statusName<%=r.getId()%>" class="d-inline pr-3 text-uppercase" style="color:#ee4d2d; font-size:14px">
-                                <span><%=r.getStatusName()%></span>
+                                <span><%=URLDecoder.decode(r.getStatusName())%></span>
                             </div>
                         </div>
                     </div>
@@ -253,8 +254,13 @@
                     <div class="col-12 mb-2">
                         <div class="card-body my-0">
                             <div class="card-text text-dark border-bottom pb-2">
-                                <span class=" text-dark font-italic">
+                                <span class=" text-dark">
                                     GHI CHÚ CHUNG: <%=r.getNote() != null? r.getNote(): "Không có"%>
+                                </span>
+                            </div>
+                            <div class="card-text text-dark border-bottom pb-2">
+                                <span class=" text-dark text-uppercase">
+                                    Dự kiến giao: <%=r.getDelivery_date()%>
                                 </span>
                             </div>
                             <div class="card-text text-dark pt-2">

@@ -116,16 +116,16 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT products.productName, sum(BILL_DETAIL.AMOUNT) as slg\n" +
+                ResultSet rs = statement.executeQuery("SELECT products.idProduct,products.productName, sum(BILL_DETAIL.AMOUNT) as slg\n" +
 
-                        "from products, bills, BILL_DETAIL\n" +
-                        "WHERE  bills.ID = BILL_DETAIL.ID and products.idProduct = BILL_DETAIL.idProduct \n" +
-                        "and bills.STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) " +
-                        "and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)\n" +
+                        "from products, BILLS, BILL_DETAIL\n" +
+                        "WHERE  BILLS.ID = BILL_DETAIL.ID and products.idProduct = BILL_DETAIL.idProduct \n" +
+                        "and BILLS.STATUS != 4 and month(BILLS.EXPORT_DATE) = MONTH(CURRENT_DATE) " +
+                        "and year(BILLS.EXPORT_DATE) =YEAR(CURRENT_DATE)\n" +
                         "GROUP BY  products.idProduct, products.productName HAVING slg > 0\n" +
                         "ORDER BY slg DESC LIMIT 10");
                 while (rs.next()) {
-                    map.put(rs.getString(1), rs.getInt(2));
+                    map.put(rs.getString(2), rs.getInt(3));
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -337,11 +337,11 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT ID, DELIVERY_DATE, ADDRESS,EMAIL,PHONE,NAMECUSTOMER  from DELIVERY where ID =" + "'" + id + "'");
+                ResultSet rs = statement.executeQuery("SELECT ID, DELIVERY_DATE, WARD_ID, DISTRICT_ID, ADDRESS,EMAIL,PHONE,NAMECUSTOMER  from DELIVERY where ID =" + "'" + id + "'");
                 while (rs.next()) {
-                    delivery = new Delivery(rs.getString(1), rs.getString(6),
-                            rs.getString(2), rs.getString(3),
-                            rs.getString(4), rs.getString(5));
+                    delivery = new Delivery(rs.getString(1), rs.getString(2),
+                            rs.getString(3), rs.getString(4),
+                            rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);

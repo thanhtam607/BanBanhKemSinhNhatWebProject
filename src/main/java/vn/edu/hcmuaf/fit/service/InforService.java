@@ -90,8 +90,8 @@ public class InforService {
         }
     }
     public static void main(String[] args) {
-        List<General_information> list = InforService.getImgSlideShow();
-        System.out.println(list.get(1).getContent());
-        updateContent("GI001", "img/hero/GI001.jpg");
+//        List<General_information> list = InforService.getImgSlideShow();
+//        System.out.println(list.get(1).getContent());
+//        updateContent("GI001", "img/hero/GI001.jpg");
     }
 }

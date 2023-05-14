@@ -313,23 +313,23 @@ public class UserService {
 
     public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {
 
-//        UserService userService = new UserService();
+        UserService userService = new UserService();
 //       System.out.println(userService.checkLogin("thanhthuy@gmail.com", "123").toString());
 //       System.out.println(userService.hashPassword("123"));
 //       System.out.println(userService.hashPassword("456"));
 //       System.out.println(userService.hashPassword("789"));
-//       System.out.println(userService.hashPassword("nhom27"));
+//       System.out.println(userService.hashPassword("1"));
 //        UserService.register(new Account("Thanh@gmail.com","12","Thanh"));
 
 //        System.out.println(UserService.checkEmail("thanh@gmail.com"));
 //        sendMail("thanhtamv14717@gmail.com", randomCode());
 //        updatePass("thanhtamv14717@gmail.com", hashPassword("123"));
-        User user = new User();
-        user.setId("fdfgrf");
-        user.setEmail("dfdf");
-        user.setType("fdfdcd");
-        user.setName("dfw");
-        addAccGG(user);
+//        User user = new User();
+//        user.setId("fdfgrf");
+//        user.setEmail("dfdf");
+//        user.setType("fdfdcd");
+//        user.setName("dfw");
+//        addAccGG(user);
 
 
     }
