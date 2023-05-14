@@ -233,9 +233,12 @@
                                             <%}%>
                                             <% } else { %>
                                             <% } %>
+                                            <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                             <a href="EditBlog?idB=<%=blog.getId()%>" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
+                                            <% } else { %>
+                                            <% } %>
                                             <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                                             <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                                                 <i class="fa fa-trash"></i>

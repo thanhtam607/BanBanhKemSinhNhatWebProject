@@ -160,12 +160,14 @@
         </div>
       </div>
       <!-- end main title -->
+      <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
       <div class="button">
         <div class="button_left">
           <a class="button_product" href="add-new-bill.jsp">Tạo đơn hàng</a>
         </div>
-
       </div>
+      <% } else { %>
+      <% } %>
       <!-- table -->
       <div class="col-12 bg-pink">
         <div class="main__table-wrap">

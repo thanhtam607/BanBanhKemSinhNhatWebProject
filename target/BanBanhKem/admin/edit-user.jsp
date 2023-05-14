@@ -270,22 +270,38 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="username">Tên tài khoản</label>
+                                                    <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                                     <input id="username" type="text" name="username" class="form__input" value="<%=UserService.findById(mkh).getName()%>">
+                                                    <% } else { %>
+                                                    <input id="username" type="text" name="username" class="form__input  bg-pink" value="<%=UserService.findById(mkh).getName()%>" disabled>
+                                                    <% } %>
                                                 </div>
                                                 <div class="form__group">
                                                     <label class="form__label" for="phone">SĐT</label>
+                                                    <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                                     <input id="phone" type="tel" name="phone" class="form__input text-lowercase" value="<%=CustomerService.getCusByIdAcc(mkh).getSDT()%>">
+                                                    <% } else { %>
+                                                    <input id="phone" type="tel" name="phone" class="form__input text-lowercase  bg-pink" value="<%=CustomerService.getCusByIdAcc(mkh).getSDT()%>" disabled>
+                                                    <% } %>
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="email">Email</label>
+                                                    <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                                     <input id="email" type="email" name="email" class="form__input text-lowercase" value="<%=UserService.findById(mkh).getEmail()%>">
+                                                    <% } else { %>
+                                                    <input id="email" type="email" name="email" class="form__input text-lowercase  bg-pink" value="<%=UserService.findById(mkh).getEmail()%>" disabled>
+                                                    <% } %>
                                                 </div>
                                                 <div class="form__group">
                                                     <label class="form__label" for="address">Địa chỉ</label>
+                                                    <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                                     <input id="address" type="text" name="address" class="form__input text-lowercase" value="<%=CustomerService.getCusByIdAcc(mkh).getDIACHI()%>">
+                                                    <% } else { %>
+                                                    <input id="address" type="text" name="address" class="form__input text-lowercase bg-pink" value="<%=CustomerService.getCusByIdAcc(mkh).getDIACHI()%>" disabled>
+                                                    <% } %>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">

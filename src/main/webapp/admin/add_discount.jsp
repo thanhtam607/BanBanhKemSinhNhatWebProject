@@ -7,6 +7,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Image"%>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -113,6 +114,8 @@
 <!-- Sidebar End -->
 
 <!-- main content -->
+<% User user = UserService.findById(auth.getId()); %>
+<% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
 <main class="main">
   <div class="container-fluid">
     <div class="row">
@@ -275,6 +278,11 @@
   </div>
   </div>
 </main>
+<% } else { %>
+<div class="w-100 h-100 ml-5">
+    <h1 class="text-pink mt-5 text-center">Bạn không có quyền này</h1>
+</div>
+<% } %>
 
 <!-- JS -->
 <script src="js/jquery-3.5.1.min.js"></script>
