@@ -5,6 +5,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="java.net.URLDecoder" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,10 +84,10 @@
 				<i class="fa fa-user icon__user"></i>
 				<div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
 			</div>
-			<div class="ms-3">
+            <div class="ms-3">
                 <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
-                <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
-			</div>
+                <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
+            </div>
 		</div>
         <div class="navbar-nav w-100">
             <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
@@ -217,7 +218,7 @@
                                             }else{
                                                 main__table = "main__table-text--black";
                                             }%>
-                                        <div class="main__table-text <%=main__table%>"><%=customer.getRole()%></div>
+                                        <div class="main__table-text <%=main__table%>"><%=URLDecoder.decode(customer.getRole(), "UTF-8")%></div>
                                     </td>
 
                                     <td>

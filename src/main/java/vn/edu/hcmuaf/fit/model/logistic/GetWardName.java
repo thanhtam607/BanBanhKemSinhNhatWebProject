@@ -7,6 +7,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 @WebServlet(name = "GetWardName", value = "/GetWardName")
@@ -25,8 +27,9 @@ public class GetWardName extends HttpServlet {
         LogisticController controller = new LogisticController();
         List<Ward> wardList = controller.getWardByDistrictID(distID);
 
+        String ul = URLEncoder.encode("Chọn xã phường", "UTF-8");
         PrintWriter out = response.getWriter();
-        out.println("<option selected disabled value=\"0\">Chọn Xã/Phường</option>");
+        out.println("<option selected disabled value=\"0\">"+ URLDecoder.decode(ul, "UTF-8") +"</option>");
         for(Ward ward: wardList){
 
             out.println("<option value="+ward.getWardCode()+">"+ward.getWardName().replace("\"", "")+"</option>");

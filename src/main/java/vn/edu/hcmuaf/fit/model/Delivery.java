@@ -16,22 +16,22 @@ public class Delivery {
 
     public Delivery(String mahd, String tenKH, String ngayGiao, String huyen, String xa,String diachigiao, String email, String phone) {
         this.mahd = mahd;
-        this.tenKH = tenKH;
         this.ngayGiao = ngayGiao;
-        this.huyen = huyen;
         this.xa = xa;
+        this.huyen = huyen;
         this.diachigiao = diachigiao;
         this.email = email;
         this.phone = phone;
-    }
-    public Delivery(String mahd, String tenKH, String ngayGiao,String diachigiao, String email, String phone) {
-        this.mahd = mahd;
         this.tenKH = tenKH;
-        this.ngayGiao = ngayGiao;
-        this.diachigiao = diachigiao;
-        this.email = email;
-        this.phone = phone;
     }
+//    public Delivery(String mahd, String tenKH, String ngayGiao,String diachigiao, String email, String phone) {
+//        this.mahd = mahd;
+//        this.tenKH = tenKH;
+//        this.ngayGiao = ngayGiao;
+//        this.diachigiao = diachigiao;
+//        this.email = email;
+//        this.phone = phone;
+//    }
 
     public String getHuyen() {
         return huyen;
