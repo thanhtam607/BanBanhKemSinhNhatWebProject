@@ -5,6 +5,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Bill_Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.*" %>
+<%@ page import="java.net.URLDecoder" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +87,7 @@
             </div>
             <div class="ms-3">
                 <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
-                <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
+                <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
             </div>
         </div>
         <div class="navbar-nav w-100">
@@ -148,7 +149,7 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                         main__table = "main__table-text--green";
                                         profile__text = "profile__action--banned";
                                     }%>
-                                <h3><%=UserService.findById(mkh).getName()%> <span class="<%=main__table%>">(<%=us.getStatusName()%>)</span></h3>
+                                <h3><%=UserService.findById(mkh).getName()%> <span class="<%=main__table%>">(<%=URLDecoder.decode(us.getStatusName(), "UTF-8")%>)</span></h3>
                                 <span name = "makh" value="<%=mkh%>"> ID: <%=mkh%></span>
                             </div>
                         </div>
@@ -270,22 +271,38 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="username">Tên tài khoản</label>
+                                                    <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                                     <input id="username" type="text" name="username" class="form__input" value="<%=UserService.findById(mkh).getName()%>">
+                                                    <% } else { %>
+                                                    <input id="username" type="text" name="username" class="form__input  bg-pink" value="<%=UserService.findById(mkh).getName()%>" disabled>
+                                                    <% } %>
                                                 </div>
                                                 <div class="form__group">
                                                     <label class="form__label" for="phone">SĐT</label>
+                                                    <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                                     <input id="phone" type="tel" name="phone" class="form__input text-lowercase" value="<%=CustomerService.getCusByIdAcc(mkh).getSDT()%>">
+                                                    <% } else { %>
+                                                    <input id="phone" type="tel" name="phone" class="form__input text-lowercase  bg-pink" value="<%=CustomerService.getCusByIdAcc(mkh).getSDT()%>" disabled>
+                                                    <% } %>
                                                 </div>
                                             </div>
 
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                                 <div class="form__group">
                                                     <label class="form__label" for="email">Email</label>
+                                                    <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                                     <input id="email" type="email" name="email" class="form__input text-lowercase" value="<%=UserService.findById(mkh).getEmail()%>">
+                                                    <% } else { %>
+                                                    <input id="email" type="email" name="email" class="form__input text-lowercase  bg-pink" value="<%=UserService.findById(mkh).getEmail()%>" disabled>
+                                                    <% } %>
                                                 </div>
                                                 <div class="form__group">
                                                     <label class="form__label" for="address">Địa chỉ</label>
+                                                    <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                                     <input id="address" type="text" name="address" class="form__input text-lowercase" value="<%=CustomerService.getCusByIdAcc(mkh).getDIACHI()%>">
+                                                    <% } else { %>
+                                                    <input id="address" type="text" name="address" class="form__input text-lowercase bg-pink" value="<%=CustomerService.getCusByIdAcc(mkh).getDIACHI()%>" disabled>
+                                                    <% } %>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-12 col-xl-6">
@@ -295,10 +312,10 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                                     <select class="form__input" id="rights" name="role">
                                                         <%List<String> listRole = (List<String>) request.getAttribute("listRole");
                                                             for(String r : listRole){
-                                                                if(r == UserService.findById(mkh).getRoleName()){%>
-                                                        <option selected value="<%=r%>"><%=r%></option>
+                                                                if(URLDecoder.decode(r, "UTF-8").equals(URLDecoder.decode(UserService.findById(mkh).getRoleName(), "UTF-8"))){%>
+                                                        <option selected value="<%=URLDecoder.decode(r, "UTF-8")%>"><%=URLDecoder.decode(r, "UTF-8")%></option>
                                                         <% } else {%>
-                                                        <option value="<%=r%>"><%=r%></option>
+                                                        <option value="<%=URLDecoder.decode(r, "UTF-8")%>"><%=URLDecoder.decode(r, "UTF-8")%></option>
                                                         <%}}%>
                                                     </select>
                                                 </div>

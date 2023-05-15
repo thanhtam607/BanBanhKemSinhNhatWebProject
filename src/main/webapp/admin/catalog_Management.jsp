@@ -15,6 +15,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
+<%@ page import="java.net.URLDecoder" %>
 <html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -95,7 +96,7 @@
             </div>
             <div class="ms-3">
                 <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
-                <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
+                <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
             </div>
         </div>
         <div class="navbar-nav w-100">
@@ -231,10 +232,10 @@
                         <div id="modal-edit<%=i%>" class="zoom-anim-dialog mfp-hide modal" style="height: 370px">
                             <form method="post" action="update_TypeCake">
                             <h6 class="modal__title">Sửa danh mục</h6>
-                            <label class="form__label" for="name" style="color: white;">Tên danh mục</label>
+                            <label class="form__label text-dark" for="name" style="color: white;">Tên danh mục</label>
                             <input id="name" type="text" name="nameType" class="form__input" value="<%=list.get(i).getName()%>">
                             <input style="display: none" name="idType" value="<%=list.get(i).getIdType()%>">
-                            <label class="form__label" style="color: white">Trạng thái</label>
+                            <label class="form__label text-dark" style="color: white">Trạng thái</label>
                             <select class="form-select form__input" name="status" >
                                 <option>Còn hiệu lực</option>
                                 <option>Hết hiệu lực</option>

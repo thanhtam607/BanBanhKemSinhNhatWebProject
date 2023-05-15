@@ -4,6 +4,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
+<%@ page import="java.net.URLDecoder" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -85,7 +86,7 @@
       </div>
       <div class="ms-3">
         <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
-        <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
+        <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
       </div>
     </div>
     <div class="navbar-nav w-100">
@@ -160,12 +161,7 @@
         </div>
       </div>
       <!-- end main title -->
-      <div class="button">
-        <div class="button_left">
-          <a class="button_product" href="add-new-bill.jsp">Tạo đơn hàng</a>
-        </div>
 
-      </div>
       <!-- table -->
       <div class="col-12 bg-pink">
         <div class="main__table-wrap">
@@ -211,7 +207,7 @@
                 <div class="main__table-text"><%=rc.formatNum(rc.getMoney())%> VND</div>
               </td>
               <td>
-                <div class="main__table-text"><%=rc.getStatusName()%></div>
+                <div class="main__table-text"><%=URLDecoder.decode(rc.getStatusName(), "UTF-8")%></div>
               </td>
               <td>
                 <div class="main__table-btns">

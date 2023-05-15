@@ -898,27 +898,29 @@ INSERT INTO BILL_DETAIL VALUES('HD15', 'B090', 1, 'Chúc mừng sinh nhật 20 t
 /*=============================================DELIVERY=======================================*/
 CREATE TABLE DELIVERY(ID CHAR(4),
 										    DELIVERY_DATE DATETIME NOT NULL,
+												WARD_ID LONGTEXT,
+												DISTRICT_ID LONGTEXT,
 												ADDRESS LONGTEXT NOT NULL,
 												EMAIL VARCHAR(100),
 												PHONE VARCHAR(12),
 												NAMECUSTOMER VARCHAR(100),
 												CONSTRAINT f_mhdgh FOREIGN KEY(ID) REFERENCES BILLS(ID));
 												
-INSERT INTO DELIVERY VALUES('HD01', '2022/10/14', 'Q1, TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD02', '2022/10/23', 'Q3, TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD03', '2022/10/15', 'TP.THỦ ĐỨC TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD04', '2022/9/25', 'Q1, TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD05', '2022/10/24', 'ĐỒNG NAI', null, null,null);
-INSERT INTO DELIVERY VALUES('HD06', '2022/10/15', 'Q10, TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD07', '2022/5/11', 'Q10, TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD08', '2022/8/15', 'Q.BÌNH THẠNH, TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD09', '2022/7/17', 'H.CHÂU THÀNH,LONG AN', null, null,null);
-INSERT INTO DELIVERY VALUES('HD10', '2022/11/10', 'Q9, TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD11', '2022/1/22', 'Q.BÌNH CHÁNH, TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD12', '2023/1/12', 'Q1, TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD13', '2023/1/11', 'Q1, TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD14', '2023/1/12', 'Q3, TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD15', '2023/1/13', 'Q1, TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD01', '2022/10/14','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD02', '2022/10/23','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD03', '2022/10/15','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD04', '2022/9/25','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD05', '2022/10/24','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD06', '2022/10/15','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD07', '2022/5/11','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD08', '2022/8/15','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD09', '2022/7/17','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD10', '2022/11/10','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD11', '2022/1/22','21208','1533', 'TP HCM',null, null,null);
+INSERT INTO DELIVERY VALUES('HD12', '2023/1/12','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD13', '2023/1/11','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD14', '2023/1/12','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD15', '2023/1/13','21208','1533', 'TP HCM', null, null,null);
 
 
 /*=========================================Comments=========================================*/
