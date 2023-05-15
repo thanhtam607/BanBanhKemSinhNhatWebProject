@@ -23,9 +23,9 @@ public class GetFee extends HttpServlet {
         String from_ward_id = "90737";
         String to_dist_id = request.getParameter("to_dist_id");
         String to_ward_id = request.getParameter("to_ward_id");
-        int height = 100;
-        int length = 100;
-        int width = 100;
+        int height = 16;
+        int length = 20;
+        int width = 20;
         int weight = 500;
 
         LogisticController controller = new LogisticController();
