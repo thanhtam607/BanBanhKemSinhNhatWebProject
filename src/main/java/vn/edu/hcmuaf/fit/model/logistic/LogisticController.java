@@ -340,8 +340,8 @@ public class LogisticController {
 //        List<Ward> wards = controller.getWardByDistrictID("1454");
 //        for (Ward w: wards) System.out.println(w);
 // phường 90750, quận 3695, tp 202
-//        System.out.println(controller.registerTranport(FROM_DISTRICT_ID, FROM_WARD_ID, FROM_DISTRICT_ID, "90767", 100, 200, 200, 300));
-//        System.out.println(controller.getAllInfoTransport());
+        System.out.println(controller.registerTranport(FROM_DISTRICT_ID, FROM_WARD_ID, FROM_DISTRICT_ID, "90767", 100, 200, 200, 300));
+        System.out.println(controller.getAllInfoTransport());
     }
 
 

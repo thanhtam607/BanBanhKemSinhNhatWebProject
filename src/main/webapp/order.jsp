@@ -3,6 +3,7 @@
 
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.*" %>
+<%@ page import="java.net.URLDecoder" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -209,7 +210,7 @@
                         <div class="col-6 text-right  my-2 pt-2 ">
                             <small class="d-inline text-secondary">Trạng thái |</small>
                             <div id="statusName<%=r.getId()%>" class="d-inline pr-3 text-uppercase" style="color:#ee4d2d; font-size:14px">
-                                <span><%=r.getStatusName()%></span>
+                                <span><%=URLDecoder.decode(r.getStatusName())%></span>
                             </div>
                         </div>
                     </div>

@@ -5,15 +5,13 @@ import vn.edu.hcmuaf.fit.model.Comment;
 import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.model.Receipt;
-import vn.edu.hcmuaf.fit.service.CustomerService;
-import vn.edu.hcmuaf.fit.service.LogService;
-import vn.edu.hcmuaf.fit.service.ProductService;
-import vn.edu.hcmuaf.fit.service.ReceiptService;
+import vn.edu.hcmuaf.fit.service.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +19,15 @@ import java.util.List;
 public class EditUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("auth");
 
         String makh = request.getParameter("makh");
 
         List<String> listRole = new ArrayList<>();
-        listRole.add("Thường");
-        listRole.add("Admin");
-        listRole.add("Quản Lí");
+        listRole.add(URLEncoder.encode("Thường", "UTF-8"));
+        listRole.add(URLEncoder.encode("Admin", "UTF-8"));
+        listRole.add(URLEncoder.encode("Quản Lí", "UTF-8"));
         request.setAttribute("listRole", listRole);
 
         List<Receipt> listctkh = ReceiptService.getReceiptByMakh(makh);
@@ -37,8 +37,6 @@ public class EditUser extends HttpServlet {
         request.setAttribute("listcmt", listcmt);
         request.setAttribute("mkh", makh);
 
-        HttpSession session = request.getSession(true);
-        User user = (User) session.getAttribute("auth");
 
         Log log = new Log();
         log.setLevel(2);

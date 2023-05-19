@@ -11,6 +11,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
+<%@ page import="java.net.URLDecoder" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,7 +93,7 @@
       </div>
       <div class="ms-3">
         <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
-        <span><%= auth != null ? auth.getRoleName():"Admin"%></span>
+        <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
       </div>
     </div>
     <div class="navbar-nav w-100">
@@ -141,7 +142,7 @@
                 <p class=" px-3">Ngày Lập: <%=receipt.getExport_date()%></p>
                 <p class=" px-3">Ngày Giao Hàng: <%=receipt.getDelivery_date()%></p>
                 <p class=" px-3">Địa Chỉ Giao: <%=receipt.getAddress()%></p>
-                <p class=" px-3">Trạng Thái: <%=receipt.getStatusName()%></p>
+                <p class=" px-3">Trạng Thái: <%=URLDecoder.decode(receipt.getStatusName(), "UTF-8")%></p>
               </div>
             </div>
         <p>Ghi Chú Chung: <%=receipt.getNote()%></p>
