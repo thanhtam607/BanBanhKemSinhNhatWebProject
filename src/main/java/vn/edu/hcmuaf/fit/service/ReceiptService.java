@@ -365,11 +365,11 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT ID, DELIVERY_DATE, ADDRESS,EMAIL,PHONE,NAMECUSTOMER  from DELIVERY where ID =" + "'" + id + "'");
+                ResultSet rs = statement.executeQuery("SELECT ID, DELIVERY_DATE, WARD_ID, DISTRICT_ID, ADDRESS,EMAIL,PHONE,NAMECUSTOMER  from DELIVERY where ID =" + "'" + id + "'");
                 while (rs.next()) {
-                    delivery = new Delivery(rs.getString(1), rs.getString(6),
-                            rs.getString(2), rs.getString(3),
-                            rs.getString(4), rs.getString(5));
+                    delivery = new Delivery(rs.getString(1), rs.getString(2),
+                            rs.getString(3), rs.getString(4),
+                            rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);

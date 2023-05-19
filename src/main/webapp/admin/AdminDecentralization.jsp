@@ -56,7 +56,14 @@
   <meta name="author" content="Dmitry Volkov">
   <title>Admin |  <%=InforService.getInformation("NameShop").get(0).getContent()%></title>
 </head>
-
+<% List<User> listuser = (List<User>) UserService.getListEmployee();%>
+<% for(int i = 0; i < listuser.size(); i++){ %>
+<style>
+  #modal-sucess<%=i%>{
+    display: none;
+  }
+</style>
+<% } %>
 <body>
 <% User auth = (User) session.getAttribute("auth");%>
 <!-- header -->
@@ -82,16 +89,15 @@
 <!-- Sidebar Start -->
 <div class="sidebar pe-4 pb-3">
   <nav class="navbar bg-pink navbar-dark">
-
     <div class="d-flex align-items-center ms-4 mb-4">
       <div class="position-relative">
         <i class="fa fa-user icon__user"></i>
         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
       </div>
       <div class="ms-3">
-        <h6 class="mb-0"><%= auth != null ? auth.getName() : "ADMIN"%>
-        </h6>
-        <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8") : "Admin"%></span>
+        <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
+        <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
+
       </div>
     </div>
     <div class="navbar-nav w-100">
@@ -113,11 +119,26 @@
   </nav>
 </div>
 <!-- Sidebar End -->
-
+<% User user = UserService.findById(auth.getId()); %>
+<% for(int i = 0; i < listuser.size(); i++){ %>
+<div id="modal-sucess<%=i%>" class="modal-container">
+  <div class="modal-admin">
+    <h6 class="modal__title" style="margin-top: 20px">Xác nhận thay đổi quyền</h6>
+    <i class="fa fa-question-circle text--green" style="margin-left: 195px; font-size: 100px"></i>
+    <div class="button btn-sc" style="margin-top: 30px;">
+      <div class="modal__btns ml">
+        <button id="btn-scss<%=i%>" class="modal__btn modal__btn--apply">Xác nhận</button>
+        <button id="btn-cancel<%=i%>" class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% } %>
 <!-- main content -->
 <main class="main bg-white">
   <div class="container-fluid bg-white">
     <!-- main title -->
+    <% if(user.getRole() == 2) { %>
     <div class="col-12">
       <div class="main__title">
         <h2>Quản lý nhân viên</h2>
@@ -128,12 +149,11 @@
         <div class="col-12">
           <div class="row">
             <!-- details form -->
-            <% List<User> listuser = (List<User>) UserService.getListEmployee();
-              for(int i = 0; i < listuser.size(); i++){
+             <% for(int i = 0; i < listuser.size(); i++){
                 User u = listuser.get(i);%>
             <div class="col-12 col-lg-6 ">
-              <form method="post" action="UpdateAuthority">
                 <div class="row row--form form">
+                  <form id="formUpdateAuthority<%=i%>" method="post" action="UpdateAuthority">
                   <h4 class="form__title text-pink font-size-30 text-center">Thông tin nhân viên</h4>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
@@ -143,13 +163,12 @@
                     <div class="form__group">
                       <input name="idnv<%=i%>" value="<%=u.getId()%>" style="display: none">
                       <p>Tên nhân viên:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20 text-uppercase"><%=u.getName()%></span></p>
-                      <%--                      <p>Tên nhân viên:<span>&nbsp;&nbsp;&nbsp;</span><span class = "text--green font-size-20 text-uppercase">ssssssss</span></p>--%>
                     </div>
                   </div>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form__group">
                       <p>Địa chỉ Email:<span>&nbsp;&nbsp;&nbsp;</span> <span class = "text--green font-size-20"><%=u.getEmail()%></span></p>
-                      <%--                      <p>Địa chỉ Email:<span>&nbsp;&nbsp;&nbsp;</span> <span class = "text--green font-size-20">aaaaaaaaaa</span></p>--%>
+
                     </div>
                   </div>
                   <div class="col-12 col-md-12 col-lg-12 col-xl-12">
@@ -186,12 +205,15 @@
                       <label>Xóa</label>&ensp;
                     </div>
                   </div>
+                  </form>
                   <div class="col-6">
-                    <input class="form__btn" type="submit" value="Lưu thông tin">
+                    <button id="save-info<%=i%>" class="form__btn">Lưu thông tin</button>
                   </div>
                 </div>
-              </form>
             </div>
+            <% } %>
+            <% } else { %>
+            <h1 class="text-pink mt-5 text-center">Bạn không có quyền này</h1>
             <% } %>
             <%--                <div class="col-6">--%>
             <%--                  <input class="form__btn" type="submit" value="Lưu thông tin">--%>
@@ -202,8 +224,6 @@
     </div>
   </div>
 </main>
-<!-- end modal delete -->
-
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
@@ -216,6 +236,28 @@
 <script src="js/select2.min.js"></script>
 <script src="js/admin.js"></script>
 <script>
+  var length = <%=listuser.size()%>;
+  var modal = new Array(length);
+  var btn_cancel = new Array(length);
+  var btn_save = new Array(length);
+  for(let j = 0; j < length; j++) {
+    modal[j] = document.getElementById('modal-sucess' + j);
+    btn_save[j] = document.getElementById('save-info' + j);
+    btn_cancel[j] = document.getElementById('btn-cancel' + j);
+    btn_save[j].addEventListener('click', function () {
+      modal[j].style.display = 'block';
+    });
+    btn_cancel[j].addEventListener('click', function () {
+      if (modal[j].style.display === 'block') {
+        modal[j].style.display = 'none';
+      }
+    })
+    var btnok = new Array(length);
+           btnok[j] = document.getElementById('btn-scss' + j);
+    btnok[j].addEventListener('click', function () {
+      $('#formUpdateAuthority' + j + '').submit();
+    })
+  }
   <% for(int i = 0; i < listuser.size(); i++){%>
   document.querySelector('input[name="add<%=i%>"]').addEventListener('change', function(event) {
     if (event.target.checked) {

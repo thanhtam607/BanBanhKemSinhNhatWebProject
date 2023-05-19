@@ -322,8 +322,8 @@ public class LogisticController {
     public static void main(String[] args) throws URISyntaxException, IOException {
 //        ============================================== thuan =======================
         LogisticController controller = new LogisticController();
-        System.out.println(controller.registerTranport(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100));
-//        System.out.println(controller.getCalculateFee(FROM_DISTRICT_ID,FROM_WARD_ID, "1454", "21201", 100, 100, 100, 100));
+//        System.out.println(controller.registerTranport(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100));
+//        System.out.println(controller.getCalculateFee(FROM_DISTRICT_ID,FROM_WARD_ID, "1454", "21201", 12, 20, 20, 400));
 //        System.out.println(controller.getLeadTime(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100).replaceAll("[TZ]", ""));
 //        System.out.println(controller.registerTranport("3695","90750", "2270", "231013", 100, 150, 100, 100));
 //

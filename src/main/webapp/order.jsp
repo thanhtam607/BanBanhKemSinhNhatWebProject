@@ -254,8 +254,13 @@
                     <div class="col-12 mb-2">
                         <div class="card-body my-0">
                             <div class="card-text text-dark border-bottom pb-2">
-                                <span class=" text-dark font-italic">
+                                <span class=" text-dark">
                                     GHI CHÚ CHUNG: <%=r.getNote() != null? r.getNote(): "Không có"%>
+                                </span>
+                            </div>
+                            <div class="card-text text-dark border-bottom pb-2">
+                                <span class=" text-dark text-uppercase">
+                                    Dự kiến giao: <%=r.getDelivery_date()%>
                                 </span>
                             </div>
                             <div class="card-text text-dark pt-2">

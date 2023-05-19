@@ -7,6 +7,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Image"%>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<<<<<<< HEAD
+=======
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
+>>>>>>> b871d4b553c1c2ef8407e6262a01bbe8e5b65318
 <%@ page import="java.net.URLDecoder" %>
 
 <!DOCTYPE html>
@@ -89,10 +93,12 @@
         <i class="fa fa-user icon__user"></i>
         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
       </div>
-      <div class="ms-3">
-        <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
-        <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
-      </div>
+
+        <div class="ms-3">
+            <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
+            <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
+        </div>
+
     </div>
       <div class="navbar-nav w-100">
           <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
@@ -114,6 +120,8 @@
 <!-- Sidebar End -->
 
 <!-- main content -->
+<% User user = UserService.findById(auth.getId()); %>
+<% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
 <main class="main">
   <div class="container-fluid">
     <div class="row">
@@ -276,6 +284,11 @@
   </div>
   </div>
 </main>
+<% } else { %>
+<div class="w-100 h-100 ml-5">
+    <h1 class="text-pink mt-5 text-center">Bạn không có quyền này</h1>
+</div>
+<% } %>
 
 <!-- JS -->
 <script src="js/jquery-3.5.1.min.js"></script>

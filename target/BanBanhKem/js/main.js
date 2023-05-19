@@ -260,7 +260,7 @@ function myFunction() {
             },
             success: function (data) {
                 $(".checkout__order__fee span").text(data);
-                var oldTotal = $(".checkout__order__total span").text();
+                var oldTotal = $(".checkout__order__subtotal span").text();
                 var newTotal = parseInt(oldTotal.replace(/,/g, '')) + parseInt( $(".checkout__order__fee span").text().replace(/,/g, ''));
                 $(".checkout__order__total span").text(newTotal.toLocaleString('en-US'));
 
@@ -765,6 +765,7 @@ async function removePass(email) {
         }
     })
     if (formValues != 0) {
+        console.log("dnfjdn")
         var url = "UpdatePassword?password=" + formValues + "&email=" + email;
         $.ajax({
             url: url,
@@ -875,12 +876,20 @@ function addOrder() {
     var selectElement2 = document.getElementById("inputGroupSelect02");
     var selectElement3 = document.getElementById("inputGroupSelect03");
     var ten = document.getElementById("ten").value;
-    var diachitxt = document.getElementById("diachi").value
-        +"- "+ selectElement3.options[selectElement3.selectedIndex].textContent
-        +"- "+ selectElement2.options[selectElement2.selectedIndex].textContent
-        +"- "+ selectElement1.options[selectElement1.selectedIndex].textContent
-    ;
+    var diachitxt = "";
 
+    if(document.getElementById("diachi").value !== ""){
+         diachitxt = document.getElementById("diachi").value
+            +" - "+ selectElement3.options[selectElement3.selectedIndex].textContent
+            +" - "+ selectElement2.options[selectElement2.selectedIndex].textContent
+            +" - "+ selectElement1.options[selectElement1.selectedIndex].textContent
+        ;
+    }else{
+        diachitxt = selectElement3.options[selectElement3.selectedIndex].textContent
+            +" - "+ selectElement2.options[selectElement2.selectedIndex].textContent
+            +" - "+ selectElement1.options[selectElement1.selectedIndex].textContent
+        ;
+    }
 
     var huyentxt = selectElement2.options[selectElement3.selectedIndex].value;
     var xatxt = selectElement3.options[selectElement3.selectedIndex].value;
@@ -914,7 +923,8 @@ function addOrder() {
         }
 
     }
-    var haveDisk = document.getElementById("payment3").value;
+    var haveDisk = document.getElementById("payment3").checked;
+    var haveDiskName = document.getElementById("payment3").value;
     // var url1  ="AddNewOrder?ten=" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
     var url1  ="AddNewOrder";
     $.ajax({
@@ -927,6 +937,7 @@ function addOrder() {
             phone: phone,
             ghichu: ghichu,
             haveDisk: haveDisk,
+            haveDiskName: haveDiskName,
             note: note.toString(),
             totalBill:totalBill,
             fee:fee,

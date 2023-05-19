@@ -92,6 +92,7 @@
             <div class="ms-3">
                 <h6 class="mb-0"><%=auth != null ? auth.getName() : "ADMIN"%></h6>
                 <span><%=auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8") : "Admin"%></span>
+
             </div>
         </div>
         <div class="navbar-nav w-100">
@@ -114,7 +115,7 @@
 <!-- Sidebar End -->
 
 <!-- main content -->
-<%%>
+<% User user = UserService.findById(auth.getId()); %>
 <main class="main bg-white">
     <div class="container-fluid bg-white">
         <div class="row">
@@ -169,7 +170,7 @@
             </div>
             <!-- end main title -->
             <div class="button">
-                <% if(auth.getIsadd() == 1 || auth.getRole() == 2) { %>
+                <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
                 <div class="button_left">
                     <a class="button_product" href="Add_Discount">Thêm khuyến mãi</a>
                 </div>

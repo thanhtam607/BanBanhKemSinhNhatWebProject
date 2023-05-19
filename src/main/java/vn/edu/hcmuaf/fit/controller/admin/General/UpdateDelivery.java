@@ -34,8 +34,6 @@ public class UpdateDelivery extends HttpServlet {
         log.setContent("Cập nhật thông tin giao hàng trên header");
         log.setUser(user.getId());
         LogService.addLog(log);
-
-
         response.sendRedirect("general_Management.jsp");
     }
 }

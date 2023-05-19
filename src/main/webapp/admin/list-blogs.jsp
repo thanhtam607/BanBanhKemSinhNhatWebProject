@@ -84,10 +84,11 @@
 				<i class="fa fa-user icon__user"></i>
 				<div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
 			</div>
-			<div class="ms-3">
+            <div class="ms-3">
                 <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
                 <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
-			</div>
+
+            </div>
 		</div>
         <div class="navbar-nav w-100">
             <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
@@ -234,9 +235,12 @@
                                             <%}%>
                                             <% } else { %>
                                             <% } %>
+                                            <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
                                             <a href="EditBlog?idB=<%=blog.getId()%>" class="main__table-btn main__table-btn--edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
+                                            <% } else { %>
+                                            <% } %>
                                             <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                                             <a href="#modal-delete<%=i%>" class="main__table-btn main__table-btn--delete open-modal">
                                                 <i class="fa fa-trash"></i>

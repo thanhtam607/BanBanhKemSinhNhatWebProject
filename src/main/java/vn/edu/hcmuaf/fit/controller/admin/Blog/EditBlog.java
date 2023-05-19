@@ -6,11 +6,13 @@ import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.service.BlogService;
 import vn.edu.hcmuaf.fit.service.LogService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "EditBlog", value = "/admin/EditBlog")
@@ -32,9 +34,11 @@ public class EditBlog extends HttpServlet {
         log.setContent("Sửa bài viết" + request.getParameter("idB"));
         log.setUser(user.getId());
         LogService.addLog(log);
-
+        if (user.getIsedit() == 1 || user.getRole() == 2) {
         request.getRequestDispatcher("edit-blog.jsp").forward(request, response);
-
+        } else{
+            request.getRequestDispatcher("error_page.jsp").forward(request, response);
+        }
     }
 
     @Override

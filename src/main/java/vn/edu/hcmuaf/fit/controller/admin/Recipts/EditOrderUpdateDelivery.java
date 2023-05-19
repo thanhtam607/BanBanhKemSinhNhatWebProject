@@ -45,7 +45,8 @@ public class EditOrderUpdateDelivery extends HttpServlet {
 
         if(st == 2){
             LogisticController controller = new LogisticController();
-            controller.registerTranport(controller.FROM_DISTRICT_ID, controller.FROM_WARD_ID, ReceiptService.getListGiaoHang(id).getHuyen(), ReceiptService.getListGiaoHang(id).getXa(), 100, 100,100, 400);
+            controller.registerTranport(controller.FROM_DISTRICT_ID, controller.FROM_WARD_ID, ReceiptService.getListGiaoHang(id).getHuyen(), ReceiptService.getListGiaoHang(id).getXa(), 12, 20,20, 400);
+
             ReceiptService.updateState(id, st);
         }else{
             ReceiptService.updateState(id, st);
