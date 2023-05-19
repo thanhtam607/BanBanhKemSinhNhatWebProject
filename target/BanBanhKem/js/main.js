@@ -765,6 +765,7 @@ async function removePass(email) {
         }
     })
     if (formValues != 0) {
+        console.log("dnfjdn")
         var url = "UpdatePassword?password=" + formValues + "&email=" + email;
         $.ajax({
             url: url,
