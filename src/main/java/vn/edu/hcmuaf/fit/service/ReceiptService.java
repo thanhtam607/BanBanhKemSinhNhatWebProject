@@ -2,20 +2,12 @@ package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.*;
-import vn.edu.hcmuaf.fit.model.logistic.LogisticController;
-
-import java.io.IOException;
 import java.sql.*;
-import java.text.SimpleDateFormat;
+
 import java.util.*;
-import java.util.Date;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ReceiptService {
-
-
-
     public static List<Comment> getListComment(String id) {
         List<Comment> list = new ArrayList<Comment>();
         Statement statement = DBConnect.getInstall().get();
@@ -528,34 +520,34 @@ public class ReceiptService {
     }
 
     public static void addCTHD(String id, String msp, int slg, String notes) {
-            List<String> listMsp = getListMaSpCTHD(id);
-            if(msp != null && ProductService.findById(msp) != null) {
-                Statement stm = DBConnect.getInstall().get();
-                String sql1, sql2 = "";
-                int oldTotal = (int) getReceiptByMahd(id).getPro_bill();
-                Product p = ProductService.findById(msp);
-                int price = p.getPromotional()!=0?p.getPromotional():p.getPrice();
+        List<String> listMsp = getListMaSpCTHD(id);
+        if(msp != null && ProductService.findById(msp) != null) {
+            Statement stm = DBConnect.getInstall().get();
+            String sql1, sql2 = "";
+            int oldTotal = (int) getReceiptByMahd(id).getPro_bill();
+            Product p = ProductService.findById(msp);
+            int price = p.getPromotional()!=0?p.getPromotional():p.getPrice();
 
-                int newTotal = oldTotal + ( price* slg);
-                System.out.println(price);
-                getReceiptByMahd(id).setPro_bill(newTotal);
+            int newTotal = oldTotal + ( price* slg);
+            System.out.println(price);
+            getReceiptByMahd(id).setPro_bill(newTotal);
 
-                sql1 = "INSERT INTO BILL_DETAIL VALUES('" + id + "','" + msp + "'," + slg + ",'" + notes + "',"+ price +");";
-                System.out.println(sql1);
-                sql2 = "UPDATE BILLS set BILLS.PRO_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
-                String sql3 = "UPDATE BILL_DETAIL set BILL_DETAIL.AMOUNT = BILL_DETAIL.AMOUNT+" + slg + "" +
-                        " WHERE BILL_DETAIL.idProduct = '" + msp + "' and BILL_DETAIL.ID = '" + id + "'";
-                try {
-                    if (listMsp.contains(msp)) {
-                        stm.executeUpdate(sql3);
-                    } else {
-                        stm.executeUpdate(sql1);
-                    }
-                    stm.executeUpdate(sql2);
-                } catch (SQLException se) {
-                    se.printStackTrace();
+            sql1 = "INSERT INTO BILL_DETAIL VALUES('" + id + "','" + msp + "'," + slg + ",'" + notes + "',"+ price +");";
+            System.out.println(sql1);
+            sql2 = "UPDATE BILLS set BILLS.PRO_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
+            String sql3 = "UPDATE BILL_DETAIL set BILL_DETAIL.AMOUNT = BILL_DETAIL.AMOUNT+" + slg + "" +
+                    " WHERE BILL_DETAIL.idProduct = '" + msp + "' and BILL_DETAIL.ID = '" + id + "'";
+            try {
+                if (listMsp.contains(msp)) {
+                    stm.executeUpdate(sql3);
+                } else {
+                    stm.executeUpdate(sql1);
                 }
+                stm.executeUpdate(sql2);
+            } catch (SQLException se) {
+                se.printStackTrace();
             }
+        }
 
     }
 
