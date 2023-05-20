@@ -124,7 +124,7 @@
 <div id="modal-sucess<%=i%>" class="modal-container">
   <div class="modal-admin">
     <h6 class="modal__title" style="margin-top: 20px">Xác nhận thay đổi quyền</h6>
-    <i class="fa fa-question-circle text--green" style="margin-left: 195px; font-size: 100px"></i>
+    <p class="text-center">Bạn có chắc chắn muốn thay đổi quyền cho nhân viên này?</p>
     <div class="button btn-sc" style="margin-top: 30px;">
       <div class="modal__btns ml">
         <button id="btn-scss<%=i%>" class="modal__btn modal__btn--apply">Xác nhận</button>
