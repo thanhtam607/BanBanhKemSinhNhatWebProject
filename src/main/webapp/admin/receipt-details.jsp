@@ -87,23 +87,6 @@
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-pink navbar-dark">
 
-        <<<<<<< HEAD
-        <div class="d-flex align-items-center ms-4 mb-4">
-            <div class="position-relative">
-                <i class="fa fa-user icon__user"></i>
-                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-            </div>
-            <div class="ms-3">
-                <h6 class="mb-0"><%= auth != null ? auth.getName() : "ADMIN"%>
-                </h6>
-                <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8") : "Admin"%></span>
-            </div>
-        </div>
-        <div class="navbar-nav w-100">
-            <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
-            <%--                    <a href="general_Management.jsp" class="nav-item nav-link"><i class="fa fa-user"></i>Quản lý chung</a>--%>
-            <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
-            =======
             <div class="d-flex align-items-center ms-4 mb-4">
                 <div class="position-relative">
                     <i class="fa fa-user icon__user"></i>
@@ -120,7 +103,7 @@
                     quan</a>
                 <%--                    <a href="general_Management.jsp" class="nav-item nav-link"><i class="fa fa-user"></i>Quản lý chung</a>--%>
                 <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
-                >>>>>>> b871d4b553c1c2ef8407e6262a01bbe8e5b65318
+
 
                 <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
                 <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>

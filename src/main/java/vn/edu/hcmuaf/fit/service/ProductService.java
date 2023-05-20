@@ -485,7 +485,7 @@ public class ProductService {
 
     public static String idMaxType(){
         String res ="";
-        String sql= "SELECT max(idType) from typeofcake";
+        String sql= "SELECT max(idType) from typeOfCake";
         Statement statement = DBConnect.getInstall().get();
         try {
             ResultSet rs = statement.executeQuery(sql);
@@ -506,7 +506,7 @@ public class ProductService {
     }
     public static void addTypePro(String id, String type){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "INSERT into typeofcake VALUES('" + id + "', '"+ type+"')";
+        String sql = "INSERT into typeOfCake VALUES('" + id + "', '"+ type+"')";
         try {
             stm.executeUpdate(sql);
         } catch (SQLException se) {
@@ -516,7 +516,7 @@ public class ProductService {
     }
     public static void updateType(String id, String newtype){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "UPDATE typeofcake SET name = '" + newtype + "' WHERE idType = '" + id +"'";
+        String sql = "UPDATE typeOfCake SET name = '" + newtype + "' WHERE idType = '" + id +"'";
         try {
             stm.executeUpdate(sql);
 
@@ -526,7 +526,7 @@ public class ProductService {
     }
     public  static void deleteType(String id){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "DELETE FROM typeofcake WHERE idType = '" + id + "'";
+        String sql = "DELETE FROM typeOfCake WHERE idType = '" + id + "'";
         try {
             stm.executeUpdate(sql);
 
@@ -536,7 +536,7 @@ public class ProductService {
     }
     public static void addTyofcake(TypeOfCake toc){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "INSERT INTO typeofcake VALUES('" + toc.getIdType() + "', '" + toc.getName() + "')";
+        String sql = "INSERT INTO typeOfCake VALUES('" + toc.getIdType() + "', '" + toc.getName() + "')";
         try {
             stm.executeUpdate(sql);
         } catch (SQLException se) {

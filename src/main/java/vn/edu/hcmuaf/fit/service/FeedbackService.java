@@ -12,7 +12,7 @@ import java.util.List;
 public class FeedbackService {
     public static void addFeedback(Feedback fb){
         Statement statement = DBConnect.getInstall().get();
-        String sql = "insert into feedbacks(userName, email, feedback, fbDate) values('"+ fb.getName() + "', '"+ fb.getEmail() + "', '"+ fb.getFeedback()+ "', '"+ fb.getDate() +"');";
+        String sql = "insert into FEEDBACKS(userName, email, feedback, fbDate) values('"+ fb.getName() + "', '"+ fb.getEmail() + "', '"+ fb.getFeedback()+ "', '"+ fb.getDate() +"');";
         try {
             statement.executeUpdate(sql);
 
@@ -26,7 +26,7 @@ public class FeedbackService {
         Statement stmt = DBConnect.getInstall().get();
         if(stmt != null){
             try {
-                ResultSet rs = stmt.executeQuery("select id, userName, email, feedback, fbDate from feedbacks");
+                ResultSet rs = stmt.executeQuery("select id, userName, email, feedback, fbDate from FEEDBACKS");
                 while(rs.next()){
                     list.add(new Feedback(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
                 }
@@ -36,7 +36,5 @@ public class FeedbackService {
         return list;
     }
     public static void main(String[] args) throws SQLException {
-//        addFeedback(new Feedback("Thanh Tâm","thanhtamv14717@gmail.com","fjdsk","12/1/2022"));
-        System.out.println(getListFeedback().get(0).getFeedback());
     }
 }

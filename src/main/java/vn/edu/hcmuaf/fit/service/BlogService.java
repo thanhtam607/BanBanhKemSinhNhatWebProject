@@ -107,7 +107,7 @@ public static void  updateTitle(String idblog, String title ){
 }
 public  static String getNewIdBlog(){
     String res ="";
-    String sql= "SELECT max(ID) from blogs";
+    String sql= "SELECT max(ID) from BLOGS";
     Statement statement = DBConnect.getInstall().get();
     try {
         ResultSet rs = statement.executeQuery(sql);
@@ -128,7 +128,7 @@ public  static String getNewIdBlog(){
 }
     public  static String getMaxIdBlog(){
         String res ="";
-        String sql= "SELECT max(ID) from blogs";
+        String sql= "SELECT max(ID) from BLOGS";
         Statement statement = DBConnect.getInstall().get();
         try {
             ResultSet rs = statement.executeQuery(sql);

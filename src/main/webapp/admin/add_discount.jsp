@@ -7,10 +7,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Image"%>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
-<<<<<<< HEAD
-=======
 <%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
->>>>>>> b871d4b553c1c2ef8407e6262a01bbe8e5b65318
+
 <%@ page import="java.net.URLDecoder" %>
 
 <!DOCTYPE html>

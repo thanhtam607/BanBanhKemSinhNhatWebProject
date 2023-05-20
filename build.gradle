@@ -11,16 +11,16 @@ plugins {
 
 apply plugin: 'org.hidetake.ssh'
 remotes {
-//    host {
-//        host = '103.9.159.203'
-//        user = 'root'
-//        password = "Minh@123"
-//    }
     host {
-        host = '192.168.149.128'
+        host = '103.9.159.203'
         user = 'root'
-        password = "123"
+        password = "Minh@123"
     }
+//    host {
+//        host = '192.168.149.128'
+//        user = 'root'
+//        password = "123"
+//    }
 }
 ssh.settings {
     knownHosts = allowAnyHosts
@@ -34,7 +34,7 @@ task docker_app_start {
                 execute 'docker run -it --rm -d ' +
                         '--name tomcat9 ' +
                         '-v /usr/deploy:/usr/local/tomcat/webapps ' +
-                        '-p 80:8080 ' +
+                        '-p 81:8080 ' +
                         'tomcat:9.0&'
             }
 //            -p 80:8080
