@@ -865,6 +865,7 @@ INSERT INTO BILLS VALUES('HD12', 'AD02', '2023/1/8','Giao sớm, đúng địa c
 INSERT INTO BILLS VALUES('HD13', 'AD01', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi',500000,0, 2);
 INSERT INTO BILLS VALUES('HD14', 'AD09', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi',300000,0, 0);
 INSERT INTO BILLS VALUES('HD15', 'AD02', '2023/1/8','Giao sớm, đúng địa chỉ nha shop ơi',300000,0, 0);
+INSERT INTO BILLS VALUES('HD16', 'AD03', '2023/5/19','Giao sớm, đúng địa chỉ nha shop ơi',300000,0, 0);
 
 /*==============================BILL_DETAIL=====================================*/
 CREATE TABLE BILL_DETAIL(ID CHAR(4),
@@ -894,6 +895,7 @@ INSERT INTO BILL_DETAIL VALUES('HD13', 'B034', 1, 'Chúc mừng sinh nhật 24 t
 INSERT INTO BILL_DETAIL VALUES('HD13', 'B014', 3, 'Chúc mừng sinh nhật 24 tuổi',180000);
 INSERT INTO BILL_DETAIL VALUES('HD14', 'B088', 1, 'Chúc mừng sinh nhật 23 tuổi',300000);
 INSERT INTO BILL_DETAIL VALUES('HD15', 'B090', 1, 'Chúc mừng sinh nhật 20 tuổi',300000);
+INSERT INTO BILL_DETAIL VALUES('HD16', 'B090', 1, 'Chúc mừng sinh nhật 20 tuổi',300000);
 
 /*=============================================DELIVERY=======================================*/
 CREATE TABLE DELIVERY(ID CHAR(4),
@@ -906,21 +908,22 @@ CREATE TABLE DELIVERY(ID CHAR(4),
 												NAMECUSTOMER VARCHAR(100),
 												CONSTRAINT f_mhdgh FOREIGN KEY(ID) REFERENCES BILLS(ID));
 												
-INSERT INTO DELIVERY VALUES('HD01', '2022/10/14','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD02', '2022/10/23','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD03', '2022/10/15','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD04', '2022/9/25','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD05', '2022/10/24','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD06', '2022/10/15','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD07', '2022/5/11','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD08', '2022/8/15','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD09', '2022/7/17','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD10', '2022/11/10','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD11', '2022/1/22','21208','1533', 'TP HCM',null, null,null);
-INSERT INTO DELIVERY VALUES('HD12', '2023/1/12','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD13', '2023/1/11','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD14', '2023/1/12','21208','1533', 'TP HCM', null, null,null);
-INSERT INTO DELIVERY VALUES('HD15', '2023/1/13','21208','1533', 'TP HCM', null, null,null);
+INSERT INTO DELIVERY VALUES('HD01', '2022/10/14','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD02', '2022/10/23','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD03', '2022/10/15','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD04', '2022/9/25','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD05', '2022/10/24','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD06', '2022/10/15','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD07', '2022/5/11','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD08', '2022/8/15','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD09', '2022/7/17','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD10', '2022/11/10','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD11', '2022/1/22','21208','1533', 'TP HCM','thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD12', '2023/1/12','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD13', '2023/1/11','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD14', '2023/1/12','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD15', '2023/1/13','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
+INSERT INTO DELIVERY VALUES('HD16', '2023/1/13','21208','1533', 'TP HCM', 'thanhthuy@gmail.com', '0908765467','Thanh Thùy');
 
 
 /*=========================================Comments=========================================*/
