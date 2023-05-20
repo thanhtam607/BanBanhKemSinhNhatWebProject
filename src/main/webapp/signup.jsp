@@ -73,7 +73,6 @@
                                 <input id="save-login" type="checkbox" class="form-check-input" >
                                 <label class="form-check-label" for="save-login">Lưu đăng nhập</label>
                             </div>
-
                         </div>
                         <button onclick="check()" class="btn btn-primary py-3 w-100 mb-4">Đăng ký</button>
                         <p class="text-center mb-0">Bạn đã có tài khoản? <a href="signin.jsp">Đăng nhập</a></p>

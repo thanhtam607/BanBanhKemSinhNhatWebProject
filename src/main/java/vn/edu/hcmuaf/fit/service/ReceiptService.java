@@ -2,20 +2,12 @@ package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.*;
-import vn.edu.hcmuaf.fit.model.logistic.LogisticController;
-
-import java.io.IOException;
 import java.sql.*;
-import java.text.SimpleDateFormat;
+
 import java.util.*;
-import java.util.Date;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ReceiptService {
-
-
-
     public static List<Comment> getListComment(String id) {
         List<Comment> list = new ArrayList<Comment>();
         Statement statement = DBConnect.getInstall().get();
@@ -71,9 +63,12 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES, STATUS FROM BILLS\n" +
-                        "WHERE date(EXPORT_DATE) = date(CURRENT_DATE) \n" +
-                        "and MONTH(EXPORT_DATE) = MONTH(CURRENT_DATE) and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE) and  STATUS != 4\n" +
+                ResultSet rs = statement.executeQuery("SELECT ID, CUSTOMER_ID, EXPORT_DATE, NOTES, sum(BILLS.PRO_BILL+ BILLS.FEE_BILL) as total\n" +
+                        "FROM BILLS\n" +
+                        "WHERE date(EXPORT_DATE) = date(CURRENT_DATE)\n" +
+                        "and MONTH(EXPORT_DATE) = MONTH(CURRENT_DATE)\n" +
+                        "and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE)\n" +
+                        "GROUP BY ID, CUSTOMER_ID, EXPORT_DATE, NOTES\n" +
                         "ORDER BY BILLS.ID DESC");
                 while (rs.next()) {
                     Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
@@ -94,8 +89,9 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES,  STATUS FROM BILLS\n" +
-                        "WHERE MONTH(EXPORT_DATE) = month(CURRENT_DATE) and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE)\n" +
+                ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES,  STATUS, sum(BILLS.PRO_BILL+ BILLS.FEE_BILL) as total FROM BILLS\n" +
+                        "                        WHERE MONTH(EXPORT_DATE) = month(CURRENT_DATE) and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE)\n" +
+                        "                        GROUP BY ID, CUSTOMER_ID, EXPORT_DATE, NOTES\n" +
                         "ORDER BY BILLS.ID DESC");
                 while (rs.next()) {
                     Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
@@ -116,16 +112,16 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT products.productName, sum(BILL_DETAIL.AMOUNT) as slg\n" +
+                ResultSet rs = statement.executeQuery("SELECT products.idProduct,products.productName, sum(BILL_DETAIL.AMOUNT) as slg\n" +
 
-                        "from products, bills, BILL_DETAIL\n" +
-                        "WHERE  bills.ID = BILL_DETAIL.ID and products.idProduct = BILL_DETAIL.idProduct \n" +
-                        "and bills.STATUS != 4 and month(bills.EXPORT_DATE) = MONTH(CURRENT_DATE) " +
-                        "and year(bills.EXPORT_DATE) =YEAR(CURRENT_DATE)\n" +
+                        "from products, BILLS, BILL_DETAIL\n" +
+                        "WHERE  BILLS.ID = BILL_DETAIL.ID and products.idProduct = BILL_DETAIL.idProduct \n" +
+                        "and BILLS.STATUS != 4 and month(BILLS.EXPORT_DATE) = MONTH(CURRENT_DATE) " +
+                        "and year(BILLS.EXPORT_DATE) =YEAR(CURRENT_DATE)\n" +
                         "GROUP BY  products.idProduct, products.productName HAVING slg > 0\n" +
                         "ORDER BY slg DESC LIMIT 10");
                 while (rs.next()) {
-                    map.put(rs.getString(1), rs.getInt(2));
+                    map.put(rs.getString(2), rs.getInt(3));
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -148,11 +144,11 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT BILLS.ID, sum(BILL_DETAIL.AMOUNT) FROM  BILL_DETAIL, BILLS\n" +
+                ResultSet rs = statement.executeQuery("SELECT sum(BILL_DETAIL.AMOUNT) FROM  BILL_DETAIL, BILLS\n" +
                         "WHERE date(EXPORT_DATE) = date(CURRENT_DATE) and MONTH(EXPORT_DATE) = month(CURRENT_DATE) and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE)\n" +
                         "and BILLS.ID =  BILL_DETAIL.ID and BILLS.STATUS != 4");
                 while (rs.next()) {
-                    result = rs.getInt(2);
+                    result = rs.getInt(1);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -164,23 +160,47 @@ public class ReceiptService {
     }
 
     public static int getDoanhThuToDay() {
-        int rs = 0;
-        for (Receipt r : getAllReceiptToDay()) {
-            if (r.getStatus() != 4) {
-                rs += r.getMoney();
+        int result = 0;
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT sum(BILLS.PRO_BILL+ BILLS.FEE_BILL) as total\n" +
+                        "FROM BILLS\n" +
+                        "WHERE date(EXPORT_DATE) = date(CURRENT_DATE) \n" +
+                        "and MONTH(EXPORT_DATE) = MONTH(CURRENT_DATE) \n" +
+                        "and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE) \n" +
+                        "and  STATUS != 4\n" +
+                        "ORDER BY BILLS.ID DESC");
+                while (rs.next()) {
+                    result = rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
+        else {
+            System.out.println("Không có ");
         }
-        return rs;
+        return result;
     }
 
     public static int getDoanhThuThisMonth() {
-        int rs = 0;
-        for (Receipt r : getAllReceiptThisMonth()) {
-            if (r.getStatus() != 4) {
-                rs += r.getMoney();
+        int result = 0;
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT sum(BILLS.PRO_BILL+ BILLS.FEE_BILL) as total FROM BILLS\n" +
+                        "  WHERE MONTH(EXPORT_DATE) = month(CURRENT_DATE) and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE) and BILLS.STATUS != 4\n" +
+                        "ORDER BY BILLS.ID DESC");
+                while (rs.next()) {
+                    result = rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
+        else {
+            System.out.println("Không có  hóa đơn");
         }
-        return rs;
+        return result;
     }
 
     public static List<Bill_Detail> getListCTHD() {
@@ -337,11 +357,11 @@ public class ReceiptService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT ID, DELIVERY_DATE, ADDRESS,EMAIL,PHONE,NAMECUSTOMER  from DELIVERY where ID =" + "'" + id + "'");
+                ResultSet rs = statement.executeQuery("SELECT ID, DELIVERY_DATE, WARD_ID, DISTRICT_ID, ADDRESS,EMAIL,PHONE,NAMECUSTOMER  from DELIVERY where ID =" + "'" + id + "'");
                 while (rs.next()) {
-                    delivery = new Delivery(rs.getString(1), rs.getString(6),
-                            rs.getString(2), rs.getString(3),
-                            rs.getString(4), rs.getString(5));
+                    delivery = new Delivery(rs.getString(1), rs.getString(2),
+                            rs.getString(3), rs.getString(4),
+                            rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -500,34 +520,34 @@ public class ReceiptService {
     }
 
     public static void addCTHD(String id, String msp, int slg, String notes) {
-            List<String> listMsp = getListMaSpCTHD(id);
-            if(msp != null && ProductService.findById(msp) != null) {
-                Statement stm = DBConnect.getInstall().get();
-                String sql1, sql2 = "";
-                int oldTotal = (int) getReceiptByMahd(id).getPro_bill();
-                Product p = ProductService.findById(msp);
-                int price = p.getPromotional()!=0?p.getPromotional():p.getPrice();
+        List<String> listMsp = getListMaSpCTHD(id);
+        if(msp != null && ProductService.findById(msp) != null) {
+            Statement stm = DBConnect.getInstall().get();
+            String sql1, sql2 = "";
+            int oldTotal = (int) getReceiptByMahd(id).getPro_bill();
+            Product p = ProductService.findById(msp);
+            int price = p.getPromotional()!=0?p.getPromotional():p.getPrice();
 
-                int newTotal = oldTotal + ( price* slg);
-                System.out.println(price);
-                getReceiptByMahd(id).setPro_bill(newTotal);
+            int newTotal = oldTotal + ( price* slg);
+            System.out.println(price);
+            getReceiptByMahd(id).setPro_bill(newTotal);
 
-                sql1 = "INSERT INTO BILL_DETAIL VALUES('" + id + "','" + msp + "'," + slg + ",'" + notes + "',"+ price +");";
-                System.out.println(sql1);
-                sql2 = "UPDATE BILLS set BILLS.PRO_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
-                String sql3 = "UPDATE BILL_DETAIL set BILL_DETAIL.AMOUNT = BILL_DETAIL.AMOUNT+" + slg + "" +
-                        " WHERE BILL_DETAIL.idProduct = '" + msp + "' and BILL_DETAIL.ID = '" + id + "'";
-                try {
-                    if (listMsp.contains(msp)) {
-                        stm.executeUpdate(sql3);
-                    } else {
-                        stm.executeUpdate(sql1);
-                    }
-                    stm.executeUpdate(sql2);
-                } catch (SQLException se) {
-                    se.printStackTrace();
+            sql1 = "INSERT INTO BILL_DETAIL VALUES('" + id + "','" + msp + "'," + slg + ",'" + notes + "',"+ price +");";
+            System.out.println(sql1);
+            sql2 = "UPDATE BILLS set BILLS.PRO_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
+            String sql3 = "UPDATE BILL_DETAIL set BILL_DETAIL.AMOUNT = BILL_DETAIL.AMOUNT+" + slg + "" +
+                    " WHERE BILL_DETAIL.idProduct = '" + msp + "' and BILL_DETAIL.ID = '" + id + "'";
+            try {
+                if (listMsp.contains(msp)) {
+                    stm.executeUpdate(sql3);
+                } else {
+                    stm.executeUpdate(sql1);
                 }
+                stm.executeUpdate(sql2);
+            } catch (SQLException se) {
+                se.printStackTrace();
             }
+        }
 
     }
 

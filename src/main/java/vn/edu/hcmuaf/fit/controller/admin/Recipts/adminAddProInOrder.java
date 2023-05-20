@@ -27,7 +27,7 @@ public class adminAddProInOrder extends HttpServlet {
         String notes = request.getParameter("notes");
 
         String namePro = ProductService.findById(msp).getName();
-        int pricePro = ProductService.findById(msp).getPrice();
+        int pricePro = ProductService.findById(msp).getPromotional() != 0 ? ProductService.findById(msp).getPromotional() : ProductService.findById(msp).getPrice();
         int totalPrice = pricePro * slg;
         int index = ReceiptService.getListMaSpCTHD(idRec).size() + 1;
 

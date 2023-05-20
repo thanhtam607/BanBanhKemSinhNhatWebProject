@@ -49,8 +49,16 @@ public class AddNewOrder extends HttpServlet {
 
         String leadTime = request.getParameter("leadTime");
 
-        if(ghichu!=null && request.getParameter("haveDisk")!=null){
-            ghichu +=", "+ request.getParameter("haveDisk");
+        if(ghichu!=null && request.getParameter("haveDisk").equals("true")){
+            ghichu +=", "+ request.getParameter("haveDiskName");
+        } else if(ghichu == null && request.getParameter("haveDisk").equals("true")){
+            ghichu += request.getParameter("haveDiskName");
+            ghichu.replace(',',' ');
+        } else if (ghichu != null) {
+            ghichu+=ghichu;
+        } else{
+            ghichu = "";
+
         }
         String notes = request.getParameter("note");
         String[] notesForDetail = notes.split("/,");
@@ -84,7 +92,6 @@ public class AddNewOrder extends HttpServlet {
 
         OrderService.updateTonKhoWhenAdd(order);
         session.setAttribute("itemCart",null);
-
 
 
         Log log = new Log();

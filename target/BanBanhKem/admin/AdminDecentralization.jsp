@@ -9,6 +9,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
+<%@ page import="java.net.URLDecoder" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,9 +95,8 @@
         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
       </div>
       <div class="ms-3">
-        <h6 class="mb-0"><%= auth != null ? auth.getName() : "ADMIN"%>
-        </h6>
-        <span><%= auth != null ? auth.getRoleName() : "Admin"%></span>
+        <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
+        <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
       </div>
     </div>
     <div class="navbar-nav w-100">
@@ -123,7 +123,7 @@
 <div id="modal-sucess<%=i%>" class="modal-container">
   <div class="modal-admin">
     <h6 class="modal__title" style="margin-top: 20px">Xác nhận thay đổi quyền</h6>
-    <i class="fa fa-question-circle text--green" style="margin-left: 195px; font-size: 100px"></i>
+    <p class="text-center">Bạn có chắc chắn muốn thay đổi quyền cho nhân viên này?</p>
     <div class="button btn-sc" style="margin-top: 30px;">
       <div class="modal__btns ml">
         <button id="btn-scss<%=i%>" class="modal__btn modal__btn--apply">Xác nhận</button>

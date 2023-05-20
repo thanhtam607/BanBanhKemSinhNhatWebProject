@@ -8,6 +8,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.*" %>
+<%@ page import="java.net.URLDecoder" %>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,9 +89,8 @@
                 <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
             </div>
             <div class="ms-3">
-                <h6 class="mb-0"><%= auth != null ? auth.getName() : "ADMIN"%>
-                </h6>
-                <span><%= auth != null ? auth.getRoleName() : "Admin"%></span>
+                <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
+                <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
             </div>
         </div>
         <div class="navbar-nav w-100">
@@ -184,7 +184,11 @@
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
                                             <input class="d-none" id="idR" name="idR" value="<%=receipt.getId()%>">
-                                            <label class="form__label" for="dayD">Ngày giao</label>
+                                            <label class="form__label" for="dayD"><%if(receipt.getStatus() != 3 && receipt.getStatus() != 4){%>
+                                                Ngày giao
+                                            <%} else{%>
+                                                Ngày giao dự kiến
+                                                <%}%></label>
                                             <input type="datetime" id="dayD" name="dayD" class="form__input text-lowercase"
                                                    value="<%=receipt.getDelivery_date()%>">
                                         </div>
@@ -201,10 +205,11 @@
                                             <label class="form__label" for="rights">Trạng thái ĐH</label>
                                             <select class="form__input state" id="rights" name="rights">
                                                 <% for(String status : statusName){
-                                                        if(status.equals(receipt.getStatusName())){%>
+
+                                                    if(status.equals(URLDecoder.decode(receipt.getStatusName(), "UTF-8"))){%>
                                                 <option selected value="<%=status%>"><%=status%></option>
                                                 <% } else if (receipt.getStatus() == 3) {%>
-                                                     <option disabled value="<%=status%>"><%=status%></option>
+                                                <option disabled value="<%=status%>"><%=status%></option>
                                                 <%} else if (receipt.getStatus() == 2) {%>
                                                 <option <%=status.equals("Đã hủy") ? "disabled": " "%> value="<%=status%>"><%=status%></option>
                                                 <%} else {%>
@@ -322,9 +327,6 @@
                                 <%if(receipt.getStatus() == 0 || receipt.getStatus() == 1 || receipt.getStatus() == 2){%>
                                 <div class="col-12 col-lg-6">
                                     <a href="#modal-view"  type="button" class="form__btn open-modal">Thêm sản phẩm</a>
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <button onclick="save()" type="button" class="form__btn flex-row-reverse">Lưu thay đổi</button>
                                 </div>
                                 <%}%>
                             </div>

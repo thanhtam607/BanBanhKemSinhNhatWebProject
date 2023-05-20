@@ -68,7 +68,7 @@ public class OrderService {
         String sql = "";
         if(stm!= null) {
             try {
-                 sql = "INSERT INTO DELIVERY VALUES('" + order.getId() + "','" + order.getGiaohang().getNgayGiao() + "',' "+ order.getGiaohang().getDiachigiao() + "',' "+ order.getGiaohang().getEmail() + "',' "+ order.getGiaohang().getPhone() + "',' " + order.getGiaohang().getTenKH()+"');";
+                 sql = "INSERT INTO DELIVERY VALUES('" + order.getId() + "','" + order.getGiaohang().getNgayGiao() + "','"+order.getGiaohang().getXa()+"','"+order.getGiaohang().getHuyen()+"',' "+ order.getGiaohang().getDiachigiao() + "',' "+ order.getGiaohang().getEmail() + "',' "+ order.getGiaohang().getPhone() + "',' " + order.getGiaohang().getTenKH()+"');";
                 stm.executeUpdate(sql);
             } catch (SQLException se) {
                 se.printStackTrace();
