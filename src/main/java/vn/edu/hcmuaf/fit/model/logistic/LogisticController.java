@@ -246,7 +246,6 @@ public class LogisticController {
             String createdAt = logistic.get("created_at").getAsString();
             String id = logistic.get("id").getAsString();
             return new TransportOrder(fromDistrictID, fromWardID, toDistrictID, toWardID, height, length, width, weight, fee, leadTime, active, updatedAt, createdAt, id);
-
         }
         return null;
 
@@ -326,7 +325,7 @@ public class LogisticController {
 //        System.out.println(controller.getCalculateFee(FROM_DISTRICT_ID,FROM_WARD_ID, "1454", "21201", 12, 20, 20, 400));
 //        System.out.println(controller.getLeadTime(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100).replaceAll("[TZ]", ""));
 //        System.out.println(controller.registerTranport("3695","90750", "2270", "231013", 100, 150, 100, 100));
-//
+//        System.out.println(ReceiptService.convertDate(1686441599));
 //        System.out.println(controller.register("Nhom27", "nhom27@gmail.com", "123456", "123456"));
 //        controller.changePass("1234536", "123", "123");
 //        System.out.println(controller.infoUser());
