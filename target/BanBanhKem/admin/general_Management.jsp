@@ -133,7 +133,7 @@
             </div>
             <!-- or red -->
             <div class="profile__meta profile__meta--green">
-              <h3 class="text--green">Tên cửa hàng</h3>
+              <h3 class="text--green" style="font-weight: lighter">Tên cửa hàng:  <span class="text-uppercase" style="color: #0b0b0b;"><%=InforService.getInformation("NameShop").get(0).getContent()%></span></h3>
             </div>
           </div>
           <!-- end profile user -->
