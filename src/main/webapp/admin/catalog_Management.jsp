@@ -233,13 +233,8 @@
                             <form method="post" action="update_TypeCake">
                             <h6 class="modal__title">Sửa danh mục</h6>
                             <label class="form__label text-dark" for="name" style="color: white;">Tên danh mục</label>
-                            <input id="name" type="text" name="nameType" class="form__input" value="<%=list.get(i).getName()%>">
+                            <input id="name" type="text" name="nameType" class="form__input" value="<%=list.get(i).getName()%>" required>
                             <input style="display: none" name="idType" value="<%=list.get(i).getIdType()%>">
-<%--                            <label class="form__label text-dark" style="color: white">Trạng thái</label>--%>
-<%--                            <select class="form-select form__input" name="status" >--%>
-<%--                                <option>Còn hiệu lực</option>--%>
-<%--                                <option>Hết hiệu lực</option>--%>
-<%--                            </select>--%>
                             <div class="modal__btns">
                                 <button class="modal__btn modal__btn--apply" type="submit">Sửa</button>
                                 <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
@@ -253,14 +248,9 @@
                             <form method="post" action="addTypeCake">
                             <h6 class="modal__title">Thêm danh mục</h6>
                             <label class="form__label text-dark" for="add-name" style="color: white;">Tên danh mục</label>
-                            <input id="add-name" type="text" name="nameType" class="form__input" placeholder="Thêm tên danh mục">
-<%--                            <label class="form__label" style="color: white">Trạng thái</label>--%>
-<%--                            <select class="form-select form__input" name="status" >--%>
-<%--                                <option>Còn hiệu lực</option>--%>
-<%--                                <option>Hết hiệu lực</option>--%>
-<%--                            </select>--%>
+                            <input id="add-name" type="text" name="nameType" class="form__input" placeholder="Thêm tên danh mục" required>
                             <div class="modal__btns">
-                                <button class="modal__btn modal__btn--apply" type="submit">Thêm</button>
+                                <button id="add" class="modal__btn modal__btn--apply" type="submit">Thêm</button>
                                 <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
                             </div>
                             </form>
@@ -289,8 +279,5 @@
 <script src="js/select2.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/admin.js"></script>
-
-
 </body>
-
 </html>

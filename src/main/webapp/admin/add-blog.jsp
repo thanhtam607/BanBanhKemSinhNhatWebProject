@@ -126,40 +126,40 @@
                     <form action="AddBlog" class="form" method="post" enctype="multipart/form-data">
                         <div class="row row--form">
                             <div class="col-12">
-                                <input type="text" class="form__input" placeholder="Tiêu đề" name="title">
+                                <input type="text" class="form__input" placeholder="Tiêu đề" name="title" required>
                             </div>
                             <div class="col-12 col-md-5 form__cover">
                                 <div class="row row--form">
                                     <div class="col-12 col-sm-6 col-md-12">
                                         <div class="form__img" style="height: 175px">
                                             <label for="form__img-upload">Thêm ảnh (270 x 160)</label>
-                                            <input id="form__img-upload" onchange="chooseFile(this)" name="img" type="file" accept=".png, .jpg, .jpeg">
+                                            <input id="form__img-upload" onchange="chooseFile(this)" name="img" type="file" accept=".png, .jpg, .jpeg" required>
                                             <img id="form__img" src="" alt=" ">
                                         </div>
                                     </div>
                                         <div class="form__group">
                                             <label class="form__label" for="dateblog">Ngày đăng:</label>
-                                            <input id="dateblog" type="datetime-local" name="datetime" class="form__input" value="">
+                                            <input id="dateblog" type="datetime-local" name="datetime" class="form__input" value="" required>
                                         </div>
                                     <div class="col-12 col-sm-6 col-md-12">
                                         <label class="text-dark" for="textdm">Danh mục:</label>
-                                        <input id = "textdm" class="form__input"  name="category">
+                                        <input id = "textdm" class="form__input"  name="category" required>
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-12">
                                         <label class="text-dark" for="textcd">Chủ đề:</label>
-                                        <input id="textcd" class="form__input"  name="season">
+                                        <input id="textcd" class="form__input"  name="season" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-7 form__content">
                                 <div class="row row--form">
                                     <div class="col-12">
-                                        <textarea id="content" name="content" class="form__textarea-blog">Thêm mô tả</textarea>
+                                        <textarea id="content" name="content" class="form__textarea-blog" required></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="form__btn" type="submit" style="background-color: pink">Thêm</button>
+                                <button id="add_blog" class="form__btn" type="submit" style="background-color: pink">Thêm</button>
                             </div>
                         </div>
                     </form>
@@ -187,7 +187,6 @@
     <script src="js/jquery.mCustomScrollbar.min.js"></script>
     <script src="js/select2.min.js"></script>
     <script src="js/admin.js"></script>
-
 	<!-- ================ -->
 	 <!-- JavaScript Libraries -->
 	 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -206,5 +205,4 @@
     CKEDITOR.replace('content');
 </script>
 </body>
-
 </html>
