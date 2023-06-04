@@ -1024,13 +1024,13 @@ insert into general_infor values('GI004', 'Introduce', '<h1 style="text-align:ju
 
 <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">&nbsp; &nbsp; &nbsp;Được th&agrave;nh lập v&agrave;o năm 2022 bởi một đội ngũ đầy nhiệt huyết, b&aacute;nh sinh nhật của tiệm b&aacute;nh ch&uacute;ng t&ocirc;i l&agrave; những chiếc b&aacute;nh tươi ngon được nướng h&agrave;ng ng&agrave;y v&agrave; chau chuốt tỉ mỉ đến từng chi tiết. Với mong muốn mang đến những chiếc b&aacute;nh kh&ocirc;ng chỉ ngon miệng m&agrave; c&ograve;n đẹp mắt, với nguồn nguy&ecirc;n liệu chất lượng cao, c&ocirc;ng thức chế biến điều chỉnh ph&ugrave; hợp với thị hiếu, v&agrave; một vẻ ngo&agrave;i hợp xu hướng v&agrave; độc đ&aacute;o.</span></p>
 
-<p><span style="font-family:Times New Roman,Times,serif"><img src="http://localhost:8080/img/about/anh2.jpg" /></span></p>
+<p><span style="font-family:Times New Roman,Times,serif"><img src="img/about/anh2.jpg" /></span></p>
 
 <h1><span style="font-family:Times New Roman,Times,serif"><span style="font-size:22px"><strong>2. Điểm kh&aacute;c biệt.</strong></span></span></h1>
 
 <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">&nbsp; &nbsp; &nbsp; &nbsp;Với thợ bếp đam m&ecirc; v&agrave; gi&agrave;u kinh nghiệm, ch&uacute;ng t&ocirc;i cũng đ&aacute;p ứng những y&ecirc;u cầu đặc biệt của kh&aacute;ch h&agrave;ng để tạo n&ecirc;n những chiếc b&aacute;nh đặc biệt cho mỗi sự kiện quan trọng. Sản phẩm của Tiệm b&aacute;nh hạnh ph&uacute;c th&iacute;ch hợp cho mọi dịp đặc biệt như sinh nhật, khai trương, kỉ niệm, lễ cầu h&ocirc;n, tiệc cưới, lễ đầy th&aacute;ng, v&agrave; cả những ng&agrave;y thường bỗng dưng th&egrave;m một ch&uacute;t ngọt ng&agrave;o v&agrave; tươi tắn.</span></p>
 
-<p><span style="font-family:Times New Roman,Times,serif"><img src="http://localhost:8080/img/about/anh1.jpg" /></span></p>
+<p><span style="font-family:Times New Roman,Times,serif"><img src="img/about/anh1.jpg" /></span></p>
 
 <h1><span style="font-family:Times New Roman,Times,serif"><strong><span style="font-size:22px">3. Trải nghiệm online v&agrave; tại cửa h&agrave;ng.</span></strong></span></h1>
 
