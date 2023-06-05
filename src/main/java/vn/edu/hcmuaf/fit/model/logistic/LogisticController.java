@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.model.logistic;
 
 import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 //import com.restfb.json.Json;
 
@@ -229,6 +230,7 @@ public class LogisticController {
         String urlString = "http://140.238.54.136/api/registerTransport";
         String param = "?from_district_id=" + fromDistrictID + "&from_ward_id=" + fromWardID + "&to_district_id=" + toDistrictID + "&to_ward_id=" + toWardID + "&height=" + height + "&length=" + length + "&width=" + width + "&weight=" + weight;
         URL url = new URL(urlString + param);
+        TransportOrder transportOrder = null;
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
@@ -245,7 +247,9 @@ public class LogisticController {
             String updatedAt = logistic.get("updated_at").getAsString();
             String createdAt = logistic.get("created_at").getAsString();
             String id = logistic.get("id").getAsString();
-            return new TransportOrder(fromDistrictID, fromWardID, toDistrictID, toWardID, height, length, width, weight, fee, leadTime, active, updatedAt, createdAt, id);
+            transportOrder = new TransportOrder(fromDistrictID, fromWardID, toDistrictID, toWardID, height, length, width, weight, fee, leadTime, active, updatedAt, createdAt, id);
+            System.out.println(transportOrder);
+            return transportOrder;
         }
         return null;
 
@@ -319,9 +323,10 @@ public class LogisticController {
     }
 
     public static void main(String[] args) throws URISyntaxException, IOException {
-//        ============================================== thuan =======================
-        LogisticController controller = new LogisticController();
-//        System.out.println(controller.registerTranport(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100));
+//        LogisticController controller = new LogisticController();
+//       TransportOrder transportOrder = controller.registerTranport(controller.FROM_DISTRICT_ID, controller.FROM_WARD_ID, "1456", "21105", 12, 20,20, 400);
+//       System.out.println(ReceiptService.convertDate(transportOrder.getLeadTime()));
+//        ReceiptService.updateDeliveryDateInBill("HD01", ReceiptService.convertDate(transportOrder.getLeadTime()));
 //        System.out.println(controller.getCalculateFee(FROM_DISTRICT_ID,FROM_WARD_ID, "1454", "21201", 12, 20, 20, 400));
 //        System.out.println(controller.getLeadTime(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100).replaceAll("[TZ]", ""));
 //        System.out.println(controller.registerTranport("3695","90750", "2270", "231013", 100, 150, 100, 100));

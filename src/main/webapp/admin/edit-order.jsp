@@ -184,20 +184,20 @@
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
                                             <input class="d-none" id="idR" name="idR" value="<%=receipt.getId()%>">
-                                            <label class="form__label" for="dayD"><%if(receipt.getStatus() != 3 && receipt.getStatus() != 4){%>
+                                            <label class="form__label" for="dayD"><%if(receipt.getStatus() == 3 && receipt.getStatus() == 4){%>
                                                 Ngày giao
                                             <%} else{%>
                                                 Ngày giao dự kiến
                                                 <%}%></label>
-                                            <input type="datetime" id="dayD" name="dayD" class="form__input text-lowercase"
-                                                   value="<%=receipt.getDelivery_date()%>">
+                                            <input type="datetime" id="dayD" name="dayD" class="form__input text-lowercase form-check-input is-invalid"
+                                                   value="<%=receipt.getDelivery_date()%>" readonly>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
                                             <label class="form__label" for="address">Địa chỉ giao</label>
-                                            <input type="text" id="address" name="address" class="form__input text-lowercase"
-                                                   value="<%=receipt.getAddress()%>">
+                                            <input type="text" id="address" name="address" class="form__input text-lowercase form-check-input is-invalid"
+                                                   value="<%=receipt.getAddress()%>" readonly>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
