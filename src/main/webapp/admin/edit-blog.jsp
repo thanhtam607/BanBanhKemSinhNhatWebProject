@@ -30,8 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
 
     <!-- boostrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -42,6 +41,7 @@
 
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
 
 
     <meta name="description" content="">

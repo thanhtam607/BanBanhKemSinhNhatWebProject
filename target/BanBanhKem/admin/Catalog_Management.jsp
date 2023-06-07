@@ -5,7 +5,6 @@
   Time: 7:46 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.ProductDetail" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
@@ -42,8 +41,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
 
     <!-- boostrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -168,12 +166,20 @@
                 </div>
             </div>
             <!-- end main title -->
-            <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
-            <div class="paginator-wrap" style="margin-top: -20px">
-                <span  href="#modal-add"  class="open-modal" type="button">Thêm danh mục</span>
+            <div class="button">
+                <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
+                <div class="button_left">
+                    <a class="button_product open-modal" href="#modal-add">Thêm danh mục</a>
+                </div>
+                <% } else { %>
+                <% } %>
+                <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
+                <div class="button_right">
+                    <a class="button_product" href="CatalogRemoved.jsp">Danh mục đã xóa</a>
+                </div>
+                <% } else { %>
+                  <% } %>
             </div>
-            <% } else { %>
-            <% } %>
             <!-- users -->
             <div class="col-12 bg-pink">
                 <div class="main__table-wrap">
@@ -216,10 +222,11 @@
                             </td>
                         </tr>
                         <!-- modal delete -->
-                        <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal" style="height: 200px">
+                        <div id="modal-delete<%=i%>" class="zoom-anim-dialog mfp-hide modal" style="height: 300px">
                             <form method="post" action="deleteTypeCake">
                             <h6 class="modal__title">Xóa danh mục</h6>
-                            <p class="modal__text">Bạn có chắc muốn xóa danh mục này?</p>
+                                <p class="modal__text  text-danger">Việc xóa danh mục sẽ xóa luôn những sản phẩm liên quan </p>
+                            <p class="modal__text font-size-20">Bạn có chắc xóa danh mục này?</p>
                             <div class="modal__btns">
                                 <input style="display: none" name="idType" value="<%=list.get(i).getIdType()%>">
                                 <button class="modal__btn modal__btn--apply" type="submit">Xóa</button>

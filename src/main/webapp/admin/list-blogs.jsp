@@ -17,6 +17,7 @@
 	<!-- Icon Font Stylesheet -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
     
 	<!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
@@ -161,17 +162,20 @@
                     </div>
                 </div>
                 <!-- end main title -->
-                <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
-<%--                <div class="paginator-wrap" style="margin-top: -10px">--%>
-<%--                    <span><a href="add-blog.jsp" style="color: white;"> Thêm tin tức mới</a></span>--%>
-<%--                </div>--%>
-               <div class="button">
-                   <div class="button_left">
-                       <a class="button_product" href="add-blog.jsp">Thêm tin tức mới</a>
-                   </div>
-               </div>
-                <% } else { %>
-                <% } %>
+                <div class="button">
+                    <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
+                    <div class="button_left">
+                        <a class="button_product" href="add-blog.jsp">Thêm tin tức</a>
+                    </div>
+                    <% } else { %>
+                    <% } %>
+                    <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
+                    <div class="button_right">
+                        <a class="button_product" href="ListBlogsRemoved.jsp">Tin tức đã xóa</a>
+                    </div>
+                    <% } else { %>
+                    <% } %>
+                </div>
                 <!-- users -->
                 <div class="col-12 bg-pink">
                     <div class="main__table-wrap">

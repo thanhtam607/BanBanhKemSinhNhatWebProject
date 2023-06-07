@@ -2,25 +2,25 @@ CREATE DATABASE banbanhkem;
 use banbanhkem;
 -- --
 /*==============================typeOfCake=====================================*/
-create table typeOfCake(idType char (4) not null PRIMARY key, name varchar(40));
+create table typeOfCake(idType char (4) not null PRIMARY key, name varchar(40), status int);
 -- --
-INSERT INTO typeOfCake VALUES ('LB01', 'Bánh hoa');
-INSERT INTO typeOfCake VALUES ('LB02', 'Bánh trang trí con thú');
-INSERT INTO typeOfCake VALUES ('LB03', 'Bánh trái cây');
-INSERT INTO typeOfCake VALUES ('LB04', 'Bánh nhân vật hoạt hình');
-INSERT INTO typeOfCake VALUES ('LB05', 'Bánh hoa mousse');
-INSERT INTO typeOfCake VALUES ('LB06', 'Bánh maccaron và socola');
-INSERT INTO typeOfCake VALUES ('LB07', 'Bánh hình lạ mắt');
-INSERT INTO typeOfCake VALUES ('LB08', 'Bánh trang trí đơn giản');
+INSERT INTO typeOfCake VALUES ('LB01', 'Bánh hoa', 1);
+INSERT INTO typeOfCake VALUES ('LB02', 'Bánh trang trí con thú', 1);
+INSERT INTO typeOfCake VALUES ('LB03', 'Bánh trái cây', 1);
+INSERT INTO typeOfCake VALUES ('LB04', 'Bánh nhân vật hoạt hình', 1);
+INSERT INTO typeOfCake VALUES ('LB05', 'Bánh hoa mousse', 1);
+INSERT INTO typeOfCake VALUES ('LB06', 'Bánh maccaron và socola', 1);
+INSERT INTO typeOfCake VALUES ('LB07', 'Bánh hình lạ mắt', 1);
+INSERT INTO typeOfCake VALUES ('LB08', 'Bánh trang trí đơn giản', 1);
 
 /*==============================products=====================================*/
 create table products(idProduct char(4) not null PRIMARY KEY, idType char(4), productName LONGTEXT,
-										size varchar(10), weight int, description longtext, introduction longtext, price float, STATUS tinyint(4) DEFAULT 0,
-										CONSTRAINT f_mlb FOREIGN KEY(idType) REFERENCES typeOfCake(idType));
+                      size varchar(10), weight int, description longtext, introduction longtext, price float, STATUS tinyint(4) DEFAULT 0,
+                      CONSTRAINT f_mlb FOREIGN KEY(idType) REFERENCES typeOfCake(idType));
 -- --
 -- --
 INSERT INTO products VALUES ('B001', 'LB01','Bánh cánh đồng hoa', 'Vừa', 500,
-"Bánh kem phong cách hoa Hàn Quốc, ngon và đẹp, chất lượng luôn tươi mới, nguyên liệu hoàn toàn cao cấp được chọn lọc kỹ càng, đảm bảo an toàn vệ sinh thực phẩm, bảo vệ sức khỏe cho người dùng đó chính là điều mà chúng tôi muốn mang lại cho quý khách hàng. Phần hoa của bánh sẽ được làm từ kem bơ, kem tươi tạo nên vị bánh cũng rất ấn tượng, ngọt dịu, không gây ngán. Các thợ làm bánh phải bắt từng bông hoa, để cho thật lạnh để hoa đông cứng rồi mới sắp xếp lên bánh cho hài hoà. Vì vậy cần rất nhiều thời gian, sự kiên nhẫn và cả sự khéo léo. Mỗi chiếc bánh thật sự là một tác phẩm nghệ thuật.", "Trong những dịp lễ, ngày kỷ niệm hay sinh nhật, không cần một món quà quá khoa trương, đơn giản chỉ là một chiếc bánh kem được trang trí bằng những bông hoa sắc màu, bắt mắt cũng khiến bữa tiệc trở nên lung linh mà người nhận thì vui vẻ rồi. Bánh thích hợp tặng chị gái, mẹ, cô giáo.", 450000, 0);
+                             "Bánh kem phong cách hoa Hàn Quốc, ngon và đẹp, chất lượng luôn tươi mới, nguyên liệu hoàn toàn cao cấp được chọn lọc kỹ càng, đảm bảo an toàn vệ sinh thực phẩm, bảo vệ sức khỏe cho người dùng đó chính là điều mà chúng tôi muốn mang lại cho quý khách hàng. Phần hoa của bánh sẽ được làm từ kem bơ, kem tươi tạo nên vị bánh cũng rất ấn tượng, ngọt dịu, không gây ngán. Các thợ làm bánh phải bắt từng bông hoa, để cho thật lạnh để hoa đông cứng rồi mới sắp xếp lên bánh cho hài hoà. Vì vậy cần rất nhiều thời gian, sự kiên nhẫn và cả sự khéo léo. Mỗi chiếc bánh thật sự là một tác phẩm nghệ thuật.", "Trong những dịp lễ, ngày kỷ niệm hay sinh nhật, không cần một món quà quá khoa trương, đơn giản chỉ là một chiếc bánh kem được trang trí bằng những bông hoa sắc màu, bắt mắt cũng khiến bữa tiệc trở nên lung linh mà người nhận thì vui vẻ rồi. Bánh thích hợp tặng chị gái, mẹ, cô giáo.", 450000, 0);
 
 INSERT INTO products  VALUES ('B002','LB01', 'Bánh hoa hồng kem dâu tây', 'Vừa', 500,"Bánh kem phong cách hoa Hàn Quốc, ngon và đẹp, chất lượng luôn tươi mới, nguyên liệu hoàn toàn cao cấp được chọn lọc kỹ càng, đảm bảo an toàn vệ sinh thực phẩm, bảo vệ sức khỏe cho người dùng đó chính là điều mà chúng tôi muốn mang lại cho quý khách hàng. Phần hoa của bánh sẽ được làm từ kem bơ, kem tươi tạo nên vị bánh cũng rất ấn tượng, ngọt dịu, không gây ngán. Các thợ làm bánh phải bắt từng bông hoa, để cho thật lạnh để hoa đông cứng rồi mới sắp xếp lên bánh cho hài hoà. Vì vậy cần rất nhiều thời gian, sự kiên nhẫn và cả sự khéo léo. Mỗi chiếc bánh thật sự là một tác phẩm nghệ thuật.", "Trong những dịp lễ, ngày kỷ niệm hay sinh nhật, không cần một món quà quá khoa trương, đơn giản chỉ là một chiếc bánh kem được trang trí bằng những bông hoa sắc màu, bắt mắt cũng khiến bữa tiệc trở nên lung linh mà người nhận thì vui vẻ rồi. Bánh thích hợp tặng chị gái, mẹ, cô giáo.", 450000, 0);
 
@@ -221,11 +221,11 @@ INSERT INTO products VALUES ('B100', 'LB06','Bánh kem chery kem tươi', 'Vừa
 
 /*==============================discounts=====================================*/
 create table discounts( id int AUTO_INCREMENT PRIMARY KEY,
-                   idProduct char(4),
-                   discount DOUBLE,
-                   startDate datetime,
-                   expiryDate datetime,
-                   CONSTRAINT f_mk FOREIGN KEY(idProduct) REFERENCES products(idProduct));
+                        idProduct char(4),
+                        discount DOUBLE,
+                        startDate datetime,
+                        expiryDate datetime,
+                        CONSTRAINT f_mk FOREIGN KEY(idProduct) REFERENCES products(idProduct));
 insert into discounts(idProduct, discount, startDATE, expiryDate)  values('B003', 0.2, '2022/12/11', '2023/12/20');
 insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B007', 0.3, '2022/12/11', '2023/12/20');
 insert into discounts(idProduct, discount, startDATE, expiryDate) values( 'B009', 0.5, '2022/12/11', '2023/12/20');
@@ -697,11 +697,11 @@ INSERT INTO productImgs VALUES('ASP100-3','B100','img/product/B100/banh3.jpg', 0
 
 /*==============================productDetails=====================================*/
 create table productDetails(idProduct char(4) not null,
-															quantity int,
-															 inventory int,
-															dateOfManufacture DATETIME,
-															expirationDate DATETIME,
-										CONSTRAINT f_mspproductDetails FOREIGN KEY(idProduct) REFERENCES products(idProduct));
+                            quantity int,
+                            inventory int,
+                            dateOfManufacture DATETIME,
+                            expirationDate DATETIME,
+                            CONSTRAINT f_mspproductDetails FOREIGN KEY(idProduct) REFERENCES products(idProduct));
 INSERT INTO productDetails VALUES('B001', 10, 10, '2022/10/12', '2022/10/15');
 INSERT INTO productDetails VALUES('B002', 10, 10, '2022/10/12', '2022/10/15');
 INSERT INTO productDetails VALUES('B003', 15, 10, '2022/10/12', '2022/10/15');
@@ -826,30 +826,30 @@ INSERT INTO ACCOUNTS VALUES('AD10', 'nhom275@gmail.com', '8a050fa1b4e6ed4a406292
 
 /*==============================CUSTOMERS=====================================*/
 CREATE TABLE CUSTOMERS(ID CHAR(50) PRIMARY KEY NOT NULL,
-											 ADDRESS VARCHAR(60),
-											 PHONE VARCHAR(10),
-											 CONSTRAINT f_mTK FOREIGN KEY (ID) REFERENCES ACCOUNTS(ID));
- INSERT INTO CUSTOMERS VALUES('AD01','TP.HCM', '0978675678');
- INSERT INTO CUSTOMERS VALUES('AD02', 'TP.HCM', '0987675435');
- INSERT INTO CUSTOMERS VALUES('AD03', 'TP.HCM', '0987863764');
- INSERT INTO CUSTOMERS VALUES('AD04', 'TP.HCM', '0987467536');
- INSERT INTO CUSTOMERS VALUES('AD05', 'BINH DUONG', '0987463578');
- INSERT INTO CUSTOMERS VALUES('AD06',  'DONG NAI', '0978365478');
- INSERT INTO CUSTOMERS VALUES('AD07',  'TP.HCM', '0987425367');
- INSERT INTO CUSTOMERS VALUES('AD08',  'TP.HCM', '0976456736');
- INSERT INTO CUSTOMERS VALUES('AD09',  'LONG AN', '0978365627');
- INSERT INTO CUSTOMERS VALUES('AD10', 'TP.HCM', '0987362567');
+                       ADDRESS VARCHAR(60),
+                       PHONE VARCHAR(10),
+                       CONSTRAINT f_mTK FOREIGN KEY (ID) REFERENCES ACCOUNTS(ID));
+INSERT INTO CUSTOMERS VALUES('AD01','TP.HCM', '0978675678');
+INSERT INTO CUSTOMERS VALUES('AD02', 'TP.HCM', '0987675435');
+INSERT INTO CUSTOMERS VALUES('AD03', 'TP.HCM', '0987863764');
+INSERT INTO CUSTOMERS VALUES('AD04', 'TP.HCM', '0987467536');
+INSERT INTO CUSTOMERS VALUES('AD05', 'BINH DUONG', '0987463578');
+INSERT INTO CUSTOMERS VALUES('AD06',  'DONG NAI', '0978365478');
+INSERT INTO CUSTOMERS VALUES('AD07',  'TP.HCM', '0987425367');
+INSERT INTO CUSTOMERS VALUES('AD08',  'TP.HCM', '0976456736');
+INSERT INTO CUSTOMERS VALUES('AD09',  'LONG AN', '0978365627');
+INSERT INTO CUSTOMERS VALUES('AD10', 'TP.HCM', '0987362567');
 
 
- /*==============================BILLS=====================================*/
+/*==============================BILLS=====================================*/
 CREATE TABLE BILLS(ID CHAR(4) PRIMARY KEY,
-											CUSTOMER_ID CHAR(50),
-											EXPORT_DATE DATETIME NOT NULL,
-											NOTES LONGTEXT,
-											PRO_BILL FLOAT,
-											FEE_BILL FLOAT,
-											STATUS int DEFAULT 0,
-											CONSTRAINT f_kh FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(ID ));
+                   CUSTOMER_ID CHAR(50),
+                   EXPORT_DATE DATETIME NOT NULL,
+                   NOTES LONGTEXT,
+                   PRO_BILL FLOAT,
+                   FEE_BILL FLOAT,
+                   STATUS int DEFAULT 0,
+                   CONSTRAINT f_kh FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(ID ));
 INSERT INTO BILLS VALUES('HD01', 'AD02', '2022/10/12','Giao sớm, đúng địa chỉ nha shop ơi',900000,0, 0);
 INSERT INTO BILLS VALUES('HD02', 'AD04', '2022/10/19','Giao sớm, đúng địa chỉ nha shop ơi',330000,0, 1);
 INSERT INTO BILLS VALUES('HD03', 'AD05', '2022/10/12','Giao sớm, đúng địa chỉ nha shop ơi',950000,0, 0);
@@ -868,12 +868,12 @@ INSERT INTO BILLS VALUES('HD15', 'AD02', '2023/1/8','Giao sớm, đúng địa c
 
 /*==============================BILL_DETAIL=====================================*/
 CREATE TABLE BILL_DETAIL(ID CHAR(4),
-									 idProduct CHAR(4),
-										AMOUNT INT,
-										NOTES LONGTEXT,
-										PRICE int,
-										CONSTRAINT f_mhdcthd FOREIGN KEY(idProduct) REFERENCES products(idProduct),
-										CONSTRAINT f_mspcthd FOREIGN KEY (ID) REFERENCES BILLS(ID));
+                         idProduct CHAR(4),
+                         AMOUNT INT,
+                         NOTES LONGTEXT,
+                         PRICE int,
+                         CONSTRAINT f_mhdcthd FOREIGN KEY(idProduct) REFERENCES products(idProduct),
+                         CONSTRAINT f_mspcthd FOREIGN KEY (ID) REFERENCES BILLS(ID));
 INSERT INTO BILL_DETAIL VALUES('HD01', 'B001', 2, 'Chúc mừng sinh nhật 2 tuổi',450000);
 INSERT INTO BILL_DETAIL VALUES('HD02', 'B005', 1, 'Chúc mừng sinh nhật 32 tuổi',330000);
 INSERT INTO BILL_DETAIL VALUES('HD03', 'B039', 1, 'Chúc mừng sinh nhật 25 tuổi',650000);
@@ -897,15 +897,15 @@ INSERT INTO BILL_DETAIL VALUES('HD15', 'B090', 1, 'Chúc mừng sinh nhật 20 t
 
 /*=============================================DELIVERY=======================================*/
 CREATE TABLE DELIVERY(ID CHAR(4),
-										    DELIVERY_DATE DATETIME NOT NULL,
-												WARD_ID LONGTEXT,
-												DISTRICT_ID LONGTEXT,
-												ADDRESS LONGTEXT NOT NULL,
-												EMAIL VARCHAR(100),
-												PHONE VARCHAR(12),
-												NAMECUSTOMER VARCHAR(100),
-												CONSTRAINT f_mhdgh FOREIGN KEY(ID) REFERENCES BILLS(ID));
-												
+                      DELIVERY_DATE DATETIME NOT NULL,
+                      WARD_ID LONGTEXT,
+                      DISTRICT_ID LONGTEXT,
+                      ADDRESS LONGTEXT NOT NULL,
+                      EMAIL VARCHAR(100),
+                      PHONE VARCHAR(12),
+                      NAMECUSTOMER VARCHAR(100),
+                      CONSTRAINT f_mhdgh FOREIGN KEY(ID) REFERENCES BILLS(ID));
+
 INSERT INTO DELIVERY VALUES('HD01', '2022/10/14','21208','1533', 'TP HCM', null, null,null);
 INSERT INTO DELIVERY VALUES('HD02', '2022/10/23','21208','1533', 'TP HCM', null, null,null);
 INSERT INTO DELIVERY VALUES('HD03', '2022/10/15','21208','1533', 'TP HCM', null, null,null);
@@ -996,24 +996,24 @@ INSERT INTO BLOGS VALUES('BL04', 'img/blog/BL04/blog4.jpg', 'Tại sao sinh nh�
 <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">&nbsp; &nbsp; Đồ vật kh&ocirc;ng thể thiếu cho tiệc sinh nhật tất nhi&ecirc;n l&agrave; b&aacute;nh kem. Việc cắm nến sinh nhật tr&ecirc;n b&aacute;nh c&oacute; &yacute; nghĩa l&agrave; tỏa s&aacute;ng rực rỡ. Nếu cắm tr&ecirc;n b&aacute;nh đủ số nến bằng số tuổi v&agrave; thổi tắt trong 1 lần sẽ gặp được điều may v&agrave; tốt l&agrave;nh. Nếu kh&ocirc;ng tắt hết th&igrave; điều ước sẽ kh&ocirc;ng trở th&agrave;nh hiện thực. Một v&agrave;i nơi c&ograve;n c&oacute; những n&eacute;t văn h&oacute;a đặc trưng ri&ecirc;ng, với m&oacute;n ăn truyền thống v&agrave;o sinh nhật hay tập tục n&agrave;o đ&oacute;. Như quệt kem l&ecirc;n mặt chủ nh&acirc;n bữa tiệc trước khi cắt b&aacute;nh, ăn m&igrave; trường thọ v&agrave;o ng&agrave;y sinh nhật&hellip; Để sinh nhật c&oacute; &yacute; nghĩa hơn, kh&ocirc;ng g&igrave; bằng tự tay chuẩn bị chiếc b&aacute;nh sinh nhật tặng cho người m&igrave;nh y&ecirc;u thương. Nếu chưa c&oacute; &yacute; tưởng hay c&aacute;c dụng cụ l&agrave;m b&aacute;nh, h&atilde;y đến với Paolo Bakery để chọn những chiếc b&aacute;nh xinh xắn nhất nh&eacute;! Tiệm b&aacute;nh HP l&agrave; một trong những cơ sở cung cấp b&aacute;nh sinh nhật lấy ngay v&ocirc; c&ugrave;ng chất lượng tại TP HCM. Kh&aacute;ch h&agrave;ng c&oacute; thể tự chọn mẫu b&aacute;nh hoặc y&ecirc;u cầu theo mong muốn của m&igrave;nh. Chỉ cần gửi y&ecirc;u cầu về chiếc b&aacute;nh bạn cần, c&ograve;n lại cứ để HP lo. B&aacute;nh kem sẽ được ho&agrave;n thiện v&agrave; ship tận tay bạn. HP hiện tại cung cấp c&aacute;c d&ograve;ng b&aacute;nh sinh nhật, b&aacute;nh kem sự kiện, b&aacute;nh mousse, b&aacute;nh b&ocirc;ng lan trứng muối v&agrave; c&aacute;c loại b&aacute;nh hot trend kh&aacute;c...</span></p>
 ', 'Đời Sống', 'Ý nghĩa bánh',0);
 create table FEEDBACKS(id INT AUTO_INCREMENT PRIMARY KEY,
-												username varchar(50), 
-												email varchar(50), 
-												feedback longtext, 
-												fbDate datetime);
+                       username varchar(50),
+                       email varchar(50),
+                       feedback longtext,
+                       fbDate datetime);
 
-CREATE table LOGS(ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
-										LEVEL TINYINT(4) not null DEFAULT(0), 
-										USER char(50), 
-										SRC longtext not null DEFAULT('none'), 
-										CONTENT LONGTEXT,
-										CREATE_AT datetime DEFAULT(NOW()), 
-										STATUS TINYINT(4) not null DEFAULT(0));
-										
-create table cartItems(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
-											customer_id char(50) , 
-											idProduct char(4) , 
-											quantity int ,FOREIGN KEY (customer_id)REFERENCES CUSTOMERS(ID),
-											FOREIGN KEY (idProduct)REFERENCES products(idProduct));
+CREATE table LOGS(ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+                  LEVEL TINYINT(4) not null DEFAULT(0),
+                  USER char(50),
+                  SRC longtext not null DEFAULT('none'),
+                  CONTENT LONGTEXT,
+                  CREATE_AT datetime DEFAULT(NOW()),
+                  STATUS TINYINT(4) not null DEFAULT(0));
+
+create table cartItems(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+                       customer_id char(50) ,
+                       idProduct char(4) ,
+                       quantity int ,FOREIGN KEY (customer_id)REFERENCES CUSTOMERS(ID),
+                       FOREIGN KEY (idProduct)REFERENCES products(idProduct));
 create table general_infor(id char(5) NOT NULL PRIMARY KEY,
                            type varchar(20) not null,
                            content text);
