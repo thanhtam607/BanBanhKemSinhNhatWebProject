@@ -333,7 +333,7 @@
                     for(int i = 0; i<3;i++){
                         Blog b2 = list2.get(i);
                         String[] rs = b2.getCont().split("\\n");
-                if(b2.getStatus() == -1){ %>
+                if(b2.getStatus() == 1){ %>
                 <div class="col-lg-4 col-md-4 col-sm-6" style = "display: none">
                     <div class="blog__item">
                         <div class="blog__item__pic">

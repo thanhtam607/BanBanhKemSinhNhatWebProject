@@ -15,6 +15,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <%@ page import="java.net.URLDecoder" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -175,7 +176,7 @@
                 <% } %>
                 <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                 <div class="button_right">
-                    <a class="button_product" href="CatalogRemoved.jsp">Danh mục đã xóa</a>
+                    <a class="button_product" href="CatalogRemoved.jsp">Danh mục đã xóa(<%=ProductService.getListTypeRemove().size()%>)</a>
                 </div>
                 <% } else { %>
                   <% } %>

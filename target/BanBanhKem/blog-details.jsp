@@ -319,7 +319,7 @@
                                 for(int i = 0; i<3;i++){
                                     Blog bloghot = listhotblog.get(i);
                                     String[] rs = bloghot.getCont().split("\\n");
-                            if(bloghot.getStatus() == -1) { %>
+                            if(bloghot.getStatus() == 1) { %>
                             <div class="col-lg-4 col-md-4 col-sm-6" style="display: none">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">

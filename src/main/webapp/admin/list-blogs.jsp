@@ -171,7 +171,7 @@
                     <% } %>
                     <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
                     <div class="button_right">
-                        <a class="button_product" href="ListBlogsRemoved.jsp">Tin tức đã xóa</a>
+                        <a class="button_product" href="ListBlogsRemoved.jsp">Tin tức đã xóa(<%=BlogService.getDataRemove().size()%>)</a>
                     </div>
                     <% } else { %>
                     <% } %>
@@ -217,7 +217,7 @@
                                     </td>
                                     <td style="display: none">
                                         <%String main__btn ="";
-                                            if(BlogService.findById(blog.getId()).getStatus() == -1){
+                                            if(BlogService.findById(blog.getId()).getStatus() == 1){
                                                 main__btn = "main__table-btn--delete";
                                             }else{
                                                 main__btn = "main__table-btn--banned";
@@ -227,7 +227,7 @@
                                     <td>
                                         <div class="main__table-btns">
                                             <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
-                                            <%if(BlogService.findById(blog.getId()).getStatus() == -1){%>
+                                            <%if(BlogService.findById(blog.getId()).getStatus() == 1){%>
                                             <a href="#modal-status-unlock<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
@@ -260,7 +260,7 @@
                                     <h6 class="modal__title">Ẩn tin tức</h6>
                                     <p class="modal__text">Bạn có chắc muốn ẩn tin tức này này?</p>
                                     <input name = "mablog" value="<%=blog.getId()%>" style="display: none">
-                                    <input name = "stt" value="-1" style="display: none">
+                                    <input name = "stt" value="1" style="display: none">
                                     <div class="modal__btns">
                                         <button class="modal__btn modal__btn--apply" type="submit">Ẩn</button>
                                         <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
