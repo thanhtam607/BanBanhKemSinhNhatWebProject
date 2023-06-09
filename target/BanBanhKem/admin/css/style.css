@@ -67,9 +67,6 @@
 .boder-none{
     border: none;
 }
-.cl-pink{
-    color: #ff96b7;
-}
 /*** Spinner ***/
 #spinner {
     opacity: 0;

@@ -32,8 +32,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 
   <!-- Favicons -->
-  <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+  <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
 
   <!-- boostrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -133,7 +132,6 @@
               <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
                 <%List<String> listOption = new ArrayList<String>();
                   listOption.add("Mặc định");
-                  listOption.add("Theo ngày đặt");
                   listOption.add("Theo đơn giá");
                   String val;
                   for(String s: listOption){

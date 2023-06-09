@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="BanBanhKemSinhNhatWebProject" options="" />
+      <module name="BanBanhKemSinhNhatWebProject" options="--add-modules java.sql" />
     </option>
   </component>
 </project>

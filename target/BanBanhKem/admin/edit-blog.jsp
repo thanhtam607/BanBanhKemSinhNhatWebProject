@@ -30,8 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
 
     <!-- boostrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -42,6 +41,7 @@
 
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
 
 
     <meta name="description" content="">
@@ -148,7 +148,7 @@
                                 <p class="modal__text">Chọn hình ảnh</p>
                                 <input type="text" class="form__input" name="idblog" style="display: none" value="<%=b.getId()%>">
                                 <input name = "oldImg" value="<%=b.getImg()%>" style="display: none">
-                                <input type="file" class="form__input" name="img">
+                                <input type="file" class="form__input" name="img" required>
                                 <div class="modal__btns">
                                     <button class="modal__btn modal__btn--apply" type="submit">Xong</button>
                                     <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>
@@ -191,7 +191,7 @@
                                 <form method="post" action="UpdateTitle">
                                     <h6 class="modal__title">Đổi tên tin tức</h6>
                                     <label class="form__label" for="update-name" style="color: white;">Tên danh mục</label>
-                                    <input id="update-name" type="text" name="title" class="form__input" value="<%=b.getTitle()%>">
+                                    <input id="update-name" type="text" name="title" class="form__input" value="<%=b.getTitle()%>" required>
                                     <input name = "idb" value="<%=b.getId()%>" style="display: none">
                                     <div class="modal__btns">
                                         <button class="modal__btn modal__btn--apply" type="submit">Xác nhận</button>
@@ -261,7 +261,7 @@
                                             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                                 <div class="form__group">
                                                     <label class="form__label" for="content">Nội dung</label>
-                                                    <textarea class="form__input text-justify"  id="content" name="content" form="info-blog">
+                                                    <textarea class="form__input text-justify"  id="content" name="content" form="info-blog" required>
                                                     <% String[] rs = b.getCont().split("\\n");
                                                     for(int i = 0; i < rs.length; i++){%>
                                                         <%=rs[i] + '\n'%>&#10;
