@@ -8,6 +8,7 @@ import vn.edu.hcmuaf.fit.service.ReceiptService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class LogisticController {
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(response.toString());
         JsonObject object = element.getAsJsonObject();
+
         return object;
     }
 
@@ -248,7 +250,7 @@ public class LogisticController {
             String createdAt = logistic.get("created_at").getAsString();
             String id = logistic.get("id").getAsString();
             transportOrder = new TransportOrder(fromDistrictID, fromWardID, toDistrictID, toWardID, height, length, width, weight, fee, leadTime, active, updatedAt, createdAt, id);
-            System.out.println(transportOrder);
+//            System.out.println(logistic);
             return transportOrder;
         }
         return null;
@@ -329,6 +331,7 @@ public class LogisticController {
 //        ReceiptService.updateDeliveryDateInBill("HD01", ReceiptService.convertDate(transportOrder.getLeadTime()));
 //        System.out.println(controller.getCalculateFee(FROM_DISTRICT_ID,FROM_WARD_ID, "1454", "21201", 12, 20, 20, 400));
 //        System.out.println(controller.getLeadTime(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100).replaceAll("[TZ]", ""));
+//        System.out.println(controller.registerTranport(controller.FROM_DISTRICT_ID, controller.FROM_WARD_ID, "1456", "21501", 12, 20,20, 400));
 //        System.out.println(controller.registerTranport("3695","90750", "2270", "231013", 100, 150, 100, 100));
 //        System.out.println(ReceiptService.convertDate(1686441599));
 //        System.out.println(controller.register("Nhom27", "nhom27@gmail.com", "123456", "123456"));
@@ -340,7 +343,7 @@ public class LogisticController {
 
 //        List<District> dis = controller.getDistrictByProvinceID("202");
 //        for (District dt: dis) System.out.println(dt);
-//
+////
 //        List<Ward> wards = controller.getWardByDistrictID("1454");
 //        for (Ward w: wards) System.out.println(w);
 // phường 90750, quận 3695, tp 202

@@ -111,7 +111,7 @@
                                 <% } else { %>
                                 <% } %>
                                 <a href="edit-profile.jsp" class="dropdown-item">Hồ sơ của tôi</a>
-                                <a href="/doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
+                                <a href="./doSignOut" method="get" class="dropdown-item">Đăng xuất</a>
                             </div>
                         <%}%>
                     </div>

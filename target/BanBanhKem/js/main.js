@@ -890,8 +890,8 @@ function addOrder() {
         ;
     }
 
-    var huyentxt = selectElement2.options[selectElement3.selectedIndex].value;
-    var xatxt = selectElement3.options[selectElement3.selectedIndex].value;
+    var huyentxt = selectElement2.value;
+    var xatxt = selectElement3.value;
 
     var huyen = huyentxt.replace(/"/g, '');
     var xa = xatxt.replace(/"/g, '');

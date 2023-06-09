@@ -237,7 +237,7 @@
                             </td>
                             <td>
                                 <%Discount discount =pro.getDiscount(); %>
-                                <div class="main__table-text"><%=discount.getDiscount()*100%></div>
+                                <div class="main__table-text"><%=discount.getDiscount()%></div>
                             </td>
                             <td>
                                 <div class="main__table-btns">
