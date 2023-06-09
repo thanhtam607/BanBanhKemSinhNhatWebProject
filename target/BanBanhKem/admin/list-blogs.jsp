@@ -17,6 +17,7 @@
 	<!-- Icon Font Stylesheet -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
     
 	<!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
@@ -161,17 +162,20 @@
                     </div>
                 </div>
                 <!-- end main title -->
-                <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
-<%--                <div class="paginator-wrap" style="margin-top: -10px">--%>
-<%--                    <span><a href="add-blog.jsp" style="color: white;"> Thêm tin tức mới</a></span>--%>
-<%--                </div>--%>
-               <div class="button">
-                   <div class="button_left">
-                       <a class="button_product" href="add-blog.jsp">Thêm tin tức mới</a>
-                   </div>
-               </div>
-                <% } else { %>
-                <% } %>
+                <div class="button">
+                    <% if(user.getIsadd() == 1 || user.getRole() == 2) { %>
+                    <div class="button_left">
+                        <a class="button_product" href="add-blog.jsp">Thêm tin tức</a>
+                    </div>
+                    <% } else { %>
+                    <% } %>
+                    <% if(user.getIsdelete() == 1 || user.getRole() == 2) { %>
+                    <div class="button_right">
+                        <a class="button_product" href="ListBlogsRemoved.jsp">Tin tức đã xóa(<%=BlogService.getDataRemove().size()%>)</a>
+                    </div>
+                    <% } else { %>
+                    <% } %>
+                </div>
                 <!-- users -->
                 <div class="col-12 bg-pink">
                     <div class="main__table-wrap">
@@ -213,7 +217,7 @@
                                     </td>
                                     <td style="display: none">
                                         <%String main__btn ="";
-                                            if(BlogService.findById(blog.getId()).getStatus() == -1){
+                                            if(BlogService.findById(blog.getId()).getStatus() == 1){
                                                 main__btn = "main__table-btn--delete";
                                             }else{
                                                 main__btn = "main__table-btn--banned";
@@ -223,7 +227,7 @@
                                     <td>
                                         <div class="main__table-btns">
                                             <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
-                                            <%if(BlogService.findById(blog.getId()).getStatus() == -1){%>
+                                            <%if(BlogService.findById(blog.getId()).getStatus() == 1){%>
                                             <a href="#modal-status-unlock<%=i%>" class="main__table-btn <%=main__btn%> open-modal">
                                                 <i class="fa fa-lock"></i>
                                             </a>
@@ -256,7 +260,7 @@
                                     <h6 class="modal__title">Ẩn tin tức</h6>
                                     <p class="modal__text">Bạn có chắc muốn ẩn tin tức này này?</p>
                                     <input name = "mablog" value="<%=blog.getId()%>" style="display: none">
-                                    <input name = "stt" value="-1" style="display: none">
+                                    <input name = "stt" value="1" style="display: none">
                                     <div class="modal__btns">
                                         <button class="modal__btn modal__btn--apply" type="submit">Ẩn</button>
                                         <button class="modal__btn modal__btn--dismiss" type="button">Quay lại</button>

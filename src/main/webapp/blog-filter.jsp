@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 <!-- ==================== -->
 
     <!-- Css Styles -->
@@ -219,7 +220,7 @@
                                         <% List<Blog> list1 = (List<Blog>) request.getAttribute("list");
                                             for(Blog b1: list1){ %>
                                         <div class="blog__sidebar__recent">
-                                            <% if(b1.getStatus() == -1) { %>
+                                            <% if(b1.getStatus() == 1) { %>
                                             <a href="BlogDetails?id=<%=b1.getId()%>" class="blog__sidebar__recent__item" style="display: none">
                                                 <div class="blog__sidebar__recent__item__pic">
                                                     <img src="<%=b1.getImg()%>" alt="">
@@ -260,7 +261,7 @@
                                     <% List<Blog> list = (List<Blog>) request.getAttribute("list");
                                         for(Blog b: list){
                                             String[] rs = b.getCont().split("\\n");
-                                    if(b.getStatus() == -1){%>
+                                    if(b.getStatus() == 1){%>
                                     <div class="col-lg-6 col-md-6 col-sm-6" style="display: none">
                                         <div class="blog__item">
                                                 <div class="blog__item__pic">

@@ -34,8 +34,7 @@
 
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
 
     <!-- boostrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">

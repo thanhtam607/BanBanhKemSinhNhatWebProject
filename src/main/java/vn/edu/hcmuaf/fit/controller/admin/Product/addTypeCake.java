@@ -24,7 +24,7 @@ public class addTypeCake extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String name = request.getParameter("nameType");
         String id = ProductService.idMaxType();
-        TypeOfCake toc = new TypeOfCake(id, name);
+        TypeOfCake toc = new TypeOfCake(id, name, 1);
         ProductService.addTyofcake(toc);
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("auth");

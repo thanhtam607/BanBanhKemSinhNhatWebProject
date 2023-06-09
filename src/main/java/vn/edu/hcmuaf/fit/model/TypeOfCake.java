@@ -3,9 +3,11 @@ package vn.edu.hcmuaf.fit.model;
 public class TypeOfCake {
     String idType;
     String name;
-    public TypeOfCake(String idType, String name){
+    int status;
+    public TypeOfCake(String idType, String name, int status){
         this.idType=idType;
         this.name=name;
+        this.status = status;
     }
     public TypeOfCake( String name){
         this.idType= null;
@@ -26,5 +28,13 @@ public class TypeOfCake {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
