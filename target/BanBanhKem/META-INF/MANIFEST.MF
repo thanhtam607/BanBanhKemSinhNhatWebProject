@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
+<<<<<<< HEAD
+Built-By: thanh
+=======
 Built-By: maith
+>>>>>>> 54e1e6458683b56ef2fa5b7bc930911e0642dc19
 Build-Jdk: 19.0.2
 

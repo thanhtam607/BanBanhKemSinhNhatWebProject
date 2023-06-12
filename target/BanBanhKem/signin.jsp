@@ -76,7 +76,6 @@
                             <input type="checkbox" class="form-check-input toggle" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Lưu đăng nhập</label>
                         </div>
-
                         <script>
                             const toggle = document.querySelector(".toggle"),
                                 pass = document.querySelector(".pass");
