@@ -21,6 +21,7 @@
   <!-- Icon Font Stylesheet -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
@@ -123,7 +124,7 @@
 <div id="modal-sucess<%=i%>" class="modal-container">
   <div class="modal-admin">
     <h6 class="modal__title" style="margin-top: 20px">Xác nhận thay đổi quyền</h6>
-    <i class="fa fa-question-circle text--green" style="margin-left: 195px; font-size: 100px"></i>
+    <p class="text-center">Bạn có chắc chắn muốn thay đổi quyền cho nhân viên này?</p>
     <div class="button btn-sc" style="margin-top: 30px;">
       <div class="modal__btns ml">
         <button id="btn-scss<%=i%>" class="modal__btn modal__btn--apply">Xác nhận</button>

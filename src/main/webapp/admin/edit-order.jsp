@@ -20,6 +20,7 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
@@ -184,7 +185,11 @@
                                     <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form__group">
                                             <input class="d-none" id="idR" name="idR" value="<%=receipt.getId()%>">
-                                            <label class="form__label" for="dayD">Ngày giao</label>
+                                            <label class="form__label" for="dayD"><%if(receipt.getStatus() != 3 && receipt.getStatus() != 4){%>
+                                                Ngày giao
+                                            <%} else{%>
+                                                Ngày giao dự kiến
+                                                <%}%></label>
                                             <input type="datetime" id="dayD" name="dayD" class="form__input text-lowercase"
                                                    value="<%=receipt.getDelivery_date()%>">
                                         </div>
@@ -324,9 +329,6 @@
                                 <div class="col-12 col-lg-6">
                                     <a href="#modal-view"  type="button" class="form__btn open-modal">Thêm sản phẩm</a>
                                 </div>
-<%--                                <div class="col-12 col-lg-6">--%>
-<%--                                    <button onclick="save()" type="button" class="form__btn flex-row-reverse">Lưu thay đổi</button>--%>
-<%--                                </div>--%>
                                 <%}%>
                             </div>
                         </div>

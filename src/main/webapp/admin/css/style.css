@@ -26,8 +26,8 @@
     margin-right: auto;
     margin-top: 150px;
     width: 500px;
-    height: 250px;
-    border: rgb(37, 26, 26) solid 2px;
+    height: 180px;
+    border: #ff96b7 solid 2px;
     background-color: #fbf1f2;
     border-radius: 5px;
 }
@@ -67,7 +67,6 @@
 .boder-none{
     border: none;
 }
-
 /*** Spinner ***/
 #spinner {
     opacity: 0;
