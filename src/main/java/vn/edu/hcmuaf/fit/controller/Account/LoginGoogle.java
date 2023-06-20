@@ -84,7 +84,7 @@ public class LoginGoogle extends HttpServlet {
 
         List<ItemProductInCart> listItemCart = CartService.findItemCartByIdUser(user.getId());
         session.setAttribute("itemCart", listItemCart);
-        response.sendRedirect(request.getContextPath() + "/Index");
+        response.sendRedirect( "Index");
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

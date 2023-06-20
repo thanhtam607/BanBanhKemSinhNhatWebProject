@@ -66,8 +66,8 @@ public class ProductService {
             while (rs.next()) {
                 p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), findImagesByIdProduct(rs.getString(1)), rs.getInt(8), findCommentsByIdProduct(rs.getString(1)), findPDetailByIdProduct(rs.getString(1)), rs.getInt(9));
                 p.setDiscount(DiscountService.findByIdProduct(id));
-                }
-            }catch (SQLException e) {
+            }
+        }catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return p;
@@ -77,7 +77,7 @@ public class ProductService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT products.idProduct,products.STATUS ,sum(BILL_DETAIL.AMOUNT)as total FROM products, BILL_DETAIL WHERE products.idProduct = BILL_DETAIL.idProduct GROUP BY products.idProduct ,products.STATUS ORDER BY total DESC;");
+                ResultSet rs = statement.executeQuery("SELECT products.idProduct,products.STATUS ,sum(BILL_DETAIL.AMOUNT)as total FROM products, BILL_DETAIL WHERE products.idProduct = BILL_DETAIL.idProduct GROUP BY products.idProduct ORDER BY total DESC;");
                 while (rs.next()) {
                     int status = rs.getInt(2);
                     if(status==0) {
@@ -454,15 +454,15 @@ public class ProductService {
     public static List<Comment> findCommentsByIdProduct(String idProduct){
         List<Comment> list = new ArrayList<>();
         try{
-        PreparedStatement stm = con.prepareStatement("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID and idProduct=?");
-        stm.setString(1,idProduct);
-        ResultSet rsCmt = stm.executeQuery();
-        while(rsCmt.next()){
-            list.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
+            PreparedStatement stm = con.prepareStatement("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID and idProduct=?");
+            stm.setString(1,idProduct);
+            ResultSet rsCmt = stm.executeQuery();
+            while(rsCmt.next()){
+                list.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-    }
         return list;
     }
     public static List<Image> findImagesByIdProduct(String idProduct){
@@ -489,7 +489,7 @@ public class ProductService {
             while (rs.next()) {
                 detail = new ProductDetail(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
             }
-            }catch (SQLException e) {
+        }catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return detail;
@@ -579,7 +579,7 @@ public class ProductService {
         try {
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()){
-            result.add(rs.getString(1));
+                result.add(rs.getString(1));
             }
         } catch (SQLException se) {
             se.printStackTrace();
@@ -593,4 +593,3 @@ class IDComparator implements Comparator<Product> {
         return p2.getId().compareTo(p1.getName());
     }
 }
-

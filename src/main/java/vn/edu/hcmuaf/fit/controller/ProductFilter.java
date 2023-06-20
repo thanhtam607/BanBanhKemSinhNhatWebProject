@@ -29,7 +29,7 @@ public class ProductFilter extends HttpServlet {
             listFilter = ProductService.findByType(request.getParameter("filter"),ProductService.getListProduct());
         }
 
-        else if(listFilter.isEmpty()){
+       if(listFilter.isEmpty()){
             listFilter = ProductService.findByName(request.getParameter("search"), ProductService.getListProduct());
             title= "Kết quả tìm kiếm '" + request.getParameter("search")+"'";
 
