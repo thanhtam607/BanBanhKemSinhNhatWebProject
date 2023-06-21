@@ -205,7 +205,7 @@
                                             <i class="fas fa-info-circle text-center"></i>
                                         </a>
                                         <% if(user.getIsedit() == 1 || user.getRole() == 2) { %>
-                                        <%if(rc.getStatus() != 3){%>
+                                        <%if(rc.getStatus() != 3 && rc.getStatus() != 2){%>
                                         <a href="AdminEditOrder?id=<%=rc.getId()%>&tenkh=<%=UserService.findById(rc.getMakh()).getName()%>" class=" main__table-btn main__table-btn--edit px-1">
                                             <i class="fas fa-edit text-center"></i>
                                         </a>

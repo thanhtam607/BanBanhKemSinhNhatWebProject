@@ -141,28 +141,28 @@
             </div>
             <div class="col-12 d-flex form__content pl-0 pr-0">
                 <div class="col-6 pl-0 pr-0">
-                    <p class=" px-3">Người
+                    <p class="pb-2 border-bottom px-3">Người
                         nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getTenKH() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getTenKH() : "" %>
                     </p>
-                    <p class=" px-3">SĐT người
+                    <p class="pb-2 border-bottom px-3">SĐT người
                         nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getPhone() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getPhone() : ""%>
                     </p>
-                    <p class=" px-3">Email người
+                    <p class="pb-2 border-bottom px-3">Email người
                         nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getEmail() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getEmail() : ""%>
                     </p>
                 </div>
                 <div class="col-6 pl-0 pr-0">
-                    <p class=" px-3">Ngày Lập: <%=receipt.getExport_date()%>
+                    <p class="pb-2 border-bottom px-3">Ngày Lập: <%=receipt.getExport_date()%>
                     </p>
-                    <p class=" px-3">Ngày Giao Hàng: <%=receipt.getDelivery_date()%>
+                    <p class="pb-2 border-bottom px-3">Ngày Giao Hàng: <%=receipt.getDelivery_date()%>
                     </p>
-                    <p class=" px-3">Địa Chỉ Giao: <%=receipt.getAddress()%>
+                    <p class="pb-2 border-bottom px-3">Địa Chỉ Giao: <%=receipt.getAddress()%>
                     </p>
-                    <p class=" px-3">Trạng Thái: <%=URLDecoder.decode(receipt.getStatusName(), "UTF-8")%>
+                    <p class="px-3">Trạng Thái: <%=URLDecoder.decode(receipt.getStatusName(), "UTF-8")%>
                     </p>
                 </div>
             </div>
-            <p>Ghi Chú Chung: <%=receipt.getNote()%>
+            <p style="font-weight: 600">Ghi Chú Chung: <%=receipt.getNote()%>
             </p>
             <div class="table-responsive margin-top-20px col-12 pl-0">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">

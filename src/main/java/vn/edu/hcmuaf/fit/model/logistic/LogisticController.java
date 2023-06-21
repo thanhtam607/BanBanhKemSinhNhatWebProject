@@ -19,7 +19,7 @@ public class LogisticController {
     public static String FROM_WARD_ID = "90737"; // linh trung
 
     public LogisticController() throws IOException {
-        login("nhom27@gmail.com", "123456");
+        login("nhom17@gmail.com", "123456");
     }
 
     public JsonObject getJSONObjectFromConnection(HttpURLConnection connection) throws IOException {
@@ -334,7 +334,7 @@ public class LogisticController {
 //        System.out.println(controller.registerTranport(controller.FROM_DISTRICT_ID, controller.FROM_WARD_ID, "1456", "21501", 12, 20,20, 400));
 //        System.out.println(controller.registerTranport("3695","90750", "2270", "231013", 100, 150, 100, 100));
 //        System.out.println(ReceiptService.convertDate(1686441599));
-//        System.out.println(controller.register("Nhom27", "nhom27@gmail.com", "123456", "123456"));
+//        System.out.println(controller.register("Nhom17", "nhom17@gmail.com", "123456", "123456"));
 //        controller.changePass("1234536", "123", "123");
 //        System.out.println(controller.infoUser());
 
