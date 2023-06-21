@@ -16,7 +16,7 @@ public class InforService {
 
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  id, type, content from general_infor");
+                ResultSet rs = statement.executeQuery("SELECT  ID, TYPE, CONTENT from GENERAL_INFOR");
                 while(rs.next()) {
                      General_information gi = new General_information(rs.getString(1), rs.getString(2), rs.getString(3));
                     list.add(gi);
@@ -71,7 +71,7 @@ public class InforService {
     }
     public static  void updateContent(String id,String content){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "UPDATE general_infor SET content = '" + content + "' WHERE id = '" + id +"'";
+        String sql = "UPDATE GENERAL_INFOR SET CONTENT = '" + content + "' WHERE ID = '" + id +"'";
         try {
             stm.executeUpdate(sql);
 
@@ -81,7 +81,7 @@ public class InforService {
     }
     public static  void updateIntroduce(String id,String content){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "UPDATE general_infor SET content = '" + content + "' WHERE id = '" + id +"'";
+        String sql = "UPDATE GENERAL_INFOR SET CONTENT = '" + content + "' WHERE ID = '" + id +"'";
         try {
             stm.executeUpdate(sql);
 
