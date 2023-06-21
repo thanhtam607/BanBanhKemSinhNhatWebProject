@@ -131,17 +131,17 @@
 
         <div class="row">
           <div class="button_right">
-<%--            <a class="button_product" onclick="removeLog()"> Xóa nhật ký</a>--%>
+            <a class="button_product" onclick="removeLog()"> Xóa nhật ký</a>
             </div>
 
             <div class="form form--profile">
               <div class="row row--form">
                 <div class="col-12">
                   <table class="table table-striped log">
-<%--                    <div class="choose-all">--%>
-<%--                      <div>--%>
-<%--                        <input class="form-check-input" type="checkbox"  id="select-all" > Chọn tất cả</div>--%>
-<%--                    </div>--%>
+                    <div class="choose-all">
+                      <div>
+                        <input class="form-check-input" type="checkbox"  id="select-all" > Chọn tất cả</div>
+                    </div>
                     <thead>
                     <tr>
                       <th scope="col">Thời gian
@@ -219,7 +219,7 @@
                         </div>
                       </th>
                       <th class="bottom" scope="col">Source</th>
-<%--                      <th class="bottom" scope="col">Chọn</th>--%>
+                      <th class="bottom" scope="col">Chọn</th>
                     </tr>
                     </thead>
                     <tbody id="listLog">
@@ -236,9 +236,9 @@
                       <td><%=log.getUser()%></td>
                       <td><%=log.getContent()%></td>
                       <td><%=log.getSrc()%></td>
-<%--                      <td class="check" >--%>
-<%--                        <input class="form-check-input" type="checkbox" name="check" onclick="cancelSelectAll()" value="<%=log.getId()%>"></td>--%>
-<%--                      <td>--%>
+                      <td class="check" >
+                        <input class="form-check-input" type="checkbox" name="check" onclick="cancelSelectAll()" value="<%=log.getId()%>"></td>
+                      <td>
                     </tr>
                     <%}%>
 

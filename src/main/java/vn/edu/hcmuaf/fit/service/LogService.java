@@ -38,7 +38,7 @@ public class LogService {
                         if(user != null){
                             userN = user.getName();
                         }
-                        if(rs.getInt(7)!= -1) {
+                        if(rs.getInt(7) != -1) {
                             listLog.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
                         }
                     }
