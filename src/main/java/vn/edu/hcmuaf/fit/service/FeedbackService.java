@@ -19,7 +19,6 @@ public class FeedbackService {
         } catch (SQLException se) {
             se.printStackTrace();
         }
-        System.out.println(sql);
     }
     public static List<Feedback> getListFeedback() throws SQLException {
         List<Feedback> list = new ArrayList<>();

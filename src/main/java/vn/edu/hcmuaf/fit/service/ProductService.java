@@ -17,7 +17,7 @@ public class ProductService {
         ProductDetail detail = new ProductDetail();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, typeOfCake where products.idType = typeOfCake.idType");
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,TYPEOFCAKE.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, TYPEOFCAKE where products.idType = TYPEOFCAKE.idType");
                 while (rs.next()) {
                     ResultSet rsImg = stmt.executeQuery("SELECT idImg, productImgs.idProduct,productImgs.img, status from productImgs");
                     List<Image> listImg = new LinkedList<Image>();
@@ -60,14 +60,14 @@ public class ProductService {
     public static Product findById(String id) {
         Product p = null;
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, typeOfCake where products.idType = typeOfCake.idType and products.idProduct = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT distinct products.idProduct ,products.productName,TYPEOFCAKE.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, typeOfCake where products.idType = typeOfCake.idType and products.idProduct = ?");
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 p = new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), findImagesByIdProduct(rs.getString(1)), rs.getInt(8), findCommentsByIdProduct(rs.getString(1)), findPDetailByIdProduct(rs.getString(1)), rs.getInt(9));
                 p.setDiscount(DiscountService.findByIdProduct(id));
-                }
-            }catch (SQLException e) {
+            }
+        }catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return p;
@@ -77,7 +77,7 @@ public class ProductService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT products.idProduct,products.STATUS ,sum(BILL_DETAIL.AMOUNT)as total FROM products, BILL_DETAIL WHERE products.idProduct = BILL_DETAIL.idProduct GROUP BY products.idProduct ,products.STATUS ORDER BY total DESC;");
+                ResultSet rs = statement.executeQuery("SELECT products.idProduct,products.STATUS ,sum(BILL_DETAIL.AMOUNT)as total FROM products, BILL_DETAIL WHERE products.idProduct = BILL_DETAIL.idProduct GROUP BY products.idProduct ORDER BY total DESC;");
                 while (rs.next()) {
                     int status = rs.getInt(2);
                     if(status==0) {
@@ -145,7 +145,7 @@ public class ProductService {
     public static List<TypeOfCake> getListType() throws SQLException {
         List<TypeOfCake> res = new ArrayList<>();
         Statement stm = DBConnect.getInstall().get();
-        ResultSet rs = stm.executeQuery("SELECT idType, name, status FROM typeOfCake where status = 1");
+        ResultSet rs = stm.executeQuery("SELECT idType, name, status FROM TYPEOFCAKE where status = 1");
         while (rs.next()) {
             res.add(new TypeOfCake(rs.getString(1), rs.getString(2), rs.getInt(3)));
         }
@@ -154,7 +154,7 @@ public class ProductService {
     public static List<TypeOfCake> getListTypeRemove() throws SQLException {
         List<TypeOfCake> res = new ArrayList<>();
         Statement stm = DBConnect.getInstall().get();
-        ResultSet rs = stm.executeQuery("SELECT idType, name, status FROM typeOfCake where status = 0");
+        ResultSet rs = stm.executeQuery("SELECT idType, name, status FROM TYPEOFCAKE where status = 0");
         while (rs.next()) {
             res.add(new TypeOfCake(rs.getString(1), rs.getString(2), rs.getInt(3)));
         }
@@ -387,7 +387,7 @@ public class ProductService {
         ProductDetail detail ;
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, typeOfCake where products.idType = typeOfCake.idType and products.STATUS=0");
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,TYPEOFCAKE.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, typeOfCake where products.idType = typeOfCake.idType and products.STATUS=0");
                 while (rs.next()) {
                     String idProduct = rs.getString(1);
                     detail = findPDetailByIdProduct(idProduct);
@@ -454,15 +454,15 @@ public class ProductService {
     public static List<Comment> findCommentsByIdProduct(String idProduct){
         List<Comment> list = new ArrayList<>();
         try{
-        PreparedStatement stm = con.prepareStatement("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID and idProduct=?");
-        stm.setString(1,idProduct);
-        ResultSet rsCmt = stm.executeQuery();
-        while(rsCmt.next()){
-            list.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
+            PreparedStatement stm = con.prepareStatement("SELECT idProduct, ACCOUNTS.NAME,comment,date, IdCmt, Comments.STATUS from Comments, ACCOUNTS where ACCOUNTS.ID = Comments.ID and idProduct=?");
+            stm.setString(1,idProduct);
+            ResultSet rsCmt = stm.executeQuery();
+            while(rsCmt.next()){
+                list.add(new Comment(rsCmt.getString(1), rsCmt.getString(2), rsCmt.getString(3), rsCmt.getString(4), rsCmt.getInt(5), rsCmt.getInt(6)));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-    }
         return list;
     }
     public static List<Image> findImagesByIdProduct(String idProduct){
@@ -489,7 +489,7 @@ public class ProductService {
             while (rs.next()) {
                 detail = new ProductDetail(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
             }
-            }catch (SQLException e) {
+        }catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return detail;
@@ -497,7 +497,7 @@ public class ProductService {
 
     public static String idMaxType(){
         String res ="";
-        String sql= "SELECT max(idType) from typeofcake";
+        String sql= "SELECT max(idType) from TYPEOFCAKE";
         Statement statement = DBConnect.getInstall().get();
         try {
             ResultSet rs = statement.executeQuery(sql);
@@ -518,7 +518,7 @@ public class ProductService {
     }
     public static void addTypePro(String id, String type){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "INSERT into typeofcake VALUES('" + id + "', '"+ type+"')";
+        String sql = "INSERT into TYPEOFCAKE VALUES('" + id + "', '"+ type+"')";
         try {
             stm.executeUpdate(sql);
         } catch (SQLException se) {
@@ -528,7 +528,7 @@ public class ProductService {
     }
     public static void updateType(String id, String newtype){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "UPDATE typeofcake SET name = '" + newtype + "' WHERE idType = '" + id +"'";
+        String sql = "UPDATE TYPEOFCAKE SET name = '" + newtype + "' WHERE idType = '" + id +"'";
         try {
             stm.executeUpdate(sql);
 
@@ -539,8 +539,8 @@ public class ProductService {
     public static void restoreType(String id){
         Statement stm = DBConnect.getInstall().get();
         Statement stme = DBConnect.getInstall().get();
-        String sql = "UPDATE typeofcake SET status = 1 WHERE idType = '" + id +"'";
-        String sql2 = "UPDATE products set STATUS = 0 where  idType = '"+id+"';";
+        String sql = "UPDATE TYPEOFCAKE SET status = 1 WHERE idType = '" + id +"'";
+        String sql2 = "UPDATE  PRODUCTS set STATUS = 0 where  idType = '"+id+"';";
         try {
             stm.executeUpdate(sql);
             stme.executeUpdate(sql2);
@@ -552,8 +552,8 @@ public class ProductService {
     public  static void deleteType(String id){
         Statement stm = DBConnect.getInstall().get();
         Statement stme = DBConnect.getInstall().get();
-        String sql = "UPDATE typeofcake set status = 0 WHERE idType = '" + id + "'";
-        String sql2 = "UPDATE products set STATUS = -1 where  idType = '"+id+"';";
+        String sql = "UPDATE TYPEOFCAKE set status = 0 WHERE idType = '" + id + "'";
+        String sql2 = "UPDATE PRODUCTS set STATUS = -1 where  idType = '"+id+"';";
         try {
             stm.executeUpdate(sql);
             stme.executeUpdate(sql2);
@@ -564,7 +564,7 @@ public class ProductService {
     }
     public static void addTyofcake(TypeOfCake toc){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "INSERT INTO typeofcake VALUES('" + toc.getIdType() + "', '" + toc.getName() + "', '" + toc.getStatus() + "')";
+        String sql = "INSERT INTO TYPEOFCAKE VALUES('" + toc.getIdType() + "', '" + toc.getName() + "', '" + toc.getStatus() + "')";
         try {
             stm.executeUpdate(sql);
         } catch (SQLException se) {
@@ -579,7 +579,7 @@ public class ProductService {
         try {
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()){
-            result.add(rs.getString(1));
+                result.add(rs.getString(1));
             }
         } catch (SQLException se) {
             se.printStackTrace();
@@ -593,4 +593,3 @@ class IDComparator implements Comparator<Product> {
         return p2.getId().compareTo(p1.getName());
     }
 }
-

@@ -427,6 +427,7 @@ async function filterLog(type, val) {
         if (val== 1) {
             const {value: formValues} = await Swal.fire({
                 title: 'Lọc theo ngày',
+                confirmButtonColor: '#ff96b7',
                 html:
                     '<label class="text-left col-5 mr-5" for="swal-input1">Từ ngày:</label>' +
                     '<label class="text-left col-5 " for="swal-input2">Đến ngày:</label>' +
@@ -462,6 +463,7 @@ async function filterLog(type, val) {
         else if(val==2){
             const { value: date } = await Swal.fire({
                 title: 'Lọc theo ngày',
+                confirmButtonColor: '#ff96b7',
                 html:    '<label  class="col-12" for="swal-input1">Ngày cần lọc:</label>' +
                     '<input type="date" class="form__input col-9" id="swal-input1">',
                 preConfirm: () => {
