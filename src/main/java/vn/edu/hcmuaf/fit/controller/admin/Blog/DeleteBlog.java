@@ -30,7 +30,7 @@ public class DeleteBlog extends HttpServlet {
         Log log = new Log();
         log.setLevel(3);
         log.setSrc(request.getServletPath());
-        log.setContent("Xóa bài viết" + idblog);
+        log.setContent("Xóa bài viết: " + idblog);
         log.setUser(user.getId());
         LogService.addLog(log);
 

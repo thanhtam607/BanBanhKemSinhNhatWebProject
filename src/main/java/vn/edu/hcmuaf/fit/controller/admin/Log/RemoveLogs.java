@@ -64,6 +64,7 @@ public class RemoveLogs extends HttpServlet {
                 idArr[i] = listLog.get(i).getId()+"";
             }
             LogService.removeListLog(idArr);
+            request.getRequestDispatcher("ListLog").forward(request,response);
         }
     }
 

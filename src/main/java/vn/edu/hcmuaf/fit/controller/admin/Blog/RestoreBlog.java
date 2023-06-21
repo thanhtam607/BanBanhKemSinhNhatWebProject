@@ -30,7 +30,7 @@ public class RestoreBlog extends HttpServlet {
         Log log = new Log();
         log.setLevel(1);
         log.setSrc(request.getServletPath());
-        log.setContent("Khôi phục bài viết" + idblog);
+        log.setContent("Khôi phục bài viết: " + idblog);
         log.setUser(user.getId());
         LogService.addLog(log);
 
