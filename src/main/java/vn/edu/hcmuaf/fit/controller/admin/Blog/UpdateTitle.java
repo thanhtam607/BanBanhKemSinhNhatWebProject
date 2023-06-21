@@ -31,7 +31,7 @@ public class UpdateTitle extends HttpServlet {
         Log log = new Log();
         log.setLevel(2);
         log.setSrc(request.getServletPath());
-        log.setContent("Sửa tiêu đề bài viết" + idb);
+        log.setContent("Sửa tiêu đề bài viết: " + idb);
         log.setUser(user.getId());
         LogService.addLog(log);
 

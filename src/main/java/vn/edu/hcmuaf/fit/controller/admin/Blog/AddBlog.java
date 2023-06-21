@@ -63,7 +63,7 @@ public class AddBlog extends HttpServlet {
         Log log = new Log();
         log.setLevel(1);
         log.setSrc(request.getServletPath());
-        log.setContent("Thêm bài viết" + idnew);
+        log.setContent("Thêm bài viết: " + idnew);
         log.setUser(user.getId());
         LogService.addLog(log);
 

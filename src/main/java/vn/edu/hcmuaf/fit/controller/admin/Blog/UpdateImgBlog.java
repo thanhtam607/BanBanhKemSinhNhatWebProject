@@ -38,7 +38,7 @@ public class UpdateImgBlog extends HttpServlet {
         Log log = new Log();
         log.setLevel(2);
         log.setSrc(request.getServletPath());
-        log.setContent("Sửa hình ảnh bài viết" + idblog);
+        log.setContent("Sửa hình ảnh bài viết: " + idblog);
         log.setUser(user.getId());
         LogService.addLog(log);
 

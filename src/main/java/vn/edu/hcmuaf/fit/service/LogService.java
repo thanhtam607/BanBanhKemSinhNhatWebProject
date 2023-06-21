@@ -246,7 +246,7 @@ public class LogService {
     public static List<String> getListContent(){
         List<String> res = new ArrayList<>();
         try {
-            PreparedStatement stm = con.prepareStatement("  SELECT DISTINCT if(content like '%:%', SUBSTRING(CONTENT,1,CHARACTER_LENGTH(CONTENT)-6), content) FROM LOGS  ");
+            PreparedStatement stm = con.prepareStatement("  SELECT DISTINCT if(CONTENT like '%:%', SUBSTRING(CONTENT,1,CHARACTER_LENGTH(CONTENT)-6), CONTENT) FROM LOGS  ");
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
                 res.add(rs.getString(1));
@@ -263,7 +263,7 @@ public class LogService {
     }
     public static void removeLog(String id){
         try{
-            PreparedStatement stm = con.prepareStatement("UPDATE logs set STATUS = -1 WHERE id=?");
+            PreparedStatement stm = con.prepareStatement("UPDATE LOGS set STATUS = -1 WHERE ID=?");
             stm.setInt(1, Integer.parseInt(id));
             stm.executeUpdate();
         }catch (SQLException e) {

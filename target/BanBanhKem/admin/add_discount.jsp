@@ -170,7 +170,7 @@
                   int tag = (int) request.getAttribute("tag");%>
           <div class="col-3">
 
-            <button class="form__btn" type="button" onclick="addDiscount()" >Lưu thay đổi</button>
+            <button class="form__btn" type="button" onclick="addDiscount()" >Thêm khuyến mãi</button>
           </div>
       </div>
       <!-- end details form -->

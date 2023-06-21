@@ -31,7 +31,7 @@ public class EditBlog extends HttpServlet {
         Log log = new Log();
         log.setLevel(2);
         log.setSrc(request.getServletPath());
-        log.setContent("Sửa bài viết" + request.getParameter("idB"));
+        log.setContent("Sửa bài viết: " + request.getParameter("idB"));
         log.setUser(user.getId());
         LogService.addLog(log);
         if (user.getIsedit() == 1 || user.getRole() == 2) {

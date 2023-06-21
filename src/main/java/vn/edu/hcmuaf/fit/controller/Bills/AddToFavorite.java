@@ -56,7 +56,7 @@ public class AddToFavorite extends HttpServlet {
                 Log log = new Log();
                 log.setLevel(1);
                 log.setSrc(request.getServletPath());
-                log.setContent("Thêm sản phẩm " + maSP+" vào danh mục yêu thích");
+                log.setContent("Thêm vào danh mục yêu thích sản phẩm:  " + maSP);
                 log.setUser(auth.getId());
                 LogService.addLog(log);
 
