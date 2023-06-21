@@ -15,7 +15,7 @@ public class BlogService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  blogs.id, blogs.img,blogs.title, blogs.date, blogs.content, blogs.category, blogs.season, blogs.status from BLOGS where blogs.status between 0 and 1 ");
+                ResultSet rs = statement.executeQuery("SELECT  BLOGS.ID, BLOGS.IMG ,BLOGS.TITLE, BLOGS.DATE, BLOGS.CONTENT, BLOGS.CATEGORY, BLOGS.SEASON, BLOGS.STATUS from BLOGS where BLOGS.STATUS between 0 and 1 ");
                 while(rs.next()) {
                     Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
                     list.add(b);
@@ -33,7 +33,7 @@ public class BlogService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  blogs.id, blogs.img,blogs.title, blogs.date, blogs.content, blogs.category, blogs.season, blogs.status from BLOGS where blogs.status = -1 ");
+                ResultSet rs = statement.executeQuery("SELECT  BLOGS.ID, BLOGS.IMG ,BLOGS.TITLE, BLOGS.DATE, BLOGS.CONTENT, BLOGS.CATEGORY, BLOGS.SEASON, BLOGS.STATUS from BLOGS where BLOGS.STATUS = -1 ");
                 while(rs.next()) {
                     Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
                     list.add(b);
@@ -77,7 +77,7 @@ public class BlogService {
     }
     public static void updateBlog(String idblog, String date, String cont, String category, String season){
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE blogs set  DATE='" +date+ "', CONTENT= '"+ cont+ "', CATEGORY= '"+ category+ "', SEASON= '"+ season+ "' Where  ID= '" + idblog+ "' ;";
+        String sql = "UPDATE BLOGS set  DATE='" +date+ "', CONTENT= '"+ cont+ "', CATEGORY= '"+ category+ "', SEASON= '"+ season+ "' Where  ID= '" + idblog+ "' ;";
         try {
             statement.executeUpdate(sql);
         } catch (SQLException se) {
@@ -86,7 +86,7 @@ public class BlogService {
     }
     public static void updateStatus(String id, int status) {
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE blogs set  status= " + status + " where blogs.id = '" + id + "'";
+        String sql = "UPDATE BLOGS set  STATUS= " + status + " where BLOGS.ID = '" + id + "'";
         try {
             statement.executeUpdate(sql);
         } catch (SQLException se) {
@@ -95,7 +95,7 @@ public class BlogService {
     }
  public  static void deleteBlog(String idblog){
         Statement stm = DBConnect.getInstall().get();
-        String sql =  "UPDATE blogs set  status= -1 where blogs.id = '" + idblog + "'";
+        String sql =  "UPDATE BLOGS set  STATUS = -1 where BLOGS.ID = '" + idblog + "'";
      try {
          stm.executeUpdate(sql);
      } catch (SQLException se) {
@@ -104,7 +104,7 @@ public class BlogService {
  }
     public  static void restoreBlog(String idblog){
         Statement stm = DBConnect.getInstall().get();
-        String sql =  "UPDATE blogs set  status= 0 where blogs.id = '" + idblog + "'";
+        String sql =  "UPDATE BLOGS set  STATUS= 0 where BLOGS.ID = '" + idblog + "'";
         try {
             stm.executeUpdate(sql);
         } catch (SQLException se) {
@@ -113,7 +113,7 @@ public class BlogService {
     }
 public static  void updateImgBlog(String img,String imgnew){
     Statement stm = DBConnect.getInstall().get();
-    String sql = "UPDATE blogs SET IMG = '" + imgnew + "' WHERE IMG = '" + img +"'";
+    String sql = "UPDATE BLOGS SET IMG = '" + imgnew + "' WHERE IMG = '" + img +"'";
     try {
         stm.executeUpdate(sql);
 
@@ -123,7 +123,7 @@ public static  void updateImgBlog(String img,String imgnew){
 }
 public static void  updateTitle(String idblog, String title ){
     Statement stm = DBConnect.getInstall().get();
-    String sql = "UPDATE blogs SET TITLE = '" + title + "' WHERE ID = '" + idblog +"'";
+    String sql = "UPDATE BLOGS SET TITLE = '" + title + "' WHERE ID = '" + idblog +"'";
     try {
         stm.executeUpdate(sql);
     } catch (SQLException se) {
@@ -132,7 +132,7 @@ public static void  updateTitle(String idblog, String title ){
 }
 public  static String getNewIdBlog(){
     String res ="";
-    String sql= "SELECT max(id) from blogs";
+    String sql= "SELECT MAX(ID) from BLOGS";
     Statement statement = DBConnect.getInstall().get();
     try {
         ResultSet rs = statement.executeQuery(sql);
@@ -153,7 +153,7 @@ public  static String getNewIdBlog(){
 }
     public  static String getMaxIdBlog(){
         String res ="";
-        String sql= "SELECT max(id) from blogs";
+        String sql= "SELECT MAX(ID) from BLOGS";
         Statement statement = DBConnect.getInstall().get();
         try {
             ResultSet rs = statement.executeQuery(sql);
