@@ -1064,3 +1064,8 @@ insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh
 insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
 insert into general_infor values('GI023', 'NameShop', 'Shop Bánh Kem');
 
+ALTER TABLE bills
+add Hash text;
+ALTER TABLE bills
+add CipherText text;
+ 

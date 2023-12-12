@@ -238,6 +238,7 @@ function myFunction() {
                 distID: distID
             },
             success: function (data) {
+
                 $("#inputGroupSelect03").html(data);
                 // $("select").niceSelect();
                 $("#inputGroupSelect03").removeAttr("disabled");
@@ -259,6 +260,7 @@ function myFunction() {
                 to_ward_id: to_ward_id
             },
             success: function (data) {
+                console.log(data)
                 $(".checkout__order__fee span").text(data);
                 var oldTotal = $(".checkout__order__subtotal span").text();
                 var newTotal = parseInt(oldTotal.replace(/,/g, '')) + parseInt( $(".checkout__order__fee span").text().replace(/,/g, ''));
