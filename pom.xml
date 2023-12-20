@@ -53,6 +53,14 @@
       <artifactId>commons-fileupload</artifactId>
       <version>1.4</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcpkix-jdk18on</artifactId>
+      <version>1.76</version>
+    </dependency>
+
+
   </dependencies>
   <build>
     <finalName>BanBanhKem</finalName>
@@ -63,6 +71,7 @@
         <configuration>
           <source>19</source>
           <target>19</target>
+
         </configuration>
       </plugin>
     </plugins>
