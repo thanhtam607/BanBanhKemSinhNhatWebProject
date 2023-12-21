@@ -12,7 +12,7 @@ public class RSA {
 
     public static KeyPair genKeyPair() throws NoSuchAlgorithmException {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        keyPairGenerator.initialize(2048);
+        keyPairGenerator.initialize(1024);
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
         return keyPair;
     }

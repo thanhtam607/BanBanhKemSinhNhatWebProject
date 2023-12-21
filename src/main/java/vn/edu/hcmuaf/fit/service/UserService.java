@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -309,6 +310,16 @@ public class UserService {
         } catch (SQLException se) {
             se.printStackTrace();
         }
+    }
+    public static String getEmail(String userId) throws SQLException {
+        String sql = "select email from accounts where id = ?";
+        PreparedStatement stms = DBConnect.getInstall().getConn().prepareStatement(sql);
+        stms.setString(1, userId);
+        ResultSet rs= stms.executeQuery();
+        while (rs.next()){
+            return rs.getString(1);
+        }
+        return null;
     }
 
     public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {

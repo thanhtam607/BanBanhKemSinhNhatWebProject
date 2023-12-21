@@ -1,24 +1,33 @@
 package vn.edu.hcmuaf.fit.security;
 
 import vn.edu.hcmuaf.fit.db.DBConnect;
+import vn.edu.hcmuaf.fit.service.UserService;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
+
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
+import java.security.KeyPair;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.bouncycastle.openssl.PEMWriter;
+import java.util.Base64;
 
 
 public class KeyManager {
-    public static void genKey(String userId) throws SQLException {
-        if(!userIsHasKey(userId)){
-
-        }else{
+    public static void genKey(String userId) throws SQLException, NoSuchAlgorithmException, MessagingException, UnsupportedEncodingException {
+        KeyPair keyPair = RSA.genKeyPair();
+        if(userIsHasKey(userId)){
             updateStatusForKey(userId, 2);
-
         }
+        PublicKey publicKey = RSA.genPublicKey(keyPair);
+        PrivateKey privateKey = RSA.genPrivateKey(keyPair);
+        insertPublicKey(userId, Base64.getEncoder().encodeToString(publicKey.getEncoded()));
+        String subject = "Tạo khóa mới";
+        String mess = "Khóa tài khoản của bạn là: " + Base64.getEncoder().encodeToString(privateKey.getEncoded());
+        UserService.sendMail(UserService.getEmail(userId), subject, mess) ;
 
     }
     private static void updateStatusForKey(String userId, int status) throws SQLException {
@@ -36,21 +45,25 @@ public class KeyManager {
         return rs.next();
     }
     public static void insertPublicKey(String userId, String publicKeyLink) throws SQLException {
-        String sql = "insert into PublicKey(User_id, publickeylink, createDate, expiredDate, status)" +
-                " values(?,?,now(), ?,1)";
+        String sql = "";
+        if(!userIsHasKey(userId)){
+            sql = "insert into PublicKey(User_id, publickeylink, createDate, expiredDate, status)" +
+                    " values(?,?,now(), ?,1)";
+        }else{
+            sql = "insert into PublicKey(User_id, publickeylink, createDate, MissingDate, expiredDate, status)" +
+                    " values(?,?,now(), CURDATE(),?,1)";
+        }
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
         stm.setString(1, userId);
         stm.setString(2, publicKeyLink);
-        stm.setString(3, "31-12-2099");
+        stm.setString(3, "2099/12/31");
         stm.executeUpdate();
     }
 
-    private static void savePublicKeyToFile(PublicKey publicKey, String filename) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(filename);
-             PEMWriter pemWriter = new PEMWriter(fos)) {
+//    public static void main(String[] args) throws SQLException, MessagingException, UnsupportedEncodingException, NoSuchAlgorithmException {
+//        genKey("101252141346747555507");
+//    }
 
-            pemWriter.writeObject(publicKey);
-        }
-    }
+
 
 }
