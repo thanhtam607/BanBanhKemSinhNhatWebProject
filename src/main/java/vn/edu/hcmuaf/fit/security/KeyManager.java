@@ -37,11 +37,12 @@ public class KeyManager {
         stm.setString(2, userId);
         stm.executeUpdate();
     }
-    private static boolean userIsHasKey(String id) throws SQLException {
+    public static boolean userIsHasKey(String id) throws SQLException {
         String sql = "select id from PublicKey where User_Id = ?";
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
         stm.setString(1, id);
         ResultSet rs = stm.executeQuery();
+
         return rs.next();
     }
     public static void insertPublicKey(String userId, String publicKeyLink) throws SQLException {
@@ -60,9 +61,10 @@ public class KeyManager {
         stm.executeUpdate();
     }
 
-//    public static void main(String[] args) throws SQLException, MessagingException, UnsupportedEncodingException, NoSuchAlgorithmException {
-//        genKey("101252141346747555507");
-//    }
+    public static void main(String[] args) throws SQLException, MessagingException, UnsupportedEncodingException, NoSuchAlgorithmException {
+
+        System.out.println( userIsHasKey("114539523549397711833"));
+    }
 
 
 

@@ -1,9 +1,12 @@
 package vn.edu.hcmuaf.fit.bean;
 
 
+import vn.edu.hcmuaf.fit.security.KeyManager;
+
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.SQLException;
 
 public class User implements Serializable {
     private String  id;
@@ -146,5 +149,12 @@ public class User implements Serializable {
 
     public void setIsdelete(int isdelete) {
         this.isdelete = isdelete;
+    }
+    public boolean hasKey(){
+        try {
+            return KeyManager.userIsHasKey(this.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

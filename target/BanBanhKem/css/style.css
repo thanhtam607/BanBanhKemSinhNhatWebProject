@@ -3902,3 +3902,30 @@ font-size: 24px;
 	width: 200px;
 	cursor: pointer;
 }
+#btn-genkey{
+	margin-left: 10px;
+	font-size: 18px;
+	background-color: #ff96b7;
+	color: white;
+	font-weight: 500;
+}
+.button_product{
+	font-size: 17px;
+	border-radius: 5px;
+	border: #ff96b7 2px solid;
+	padding: 5px 20px;
+	text-align: center;
+	background: #ff96b7;
+	color: white;
+	font-weight: 500;
+}
+.button_product:hover{
+	border-radius: 5px;
+	border: #ff96b7 2px solid;
+	padding: 5px 20px;
+	text-align: center;
+	background:white ;
+	color: #ff96b7;
+	font-weight: 500;
+	font-size: 17px;
+}
