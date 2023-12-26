@@ -2,8 +2,10 @@ package vn.edu.hcmuaf.fit.model.logistic;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
+//import com.mysql.cj.xdevapi.JsonParser;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 //import com.restfb.json.Json;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +21,7 @@ public class LogisticController {
     public static String FROM_WARD_ID = "90737"; // linh trung
 
     public LogisticController() throws IOException {
-        login("nhom17@gmail.com", "123456");
+        login("nhom27@gmail.com", "123456");
     }
 
     public JsonObject getJSONObjectFromConnection(HttpURLConnection connection) throws IOException {
@@ -30,9 +32,10 @@ public class LogisticController {
             response.append(inputLine);
         }
         reader.close();
-
+//        System.out.println(response);
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(response.toString());
+//        System.out.println(element);
         JsonObject object = element.getAsJsonObject();
 
         return object;
@@ -192,7 +195,7 @@ public class LogisticController {
     }
     public double getCalculateFee(String fromDistrictID, String fromWardID, String toDistrictID, String toWardID, int height, int length, int width, int weight) throws IOException {
         String urlString = "http://140.238.54.136/api/calculateFee";
-        String param = "?from_district_id=" + fromDistrictID + "&from_ward_id=" + fromWardID + "&to_district_id=" + toDistrictID + "&to_ward_id=" + toWardID + "&height=" + height + "&length=" + length + "&width=" + width + "&weight=" + weight;
+        String param = "?from_district_id=" + fromDistrictID + "&from_ward_id=" + fromWardID + "&to_district_id=" + toDistrictID + "&to_ward_id=" + toWardID + "&height=" + height + "&length=" + length + "&width=" + width + "&Weight=" + weight;
         URL url = new URL(urlString + param);
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -325,14 +328,14 @@ public class LogisticController {
     }
 
     public static void main(String[] args) throws URISyntaxException, IOException {
-//        LogisticController controller = new LogisticController();
-//       TransportOrder transportOrder = controller.registerTranport(controller.FROM_DISTRICT_ID, controller.FROM_WARD_ID, "1456", "21105", 12, 20,20, 400);
+        LogisticController controller = new LogisticController();
+//       TransportOrder transportOrder = controller.registerTranport(FROM_DISTRICT_ID, FROM_WARD_ID, "2270", "231013", 12, 20,20, 400);
+//        System.out.println(transportOrder);
 //       System.out.println(ReceiptService.convertDate(transportOrder.getLeadTime()));
 //        ReceiptService.updateDeliveryDateInBill("HD01", ReceiptService.convertDate(transportOrder.getLeadTime()));
-//        System.out.println(controller.getCalculateFee(FROM_DISTRICT_ID,FROM_WARD_ID, "1454", "21201", 12, 20, 20, 400));
+//        System.out.println(controller.getCalculateFee(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 12, 20,20, 400));
 //        System.out.println(controller.getLeadTime(FROM_DISTRICT_ID,FROM_WARD_ID, "2270", "231013", 100, 100, 100, 100).replaceAll("[TZ]", ""));
 //        System.out.println(controller.registerTranport(controller.FROM_DISTRICT_ID, controller.FROM_WARD_ID, "1456", "21501", 12, 20,20, 400));
-//        System.out.println(controller.registerTranport("3695","90750", "2270", "231013", 100, 150, 100, 100));
 //        System.out.println(ReceiptService.convertDate(1686441599));
 //        System.out.println(controller.register("Nhom17", "nhom17@gmail.com", "123456", "123456"));
 //        controller.changePass("1234536", "123", "123");
@@ -344,7 +347,7 @@ public class LogisticController {
 //        List<District> dis = controller.getDistrictByProvinceID("202");
 //        for (District dt: dis) System.out.println(dt);
 ////
-//        List<Ward> wards = controller.getWardByDistrictID("1454");
+//        List<Ward> wards = controller.getWardByDistrictID("2270");
 //        for (Ward w: wards) System.out.println(w);
 // phường 90750, quận 3695, tp 202
 //        System.out.println(controller.registerTranport(FROM_DISTRICT_ID, FROM_WARD_ID, FROM_DISTRICT_ID, "90767", 100, 200, 200, 300));

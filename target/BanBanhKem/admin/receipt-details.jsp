@@ -156,7 +156,7 @@
                     </p>
                     <p class="pb-2 border-bottom px-3">Ngày Giao Hàng: <%=receipt.getDelivery_date()%>
                     </p>
-                    <p class="pb-2 border-bottom px-3">Địa Chỉ Giao: <%=receipt.getAddress()%>
+                    <p class="px-3">Địa Chỉ Giao: <%=receipt.getAddress()%>
                     </p>
                     <p class="px-3">Trạng Thái: <%=URLDecoder.decode(receipt.getStatusName(), "UTF-8")%>
                     </p>

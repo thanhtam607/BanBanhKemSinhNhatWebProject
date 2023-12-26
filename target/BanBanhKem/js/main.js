@@ -251,6 +251,7 @@ function myFunction() {
     $("#inputGroupSelect03").change(function() {
         var to_dist_id = $("#inputGroupSelect02").val();
         var to_ward_id = $(this).val();
+        console.log(to_dist_id, to_ward_id);
         $.ajax({
             url: "GetFee",
             type: "POST",

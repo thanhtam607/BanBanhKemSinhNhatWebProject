@@ -16,7 +16,7 @@ INSERT INTO TYPEOFCAKE VALUES ('LB08', 'Bánh trang trí đơn giản', 1);
 /*==============================products=====================================*/
 create table products(idProduct char(4) not null PRIMARY KEY, idType char(4), productName LONGTEXT,
                       size varchar(10), weight int, description longtext, introduction longtext, price float, STATUS tinyint(4) DEFAULT 0,
-                      CONSTRAINT f_mlb FOREIGN KEY(idType) REFERENCES typeOfCake(idType));
+                      CONSTRAINT f_mlb FOREIGN KEY(idType) REFERENCES TYPEOFCAKE(idType));
 -- --
 -- --
 INSERT INTO products VALUES ('B001', 'LB01','Bánh cánh đồng hoa', 'Vừa', 500,
