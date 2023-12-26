@@ -95,7 +95,7 @@ public class LogService {
         User user;
         if(!fromDate.equals("0") && !toDate.equals("0")){
         try {
-            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE CREATE_AT between ? and ?;");
+            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE CREATE_AT BETWEEN ? AND ?");
             stm.setString(1,fromDate);
             stm.setString(2, toDate);
             ResultSet rs = stm.executeQuery();

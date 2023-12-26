@@ -83,9 +83,9 @@ public class AddNewOrder extends HttpServlet {
         Order order = new Order(auth, listItemC, todayFM,Double.parseDouble(totalBill), ghichu,gh, price_pro_bill, Double.parseDouble(fee));
 
         if(notesForDetail!=null){
-        for(int i =0; i< notesForDetail.length ;i++){
-            order.getData().get(i).setNote(notesForDetail[i]);
-        }}
+            for(int i =0; i< notesForDetail.length ;i++){
+                order.getData().get(i).setNote(notesForDetail[i]);
+            }}
 
         OrderService.addOrder(order);
         OrderService.addGiaoHang(order);

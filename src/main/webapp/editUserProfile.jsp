@@ -194,7 +194,9 @@
 <section class="checkout spad">
     <div class="container">
         <div class="checkout__form">
-            <h4>Thông Tin Tài Khoản</h4>
+            <h4 >Thông Tin Tài Khoản
+                <button class="button_product" onclick="genKey('<%=auth.getId()%>')">Tạo khóa</button></h4>
+
             <div>
                 <div class="row">
                     <div class="col-lg-7 col-md-6">
@@ -229,7 +231,7 @@
                             </div>
                         </div>
 
-                        <button class="btn" onclick="changeProfile()" style="background-color: #ff96b7; color: white; font-weight: 500;">
+                        <button class="button_product" onclick="changeProfile()">
                             Lưu Thay Đổi
                         </button>
                     </div>

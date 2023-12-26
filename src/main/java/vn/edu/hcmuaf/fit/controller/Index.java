@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Blog;
 import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.service.BlogService;
@@ -25,6 +26,11 @@ public class Index extends HttpServlet {
         request.setAttribute("listBanChay", listHotProduct);
         List<Product> listNewProduct = ProductService.getNewProduct(ProductService.getListProduct());
         request.setAttribute("listNewProduct", listNewProduct);
+        HttpSession session = request.getSession(true);
+        User auth = (User) session.getAttribute("auth");
+        if(auth == null){
+            session.setAttribute("userNeedsKey", true);
+        }
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

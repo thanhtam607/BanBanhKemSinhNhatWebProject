@@ -1064,3 +1064,16 @@ insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh
 insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
 insert into general_infor values('GI023', 'NameShop', 'Shop Bánh Kem');
 
+
+ALTER TABLE bills
+add CipherText text;
+CREATE TABLE publickey  (
+  ID int NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+  user_Id varchar(255) ,
+  publickeylink text ,
+  createDate datetime ,
+  MissingDate date ,
+  ExpiredDate date ,
+  status int ,
+  CONSTRAINT publickey_ibfk_1 FOREIGN KEY (user_Id) REFERENCES accounts (ID));
+ 
