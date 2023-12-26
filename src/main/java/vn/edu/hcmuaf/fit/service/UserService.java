@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -176,7 +177,7 @@ public class UserService {
     public static int randomCode(){
         return  (int) Math.floor(((Math.random() * 899999) + 100000));
     }
-    public  static void sendMail(String toEmail, int code) throws MessagingException, UnsupportedEncodingException {
+    public  static void sendMail(String toEmail,  String subject, String mess) throws MessagingException, UnsupportedEncodingException {
         String fromEmail= "group27web@gmail.com";
         String pass =  "imvwmzsvffvjtgpr";
         Properties props = new Properties();
@@ -199,8 +200,8 @@ public class UserService {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            message.setSubject("Xác minh tài khoản");
-            message.setText("Mã xác nhận của bạn là: " + code);
+            message.setSubject(subject);
+            message.setText(mess);
 
             // send message
             Transport.send(message);
@@ -309,6 +310,16 @@ public class UserService {
         } catch (SQLException se) {
             se.printStackTrace();
         }
+    }
+    public static String getEmail(String userId) throws SQLException {
+        String sql = "select email from accounts where id = ?";
+        PreparedStatement stms = DBConnect.getInstall().getConn().prepareStatement(sql);
+        stms.setString(1, userId);
+        ResultSet rs= stms.executeQuery();
+        while (rs.next()){
+            return rs.getString(1);
+        }
+        return null;
     }
 
     public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {

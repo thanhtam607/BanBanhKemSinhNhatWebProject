@@ -51,7 +51,7 @@ public class LogFilter  extends HttpServlet {
         }
 
         if (!fromDate.equals("0") || !toDate.equals("0") && date.equals("0")) {
-                listLog = LogService.findByDate(fromDate, toDate, listLog);
+            listLog = LogService.findByDate(fromDate, toDate, listLog);
 
         }
 
@@ -78,7 +78,7 @@ public class LogFilter  extends HttpServlet {
             if(log.getLevel()==1){
                 i = "<i class=\"bi bi-check-circle-fill text-success\"></i>\n";
             }else if(log.getLevel()==2){
-               i= "   <i class=\"fas fa-exclamation-triangle text-warning\"></i>\n" ;
+                i= "   <i class=\"fas fa-exclamation-triangle text-warning\"></i>\n" ;
             }
             else{
                 i=  " <i class=\"fas fa-skull-crossbones text-danger\"></i>\n";

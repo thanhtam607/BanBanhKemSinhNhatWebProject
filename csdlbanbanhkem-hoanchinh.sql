@@ -2,16 +2,16 @@ CREATE DATABASE banbanhkem;
 use banbanhkem;
 -- --
 /*==============================typeOfCake=====================================*/
-create table TYPEOFCAKE(idType char (4) not null PRIMARY key, name varchar(40), status int);
+create table typeOfCake(idType char (4) not null PRIMARY key, name varchar(40), status int);
 -- --
-INSERT INTO TYPEOFCAKE VALUES ('LB01', 'Bánh hoa', 1);
-INSERT INTO TYPEOFCAKE VALUES ('LB02', 'Bánh trang trí con thú', 1);
-INSERT INTO TYPEOFCAKE VALUES ('LB03', 'Bánh trái cây', 1);
-INSERT INTO TYPEOFCAKE VALUES ('LB04', 'Bánh nhân vật hoạt hình', 1);
-INSERT INTO TYPEOFCAKE VALUES ('LB05', 'Bánh hoa mousse', 1);
-INSERT INTO TYPEOFCAKE VALUES ('LB06', 'Bánh maccaron và socola', 1);
-INSERT INTO TYPEOFCAKE VALUES ('LB07', 'Bánh hình lạ mắt', 1);
-INSERT INTO TYPEOFCAKE VALUES ('LB08', 'Bánh trang trí đơn giản', 1);
+INSERT INTO typeOfCake VALUES ('LB01', 'Bánh hoa', 1);
+INSERT INTO typeOfCake VALUES ('LB02', 'Bánh trang trí con thú', 1);
+INSERT INTO typeOfCake VALUES ('LB03', 'Bánh trái cây', 1);
+INSERT INTO typeOfCake VALUES ('LB04', 'Bánh nhân vật hoạt hình', 1);
+INSERT INTO typeOfCake VALUES ('LB05', 'Bánh hoa mousse', 1);
+INSERT INTO typeOfCake VALUES ('LB06', 'Bánh maccaron và socola', 1);
+INSERT INTO typeOfCake VALUES ('LB07', 'Bánh hình lạ mắt', 1);
+INSERT INTO typeOfCake VALUES ('LB08', 'Bánh trang trí đơn giản', 1);
 
 /*==============================products=====================================*/
 create table products(idProduct char(4) not null PRIMARY KEY, idType char(4), productName LONGTEXT,
@@ -1014,13 +1014,13 @@ create table cartItems(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                        idProduct char(4) ,
                        quantity int ,FOREIGN KEY (customer_id)REFERENCES CUSTOMERS(ID),
                        FOREIGN KEY (idProduct)REFERENCES products(idProduct));
-create table GENERAL_INFOR(ID char(5) NOT NULL PRIMARY KEY,
-                           TYPE varchar(20) not null,
-                           CONTENT text);
-insert into GENERAL_INFOR values('GI001', 'SlideShow', 'img/slideshow/GI001.jpg');
-insert into GENERAL_INFOR values('GI002', 'SlideShow', 'img/slideshow/GI002.jpg');
-insert into GENERAL_INFOR values('GI003', 'LogoWeb', 'img/logo_web.jpg');
-insert into GENERAL_INFOR values('GI004', 'Introduce', '<h1 style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><strong><span style="font-size:22px">1. Ch&uacute;ng t&ocirc;i l&agrave; Tiệm b&aacute;nh hạnh ph&uacute;c.</span></strong></span></h1>
+create table general_infor(id char(5) NOT NULL PRIMARY KEY,
+                           type varchar(20) not null,
+                           content text);
+insert into general_infor values('GI001', 'SlideShow', 'img/slideshow/GI001.jpg');
+insert into general_infor values('GI002', 'SlideShow', 'img/slideshow/GI002.jpg');
+insert into general_infor values('GI003', 'LogoWeb', 'img/logo_web.jpg');
+insert into general_infor values('GI004', 'Introduce', '<h1 style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><strong><span style="font-size:22px">1. Ch&uacute;ng t&ocirc;i l&agrave; Tiệm b&aacute;nh hạnh ph&uacute;c.</span></strong></span></h1>
 
 <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">&nbsp; &nbsp; &nbsp;Được th&agrave;nh lập v&agrave;o năm 2022 bởi một đội ngũ đầy nhiệt huyết, b&aacute;nh sinh nhật của tiệm b&aacute;nh ch&uacute;ng t&ocirc;i l&agrave; những chiếc b&aacute;nh tươi ngon được nướng h&agrave;ng ng&agrave;y v&agrave; chau chuốt tỉ mỉ đến từng chi tiết. Với mong muốn mang đến những chiếc b&aacute;nh kh&ocirc;ng chỉ ngon miệng m&agrave; c&ograve;n đẹp mắt, với nguồn nguy&ecirc;n liệu chất lượng cao, c&ocirc;ng thức chế biến điều chỉnh ph&ugrave; hợp với thị hiếu, v&agrave; một vẻ ngo&agrave;i hợp xu hướng v&agrave; độc đ&aacute;o.</span></p>
 
@@ -1044,22 +1044,36 @@ insert into GENERAL_INFOR values('GI004', 'Introduce', '<h1 style="text-align:ju
 
 <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">&nbsp; &nbsp; &nbsp; Cảm ơn qu&yacute; kh&aacute;ch đ&atilde; lựa chọn v&agrave; đồng h&agrave;nh c&ugrave;ng ch&uacute;ng t&ocirc;i trong những chặng đường qua!</span></p>
 ');
-insert into GENERAL_INFOR values('GI005', 'Address', 'Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM');
-insert into GENERAL_INFOR values('GI006', 'PhoneNumber', '0987654321');
-insert into GENERAL_INFOR values('GI007', 'Email', 'tiembanhhanhphuc@gmail.com');
-insert into GENERAL_INFOR values('GI008', 'TimeShop', 'T2 - T6');
-insert into GENERAL_INFOR values('GI009', 'TimeShop', '8:00 sáng - 22:00 tối');
-insert into GENERAL_INFOR values('GI010', 'TimeShop', 'T7 & CN');
-insert into GENERAL_INFOR values('GI011', 'TimeShop', '13:00 chiều - 18:00 tối');
-insert into GENERAL_INFOR values('GI012', 'SpecialOffer', 'Thưởng thức bánh miễn phí');
-insert into GENERAL_INFOR values('GI013', 'SpecialOffer', 'Thứ sáu hàng tuần tại cửa hàng vào lúc 14h00-14h30');
-insert into GENERAL_INFOR values('GI014', 'SpecialOffer', 'img/footer/img-footer.jpeg');
-insert into GENERAL_INFOR values('GI015', 'SocialNetwork', 'https://www.facebook.com/mai.thuan.52438/');
-insert into GENERAL_INFOR values('GI016', 'SocialNetwork', 'https://www.messenger.com/t/100017755062615');
-insert into GENERAL_INFOR values('GI017', 'SocialNetwork', 'https://www.instagram.com/maizecorn1542/');
-insert into GENERAL_INFOR values('GI018', 'Delivery', 'Miễn phí giao hàng nội thành TP.HCM');
-insert into GENERAL_INFOR values('GI019', 'GoogleMap', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18773.836012880063!2d106.75738369035878!3d10.863314618235568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRwLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1657022439109!5m2!1svi!2s');
-insert into GENERAL_INFOR values('GI020', 'IndexSlogan', 'Tận hưởng thế giới ngọt ngào của bạn.');
-insert into GENERAL_INFOR values('GI021', 'IndexSlogan', 'Không chỉ là bánh ngọt, đây là sự yêu thương.');
-insert into GENERAL_INFOR values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
-insert into GENERAL_INFOR values('GI023', 'NameShop', 'Shop Bánh Kem');
+insert into general_infor values('GI005', 'Address', 'Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM');
+insert into general_infor values('GI006', 'PhoneNumber', '0987654321');
+insert into general_infor values('GI007', 'Email', 'tiembanhhanhphuc@gmail.com');
+insert into general_infor values('GI008', 'TimeShop', 'T2 - T6');
+insert into general_infor values('GI009', 'TimeShop', '8:00 sáng - 22:00 tối');
+insert into general_infor values('GI010', 'TimeShop', 'T7 & CN');
+insert into general_infor values('GI011', 'TimeShop', '13:00 chiều - 18:00 tối');
+insert into general_infor values('GI012', 'SpecialOffer', 'Thưởng thức bánh miễn phí');
+insert into general_infor values('GI013', 'SpecialOffer', 'Thứ sáu hàng tuần tại cửa hàng vào lúc 14h00-14h30');
+insert into general_infor values('GI014', 'SpecialOffer', 'img/footer/img-footer.jpeg');
+insert into general_infor values('GI015', 'SocialNetwork', 'https://www.facebook.com/mai.thuan.52438/');
+insert into general_infor values('GI016', 'SocialNetwork', 'https://www.messenger.com/t/100017755062615');
+insert into general_infor values('GI017', 'SocialNetwork', 'https://www.instagram.com/maizecorn1542/');
+insert into general_infor values('GI018', 'Delivery', 'Miễn phí giao hàng nội thành TP.HCM');
+insert into general_infor values('GI019', 'GoogleMap', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18773.836012880063!2d106.75738369035878!3d10.863314618235568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRwLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1657022439109!5m2!1svi!2s');
+insert into general_infor values('GI020', 'IndexSlogan', 'Tận hưởng thế giới ngọt ngào của bạn.');
+insert into general_infor values('GI021', 'IndexSlogan', 'Không chỉ là bánh ngọt, đây là sự yêu thương.');
+insert into general_infor values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
+insert into general_infor values('GI023', 'NameShop', 'Shop Bánh Kem');
+
+
+ALTER TABLE bills
+add CipherText text;
+CREATE TABLE publickey  (
+  ID int NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+  user_Id varchar(255) ,
+  publickeylink text ,
+  createDate datetime ,
+  MissingDate date ,
+  ExpiredDate date ,
+  status int ,
+  CONSTRAINT publickey_ibfk_1 FOREIGN KEY (user_Id) REFERENCES accounts (ID));
+ 

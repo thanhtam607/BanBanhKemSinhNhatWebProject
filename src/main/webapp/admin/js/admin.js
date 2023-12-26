@@ -515,7 +515,7 @@ async function filterLog(type, val) {
     }
     // var url = "LogFilter?level="+level+"&user="+user+"&content="+content+"&from="+ fDate+"&to="+tDate+"&page="+page+"&date="+dateF;
     $.ajax({
-        url: "LogFilter",
+        url: "./LogFilter",
         // url: url,
         type: "POST",
         data: {

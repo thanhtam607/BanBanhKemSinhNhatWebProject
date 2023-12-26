@@ -23,7 +23,7 @@ public class UnHideImage extends HttpServlet {
         Log log = new Log();
         log.setLevel(2);
         log.setSrc(request.getServletPath());
-        log.setContent("Ẩn hình ảnh: "+ img);
+        log.setContent("Ẩn hình ảnh sản phẩm");
         log.setUser(user.getId());
         LogService.addLog(log);
 
