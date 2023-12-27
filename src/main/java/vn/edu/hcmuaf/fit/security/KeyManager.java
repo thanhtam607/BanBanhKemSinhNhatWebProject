@@ -33,7 +33,7 @@ public class KeyManager {
     private static void updateStatusForKey(String userId, int status) throws SQLException {
         String sql = "update PublicKey set Status = ? where User_Id  = ? and status = 1";
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
-        stm.setInt(1,2);
+        stm.setInt(1,status);
         stm.setString(2, userId);
         stm.executeUpdate();
     }
@@ -46,14 +46,9 @@ public class KeyManager {
         return rs.next();
     }
     public static void insertPublicKey(String userId, String publicKeyLink) throws SQLException {
-        String sql = "";
-        if(!userIsHasKey(userId)){
-            sql = "insert into PublicKey(User_id, publickeylink, createDate, expiredDate, status)" +
+        String sql = "insert into PublicKey(User_id, publickeylink, createDate, expiredDate, status)" +
                     " values(?,?,now(), ?,1)";
-        }else{
-            sql = "insert into PublicKey(User_id, publickeylink, createDate, MissingDate, expiredDate, status)" +
-                    " values(?,?,now(), CURDATE(),?,1)";
-        }
+
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
         stm.setString(1, userId);
         stm.setString(2, publicKeyLink);

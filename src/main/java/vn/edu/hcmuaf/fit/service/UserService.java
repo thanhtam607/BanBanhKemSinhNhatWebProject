@@ -177,7 +177,7 @@ public class UserService {
     public static int randomCode(){
         return  (int) Math.floor(((Math.random() * 899999) + 100000));
     }
-    public  static void sendMail(String toEmail,  String subject, String mess) throws MessagingException, UnsupportedEncodingException {
+    public  static void sendMail(String toEmail, String subject, String mess) throws MessagingException, UnsupportedEncodingException {
         String fromEmail= "group27web@gmail.com";
         String pass =  "imvwmzsvffvjtgpr";
         Properties props = new Properties();

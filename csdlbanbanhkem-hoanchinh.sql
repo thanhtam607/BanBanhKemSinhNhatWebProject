@@ -1072,7 +1072,6 @@ CREATE TABLE publickey  (
   user_Id varchar(255) ,
   publickeylink text ,
   createDate datetime ,
-  MissingDate date ,
   ExpiredDate date ,
   status int ,
   CONSTRAINT publickey_ibfk_1 FOREIGN KEY (user_Id) REFERENCES accounts (ID));
