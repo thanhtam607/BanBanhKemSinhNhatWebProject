@@ -26,8 +26,9 @@ public class KeyManager {
         PrivateKey privateKey = RSA.genPrivateKey(keyPair);
         insertPublicKey(userId, Base64.getEncoder().encodeToString(publicKey.getEncoded()));
         String subject = "Tạo khóa mới";
-        String mess = "Khóa tài khoản của bạn là: " + Base64.getEncoder().encodeToString(privateKey.getEncoded());
-        UserService.sendMail(UserService.getEmail(userId), subject, mess) ;
+        String mess = Base64.getEncoder().encodeToString(privateKey.getEncoded());
+        String filename = "yourfile.xml";
+        UserService.sendMailWithPrivateKey(UserService.getEmail(userId), subject, UserService.convertMessageToXML(mess, filename));
 
     }
     private static void updateStatusForKey(String userId, int status) throws SQLException {

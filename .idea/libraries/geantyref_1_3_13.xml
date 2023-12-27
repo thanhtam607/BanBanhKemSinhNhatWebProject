@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="geantyref-1.3.13">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/BanBanhKem/WEB-INF/lib/geantyref-1.3.13.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
