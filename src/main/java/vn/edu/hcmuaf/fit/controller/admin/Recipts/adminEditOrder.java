@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "AdminEditOrder", value = "/admin/AdminEditOrder")
-public class AdminEditOrder extends HttpServlet {
+public class adminEditOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String madh = request.getParameter("id");

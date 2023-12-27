@@ -1,3 +1,78 @@
+// Function to open the modal
+function openModal() {
+    document.getElementById('myModal').style.display = 'block';
+}
+
+// Function to close the modal
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+}
+
+// Function to enable/disable file input based on checkbox
+function chooseFile() {
+    var fileButton = document.getElementById('fileButton');
+    var fileInput = document.getElementById('fileInput');
+    var keyContent = document.getElementById('keyContent');
+    var file = document.getElementById('file');
+
+    fileButton.style.color = 'black';
+    fileInput.disabled = true;
+    file.style.display = 'block';
+    fileInput.value = ''; // Reset file input value
+    keyContent.value = ''; // Clear file content
+
+    file.onchange = function(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var xmlString = reader.result;
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+            var messageContent = xmlDoc.getElementsByTagName('Message')[0].textContent;
+            keyContent.value = messageContent;
+            keyContent.setAttribute('readonly', true); // Prevent editing
+        };
+        reader.readAsText(event.target.files[0]);
+    };
+    fileButton.style.opacity = '1'; // Make button visible
+
+    keyContent.removeAttribute('readonly'); // Allow editing
+
+    file.click();
+}
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    var modal = document.getElementById('myModal');
+    var modalContent = document.querySelector('.modal-content');
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    };
+
+    if(modalContent) {
+        modalContent.onclick = function(event) {
+            event.stopPropagation();
+        };
+    }
+});
+
+
+// Function to go back in the modal
+function goBack() {
+    var keyContent = document.getElementById('keyContent');
+    keyContent.removeAttribute('readonly'); // Allow editing again
+    keyContent.value = '';
+
+    var fileInput = document.getElementById('fileInput');
+    fileInput.value = '';
+    var file = document.getElementById('file');
+    file.value = '';
+
+    closeModal();
+}
+
 
 function myFunction() {
     var x = document.getElementById('bld1');
@@ -252,6 +327,7 @@ function myFunction() {
     $("#inputGroupSelect03").change(function() {
         var to_dist_id = $("#inputGroupSelect02").val();
         var to_ward_id = $(this).val();
+        console.log(to_dist_id, to_ward_id);
         $.ajax({
             url: "GetFee",
             type: "POST",
@@ -892,8 +968,8 @@ function addOrder() {
         ;
     }
 
-    var huyentxt = selectElement2.options[selectElement3.selectedIndex].value;
-    var xatxt = selectElement3.options[selectElement3.selectedIndex].value;
+    var huyentxt = selectElement2.value;
+    var xatxt = selectElement3.value;
 
     var huyen = huyentxt.replace(/"/g, '');
     var xa = xatxt.replace(/"/g, '');
@@ -1110,6 +1186,7 @@ function changeProfile() {
 
     });
 }
+// ========================================================= //
 function genKey(userId){
     Swal.fire({
         text: 'Bạn có chắc chắn muốn tạo khóa mới?',
@@ -1182,7 +1259,7 @@ function createKey(userId){
         data: {userId: userId},
         success: function () {
             Swal.fire({
-                title: "'Yêu cầu tạo khóa của bạn đã được thực hiện!",
+                title: "Yêu cầu tạo khóa của bạn đã được thực hiện!",
                 text:'Khóa mới sẽ được tới email của bạn.',
                 icon: 'success',
                 confirmButtonText: 'OK',

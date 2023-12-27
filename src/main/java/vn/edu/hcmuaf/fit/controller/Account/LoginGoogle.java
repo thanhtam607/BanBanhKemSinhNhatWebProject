@@ -2,11 +2,10 @@ package vn.edu.hcmuaf.fit.controller.Account;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import vn.edu.hcmuaf.fit.Google.Constants;
-import vn.edu.hcmuaf.fit.Google.UserGoogleDTO;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
+import vn.edu.hcmuaf.fit.Google.Constants;
+import vn.edu.hcmuaf.fit.Google.UserGoogleDTO;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.ItemProductInCart;
@@ -16,7 +15,6 @@ import vn.edu.hcmuaf.fit.service.CartService;
 import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.UserService;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

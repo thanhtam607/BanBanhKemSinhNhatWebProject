@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
+import vn.edu.hcmuaf.fit.model.SignUser;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -282,9 +283,9 @@ public class UserService {
     }
 
 
-    public static void updatePass(String email, String pass)  {
-        String sql = "UPDATE ACCOUNTS set PASS = '"+pass+"' where EMAIL like "+ "'"+email+"'";
-        Statement stm  =  DBConnect.getInstall().get();
+    public static void updatePass(String email, String pass) {
+        String sql = "UPDATE ACCOUNTS set PASS = '" + pass + "' where EMAIL like " + "'" + email + "'";
+        Statement stm = DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql);
 
@@ -293,27 +294,28 @@ public class UserService {
         }
     }
 
-    public static void updateProfile(String name, String sdt, String diachi, String mail, String id, User user)  {
-        if(name == null || sdt == null || diachi == null || mail == null) return;
-        String sql1 = "UPDATE CUSTOMERS, ACCOUNTS set CUSTOMERS.ADDRESS = '"+diachi+"', " +
-                "CUSTOMERS.PHONE = '"+sdt+"', ACCOUNTS.EMAIL = '"+mail+"'," +
-                " ACCOUNTS.NAME='" +name+"'" +
-                " WHERE CUSTOMERS.ID = '"+id+"' and CUSTOMERS.ID = ACCOUNTS.ID";
-        Statement stm  =  DBConnect.getInstall().get();
+    public static void updateProfile(String name, String sdt, String diachi, String mail, String id, User user) {
+        if (name == null || sdt == null || diachi == null || mail == null) return;
+        String sql1 = "UPDATE CUSTOMERS, ACCOUNTS set CUSTOMERS.ADDRESS = '" + diachi + "', " +
+                "CUSTOMERS.PHONE = '" + sdt + "', ACCOUNTS.EMAIL = '" + mail + "'," +
+                " ACCOUNTS.NAME='" + name + "'" +
+                " WHERE CUSTOMERS.ID = '" + id + "' and CUSTOMERS.ID = ACCOUNTS.ID";
+        Statement stm = DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql1);
         } catch (SQLException se) {
             se.printStackTrace();
         }
     }
-    public static void updateProfile(String name, String sdt, String diachi, String mail, User auth)  {
-        if(name == null || sdt == null || diachi == null || mail == null) return;
+
+    public static void updateProfile(String name, String sdt, String diachi, String mail, User auth) {
+        if (name == null || sdt == null || diachi == null || mail == null) return;
         String idACC = auth.getId();
-        String sql1 = "UPDATE CUSTOMERS, ACCOUNTS set CUSTOMERS.ADDRESS = '"+diachi+"', " +
-                "CUSTOMERS.PHONE = '"+sdt+"', ACCOUNTS.EMAIL = '"+mail+"'," +
-                " ACCOUNTS.NAME='" +name+"'" +
-                " WHERE CUSTOMERS.ID = '"+idACC+"' and CUSTOMERS.ID = ACCOUNTS.ID";
-        Statement stm  =  DBConnect.getInstall().get();
+        String sql1 = "UPDATE CUSTOMERS, ACCOUNTS set CUSTOMERS.ADDRESS = '" + diachi + "', " +
+                "CUSTOMERS.PHONE = '" + sdt + "', ACCOUNTS.EMAIL = '" + mail + "'," +
+                " ACCOUNTS.NAME='" + name + "'" +
+                " WHERE CUSTOMERS.ID = '" + idACC + "' and CUSTOMERS.ID = ACCOUNTS.ID";
+        Statement stm = DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql1);
             auth.setName(name);
@@ -324,17 +326,19 @@ public class UserService {
             se.printStackTrace();
         }
     }
-    public static User findByEmail(String email){
-        for(User u: getListAcc()){
-            if(!checkEmail(email) && u.getEmail().equals(email)){
+
+    public static User findByEmail(String email) {
+        for (User u : getListAcc()) {
+            if (!checkEmail(email) && u.getEmail().equals(email)) {
                 return u;
             }
         }
         return null;
     }
-    public static void updateType(String email, String type)  {
-        String sql = "UPDATE ACCOUNTS set TYPE = '"+type+"' where EMAIL like "+ "'"+email+"'";
-        Statement stm  =  DBConnect.getInstall().get();
+
+    public static void updateType(String email, String type) {
+        String sql = "UPDATE ACCOUNTS set TYPE = '" + type + "' where EMAIL like " + "'" + email + "'";
+        Statement stm = DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql);
 
@@ -342,19 +346,21 @@ public class UserService {
             se.printStackTrace();
         }
     }
-  public static List<User> getListEmployee(){
+
+    public static List<User> getListEmployee() {
         List<User> listuser = UserService.getListUser();
         List<User> listemp = new LinkedList<>();
-        for(User u: listuser){
-            if(u.getRole() == 1){
+        for (User u : listuser) {
+            if (u.getRole() == 1) {
                 listemp.add(u);
             }
         }
         return listemp;
     }
-    public static void updateAdd(String id, int n)  {
-        String sql = "UPDATE ACCOUNTS set ISADD = '"+n+"' where ID = '"+id+"'";
-        Statement stm  =  DBConnect.getInstall().get();
+
+    public static void updateAdd(String id, int n) {
+        String sql = "UPDATE ACCOUNTS set ISADD = '" + n + "' where ID = '" + id + "'";
+        Statement stm = DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql);
 
@@ -362,9 +368,10 @@ public class UserService {
             se.printStackTrace();
         }
     }
-    public static void updateEdit(String id, int n)  {
-        String sql = "UPDATE ACCOUNTS set ISEDIT = '"+n+"' where ID = '"+id+"'";
-        Statement stm  =  DBConnect.getInstall().get();
+
+    public static void updateEdit(String id, int n) {
+        String sql = "UPDATE ACCOUNTS set ISEDIT = '" + n + "' where ID = '" + id + "'";
+        Statement stm = DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql);
 
@@ -372,9 +379,10 @@ public class UserService {
             se.printStackTrace();
         }
     }
-    public static void updateDelete(String id, int n)  {
-        String sql = "UPDATE ACCOUNTS set ISDELETE = '"+n+"' where ID = '"+id+"'";
-        Statement stm  =  DBConnect.getInstall().get();
+
+    public static void updateDelete(String id, int n) {
+        String sql = "UPDATE ACCOUNTS set ISDELETE = '" + n + "' where ID = '" + id + "'";
+        Statement stm = DBConnect.getInstall().get();
         try {
             stm.executeUpdate(sql);
 
@@ -382,16 +390,18 @@ public class UserService {
             se.printStackTrace();
         }
     }
+
     public static String getEmail(String userId) throws SQLException {
         String sql = "select email from accounts where id = ?";
         PreparedStatement stms = DBConnect.getInstall().getConn().prepareStatement(sql);
         stms.setString(1, userId);
-        ResultSet rs= stms.executeQuery();
-        while (rs.next()){
+        ResultSet rs = stms.executeQuery();
+        while (rs.next()) {
             return rs.getString(1);
         }
         return null;
     }
+
     public static File convertMessageToXML(String messageContent, String fileName) {
         try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
@@ -424,7 +434,39 @@ public class UserService {
         }
     }
 
-    public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {
+    public static List<SignUser> getListKey() {
+        List<SignUser> list = new ArrayList<SignUser>();
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null) {
+            try {
+                ResultSet rs = statement.executeQuery("select ID, user_Id, publickeylink, createDate, expiredDate, status from publickey;");
+                while (rs.next()) {
+                    list.add(new SignUser(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6)));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("No rs");
+        }
+        return list;
 
+    }
+
+    public static String getPbKeybyID(String id) {
+        List<SignUser> listKey = UserService.getListKey();
+        String rs = "";
+        for (SignUser su : listKey) {
+            if (su.getId_user().equals(id)) {
+                rs = su.getPbkey();
+            } else {
+                rs = "";
+            }
+        }
+        return rs;
+    }
+
+
+    public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {
     }
 }

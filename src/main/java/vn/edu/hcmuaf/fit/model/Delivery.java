@@ -14,7 +14,7 @@ public class Delivery {
 
     }
 
-    public Delivery(String mahd, String tenKH, String ngayGiao, String huyen, String xa,String diachigiao, String email, String phone) {
+    public Delivery(String mahd, String ngayGiao,  String xa,String huyen,String diachigiao, String email, String phone, String tenKH) {
         this.mahd = mahd;
         this.ngayGiao = ngayGiao;
         this.xa = xa;

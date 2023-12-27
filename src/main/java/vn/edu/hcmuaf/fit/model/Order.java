@@ -1,11 +1,8 @@
 package vn.edu.hcmuaf.fit.model;
 
 import vn.edu.hcmuaf.fit.bean.User;
-import vn.edu.hcmuaf.fit.service.CartService;
 
 import java.text.NumberFormat;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 public class  Order {
@@ -21,7 +18,6 @@ public class  Order {
     List<ItemProductInCart> data;
     public Order() {
 
-
     }
 
     public Order(String id, User user, String buyDate, double priceTotal, String note,
@@ -34,7 +30,7 @@ public class  Order {
         this.trangthai = trangthai;
         this.data = data;
         this.giaohang = gh;
-}
+    }
     public Order( User user, List<ItemProductInCart> data, String buyDate, double priceTotal,
                   String note, Delivery gh, double pro_bill, double fee_bill) {
         this.id = null;

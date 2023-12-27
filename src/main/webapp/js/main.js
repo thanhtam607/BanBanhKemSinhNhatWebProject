@@ -252,6 +252,7 @@ function myFunction() {
     $("#inputGroupSelect03").change(function() {
         var to_dist_id = $("#inputGroupSelect02").val();
         var to_ward_id = $(this).val();
+        console.log(to_dist_id, to_ward_id);
         $.ajax({
             url: "GetFee",
             type: "POST",
@@ -892,8 +893,8 @@ function addOrder() {
         ;
     }
 
-    var huyentxt = selectElement2.options[selectElement3.selectedIndex].value;
-    var xatxt = selectElement3.options[selectElement3.selectedIndex].value;
+    var huyentxt = selectElement2.value;
+    var xatxt = selectElement3.value;
 
     var huyen = huyentxt.replace(/"/g, '');
     var xa = xatxt.replace(/"/g, '');
@@ -1110,6 +1111,7 @@ function changeProfile() {
 
     });
 }
+// ========================================================= //
 function genKey(userId){
     Swal.fire({
         text: 'Bạn có chắc chắn muốn tạo khóa mới?',
@@ -1182,7 +1184,7 @@ function createKey(userId){
         data: {userId: userId},
         success: function () {
             Swal.fire({
-                title: "'Yêu cầu tạo khóa của bạn đã được thực hiện!",
+                title: "Yêu cầu tạo khóa của bạn đã được thực hiện!",
                 text:'Khóa mới sẽ được tới email của bạn.',
                 icon: 'success',
                 confirmButtonText: 'OK',
