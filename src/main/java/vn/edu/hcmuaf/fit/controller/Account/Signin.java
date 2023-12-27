@@ -4,6 +4,7 @@ import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.ItemProductInCart;
 import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.security.KeyManager;
 import vn.edu.hcmuaf.fit.service.CartService;
 import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.LogService;
@@ -13,6 +14,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "Signin", value = "/doSignin")
@@ -52,6 +54,11 @@ public class Signin extends HttpServlet {
                 session.setAttribute("cust", customer);
 
                 String previousPageUrl = (String) session.getAttribute("previousPageUrl");
+                try {
+                    session.setAttribute("userNeedsKey", KeyManager.userIsHasKey(user.getId()));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 if (previousPageUrl != null && !previousPageUrl.contains("/signin.jsp") && !previousPageUrl.contains("/doSignin")) {
 //                    response.getWriter().println(previousPageUrl);
                     response.sendRedirect(previousPageUrl);

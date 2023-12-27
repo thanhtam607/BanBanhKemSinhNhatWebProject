@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.model;
 
+import java.awt.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.NumberFormat;
@@ -18,7 +19,9 @@ public class Receipt {
     private String email;
     private double fee_bill;
     private double pro_bill;
-    Delivery gh;
+    List<Bill_Detail> billDetailList;
+    Delivery delivery;
+
 
     public Receipt() {
     }
@@ -40,6 +43,17 @@ public class Receipt {
         this.fee_bill = fee_bill;
         this.status = status;
         this.address = dc;
+    }
+//    Receipt nafy dùng để mã hoá lúc tạo đơn hàng
+    public Receipt(String id, String makh, String export_date, String note, double pro_bill, double fee_bill, List<Bill_Detail> billDetailList, Delivery delivery) {
+        this.id = id;
+        this.makh = makh;
+        this.export_date = export_date;
+        this.note = note;
+        this.pro_bill = pro_bill;
+        this.fee_bill = fee_bill;
+        this.billDetailList = billDetailList;
+        this.delivery = delivery;
     }
 
     public String getExport_date() {
@@ -167,6 +181,19 @@ public class Receipt {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Receipt{" +
+                "id='" + id + '\'' +
+                ", makh='" + makh + '\'' +
+                ", address='" + address + '\'' +
+                ", export_date='" + export_date + '\'' +
+                ", delivery_date='" + delivery_date + '\'' +
+                ", note='" + note + '\'' +
+                ", fee_bill=" + fee_bill +
+                ", pro_bill=" + pro_bill +
+                ", status=" + status +
+                '}';
 
-
+    }
 }

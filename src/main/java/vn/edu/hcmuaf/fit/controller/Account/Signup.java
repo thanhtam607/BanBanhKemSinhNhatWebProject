@@ -26,7 +26,7 @@ public class Signup extends HttpServlet {
             PrintWriter out= response.getWriter();
             int code = UserService.randomCode();
             try {
-                UserService.sendMail(email, code);
+                UserService.sendMail(email, "Xác nhận tài khoản", "Mã xác nhận của bạn là: " + code);
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
             }

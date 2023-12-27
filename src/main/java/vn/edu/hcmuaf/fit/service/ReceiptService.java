@@ -2,7 +2,13 @@ package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.*;
+import vn.edu.hcmuaf.fit.security.RSA;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 import java.time.LocalDateTime;
@@ -36,7 +42,7 @@ public class ReceiptService {
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  BILLS.ID, BILLS.CUSTOMER_ID, BILLS.EXPORT_DATE, BILLS.NOTES, BILLS.PRO_BILL, BILLS.FEE_BILL, BILLS.STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
+                ResultSet rs = statement.executeQuery("SELECT BILLS.ID, BILLS.CUSTOMER_ID, BILLS.EXPORT_DATE, BILLS.NOTES, BILLS.PRO_BILL, BILLS.FEE_BILL, BILLS.STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = stmt1.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID,DELIVERY.DELIVERY_DATE  FROM DELIVERY");
                     String diachi = "";
@@ -49,7 +55,9 @@ public class ReceiptService {
                         }
                     }
                     Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
-                            rs.getString(3), ngaygiao, rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), diachi);
+                            rs.getString(3), ngaygiao, rs.getString(4), rs.getInt(5),
+                            rs.getInt(6), rs.getInt(7), diachi);
+
                     list.add(rc);
                 }
             } catch (SQLException e) {
@@ -59,6 +67,19 @@ public class ReceiptService {
             System.out.println("Không có  hóa đơn");
         }
         return list;
+    }
+//    tạo cypherText cho từng đơn hàng
+
+    public static String createCypherText(Receipt receipt, String privateKeyString) throws NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+        String hashOrder = RSA.hashOrder(receipt.toString());
+        return RSA.encrypt(hashOrder, RSA.getPrivateKeyFromString(privateKeyString));
+    }
+
+//    so sánh Hash o1 và o2
+    public static boolean compareOrderHash(Receipt receipt, String cypherText, String publickeyString) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+        String fstHash = RSA.decrypt(cypherText, RSA.getPublicKeyFromString(publickeyString));
+        String hashOrder = RSA.hashOrder(receipt.toString());
+        return fstHash.equals(hashOrder);
     }
 
     public static List<Receipt> getAllReceiptToDay() {
@@ -597,6 +618,12 @@ public class ReceiptService {
     }
 
     public static void main(String[] args) {
+        List<Receipt> receipts = getAllReceipt();
+        for (Receipt r:
+             receipts) {
+
+            System.out.println(r.toString());
+        }
 
     }
 

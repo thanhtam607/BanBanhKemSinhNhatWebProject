@@ -21,7 +21,6 @@ public class  Order {
     List<ItemProductInCart> data;
     public Order() {
 
-
     }
 
     public Order(String id, User user, String buyDate, double priceTotal, String note,

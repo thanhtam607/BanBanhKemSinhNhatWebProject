@@ -36,7 +36,41 @@
 </head>
 
 <body>
-<% User auth = (User) session.getAttribute("auth");%>
+<% User auth = (User) session.getAttribute("auth");
+    boolean userNeedsKey = (boolean) session.getAttribute("userNeedsKey");
+    if(!userNeedsKey){
+%>
+<script>
+    // Hiển thị thông báo khi người dùng cần tạo khóa
+    document.addEventListener("DOMContentLoaded", function() {
+        // Hiển thị thông báo khi người dùng cần tạo khóa
+        const Toast = Swal.mixin({
+            // toast: true,
+            position: "top",
+            timer: 6000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "info",
+            title: "Tài khoản của bạn hiện chưa có khóa bảo mật!",
+            text: "Bạn có muốn tạo khóa cho tài khoản của mình?",
+            showConfirmButton: true,
+            confirmButtonText: 'Tạo khóa',
+            confirmButtonColor: '#ff96b7',
+            showCancelButton: true,
+            cancelButtonText: 'Thoát'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                genKey('<%=auth.getId()%>');
+            }
+        });
+    });
+</script>
+<%} session.setAttribute("userNeedsKey", true);%>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>

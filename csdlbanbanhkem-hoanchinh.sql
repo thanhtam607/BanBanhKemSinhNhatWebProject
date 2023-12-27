@@ -1044,6 +1044,7 @@ insert into GENERAL_INFOR values('GI004', 'Introduce', '<h1 style="text-align:ju
 
 <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif">&nbsp; &nbsp; &nbsp; Cảm ơn qu&yacute; kh&aacute;ch đ&atilde; lựa chọn v&agrave; đồng h&agrave;nh c&ugrave;ng ch&uacute;ng t&ocirc;i trong những chặng đường qua!</span></p>
 ');
+
 insert into GENERAL_INFOR values('GI005', 'Address', 'Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM');
 insert into GENERAL_INFOR values('GI006', 'PhoneNumber', '0987654321');
 insert into GENERAL_INFOR values('GI007', 'Email', 'tiembanhhanhphuc@gmail.com');
@@ -1063,3 +1064,17 @@ insert into GENERAL_INFOR values('GI020', 'IndexSlogan', 'Tận hưởng thế g
 insert into GENERAL_INFOR values('GI021', 'IndexSlogan', 'Không chỉ là bánh ngọt, đây là sự yêu thương.');
 insert into GENERAL_INFOR values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
 insert into GENERAL_INFOR values('GI023', 'NameShop', 'Shop Bánh Kem');
+
+ALTER TABLE bills
+add CipherText text;
+CREATE TABLE publickey  (
+  ID int NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+  user_Id varchar(255) ,
+  publickeylink text ,
+  createDate datetime ,
+  MissingDate date ,
+  ExpiredDate date ,
+  status int ,
+  CONSTRAINT publickey_ibfk_1 FOREIGN KEY (user_Id) REFERENCES accounts (ID));
+ 
+

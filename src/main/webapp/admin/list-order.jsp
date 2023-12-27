@@ -281,8 +281,8 @@
             <li class="paginator__item paginator__item--prev">
               <a href="#"><i class="fa fa-chevron-left"></i></a>
             </li>
-            <li class="paginator__item"><a href="#">1</a></li>
-            <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
+            <li class="paginator__item--active"><a href="#">1</a></li>
+            <li class="paginator__item paginator__item"><a href="#">2</a></li>
             <li class="paginator__item"><a href="#">3</a></li>
             <li class="paginator__item"><a href="#">4</a></li>
             <li class="paginator__item paginator__item--next">

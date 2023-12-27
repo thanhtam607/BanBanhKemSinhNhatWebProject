@@ -37,7 +37,7 @@ public class UpdateBlog extends HttpServlet {
         Log log = new Log();
         log.setLevel(2);
         log.setSrc(request.getServletPath());
-        log.setContent("Sửa bài viết" + idblog);
+        log.setContent("Sửa bài viết: " + idblog);
         log.setUser(user.getId());
         LogService.addLog(log);
 

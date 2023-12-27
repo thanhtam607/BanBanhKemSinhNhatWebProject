@@ -10,6 +10,7 @@ import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.ItemProductInCart;
 import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.security.KeyManager;
 import vn.edu.hcmuaf.fit.service.CartService;
 import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.LogService;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "LoginGoogle", value = "/LoginGoogle")
@@ -82,6 +84,11 @@ public class LoginGoogle extends HttpServlet {
 
         List<ItemProductInCart> listItemCart = CartService.findItemCartByIdUser(user.getId());
         session.setAttribute("itemCart", listItemCart);
+        try {
+            session.setAttribute("userNeedsKey", KeyManager.userIsHasKey(user.getId()));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         response.sendRedirect( "Index");
     }
     @Override
