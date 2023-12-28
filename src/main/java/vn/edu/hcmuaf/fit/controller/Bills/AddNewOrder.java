@@ -84,7 +84,7 @@ public class AddNewOrder extends HttpServlet {
         order.setId(OrderService.getNewIdOrder());
 
 //        hash order here
-        String hash1 = RSA.hashObject(order);
+
         List<Bill_Detail> billDetailList = new ArrayList<>();
         for (ItemProductInCart item : order.getData()) {
             Product p = ProductService.findById(item.getSp().getId());
@@ -94,9 +94,7 @@ public class AddNewOrder extends HttpServlet {
         }
         Receipt receipt = new Receipt(order.getId(), order.getUser().getId(), todayFM, ghichu, price_pro_bill, Double.parseDouble(fee), billDetailList, gh);
 //==  hash order here
-        String hash2 = RSA.hashObject(receipt);
-
-        String hash = hash1 + hash2;
+        String hash = RSA.hashObject(receipt);
         String privateKey = request.getParameter("keyContent");
         try {
             String signBill = RSA.sign(hash, privateKey);
