@@ -33,10 +33,10 @@ public class OrderService {
         return "HD" + (Integer.parseInt(stt) + 1);
     }
 
-    public static void addOrder(Order order) {
+    public static void addOrder(Order order, String cypherText) {
         Statement stm = DBConnect.getInstall().get();
 
-        String sql = "INSERT INTO BILLS VALUES('" + getNewIdOrder() + "', '" + order.getUser().getId() + "', '" + order.getBuyDate() + "', '" + order.getNote() + "', " + order.getPro_bill() + ", " + order.getFee_bill() + ", 0 , 'aaaaaa')";
+        String sql = "INSERT INTO BILLS VALUES('" + order.getId() + "', '" + order.getUser().getId() + "', '" + order.getBuyDate() + "', '" + order.getNote() + "', " + order.getPro_bill() + ", " + order.getFee_bill() + ", 0, '" + cypherText + "')";
         if (stm != null) {
             try {
                 stm.executeUpdate(sql);

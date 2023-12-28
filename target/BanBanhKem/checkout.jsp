@@ -10,8 +10,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.logistic.District" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.logistic.LogisticController" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.logistic.Ward" %>
-<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <html lang="xzz">
@@ -366,14 +364,13 @@
                                     <div class="button-container">
                                         <div class="button-row">
                                             <button onclick="goBack()" class="back-btn" style="width: 30%">Quay lại</button>
-                                            <button onclick="addOrder()" style="width: 30%; height: 40px" class="confirm-btn">Xác nhận</button>
+                                            <button onclick="addOrder()" style="width: 30%; height: 40px" type="submit" class="confirm-btn" disabled>Xác nhận</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <button onclick="openModal()" type="submit" class="site-btn">ĐẶT HÀNG</button>
-                            <%--                            <button onclick="addOrder()" type="submit" class="site-btn">ĐẶT HÀNG</button>--%>
+                            <button onclick="openModal()" class="site-btn">ĐẶT HÀNG</button>
+<%--                            <button onclick="addOrder()" type="submit" class="site-btn">ĐẶT HÀNG</button>--%>
                         </div>
                     </div>
                 </div>

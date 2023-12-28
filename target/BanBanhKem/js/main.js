@@ -1,78 +1,3 @@
-// Function to open the modal
-function openModal() {
-    document.getElementById('myModal').style.display = 'block';
-}
-
-// Function to close the modal
-function closeModal() {
-    document.getElementById('myModal').style.display = 'none';
-}
-
-// Function to enable/disable file input based on checkbox
-function chooseFile() {
-    var fileButton = document.getElementById('fileButton');
-    var fileInput = document.getElementById('fileInput');
-    var keyContent = document.getElementById('keyContent');
-    var file = document.getElementById('file');
-
-    fileButton.style.color = 'black';
-    fileInput.disabled = true;
-    file.style.display = 'block';
-    fileInput.value = ''; // Reset file input value
-    keyContent.value = ''; // Clear file content
-
-    file.onchange = function(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var xmlString = reader.result;
-            var parser = new DOMParser();
-            var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-            var messageContent = xmlDoc.getElementsByTagName('Message')[0].textContent;
-            keyContent.value = messageContent;
-            keyContent.setAttribute('readonly', true); // Prevent editing
-        };
-        reader.readAsText(event.target.files[0]);
-    };
-    fileButton.style.opacity = '1'; // Make button visible
-
-    keyContent.removeAttribute('readonly'); // Allow editing
-
-    file.click();
-}
-
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    var modal = document.getElementById('myModal');
-    var modalContent = document.querySelector('.modal-content');
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            closeModal();
-        }
-    };
-
-    if(modalContent) {
-        modalContent.onclick = function(event) {
-            event.stopPropagation();
-        };
-    }
-});
-
-
-// Function to go back in the modal
-function goBack() {
-    var keyContent = document.getElementById('keyContent');
-    keyContent.removeAttribute('readonly'); // Allow editing again
-    keyContent.value = '';
-
-    var fileInput = document.getElementById('fileInput');
-    fileInput.value = '';
-    var file = document.getElementById('file');
-    file.value = '';
-
-    closeModal();
-}
-
 
 function myFunction() {
     var x = document.getElementById('bld1');
@@ -955,25 +880,30 @@ function addOrder() {
     var ten = document.getElementById("ten").value;
     var diachitxt = "";
 
-    if(document.getElementById("diachi").value !== ""){
-         diachitxt = document.getElementById("diachi").value
-            +" - "+ selectElement3.options[selectElement3.selectedIndex].textContent
-            +" - "+ selectElement2.options[selectElement2.selectedIndex].textContent
-            +" - "+ selectElement1.options[selectElement1.selectedIndex].textContent
-        ;
-    }else{
-        diachitxt = selectElement3.options[selectElement3.selectedIndex].textContent
-            +" - "+ selectElement2.options[selectElement2.selectedIndex].textContent
-            +" - "+ selectElement1.options[selectElement1.selectedIndex].textContent
-        ;
+    if (document.getElementById("diachi").value !== "") {
+        diachitxt =
+            document.getElementById("diachi").value +
+            " - " +
+            selectElement3.options[selectElement3.selectedIndex].textContent +
+            " - " +
+            selectElement2.options[selectElement2.selectedIndex].textContent +
+            " - " +
+            selectElement1.options[selectElement1.selectedIndex].textContent;
+    } else {
+        diachitxt =
+            selectElement3.options[selectElement3.selectedIndex].textContent +
+            " - " +
+            selectElement2.options[selectElement2.selectedIndex].textContent +
+            " - " +
+            selectElement1.options[selectElement1.selectedIndex].textContent;
     }
 
     var huyentxt = selectElement2.value;
     var xatxt = selectElement3.value;
 
-    var huyen = huyentxt.replace(/"/g, '');
-    var xa = xatxt.replace(/"/g, '');
-    var diachi = diachitxt.replace(/"/g, '');
+    var huyen = huyentxt.replace(/"/g, "");
+    var xa = xatxt.replace(/"/g, "");
+    var diachi = diachitxt.replace(/"/g, "");
 
     var phone = document.getElementById("phone").value;
     var email = document.getElementById("email").value;
@@ -982,32 +912,34 @@ function addOrder() {
     var leadTime = document.getElementById("leadTime").innerText;
 
     var pro_bill_t = document.getElementById("pro_bill").innerText;
-    var pro_bill = parseInt(pro_bill_t.replace(/,/g, ''));
+    var pro_bill = parseInt(pro_bill_t.replace(/,/g, ""));
 
     var feeTt = document.getElementById("fee").innerText;
-    var fee = parseInt(feeTt.replace(/,/g, ''));
+    var fee = parseInt(feeTt.replace(/,/g, ""));
 
     var totalBilltext = document.getElementById("totalBill").innerText;
-    var totalBill = parseInt(totalBilltext.replace(/,/g, ''));
+    var totalBill = parseInt(totalBilltext.replace(/,/g, ""));
 
-    var lenght = document.getElementsByName("noteD").length;
+    var length = document.getElementsByName("noteD").length;
     var note = new Array();
 
-    for(var i =0; i<lenght;i++){
-        note[i] = document.getElementsByName("noteD")[i].value+"/";
-        if(i=== lenght-1){
+    var keyContent = document.getElementById("keyContent").value;
+    for (var i = 0; i < length; i++) {
+        note[i] = document.getElementsByName("noteD")[i].value + "/";
+        if (i === length - 1) {
             note[i] = document.getElementsByName("noteD")[i].value;
         }
-
     }
+
     var haveDisk = document.getElementById("payment3").checked;
     var haveDiskName = document.getElementById("payment3").value;
+
     // var url1  ="AddNewOrder?ten=" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
-    var url1  ="AddNewOrder";
+    var url1 = "AddNewOrder";
     $.ajax({
         url: url1,
         type: "GET",
-        data:{
+        data: {
             ten: ten,
             email: email,
             diachi: diachi,
@@ -1016,37 +948,36 @@ function addOrder() {
             haveDisk: haveDisk,
             haveDiskName: haveDiskName,
             note: note.toString(),
-            totalBill:totalBill,
-            fee:fee,
-            pro_bill:pro_bill,
-            leadTime:leadTime,
-            huyen:huyen,
-            xa:xa
+            totalBill: totalBill,
+            fee: fee,
+            pro_bill: pro_bill,
+            leadTime: leadTime,
+            huyen: huyen,
+            xa: xa,
+            keyContent: keyContent,
         },
         success: function () {
-
+            // Xử lý khi thành công
             document.getElementById("totalPro").innerHTML = "0";
             document.getElementById("totalPro1").innerHTML = "0";
-            document.getElementById("emptyPro").innerHTML = "" +
-                "                                <h4>Đơn hàng</h4>\n" +
-                "                                <div class=\"checkout__order__products\">Sản Phẩm <span>Tổng</span></div>\n" +
-                "                                <ul class=\"\">\n" +
-                "                                    <li>\n" +
-                "                                    </li>\n" +
-                "                                </ul>\n" +
-                "                                <div class=\"checkout__order__subtotal\">Tạm tính <span>0 VND</span></div>\n" +
-                "                                <div class=\"checkout__order__total\">Tổng <span>0 VND</span></div>\n" +
-                "\n" +
-                "\n" +
-                "                                <div class=\"checkout__input__checkbox\">\n" +
-                "                                    <label for=\"payment\" >\n" +
-                "                                       Thanh Toán Khi Nhận Hàng\n" +
-                "                                        <input type=\"checkbox\" id=\"payment\">\n" +
-                "                                        <span class=\"checkmark\"></span>\n" +
-                "                                    </label>\n" +
-                "                                </div>\n" +
-                "                                <button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>\n" +
-                "                            ";
+            document.getElementById("emptyPro").innerHTML =
+                "<h4>Đơn hàng</h4>\n" +
+                "<div class=\"checkout__order__products\">Sản Phẩm <span>Tổng</span></div>\n" +
+                "<ul class=\"\">\n" +
+                "    <li>\n" +
+                "    </li>\n" +
+                "</ul>\n" +
+                "<div class=\"checkout__order__subtotal\">Tạm tính <span>0 VND</span></div>\n" +
+                "<div class=\"checkout__order__total\">Tổng <span>0 VND</span></div>\n" +
+                "<div class=\"checkout__input__checkbox\">\n" +
+                "    <label for=\"payment\" >\n" +
+                "       Thanh Toán Khi Nhận Hàng\n" +
+                "        <input type=\"checkbox\" id=\"payment\">\n" +
+                "        <span class=\"checkmark\"></span>\n" +
+                "    </label>\n" +
+                "</div>\n" +
+                "<button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>";
+
             Swal.fire({
                 text: 'Đặt hàng thành công!',
                 icon: 'success',
@@ -1055,20 +986,34 @@ function addOrder() {
                 confirmButtonText: 'Xem đơn đặt',
                 confirmButtonColor: '#ff96b7'
             }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.href = "MyOrder";
-                    } else {
-                        location.href = "ListProduct";
-                    }
+                if (result.isConfirmed) {
+                    location.href = "MyOrder";
+                } else {
+                    location.href = "ListProduct";
                 }
-            );
+            });
+        },
+        error: function (xhr, status, error) {
+            // Xử lý khi có lỗi
+            console.error("Error:", error);
 
+            // Hiển thị modal lỗi
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Vui lòng nhập đúng định dạng khóa riêng tư của bạn!',
+                footer: 'Vui lòng thử lại hoặc liên hệ hỗ trợ.'
+            });
         }
-
     });
+}
 
-
-
+function isBase64(str) {
+    try {
+        return btoa(atob(str)) === str;
+    } catch (err) {
+        return false;
+    }
 }
 
 function cartEmpty() {
@@ -1187,77 +1132,103 @@ function changeProfile() {
     });
 }
 // ========================================================= //
+function confirmGenKey(userId, hasKey){
+    if(hasKey) {
+        Swal.fire({
+            text: 'Bạn có chắc chắn muốn tạo lại khóa mới?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Quay lại',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#ff96b7'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                genKey(userId);
+            }
+        });
+    }else{
+        genKey(userId)
+    }
+}
 function genKey(userId){
     Swal.fire({
-        text: 'Bạn có chắc chắn muốn tạo khóa mới?',
-        icon: 'question',
-        showCancelButton: true,
-        cancelButtonText: 'Quay lại',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#ff96b7'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: "Verify",
-                type: "POST",
-                data: {userId: userId},
-                success: async function (response) {
-                    let count = 30;
-                    const {value: code} = await Swal.fire({
-                        title: 'Xác minh tài khoản',
-                        input: 'text',
-                        inputLabel: 'Mã xác nhận',
-                        inputPlaceholder: 'Nhập mã xác nhận...',
-                        confirmButtonColor: '#ff96b7',
-                        confirmButtonText: 'Xác nhận',
-                        html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
-                        timer: 31000,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            const b = Swal.getHtmlContainer().querySelector('b')
-                            timerInterval = setInterval(() => {
-                                --count;
-                                b.textContent = count;
-                            }, 1000)
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval)
-                        }
-                    })
-
-                    if (checkCode(parseInt(code), parseInt(response))) {
-                       createKey(userId);
-                    } else {
-                        if (count <= 0) {
-                            Swal.fire({
-                                text: 'Mã xác nhận hêt hiệu lực!',
-                                icon: 'error',
-                                confirmButtonColor: '#ff96b7'
-                            });
-                        } else {
-                            Swal.fire({
-                                text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
-                                icon: 'error',
-                                confirmButtonColor: '#ff96b7'
-                            }).then((result) => {
-                                location.reload();
-                            });
-
-                        }
-
-                    }
-                }
-            });
+        title: 'Yêu cầu đang được xử lý...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
         }
     });
+    $.ajax({
+        url: "Verify",
+        type: "POST",
+        data: {userId: userId},
+        success: async function (response) {
+            Swal.close();
+            let count = 30;
+            const {value: code} = await Swal.fire({
+                title: 'Xác minh tài khoản',
+                input: 'text',
+                inputLabel: 'Mã xác nhận',
+                inputPlaceholder: 'Nhập mã xác nhận...',
+                confirmButtonColor: '#ff96b7',
+                confirmButtonText: 'Xác nhận',
+                html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
+                timer: 31000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        --count;
+                        b.textContent = count;
+                    }, 1000)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            })
 
+            if (checkCode(parseInt(code), parseInt(response))) {
+
+                createKey(userId);
+            } else {
+                Swal.close();
+                if (count <= 0) {
+                    Swal.fire({
+                        text: 'Mã xác nhận hêt hiệu lực!',
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'
+                    });
+                } else {
+                    Swal.fire({
+                        text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'
+                    }).then((result) => {
+                        location.reload();
+                    });
+
+                }
+
+            }
+        }
+    });
 }
 function createKey(userId){
+    Swal.fire({
+        title: 'Vui lòng chờ...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
     $.ajax({
         url: "GenKey",
         type: "POST",
         data: {userId: userId},
         success: function () {
+            Swal.close();
             Swal.fire({
                 title: "Yêu cầu tạo khóa của bạn đã được thực hiện!",
                 text:'Khóa mới sẽ được tới email của bạn.',
@@ -1270,8 +1241,115 @@ function createKey(userId){
     });
 
 }
-function suggestCreateKey(){
-
+function requestKey(userId){
+    Swal.fire({
+        title: "Yêu cầu tạo khóa",
+        text:'Tài khoản của bạn hiện chưa có khóa. Vui lòng tạo khóa để thực hiện đặt hàng!',
+        icon: 'info',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#ff96b7',
+        showCancelButton: true,
+        cancelButtonText: 'Quay lại'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            genKey(userId);
+        }
+    });
 }
 
 
+function openModal() {
+    document.getElementById('myModal').style.display = 'block';
+}
+
+// Function to close the modal
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+}
+
+// Function to enable/disable file input based on checkbox
+function chooseFile() {
+    var fileButton = document.getElementById('fileButton');
+    var fileInput = document.getElementById('fileInput');
+    var keyContent = document.getElementById('keyContent');
+    var file = document.getElementById('file');
+    var confirmButton = document.querySelector(".confirm-btn");
+
+    fileButton.style.color = 'black';
+    fileInput.disabled = true;
+    file.style.display = 'block';
+    fileInput.value = ''; // Reset file input value
+    keyContent.value = ''; // Clear file content
+
+    file.onchange = function(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var xmlString = reader.result;
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+            var messageContent = xmlDoc.getElementsByTagName('Message')[0].textContent;
+            keyContent.value = messageContent;
+            keyContent.setAttribute('readonly', true); // Prevent editing
+            confirmButton.removeAttribute("disabled");
+            confirmButton.style.backgroundColor = "#ff96b7";        };
+        reader.readAsText(event.target.files[0]);
+    };
+    fileButton.style.opacity = '1'; // Make button visible
+
+    keyContent.removeAttribute('readonly'); // Allow editing
+    file.click();
+}
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    var modal = document.getElementById('myModal');
+    var modalContent = document.querySelector('.modal-content');
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    };
+
+    if(modalContent) {
+        modalContent.onclick = function(event) {
+            event.stopPropagation();
+        };
+    }
+});
+
+
+// Function to go back in the modal
+function goBack() {
+    var keyContent = document.getElementById('keyContent');
+    keyContent.removeAttribute('readonly'); // Allow editing again
+    keyContent.value = '';
+    var confirmButton = document.querySelector(".confirm-btn");
+
+    var fileInput = document.getElementById('fileInput');
+    fileInput.value = '';
+    var file = document.getElementById('file');
+    confirmButton.setAttribute("disabled", true);
+    confirmButton.style.backgroundColor = "rgba(11, 11, 11, 0.5)";
+    file.value = '';
+
+    closeModal();
+}
+function checkTextarea() {
+    var textareaValue = document.getElementById("keyContent").value.trim();
+    var confirmButton = document.querySelector(".confirm-btn");
+
+    // Kiểm tra nếu có dữ liệu trong textarea thì enable button, ngược lại disable
+    if (textareaValue.length > 0) {
+        confirmButton.removeAttribute("disabled");
+        confirmButton.style.backgroundColor = "#ff96b7";
+
+    } else {
+        confirmButton.setAttribute("disabled", true);
+        confirmButton.style.backgroundColor = "rgba(11, 11, 11, 0.5)";
+    }
+    console.log("Textarea Value:", textareaValue);
+}
+
+// Gọi hàm checkTextarea khi textarea thay đổi
+document.getElementById("keyContent").addEventListener("input", checkTextarea);
