@@ -8,7 +8,6 @@ public class Bill_Detail {
     private String mahd;
     private String masp;
     private String namePro;
-
     private int solg;
     private int price;
     private String note;
@@ -29,6 +28,13 @@ public class Bill_Detail {
         this.solg = solg;
         this.note = note;
 
+    }
+    public Bill_Detail(String mahd, String masp,int solg, String note, int price) {
+        this.mahd = mahd;
+        this.masp = masp;
+        this.solg = solg;
+        this.note = note;
+        this.price = price;
     }
 
     public int getToTalPrice(){
