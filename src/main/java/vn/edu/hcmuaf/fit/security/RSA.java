@@ -153,7 +153,7 @@ public class RSA {
         }
         return publicSignature.verify(signatureBytes);
     }
-    public static void main(String[] args) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    public static void main(String[] args) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
         RSA rsa = new RSA();
         SignUser su = new SignUser("aa", "bb", "cc", "dd", "ee", 1);
         String hash = rsa.hashObject(su);
