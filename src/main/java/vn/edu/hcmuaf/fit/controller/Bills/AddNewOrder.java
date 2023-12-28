@@ -2,21 +2,23 @@ package vn.edu.hcmuaf.fit.controller.Bills;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.*;
-import vn.edu.hcmuaf.fit.service.CartService;
+import vn.edu.hcmuaf.fit.security.RSA;
 import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.OrderService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.sql.SQLException;
-import java.text.ParseException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SignatureException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -82,15 +84,27 @@ public class AddNewOrder extends HttpServlet {
         order.setId(OrderService.getNewIdOrder());
 
 //        hash order here
+
         List<Bill_Detail> billDetailList = new ArrayList<>();
         for (ItemProductInCart item : order.getData()) {
             Product p = ProductService.findById(item.getSp().getId());
             int price = p.getPromotional() != 0 ? p.getPromotional() : p.getPrice();
-           billDetailList.add(new Bill_Detail(order.getId(), item.getSp().getId(),item.getSoLgMua(), item.getNote(), price));
+            billDetailList.add(new Bill_Detail(order.getId(), item.getSp().getId(),item.getSoLgMua(), item.getNote(), price));
 
         }
         Receipt receipt = new Receipt(order.getId(), order.getUser().getId(), todayFM, ghichu, price_pro_bill, Double.parseDouble(fee), billDetailList, gh);
 //==  hash order here
+        String hash = RSA.hashObject(receipt);
+        String privateKey = request.getParameter("keyContent");
+        try {
+            String signBill = RSA.sign(hash, privateKey);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        } catch (SignatureException e) {
+            throw new RuntimeException(e);
+        }
         if(notesForDetail!=null){
             for(int i =0; i< notesForDetail.length ;i++){
                 order.getData().get(i).setNote(notesForDetail[i]);

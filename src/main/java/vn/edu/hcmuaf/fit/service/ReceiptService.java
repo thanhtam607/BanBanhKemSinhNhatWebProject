@@ -75,7 +75,7 @@ public class ReceiptService {
         return RSA.encrypt(hashOrder, RSA.getPrivateKeyFromString(privateKeyString));
     }
 
-//    so sánh Hash o1 và o2
+    //    so sánh Hash o1 và o2
     public static boolean compareOrderHash(Receipt receipt, String cypherText, String publickeyString) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         String fstHash = RSA.decrypt(cypherText, RSA.getPublicKeyFromString(publickeyString));
         String hashOrder = RSA.hashOrder(receipt.toString());
@@ -618,12 +618,8 @@ public class ReceiptService {
     }
 
     public static void main(String[] args) {
-        List<Receipt> receipts = getAllReceipt();
-        for (Receipt r:
-             receipts) {
-
-            System.out.println(r.toString());
-        }
+       ReceiptService rs = new ReceiptService();
+       System.out.println(rs.getReceiptByMahd("AD11"));
 
     }
 

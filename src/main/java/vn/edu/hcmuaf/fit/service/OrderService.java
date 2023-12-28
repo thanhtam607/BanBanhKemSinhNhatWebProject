@@ -1,17 +1,13 @@
 package vn.edu.hcmuaf.fit.service;
 
-import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.db.DBConnect;
-import vn.edu.hcmuaf.fit.model.*;
-import vn.edu.hcmuaf.fit.security.RSA;
+import vn.edu.hcmuaf.fit.model.ItemProductInCart;
+import vn.edu.hcmuaf.fit.model.Order;
+import vn.edu.hcmuaf.fit.model.Product;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.sql.*;
-import java.util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class OrderService {
     public static String getLastMaHD() {
@@ -32,15 +28,15 @@ public class OrderService {
         return result;
     }
 
-   public static String getNewIdOrder(){
-       String stt = getLastMaHD().substring(2);
-       return "HD" + (Integer.parseInt(stt) + 1);
-   }
+    public static String getNewIdOrder(){
+        String stt = getLastMaHD().substring(2);
+        return "HD" + (Integer.parseInt(stt) + 1);
+    }
 
     public static void addOrder(Order order) {
         Statement stm = DBConnect.getInstall().get();
 
-        String sql = "INSERT INTO BILLS VALUES('" + getNewIdOrder() + "', '" + order.getUser().getId() + "', '" + order.getBuyDate() + "', '" + order.getNote() + "', " + order.getPro_bill() + ", " + order.getFee_bill() + ", 0)";
+        String sql = "INSERT INTO BILLS VALUES('" + getNewIdOrder() + "', '" + order.getUser().getId() + "', '" + order.getBuyDate() + "', '" + order.getNote() + "', " + order.getPro_bill() + ", " + order.getFee_bill() + ", 0 , 'aaaaaa')";
         if (stm != null) {
             try {
                 stm.executeUpdate(sql);
@@ -109,6 +105,7 @@ public class OrderService {
     }
 
     public static void main(String[] args) {
+
     }
 
 }

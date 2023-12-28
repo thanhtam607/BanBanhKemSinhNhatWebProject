@@ -352,7 +352,28 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <button onclick="addOrder()" type="submit" class="site-btn">ĐẶT HÀNG</button>
+                            <div id="myModal" class="modal">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <span class="close" onclick="closeModal()">&times;</span>
+                                    <h2>Nhập vào private key của bạn</h2>
+                                    <label for="checkFile">
+                                        Chọn file
+                                        <input type="checkbox" id="checkFile">
+                                    </label>
+                                    <label for="fileInput" class="fileLabel">File:</label>
+                                    <input type="text" id="fileInput" disabled>
+                                    <input type="file" id="file" accept=".xml" style="display: none;">
+                                    <button onclick="chooseFile()">Chọn File</button>
+                                    <textarea id="fileContent" rows="10"></textarea>
+                                    <div class="button-container">
+                                        <button onclick="goBack()">Quay lại</button>
+                                        <button onclick="confirmAction()">Xác nhận</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="openModal()" type="submit" class="site-btn">ĐẶT HÀNG</button>
+<%--                            <button onclick="addOrder()" type="submit" class="site-btn">ĐẶT HÀNG</button>--%>
                         </div>
                     </div>
                 </div>
