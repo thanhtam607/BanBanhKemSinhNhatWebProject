@@ -1238,3 +1238,76 @@ function requestKey(userId){
 }
 
 
+function openModal() {
+    document.getElementById('myModal').style.display = 'block';
+}
+
+// Function to close the modal
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+}
+
+// Function to enable/disable file input based on checkbox
+function chooseFile() {
+    var fileButton = document.getElementById('fileButton');
+    var fileInput = document.getElementById('fileInput');
+    var keyContent = document.getElementById('keyContent');
+    var file = document.getElementById('file');
+
+    fileButton.style.color = 'black';
+    fileInput.disabled = true;
+    file.style.display = 'block';
+    fileInput.value = ''; // Reset file input value
+    keyContent.value = ''; // Clear file content
+
+    file.onchange = function(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var xmlString = reader.result;
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+            var messageContent = xmlDoc.getElementsByTagName('Message')[0].textContent;
+            keyContent.value = messageContent;
+            keyContent.setAttribute('readonly', true); // Prevent editing
+        };
+        reader.readAsText(event.target.files[0]);
+    };
+    fileButton.style.opacity = '1'; // Make button visible
+
+    keyContent.removeAttribute('readonly'); // Allow editing
+
+    file.click();
+}
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    var modal = document.getElementById('myModal');
+    var modalContent = document.querySelector('.modal-content');
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    };
+
+    if(modalContent) {
+        modalContent.onclick = function(event) {
+            event.stopPropagation();
+        };
+    }
+});
+
+
+// Function to go back in the modal
+function goBack() {
+    var keyContent = document.getElementById('keyContent');
+    keyContent.removeAttribute('readonly'); // Allow editing again
+    keyContent.value = '';
+
+    var fileInput = document.getElementById('fileInput');
+    fileInput.value = '';
+    var file = document.getElementById('file');
+    file.value = '';
+
+    closeModal();
+}

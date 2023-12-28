@@ -2467,6 +2467,7 @@ ol {
 	font-weight: 700;
 	float: right;
 }
+
 .checkout__order .checkout__order__subtotal {
 	font-size: 18px;
 	color: #1c1c1c;
@@ -3928,7 +3929,6 @@ font-size: 24px;
 	font-weight: 500;
 	font-size: 17px;
 }
-/* Modal Styles */
 .modal {
 	display: none;
 	position: fixed;
@@ -3986,6 +3986,7 @@ font-size: 24px;
 .confirm-btn{
 	background-color: #ff96b7; color: white;
 }
-.back-btn{
-	background-color: #020e17; color: white;
+.back-btn {
+	background-color: #020e17;
+	color: white;
 }

@@ -10,8 +10,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.logistic.District" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.logistic.LogisticController" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.logistic.Ward" %>
-<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <html lang="xzz">
