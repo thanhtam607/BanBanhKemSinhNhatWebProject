@@ -252,6 +252,7 @@ function myFunction() {
     $("#inputGroupSelect03").change(function() {
         var to_dist_id = $("#inputGroupSelect02").val();
         var to_ward_id = $(this).val();
+        console.log(to_dist_id, to_ward_id);
         $.ajax({
             url: "GetFee",
             type: "POST",
@@ -892,8 +893,8 @@ function addOrder() {
         ;
     }
 
-    var huyentxt = selectElement2.options[selectElement3.selectedIndex].value;
-    var xatxt = selectElement3.options[selectElement3.selectedIndex].value;
+    var huyentxt = selectElement2.value;
+    var xatxt = selectElement3.value;
 
     var huyen = huyentxt.replace(/"/g, '');
     var xa = xatxt.replace(/"/g, '');
@@ -1110,79 +1111,106 @@ function changeProfile() {
 
     });
 }
+// ========================================================= //
+function confirmGenKey(userId, hasKey){
+    if(hasKey) {
+        Swal.fire({
+            text: 'Bạn có chắc chắn muốn tạo lại khóa mới?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Quay lại',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#ff96b7'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                genKey(userId);
+            }
+        });
+    }else{
+        genKey(userId)
+    }
+}
 function genKey(userId){
     Swal.fire({
-        text: 'Bạn có chắc chắn muốn tạo khóa mới?',
-        icon: 'question',
-        showCancelButton: true,
-        cancelButtonText: 'Quay lại',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#ff96b7'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: "Verify",
-                type: "POST",
-                data: {userId: userId},
-                success: async function (response) {
-                    let count = 30;
-                    const {value: code} = await Swal.fire({
-                        title: 'Xác minh tài khoản',
-                        input: 'text',
-                        inputLabel: 'Mã xác nhận',
-                        inputPlaceholder: 'Nhập mã xác nhận...',
-                        confirmButtonColor: '#ff96b7',
-                        confirmButtonText: 'Xác nhận',
-                        html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
-                        timer: 31000,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            const b = Swal.getHtmlContainer().querySelector('b')
-                            timerInterval = setInterval(() => {
-                                --count;
-                                b.textContent = count;
-                            }, 1000)
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval)
-                        }
-                    })
-
-                    if (checkCode(parseInt(code), parseInt(response))) {
-                       createKey(userId);
-                    } else {
-                        if (count <= 0) {
-                            Swal.fire({
-                                text: 'Mã xác nhận hêt hiệu lực!',
-                                icon: 'error',
-                                confirmButtonColor: '#ff96b7'
-                            });
-                        } else {
-                            Swal.fire({
-                                text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
-                                icon: 'error',
-                                confirmButtonColor: '#ff96b7'
-                            }).then((result) => {
-                                location.reload();
-                            });
-
-                        }
-
-                    }
-                }
-            });
+        title: 'Yêu cầu đang được xử lý...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
         }
     });
+    $.ajax({
+        url: "Verify",
+        type: "POST",
+        data: {userId: userId},
+        success: async function (response) {
+            Swal.close();
+            let count = 30;
+            const {value: code} = await Swal.fire({
+                title: 'Xác minh tài khoản',
+                input: 'text',
+                inputLabel: 'Mã xác nhận',
+                inputPlaceholder: 'Nhập mã xác nhận...',
+                confirmButtonColor: '#ff96b7',
+                confirmButtonText: 'Xác nhận',
+                html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
+                timer: 31000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        --count;
+                        b.textContent = count;
+                    }, 1000)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            })
 
+            if (checkCode(parseInt(code), parseInt(response))) {
+
+                createKey(userId);
+            } else {
+                Swal.close();
+                if (count <= 0) {
+                    Swal.fire({
+                        text: 'Mã xác nhận hêt hiệu lực!',
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'
+                    });
+                } else {
+                    Swal.fire({
+                        text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'
+                    }).then((result) => {
+                        location.reload();
+                    });
+
+                }
+
+            }
+        }
+    });
 }
 function createKey(userId){
+    Swal.fire({
+        title: 'Vui lòng chờ...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
     $.ajax({
         url: "GenKey",
         type: "POST",
         data: {userId: userId},
         success: function () {
+            Swal.close();
             Swal.fire({
-                title: "'Yêu cầu tạo khóa của bạn đã được thực hiện!",
+                title: "Yêu cầu tạo khóa của bạn đã được thực hiện!",
                 text:'Khóa mới sẽ được tới email của bạn.',
                 icon: 'success',
                 confirmButtonText: 'OK',
@@ -1193,8 +1221,20 @@ function createKey(userId){
     });
 
 }
-function suggestCreateKey(){
-
+function requestKey(userId){
+    Swal.fire({
+        title: "Yêu cầu tạo khóa",
+        text:'Tài khoản của bạn hiện chưa có khóa. Vui lòng tạo khóa để thực hiện đặt hàng!',
+        icon: 'info',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#ff96b7',
+        showCancelButton: true,
+        cancelButtonText: 'Quay lại'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            genKey(userId);
+        }
+    });
 }
 
 

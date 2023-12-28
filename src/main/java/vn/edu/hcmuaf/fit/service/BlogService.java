@@ -195,6 +195,6 @@ public static void addBlog(Blog b){
     }
 }
     public static void main(String[] args) {
-//
+        System.out.println("thanhthuy");
     }
 }

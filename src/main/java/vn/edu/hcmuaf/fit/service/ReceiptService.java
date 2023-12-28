@@ -2,8 +2,17 @@ package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.db.DBConnect;
 import vn.edu.hcmuaf.fit.model.*;
+import vn.edu.hcmuaf.fit.security.RSA;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,7 +42,7 @@ public class ReceiptService {
         Statement stmt1 = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  BILLS.ID, BILLS.CUSTOMER_ID, BILLS.EXPORT_DATE, BILLS.NOTES, BILLS.PRO_BILL, BILLS.FEE_BILL, BILLS.STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
+                ResultSet rs = statement.executeQuery("SELECT BILLS.ID, BILLS.CUSTOMER_ID, BILLS.EXPORT_DATE, BILLS.NOTES, BILLS.PRO_BILL, BILLS.FEE_BILL, BILLS.STATUS FROM BILLS ORDER BY BILLS.EXPORT_DATE DESC");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = stmt1.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID,DELIVERY.DELIVERY_DATE  FROM DELIVERY");
                     String diachi = "";
@@ -46,7 +55,9 @@ public class ReceiptService {
                         }
                     }
                     Receipt rc = new Receipt(rs.getString(1), rs.getString(2),
-                            rs.getString(3), ngaygiao, rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), diachi);
+                            rs.getString(3), ngaygiao, rs.getString(4), rs.getInt(5),
+                            rs.getInt(6), rs.getInt(7), diachi);
+
                     list.add(rc);
                 }
             } catch (SQLException e) {
@@ -56,6 +67,19 @@ public class ReceiptService {
             System.out.println("Không có  hóa đơn");
         }
         return list;
+    }
+//    tạo cypherText cho từng đơn hàng
+
+    public static String createCypherText(Receipt receipt, String privateKeyString) throws NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+        String hashOrder = RSA.hashOrder(receipt.toString());
+        return RSA.encrypt(hashOrder, RSA.getPrivateKeyFromString(privateKeyString));
+    }
+
+//    so sánh Hash o1 và o2
+    public static boolean compareOrderHash(Receipt receipt, String cypherText, String publickeyString) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+        String fstHash = RSA.decrypt(cypherText, RSA.getPublicKeyFromString(publickeyString));
+        String hashOrder = RSA.hashOrder(receipt.toString());
+        return fstHash.equals(hashOrder);
     }
 
     public static List<Receipt> getAllReceiptToDay() {
@@ -249,7 +273,6 @@ public class ReceiptService {
     }
 
 
-
     public static List<Bill_Detail> getBill_DetailUser(String mahd) {
         List<Bill_Detail> list = new ArrayList<>();
         Statement statement = DBConnect.getInstall().get();
@@ -257,7 +280,7 @@ public class ReceiptService {
             try {
                 ResultSet rs = statement.executeQuery("SELECT BILL_DETAIL.ID, BILL_DETAIL.idProduct, products.productName,BILL_DETAIL.PRICE , BILL_DETAIL.AMOUNT, BILL_DETAIL.NOTES from BILLS, BILL_DETAIL, products\n" +
                         "                        WHERE BILL_DETAIL.ID = BILLS.ID and BILL_DETAIL.idProduct = products.idProduct \n" +
-                        "and BILLS.ID = '"+mahd+"'");
+                        "and BILLS.ID = '" + mahd + "'");
                 while (rs.next()) {
 
                     Bill_Detail billDetail = new Bill_Detail(rs.getString(1),
@@ -284,7 +307,7 @@ public class ReceiptService {
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES, PRO_BILL, " +
-                        "FEE_BILL, STATUS FROM BILLS WHERE BILLS.ID ='"+mhd+"'");
+                        "FEE_BILL, STATUS FROM BILLS WHERE BILLS.ID ='" + mhd + "'");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = statement1.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID, DELIVERY.DELIVERY_DATE FROM DELIVERY");
                     String diachi = "";
@@ -297,7 +320,7 @@ public class ReceiptService {
                         }
                     }
                     result = new Receipt(rs.getString(1), rs.getString(2),
-                            rs.getString(3), ngaygiao, rs.getString(4), rs.getInt(5), rs.getInt(6),  rs.getInt(7), diachi);
+                            rs.getString(3), ngaygiao, rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), diachi);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -315,7 +338,7 @@ public class ReceiptService {
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT BILLS.ID, BILLS.CUSTOMER_ID, BILLS.EXPORT_DATE, BILLS.NOTES, BILLS.PRO_BILL, BILLS.FEE_BILL, BILLS.STATUS FROM BILLS, CUSTOMERS \n" +
-                        "WHERE BILLS.CUSTOMER_ID = CUSTOMERS.ID AND CUSTOMERS.ID = '"+makh+"' ORDER BY BILLS.EXPORT_DATE DESC");
+                        "WHERE BILLS.CUSTOMER_ID = CUSTOMERS.ID AND CUSTOMERS.ID = '" + makh + "' ORDER BY BILLS.EXPORT_DATE DESC");
                 while (rs.next()) {
                     ResultSet rsDiaChiGiao = statement2.executeQuery("SELECT DELIVERY.ADDRESS, DELIVERY.ID, DELIVERY.DELIVERY_DATE FROM DELIVERY");
                     String diachi = "";
@@ -328,7 +351,7 @@ public class ReceiptService {
                         }
                     }
                     Receipt re = new Receipt(rs.getString(1), rs.getString(2),
-                            rs.getString(3), ngaygiao, rs.getString(4), rs.getInt(5), rs.getInt(6),  rs.getInt(7), diachi);
+                            rs.getString(3), ngaygiao, rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), diachi);
                     result.add(re);
                 }
             } catch (SQLException e) {
@@ -438,7 +461,7 @@ public class ReceiptService {
     }
 
 
-    public static void updateState(String mahd, int st){
+    public static void updateState(String mahd, int st) {
         Statement stm = DBConnect.getInstall().get();
 
         if (stm != null) {
@@ -475,6 +498,25 @@ public class ReceiptService {
                 se.printStackTrace();
             }
         }
+    }
+
+    public static void updateDeliveryDateInBill(String id, String deliveryDate) {
+        Statement stm = DBConnect.getInstall().get();
+        if (stm != null) {
+            try {
+                String sql = "UPDATE DELIVERY set DELIVERY_DATE = '" + deliveryDate + "' WHERE DELIVERY.ID = '" + id + "'";
+                stm.executeUpdate(sql);
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
+    public static String convertDate(long timestamp) {
+        LocalDateTime dateTime = LocalDateTime.ofEpochSecond(timestamp, 0, java.time.ZoneOffset.UTC);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = dateTime.format(formatter);
+        return formattedDateTime;
     }
 
     public static void updateNoteInBill(String id, String note) {
@@ -521,18 +563,18 @@ public class ReceiptService {
 
     public static void addCTHD(String id, String msp, int slg, String notes) {
         List<String> listMsp = getListMaSpCTHD(id);
-        if(msp != null && ProductService.findById(msp) != null) {
+        if (msp != null && ProductService.findById(msp) != null) {
             Statement stm = DBConnect.getInstall().get();
             String sql1, sql2 = "";
             int oldTotal = (int) getReceiptByMahd(id).getPro_bill();
             Product p = ProductService.findById(msp);
-            int price = p.getPromotional()!=0?p.getPromotional():p.getPrice();
+            int price = p.getPromotional() != 0 ? p.getPromotional() : p.getPrice();
 
-            int newTotal = oldTotal + ( price* slg);
+            int newTotal = oldTotal + (price * slg);
             System.out.println(price);
             getReceiptByMahd(id).setPro_bill(newTotal);
 
-            sql1 = "INSERT INTO BILL_DETAIL VALUES('" + id + "','" + msp + "'," + slg + ",'" + notes + "',"+ price +");";
+            sql1 = "INSERT INTO BILL_DETAIL VALUES('" + id + "','" + msp + "'," + slg + ",'" + notes + "'," + price + ");";
             System.out.println(sql1);
             sql2 = "UPDATE BILLS set BILLS.PRO_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
             String sql3 = "UPDATE BILL_DETAIL set BILL_DETAIL.AMOUNT = BILL_DETAIL.AMOUNT+" + slg + "" +
@@ -552,20 +594,19 @@ public class ReceiptService {
     }
 
 
-
     public static void deleteProInCTHD(String id, String msp, int slg) {
         Statement stm = DBConnect.getInstall().get();
         String sql, sql2 = "";
         Product p = ProductService.findById(msp);
-        int price = p.getPromotional()!=0?p.getPromotional():p.getPrice();
+        int price = p.getPromotional() != 0 ? p.getPromotional() : p.getPrice();
         int oldTotal = (int) getReceiptByMahd(id).getPro_bill();
         int newTotal = oldTotal - (price * slg);
         getReceiptByMahd(id).setPro_bill(newTotal);
-        sql = "DELETE FROM BILL_DETAIL WHERE BILL_DETAIL.ID = '"+id+"' and BILL_DETAIL.idProduct = '"+msp+"'";
+        sql = "DELETE FROM BILL_DETAIL WHERE BILL_DETAIL.ID = '" + id + "' and BILL_DETAIL.idProduct = '" + msp + "'";
 
         sql2 = "UPDATE BILLS set BILLS.PRO_BILL = " + newTotal + " WHERE BILLS.ID ='" + id + "'";
         try {
-            if(getListMaSpCTHD(id).size() != 1){
+            if (getListMaSpCTHD(id).size() != 1) {
                 stm.executeUpdate(sql);
                 stm.executeUpdate(sql2);
             }
@@ -577,6 +618,12 @@ public class ReceiptService {
     }
 
     public static void main(String[] args) {
+        List<Receipt> receipts = getAllReceipt();
+        for (Receipt r:
+             receipts) {
+
+            System.out.println(r.toString());
+        }
 
     }
 

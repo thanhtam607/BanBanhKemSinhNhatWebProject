@@ -1,19 +1,18 @@
 package vn.edu.hcmuaf.fit.controller.Bills;
 
 import vn.edu.hcmuaf.fit.bean.User;
-import vn.edu.hcmuaf.fit.model.ItemProductInCart;
-import vn.edu.hcmuaf.fit.model.Log;
-import vn.edu.hcmuaf.fit.model.Order;
-import vn.edu.hcmuaf.fit.model.Delivery;
+import vn.edu.hcmuaf.fit.model.*;
 import vn.edu.hcmuaf.fit.service.CartService;
 import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.OrderService;
+import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -79,14 +78,23 @@ public class AddNewOrder extends HttpServlet {
         gh.setXa(xa);
 
 
+        Order order = new Order(auth, listItemC, todayFM,Double.parseDouble(totalBill), ghichu, gh, price_pro_bill, Double.parseDouble(fee));
+        order.setId(OrderService.getNewIdOrder());
 
-        Order order = new Order(auth, listItemC, todayFM,Double.parseDouble(totalBill), ghichu,gh, price_pro_bill, Double.parseDouble(fee));
+//        hash order here
+        List<Bill_Detail> billDetailList = new ArrayList<>();
+        for (ItemProductInCart item : order.getData()) {
+            Product p = ProductService.findById(item.getSp().getId());
+            int price = p.getPromotional() != 0 ? p.getPromotional() : p.getPrice();
+           billDetailList.add(new Bill_Detail(order.getId(), item.getSp().getId(),item.getSoLgMua(), item.getNote(), price));
 
+        }
+        Receipt receipt = new Receipt(order.getId(), order.getUser().getId(), todayFM, ghichu, price_pro_bill, Double.parseDouble(fee), billDetailList, gh);
+//==  hash order here
         if(notesForDetail!=null){
             for(int i =0; i< notesForDetail.length ;i++){
                 order.getData().get(i).setNote(notesForDetail[i]);
             }}
-
         OrderService.addOrder(order);
         OrderService.addGiaoHang(order);
 

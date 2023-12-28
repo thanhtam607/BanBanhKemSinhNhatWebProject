@@ -60,7 +60,7 @@ public class ProductService {
     public static Product findById(String id) {
         Product p = null;
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT distinct products.idProduct ,products.productName,TYPEOFCAKE.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, typeOfCake where products.idType = typeOfCake.idType and products.idProduct = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT distinct products.idProduct ,products.productName,TYPEOFCAKE.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, TYPEOFCAKE where products.idType = TYPEOFCAKE.idType and products.idProduct = ?");
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -387,7 +387,7 @@ public class ProductService {
         ProductDetail detail ;
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,TYPEOFCAKE.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, typeOfCake where products.idType = typeOfCake.idType and products.STATUS=0");
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,TYPEOFCAKE.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, TYPEOFCAKE where products.idType = TYPEOFCAKE.idType and products.STATUS=0");
                 while (rs.next()) {
                     String idProduct = rs.getString(1);
                     detail = findPDetailByIdProduct(idProduct);

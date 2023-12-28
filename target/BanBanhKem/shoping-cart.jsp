@@ -298,7 +298,11 @@
                         <li>Tổng thanh toán:<span id="totalMoney"><%=CartService.formatNum(CartService.totalPrice(listItemCart))%> VND</span></li>
                     </ul>
                     <hr>
+                    <%if(auth.hasKey()){%>
                     <a href="checkout.jsp" class="primary-btn">THANH TOÁN NGAY</a>
+                    <%}else {%>
+                    <a onclick="requestKey('<%=auth.getId()%>')" class="primary-btn" style="color: white">THANH TOÁN NGAY</a>
+                    <%}%>
                 </div>
             </div>
 
