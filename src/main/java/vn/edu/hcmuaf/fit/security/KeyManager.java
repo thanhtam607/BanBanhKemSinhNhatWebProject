@@ -46,7 +46,7 @@ public class KeyManager {
         stm.executeUpdate();
     }
     public static boolean userIsHasKey(String id) throws SQLException {
-        String sql = "SELECT id FROM PUBLICKEY WHERE USER_ID = ?";
+        String sql = "SELECT ID FROM PUBLICKEY WHERE USER_ID = ?";
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
         stm.setString(1, id);
         ResultSet rs = stm.executeQuery();

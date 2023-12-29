@@ -1,78 +1,3 @@
-// Function to open the modal
-function openModal() {
-    document.getElementById('myModal').style.display = 'block';
-}
-
-// Function to close the modal
-function closeModal() {
-    document.getElementById('myModal').style.display = 'none';
-}
-
-// Function to enable/disable file input based on checkbox
-function chooseFile() {
-    var fileButton = document.getElementById('fileButton');
-    var fileInput = document.getElementById('fileInput');
-    var keyContent = document.getElementById('keyContent');
-    var file = document.getElementById('file');
-
-    fileButton.style.color = 'black';
-    fileInput.disabled = true;
-    file.style.display = 'block';
-    fileInput.value = ''; // Reset file input value
-    keyContent.value = ''; // Clear file content
-
-    file.onchange = function(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var xmlString = reader.result;
-            var parser = new DOMParser();
-            var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-            var messageContent = xmlDoc.getElementsByTagName('Message')[0].textContent;
-            keyContent.value = messageContent;
-            keyContent.setAttribute('readonly', true); // Prevent editing
-        };
-        reader.readAsText(event.target.files[0]);
-    };
-    fileButton.style.opacity = '1'; // Make button visible
-
-    keyContent.removeAttribute('readonly'); // Allow editing
-
-    file.click();
-}
-
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    var modal = document.getElementById('myModal');
-    var modalContent = document.querySelector('.modal-content');
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            closeModal();
-        }
-    };
-
-    if(modalContent) {
-        modalContent.onclick = function(event) {
-            event.stopPropagation();
-        };
-    }
-});
-
-
-// Function to go back in the modal
-function goBack() {
-    var keyContent = document.getElementById('keyContent');
-    keyContent.removeAttribute('readonly'); // Allow editing again
-    keyContent.value = '';
-
-    var fileInput = document.getElementById('fileInput');
-    fileInput.value = '';
-    var file = document.getElementById('file');
-    file.value = '';
-
-    closeModal();
-}
-
 
 function myFunction() {
     var x = document.getElementById('bld1');
@@ -874,67 +799,67 @@ function check() {
     var url = "Signup?email=" + email;
     var urlSignup = "Signup?email="+email+"&pass="+pass+"&saveLogin="+ saveLogin+"&name="+user;
     if(repass == pass){
-    $.ajax({
-        url: url,
-        type: "POST",
-        success: async function (response) {
-            let count =30;
-            const {value: code} = await Swal.fire({
-                title: 'Xác minh tài khoản',
-                input: 'text',
-                inputLabel: 'Mã xác nhận',
-                inputPlaceholder: 'Nhập mã xác nhận...',
-                confirmButtonColor: '#ff96b7',
-                confirmButtonText: 'Xác nhận',
-                html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
-                timer: 31000,
-                timerProgressBar: true,
-                didOpen: () => {
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                        --count;
-                        b.textContent = count;
-                    }, 1000)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            })
+        $.ajax({
+            url: url,
+            type: "POST",
+            success: async function (response) {
+                let count =30;
+                const {value: code} = await Swal.fire({
+                    title: 'Xác minh tài khoản',
+                    input: 'text',
+                    inputLabel: 'Mã xác nhận',
+                    inputPlaceholder: 'Nhập mã xác nhận...',
+                    confirmButtonColor: '#ff96b7',
+                    confirmButtonText: 'Xác nhận',
+                    html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
+                    timer: 31000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            --count;
+                            b.textContent = count;
+                        }, 1000)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                })
 
-            if(checkCode(parseInt(code), parseInt(response))){
-                $.ajax({
-                    url: urlSignup,
-                    type: "POST",
-                    success: async function (response) {
+                if(checkCode(parseInt(code), parseInt(response))){
+                    $.ajax({
+                        url: urlSignup,
+                        type: "POST",
+                        success: async function (response) {
+                            Swal.fire({
+                                text: 'Đăng ký thành công!',
+                                icon: 'success',
+                                confirmButtonColor: '#ff96b7'
+                            }).then((result) => {
+                                location.href=response.toString();
+                            });
+                        }
+                    });
+                }else {
+                    if (count <= 0) {
                         Swal.fire({
-                            text: 'Đăng ký thành công!',
-                            icon: 'success',
+                            text: 'Mã xác nhận hêt hiệu lực!',
+                            icon: 'error',
+                            confirmButtonColor: '#ff96b7'
+                        });
+                    } else {
+                        Swal.fire({
+                            text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
+                            icon: 'error',
                             confirmButtonColor: '#ff96b7'
                         }).then((result) => {
-                            location.href=response.toString();
+                            location.reload();
                         });
-                    }
-                });
-            }else {
-                if (count <= 0) {
-                    Swal.fire({
-                        text: 'Mã xác nhận hêt hiệu lực!',
-                        icon: 'error',
-                        confirmButtonColor: '#ff96b7'
-                    });
-                } else {
-                    Swal.fire({
-                        text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
-                        icon: 'error',
-                        confirmButtonColor: '#ff96b7'
-                    }).then((result) => {
-                        location.reload();
-                    });
 
+                    }
                 }
             }
-        }
-    });}
+        });}
     else{
         Swal.fire({
             text: 'Mật khẩu nhập lại không đúng. Vui lòng kiểm tra lại!',
@@ -956,7 +881,7 @@ function addOrder() {
     var diachitxt = "";
 
     if(document.getElementById("diachi").value !== ""){
-         diachitxt = document.getElementById("diachi").value
+        diachitxt = document.getElementById("diachi").value
             +" - "+ selectElement3.options[selectElement3.selectedIndex].textContent
             +" - "+ selectElement2.options[selectElement2.selectedIndex].textContent
             +" - "+ selectElement1.options[selectElement1.selectedIndex].textContent
@@ -1187,77 +1112,103 @@ function changeProfile() {
     });
 }
 // ========================================================= //
+function confirmGenKey(userId, hasKey){
+    if(hasKey) {
+        Swal.fire({
+            text: 'Bạn có chắc chắn muốn tạo lại khóa mới?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Quay lại',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#ff96b7'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                genKey(userId);
+            }
+        });
+    }else{
+        genKey(userId)
+    }
+}
 function genKey(userId){
     Swal.fire({
-        text: 'Bạn có chắc chắn muốn tạo khóa mới?',
-        icon: 'question',
-        showCancelButton: true,
-        cancelButtonText: 'Quay lại',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#ff96b7'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: "Verify",
-                type: "POST",
-                data: {userId: userId},
-                success: async function (response) {
-                    let count = 30;
-                    const {value: code} = await Swal.fire({
-                        title: 'Xác minh tài khoản',
-                        input: 'text',
-                        inputLabel: 'Mã xác nhận',
-                        inputPlaceholder: 'Nhập mã xác nhận...',
-                        confirmButtonColor: '#ff96b7',
-                        confirmButtonText: 'Xác nhận',
-                        html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
-                        timer: 31000,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            const b = Swal.getHtmlContainer().querySelector('b')
-                            timerInterval = setInterval(() => {
-                                --count;
-                                b.textContent = count;
-                            }, 1000)
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval)
-                        }
-                    })
-
-                    if (checkCode(parseInt(code), parseInt(response))) {
-                       createKey(userId);
-                    } else {
-                        if (count <= 0) {
-                            Swal.fire({
-                                text: 'Mã xác nhận hêt hiệu lực!',
-                                icon: 'error',
-                                confirmButtonColor: '#ff96b7'
-                            });
-                        } else {
-                            Swal.fire({
-                                text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
-                                icon: 'error',
-                                confirmButtonColor: '#ff96b7'
-                            }).then((result) => {
-                                location.reload();
-                            });
-
-                        }
-
-                    }
-                }
-            });
+        title: 'Yêu cầu đang được xử lý...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
         }
     });
+    $.ajax({
+        url: "Verify",
+        type: "POST",
+        data: {userId: userId},
+        success: async function (response) {
+            Swal.close();
+            let count = 30;
+            const {value: code} = await Swal.fire({
+                title: 'Xác minh tài khoản',
+                input: 'text',
+                inputLabel: 'Mã xác nhận',
+                inputPlaceholder: 'Nhập mã xác nhận...',
+                confirmButtonColor: '#ff96b7',
+                confirmButtonText: 'Xác nhận',
+                html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
+                timer: 31000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        --count;
+                        b.textContent = count;
+                    }, 1000)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            })
 
+            if (checkCode(parseInt(code), parseInt(response))) {
+
+                createKey(userId);
+            } else {
+                Swal.close();
+                if (count <= 0) {
+                    Swal.fire({
+                        text: 'Mã xác nhận hêt hiệu lực!',
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'
+                    });
+                } else {
+                    Swal.fire({
+                        text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
+                        icon: 'error',
+                        confirmButtonColor: '#ff96b7'
+                    }).then((result) => {
+                        location.reload();
+                    });
+
+                }
+
+            }
+        }
+    });
 }
 function createKey(userId){
+    Swal.fire({
+        title: 'Vui lòng chờ...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
     $.ajax({
         url: "GenKey",
         type: "POST",
         data: {userId: userId},
         success: function () {
+            Swal.close();
             Swal.fire({
                 title: "Yêu cầu tạo khóa của bạn đã được thực hiện!",
                 text:'Khóa mới sẽ được tới email của bạn.',
@@ -1270,8 +1221,19 @@ function createKey(userId){
     });
 
 }
-function suggestCreateKey(){
-
+function requestKey(userId){
+    Swal.fire({
+        title: "Yêu cầu tạo khóa",
+        text:'Tài khoản của bạn hiện chưa có khóa. Vui lòng tạo khóa để thực hiện đặt hàng!',
+        icon: 'info',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#ff96b7',
+        showCancelButton: true,
+        cancelButtonText: 'Quay lại'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            genKey(userId);
+        }
+    });
 }
-
 

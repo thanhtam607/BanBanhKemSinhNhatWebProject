@@ -31,6 +31,8 @@ public class RSA {
     public static PublicKey genPublicKey(KeyPair keyPair) {
         return keyPair.getPublic();
     }
+
+
 // giải mã bằng public
     public static String decrypt(String data, PublicKey publicKey) throws NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");

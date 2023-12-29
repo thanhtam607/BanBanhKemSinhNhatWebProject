@@ -217,15 +217,18 @@
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
     <div class="container">
-        <div class="checkout__form">
             <div style="
                         display: flex;
                         justify-content: space-between;
                         padding-bottom: 20px;
                         margin-bottom: 25px;
                         border-bottom: 1px solid #e1e1e1;">
-                <h4>Thông Tin Tài Khoản </h4>
-                <button class="button_product" onclick="genKey('<%=auth.getId()%>')">Tạo khóa</button>
+                <h4 style="
+                        color: #1c1c1c;
+	                    font-weight: 700;">
+                    Thông Tin Tài Khoản
+                </h4>
+                <button class="button_product" onclick="confirmGenKey('<%=auth.getId()%>', <%=auth.hasKey()%>)">Tạo khóa</button>
             </div>
 
             <div>
