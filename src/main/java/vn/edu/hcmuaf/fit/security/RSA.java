@@ -2,9 +2,10 @@ package vn.edu.hcmuaf.fit.security;
 
 import vn.edu.hcmuaf.fit.model.SignUser;
 
-import javax.crypto.*;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
@@ -33,10 +34,13 @@ public class RSA {
     // giải mã bằng public
 
     public static String decrypt(String data, PublicKey publicKey) throws Exception {
-
+        byte[] byteCipherText = {};
+        byte[] byteCipherAESKey = {};
         byte[] byteCipherDataAndKey = Base64.getDecoder().decode(data);
-        byte[] byteCipherText = Arrays.copyOfRange(byteCipherDataAndKey, 0, byteCipherDataAndKey.length - 256);
-        byte[] byteCipherAESKey = Arrays.copyOfRange(byteCipherDataAndKey, byteCipherDataAndKey.length - 256, byteCipherDataAndKey.length);
+        if(byteCipherDataAndKey.length > 256){
+            byteCipherText = Arrays.copyOfRange(byteCipherDataAndKey, 0, byteCipherDataAndKey.length - 256);
+            byteCipherAESKey = Arrays.copyOfRange(byteCipherDataAndKey, byteCipherDataAndKey.length - 256, byteCipherDataAndKey.length);
+        }
 
 
         Cipher rsaCipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
@@ -152,6 +156,12 @@ public class RSA {
         }
 
         return stringBuilder.toString();
+    }
+    public static boolean areKeyPairsMatching(String privateKey, String publicKey) {
+        byte[] privateBytes = getPrivateKeyFromString(privateKey).getEncoded();
+        byte[] publicBytes = getPublicKeyFromString(publicKey).getEncoded();
+
+        return Arrays.equals(privateBytes, publicBytes);
     }
 
     public static void main(String[] args) throws Exception {

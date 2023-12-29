@@ -24,14 +24,7 @@ public class Delivery {
         this.phone = phone;
         this.tenKH = tenKH;
     }
-//    public Delivery(String mahd, String tenKH, String ngayGiao,String diachigiao, String email, String phone) {
-//        this.mahd = mahd;
-//        this.tenKH = tenKH;
-//        this.ngayGiao = ngayGiao;
-//        this.diachigiao = diachigiao;
-//        this.email = email;
-//        this.phone = phone;
-//    }
+
 
     public String getHuyen() {
         return huyen;
@@ -95,5 +88,19 @@ public class Delivery {
 
     public void setDiachigiao(String diachigiao) {
         this.diachigiao = diachigiao;
+    }
+
+    @Override
+    public String toString() {
+        return "Delivery{" +
+                "mahd='" + mahd + '\'' +
+                ", tenKH='" + tenKH + '\'' +
+                ", ngayGiao='" + ngayGiao + '\'' +
+                ", diachigiao='" + diachigiao + '\'' +
+                ", huyen='" + huyen + '\'' +
+                ", xa='" + xa + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

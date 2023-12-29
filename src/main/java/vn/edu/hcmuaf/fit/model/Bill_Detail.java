@@ -1,7 +1,5 @@
 package vn.edu.hcmuaf.fit.model;
 
-import vn.edu.hcmuaf.fit.service.ProductService;
-
 import java.text.NumberFormat;
 
 public class Bill_Detail {
@@ -101,7 +99,6 @@ public class Bill_Detail {
         return "Bill_Detail{" +
                 "mahd='" + mahd + '\'' +
                 ", masp='" + masp + '\'' +
-                ", namePro='" + namePro + '\'' +
                 ", solg=" + solg +
                 ", price=" + price +
                 ", note='" + note + '\'' +

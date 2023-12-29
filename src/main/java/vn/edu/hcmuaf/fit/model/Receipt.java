@@ -114,11 +114,17 @@ public class Receipt {
             return URLEncoder.encode("Đang Giao", "UTF-8");
         }else if(this.status == 3){
             return URLEncoder.encode("Giao Thành Công", "UTF-8");
+        }else if(this.status == 5){
+            return URLEncoder.encode("Đã bị chỉnh sửa", "UTF-8");
         }
         return URLEncoder.encode("Đã hủy", "UTF-8");
     }
     public boolean checkState(){
-        if(this.status == 0 || this.status == 1) return true;
+        if(this.status == 0 || this.status == 1 || this.status == 5) return true;
+        return false;
+    }
+    public boolean checkEdited(){
+        if(this.status == 5) return true;
         return false;
     }
 

@@ -2,17 +2,17 @@ package vn.edu.hcmuaf.fit.controller.admin.Customers;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Comment;
-import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.model.Receipt;
-import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.LogService;
-import vn.edu.hcmuaf.fit.service.ProductService;
 import vn.edu.hcmuaf.fit.service.ReceiptService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,12 @@ public class EditUser extends HttpServlet {
         listRole.add("Quản Lí");
         request.setAttribute("listRole", listRole);
 
-        List<Receipt> listctkh = ReceiptService.getReceiptByMakh(makh);
+        List<Receipt> listctkh = null;
+        try {
+            listctkh = ReceiptService.getReceiptByMakh(makh);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         List<Comment> listcmt = ReceiptService.getListComment(makh);
 
         request.setAttribute("listmakh", listctkh);

@@ -1,4 +1,3 @@
-
 function myFunction() {
     var x = document.getElementById('bld1');
     var btnrm = document.getElementById('readmore');
@@ -228,7 +227,7 @@ function myFunction() {
     /*-------------------
        get ward name by distID
       --------------------- */
-    $("#inputGroupSelect02").change(function() {
+    $("#inputGroupSelect02").change(function () {
         var distID = $(this).val();
         var url = "GetWardName";
         $.ajax({
@@ -249,7 +248,7 @@ function myFunction() {
     /*-------------------
            get fee and leadtime in bill
           --------------------- */
-    $("#inputGroupSelect03").change(function() {
+    $("#inputGroupSelect03").change(function () {
         var to_dist_id = $("#inputGroupSelect02").val();
         var to_ward_id = $(this).val();
         console.log(to_dist_id, to_ward_id);
@@ -264,7 +263,7 @@ function myFunction() {
                 console.log(data)
                 $(".checkout__order__fee span").text(data);
                 var oldTotal = $(".checkout__order__subtotal span").text();
-                var newTotal = parseInt(oldTotal.replace(/,/g, '')) + parseInt( $(".checkout__order__fee span").text().replace(/,/g, ''));
+                var newTotal = parseInt(oldTotal.replace(/,/g, '')) + parseInt($(".checkout__order__fee span").text().replace(/,/g, ''));
                 $(".checkout__order__total span").text(newTotal.toLocaleString('en-US'));
 
             }
@@ -658,7 +657,7 @@ async function forgotPassword() {
                     if (checkCode(parseInt(code), parseInt(response))) {
                         removePass(email);
 
-                    }else {
+                    } else {
                         if (count <= 0) {
                             Swal.fire({
                                 text: 'Mã xác nhận hết hiệu lực!',
@@ -793,74 +792,74 @@ async function removePass(email) {
 function check() {
     var email = document.getElementById("email").value;
     var user = document.getElementById("name").value;
-    var pass= document.getElementById("pass").value;
+    var pass = document.getElementById("pass").value;
     var repass = document.getElementById("repass").value;
     var saveLogin = document.getElementById("save-login").checked;
     var url = "Signup?email=" + email;
-    var urlSignup = "Signup?email="+email+"&pass="+pass+"&saveLogin="+ saveLogin+"&name="+user;
-    if(repass == pass){
-    $.ajax({
-        url: url,
-        type: "POST",
-        success: async function (response) {
-            let count =30;
-            const {value: code} = await Swal.fire({
-                title: 'Xác minh tài khoản',
-                input: 'text',
-                inputLabel: 'Mã xác nhận',
-                inputPlaceholder: 'Nhập mã xác nhận...',
-                confirmButtonColor: '#ff96b7',
-                confirmButtonText: 'Xác nhận',
-                html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
-                timer: 31000,
-                timerProgressBar: true,
-                didOpen: () => {
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                        --count;
-                        b.textContent = count;
-                    }, 1000)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            })
-
-            if(checkCode(parseInt(code), parseInt(response))){
-                $.ajax({
-                    url: urlSignup,
-                    type: "POST",
-                    success: async function (response) {
-                        Swal.fire({
-                            text: 'Đăng ký thành công!',
-                            icon: 'success',
-                            confirmButtonColor: '#ff96b7'
-                        }).then((result) => {
-                            location.href=response.toString();
-                        });
+    var urlSignup = "Signup?email=" + email + "&pass=" + pass + "&saveLogin=" + saveLogin + "&name=" + user;
+    if (repass == pass) {
+        $.ajax({
+            url: url,
+            type: "POST",
+            success: async function (response) {
+                let count = 30;
+                const {value: code} = await Swal.fire({
+                    title: 'Xác minh tài khoản',
+                    input: 'text',
+                    inputLabel: 'Mã xác nhận',
+                    inputPlaceholder: 'Nhập mã xác nhận...',
+                    confirmButtonColor: '#ff96b7',
+                    confirmButtonText: 'Xác nhận',
+                    html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
+                    timer: 31000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            --count;
+                            b.textContent = count;
+                        }, 1000)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
                     }
-                });
-            }else {
-                if (count <= 0) {
-                    Swal.fire({
-                        text: 'Mã xác nhận hêt hiệu lực!',
-                        icon: 'error',
-                        confirmButtonColor: '#ff96b7'
+                })
+
+                if (checkCode(parseInt(code), parseInt(response))) {
+                    $.ajax({
+                        url: urlSignup,
+                        type: "POST",
+                        success: async function (response) {
+                            Swal.fire({
+                                text: 'Đăng ký thành công!',
+                                icon: 'success',
+                                confirmButtonColor: '#ff96b7'
+                            }).then((result) => {
+                                location.href = response.toString();
+                            });
+                        }
                     });
                 } else {
-                    Swal.fire({
-                        text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
-                        icon: 'error',
-                        confirmButtonColor: '#ff96b7'
-                    }).then((result) => {
-                        location.reload();
-                    });
+                    if (count <= 0) {
+                        Swal.fire({
+                            text: 'Mã xác nhận hêt hiệu lực!',
+                            icon: 'error',
+                            confirmButtonColor: '#ff96b7'
+                        });
+                    } else {
+                        Swal.fire({
+                            text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
+                            icon: 'error',
+                            confirmButtonColor: '#ff96b7'
+                        }).then((result) => {
+                            location.reload();
+                        });
 
+                    }
                 }
             }
-        }
-    });}
-    else{
+        });
+    } else {
         Swal.fire({
             text: 'Mật khẩu nhập lại không đúng. Vui lòng kiểm tra lại!',
             icon: 'error',
@@ -956,52 +955,53 @@ function addOrder() {
             xa: xa,
             keyContent: keyContent,
         },
-        success: function () {
-            // Xử lý khi thành công
-            document.getElementById("totalPro").innerHTML = "0";
-            document.getElementById("totalPro1").innerHTML = "0";
-            document.getElementById("emptyPro").innerHTML =
-                "<h4>Đơn hàng</h4>\n" +
-                "<div class=\"checkout__order__products\">Sản Phẩm <span>Tổng</span></div>\n" +
-                "<ul class=\"\">\n" +
-                "    <li>\n" +
-                "    </li>\n" +
-                "</ul>\n" +
-                "<div class=\"checkout__order__subtotal\">Tạm tính <span>0 VND</span></div>\n" +
-                "<div class=\"checkout__order__total\">Tổng <span>0 VND</span></div>\n" +
-                "<div class=\"checkout__input__checkbox\">\n" +
-                "    <label for=\"payment\" >\n" +
-                "       Thanh Toán Khi Nhận Hàng\n" +
-                "        <input type=\"checkbox\" id=\"payment\">\n" +
-                "        <span class=\"checkmark\"></span>\n" +
-                "    </label>\n" +
-                "</div>\n" +
-                "<button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>";
+        success: function (response) {
+            if (parseInt(response) === 1) {
+                // Hiển thị modal lỗi
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Hãy nhập đúng định dạng khóa riêng tư của bạn!',
+                    footer: 'Vui lòng thử lại hoặc liên hệ hỗ trợ.'
+                });
+            } else {
 
-            Swal.fire({
-                text: 'Đặt hàng thành công!',
-                icon: 'success',
-                showCancelButton: true,
-                cancelButtonText: 'Mua tiếp',
-                confirmButtonText: 'Xem đơn đặt',
-                confirmButtonColor: '#ff96b7'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    location.href = "MyOrder";
-                } else {
-                    location.href = "ListProduct";
-                }
-            });
-        },
-        error: function (xhr, status, error) {
+                // Xử lý khi thành công
+                document.getElementById("totalPro").innerHTML = "0";
+                document.getElementById("totalPro1").innerHTML = "0";
+                document.getElementById("emptyPro").innerHTML =
+                    "<h4>Đơn hàng</h4>\n" +
+                    "<div class=\"checkout__order__products\">Sản Phẩm <span>Tổng</span></div>\n" +
+                    "<ul class=\"\">\n" +
+                    "    <li>\n" +
+                    "    </li>\n" +
+                    "</ul>\n" +
+                    "<div class=\"checkout__order__subtotal\">Tạm tính <span>0 VND</span></div>\n" +
+                    "<div class=\"checkout__order__total\">Tổng <span>0 VND</span></div>\n" +
+                    "<div class=\"checkout__input__checkbox\">\n" +
+                    "    <label for=\"payment\" >\n" +
+                    "       Thanh Toán Khi Nhận Hàng\n" +
+                    "        <input type=\"checkbox\" id=\"payment\">\n" +
+                    "        <span class=\"checkmark\"></span>\n" +
+                    "    </label>\n" +
+                    "</div>\n" +
+                    "<button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>";
 
-            // Hiển thị modal lỗi
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Hãy nhập đúng định dạng khóa riêng tư của bạn!',
-                footer: 'Vui lòng thử lại hoặc liên hệ hỗ trợ.'
-            });
+                Swal.fire({
+                    text: 'Đặt hàng thành công!',
+                    icon: 'success',
+                    showCancelButton: true,
+                    cancelButtonText: 'Mua tiếp',
+                    confirmButtonText: 'Xem đơn đặt',
+                    confirmButtonColor: '#ff96b7'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "MyOrder";
+                    } else {
+                        location.href = "ListProduct";
+                    }
+                });
+            }
         }
     });
 }
@@ -1130,9 +1130,10 @@ function changeProfile() {
 
     });
 }
+
 // ========================================================= //
-function confirmGenKey(userId, hasKey){
-    if(hasKey) {
+function confirmGenKey(userId, hasKey) {
+    if (hasKey) {
         Swal.fire({
             text: 'Bạn có chắc chắn muốn tạo lại khóa mới?',
             icon: 'question',
@@ -1145,11 +1146,12 @@ function confirmGenKey(userId, hasKey){
                 genKey(userId);
             }
         });
-    }else{
+    } else {
         genKey(userId)
     }
 }
-function genKey(userId){
+
+function genKey(userId) {
     Swal.fire({
         title: 'Yêu cầu đang được xử lý...',
         allowOutsideClick: false,
@@ -1213,7 +1215,8 @@ function genKey(userId){
         }
     });
 }
-function createKey(userId){
+
+function createKey(userId) {
     Swal.fire({
         title: 'Vui lòng chờ...',
         allowOutsideClick: false,
@@ -1230,20 +1233,23 @@ function createKey(userId){
             Swal.close();
             Swal.fire({
                 title: "Yêu cầu tạo khóa của bạn đã được thực hiện!",
-                text:'Khóa mới sẽ được tới email của bạn.',
+                text: 'Khóa mới sẽ được tới email của bạn.',
                 icon: 'success',
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#ff96b7'
+            }).then((result) => {
+                location.reload();
             });
 
         }
     });
 
 }
-function requestKey(userId){
+
+function requestKey(userId) {
     Swal.fire({
         title: "Yêu cầu tạo khóa",
-        text:'Tài khoản của bạn hiện chưa có khóa. Vui lòng tạo khóa để thực hiện đặt hàng!',
+        text: 'Tài khoản của bạn hiện chưa có khóa. Vui lòng tạo khóa để thực hiện đặt hàng!',
         icon: 'info',
         confirmButtonText: 'OK',
         confirmButtonColor: '#ff96b7',
@@ -1255,6 +1261,7 @@ function requestKey(userId){
         }
     });
 }
+
 // ========================================================= //
 
 function openModal() {
@@ -1280,9 +1287,9 @@ function chooseFile() {
     fileInput.value = ''; // Reset file input value
     keyContent.value = ''; // Clear file content
 
-    file.onchange = function(event) {
+    file.onchange = function (event) {
         var reader = new FileReader();
-        reader.onload = function() {
+        reader.onload = function () {
             var xmlString = reader.result;
             var parser = new DOMParser();
             var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
@@ -1290,7 +1297,8 @@ function chooseFile() {
             keyContent.value = messageContent;
             keyContent.setAttribute('readonly', true); // Prevent editing
             confirmButton.removeAttribute("disabled");
-            confirmButton.style.backgroundColor = "#ff96b7";        };
+            confirmButton.style.backgroundColor = "#ff96b7";
+        };
         reader.readAsText(event.target.files[0]);
     };
     fileButton.style.opacity = '1'; // Make button visible
@@ -1304,14 +1312,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var modal = document.getElementById('myModal');
     var modalContent = document.querySelector('.modal-content');
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             closeModal();
         }
     };
 
-    if(modalContent) {
-        modalContent.onclick = function(event) {
+    if (modalContent) {
+        modalContent.onclick = function (event) {
             event.stopPropagation();
         };
     }
@@ -1334,6 +1342,7 @@ function goBack() {
 
     closeModal();
 }
+
 function checkTextarea() {
     var textareaValue = document.getElementById("keyContent").value.trim();
     var confirmButton = document.querySelector(".confirm-btn");

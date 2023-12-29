@@ -401,6 +401,16 @@ public class UserService {
         }
         return null;
     }
+    public static String getNameUser(String userId) throws SQLException {
+        String sql = "select NAME from accounts where ID = ?";
+        PreparedStatement stms = DBConnect.getInstall().getConn().prepareStatement(sql);
+        stms.setString(1, userId);
+        ResultSet rs = stms.executeQuery();
+        while (rs.next()) {
+            return rs.getString(1);
+        }
+        return null;
+    }
 
     public static File convertMessageToXML(String messageContent, String fileName) {
         try {
@@ -453,19 +463,6 @@ public class UserService {
 
     }
 
-//    public static String getPbKeyActivebyID(String id) {
-//        List<SignUser> listKey = UserService.getListKey();
-//        String rs = "";
-//        for (SignUser su : listKey) {
-////            laays publickey đang đc active
-//            if (su.getId_user().equals(id) && su.getStatus() == 1) {
-//                rs = su.getPbkey();
-//            } else {
-//                rs = "";
-//            }
-//        }
-//        return rs;
-//    }
 
 
 
