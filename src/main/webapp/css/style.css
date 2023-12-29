@@ -3929,3 +3929,65 @@ font-size: 24px;
 	font-weight: 500;
 	font-size: 17px;
 }
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.4);
+}
+.modal button{
+	border-radius: 5px;
+	border: none;
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 40%;
+}
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* Hide file input initially */
+.fileLabel,
+#fileInput {
+	display: none;
+}
+
+/* Show file input when checkbox is checked */
+#checkFile:checked + .fileLabel,
+#checkFile:checked ~ #fileInput {
+	display: inline-block;
+}
+.button-container {
+	display: flex;
+	justify-content: center;
+}
+
+.button-row {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+.confirm-btn{
+	 color: white;
+	background-color: rgba(11, 11, 11, 0.5);
+}
+.back-btn {
+	background-color: #020e17;
+	color: white;
+}

@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SignatureException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,10 +27,10 @@ public class AddNewOrder extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
-        List<ItemProductInCart> listItemC =(List<ItemProductInCart>) session.getAttribute("itemCart");
+        List<ItemProductInCart> listItemC = (List<ItemProductInCart>) session.getAttribute("itemCart");
 
         double price_pro_bill = 0;
-        for(ItemProductInCart inCart: listItemC){
+        for (ItemProductInCart inCart : listItemC) {
             price_pro_bill += inCart.getPrice();
         }
 
@@ -50,14 +47,14 @@ public class AddNewOrder extends HttpServlet {
 
         String leadTime = request.getParameter("leadTime");
 
-        if(ghichu!=null && request.getParameter("haveDisk").equals("true")){
-            ghichu +=", "+ request.getParameter("haveDiskName");
-        } else if(ghichu == null && request.getParameter("haveDisk").equals("true")){
+        if (ghichu != null && request.getParameter("haveDisk").equals("true")) {
+            ghichu += ", " + request.getParameter("haveDiskName");
+        } else if (ghichu == null && request.getParameter("haveDisk").equals("true")) {
             ghichu += request.getParameter("haveDiskName");
-            ghichu.replace(',',' ');
+            ghichu.replace(',', ' ');
         } else if (ghichu != null) {
-            ghichu+=ghichu;
-        } else{
+            ghichu += ghichu;
+        } else {
             ghichu = "";
 
         }
@@ -80,40 +77,36 @@ public class AddNewOrder extends HttpServlet {
         gh.setXa(xa);
 
 
-        Order order = new Order(auth, listItemC, todayFM,Double.parseDouble(totalBill), ghichu, gh, price_pro_bill, Double.parseDouble(fee));
+        Order order = new Order(auth, listItemC, todayFM, Double.parseDouble(totalBill), ghichu, gh, price_pro_bill, Double.parseDouble(fee));
         order.setId(OrderService.getNewIdOrder());
 
 //        hash order here
-
         List<Bill_Detail> billDetailList = new ArrayList<>();
         for (ItemProductInCart item : order.getData()) {
             Product p = ProductService.findById(item.getSp().getId());
             int price = p.getPromotional() != 0 ? p.getPromotional() : p.getPrice();
-            billDetailList.add(new Bill_Detail(order.getId(), item.getSp().getId(),item.getSoLgMua(), item.getNote(), price));
+            billDetailList.add(new Bill_Detail(order.getId(), item.getSp().getId(), item.getSoLgMua(), item.getNote(), price));
 
         }
         Receipt receipt = new Receipt(order.getId(), order.getUser().getId(), todayFM, ghichu, price_pro_bill, Double.parseDouble(fee), billDetailList, gh);
 //==  hash order here
-        String hash = RSA.hashObject(receipt);
-        String privateKey = request.getParameter("keyContent");
+        String cypherText = "";
+        String keyContent = request.getParameter("keyContent");
+        String hashOrder = RSA.hashObject(receipt);
         try {
-            String signBill = RSA.sign(hash, privateKey);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidKeyException e) {
-            throw new RuntimeException(e);
-        } catch (SignatureException e) {
+            cypherText = RSA.encrypt(hashOrder, RSA.getPrivateKeyFromString(keyContent));
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        if(notesForDetail!=null){
-            for(int i =0; i< notesForDetail.length ;i++){
-                order.getData().get(i).setNote(notesForDetail[i]);
-            }}
-        OrderService.addOrder(order);
+
+        for (int i = 0; i < notesForDetail.length; i++) {
+            order.getData().get(i).setNote(notesForDetail[i]);
+        }
+        OrderService.addOrder(order, cypherText);
         OrderService.addGiaoHang(order);
 
         OrderService.updateTonKhoWhenAdd(order);
-        session.setAttribute("itemCart",null);
+        session.setAttribute("itemCart", null);
 
 
         Log log = new Log();
