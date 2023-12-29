@@ -434,12 +434,12 @@ public class UserService {
         }
     }
 
-    public static List<SignUser> getListKey() {
+    public static List<SignUser> getListKey(String userID) {
         List<SignUser> list = new ArrayList<SignUser>();
         Statement statement = DBConnect.getInstall().get();
         if (statement != null) {
             try {
-                ResultSet rs = statement.executeQuery("select ID, user_Id, publickeylink, createDate, expiredDate, status from publickey;");
+                ResultSet rs = statement.executeQuery("select ID, user_Id, publickeylink, createDate, expiredDate, status from publickey where user_Id = '"+userID+"';");
                 while (rs.next()) {
                     list.add(new SignUser(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6)));
                 }
@@ -453,18 +453,20 @@ public class UserService {
 
     }
 
-    public static String getPbKeybyID(String id) {
-        List<SignUser> listKey = UserService.getListKey();
-        String rs = "";
-        for (SignUser su : listKey) {
-            if (su.getId_user().equals(id)) {
-                rs = su.getPbkey();
-            } else {
-                rs = "";
-            }
-        }
-        return rs;
-    }
+//    public static String getPbKeyActivebyID(String id) {
+//        List<SignUser> listKey = UserService.getListKey();
+//        String rs = "";
+//        for (SignUser su : listKey) {
+////            laays publickey đang đc active
+//            if (su.getId_user().equals(id) && su.getStatus() == 1) {
+//                rs = su.getPbkey();
+//            } else {
+//                rs = "";
+//            }
+//        }
+//        return rs;
+//    }
+
 
 
     public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {

@@ -32,12 +32,12 @@ public class RSA {
     }
 
     // giải mã bằng public
-    public static String decrypt(String data, PublicKey publicKey) throws NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-        cipher.init(Cipher.DECRYPT_MODE, publicKey);
-        byte[] output = cipher.doFinal(data.getBytes(StandardCharsets.UTF_8));
-        return Base64.getEncoder().encodeToString(output);
-    }
+//    public static String decrypt(String data, PublicKey publicKey) throws NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+//        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+//        cipher.init(Cipher.DECRYPT_MODE, publicKey);
+//        byte[] output = cipher.doFinal(data.getBytes(StandardCharsets.UTF_8));
+//        return Base64.getEncoder().encodeToString(output);
+//    }
     public static String decryptRSA(String data, PublicKey publicKey) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException {
         try {
             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
@@ -58,12 +58,12 @@ public class RSA {
 
 
     // mã hoá bằng private key
-    public static String encrypt(String data, PrivateKey privateKey) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IllegalBlockSizeException {
-        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-        cipher.init(Cipher.ENCRYPT_MODE, privateKey);
-        byte[] output = cipher.doFinal(Base64.getDecoder().decode(data));
-        return new String(output, StandardCharsets.UTF_8);
-    }
+//    public static String encrypt(String data, PrivateKey privateKey) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IllegalBlockSizeException {
+//        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+//        cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+//        byte[] output = cipher.doFinal(Base64.getDecoder().decode(data));
+//        return new String(output, StandardCharsets.UTF_8);
+//    }
 
     public static PublicKey getPublicKeyFromString(String publicKeyString) {
 
@@ -105,14 +105,6 @@ public class RSA {
     }
 
     //    Hash Order
-    public static String hashOrder(String data) throws NoSuchAlgorithmException {
-        if (data == null) return null;
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] output = md.digest(data.getBytes());
-        BigInteger num = new BigInteger(1, output);
-        return num.toString(16);
-    }
-
     public static String hashObject(Object obj) {
         StringBuilder stringBuilder = new StringBuilder();
         String combinedString = obj.toString();

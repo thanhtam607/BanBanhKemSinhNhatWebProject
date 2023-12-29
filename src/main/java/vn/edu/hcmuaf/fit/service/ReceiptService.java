@@ -9,8 +9,11 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.*;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -58,9 +61,30 @@ public class ReceiptService {
                             rs.getString(3), ngaygiao, rs.getString(4), rs.getInt(5),
                             rs.getInt(6), rs.getInt(7), diachi);
 
+
+//                   ================== tạo đối tượng receiptForHash để tến hành xacs thực đơn hang =====================
+                    Delivery delivery = getListGiaoHang(rs.getString(1));
+                    List<Bill_Detail> billDetailList = getBill_DetailForHash(rs.getString(1));
+                    Receipt receiptForHash = new Receipt(rs.getString(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getDouble(5),
+                            rs.getDouble(6),
+                            billDetailList,
+                            delivery);
+                  if(!verifyOrderWhenLoad(receiptForHash, getCypherTextOfOrder(rs.getString(1)), UserService.getListKey(rs.getString(2)))){
+                      updateState(receiptForHash.getId(), 5);
+//                      gửi mail cho admin báo lỗi
+                      UserService.sendMail(UserService.getEmail("AD01"), "ERROR", "Đơn hàng "+receiptForHash.getId()+" đã bị thay đổi. Vui lòng kiểm tra lại!");
+                      UserService.sendMail(UserService.getEmail(receiptForHash.getMakh()), "ERROR", "Đơn hàng "+receiptForHash.getId()+" đã bị thay đổi. Vui lòng kiểm tra lại!");
+                  }
+
+//                   ================== tạo đối tượng receiptForHash để tến hành xacs thực đơn hang =====================
+
                     list.add(rc);
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         else {
@@ -71,16 +95,58 @@ public class ReceiptService {
 //    tạo cypherText cho từng đơn hàng
 
     public static String createCypherText(Receipt receipt, String privateKeyString) throws NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-        String hashOrder = RSA.hashOrder(receipt.toString());
-        return RSA.encrypt(hashOrder, RSA.getPrivateKeyFromString(privateKeyString));
+        String hashOrder = RSA.hashObject(receipt);
+        return RSA.encryptRSA(hashOrder, RSA.getPrivateKeyFromString(privateKeyString));
     }
 
     //    so sánh Hash o1 và o2
-    public static boolean compareOrderHash(Receipt receipt, String cypherText, String publickeyString) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
-        String fstHash = RSA.decrypt(cypherText, RSA.getPublicKeyFromString(publickeyString));
-        System.out.println(fstHash);
-        String hashOrder = RSA.hashOrder(receipt.toString());
-        return fstHash.equals(hashOrder);
+    public static boolean verifyOrderWhenLoad(Receipt receipt, String cypherText, List<SignUser> signUserList) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+        String fstHash = "";
+        String hashOrder = "";
+        String publickeyString = getPbKeyString(receipt, signUserList);
+        if (cypherText == null) {
+//            System.out.println("đã xác thực");
+            return true;
+        } else {
+            fstHash = RSA.decryptRSA(cypherText, RSA.getPublicKeyFromString(publickeyString));
+            hashOrder = RSA.hashObject(receipt);
+            return fstHash.equals(hashOrder);
+        }
+
+    }
+
+    public static String getPbKeyString(Receipt receipt, List<SignUser> signUserList) {
+        for (SignUser s : signUserList) {
+            if (s.getExpireDate() != null) {
+                if (compareDates(receipt.getExport_date(), s.getCreateDate()) > 0 && compareDates(receipt.getExport_date(), s.getExpireDate()) < 0) {
+                    return s.getPbkey();
+                }
+
+            } else {
+                return s.getPbkey();
+            }
+        }
+        return null;
+    }
+
+    public static int compareDates(String day1, String day2) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            Date date1 = dateFormat.parse(day1);
+            Date date2 = dateFormat.parse(day2);
+
+            // Sử dụng compareTo để so sánh ngày tháng giờ
+            int comparisonResult = date1.compareTo(date2);
+
+            // Nếu comparisonResult > 0, day1 lớn hơn day2
+            // Nếu comparisonResult < 0, day1 nhỏ hơn day2
+            // Nếu comparisonResult = 0, day1 bằng day2
+            return comparisonResult;
+        } catch (ParseException e) {
+            e.printStackTrace(); // Xử lý exception nếu có lỗi khi chuyển đổi
+            return 0; // Trả về false nếu có lỗi
+        }
     }
 
     public static List<Receipt> getAllReceiptToDay() {
@@ -301,6 +367,32 @@ public class ReceiptService {
         return list;
     }
 
+    public static List<Bill_Detail> getBill_DetailForHash(String mahd) {
+        List<Bill_Detail> list = new ArrayList<>();
+        Statement statement = DBConnect.getInstall().get();
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT BILL_DETAIL.ID, BILL_DETAIL.idProduct,BILL_DETAIL.PRICE , BILL_DETAIL.AMOUNT, BILL_DETAIL.NOTES from BILLS, BILL_DETAIL, products\n" +
+                        "                        WHERE BILL_DETAIL.ID = BILLS.ID and BILL_DETAIL.idProduct = products.idProduct \n" +
+                        "and BILLS.ID = '" + mahd + "'");
+                while (rs.next()) {
+
+                    Bill_Detail billDetail = new Bill_Detail(rs.getString(1),
+                            rs.getString(2),
+                            rs.getInt(4),
+                            rs.getString(5),
+                            rs.getInt(3));
+                    list.add(billDetail);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có cthd");
+        }
+        return list;
+    }
+
     public static Receipt getReceiptByMahd(String mhd) {
         Receipt result = new Receipt();
         Statement statement = DBConnect.getInstall().get();
@@ -336,6 +428,7 @@ public class ReceiptService {
         List<Receipt> result = new ArrayList<>();
         Statement statement = DBConnect.getInstall().get();
         Statement statement2 = DBConnect.getInstall().get();
+
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT BILLS.ID, BILLS.CUSTOMER_ID, BILLS.EXPORT_DATE, BILLS.NOTES, BILLS.PRO_BILL, BILLS.FEE_BILL, BILLS.STATUS FROM BILLS, CUSTOMERS \n" +
@@ -353,9 +446,29 @@ public class ReceiptService {
                     }
                     Receipt re = new Receipt(rs.getString(1), rs.getString(2),
                             rs.getString(3), ngaygiao, rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), diachi);
+
+
+//                   ================== tạo đối tượng receiptForHash để tến hành xacs thực đơn hang =====================
+                    Delivery delivery = getListGiaoHang(rs.getString(1));
+                    List<Bill_Detail> billDetailList = getBill_DetailForHash(rs.getString(1));
+                    Receipt receiptForHash = new Receipt(rs.getString(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getDouble(5),
+                            rs.getDouble(6),
+                            billDetailList,
+                            delivery);
+                    if(!verifyOrderWhenLoad(receiptForHash, getCypherTextOfOrder(rs.getString(1)), UserService.getListKey(rs.getString(2)))){
+                        updateState(receiptForHash.getId(), 5);
+                        UserService.sendMail(UserService.getEmail("AD01"), "ERROR", "Đơn hàng "+receiptForHash.getId()+" đã bị thay đổi. Vui lòng kiểm tra lại!");
+                        UserService.sendMail(UserService.getEmail(receiptForHash.getMakh()), "ERROR", "Đơn hàng "+receiptForHash.getId()+" đã bị thay đổi. Vui lòng kiểm tra lại!");
+                    }
+
+//                   ================== tạo đối tượng receiptForHash để tến hành xacs thực đơn hang =====================
                     result.add(re);
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         else {
@@ -372,6 +485,7 @@ public class ReceiptService {
         list.add("Đang Giao");//2
         list.add("Giao Thành Công");//3
         list.add("Đã hủy");//4
+        list.add("Đã bị chỉnh sửa");//5
         return list;
     }
 
@@ -394,6 +508,24 @@ public class ReceiptService {
             System.out.println("Không có ");
         }
         return delivery;
+    }
+
+    public static String getCypherTextOfOrder(String id) {
+        Statement statement = DBConnect.getInstall().get();
+        String cypherTxt = "";
+        if (statement != null)
+            try {
+                ResultSet rs = statement.executeQuery("SELECT BILLS.CipherText FROM BILLS WHERE BILLS.ID = '" + id + "'");
+                while (rs.next()) {
+                    cypherTxt = rs.getString(1);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        else {
+            System.out.println("Không có ");
+        }
+        return cypherTxt;
     }
 
 
@@ -619,39 +751,39 @@ public class ReceiptService {
     }
 
     public static void main(String[] args) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
-        Delivery gh = new Delivery();
-        gh.setDiachigiao("HCM");
-        gh.setNgayGiao("2022-10-14 00:00:00");
-        gh.setEmail("email");
-        gh.setPhone("");
-        gh.setTenKH("");
-        gh.setHuyen("1533");
-        gh.setXa("21208");
-
-        List<Bill_Detail> billDetailList = new ArrayList<>();
-        billDetailList.add(new Bill_Detail("HD15", "B001", 2, "cmsn", 500000));
-        billDetailList.add(new Bill_Detail("HD15", "B003", 2, "cmsn em", 2000000));
-
-        Receipt receipt = new Receipt("HD15", "AD01", "2022-10-12 00:00:00", "bánh", 500000.0, Double.parseDouble("21000"), billDetailList, gh);
-        String cypherText = "";
-        String privateKey = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDNW6ansPZ7H/yO+ksgsKDn7T1AbLGQQsYTumqo1szf3IqXB8IgJw7XtfD9N+EgQBGh64KtIWNeoYPd+X43qJHuZTfwNdxGu5NiNzVoTZRATEpkzTCaq/Ns5wsmoNucnKgOEOG95clc3TurKmrlmFCTwIl15lb7mdqcdFCp8VKrXzBP/BduA0DRnVZjJLR27awObiy/MSo1bGgTFNxpx3CU9igxGb6HglAwlzZ8Xh0aQqAsVcG/vyNt4eWZYKaEbhk7GGhSxPSghMh2BJTNO0Tjoirif40gV8j8wMLzFjYhFOn43TMFBB+iOAZ8q9GOl+EkGS0NcC2TC7W+Up1vnC+xAgMBAAECggEAEiTzbCScGpPgbkeaJLjGdseE3nDcHXlw4+RYMTPNZUgorKCAW/PngVKviMgLqZxPkoVrBd4J2B4gNxgouUU5I52o3B3+KPfA1XA4VU9pdmbnOdHRZhEkUG53k0GqNcO3q4p9T5iCeqSHdZ+pU0DqeauM2bBw5gkZgjJawDE00zRMyqmczlbUrgX1K8QXyGxiPKwBvrm1xo9LuP0ROtlUbmk7bWiceEKOes8SoqVbom6nM9x9FTmfSdPleZvI/L4AUhn2YGz5axiVMcLIMOGE5NID8BDCeYZIAH4VBn+BgzYfATXeIN/f1iBbQvQGkfHdyQe4Ak40MxKdLcawGnCVkwKBgQDX3m/Z9vC+yah+PMl0yTz1C0ioiVo2AeIhTV2V8XNLxPAwSPF/j7Mczd8GYFIYrXtx/gQ2MSIeDOLDErmYj8xQntasVh6RrZObyGGaSHtxPoq2QTyczI7wrjucuG2I6Hbde2EjZ7bnbYcMMBeEhJXe14zlDhCYThfpH7NTWtajKwKBgQDziPvIwH/n1PQmhl6g8MWp23T8+5KJ0b5jUdPp9q3g32xjh92JLkZ94tEPB9ItgW8E3aBO72zJdDhOvHHuegPci3G/awy9iGrOc2mj0JrgeRWQsy4XgdclVMWsbRRUD7eGyI82ERah71EXJ6D8/2DJKWaLxVwoFGVBB8KkEM56kwKBgQCdRyaNUxrilsCZgSZyXXB5RQhiKvi8IrEj/F80MSAE028AbxTtEMC6OtDEr4cBDdzEGAPvi+rEpDTPViQ9IIAHOUNFetV45FOIi/140FiIEL41veAwieWXPAqYy9KajmyUQCFtD1K22Rks6xknZwZevwObm5zBqxxGsN8R2zxI0wKBgCDvUpW4qtOQciBPpbaAOUsaWbzozM2EpwnJhC4s5SD3NjJTqnsl3fSiWwF8Xkk3KutuiYKDUKQB6qeDRqkoqSMHXK+1a3iqXT9kTlIQIRHgbjEuejpFnfH3f/AspEYmBfzdXLjEINpvgfjurA/q/YzW435dh3QIJhVgVktX1oSvAoGBAIAa0pMnuDW2qFImIM4LdPbSNUSLicQZnRXnYkX+c87cA+D1ubD6uZyo5spkenFJJnusJBsgtfLuCfYiY/h5csr2AfsiH10gERHSZvqHVd/I/xMG5p8II8T19WDFbOPtBY//aqjwU2CrcbayNJG3H+smVkTqxT76lWED+UYHdZ3q";
-        try {
-            cypherText = ReceiptService.createCypherText(receipt, privateKey);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException |
-                 InvalidKeyException e) {
-            throw new RuntimeException(e);
-        }
-
-//        System.out.println(cypherText + " :cypherText");
-//        System.out.println(compareOrderHash(receipt, cypherText, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzVump7D2ex/8jvpLILCg5+09QGyxkELGE7pqqNbM39yKlwfCICcO17Xw/TfhIEARoeuCrSFjXqGD3fl+N6iR7mU38DXcRruTYjc1aE2UQExKZM0wmqvzbOcLJqDbnJyoDhDhveXJXN07qypq5ZhQk8CJdeZW+5nanHRQqfFSq18wT/wXbgNA0Z1WYyS0du2sDm4svzEqNWxoExTcacdwlPYoMRm+h4JQMJc2fF4dGkKgLFXBv78jbeHlmWCmhG4ZOxhoUsT0oITIdgSUzTtE46Iq4n+NIFfI/MDC8xY2IRTp+N0zBQQfojgGfKvRjpfhJBktDXAtkwu1vlKdb5wvsQIDAQAB"));
-
-        String hash1 = RSA.hashOrder(receipt.toString());
-        String cypher = ReceiptService.createCypherText(receipt, "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDNW6ansPZ7H/yO+ksgsKDn7T1AbLGQQsYTumqo1szf3IqXB8IgJw7XtfD9N+EgQBGh64KtIWNeoYPd+X43qJHuZTfwNdxGu5NiNzVoTZRATEpkzTCaq/Ns5wsmoNucnKgOEOG95clc3TurKmrlmFCTwIl15lb7mdqcdFCp8VKrXzBP/BduA0DRnVZjJLR27awObiy/MSo1bGgTFNxpx3CU9igxGb6HglAwlzZ8Xh0aQqAsVcG/vyNt4eWZYKaEbhk7GGhSxPSghMh2BJTNO0Tjoirif40gV8j8wMLzFjYhFOn43TMFBB+iOAZ8q9GOl+EkGS0NcC2TC7W+Up1vnC+xAgMBAAECggEAEiTzbCScGpPgbkeaJLjGdseE3nDcHXlw4+RYMTPNZUgorKCAW/PngVKviMgLqZxPkoVrBd4J2B4gNxgouUU5I52o3B3+KPfA1XA4VU9pdmbnOdHRZhEkUG53k0GqNcO3q4p9T5iCeqSHdZ+pU0DqeauM2bBw5gkZgjJawDE00zRMyqmczlbUrgX1K8QXyGxiPKwBvrm1xo9LuP0ROtlUbmk7bWiceEKOes8SoqVbom6nM9x9FTmfSdPleZvI/L4AUhn2YGz5axiVMcLIMOGE5NID8BDCeYZIAH4VBn+BgzYfATXeIN/f1iBbQvQGkfHdyQe4Ak40MxKdLcawGnCVkwKBgQDX3m/Z9vC+yah+PMl0yTz1C0ioiVo2AeIhTV2V8XNLxPAwSPF/j7Mczd8GYFIYrXtx/gQ2MSIeDOLDErmYj8xQntasVh6RrZObyGGaSHtxPoq2QTyczI7wrjucuG2I6Hbde2EjZ7bnbYcMMBeEhJXe14zlDhCYThfpH7NTWtajKwKBgQDziPvIwH/n1PQmhl6g8MWp23T8+5KJ0b5jUdPp9q3g32xjh92JLkZ94tEPB9ItgW8E3aBO72zJdDhOvHHuegPci3G/awy9iGrOc2mj0JrgeRWQsy4XgdclVMWsbRRUD7eGyI82ERah71EXJ6D8/2DJKWaLxVwoFGVBB8KkEM56kwKBgQCdRyaNUxrilsCZgSZyXXB5RQhiKvi8IrEj/F80MSAE028AbxTtEMC6OtDEr4cBDdzEGAPvi+rEpDTPViQ9IIAHOUNFetV45FOIi/140FiIEL41veAwieWXPAqYy9KajmyUQCFtD1K22Rks6xknZwZevwObm5zBqxxGsN8R2zxI0wKBgCDvUpW4qtOQciBPpbaAOUsaWbzozM2EpwnJhC4s5SD3NjJTqnsl3fSiWwF8Xkk3KutuiYKDUKQB6qeDRqkoqSMHXK+1a3iqXT9kTlIQIRHgbjEuejpFnfH3f/AspEYmBfzdXLjEINpvgfjurA/q/YzW435dh3QIJhVgVktX1oSvAoGBAIAa0pMnuDW2qFImIM4LdPbSNUSLicQZnRXnYkX+c87cA+D1ubD6uZyo5spkenFJJnusJBsgtfLuCfYiY/h5csr2AfsiH10gERHSZvqHVd/I/xMG5p8II8T19WDFbOPtBY//aqjwU2CrcbayNJG3H+smVkTqxT76lWED+UYHdZ3q");
-        String plan = RSA.decrypt(receipt.toString(), RSA.getPublicKeyFromString("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzVump7D2ex/8jvpLILCg5+09QGyxkELGE7pqqNbM39yKlwfCICcO17Xw/TfhIEARoeuCrSFjXqGD3fl+N6iR7mU38DXcRruTYjc1aE2UQExKZM0wmqvzbOcLJqDbnJyoDhDhveXJXN07qypq5ZhQk8CJdeZW+5nanHRQqfFSq18wT/wXbgNA0Z1WYyS0du2sDm4svzEqNWxoExTcacdwlPYoMRm+h4JQMJc2fF4dGkKgLFXBv78jbeHlmWCmhG4ZOxhoUsT0oITIdgSUzTtE46Iq4n+NIFfI/MDC8xY2IRTp+N0zBQQfojgGfKvRjpfhJBktDXAtkwu1vlKdb5wvsQIDAQAB"));
-
-        System.out.println("hash : "+hash1);
-        System.out.println("cypher : "+cypher);
-        System.out.println("hash fts : "+plan);
+//        Delivery gh = new Delivery();
+//        gh.setDiachigiao("HCM");
+//        gh.setNgayGiao("2022-10-14 00:00:00");
+//        gh.setEmail("email");
+//        gh.setPhone("");
+//        gh.setTenKH("");
+//        gh.setHuyen("1533");
+//        gh.setXa("21208");
+//
+//        List<Bill_Detail> billDetailList = new ArrayList<>();
+//        billDetailList.add(new Bill_Detail("HD15", "B001", 2, "cmsn", 500000));
+//        billDetailList.add(new Bill_Detail("HD15", "B003", 2, "cmsn em", 2000000));
+//
+//        Receipt receipt = new Receipt("HD15", "AD01", "2022-10-12 00:00:00", "bánh", 500000.0, Double.parseDouble("21000"), billDetailList, gh);
+//        String cypherText = "";
+//        String privateKey = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDNW6ansPZ7H/yO+ksgsKDn7T1AbLGQQsYTumqo1szf3IqXB8IgJw7XtfD9N+EgQBGh64KtIWNeoYPd+X43qJHuZTfwNdxGu5NiNzVoTZRATEpkzTCaq/Ns5wsmoNucnKgOEOG95clc3TurKmrlmFCTwIl15lb7mdqcdFCp8VKrXzBP/BduA0DRnVZjJLR27awObiy/MSo1bGgTFNxpx3CU9igxGb6HglAwlzZ8Xh0aQqAsVcG/vyNt4eWZYKaEbhk7GGhSxPSghMh2BJTNO0Tjoirif40gV8j8wMLzFjYhFOn43TMFBB+iOAZ8q9GOl+EkGS0NcC2TC7W+Up1vnC+xAgMBAAECggEAEiTzbCScGpPgbkeaJLjGdseE3nDcHXlw4+RYMTPNZUgorKCAW/PngVKviMgLqZxPkoVrBd4J2B4gNxgouUU5I52o3B3+KPfA1XA4VU9pdmbnOdHRZhEkUG53k0GqNcO3q4p9T5iCeqSHdZ+pU0DqeauM2bBw5gkZgjJawDE00zRMyqmczlbUrgX1K8QXyGxiPKwBvrm1xo9LuP0ROtlUbmk7bWiceEKOes8SoqVbom6nM9x9FTmfSdPleZvI/L4AUhn2YGz5axiVMcLIMOGE5NID8BDCeYZIAH4VBn+BgzYfATXeIN/f1iBbQvQGkfHdyQe4Ak40MxKdLcawGnCVkwKBgQDX3m/Z9vC+yah+PMl0yTz1C0ioiVo2AeIhTV2V8XNLxPAwSPF/j7Mczd8GYFIYrXtx/gQ2MSIeDOLDErmYj8xQntasVh6RrZObyGGaSHtxPoq2QTyczI7wrjucuG2I6Hbde2EjZ7bnbYcMMBeEhJXe14zlDhCYThfpH7NTWtajKwKBgQDziPvIwH/n1PQmhl6g8MWp23T8+5KJ0b5jUdPp9q3g32xjh92JLkZ94tEPB9ItgW8E3aBO72zJdDhOvHHuegPci3G/awy9iGrOc2mj0JrgeRWQsy4XgdclVMWsbRRUD7eGyI82ERah71EXJ6D8/2DJKWaLxVwoFGVBB8KkEM56kwKBgQCdRyaNUxrilsCZgSZyXXB5RQhiKvi8IrEj/F80MSAE028AbxTtEMC6OtDEr4cBDdzEGAPvi+rEpDTPViQ9IIAHOUNFetV45FOIi/140FiIEL41veAwieWXPAqYy9KajmyUQCFtD1K22Rks6xknZwZevwObm5zBqxxGsN8R2zxI0wKBgCDvUpW4qtOQciBPpbaAOUsaWbzozM2EpwnJhC4s5SD3NjJTqnsl3fSiWwF8Xkk3KutuiYKDUKQB6qeDRqkoqSMHXK+1a3iqXT9kTlIQIRHgbjEuejpFnfH3f/AspEYmBfzdXLjEINpvgfjurA/q/YzW435dh3QIJhVgVktX1oSvAoGBAIAa0pMnuDW2qFImIM4LdPbSNUSLicQZnRXnYkX+c87cA+D1ubD6uZyo5spkenFJJnusJBsgtfLuCfYiY/h5csr2AfsiH10gERHSZvqHVd/I/xMG5p8II8T19WDFbOPtBY//aqjwU2CrcbayNJG3H+smVkTqxT76lWED+UYHdZ3q";
+//        try {
+//            cypherText = ReceiptService.createCypherText(receipt, privateKey);
+//        } catch (NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException |
+//                 InvalidKeyException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+////        System.out.println(cypherText + " :cypherText");
+////        System.out.println(compareOrderHash(receipt, cypherText, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzVump7D2ex/8jvpLILCg5+09QGyxkELGE7pqqNbM39yKlwfCICcO17Xw/TfhIEARoeuCrSFjXqGD3fl+N6iR7mU38DXcRruTYjc1aE2UQExKZM0wmqvzbOcLJqDbnJyoDhDhveXJXN07qypq5ZhQk8CJdeZW+5nanHRQqfFSq18wT/wXbgNA0Z1WYyS0du2sDm4svzEqNWxoExTcacdwlPYoMRm+h4JQMJc2fF4dGkKgLFXBv78jbeHlmWCmhG4ZOxhoUsT0oITIdgSUzTtE46Iq4n+NIFfI/MDC8xY2IRTp+N0zBQQfojgGfKvRjpfhJBktDXAtkwu1vlKdb5wvsQIDAQAB"));
+//
+//        String hash1 = RSA.hashOrder(receipt.toString());
+//        String cypher = ReceiptService.createCypherText(receipt, "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDNW6ansPZ7H/yO+ksgsKDn7T1AbLGQQsYTumqo1szf3IqXB8IgJw7XtfD9N+EgQBGh64KtIWNeoYPd+X43qJHuZTfwNdxGu5NiNzVoTZRATEpkzTCaq/Ns5wsmoNucnKgOEOG95clc3TurKmrlmFCTwIl15lb7mdqcdFCp8VKrXzBP/BduA0DRnVZjJLR27awObiy/MSo1bGgTFNxpx3CU9igxGb6HglAwlzZ8Xh0aQqAsVcG/vyNt4eWZYKaEbhk7GGhSxPSghMh2BJTNO0Tjoirif40gV8j8wMLzFjYhFOn43TMFBB+iOAZ8q9GOl+EkGS0NcC2TC7W+Up1vnC+xAgMBAAECggEAEiTzbCScGpPgbkeaJLjGdseE3nDcHXlw4+RYMTPNZUgorKCAW/PngVKviMgLqZxPkoVrBd4J2B4gNxgouUU5I52o3B3+KPfA1XA4VU9pdmbnOdHRZhEkUG53k0GqNcO3q4p9T5iCeqSHdZ+pU0DqeauM2bBw5gkZgjJawDE00zRMyqmczlbUrgX1K8QXyGxiPKwBvrm1xo9LuP0ROtlUbmk7bWiceEKOes8SoqVbom6nM9x9FTmfSdPleZvI/L4AUhn2YGz5axiVMcLIMOGE5NID8BDCeYZIAH4VBn+BgzYfATXeIN/f1iBbQvQGkfHdyQe4Ak40MxKdLcawGnCVkwKBgQDX3m/Z9vC+yah+PMl0yTz1C0ioiVo2AeIhTV2V8XNLxPAwSPF/j7Mczd8GYFIYrXtx/gQ2MSIeDOLDErmYj8xQntasVh6RrZObyGGaSHtxPoq2QTyczI7wrjucuG2I6Hbde2EjZ7bnbYcMMBeEhJXe14zlDhCYThfpH7NTWtajKwKBgQDziPvIwH/n1PQmhl6g8MWp23T8+5KJ0b5jUdPp9q3g32xjh92JLkZ94tEPB9ItgW8E3aBO72zJdDhOvHHuegPci3G/awy9iGrOc2mj0JrgeRWQsy4XgdclVMWsbRRUD7eGyI82ERah71EXJ6D8/2DJKWaLxVwoFGVBB8KkEM56kwKBgQCdRyaNUxrilsCZgSZyXXB5RQhiKvi8IrEj/F80MSAE028AbxTtEMC6OtDEr4cBDdzEGAPvi+rEpDTPViQ9IIAHOUNFetV45FOIi/140FiIEL41veAwieWXPAqYy9KajmyUQCFtD1K22Rks6xknZwZevwObm5zBqxxGsN8R2zxI0wKBgCDvUpW4qtOQciBPpbaAOUsaWbzozM2EpwnJhC4s5SD3NjJTqnsl3fSiWwF8Xkk3KutuiYKDUKQB6qeDRqkoqSMHXK+1a3iqXT9kTlIQIRHgbjEuejpFnfH3f/AspEYmBfzdXLjEINpvgfjurA/q/YzW435dh3QIJhVgVktX1oSvAoGBAIAa0pMnuDW2qFImIM4LdPbSNUSLicQZnRXnYkX+c87cA+D1ubD6uZyo5spkenFJJnusJBsgtfLuCfYiY/h5csr2AfsiH10gERHSZvqHVd/I/xMG5p8II8T19WDFbOPtBY//aqjwU2CrcbayNJG3H+smVkTqxT76lWED+UYHdZ3q");
+//        String plan = RSA.decrypt(receipt.toString(), RSA.getPublicKeyFromString("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzVump7D2ex/8jvpLILCg5+09QGyxkELGE7pqqNbM39yKlwfCICcO17Xw/TfhIEARoeuCrSFjXqGD3fl+N6iR7mU38DXcRruTYjc1aE2UQExKZM0wmqvzbOcLJqDbnJyoDhDhveXJXN07qypq5ZhQk8CJdeZW+5nanHRQqfFSq18wT/wXbgNA0Z1WYyS0du2sDm4svzEqNWxoExTcacdwlPYoMRm+h4JQMJc2fF4dGkKgLFXBv78jbeHlmWCmhG4ZOxhoUsT0oITIdgSUzTtE46Iq4n+NIFfI/MDC8xY2IRTp+N0zBQQfojgGfKvRjpfhJBktDXAtkwu1vlKdb5wvsQIDAQAB"));
+//
+//        System.out.println("hash : "+hash1);
+//        System.out.println("cypher : "+cypher);
+//        System.out.println("hash fts : "+plan);
 
 
 //        OrderService.addOrder(order, cypherText);

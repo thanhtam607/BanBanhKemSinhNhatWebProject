@@ -2,10 +2,10 @@ package vn.edu.hcmuaf.fit.controller.Bills;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.*;
-import vn.edu.hcmuaf.fit.security.RSA;
 import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.OrderService;
 import vn.edu.hcmuaf.fit.service.ProductService;
+import vn.edu.hcmuaf.fit.service.ReceiptService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -92,9 +92,9 @@ public class AddNewOrder extends HttpServlet {
 //==  hash order here
         String cypherText = "";
         String privateKey = request.getParameter("keyContent");
-        String hashOrder = RSA.hashObject(receipt);
+//        String hashOrder = RSA.hashObject(receipt);
         try {
-            cypherText = RSA.encryptRSA(hashOrder, RSA.getPrivateKeyFromString(privateKey));
+            cypherText = ReceiptService.createCypherText(receipt, privateKey);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

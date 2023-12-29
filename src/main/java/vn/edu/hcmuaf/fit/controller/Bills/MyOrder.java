@@ -28,7 +28,6 @@ public class MyOrder extends HttpServlet {
 
             session.setAttribute("listRe", receipts);
 
-
             request.getRequestDispatcher("order.jsp").forward(request, response);
         }else{
             response.sendRedirect("signin.jsp");
