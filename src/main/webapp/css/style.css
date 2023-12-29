@@ -3984,7 +3984,8 @@ font-size: 24px;
 	justify-content: space-between;
 }
 .confirm-btn{
-	background-color: #ff96b7; color: white;
+	 color: white;
+	background-color: rgba(11, 11, 11, 0.5);
 }
 .back-btn {
 	background-color: #020e17;

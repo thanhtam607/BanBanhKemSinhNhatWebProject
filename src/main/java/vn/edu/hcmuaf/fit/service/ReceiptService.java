@@ -94,13 +94,13 @@ public class ReceiptService {
     }
 //    tạo cypherText cho từng đơn hàng
 
-    public static String createCypherText(Receipt receipt, String privateKeyString) throws NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public static String createCypherText(Receipt receipt, String privateKeyString) throws Exception {
         String hashOrder = RSA.hashObject(receipt);
-        return RSA.encryptRSA(hashOrder, RSA.getPrivateKeyFromString(privateKeyString));
+        return RSA.encrypt(hashOrder, RSA.getPrivateKeyFromString(privateKeyString));
     }
 
     //    so sánh Hash o1 và o2
-    public static boolean verifyOrderWhenLoad(Receipt receipt, String cypherText, List<SignUser> signUserList) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+    public static boolean verifyOrderWhenLoad(Receipt receipt, String cypherText, List<SignUser> signUserList) throws Exception {
         String fstHash = "";
         String hashOrder = "";
         String publickeyString = getPbKeyString(receipt, signUserList);
@@ -108,7 +108,7 @@ public class ReceiptService {
 //            System.out.println("đã xác thực");
             return true;
         } else {
-            fstHash = RSA.decryptRSA(cypherText, RSA.getPublicKeyFromString(publickeyString));
+            fstHash = RSA.decrypt(cypherText, RSA.getPublicKeyFromString(publickeyString));
             hashOrder = RSA.hashObject(receipt);
             return fstHash.equals(hashOrder);
         }
@@ -147,6 +147,7 @@ public class ReceiptService {
             e.printStackTrace(); // Xử lý exception nếu có lỗi khi chuyển đổi
             return 0; // Trả về false nếu có lỗi
         }
+
     }
 
     public static List<Receipt> getAllReceiptToDay() {
@@ -178,7 +179,7 @@ public class ReceiptService {
     public static List<Receipt> getAllReceiptThisMonth() {
         List<Receipt> list = new ArrayList<Receipt>();
         Statement statement = DBConnect.getInstall().get();
-        if (statement != null)
+        if (statement != null) {
             try {
                 ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES,  STATUS, sum(BILLS.PRO_BILL+ BILLS.FEE_BILL) as total FROM BILLS\n" +
                         "                        WHERE MONTH(EXPORT_DATE) = month(CURRENT_DATE) and YEAR(EXPORT_DATE) = YEAR(CURRENT_DATE)\n" +
@@ -192,7 +193,7 @@ public class ReceiptService {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-        else {
+        } else {
             System.out.println("Không có  hóa đơn");
         }
         return list;
@@ -785,9 +786,6 @@ public class ReceiptService {
 //        System.out.println("cypher : "+cypher);
 //        System.out.println("hash fts : "+plan);
 
-
-//        OrderService.addOrder(order, cypherText);
-//        OrderService.addGiaoHang(order);
 
     }
 

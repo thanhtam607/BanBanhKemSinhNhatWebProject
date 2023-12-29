@@ -95,6 +95,7 @@ public class AddNewOrder extends HttpServlet {
 //        String hashOrder = RSA.hashObject(receipt);
         try {
             cypherText = ReceiptService.createCypherText(receipt, privateKey);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
