@@ -933,7 +933,6 @@ function addOrder() {
     var haveDisk = document.getElementById("payment3").checked;
     var haveDiskName = document.getElementById("payment3").value;
 
-    // var url1  ="AddNewOrder?ten=" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
     var url1 = "AddNewOrder";
     $.ajax({
         url: url1,
@@ -956,6 +955,7 @@ function addOrder() {
             keyContent: keyContent,
         },
         success: function (response) {
+            console.log(response);
             if (parseInt(response) === 1) {
                 // Hiển thị modal lỗi
                 Swal.fire({

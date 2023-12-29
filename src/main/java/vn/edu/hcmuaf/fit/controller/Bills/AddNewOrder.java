@@ -101,6 +101,24 @@ public class AddNewOrder extends HttpServlet {
         try {
             if(RSA.areKeyPairsMatching(privateKey, publicKey)) {
                 cypherText = ReceiptService.createCypherText(receipt, privateKey);
+
+                OrderService.addOrder(order, cypherText);
+                OrderService.addGiaoHang(order);
+
+                OrderService.updateTonKhoWhenAdd(order);
+                session.setAttribute("itemCart", null);
+
+
+                Log log = new Log();
+                log.setLevel(1);
+                log.setSrc(request.getServletPath());
+                log.setContent("Thêm đơn đặt hàng mới");
+                log.setUser(auth.getId());
+                LogService.addLog(log);
+
+
+                response.sendRedirect("MyOrder");
+
             }else{
                 out.println(1);
             }
@@ -108,23 +126,6 @@ public class AddNewOrder extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-
-        OrderService.addOrder(order, cypherText);
-        OrderService.addGiaoHang(order);
-
-        OrderService.updateTonKhoWhenAdd(order);
-        session.setAttribute("itemCart", null);
-
-
-        Log log = new Log();
-        log.setLevel(1);
-        log.setSrc(request.getServletPath());
-        log.setContent("Thêm đơn đặt hàng mới");
-        log.setUser(auth.getId());
-        LogService.addLog(log);
-
-
-        response.sendRedirect("MyOrder");
     }
 
     @Override

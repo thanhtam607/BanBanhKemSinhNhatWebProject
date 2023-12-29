@@ -158,10 +158,16 @@ public class RSA {
         return stringBuilder.toString();
     }
     public static boolean areKeyPairsMatching(String privateKey, String publicKey) {
-        byte[] privateBytes = getPrivateKeyFromString(privateKey).getEncoded();
-        byte[] publicBytes = getPublicKeyFromString(publicKey).getEncoded();
+        String cy = null;
+        String pl = null;
+        try {
+            cy = encrypt("Hel", getPrivateKeyFromString(privateKey));
+             pl = decrypt(cy, getPublicKeyFromString(publicKey));
+        } catch (Exception e) {
+           return false;
+        }
 
-        return Arrays.equals(privateBytes, publicBytes);
+        return pl.equals("Hel");
     }
 
     public static void main(String[] args) throws Exception {
@@ -171,7 +177,7 @@ public class RSA {
         String pb = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzcKSh2kZg+hrFMty2KpOBmQ6NfcTZKLMPA5itAzBq1KdkH/2EadSJD1STc7i5lDVBWgRQIqoyAFp9mz+8R1S/w19h7y6fD08gP/FEOWYlpFoIJvJvKFShetgsgby2Z39U6YZyDVkngbomCdt6uDVOKy9x/UiGNosXZJNF5zkQghfqhTrE6lJ8qdiaiB5x5MZ8YO1jR7S7VodrT0+HLstheKsvclTdPMVPnRtj/dnlw/DQHx4/3gjnSE+Y5nZ72CNw4sIDhxBeYDMLaam7YRpGESsoqUMvUsfiL7OfjUVhwuqIP8u3n+PjYvzp/K+ukKNei9WuHjmrgZkEs5nTiYW6wIDAQAB";
         String en = encrypt(hash, getPrivateKeyFromString(pv));
         String de = decrypt(en, getPublicKeyFromString(pb));
-        System.out.println(pb.equals(de));
+        System.out.println(areKeyPairsMatching(("djfhskdj"), pb));
 
     }
 }
