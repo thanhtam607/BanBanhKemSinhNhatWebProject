@@ -74,8 +74,9 @@ public class ReceiptService {
             if (compareDates(receiptForHash.getExport_date(), "2023-01-09 00:00:00") > 0) {
                 if (rs.getInt(7) != 4) {
                     if (!verifyOrderWhenLoad(receiptForHash, getCypherTextOfOrder(rs.getString(1)), UserService.getListKey(rs.getString(2)))) {
-                        updateState(receiptForHash.getId(), 5);
-                        rc.setStatus(5);
+//                        updateState(receiptForHash.getId(), 5);
+//                        rc.setStatus(5);
+                        rc.setEdited(true);
                         // Gửi mail báo lỗi
                         sendMailWhenErr(receiptForHash);
                         // Gửi mail báo lỗi
@@ -116,7 +117,6 @@ public class ReceiptService {
     //    tạo cypherText cho từng đơn hàng
     public static String createCypherText(Receipt receipt, String privateKeyString) throws Exception {
         String hashOrder = RSA.hashObject(receipt);
-        System.out.println("đoa hash ban dâu : " + hashOrder);
         return RSA.encrypt(hashOrder, RSA.getPrivateKeyFromString(privateKeyString));
     }
 
@@ -130,7 +130,6 @@ public class ReceiptService {
         } else {
             fstHash = RSA.decrypt(cypherText, RSA.getPublicKeyFromString(publickeyString));
             hashOrder = RSA.hashObject(receipt);
-            System.out.println("đoa hash lu sau : " + hashOrder);
             return fstHash.equals(hashOrder);
         }
 
@@ -408,8 +407,9 @@ public class ReceiptService {
                 if (compareDates(receiptForHash.getExport_date(), "2023-01-09 00:00:00") > 0) {
                     if (rs.getInt(7) != 4) {
                         if (!verifyOrderWhenLoad(receiptForHash, getCypherTextOfOrder(rs.getString(1)), UserService.getListKey(rs.getString(2)))) {
-                            updateState(receiptForHash.getId(), 5);
-                            re.setStatus(5);
+//                            updateState(receiptForHash.getId(), 5);
+//                            re.setStatus(5);
+                            re.setEdited(true);
 //                      Gửi mail báo lỗi
                             sendMailWhenErr(receiptForHash);
 //                        gửi mail báo lỗi

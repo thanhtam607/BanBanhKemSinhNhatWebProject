@@ -254,7 +254,7 @@
 
                     <div class="col-12 mb-2">
                         <div class="card-body my-0">
-                            <% if(r.checkEdited()){ %>
+                            <% if(r.isEdited()){ %>
                             <div class="card-text pt-2">
                                 <span class="text-danger font-italic small font-weight-bold">
                                     * Đơn hàng đã bị chỉnh sửa và không thể giao hàng, vui lòng huỷ đơn và đặt lại! Xin lỗi quý khách vì sự bất tiện này :((
