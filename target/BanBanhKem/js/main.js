@@ -994,14 +994,12 @@ function addOrder() {
             });
         },
         error: function (xhr, status, error) {
-            // Xử lý khi có lỗi
-            console.error("Error:", error);
 
             // Hiển thị modal lỗi
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Vui lòng nhập đúng định dạng khóa riêng tư của bạn!',
+                text: 'Hãy nhập đúng định dạng khóa riêng tư của bạn!',
                 footer: 'Vui lòng thử lại hoặc liên hệ hỗ trợ.'
             });
         }
