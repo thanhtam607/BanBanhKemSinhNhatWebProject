@@ -1,6 +1,5 @@
 package vn.edu.hcmuaf.fit.model;
 
-import java.awt.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.NumberFormat;
@@ -183,17 +182,15 @@ public class Receipt {
 
     @Override
     public String toString() {
-        return "Receipt{" +
+        return "{" +
                 "id='" + id + '\'' +
                 ", makh='" + makh + '\'' +
-                ", address='" + address + '\'' +
-                ", export_date='" + export_date + '\'' +
-                ", delivery_date='" + delivery_date + '\'' +
                 ", note='" + note + '\'' +
+                ", export_date='" + export_date + '\'' +
                 ", fee_bill=" + fee_bill +
                 ", pro_bill=" + pro_bill +
-                ", status=" + status +
+                ", billDetailList=" + billDetailList +
+                ", delivery=" + delivery +
                 '}';
-
     }
 }

@@ -1065,15 +1065,15 @@ insert into GENERAL_INFOR values('GI021', 'IndexSlogan', 'Không chỉ là bánh
 insert into GENERAL_INFOR values('GI022', 'ImageMenu', 'img/banner/breadcrumb.jpg');
 insert into GENERAL_INFOR values('GI023', 'NameShop', 'Shop Bánh Kem');
 
-ALTER TABLE bills
-add CipherText text;
-CREATE TABLE publickey  (
-  ID int NOT NULL AUTO_INCREMENT  PRIMARY KEY,
-  user_Id varchar(255) ,
-  publickeylink text ,
-  createDate datetime ,
-  ExpiredDate date ,
-  status int ,
-  CONSTRAINT publickey_ibfk_1 FOREIGN KEY (user_Id) REFERENCES accounts (ID));
+ALTER TABLE BILLS
+add CIPHERTEXT TEXT;
+CREATE TABLE PUBLICKEY  (
+  ID INT NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+  USER_ID VARCHAR(255) ,
+  PUBLICKEYLINK TEXT ,
+  CREATEDATE DATETIME ,
+  EXPIREDDATE DATETIME,
+  STATUS INT, ,
+  CONSTRAINT publickey_ibfk_1 FOREIGN KEY (USER_ID) REFERENCES accounts (ID));
  
 

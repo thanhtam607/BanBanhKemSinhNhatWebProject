@@ -2,21 +2,20 @@ package vn.edu.hcmuaf.fit.controller.Bills;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.*;
-import vn.edu.hcmuaf.fit.service.CartService;
+import vn.edu.hcmuaf.fit.security.RSA;
 import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.OrderService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -28,10 +27,10 @@ public class AddNewOrder extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
-        List<ItemProductInCart> listItemC =(List<ItemProductInCart>) session.getAttribute("itemCart");
+        List<ItemProductInCart> listItemC = (List<ItemProductInCart>) session.getAttribute("itemCart");
 
         double price_pro_bill = 0;
-        for(ItemProductInCart inCart: listItemC){
+        for (ItemProductInCart inCart : listItemC) {
             price_pro_bill += inCart.getPrice();
         }
 
@@ -48,14 +47,14 @@ public class AddNewOrder extends HttpServlet {
 
         String leadTime = request.getParameter("leadTime");
 
-        if(ghichu!=null && request.getParameter("haveDisk").equals("true")){
-            ghichu +=", "+ request.getParameter("haveDiskName");
-        } else if(ghichu == null && request.getParameter("haveDisk").equals("true")){
+        if (ghichu != null && request.getParameter("haveDisk").equals("true")) {
+            ghichu += ", " + request.getParameter("haveDiskName");
+        } else if (ghichu == null && request.getParameter("haveDisk").equals("true")) {
             ghichu += request.getParameter("haveDiskName");
-            ghichu.replace(',',' ');
+            ghichu.replace(',', ' ');
         } else if (ghichu != null) {
-            ghichu+=ghichu;
-        } else{
+            ghichu += ghichu;
+        } else {
             ghichu = "";
 
         }
@@ -78,7 +77,7 @@ public class AddNewOrder extends HttpServlet {
         gh.setXa(xa);
 
 
-        Order order = new Order(auth, listItemC, todayFM,Double.parseDouble(totalBill), ghichu, gh, price_pro_bill, Double.parseDouble(fee));
+        Order order = new Order(auth, listItemC, todayFM, Double.parseDouble(totalBill), ghichu, gh, price_pro_bill, Double.parseDouble(fee));
         order.setId(OrderService.getNewIdOrder());
 
 //        hash order here
@@ -86,20 +85,28 @@ public class AddNewOrder extends HttpServlet {
         for (ItemProductInCart item : order.getData()) {
             Product p = ProductService.findById(item.getSp().getId());
             int price = p.getPromotional() != 0 ? p.getPromotional() : p.getPrice();
-           billDetailList.add(new Bill_Detail(order.getId(), item.getSp().getId(),item.getSoLgMua(), item.getNote(), price));
+            billDetailList.add(new Bill_Detail(order.getId(), item.getSp().getId(), item.getSoLgMua(), item.getNote(), price));
 
         }
         Receipt receipt = new Receipt(order.getId(), order.getUser().getId(), todayFM, ghichu, price_pro_bill, Double.parseDouble(fee), billDetailList, gh);
 //==  hash order here
-        if(notesForDetail!=null){
-            for(int i =0; i< notesForDetail.length ;i++){
-                order.getData().get(i).setNote(notesForDetail[i]);
-            }}
-        OrderService.addOrder(order);
+        String cypherText = "";
+        String keyContent = request.getParameter("keyContent");
+        String hashOrder = RSA.hashObject(receipt);
+        try {
+            cypherText = RSA.encrypt(hashOrder, RSA.getPrivateKeyFromString(keyContent));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        for (int i = 0; i < notesForDetail.length; i++) {
+            order.getData().get(i).setNote(notesForDetail[i]);
+        }
+        OrderService.addOrder(order, cypherText);
         OrderService.addGiaoHang(order);
 
         OrderService.updateTonKhoWhenAdd(order);
-        session.setAttribute("itemCart",null);
+        session.setAttribute("itemCart", null);
 
 
         Log log = new Log();

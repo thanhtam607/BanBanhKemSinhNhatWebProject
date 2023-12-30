@@ -10,8 +10,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.logistic.District" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.logistic.LogisticController" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.logistic.Ward" %>
-<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <html lang="xzz">
@@ -352,7 +350,27 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <button onclick="addOrder()" type="submit" class="site-btn">ĐẶT HÀNG</button>
+                            <div id="myModal" class="modal" onclick="closeModal()">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <h4 style="text-align: center;">Xác nhận đơn hàng bằng private key</h4>
+                                    <div style="display: flex; justify-content: center;">
+                                        <button id="fileButton" onclick="chooseFile()" style="width: 320px; height: 30px; margin-bottom: 20px">Nhấn vào đây để tải file (.xml) lên</button>
+                                    </div>
+                                    <label for="fileInput" class="fileLabel">File:</label>
+                                    <input type="text" id="fileInput" disabled>
+                                    <input type="file" id="file" accept=".xml" style="display: none;">
+                                    <textarea id="keyContent" rows="10"></textarea>
+                                    <div class="button-container">
+                                        <div class="button-row">
+                                            <button onclick="goBack()" class="back-btn" style="width: 30%">Quay lại</button>
+                                            <button onclick="addOrder()" style="width: 30%; height: 40px" type="submit" class="confirm-btn" disabled>Xác nhận</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="openModal()" class="site-btn">ĐẶT HÀNG</button>
+<%--                            <button onclick="addOrder()" type="submit" class="site-btn">ĐẶT HÀNG</button>--%>
                         </div>
                     </div>
                 </div>

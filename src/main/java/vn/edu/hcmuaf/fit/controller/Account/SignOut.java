@@ -18,7 +18,7 @@ public class SignOut extends HttpServlet {
             User user = (User) session.getAttribute("auth");
             session.invalidate();
 
-            response.sendRedirect("/signin.jsp");
+            response.sendRedirect("./signin.jsp");
 
             Log log = new Log();
             log.setLevel(1);
