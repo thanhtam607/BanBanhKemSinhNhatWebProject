@@ -401,6 +401,16 @@ public class UserService {
         }
         return null;
     }
+    public static String getNameUser(String userId) throws SQLException {
+        String sql = "select NAME from accounts where ID = ?";
+        PreparedStatement stms = DBConnect.getInstall().getConn().prepareStatement(sql);
+        stms.setString(1, userId);
+        ResultSet rs = stms.executeQuery();
+        while (rs.next()) {
+            return rs.getString(1);
+        }
+        return null;
+    }
 
     public static File convertMessageToXML(String messageContent, String fileName) {
         try {
@@ -434,12 +444,12 @@ public class UserService {
         }
     }
 
-    public static List<SignUser> getListKey() {
+    public static List<SignUser> getListKey(String userID) {
         List<SignUser> list = new ArrayList<SignUser>();
         Statement statement = DBConnect.getInstall().get();
         if (statement != null) {
             try {
-                ResultSet rs = statement.executeQuery("select ID, user_Id, publickeylink, createDate, expiredDate, status from publickey;");
+                ResultSet rs = statement.executeQuery("select ID, user_Id, publickeylink, createDate, expiredDate, status from publickey where user_Id = '"+userID+"';");
                 while (rs.next()) {
                     list.add(new SignUser(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6)));
                 }
@@ -453,18 +463,7 @@ public class UserService {
 
     }
 
-    public static String getPbKeybyID(String id) {
-        List<SignUser> listKey = UserService.getListKey();
-        String rs = "";
-        for (SignUser su : listKey) {
-            if (su.getId_user().equals(id)) {
-                rs = su.getPbkey();
-            } else {
-                rs = "";
-            }
-        }
-        return rs;
-    }
+
 
 
     public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {

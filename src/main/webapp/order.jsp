@@ -254,6 +254,13 @@
 
                     <div class="col-12 mb-2">
                         <div class="card-body my-0">
+                            <% if(r.checkEdited()){ %>
+                            <div class="card-text pt-2">
+                                <span class="text-danger font-italic small font-weight-bold">
+                                    * Đơn hàng đã bị chỉnh sửa và không thể giao hàng, vui lòng huỷ đơn và đặt lại! Xin lỗi quý khách vì sự bất tiện này :((
+                                </span>
+                            </div>
+                            <% }%>
                             <div class="card-text text-dark border-bottom pb-2">
                                 <span class=" text-dark">
                                     GHI CHÚ CHUNG: <%=r.getNote() != null? r.getNote(): "Không có"%>
@@ -297,11 +304,12 @@
                                 <button onclick="cancelOrder('<%=r.getId()%>')" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2" >
                                             Hủy đơn hàng
                                 </button>
-                                <%}if(r.getStatus() == 4){%>
-                                <button onclick="buyAgain('<%=r.getId()%>')" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2" >
-                                    Mua lại
-                                </button>
                                 <%}%>
+<%--                                    if(r.getStatus() == 4){%>--%>
+<%--                                <button onclick="buyAgain('<%=r.getId()%>')" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2" >--%>
+<%--                                    Mua lại--%>
+<%--                                </button>--%>
+<%--                                <%}%>--%>
 
                             </div>
                         </div>

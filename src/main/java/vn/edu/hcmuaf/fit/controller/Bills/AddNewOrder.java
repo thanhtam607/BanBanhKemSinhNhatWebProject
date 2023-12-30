@@ -3,9 +3,7 @@ package vn.edu.hcmuaf.fit.controller.Bills;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.*;
 import vn.edu.hcmuaf.fit.security.RSA;
-import vn.edu.hcmuaf.fit.service.LogService;
-import vn.edu.hcmuaf.fit.service.OrderService;
-import vn.edu.hcmuaf.fit.service.ProductService;
+import vn.edu.hcmuaf.fit.service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,12 +51,12 @@ public class AddNewOrder extends HttpServlet {
         } else if (ghichu == null && request.getParameter("haveDisk").equals("true")) {
             ghichu += request.getParameter("haveDiskName");
             ghichu.replace(',', ' ');
-        } else if (ghichu != null) {
-            ghichu += ghichu;
-        } else {
-            ghichu = "";
-
         }
+//        else {
+//            ghichu = "";
+//
+//        }
+
         String notes = request.getParameter("note");
         String[] notesForDetail = notes.split("/,");
 
@@ -80,6 +79,10 @@ public class AddNewOrder extends HttpServlet {
         Order order = new Order(auth, listItemC, todayFM, Double.parseDouble(totalBill), ghichu, gh, price_pro_bill, Double.parseDouble(fee));
         order.setId(OrderService.getNewIdOrder());
 
+        for (int i = 0; i < notesForDetail.length; i++) {
+            order.getData().get(i).setNote(notesForDetail[i]);
+        }
+        gh.setMahd(order.getId());
 //        hash order here
         List<Bill_Detail> billDetailList = new ArrayList<>();
         for (ItemProductInCart item : order.getData()) {
@@ -89,35 +92,40 @@ public class AddNewOrder extends HttpServlet {
 
         }
         Receipt receipt = new Receipt(order.getId(), order.getUser().getId(), todayFM, ghichu, price_pro_bill, Double.parseDouble(fee), billDetailList, gh);
+
 //==  hash order here
         String cypherText = "";
-        String keyContent = request.getParameter("keyContent");
-        String hashOrder = RSA.hashObject(receipt);
+        String privateKey = request.getParameter("keyContent");
+        String publicKey = ReceiptService.getPbKeyString(receipt, UserService.getListKey(order.getUser().getId()));
+        PrintWriter out = response.getWriter();
         try {
-            cypherText = RSA.encrypt(hashOrder, RSA.getPrivateKeyFromString(keyContent));
+            if(RSA.areKeyPairsMatching(privateKey, publicKey)) {
+                cypherText = ReceiptService.createCypherText(receipt, privateKey);
+
+                OrderService.addOrder(order, cypherText);
+                OrderService.addGiaoHang(order);
+
+                OrderService.updateTonKhoWhenAdd(order);
+                session.setAttribute("itemCart", null);
+
+
+                Log log = new Log();
+                log.setLevel(1);
+                log.setSrc(request.getServletPath());
+                log.setContent("Thêm đơn đặt hàng mới");
+                log.setUser(auth.getId());
+                LogService.addLog(log);
+
+
+                response.sendRedirect("MyOrder");
+
+            }else{
+                out.println(1);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        for (int i = 0; i < notesForDetail.length; i++) {
-            order.getData().get(i).setNote(notesForDetail[i]);
-        }
-        OrderService.addOrder(order, cypherText);
-        OrderService.addGiaoHang(order);
-
-        OrderService.updateTonKhoWhenAdd(order);
-        session.setAttribute("itemCart", null);
-
-
-        Log log = new Log();
-        log.setLevel(1);
-        log.setSrc(request.getServletPath());
-        log.setContent("Thêm đơn đặt hàng mới");
-        log.setUser(auth.getId());
-        LogService.addLog(log);
-
-
-        response.sendRedirect("MyOrder");
     }
 
     @Override
