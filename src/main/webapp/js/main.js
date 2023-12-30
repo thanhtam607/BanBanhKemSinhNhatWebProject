@@ -1346,7 +1346,6 @@ function checkTextarea() {
         confirmButton.setAttribute("disabled", true);
         confirmButton.style.backgroundColor = "rgba(11, 11, 11, 0.5)";
     }
-    console.log("Textarea Value:", textareaValue);
 }
 
 // Gọi hàm checkTextarea khi textarea thay đổi
