@@ -358,7 +358,14 @@ String mkh = (String) request.getAttribute("mkh"); %>
                                         for(Receipt r: listre){%>
                                         <tr>
                                             <td>
-                                                <div class="main__table-text"><%=r.getId()%></div>
+                                                <div class="main__table-text"><%=r.getId()%>
+                                                    <% if (r.isEdited()) { %>
+                                                    <span class="text-danger font-italic small font-weight-bold">
+                                                    * Đơn hàng đã bị chỉnh sửa !!!
+                                                </span>
+                                                    <% }%>
+                                                </div>
+
                                             </td>
                                             <td>
                                                 <div class="main__table-text"><%=UserService.findById(r.getMakh()).getName()%></div>

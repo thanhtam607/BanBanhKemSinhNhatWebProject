@@ -141,17 +141,17 @@
                                             <input class="d-none" id="idRec2" name="idRec2" value="<%=receipt.getId()%>">
                                             <label class="form__label" for="usernameRE">Người nhận</label>
                                             <input id="usernameRE" type="text" name="usernameRE" class="form__input"
-                                                   value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getTenKH()%>">
+                                                   value="<%=ReceiptService.getGiaoHang(receipt.getId()).getTenKH()%>">
                                         </div>
                                         <div class="form__group">
                                             <label class="form__label" for="phoneRE">SĐT người nhận</label>
                                             <input id="phoneRE" type="text" name="phoneRE" class="form__input"
-                                                   value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getPhone()%>" maxlength="10">
+                                                   value="<%=ReceiptService.getGiaoHang(receipt.getId()).getPhone()%>" maxlength="10">
                                         </div>
                                         <div class="form__group">
                                             <label class="form__label" for="mailRE">Email người nhận</label>
                                             <input id="mailRE" type="email" name="mailRE" class="form__input"
-                                                   value="<%=ReceiptService.getListGiaoHang(receipt.getId()).getEmail()%>">
+                                                   value="<%=ReceiptService.getGiaoHang(receipt.getId()).getEmail()%>">
                                         </div>
                                     </div>
 

@@ -10,382 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f3ac344-cae9-4190-abda-570d9931f502" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0.2/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0.2/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0.2/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0.2/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0.2/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0.2/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0.2/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BanBanhKem_war.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BanBanhKem_war_exploded.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Gradle___vn_edu_hcmuaf_fit___BanBanhKem_1_0_SNAPSHOT_war.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Gradle___vn_edu_hcmuaf_fit___BanBanhKem_1_0_SNAPSHOT_war__exploded_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_ben_manes_caffeine_caffeine_3_0_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_protobuf_protobuf_java_3_11_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_fileupload_commons_fileupload_1_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_io_commons_io_2_11_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_leangen_geantyref_geantyref_1_3_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_activation_activation_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_mail_javax_mail_api_1_5_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_mail_mail_1_4_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_servlet_javax_servlet_api_3_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_3_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__mysql_mysql_connector_java_8_0_28.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_antlr_antlr4_runtime_4_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jdbi_jdbi3_core_3_24_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_slf4j_api_1_7_31.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_ben_manes_caffeine_caffeine_3_0_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_11_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_leangen_geantyref_geantyref_1_3_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_mail_javax_mail_api_1_5_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_mail_mail_1_4_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_3_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_28.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk18on_1_76.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk18on_1_76.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcutil_jdk18on_1_76.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jdbi_jdbi3_core_3_24_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_31.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/commons_logging_1_2__2_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/fluent_hc_4_5_5__2_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_8_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/httpclient_4_5_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/httpcore_4_4_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/BanBanhKem.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/BanBanhKem.test.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BanBanhKem.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/Google/Constants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/bean/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/bean/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/ForgotPassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/ForgotPassword.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/LoginGoogle.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/LoginGoogle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/SignOut.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/SignOut.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/Signin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/Signin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/Signup.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/Signup.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/UpdatePassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Account/UpdatePassword.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/AddComment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/AddComment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/AddFeedback.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/AddFeedback.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Bills/AddNewOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Bills/AddToCart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Bills/AddToFavorite.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Bills/BuyAgain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Bills/MyOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Bills/RemoveAllCart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Bills/RemoveFavorites.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Bills/RemoveOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Bills/RemoveToCart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Bills/UpdateCart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/BlogCategory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/BlogSeason.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Blogdetails.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/EditUserProfile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Index.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/ListBlog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/ListProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/ProductDetail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/ProductFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/Sort.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Blog/AddBlog.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Blog/AddBlog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Blog/DeleteBlog.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Blog/DeleteBlog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Blog/EditBlog.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Blog/EditBlog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Blog/HideBlog.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Blog/HideBlog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Blog/UpdateBlog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Blog/UpdateImgBlog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Blog/UpdateTitle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Catalog_admin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Catalog_admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Customers/AdminChangePassWord.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Customers/AdminLockCus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Customers/AdminLockCusInEditUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Customers/AdminUpdateProfile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Customers/AdminUpdateUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Customers/EditUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/DeleteCommentListReceipt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Discount/Add_Discount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Discount/FilterProductForDiscount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Discount/List_Discounts.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Discount/RemoveDiscount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/General/UpdateDelivery.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/General/UpdateGeneral_Infor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/General/UpdateImgFooter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/General/UpdateImgLogo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/General/UpdateImgMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/General/UpdateImgSlide.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/General/UpdateIntroduce.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/General/UpdateNameShop.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/General/UpdateShopInfor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/General/UpdateSloganIndex.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/General/UpdateSocialNetwork.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/ListBlog_admin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/ListBlog_admin$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/ListBlog_admin$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/ListBlog_admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/ListCustomer$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/ListCustomer$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/ListCustomer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/ListReceipt_Admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/ListReceipt_full_Admin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/ListReceipt_full_Admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Log/AddLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Log/ListLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Log/LogFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Log/RemoveLogs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/AddImage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/AddProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/DeleteComment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/DeleteImage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/DeleteProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/Edit_Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/HideProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/ListProductRemoved.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/ListProduct_Admin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/ListProduct_Admin$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/ListProduct_Admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/RestoreProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/UnHideImage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/UnHidenProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/UpdateDetails.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/UpdateImg.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/UpdateProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/addTypeCake.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/deleteTypeCake.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/hideImage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Product/update_TypeCake.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Recipts/AdminEditOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Recipts/Bill_detail_Admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Recipts/EditOrderUpdateCustomer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Recipts/EditOrderUpdateDelivery.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Recipts/adminAddProInOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Recipts/adminChangeStateOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Recipts/adminRemoveOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Recipts/adminRemoveOrderCTKH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/Recipts/adminRemoveProInOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/controller/admin/UpdateAuthority.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/db/DBConnect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/db/DBProperties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/db/JDBIConnector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/filter/AccFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/filter/Utf8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Bill_Detail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Blog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Comment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Customer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Delivery.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Discount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/FavoriteProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Feedback.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/General_information.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Image.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/ItemProductInCart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Log.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Order.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/ProductDetail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/Receipt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/TypeOfCake.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/logistic/District.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/logistic/GetFee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/logistic/GetLeadTime.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/logistic/GetWardName.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/logistic/LogisticController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/logistic/LogisticUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/logistic/Province.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/logistic/TransportOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/model/logistic/Ward.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/BlogService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/CartService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/CustomerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/DiscountService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/FeedbackService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/IDComparator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/InforService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/LogService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/OrderService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/ProductService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/ReceiptService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/UserService$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/vn/edu/hcmuaf/fit/service/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/bean/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/bean/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/Account/UpdatePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/Account/UpdatePassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/Bills/AddToCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/Bills/AddToCart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/admin/Log/ListLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/admin/Log/ListLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/BlogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/Google/Constants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/Google/UserGoogleDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/bean/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Account/ForgotPassword.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Account/LoginGoogle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Account/SignOut.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Account/Signin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Account/Signup.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Account/UpdatePassword.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Account/Verify.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/AddComment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/AddFeedback.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Bills/AddNewOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Bills/AddToCart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Bills/AddToFavorite.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Bills/BuyAgain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Bills/MyOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Bills/RemoveAllCart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Bills/RemoveFavorites.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Bills/RemoveOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Bills/RemoveToCart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Bills/UpdateCart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/BlogCategory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/BlogSeason.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Blogdetails.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/EditUserProfile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/GenKey.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Index.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/ListBlog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/ListProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/ProductDetail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/ProductFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/Sort.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Blog/AddBlog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Blog/DeleteBlog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Blog/EditBlog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Blog/HideBlog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Blog/RestoreBlog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Blog/UpdateBlog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Blog/UpdateImgBlog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Blog/UpdateTitle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Catalog_admin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Catalog_admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Customers/AdminChangePassWord.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Customers/AdminLockCus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Customers/AdminLockCusInEditUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Customers/AdminUpdateProfile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Customers/AdminUpdateUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Customers/EditUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/DeleteCommentListReceipt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Discount/Add_Discount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Discount/FilterProductForDiscount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Discount/List_Discounts.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Discount/RemoveDiscount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/General/UpdateDelivery.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/General/UpdateGeneral_Infor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/General/UpdateImgFooter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/General/UpdateImgLogo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/General/UpdateImgMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/General/UpdateImgSlide.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/General/UpdateIntroduce.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/General/UpdateNameShop.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/General/UpdateShopInfor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/General/UpdateSloganIndex.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/General/UpdateSocialNetwork.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/ListBlog_admin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/ListBlog_admin$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/ListBlog_admin$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/ListBlog_admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/ListCustomer$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/ListCustomer$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/ListCustomer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/ListReceipt_Admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/ListReceipt_full_Admin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/ListReceipt_full_Admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Log/AddLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Log/ListLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Log/LogFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Log/RemoveLogs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/AddImage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/AddProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/DeleteComment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/DeleteImage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/DeleteProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/Edit_Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/HideProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/ListProductRemoved.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/ListProduct_Admin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/ListProduct_Admin$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/ListProduct_Admin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/RestoreProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/RestoreTypeOfCake.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/UnHideImage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/UnHidenProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/UpdateDetails.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/UpdateImg.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/UpdateProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/addTypeCake.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/deleteTypeCake.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/hideImage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Product/update_TypeCake.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Recipts/AdminEditOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Recipts/EditOrderUpdateCustomer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Recipts/EditOrderUpdateDelivery.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Recipts/adminAddProInOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Recipts/adminChangeStateOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Recipts/adminRemoveOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Recipts/adminRemoveOrderCTKH.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Recipts/adminRemoveProInOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/Recipts/billDetailAdmin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/admin/UpdateAuthority.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/db/DBConnect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/db/DBProperties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/db/JDBIConnector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/filter/AccFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/filter/Utf8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Bill_Detail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Blog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Comment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Customer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Delivery.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Discount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/FavoriteProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Feedback.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/General_information.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Image.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/ItemProductInCart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Log.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Order.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/ProductDetail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/Receipt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/SignUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/TypeOfCake.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/logistic/District.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/logistic/GetFee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/logistic/GetLeadTime.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/logistic/GetWardName.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/logistic/LogisticController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/logistic/LogisticUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/logistic/Province.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/logistic/TransportOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/model/logistic/Ward.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/security/KeyManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/security/RSA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/BlogService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/CartService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/CustomerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/DiscountService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/FeedbackService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/IDComparator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/InforService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/LogService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/OrderService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/ProductService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/ReceiptService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/UserService$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/UserService$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/security/RSA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/security/RSA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/ReceiptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/ReceiptService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/admin-web.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/admin-web.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/edit-user.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/edit-user.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/list-order.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/list-order.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin/receipt-details.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin/receipt-details.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/order.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/order.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem.war" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -394,26 +27,6 @@
   </component>
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
-  </component>
-  <component name="ExternalProjectsData">
-    <projectState path="$PROJECT_DIR$">
-      <ProjectState />
-    </projectState>
-  </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
-        <projects_view>
-          <tree_state>
-            <expand />
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -438,7 +51,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -448,29 +61,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging Thuan",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/BanBanhKemSinhNhatWebProject/settings.gradle",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.4",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ThanhThuy&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/BanBanhThanhThuy/BanBanhKemSinhNhatWebProject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.4&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ATBM\Project\CuoiKy\target\BanBanhKem\WEB-INF\lib" />
@@ -505,7 +118,6 @@
     </configuration>
     <configuration name="Tomcat 9.0.73" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.73" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/Index" />
-      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="BanBanhKem:war">
@@ -515,7 +127,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="c8c98888-f0a2-4a2f-b262-ef7fa66556c8" />
+        <option name="BASE_DIRECTORY_NAME" value="b8cc2d6a-a081-4833-a50d-cd6b0969d509" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -523,7 +135,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="49847" />
+        <option name="DEBUG_PORT" value="57729" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -619,9 +231,11 @@
       <workItem from="1703699286365" duration="6371000" />
       <workItem from="1703705681665" duration="8364000" />
       <workItem from="1703727474086" duration="298000" />
-      <workItem from="1703821849600" duration="1125000" />
-      <workItem from="1703825790403" duration="648000" />
-      <workItem from="1704029746650" duration="3453000" />
+      <workItem from="1703776940723" duration="8787000" />
+      <workItem from="1703822976146" duration="638000" />
+      <workItem from="1703915973087" duration="104000" />
+      <workItem from="1703950840028" duration="5178000" />
+      <workItem from="1704021033714" duration="2765000" />
     </task>
     <servers />
   </component>

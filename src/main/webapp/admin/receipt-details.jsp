@@ -22,7 +22,7 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon"/>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
@@ -88,38 +88,33 @@
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-pink navbar-dark">
 
-            <div class="d-flex align-items-center ms-4 mb-4">
-                <div class="position-relative">
-                    <i class="fa fa-user icon__user"></i>
-                    <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-                </div>
-                <div class="ms-3">
-                    <h6 class="mb-0"><%= auth != null ? auth.getName() : "ADMIN"%>
-                    </h6>
-                    <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8") : "Admin"%></span>
-                </div>
+        <div class="d-flex align-items-center ms-4 mb-4">
+            <div class="position-relative">
+                <i class="fa fa-user icon__user"></i>
+                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
             </div>
-            <div class="navbar-nav w-100">
-                <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng
-                    quan</a>
-                <%--                    <a href="general_Management.jsp" class="nav-item nav-link"><i class="fa fa-user"></i>Quản lý chung</a>--%>
-                <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
-
-
-                <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
-                <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
-                <a href="./ListReceipt_full_Admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn
-                    Hàng</a>
-                <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
-
-                <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file me-2"></i>QL danh
-                    mục</a>
-                <a href="List_Discounts" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Khuyến
-                    mãi</a>
-                <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang
-                    chủ</a>
-                <!--  -->
+            <div class="ms-3">
+                <h6 class="mb-0"><%= auth != null ? auth.getName() : "ADMIN"%>
+                </h6>
+                <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8") : "Admin"%></span>
             </div>
+        </div>
+        <div class="navbar-nav w-100">
+            <a href="./ListReceipt_Admin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Tổng quan</a>
+            <%--                    <a href="general_Management.jsp" class="nav-item nav-link"><i class="fa fa-user"></i>Quản lý chung</a>--%>
+            <a href="./ListProduct_Admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Sản Phẩm</a>
+
+            <a href="./ListCustomer" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Khách Hàng</a>
+            <a href="./ListBlog-admin" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Tin Tức</a>
+            <a href="./ListReceipt_full_Admin" class="nav-item nav-link "><i class="fa fa-th me-2"></i>DS Đơn Hàng</a>
+            <a href="feedbacks.jsp" class="nav-item nav-link"><i class="fa fa-th me-2"></i>DS Đánh giá</a>
+
+            <a href="catalog_Management.jsp" class="nav-item nav-link"><i class="fa fa-file me-2"></i>QL danh mục</a>
+            <a href="List_Discounts" class="nav-item nav-link"><i class="fa fa-birthday-cake me-2"></i>Khuyến mãi</a>
+            <a href="../Index" class="nav-item nav-link"><i class="fa fa-arrow-alt-circle-right me-2"></i>Về trang
+                chủ</a>
+            <!--  -->
+        </div>
     </nav>
 </div>
 <!-- Sidebar End -->
@@ -145,16 +140,15 @@
                 </h5>
             </div>
             <div class="col-12 d-flex form__content pl-0 pr-0">
-
                 <div class="col-6 pl-0 pr-0">
                     <p class="pb-2 border-bottom px-3">Người
-                        nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getTenKH() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getTenKH() : "" %>
+                        nhận: <%=ReceiptService.getGiaoHang(receipt.getId()).getTenKH() != null ? ReceiptService.getGiaoHang(receipt.getId()).getTenKH() : "" %>
                     </p>
                     <p class="pb-2 border-bottom px-3">SĐT người
-                        nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getPhone() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getPhone() : ""%>
+                        nhận: <%=ReceiptService.getGiaoHang(receipt.getId()).getPhone() != null ? ReceiptService.getGiaoHang(receipt.getId()).getPhone() : ""%>
                     </p>
                     <p class="pb-2 border-bottom px-3">Email người
-                        nhận: <%=ReceiptService.getListGiaoHang(receipt.getId()).getEmail() != null ? ReceiptService.getListGiaoHang(receipt.getId()).getEmail() : ""%>
+                        nhận: <%=ReceiptService.getGiaoHang(receipt.getId()).getEmail() != null ? ReceiptService.getGiaoHang(receipt.getId()).getEmail() : ""%>
                     </p>
                 </div>
                 <div class="col-6 pl-0 pr-0">
@@ -166,6 +160,11 @@
                     </p>
                     <p class="px-3">Trạng Thái: <%=URLDecoder.decode(receipt.getStatusName(), "UTF-8")%>
                     </p>
+                    <% if (receipt.isEdited()) { %>
+                    <span class="text-danger font-italic small font-weight-bold">
+                                    * Đơn hàng đã bị chỉnh sửa !!!
+                    </span>
+                    <% }%>
                 </div>
             </div>
             <p style="font-weight: 600">Ghi Chú Chung: <%=receipt.getNote()%>
@@ -202,7 +201,6 @@
                     </tbody>
                     <% } %>
                 </table>
-
             </div>
 
             <div class="col-5 margin-top-20px">
@@ -217,17 +215,17 @@
                 <label>Tổng thanh toán: </label> &ensp;
                 <span class="text-danger text-uppercase text-pink"><%=receipt.formatNum(receipt.getMoney())%> VND</span>
             </div>
-            <% if (auth.getIsedit() == 1 || auth.getRole() == 2) { %>
-            <%if (receipt.getStatus() != 3) {%>
-            <div class="main__table-btns">
-                <div class="col-5">
-                    <a href="AdminEditOrder?id=<%=receipt.getId()%>&tenkh=<%=UserService.findById(receipt.getMakh()).getName()%>"
-                       type="button" class="form__btn">Chỉnh sửa</a>
-                </div>
-            </div>
-            <%}%>
-            <% } else { %>
-            <% } %>
+            <%--          <% if(auth.getIsedit() == 1 || auth.getRole() == 2) { %>--%>
+            <%--          <%if(receipt.getStatus() != 3){%>--%>
+            <%--            <div class="main__table-btns">--%>
+            <%--                <div class="col-5">--%>
+            <%--                    <a href="AdminEditOrder?id=<%=receipt.getId()%>&tenkh=<%=UserService.findById(receipt.getMakh()).getName()%>"--%>
+            <%--                       type="button" class="form__btn">Chỉnh sửa</a>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
+            <%--          <%}%>--%>
+            <%--          <% } else { %>--%>
+            <%--          <% } %>--%>
         </div>
 
     </div>
