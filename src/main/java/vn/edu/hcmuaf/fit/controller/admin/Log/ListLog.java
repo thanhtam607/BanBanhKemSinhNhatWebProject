@@ -31,7 +31,7 @@ public class ListLog  extends HttpServlet {
         List<String> listLevel = new ArrayList<>();
         listLevel.add("Nguy hiểm");
         listLevel.add("Cảnh báo");
-        listLevel.add("Bình thường");
+        listLevel.add("Bình thưng");
         request.setAttribute("listUser", listUser);
 
         String numPage = request.getParameter("page");
