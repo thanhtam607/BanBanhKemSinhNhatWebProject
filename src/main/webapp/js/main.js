@@ -1235,10 +1235,8 @@ function createKey(userId){
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#ff96b7'
             });
-
         }
     });
-
 }
 function requestKey(userId){
     Swal.fire({
@@ -1252,7 +1250,9 @@ function requestKey(userId){
     }).then((result) => {
         if (result.isConfirmed) {
             genKey(userId);
+
         }
+
     });
 }
 // ========================================================= //
