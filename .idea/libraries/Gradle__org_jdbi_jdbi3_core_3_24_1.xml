@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jdbi:jdbi3-core:3.24.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jdbi" artifactId="jdbi3-core" version="3.24.1" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jdbi/jdbi3-core/3.24.1/jdbi3-core-3.24.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

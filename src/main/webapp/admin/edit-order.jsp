@@ -90,8 +90,10 @@
                 <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
             </div>
             <div class="ms-3">
+
                 <h6 class="mb-0"><%= auth != null ? auth.getName():"ADMIN"%></h6>
                 <span><%= auth != null ? URLDecoder.decode(auth.getRoleName(), "UTF-8"):"Admin"%></span>
+
             </div>
         </div>
         <div class="navbar-nav w-100">
@@ -208,6 +210,7 @@
                                                 <% for(String status : statusName){
 
                                                     if(status.equals(URLDecoder.decode(receipt.getStatusName(), "UTF-8"))){%>
+
                                                 <option selected value="<%=status%>"><%=status%></option>
                                                 <% } else if (receipt.getStatus() == 3) {%>
                                                 <option disabled value="<%=status%>"><%=status%></option>

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.ben-manes.caffeine:caffeine:3.0.3" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.ben-manes.caffeine" artifactId="caffeine" version="3.0.3" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/ben-manes/caffeine/caffeine/3.0.3/caffeine-3.0.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
