@@ -55,23 +55,7 @@ public class RSA {
 
         return new String(bytePlainText, StandardCharsets.UTF_8);
     }
-//    public static String decryptRSA(String data, PublicKey publicKey) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException {
-//        try {
-//            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-//            cipher.init(Cipher.DECRYPT_MODE, publicKey);
-//            byte[] output = cipher.doFinal(Base64.getDecoder().decode(data));
-//            return new String(output, StandardCharsets.UTF_8);
-//        } catch (Exception e) {
-//            return null;
-//        }
-//
-//    }
-//    public static String encryptRSA(String data, PrivateKey privateKey) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-//        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-//        cipher.init(Cipher.ENCRYPT_MODE, privateKey);
-//        byte[] output = cipher.doFinal(data.getBytes(StandardCharsets.UTF_8));
-//        return Base64.getEncoder().encodeToString(output);
-//    }
+
 
 
     // mã hoá bằng private key
@@ -168,6 +152,16 @@ public class RSA {
         }
 
         return pl.equals("Hel");
+    }
+    public static boolean areCypherText(String cypherTxt, String publicKey) {
+        String pl = null;
+        try {
+             pl = decrypt(cypherTxt, getPublicKeyFromString(publicKey));
+             return true;
+        } catch (Exception e) {
+           return false;
+        }
+
     }
 
     public static void main(String[] args) throws Exception {

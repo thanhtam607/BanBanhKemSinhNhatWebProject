@@ -300,7 +300,7 @@
                     <div class="row mb-2 mt-2" style="margin-top: -20px">
                         <div class="col-6 pt-2 pb-3">
                             <div id="<%=r.getId()%>" class="text-left mr-3">
-                                <%if(r.checkState()){%>
+                                <%if(r.checkState() || r.isEdited()){%>
                                 <button onclick="cancelOrder('<%=r.getId()%>')" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2" >
                                             Hủy đơn hàng
                                 </button>

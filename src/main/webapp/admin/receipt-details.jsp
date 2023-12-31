@@ -22,7 +22,7 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon"/>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
@@ -160,6 +160,11 @@
                     </p>
                     <p class="px-3">Trạng Thái: <%=URLDecoder.decode(receipt.getStatusName(), "UTF-8")%>
                     </p>
+                    <% if (receipt.isEdited()) { %>
+                    <span class="text-danger font-italic small font-weight-bold">
+                                    * Đơn hàng đã bị chỉnh sửa !!!
+                    </span>
+                    <% }%>
                 </div>
             </div>
             <p style="font-weight: 600">Ghi Chú Chung: <%=receipt.getNote()%>
@@ -210,17 +215,17 @@
                 <label>Tổng thanh toán: </label> &ensp;
                 <span class="text-danger text-uppercase text-pink"><%=receipt.formatNum(receipt.getMoney())%> VND</span>
             </div>
-<%--          <% if(auth.getIsedit() == 1 || auth.getRole() == 2) { %>--%>
-<%--          <%if(receipt.getStatus() != 3){%>--%>
-<%--            <div class="main__table-btns">--%>
-<%--                <div class="col-5">--%>
-<%--                    <a href="AdminEditOrder?id=<%=receipt.getId()%>&tenkh=<%=UserService.findById(receipt.getMakh()).getName()%>"--%>
-<%--                       type="button" class="form__btn">Chỉnh sửa</a>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--          <%}%>--%>
-<%--          <% } else { %>--%>
-<%--          <% } %>--%>
+            <%--          <% if(auth.getIsedit() == 1 || auth.getRole() == 2) { %>--%>
+            <%--          <%if(receipt.getStatus() != 3){%>--%>
+            <%--            <div class="main__table-btns">--%>
+            <%--                <div class="col-5">--%>
+            <%--                    <a href="AdminEditOrder?id=<%=receipt.getId()%>&tenkh=<%=UserService.findById(receipt.getMakh()).getName()%>"--%>
+            <%--                       type="button" class="form__btn">Chỉnh sửa</a>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
+            <%--          <%}%>--%>
+            <%--          <% } else { %>--%>
+            <%--          <% } %>--%>
         </div>
 
     </div>
