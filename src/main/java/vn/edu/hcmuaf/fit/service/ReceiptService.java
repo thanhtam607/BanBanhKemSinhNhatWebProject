@@ -74,8 +74,9 @@ public class ReceiptService {
             if (compareDates(receiptForHash.getExport_date(), "2023-01-09 00:00:00") > 0) {
                 if (rs.getInt(7) != 4) {
                     if (!verifyOrderWhenLoad(receiptForHash, getCypherTextOfOrder(rs.getString(1)), UserService.getListKey(rs.getString(2)))) {
-                        updateState(receiptForHash.getId(), 5);
-                        rc.setStatus(5);
+//                        updateState(receiptForHash.getId(), 5);
+//                        rc.setStatus(5);
+                        rc.setEdited(true);
                         // Gửi mail báo lỗi
                         sendMailWhenErr(receiptForHash);
                         // Gửi mail báo lỗi
@@ -116,7 +117,6 @@ public class ReceiptService {
     //    tạo cypherText cho từng đơn hàng
     public static String createCypherText(Receipt receipt, String privateKeyString) throws Exception {
         String hashOrder = RSA.hashObject(receipt);
-        System.out.println("đoa hash ban dâu : " + hashOrder);
         return RSA.encrypt(hashOrder, RSA.getPrivateKeyFromString(privateKeyString));
     }
 
@@ -125,12 +125,11 @@ public class ReceiptService {
         String fstHash = "";
         String hashOrder = "";
         String publickeyString = getPbKeyString(receipt, signUserList);
-        if (cypherText.isEmpty()) {
+        if (cypherText.isEmpty() || !RSA.areCypherText(cypherText, publickeyString)) {
             return false;
         } else {
             fstHash = RSA.decrypt(cypherText, RSA.getPublicKeyFromString(publickeyString));
             hashOrder = RSA.hashObject(receipt);
-            System.out.println("đoa hash lu sau : " + hashOrder);
             return fstHash.equals(hashOrder);
         }
 
@@ -316,7 +315,6 @@ public class ReceiptService {
                         "                        WHERE BILL_DETAIL.ID = BILLS.ID and BILL_DETAIL.idProduct = products.idProduct \n" +
                         "and BILLS.ID = '" + mahd + "'");
                 while (rs.next()) {
-
                     Bill_Detail billDetail = new Bill_Detail(rs.getString(1),
                             rs.getString(2),
                             rs.getString(3),
@@ -362,19 +360,43 @@ public class ReceiptService {
 
     public static Receipt getReceiptByMahd(String mhd) {
         Receipt result = new Receipt();
+        Receipt receiptForHash = new Receipt();
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
                 ResultSet rs = statement.executeQuery("SELECT  ID, CUSTOMER_ID, EXPORT_DATE, NOTES, PRO_BILL, " +
                         "FEE_BILL, STATUS FROM BILLS WHERE BILLS.ID ='" + mhd + "'");
                 while (rs.next()) {
-                    Delivery delivery = getGiaoHang(rs.getString(1));
+                    Delivery delivery = getGiaoHang(mhd);
+                    List<Bill_Detail> billDetailList = getBill_DetailForHash(mhd);
                     result = new Receipt(rs.getString(1), rs.getString(2),
                             rs.getString(3), delivery.getNgayGiao(),
                             rs.getString(4), rs.getInt(5),
                             rs.getInt(6), rs.getInt(7), delivery.getDiachigiao());
+                    receiptForHash = new Receipt(rs.getString(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getDouble(5),
+                            rs.getDouble(6),
+                            billDetailList,
+                            delivery);
+//                    get order from mhd = HD16 =>
+                    if (compareDates(receiptForHash.getExport_date(), "2023-01-09 00:00:00") > 0) {
+                        if (rs.getInt(7) != 4) {
+                            if (!verifyOrderWhenLoad(receiptForHash, getCypherTextOfOrder(rs.getString(1)), UserService.getListKey(rs.getString(2)))) {
+//                        updateState(receiptForHash.getId(), 5);
+//                        rc.setStatus(5);
+                                result.setEdited(true);
+                                // Gửi mail báo lỗi
+//                                sendMailWhenErr(receiptForHash);
+                                // Gửi mail báo lỗi
+                            }
+// tạo đối tượng receiptForHash để tến hành xacs thực đơn hang
+                        }
+                    }
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         else {
@@ -408,8 +430,9 @@ public class ReceiptService {
                 if (compareDates(receiptForHash.getExport_date(), "2023-01-09 00:00:00") > 0) {
                     if (rs.getInt(7) != 4) {
                         if (!verifyOrderWhenLoad(receiptForHash, getCypherTextOfOrder(rs.getString(1)), UserService.getListKey(rs.getString(2)))) {
-                            updateState(receiptForHash.getId(), 5);
-                            re.setStatus(5);
+//                            updateState(receiptForHash.getId(), 5);
+//                            re.setStatus(5);
+                            re.setEdited(true);
 //                      Gửi mail báo lỗi
                             sendMailWhenErr(receiptForHash);
 //                        gửi mail báo lỗi

@@ -217,6 +217,11 @@
                             <td>
                                 <div class="main__table-text"><%=URLDecoder.decode(rc.getStatusName(), "UTF-8")%>
                                 </div>
+                                <% if (rc.isEdited()) { %>
+                                <span class="text-danger font-italic small font-weight-bold">
+                                    * Đơn hàng đã bị chỉnh sửa !!!
+                                </span>
+                                <% }%>
                             </td>
                             <td>
                                 <a href="Bill_detail_Admin?mahd=<%=rc.getId()%>&tenkh=<%=UserService.findById(rc.getMakh()).getName()%>"

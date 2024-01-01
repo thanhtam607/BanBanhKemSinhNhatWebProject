@@ -254,7 +254,7 @@
 
                     <div class="col-12 mb-2">
                         <div class="card-body my-0">
-                            <% if(r.checkEdited()){ %>
+                            <% if(r.isEdited()){ %>
                             <div class="card-text pt-2">
                                 <span class="text-danger font-italic small font-weight-bold">
                                     * Đơn hàng đã bị chỉnh sửa và không thể giao hàng, vui lòng huỷ đơn và đặt lại! Xin lỗi quý khách vì sự bất tiện này :((
@@ -300,7 +300,7 @@
                     <div class="row mb-2 mt-2" style="margin-top: -20px">
                         <div class="col-6 pt-2 pb-3">
                             <div id="<%=r.getId()%>" class="text-left mr-3">
-                                <%if(r.checkState()){%>
+                                <%if(r.checkState() || r.isEdited()){%>
                                 <button onclick="cancelOrder('<%=r.getId()%>')" type="submit" style="border:1px solid #ccc;" class="btn rounded-0 py-2 ml-2" >
                                             Hủy đơn hàng
                                 </button>

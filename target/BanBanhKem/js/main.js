@@ -1312,18 +1312,29 @@ function AddNewPublicKey(){
             userId : userId,
             publicKey: publicKey,
         },
-        success: function () {
-            Swal.fire({
-                text: 'Thêm khóa công khai thành công!',
-                icon: 'success',
-                confirmButtonText: 'OK',
-                confirmButtonColor: '#ff96b7'
-            })
+        success: function (response) {
+            console.log(response);
+            if (parseInt(response) === 1) {
+                // Hiển thị modal lỗi
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Khóa công khai đã có trước đó!',
+                });
+            } else {
+                Swal.fire({
+                    text: 'Thêm khóa công khai thành công!',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#ff96b7'
+                })
+            }
             document.getElementById('myModal').style.display = 'none';
             document.getElementById('keyContent2').value = '';
             document.getElementById('publicKey').value = '';
             document.getElementById('filePath').value = '';
         },
+
         error: function () {
             Swal.fire({
                 title: 'Oops...',
