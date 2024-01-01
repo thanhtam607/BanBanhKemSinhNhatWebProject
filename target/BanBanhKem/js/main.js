@@ -1385,7 +1385,6 @@ function chooseFile() {
         reader.onload = function () {
             var fileContent = reader.result;
             var publicKey = extractRSAPublicKey(fileContent);
-            console.log(publicKey);
             if (publicKey) {
                 keyContent.value = publicKey;
                 keyContent.setAttribute('readonly', true);

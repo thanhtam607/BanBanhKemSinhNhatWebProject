@@ -60,11 +60,28 @@ public class SignUser {
     public int getStatus() {
         return status;
     }
+    public String getStatusString() {
+        if (status == 1){
+            return "Đang sử dụng";
+        } else if(status == 2){
+            return "Hết hạn";
+        } else {
+            return "Đã báo cáo";
+        }
+    }
 
     public void setStatus(int status) {
         this.status = status;
     }
-
+    public String getKeySecret(String input){
+        if(input.length() >= 9){
+            String firstThree = input.substring(0, 3);
+            String lastThree = input.substring(input.length() - 6);
+            return firstThree + "******" + lastThree;
+        } else {
+            return "Chuỗi quá ngắn";
+        }
+    }
     @Override
     public String toString() {
         return "SignUser{" +
