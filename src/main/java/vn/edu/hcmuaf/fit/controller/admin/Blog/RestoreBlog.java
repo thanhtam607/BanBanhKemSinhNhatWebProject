@@ -2,12 +2,14 @@ package vn.edu.hcmuaf.fit.controller.admin.Blog;
 
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Log;
-import vn.edu.hcmuaf.fit.service.BlogService;
 import vn.edu.hcmuaf.fit.service.LogService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "RestoreBlog", value = "/admin/RestoreBlog")
@@ -23,7 +25,7 @@ public class RestoreBlog extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String idblog = request.getParameter("idblog");
         request.setAttribute("mbl", idblog);
-        BlogService.restoreBlog(idblog);
+//        BlogService.restoreBlog(idblog);
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("auth");

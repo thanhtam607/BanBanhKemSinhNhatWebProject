@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-
+    <link rel="icon" href="https://anvientv.com.vn/uploads/upload/1653357850_an-chay-an-banh-kem-duoc-khong.jpg" type="image/x-icon" />
 </head>
 
 <body>

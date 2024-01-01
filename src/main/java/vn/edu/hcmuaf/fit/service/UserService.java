@@ -393,7 +393,7 @@ public class UserService {
     }
 
     public static String getEmail(String userId) throws SQLException {
-        String sql = "select email from accounts where id = ?";
+        String sql = "select email from ACCOUNTS where id = ?";
         PreparedStatement stms = DBConnect.getInstall().getConn().prepareStatement(sql);
         stms.setString(1, userId);
         ResultSet rs = stms.executeQuery();

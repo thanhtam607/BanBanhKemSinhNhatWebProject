@@ -1,19 +1,23 @@
 package vn.edu.hcmuaf.fit.controller.Bills;
 
 //import com.sun.org.apache.xpath.internal.operations.Or;
+
 import vn.edu.hcmuaf.fit.bean.User;
-import vn.edu.hcmuaf.fit.model.*;
+import vn.edu.hcmuaf.fit.model.ItemProductInCart;
+import vn.edu.hcmuaf.fit.model.Log;
+import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.service.CartService;
-import vn.edu.hcmuaf.fit.service.CustomerService;
 import vn.edu.hcmuaf.fit.service.LogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @WebServlet(name = "AddToCart", value = "/AddToCart")
@@ -41,7 +45,7 @@ public class AddToCart extends HttpServlet {
         Log log = new Log();
         log.setLevel(1);
         log.setSrc(request.getServletPath());
-        log.setContent("Thêm sản phẩm vào giỏ hàng");
+        log.setContent("Thêm sản phẩm vào gi hàng");
         log.setUser(auth.getId());
         LogService.addLog(log);
 
