@@ -19,10 +19,6 @@ import java.util.Base64;
 public class KeyManager {
     public static void genKey(String userId) throws SQLException, NoSuchAlgorithmException, MessagingException, UnsupportedEncodingException {
         KeyPair keyPair = RSA.genKeyPair();
-        if(userIsHasKey(userId)){
-            updateExpireDateForKey(userId);
-            updateStatusForKey(userId, 2);
-        }
         PublicKey publicKey = RSA.genPublicKey(keyPair);
         PrivateKey privateKey = RSA.genPrivateKey(keyPair);
         insertPublicKey(userId, Base64.getEncoder().encodeToString(publicKey.getEncoded()));
@@ -50,7 +46,6 @@ public class KeyManager {
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
         stm.setString(1, id);
         ResultSet rs = stm.executeQuery();
-
         return rs.next();
     }
     public static void insertPublicKey(String userId, String publicKeyLink) throws SQLException {
@@ -61,12 +56,52 @@ public class KeyManager {
         stm.setString(2, publicKeyLink);
         stm.executeUpdate();
     }
-
-    public static void main(String[] args) throws SQLException, MessagingException, UnsupportedEncodingException, NoSuchAlgorithmException {
-
-        System.out.println( userIsHasKey("114539523549397711833"));
+    public static void updateMissingDateForKey(String userId,  String date) throws SQLException {
+        String sql = "UPDATE PUBLICKEY SET MISSINGDATE = STR_TO_DATE(?, '%d/%m/%Y') WHERE USER_ID  = ? AND STATUS = 1";
+        PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
+        stm.setString(1,date);
+        stm.setString(2, userId);
+        stm.executeUpdate();
+    }
+    public static void updateReportDateForKey(String userId) throws SQLException {
+        String sql = "UPDATE PUBLICKEY SET REPORTDATE = NOW() WHERE USER_ID  = ? AND STATUS = 1";
+        PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
+        stm.setString(1, userId);
+        stm.executeUpdate();
+    }
+    public static void disableKey(String userId) throws SQLException {
+       updateExpireDateForKey(userId);
+       updateStatusForKey(userId, 2);
+    }
+    private static boolean checkReportedKey(String userId) throws SQLException {
+        String sql = "SELECT PUBLICKEY.STATUS, MAX(PUBLICKEY.CREATEDATE) FROM PUBLICKEY WHERE USER_ID = ?";
+        PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
+        stm.setString(1, userId);
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            if(rs.getInt(1) ==1) return true;
+        }
+        return false;
+    }
+    public static boolean userIsHasKeyActive(String id) throws SQLException {
+        String sql = "SELECT ID FROM PUBLICKEY WHERE USER_ID = ? AND STATUS = 1";
+        PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
+        stm.setString(1, id);
+        ResultSet rs = stm.executeQuery();
+        return rs.next();
     }
 
+    public static void main(String[] args) {
+        try {
+            updateMissingDateForKey("AD12", "1/1/2024");
+        }catch (SQLException e){
+            if(e.getMessage().equals("Check constraint 'chk1' is violated.")){
+                System.out.println("ngày không hợp lệ");}
+            else{
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
 
 }

@@ -1193,7 +1193,7 @@ function genKey(userId) {
                 type: "POST",
                 data: {otp: code},
                 success: async function (response) {
-                    if (response == 1) {
+                    if (parseInt(response) === 1) {
                         createKey(userId);
                     } else {
                         Swal.close();
@@ -1253,7 +1253,7 @@ function createKey(userId) {
 function requestKey(userId) {
     Swal.fire({
         title: "Yêu cầu tạo khóa",
-        text: 'Tài khoản của bạn hiện chưa có khóa. Vui lòng tạo khóa để thực hiện đặt hàng!',
+        text: 'Tài khoản của bạn hiện chưa có khóa hoặc khóa trước đó đã bị vô hiệu hóa. Vui lòng tạo khóa để thực hiện đặt hàng!',
         icon: 'info',
         confirmButtonText: 'OK',
         confirmButtonColor: '#ff96b7',

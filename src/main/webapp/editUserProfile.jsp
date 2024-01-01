@@ -6,6 +6,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.security.KeyManager" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <html lang="xzz">
@@ -228,8 +229,16 @@
 	                    font-weight: 700;">
                     Thông Tin Tài Khoản
                 </h4>
-                <button class="button_product" onclick="confirmGenKey('<%=auth.getId()%>', <%=auth.hasKey()%>)">Tạo khóa</button>
-            </div>
+                <div>
+                    <%if(!KeyManager.userIsHasKeyActive(auth.getId())){%>
+                    <button class="button_product" onclick="confirmGenKey('<%=auth.getId()%>', <%=auth.hasKey()%>)">Tạo khóa</button>
+                    <%}else{
+                    %>
+                    <button class="button_product" >Mất khóa</button>
+                    <button class="button_product" onclick="confirmGenKey('<%=auth.getId()%>', <%=auth.hasKey()%>)">Tạo khóa</button>
+                    <%}%>
+                </div>
+                 </div>
 
             <div>
                 <div class="row">

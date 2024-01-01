@@ -3,6 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.CartService" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.security.KeyManager" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <html lang="xzz">
@@ -298,7 +299,7 @@
                         <li>Tổng thanh toán:<span id="totalMoney"><%=CartService.formatNum(CartService.totalPrice(listItemCart))%> VND</span></li>
                     </ul>
                     <hr>
-                    <%if(auth.hasKey()){%>
+                    <%if(KeyManager.userIsHasKeyActive(auth.getId())){%>
                     <a href="checkout.jsp" class="primary-btn">THANH TOÁN NGAY</a>
                     <%}else {%>
                     <a onclick="requestKey('<%=auth.getId()%>')" class="primary-btn" style="color: white">THANH TOÁN NGAY</a>
