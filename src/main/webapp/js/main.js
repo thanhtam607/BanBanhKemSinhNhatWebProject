@@ -1187,31 +1187,35 @@ function genKey(userId) {
                 willClose: () => {
                     clearInterval(timerInterval)
                 }
-            })
-
-            if (checkCode(parseInt(code), parseInt(response))) {
-
-                createKey(userId);
-            } else {
-                Swal.close();
-                if (count <= 0) {
-                    Swal.fire({
-                        text: 'Mã xác nhận hêt hiệu lực!',
-                        icon: 'error',
-                        confirmButtonColor: '#ff96b7'
-                    });
-                } else {
-                    Swal.fire({
-                        text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
-                        icon: 'error',
-                        confirmButtonColor: '#ff96b7'
-                    }).then((result) => {
-                        location.reload();
-                    });
-
+            });
+            $.ajax({
+                url: "Verify",
+                type: "POST",
+                data: {otp: code},
+                success: async function (response) {
+                    if (parseInt(response) === 1) {
+                        createKey(userId);
+                    } else {
+                        Swal.close();
+                        if (count <= 0) {
+                            Swal.fire({
+                                text: 'Mã xác nhận hêt hiệu lực!',
+                                icon: 'error',
+                                confirmButtonColor: '#ff96b7'
+                            });
+                        } else {
+                            Swal.fire({
+                                text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
+                                icon: 'error',
+                                confirmButtonColor: '#ff96b7'
+                            }).then((result) => {
+                                location.reload();
+                            });
+                        }
+                    }
                 }
+            });
 
-            }
         }
     });
 }
@@ -1240,8 +1244,10 @@ function createKey(userId) {
             }).then((result) => {
                 location.reload();
             });
+
         }
     });
+
 }
 
 function requestKey(userId) {
@@ -1256,9 +1262,7 @@ function requestKey(userId) {
     }).then((result) => {
         if (result.isConfirmed) {
             genKey(userId);
-
         }
-
     });
 }
 

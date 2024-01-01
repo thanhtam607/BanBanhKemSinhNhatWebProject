@@ -60,7 +60,7 @@ public class ProductService {
     public static Product findById(String id) {
         Product p = null;
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake where products.idType = typeOfCake.idType and products.idProduct = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT distinct products.idProduct ,products.productName,TYPEOFCAKE.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, TYPEOFCAKE where products.idType = TYPEOFCAKE.idType and products.idProduct = ?");
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -142,9 +142,9 @@ public class ProductService {
     public static List<TypeOfCake> getListType() throws SQLException {
         List<TypeOfCake> res = new ArrayList<>();
         Statement stm = DBConnect.getInstall().get();
-        ResultSet rs = stm.executeQuery("SELECT idType, name FROM typeOfCake;");
+        ResultSet rs = stm.executeQuery("SELECT idType, name, status FROM TYPEOFCAKE;");
         while (rs.next()) {
-            res.add(new TypeOfCake(rs.getString(1), rs.getString(2)));
+            res.add(new TypeOfCake(rs.getString(1), rs.getString(2), rs.getInt(3)));
         }
         return res;
     }
@@ -375,7 +375,7 @@ public class ProductService {
         ProductDetail detail ;
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,typeOfCake.name, products.size, products.weight, products.description, products.introduction, products.price, STATUS  from products, typeOfCake where products.idType = typeOfCake.idType and products.STATUS=0");
+                ResultSet rs = statement.executeQuery("SELECT distinct products.idProduct ,products.productName,TYPEOFCAKE.name, products.size, products.weight, products.description, products.introduction, products.price, products.STATUS  from products, TYPEOFCAKE where products.idType = TYPEOFCAKE.idType and products.STATUS=0");
                 while (rs.next()) {
                     String idProduct = rs.getString(1);
                     detail = findPDetailByIdProduct(idProduct);
@@ -485,7 +485,7 @@ public class ProductService {
 
     public static String idMaxType(){
         String res ="";
-        String sql= "SELECT max(idType) from typeofcake";
+        String sql= "SELECT max(idType) from TYPEOFCAKE";
         Statement statement = DBConnect.getInstall().get();
         try {
             ResultSet rs = statement.executeQuery(sql);
@@ -506,7 +506,7 @@ public class ProductService {
     }
     public static void addTypePro(String id, String type){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "INSERT into typeofcake VALUES('" + id + "', '"+ type+"')";
+        String sql = "INSERT into TYPEOFCAKE VALUES('" + id + "', '"+ type+"')";
         try {
             stm.executeUpdate(sql);
         } catch (SQLException se) {
@@ -516,7 +516,7 @@ public class ProductService {
     }
     public static void updateType(String id, String newtype){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "UPDATE typeofcake SET name = '" + newtype + "' WHERE idType = '" + id +"'";
+        String sql = "UPDATE TYPEOFCAKE SET name = '" + newtype + "' WHERE idType = '" + id +"'";
         try {
             stm.executeUpdate(sql);
 
@@ -526,7 +526,7 @@ public class ProductService {
     }
     public  static void deleteType(String id){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "DELETE FROM typeofcake WHERE idType = '" + id + "'";
+        String sql = "DELETE FROM TYPEOFCAKE WHERE idType = '" + id + "'";
         try {
             stm.executeUpdate(sql);
 
@@ -536,7 +536,7 @@ public class ProductService {
     }
     public static void addTyofcake(TypeOfCake toc){
         Statement stm = DBConnect.getInstall().get();
-        String sql = "INSERT INTO typeofcake VALUES('" + toc.getIdType() + "', '" + toc.getName() + "')";
+        String sql = "INSERT INTO TYPEOFCAKE VALUES('" + toc.getIdType() + "', '" + toc.getName() + "')";
         try {
             stm.executeUpdate(sql);
         } catch (SQLException se) {

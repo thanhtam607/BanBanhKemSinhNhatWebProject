@@ -389,7 +389,7 @@ public class ReceiptService {
 //                        rc.setStatus(5);
                                 result.setEdited(true);
                                 // Gửi mail báo lỗi
-                                sendMailWhenErr(receiptForHash);
+//                                sendMailWhenErr(receiptForHash);
                                 // Gửi mail báo lỗi
                             }
 // tạo đối tượng receiptForHash để tến hành xacs thực đơn hang
