@@ -264,6 +264,7 @@ public class UserService {
         String htmlText = "<div>\n" +
                 "    <h4 style=\"color: red;\">Đây là nội dung khóa riêng tư của bạn, vui lòng không chia sẻ nó cho bất kỳ ai!</h4>\n" +
                 "    <p>Hãy lưu lại ở một nơi an toàn để sử dụng khi cần thiết và không được chỉnh sửa nó ⚠⚠</p>\n" +
+                "    <p style=\"color: #E3B419;\">Lưu ý rằng sau khi tạo khoá mới thì khóa cũ(nếu có) sẽ không còn hiệu lực từ bây giờ ⚠⚠</p>\n" +
                 "</div>";
         htmlPart.setText(htmlText, "UTF-8", "html");
         multipart.addBodyPart(htmlPart);
@@ -401,6 +402,16 @@ public class UserService {
         }
         return null;
     }
+    public static String getNameUser(String userId) throws SQLException {
+        String sql = "select NAME from accounts where ID = ?";
+        PreparedStatement stms = DBConnect.getInstall().getConn().prepareStatement(sql);
+        stms.setString(1, userId);
+        ResultSet rs = stms.executeQuery();
+        while (rs.next()) {
+            return rs.getString(1);
+        }
+        return null;
+    }
 
     public static File convertMessageToXML(String messageContent, String fileName) {
         try {
@@ -434,12 +445,12 @@ public class UserService {
         }
     }
 
-    public static List<SignUser> getListKey() {
+    public static List<SignUser> getListKey(String userID) {
         List<SignUser> list = new ArrayList<SignUser>();
         Statement statement = DBConnect.getInstall().get();
         if (statement != null) {
             try {
-                ResultSet rs = statement.executeQuery("select ID, user_Id, publickeylink, createDate, expiredDate, status from publickey;");
+                ResultSet rs = statement.executeQuery("select ID, user_Id, publickeylink, createDate, expiredDate, status from publickey where user_Id = '"+userID+"';");
                 while (rs.next()) {
                     list.add(new SignUser(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6)));
                 }
@@ -453,18 +464,7 @@ public class UserService {
 
     }
 
-    public static String getPbKeybyID(String id) {
-        List<SignUser> listKey = UserService.getListKey();
-        String rs = "";
-        for (SignUser su : listKey) {
-            if (su.getId_user().equals(id)) {
-                rs = su.getPbkey();
-            } else {
-                rs = "";
-            }
-        }
-        return rs;
-    }
+
 
 
     public static void main(String[] args) throws MessagingException, UnsupportedEncodingException, SQLException {

@@ -214,22 +214,45 @@
 <!-- Breadcrumb Section End -->
 
 <!-- Contact Section Begin -->
+<div id="myModal" class="modal" onclick="closeModal()">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <h4 style="text-align: center; font-weight: bold">Cung cấp khóa công khai của bạn</h4>
+        <div style="display: flex; justify-content: center;">
+            <button id="fileButton" onclick="chooseFilePbK()" style="width: 320px; height: 30px; margin-bottom: 20px; margin-top: 20px">Nhấn vào đây để tải file lên</button>
+        </div>
+        <label for="fileInput" class="fileLabel">File:</label>
+        <input type="text" id="fileInput" disabled>
+        <input style="display: none" type="file" id="file" accept="*" style="display: none;">
+        <input type="text" id="filePath" style="border: none" readonly>
+        <p style="color: red; display: none" id = "errorText">*Nội dung file không chứa khóa công khai, vui lòng thử lại*</p>
+        <input id="idUser" style="display: none" value="<%= auth.getId() %>"/>
+        <input id="publicKey" style="display: none"/>
+        <textarea id="keyContent2" rows="10"></textarea>
+        <div class="button-container">
+            <div class="button-row">
+                <button onclick="goBack2()" class="back-btn" style="width: 30%; margin-top: 10px; background-color: #6e7881">Quay lại</button>
+                <button onclick="AddNewPublicKey()" style="width: 30%; height: 40px; margin-top: 10px; background-color: #ff96b7" type="submit" class="confirm-btn">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
     <div class="container">
-
             <div style="
                         display: flex;
-                        color: #1c1c1c;
-	                    font-weight: 700;
                         justify-content: space-between;
                         padding-bottom: 20px;
                         margin-bottom: 25px;
                         border-bottom: 1px solid #e1e1e1;">
-                <h4>Thông Tin Tài Khoản </h4>
+                <h4 style="
+                        color: #1c1c1c;
+	                    font-weight: 700;">
+                    Thông Tin Tài Khoản
+                </h4>
                 <button class="button_product" onclick="confirmGenKey('<%=auth.getId()%>', <%=auth.hasKey()%>)">Tạo khóa</button>
             </div>
-
             <div>
                 <div class="row">
                     <div class="col-lg-7 col-md-6">
@@ -274,7 +297,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 <!-- Contact Section End -->
@@ -310,6 +332,23 @@
             }
         });
     }
+    // function checkTextarea() {
+    //     var textareaValue = document.getElementById("keyContent2").value.trim();
+    //     var confirmButton = document.querySelector(".confirm-btn");
+    //
+    //     // Kiểm tra nếu có dữ liệu trong textarea thì enable button, ngược lại disable
+    //     if (textareaValue.length > 0) {
+    //         confirmButton.removeAttribute("disabled");
+    //         confirmButton.style.backgroundColor = "#ff96b7";
+    //
+    //     } else {
+    //         confirmButton.setAttribute("disabled", true);
+    //         confirmButton.style.backgroundColor = "rgba(11, 11, 11, 0.5)";
+    //     }
+    // }
+    //
+    // // Gọi hàm checkTextarea khi textarea thay đổi
+    // document.getElementById("keyContent2").addEventListener("input", checkTextarea);
 </script>
 
 

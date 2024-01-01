@@ -355,16 +355,18 @@
                                 <div class="modal-content">
                                     <h4 style="text-align: center;">Xác nhận đơn hàng bằng private key</h4>
                                     <div style="display: flex; justify-content: center;">
-                                        <button id="fileButton" onclick="chooseFile()" style="width: 320px; height: 30px; margin-bottom: 20px">Nhấn vào đây để tải file (.xml) lên</button>
+                                        <button id="fileButton" onclick="chooseFile()" style="width: 320px; height: 30px; margin-bottom: 20px">Nhấn vào đây để tải file lên</button>
                                     </div>
                                     <label for="fileInput" class="fileLabel">File:</label>
                                     <input type="text" id="fileInput" disabled>
-                                    <input type="file" id="file" accept=".xml" style="display: none;">
+                                    <input type="file" id="file" accept="*" style="display: none;">
+                                    <input type="text" id="filePath" style="border: none" readonly>
+                                    <p style="color: red; display: none" id = "errorText">*Nội dung file không chứa khóa, vui lòng thử lại*</p>
                                     <textarea id="keyContent" rows="10"></textarea>
                                     <div class="button-container">
                                         <div class="button-row">
-                                            <button onclick="goBack()" class="back-btn" style="width: 30%">Quay lại</button>
-                                            <button onclick="addOrder()" style="width: 30%; height: 40px" type="submit" class="confirm-btn" disabled>Xác nhận</button>
+                                            <button onclick="goBack()" class="back-btn" style="width: 30%; background-color: #6e7881">Quay lại</button>
+                                            <button onclick="addOrder()" style="width: 30%; height: 40px; background-color: #ff96b7" type="submit" class="confirm-btn">Xác nhận</button>
                                         </div>
                                     </div>
                                 </div>
@@ -391,10 +393,7 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
 </body>
 
 </html>

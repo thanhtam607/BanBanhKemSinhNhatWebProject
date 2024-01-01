@@ -20,26 +20,33 @@ public class KeyManager {
     public static void genKey(String userId) throws SQLException, NoSuchAlgorithmException, MessagingException, UnsupportedEncodingException {
         KeyPair keyPair = RSA.genKeyPair();
         if(userIsHasKey(userId)){
+            updateExpireDateForKey(userId);
             updateStatusForKey(userId, 2);
         }
         PublicKey publicKey = RSA.genPublicKey(keyPair);
         PrivateKey privateKey = RSA.genPrivateKey(keyPair);
         insertPublicKey(userId, Base64.getEncoder().encodeToString(publicKey.getEncoded()));
-        String subject = "Tạo khóa mới";
+        String subject = "Khóa riêng tư do người dùng tạo từ TiemBanhHanhPhuc";
         String mess = Base64.getEncoder().encodeToString(privateKey.getEncoded());
-        String filename = "yourfile.xml";
+        String filename = "PvKey_TiemBanhHanhPhuc.xml";
         UserService.sendMailWithPrivateKey(UserService.getEmail(userId), subject, UserService.convertMessageToXML(mess, filename));
 
     }
-    private static void updateStatusForKey(String userId, int status) throws SQLException {
-        String sql = "update PublicKey set Status = ? where User_Id  = ? and status = 1";
+    public static void updateStatusForKey(String userId, int status) throws SQLException {
+        String sql = "UPDATE PUBLICKEY SET STATUS = ? WHERE USER_ID  = ? AND STATUS = 1";
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
         stm.setInt(1,status);
         stm.setString(2, userId);
         stm.executeUpdate();
     }
+    public static void updateExpireDateForKey(String userId) throws SQLException {
+        String sql = "UPDATE PUBLICKEY SET EXPIREDDATE = NOW() WHERE USER_ID  = ? AND STATUS = 1";
+        PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
+        stm.setString(1, userId);
+        stm.executeUpdate();
+    }
     public static boolean userIsHasKey(String id) throws SQLException {
-        String sql = "select id from PublicKey where User_Id = ?";
+        String sql = "SELECT ID FROM PUBLICKEY WHERE USER_ID = ?";
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
         stm.setString(1, id);
         ResultSet rs = stm.executeQuery();
@@ -47,13 +54,12 @@ public class KeyManager {
         return rs.next();
     }
     public static void insertPublicKey(String userId, String publicKeyLink) throws SQLException {
-        String sql = "insert into PublicKey(User_id, publickeylink, createDate, expiredDate, status)" +
-                    " values(?,?,now(), ?,1)";
+        String sql = "INSERT INTO PUBLICKEY(USER_ID, PUBLICKEYLINK, CREATEDATE, STATUS)" +
+                " VALUES (?,?,NOW(),1)";
 
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
         stm.setString(1, userId);
         stm.setString(2, publicKeyLink);
-        stm.setString(3, "2099/12/31");
         stm.executeUpdate();
     }
 

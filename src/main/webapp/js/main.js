@@ -228,7 +228,7 @@ function myFunction() {
     /*-------------------
        get ward name by distID
       --------------------- */
-    $("#inputGroupSelect02").change(function() {
+    $("#inputGroupSelect02").change(function () {
         var distID = $(this).val();
         var url = "GetWardName";
         $.ajax({
@@ -249,7 +249,7 @@ function myFunction() {
     /*-------------------
            get fee and leadtime in bill
           --------------------- */
-    $("#inputGroupSelect03").change(function() {
+    $("#inputGroupSelect03").change(function () {
         var to_dist_id = $("#inputGroupSelect02").val();
         var to_ward_id = $(this).val();
         console.log(to_dist_id, to_ward_id);
@@ -264,7 +264,7 @@ function myFunction() {
                 console.log(data)
                 $(".checkout__order__fee span").text(data);
                 var oldTotal = $(".checkout__order__subtotal span").text();
-                var newTotal = parseInt(oldTotal.replace(/,/g, '')) + parseInt( $(".checkout__order__fee span").text().replace(/,/g, ''));
+                var newTotal = parseInt(oldTotal.replace(/,/g, '')) + parseInt($(".checkout__order__fee span").text().replace(/,/g, ''));
                 $(".checkout__order__total span").text(newTotal.toLocaleString('en-US'));
 
             }
@@ -658,7 +658,7 @@ async function forgotPassword() {
                     if (checkCode(parseInt(code), parseInt(response))) {
                         removePass(email);
 
-                    }else {
+                    } else {
                         if (count <= 0) {
                             Swal.fire({
                                 text: 'Mã xác nhận hết hiệu lực!',
@@ -793,74 +793,74 @@ async function removePass(email) {
 function check() {
     var email = document.getElementById("email").value;
     var user = document.getElementById("name").value;
-    var pass= document.getElementById("pass").value;
+    var pass = document.getElementById("pass").value;
     var repass = document.getElementById("repass").value;
     var saveLogin = document.getElementById("save-login").checked;
     var url = "Signup?email=" + email;
-    var urlSignup = "Signup?email="+email+"&pass="+pass+"&saveLogin="+ saveLogin+"&name="+user;
-    if(repass == pass){
-    $.ajax({
-        url: url,
-        type: "POST",
-        success: async function (response) {
-            let count =30;
-            const {value: code} = await Swal.fire({
-                title: 'Xác minh tài khoản',
-                input: 'text',
-                inputLabel: 'Mã xác nhận',
-                inputPlaceholder: 'Nhập mã xác nhận...',
-                confirmButtonColor: '#ff96b7',
-                confirmButtonText: 'Xác nhận',
-                html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
-                timer: 31000,
-                timerProgressBar: true,
-                didOpen: () => {
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                        --count;
-                        b.textContent = count;
-                    }, 1000)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            })
-
-            if(checkCode(parseInt(code), parseInt(response))){
-                $.ajax({
-                    url: urlSignup,
-                    type: "POST",
-                    success: async function (response) {
-                        Swal.fire({
-                            text: 'Đăng ký thành công!',
-                            icon: 'success',
-                            confirmButtonColor: '#ff96b7'
-                        }).then((result) => {
-                            location.href=response.toString();
-                        });
+    var urlSignup = "Signup?email=" + email + "&pass=" + pass + "&saveLogin=" + saveLogin + "&name=" + user;
+    if (repass == pass) {
+        $.ajax({
+            url: url,
+            type: "POST",
+            success: async function (response) {
+                let count = 30;
+                const {value: code} = await Swal.fire({
+                    title: 'Xác minh tài khoản',
+                    input: 'text',
+                    inputLabel: 'Mã xác nhận',
+                    inputPlaceholder: 'Nhập mã xác nhận...',
+                    confirmButtonColor: '#ff96b7',
+                    confirmButtonText: 'Xác nhận',
+                    html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
+                    timer: 31000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            --count;
+                            b.textContent = count;
+                        }, 1000)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
                     }
-                });
-            }else {
-                if (count <= 0) {
-                    Swal.fire({
-                        text: 'Mã xác nhận hêt hiệu lực!',
-                        icon: 'error',
-                        confirmButtonColor: '#ff96b7'
+                })
+
+                if (checkCode(parseInt(code), parseInt(response))) {
+                    $.ajax({
+                        url: urlSignup,
+                        type: "POST",
+                        success: async function (response) {
+                            Swal.fire({
+                                text: 'Đăng ký thành công!',
+                                icon: 'success',
+                                confirmButtonColor: '#ff96b7'
+                            }).then((result) => {
+                                location.href = response.toString();
+                            });
+                        }
                     });
                 } else {
-                    Swal.fire({
-                        text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
-                        icon: 'error',
-                        confirmButtonColor: '#ff96b7'
-                    }).then((result) => {
-                        location.reload();
-                    });
+                    if (count <= 0) {
+                        Swal.fire({
+                            text: 'Mã xác nhận hêt hiệu lực!',
+                            icon: 'error',
+                            confirmButtonColor: '#ff96b7'
+                        });
+                    } else {
+                        Swal.fire({
+                            text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
+                            icon: 'error',
+                            confirmButtonColor: '#ff96b7'
+                        }).then((result) => {
+                            location.reload();
+                        });
 
+                    }
                 }
             }
-        }
-    });}
-    else{
+        });
+    } else {
         Swal.fire({
             text: 'Mật khẩu nhập lại không đúng. Vui lòng kiểm tra lại!',
             icon: 'error',
@@ -934,7 +934,6 @@ function addOrder() {
     var haveDisk = document.getElementById("payment3").checked;
     var haveDiskName = document.getElementById("payment3").value;
 
-    // var url1  ="AddNewOrder?ten=" +ten+ "&email=" +email+"&diachi="+diachi+"&phone="+phone+"&ghichu="+ghichu+"&haveDisk="+ haveDisk+"&note="+note.toString();
     var url1 = "AddNewOrder";
     $.ajax({
         url: url1,
@@ -956,52 +955,54 @@ function addOrder() {
             xa: xa,
             keyContent: keyContent,
         },
-        success: function () {
-            // Xử lý khi thành công
-            document.getElementById("totalPro").innerHTML = "0";
-            document.getElementById("totalPro1").innerHTML = "0";
-            document.getElementById("emptyPro").innerHTML =
-                "<h4>Đơn hàng</h4>\n" +
-                "<div class=\"checkout__order__products\">Sản Phẩm <span>Tổng</span></div>\n" +
-                "<ul class=\"\">\n" +
-                "    <li>\n" +
-                "    </li>\n" +
-                "</ul>\n" +
-                "<div class=\"checkout__order__subtotal\">Tạm tính <span>0 VND</span></div>\n" +
-                "<div class=\"checkout__order__total\">Tổng <span>0 VND</span></div>\n" +
-                "<div class=\"checkout__input__checkbox\">\n" +
-                "    <label for=\"payment\" >\n" +
-                "       Thanh Toán Khi Nhận Hàng\n" +
-                "        <input type=\"checkbox\" id=\"payment\">\n" +
-                "        <span class=\"checkmark\"></span>\n" +
-                "    </label>\n" +
-                "</div>\n" +
-                "<button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>";
+        success: function (response) {
+            console.log(response);
+            if (parseInt(response) === 1) {
+                // Hiển thị modal lỗi
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Hãy nhập đúng định dạng khóa riêng tư của bạn!',
+                    footer: 'Vui lòng thử lại hoặc liên hệ hỗ trợ.'
+                });
+            } else {
 
-            Swal.fire({
-                text: 'Đặt hàng thành công!',
-                icon: 'success',
-                showCancelButton: true,
-                cancelButtonText: 'Mua tiếp',
-                confirmButtonText: 'Xem đơn đặt',
-                confirmButtonColor: '#ff96b7'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    location.href = "MyOrder";
-                } else {
-                    location.href = "ListProduct";
-                }
-            });
-        },
-        error: function (xhr, status, error) {
+                // Xử lý khi thành công
+                document.getElementById("totalPro").innerHTML = "0";
+                document.getElementById("totalPro1").innerHTML = "0";
+                document.getElementById("emptyPro").innerHTML =
+                    "<h4>Đơn hàng</h4>\n" +
+                    "<div class=\"checkout__order__products\">Sản Phẩm <span>Tổng</span></div>\n" +
+                    "<ul class=\"\">\n" +
+                    "    <li>\n" +
+                    "    </li>\n" +
+                    "</ul>\n" +
+                    "<div class=\"checkout__order__subtotal\">Tạm tính <span>0 VND</span></div>\n" +
+                    "<div class=\"checkout__order__total\">Tổng <span>0 VND</span></div>\n" +
+                    "<div class=\"checkout__input__checkbox\">\n" +
+                    "    <label for=\"payment\" >\n" +
+                    "       Thanh Toán Khi Nhận Hàng\n" +
+                    "        <input type=\"checkbox\" id=\"payment\">\n" +
+                    "        <span class=\"checkmark\"></span>\n" +
+                    "    </label>\n" +
+                    "</div>\n" +
+                    "<button onclick=\"cartEmpty()\" type=\"submit\" class=\"site-btn\" >ĐẶT HÀNG</button>";
 
-            // Hiển thị modal lỗi
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Hãy nhập đúng định dạng khóa riêng tư của bạn!',
-                footer: 'Vui lòng thử lại hoặc liên hệ hỗ trợ.'
-            });
+                Swal.fire({
+                    text: 'Đặt hàng thành công!',
+                    icon: 'success',
+                    showCancelButton: true,
+                    cancelButtonText: 'Mua tiếp',
+                    confirmButtonText: 'Xem đơn đặt',
+                    confirmButtonColor: '#ff96b7'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "MyOrder";
+                    } else {
+                        location.href = "ListProduct";
+                    }
+                });
+            }
         }
     });
 }
@@ -1013,6 +1014,7 @@ function isBase64(str) {
         return false;
     }
 }
+
 
 function cartEmpty() {
     Swal.fire({
@@ -1129,26 +1131,40 @@ function changeProfile() {
 
     });
 }
+
 // ========================================================= //
-function confirmGenKey(userId, hasKey){
-    if(hasKey) {
-        Swal.fire({
-            text: 'Bạn có chắc chắn muốn tạo lại khóa mới?',
-            icon: 'question',
-            showCancelButton: true,
-            cancelButtonText: 'Quay lại',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#ff96b7'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                genKey(userId);
-            }
-        });
-    }else{
-        genKey(userId)
+function confirmGenKey(userId, hasKey) {
+    const swalConfig = {
+        html: `
+            <div>
+                <p style="font-size: 20px; font-weight: bold">Bạn có chắc chắn muốn tạo lại khóa mới?</p>
+                <p style="font-size: smaller; color: #092a79; margin-top: -10px;">Nếu bạn đã có khóa, hãy nhấn thêm để sử dụng khóa của bạn </p>
+            </div>
+        `,
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'Quay lại',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#ff96b7',
+        showDenyButton: true,
+        denyButtonText: 'Thêm khóa',
+        denyButtonColor: '#ff96b7',
+    };
+
+    Swal.fire(swalConfig).then((result) => {
+        if (result.isConfirmed) {
+            genKey(userId);
+        } else if (result.isDenied) {
+            openModal();
+        }
+    });
+    function openModal() {
+        document.getElementById('myModal').style.display = 'block';
     }
 }
-function genKey(userId){
+
+
+function genKey(userId) {
     Swal.fire({
         title: 'Yêu cầu đang được xử lý...',
         allowOutsideClick: false,
@@ -1212,7 +1228,8 @@ function genKey(userId){
         }
     });
 }
-function createKey(userId){
+
+function createKey(userId) {
     Swal.fire({
         title: 'Vui lòng chờ...',
         allowOutsideClick: false,
@@ -1229,20 +1246,23 @@ function createKey(userId){
             Swal.close();
             Swal.fire({
                 title: "Yêu cầu tạo khóa của bạn đã được thực hiện!",
-                text:'Khóa mới sẽ được tới email của bạn.',
+                text: 'Khóa mới sẽ được tới email của bạn.',
                 icon: 'success',
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#ff96b7'
+            }).then((result) => {
+                location.reload();
             });
 
         }
     });
 
 }
-function requestKey(userId){
+
+function requestKey(userId) {
     Swal.fire({
         title: "Yêu cầu tạo khóa",
-        text:'Tài khoản của bạn hiện chưa có khóa. Vui lòng tạo khóa để thực hiện đặt hàng!',
+        text: 'Tài khoản của bạn hiện chưa có khóa. Vui lòng tạo khóa để thực hiện đặt hàng!',
         icon: 'info',
         confirmButtonText: 'OK',
         confirmButtonColor: '#ff96b7',
@@ -1254,7 +1274,70 @@ function requestKey(userId){
         }
     });
 }
+function AddNewPublicKey(){
+    var userId = document.getElementById("idUser").value;
+    var keyContent2 = document.getElementById("keyContent2").value;
+    var pbKey = document.getElementById("publicKey");
+    var publicKeyCheck = extractRSAPublicKey(keyContent2);
+    var getType = getKeyType(keyContent2);
+    pbKey.value = publicKeyCheck;
+    var publicKey = document.getElementById("publicKey").value;
+    var url = "AddPublicKey";
 
+    if (!publicKey) {
+        Swal.fire({
+            title: 'Oops...',
+            text: 'Public key không đúng định dạng!',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#ff96b7'
+        });
+        return;
+    }
+    if (getType === '1') {
+        Swal.fire({
+            title: 'Oops...',
+            text: 'Đây không phải là 1 public key!',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#ff96b7'
+        });
+        return;
+    }
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {
+            userId : userId,
+            publicKey: publicKey,
+        },
+        success: function () {
+            Swal.fire({
+                text: 'Thêm khóa công khai thành công!',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#ff96b7'
+            })
+            document.getElementById('myModal').style.display = 'none';
+            document.getElementById('keyContent2').value = '';
+            document.getElementById('publicKey').value = '';
+            document.getElementById('filePath').value = '';
+        },
+        error: function () {
+            Swal.fire({
+                title: 'Oops...',
+                text: 'Đã xảy ra lỗi khi thêm khóa công khai!',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#ff96b7'
+            });
+        }
+    });
+}
+
+
+// ========================================================= //
 
 function openModal() {
     document.getElementById('myModal').style.display = 'block';
@@ -1270,31 +1353,40 @@ function chooseFile() {
     var fileButton = document.getElementById('fileButton');
     var fileInput = document.getElementById('fileInput');
     var keyContent = document.getElementById('keyContent');
+    var errorText = document.getElementById('errorText');
     var file = document.getElementById('file');
-    var confirmButton = document.querySelector(".confirm-btn");
+    var filePath = document.getElementById('filePath');
 
     fileButton.style.color = 'black';
     fileInput.disabled = true;
-    file.style.display = 'block';
-    fileInput.value = ''; // Reset file input value
-    keyContent.value = ''; // Clear file content
+    fileInput.value = '';
+    keyContent.value = '';
+    filePath.value = '';
 
-    file.onchange = function(event) {
+    file.onchange = function (event) {
         var reader = new FileReader();
-        reader.onload = function() {
-            var xmlString = reader.result;
-            var parser = new DOMParser();
-            var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-            var messageContent = xmlDoc.getElementsByTagName('Message')[0].textContent;
-            keyContent.value = messageContent;
-            keyContent.setAttribute('readonly', true); // Prevent editing
-            confirmButton.removeAttribute("disabled");
-            confirmButton.style.backgroundColor = "#ff96b7";        };
+        filePath.value = event.target.value;
+
+        reader.onload = function () {
+            var fileContent = reader.result;
+            var publicKey = extractRSAPublicKey(fileContent);
+            console.log(publicKey);
+            if (publicKey) {
+                keyContent.value = publicKey;
+                keyContent.setAttribute('readonly', true);
+                errorText.style.display = 'none';
+            } else {
+                errorText.style.display = 'block';
+                keyContent.value = '';
+                keyContent.removeAttribute('readonly');
+            }
+        };
+
         reader.readAsText(event.target.files[0]);
     };
-    fileButton.style.opacity = '1'; // Make button visible
 
-    keyContent.removeAttribute('readonly'); // Allow editing
+    fileButton.style.opacity = '1';
+    keyContent.removeAttribute('readonly');
     file.click();
 }
 
@@ -1303,50 +1395,126 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var modal = document.getElementById('myModal');
     var modalContent = document.querySelector('.modal-content');
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             closeModal();
         }
     };
 
-    if(modalContent) {
-        modalContent.onclick = function(event) {
+    if (modalContent) {
+        modalContent.onclick = function (event) {
             event.stopPropagation();
         };
     }
 });
+function goBack2() {
+    var keyContent2 = document.getElementById('keyContent2');
+    keyContent2.removeAttribute('readonly'); // Allow editing again
+    keyContent2.value = '';
+    var filePath = document.getElementById('filePath');
+    var fileInput = document.getElementById('fileInput');
+     var error =  document.getElementById('errorText');
+     error.style.display = 'none';
+    fileInput.value = '';
+    filePath.value = '';
+    var file = document.getElementById('file');
+    file.value = '';
 
+    closeModal();
+}
 
 // Function to go back in the modal
 function goBack() {
     var keyContent = document.getElementById('keyContent');
     keyContent.removeAttribute('readonly'); // Allow editing again
     keyContent.value = '';
-    var confirmButton = document.querySelector(".confirm-btn");
-
+    var filePath = document.getElementById('filePath');
     var fileInput = document.getElementById('fileInput');
+    var error =  document.getElementById('errorText');
+    error.style.display = 'none';
+    filePath.value = '';
     fileInput.value = '';
     var file = document.getElementById('file');
-    confirmButton.setAttribute("disabled", true);
-    confirmButton.style.backgroundColor = "rgba(11, 11, 11, 0.5)";
     file.value = '';
 
     closeModal();
 }
-function checkTextarea() {
-    var textareaValue = document.getElementById("keyContent").value.trim();
-    var confirmButton = document.querySelector(".confirm-btn");
+function chooseFilePbK() {
+    var fileButton = document.getElementById('fileButton');
+    var fileInput = document.getElementById('fileInput');
+    var keyContent2 = document.getElementById('keyContent2');
+    var errorText = document.getElementById('errorText');
+    var file = document.getElementById('file');
+    var filePath = document.getElementById('filePath');
 
-    // Kiểm tra nếu có dữ liệu trong textarea thì enable button, ngược lại disable
-    if (textareaValue.length > 0) {
-        confirmButton.removeAttribute("disabled");
-        confirmButton.style.backgroundColor = "#ff96b7";
+    fileButton.style.color = 'black';
+    fileInput.disabled = true;
+    fileInput.value = '';
+    keyContent2.value = '';
+    filePath.value = '';
+    file.onchange = function (event) {
+        var reader = new FileReader();
+        filePath.value = event.target.value;
 
-    } else {
-        confirmButton.setAttribute("disabled", true);
-        confirmButton.style.backgroundColor = "rgba(11, 11, 11, 0.5)";
-    }
+        reader.onload = function () {
+            var fileContent = reader.result;
+
+            var publicKey = extractRSAPublicKey(fileContent);
+            console.log(publicKey);
+            if (publicKey) {
+                keyContent2.value = publicKey;
+                keyContent2.setAttribute('readonly', true);
+                errorText.style.display = 'none';
+            } else {
+                errorText.style.display = 'block';
+                keyContent2.value = '';
+                keyContent2.removeAttribute('readonly');
+            }
+        };
+
+        reader.readAsText(event.target.files[0]);
+    };
+
+    fileButton.style.opacity = '1';
+    keyContent2.removeAttribute('readonly');
+    file.click();
 }
 
-// Gọi hàm checkTextarea khi textarea thay đổi
-document.getElementById("keyContent").addEventListener("input", checkTextarea);
+
+
+
+function extractRSAPublicKey(str) {
+    // Xóa kí tự trống và kí tự xuống dòng
+    const cleanedString = str.replace(/[\r\n\s]/g, '');
+
+    // Tìm vị trí đầu tiên của "MII" trong chuỗi
+    const matchStart = cleanedString.indexOf("MII");
+
+    if (matchStart === -1) {
+        return null;
+    }
+
+    // Tìm vị trí đầu tiên của kí tự không phải Base64 sau "MII"
+    const base64Block = cleanedString.slice(matchStart);
+    const endRegex = /[^A-Za-z0-9+/=]/;
+    const matchEnd = base64Block.match(endRegex);
+
+    // Tách từ "MII" đến kí tự không phải Base64 hoặc đến cuối chuỗi nếu không tìm thấy kí tự không phải Base64
+    const extractedBlock = matchEnd ? base64Block.slice(0, matchEnd.index) : base64Block;
+
+    // Kiểm tra chiều dài của chuỗi trích xuất và trả về null nếu không đủ độ dài của public key
+    if (extractedBlock.length >= 256) {
+        return extractedBlock;
+    } else {
+        return null;
+    }
+}
+function getKeyType(keyString) {
+    const cleanedKeyString = keyString.replace(/\r?\n|\r/g, '');
+    const keyLength = cleanedKeyString.length;
+    if (keyLength > 1000) {
+        return '1';
+    } else {
+        return '0';
+    }
+}
