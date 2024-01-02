@@ -1333,7 +1333,9 @@ function AddNewPublicKey(){
                     icon: 'success',
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#ff96b7'
-                })
+                }).then(()=>{
+                    location.reload();
+                });
             }
             document.getElementById('myModal').style.display = 'none';
             document.getElementById('keyContent2').value = '';

@@ -10,18 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69035c2a-9afd-4c87-9a8d-2ea65fd67524" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/Account/ReportKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/Account/ReportKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/security/KeyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/security/KeyManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/editUserProfile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/editUserProfile.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/BanBanhKem.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/security/KeyManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/security/KeyManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/editUserProfile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/editUserProfile.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/security/KeyManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/security/KeyManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
