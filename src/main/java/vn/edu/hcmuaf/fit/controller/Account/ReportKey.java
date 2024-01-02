@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
 @WebServlet(name = "ReportKey", value = "/ReportKey")
@@ -36,6 +35,7 @@ public class ReportKey extends HttpServlet {
             out.println(1);
 
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             if(e.getMessage().contains("chk1"))
             out.println(2);
             else
