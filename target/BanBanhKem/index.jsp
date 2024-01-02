@@ -37,7 +37,7 @@
 
     <% User auth = (User) session.getAttribute("auth");
         boolean userNeedsKey = (boolean) session.getAttribute("userNeedsKey");
-        if(!userNeedsKey){
+        if(!userNeedsKey && auth != null){
     %>
     <script>
         // Hiển thị thông báo khi người dùng cần tạo khóa
@@ -73,7 +73,7 @@
 <div id="preloder">
     <div class="loader"></div>
 </div>
-
+<%if(auth != null){%>
     <div id="myModal" class="modal" onclick="closeModal()">
         <!-- Modal content -->
         <div class="modal-content">
@@ -106,6 +106,8 @@
             </div>
         </div>
     </div>
+    <%}%>
+
 
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
