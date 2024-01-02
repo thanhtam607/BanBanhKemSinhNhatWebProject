@@ -57,7 +57,7 @@ public class KeyManager {
         stm.executeUpdate();
     }
     public static void updateMissingDateForKey(String userId,  String date) throws SQLException {
-        String sql = "UPDATE PUBLICKEY SET MISSINGDATE = STR_TO_DATE(?, '%d/%m/%Y') WHERE USER_ID  = ? AND STATUS = 1";
+        String sql = "UPDATE PUBLICKEY SET MISSINGDATE = ? WHERE USER_ID  = ? AND STATUS = 1";
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
         stm.setString(1,date);
         stm.setString(2, userId);

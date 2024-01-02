@@ -268,7 +268,7 @@
                 <%
                 } else {
                 %>
-                <button class="button_product">Mất khóa</button>
+                <button class="button_product" onclick="reportKey('<%= auth.getId()%>')">Mất khóa</button>
                 <button class="button_product" onclick="confirmGenKey('<%=auth.getId()%>', <%=auth.hasKey()%>)">Tạo
                     khóa
                 </button>

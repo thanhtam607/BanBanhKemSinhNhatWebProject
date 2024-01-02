@@ -1144,7 +1144,7 @@ function confirmGenKey(userId, hasKey) {
         icon: 'question',
         showCancelButton: true,
         cancelButtonText: 'Quay lại',
-        confirmButtonText: 'OK',
+        confirmButtonText: 'Tạo khóa',
         confirmButtonColor: '#ff96b7',
         showDenyButton: true,
         denyButtonText: 'Thêm khóa',
@@ -1156,6 +1156,8 @@ function confirmGenKey(userId, hasKey) {
             genKey(userId);
         } else if (result.isDenied) {
             openModal();
+        }else{
+            location.reload();
         }
     });
     function openModal() {
@@ -1179,7 +1181,7 @@ function genKey(userId) {
         data: {userId: userId},
         success: async function (response) {
             Swal.close();
-            let count = 30;
+            let count = 60;
             const {value: code} = await Swal.fire({
                 title: 'Xác minh tài khoản',
                 input: 'text',
@@ -1188,7 +1190,7 @@ function genKey(userId) {
                 confirmButtonColor: '#ff96b7',
                 confirmButtonText: 'Xác nhận',
                 html: 'Mã xác nhận có hiệu lực trong: <b></b> s',
-                timer: 31000,
+                timer: 61000,
                 timerProgressBar: true,
                 didOpen: () => {
                     const b = Swal.getHtmlContainer().querySelector('b')
@@ -1331,7 +1333,9 @@ function AddNewPublicKey(){
                     icon: 'success',
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#ff96b7'
-                })
+                }).then(()=>{
+                    location.reload();
+                });
             }
             document.getElementById('myModal').style.display = 'none';
             document.getElementById('keyContent2').value = '';
@@ -1492,10 +1496,6 @@ function chooseFilePbK() {
     keyContent2.removeAttribute('readonly');
     file.click();
 }
-
-
-
-
 function extractRSAPublicKey(str) {
     // Xóa kí tự trống và kí tự xuống dòng
     const cleanedString = str.replace(/[\r\n\s]/g, '');
@@ -1529,5 +1529,68 @@ function getKeyType(keyString) {
         return '1';
     } else {
         return '0';
+    }
+}
+// =================================================
+async function reportKey(userId) {
+    const {value: date} = await Swal.fire({
+        title: "Chọn ngày mất khóa",
+        inputLabel: "Vui lòng nhập vào ngày mà bạn bị mất hoặc quên khóa.",
+        input: "datetime-local",
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#ff96b7',
+        didOpen: () => {
+            const today = (new Date()).toISOString();
+            Swal.getInput().max = today.split("T")[0];
+        }
+    });
+    if (date) {
+        Swal.fire({
+            title: 'Vui lòng chờ...',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        $.ajax({
+            url: "ReportKey",
+            type: "POST",
+            data: { missing:date},
+            success: async function (response) {
+                Swal.close();
+                if(parseInt(response) === 1){
+                    Swal.fire({
+                        title: "Báo mất khoá thành công",
+                        text: 'Báo cáo của bạn đã được chúng tôi ghi nhận.',
+                        icon: 'success',
+                        confirmButtonText: 'Tạo khóa mới',
+                        confirmButtonColor: '#ff96b7',
+                        showCancelButton: true,
+                            cancelButtonText: 'Thoát',
+
+                    }).then((result) => {
+                        if(result.isConfirmed){
+                            confirmGenKey(userId, true);
+                        }else{
+                            location.reload();
+                        }
+
+                    });
+                }
+                 else if(parseInt(response) === 2){
+                    Swal.fire({
+                        title: "Đã xảy ra lỗi",
+                        text: 'Ngày mà bạn nhập vào không hợp lệ. Vui lòng thực hiện lại thao tác.',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#ff96b7'
+                    }).then((result) => {
+                        location.reload();
+                    });
+                    }
+                }
+
+        });
     }
 }
