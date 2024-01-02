@@ -1276,7 +1276,7 @@ function requestKey(userId) {
         cancelButtonText: 'Quay lại'
     }).then((result) => {
         if (result.isConfirmed) {
-            genKey(userId);
+            confirmGenKey(userId, true);
         }
     });
 }
