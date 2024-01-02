@@ -93,7 +93,7 @@
                     </div>
                     <button type="submit" id="login-button" class="btn btn-primary py-3 w-100 mb-4">Đăng nhập</button>
                     <div class="btn-google col-12">
-                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&20openid&redirect_uri=http://banhkem.ddns.net:81/BanBanhKem/LoginGoogle&response_type=code
+                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&20openid&redirect_uri=https://maithuanmtt.id.vn:8443/LoginGoogle&response_type=code
 		   &client_id=344697106441-26mu1s28srer7nnpb5pqc7l502dodjv9.apps.googleusercontent.com&approval_prompt=force"
                            type="button" class="google col-12"><i class="fab fa-google"></i>Đăng nhập với Google</a>
                     </div>

@@ -37,7 +37,7 @@
 
     <% User auth = (User) session.getAttribute("auth");
         boolean userNeedsKey = (boolean) session.getAttribute("userNeedsKey");
-        if(!userNeedsKey){
+        if(!userNeedsKey && auth != null){
     %>
     <script>
         // Hiển thị thông báo khi người dùng cần tạo khóa
@@ -45,7 +45,6 @@
             // Hiển thị thông báo khi người dùng cần tạo khóa
             const Toast = Swal.mixin({
                 // toast: true,
-                position: "top",
                 timer: 6000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
@@ -64,7 +63,7 @@
                 cancelButtonText: 'Thoát'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    genKey('<%=auth.getId()%>');
+                    confirmGenKey('<%=auth.getId()%>', true);
                 }
             });
         });
@@ -74,8 +73,41 @@
 <div id="preloder">
     <div class="loader"></div>
 </div>
+<%if(auth != null){%>
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <h4 style="text-align: center; font-weight: bold">Cung cấp khóa công khai của bạn</h4>
+            <div style="display: flex; justify-content: center;">
+                <button id="fileButton" onclick="chooseFilePbK()"
+                        style="width: 320px; height: 30px; margin-bottom: 20px; margin-top: 20px">Nhấn vào đây để tải file
+                    lên
+                </button>
+            </div>
+            <label for="fileInput" class="fileLabel">File:</label>
+            <input type="text" id="fileInput" disabled>
+            <input style="display: none" type="file" id="file" accept="*" style="display: none;">
+            <input type="text" id="filePath" style="border: none" readonly>
+            <p style="color: red; display: none" id="errorText">*Nội dung file không chứa khóa công khai, vui lòng thử
+                lại*</p>
+            <input id="idUser" style="display: none" value="<%= auth.getId() %>"/>
+            <input id="publicKey" style="display: none"/>
+            <textarea id="keyContent2" rows="10"></textarea>
+            <div class="button-container">
+                <div class="button-row">
+                    <button onclick="goBack2()" class="back-btn"
+                            style="width: 30%; margin-top: 10px; background-color: #6e7881">Quay lại
+                    </button>
+                    <button onclick="AddNewPublicKey()"
+                            style="width: 30%; height: 40px; margin-top: 10px; background-color: #ff96b7" type="submit"
+                            class="confirm-btn">Xác nhận
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%}%>
 
-<!-- Humberger Begin -->
 
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
