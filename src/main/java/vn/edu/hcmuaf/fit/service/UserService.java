@@ -264,6 +264,7 @@ public class UserService {
         String htmlText = "<div>\n" +
                 "    <h4 style=\"color: red;\">Đây là nội dung khóa riêng tư của bạn, vui lòng không chia sẻ nó cho bất kỳ ai!</h4>\n" +
                 "    <p>Hãy lưu lại ở một nơi an toàn để sử dụng khi cần thiết và không được chỉnh sửa nó ⚠⚠</p>\n" +
+                "    <p style=\"color: #E3B419;\">Lưu ý rằng sau khi tạo khoá mới thì khóa cũ(nếu có) sẽ không còn hiệu lực từ bây giờ ⚠⚠</p>\n" +
                 "</div>";
         htmlPart.setText(htmlText, "UTF-8", "html");
         multipart.addBodyPart(htmlPart);
