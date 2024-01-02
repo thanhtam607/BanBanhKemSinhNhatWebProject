@@ -264,6 +264,7 @@ public class UserService {
         String htmlText = "<div>\n" +
                 "    <h4 style=\"color: red;\">Đây là nội dung khóa riêng tư của bạn, vui lòng không chia sẻ nó cho bất kỳ ai!</h4>\n" +
                 "    <p>Hãy lưu lại ở một nơi an toàn để sử dụng khi cần thiết và không được chỉnh sửa nó ⚠⚠</p>\n" +
+                "    <p style=\"color: #E3B419;\">Lưu ý rằng sau khi tạo khoá mới thì khóa cũ(nếu có) sẽ không còn hiệu lực từ bây giờ ⚠⚠</p>\n" +
                 "</div>";
         htmlPart.setText(htmlText, "UTF-8", "html");
         multipart.addBodyPart(htmlPart);
@@ -392,7 +393,7 @@ public class UserService {
     }
 
     public static String getEmail(String userId) throws SQLException {
-        String sql = "select email from accounts where id = ?";
+        String sql = "select email from ACCOUNTS where id = ?";
         PreparedStatement stms = DBConnect.getInstall().getConn().prepareStatement(sql);
         stms.setString(1, userId);
         ResultSet rs = stms.executeQuery();
@@ -449,9 +450,13 @@ public class UserService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null) {
             try {
-                ResultSet rs = statement.executeQuery("select ID, user_Id, publickeylink, createDate, expiredDate, status from publickey where user_Id = '"+userID+"';");
+                ResultSet rs = statement.executeQuery("SELECT ID, USER_ID, PUBLICKEYLINK, CREATEDATE, EXPIREDDATE, MISSINGDATE, REPORTDATE, STATUS FROM PUBLICKEY where USER_ID = '"+userID+"';");
                 while (rs.next()) {
-                    list.add(new SignUser(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6)));
+                    list.add(new SignUser(rs.getString(1),
+                            rs.getString(2), rs.getString(3),
+                            rs.getString(4), rs.getString(5),
+                            rs.getString(6), rs.getString(7),
+                            rs.getInt(8)));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

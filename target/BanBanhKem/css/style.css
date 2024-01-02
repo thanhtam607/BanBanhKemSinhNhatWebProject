@@ -3954,6 +3954,7 @@ font-size: 24px;
 	padding: 20px;
 	border: 1px solid #888;
 	width: 40%;
+	z-index: 100;
 }
 .close:hover,
 .close:focus {

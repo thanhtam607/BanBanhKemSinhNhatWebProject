@@ -1,11 +1,11 @@
 <%@ page import="vn.edu.hcmuaf.fit.bean.User" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Order" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.FavoriteProduct" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.Customer" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.ItemProductInCart" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.security.KeyManager" %>
+<%@ page import="java.security.Signature" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.UserService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
 <html lang="xzz">
@@ -214,65 +214,140 @@
 <!-- Breadcrumb Section End -->
 
 <!-- Contact Section Begin -->
+<div id="myModal" class="modal" onclick="closeModal()">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <h4 style="text-align: center; font-weight: bold">Cung cấp khóa công khai của bạn</h4>
+        <div style="display: flex; justify-content: center;">
+            <button id="fileButton" onclick="chooseFilePbK()"
+                    style="width: 320px; height: 30px; margin-bottom: 20px; margin-top: 20px">Nhấn vào đây để tải file
+                lên
+            </button>
+        </div>
+        <label for="fileInput" class="fileLabel">File:</label>
+        <input type="text" id="fileInput" disabled>
+        <input style="display: none" type="file" id="file" accept="*" style="display: none;">
+        <input type="text" id="filePath" style="border: none" readonly>
+        <p style="color: red; display: none" id="errorText">*Nội dung file không chứa khóa công khai, vui lòng thử
+            lại*</p>
+        <input id="idUser" style="display: none" value="<%= auth.getId() %>"/>
+        <input id="publicKey" style="display: none"/>
+        <textarea id="keyContent2" rows="10"></textarea>
+        <div class="button-container">
+            <div class="button-row">
+                <button onclick="goBack2()" class="back-btn"
+                        style="width: 30%; margin-top: 10px; background-color: #6e7881">Quay lại
+                </button>
+                <button onclick="AddNewPublicKey()"
+                        style="width: 30%; height: 40px; margin-top: 10px; background-color: #ff96b7" type="submit"
+                        class="confirm-btn">Xác nhận
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
     <div class="container">
-            <div style="
+        <div style="
                         display: flex;
                         justify-content: space-between;
                         padding-bottom: 20px;
                         margin-bottom: 25px;
                         border-bottom: 1px solid #e1e1e1;">
-                <h4 style="
+            <h4 style="
                         color: #1c1c1c;
 	                    font-weight: 700;">
-                    Thông Tin Tài Khoản
-                </h4>
-                <button class="button_product" onclick="confirmGenKey('<%=auth.getId()%>', <%=auth.hasKey()%>)">Tạo khóa</button>
-            </div>
-
+                Thông Tin Tài Khoản
+            </h4>
             <div>
-                <div class="row">
-                    <div class="col-lg-7 col-md-6">
-                        <div class="row">
+                <%if (!KeyManager.userIsHasKeyActive(auth.getId())) {%>
+                <button class="button_product" onclick="confirmGenKey('<%=auth.getId()%>', <%=auth.hasKey()%>)">Tạo
+                    khóa
+                </button>
+                <%
+                } else {
+                %>
+                <button class="button_product" onclick="reportKey('<%= auth.getId()%>')">Mất khóa</button>
+                <button class="button_product" onclick="confirmGenKey('<%=auth.getId()%>', <%=auth.hasKey()%>)">Tạo
+                    khóa
+                </button>
+                <%}%>
+            </div>
+        </div>
 
-                            <div class="col-lg-12">
-                                <div class="checkout__input">
-                                    <p>Tên Đăng Nhập</p>
-                                    <input type="text" id="ten" value="<%=auth.getName() %>">
-                                </div>
-
+        <div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="checkout__input">
+                                <p>Tên Đăng Nhập</p>
+                                <input type="text" id="ten" value="<%=auth.getName() %>">
                             </div>
-                        </div>
-                        <div class="checkout__input">
-                            <p>Địa chỉ</p>
-                            <input type="text" placeholder="Cập nhật số nhà, xã/phường, quận/huyện, tỉnh/thành phố..."
-                                   id="diachi" value="<%=customer.getDIACHI()%>">
-                        </div>
 
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="checkout__input">
-                                    <p>Điện Thoại</p>
-                                    <input type="tel" placeholder="Cập nhật số điện thoại..." id="phone"
-                                           value="<%=customer.getSDT()%>">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="checkout__input">
-                                    <p>Email</p>
-                                    <input type="email" id="email" value="<%=auth.getEmail()%>">
-                                </div>
-                            </div>
                         </div>
-
-                        <button class="button_product" onclick="changeProfile()">
-                            Lưu Thay Đổi
-                        </button>
+                    </div>
+                    <div class="checkout__input">
+                        <p>Địa chỉ</p>
+                        <input type="text" placeholder="Cập nhật số nhà, xã/phường, quận/huyện, tỉnh/thành phố..."
+                               id="diachi" value="<%=customer.getDIACHI()%>">
                     </div>
 
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="checkout__input">
+                                <p>Điện Thoại</p>
+                                <input type="tel" placeholder="Cập nhật số điện thoại..." id="phone"
+                                       value="<%=customer.getSDT()%>">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="checkout__input">
+                                <p>Email</p>
+                                <input type="email" id="email" value="<%=auth.getEmail()%>">
+                            </div>
+                        </div>
+                    </div>
 
+                    <button class="button_product" onclick="changeProfile()">
+                        Lưu Thay Đổi
+                    </button>
                 </div>
+                <div class="col-lg-6 col-md-6" style="">
+                    <p style="font-weight: bold; font-size: 20px; color: black">Quản lý khóa</p>
+                    <div class="row" style="border-left: 2px solid rgba(83,81,86,0.10); border-right: 2px solid rgba(83,81,86,0.10); overflow-x: auto; max-height: 350px; overflow-y: auto;">
+                        <div style="">
+                            <table class="table" >
+                            <thead>
+                            <tr>
+                                <th colspan="3">Khóa</th>
+                                <th>Ngày tạo</th>
+                                <th>Ngày hết hạn</th>
+                                <th>Trạng Thái</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%List<SignUser> lu = UserService.getListKey(auth.getId());
+                                for(SignUser su : lu) {%>
+                            <tr>
+                                <td colspan="3" style="overflow-x: auto; white-space: nowrap;"><%=su.getKeySecret(su.getPbkey())%></td>
+                                <td style="overflow-x: auto; white-space: nowrap;"><%=su.getCreateDate()%></td>
+                                <td style="overflow-x: auto; white-space: nowrap;"><%=su.getExpireDate()%></td>
+                                <% if (su.getStatus() == 1) {%>
+                                <td style="color: #28a745; overflow-x: auto; white-space: nowrap;"><%=su.getStatusString()%></td>
+                                <% } else if(su.getStatus() == 2){ %>
+                                <td style="overflow-x: auto; white-space: nowrap;"><%=su.getStatusString()%></td>
+                                <% } else { %>
+                                <td style="color: #bb1813; overflow-x: auto; white-space: nowrap;"><%=su.getStatusString()%></td>
+                                <% }%>
+                            </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
+                        </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -311,6 +386,24 @@
             }
         });
     }
+
+    // function checkTextarea() {
+    //     var textareaValue = document.getElementById("keyContent2").value.trim();
+    //     var confirmButton = document.querySelector(".confirm-btn");
+    //
+    //     // Kiểm tra nếu có dữ liệu trong textarea thì enable button, ngược lại disable
+    //     if (textareaValue.length > 0) {
+    //         confirmButton.removeAttribute("disabled");
+    //         confirmButton.style.backgroundColor = "#ff96b7";
+    //
+    //     } else {
+    //         confirmButton.setAttribute("disabled", true);
+    //         confirmButton.style.backgroundColor = "rgba(11, 11, 11, 0.5)";
+    //     }
+    // }
+    //
+    // // Gọi hàm checkTextarea khi textarea thay đổi
+    // document.getElementById("keyContent2").addEventListener("input", checkTextarea);
 </script>
 
 

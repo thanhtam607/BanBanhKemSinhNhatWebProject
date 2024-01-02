@@ -15,25 +15,7 @@ public class BlogService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  BLOGS.ID, BLOGS.IMG ,BLOGS.TITLE, BLOGS.DATE, BLOGS.CONTENT, BLOGS.CATEGORY, BLOGS.SEASON, BLOGS.STATUS from BLOGS where BLOGS.STATUS between 0 and 1 ");
-                while(rs.next()) {
-                    Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
-                    list.add(b);
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        else {
-            System.out.println("Không có tin tức");
-        }
-        return list;
-    }
-    public static List<Blog> getDataRemove() {
-        List<Blog> list = new LinkedList<Blog>();
-        Statement statement = DBConnect.getInstall().get();
-        if (statement != null)
-            try {
-                ResultSet rs = statement.executeQuery("SELECT  BLOGS.ID, BLOGS.IMG ,BLOGS.TITLE, BLOGS.DATE, BLOGS.CONTENT, BLOGS.CATEGORY, BLOGS.SEASON, BLOGS.STATUS from BLOGS where BLOGS.STATUS = -1 ");
+                ResultSet rs = statement.executeQuery("SELECT  BLOGS.ID, BLOGS.IMG,BLOGS.TITLE, BLOGS.DATE, BLOGS.CONTENT, BLOGS.CATEGORY, BLOGS.SEASON, BLOGS.STATUS from BLOGS ");
                 while(rs.next()) {
                     Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
                     list.add(b);
@@ -86,7 +68,7 @@ public class BlogService {
     }
     public static void updateStatus(String id, int status) {
         Statement statement = DBConnect.getInstall().get();
-        String sql = "UPDATE BLOGS set  STATUS= " + status + " where BLOGS.ID = '" + id + "'";
+        String sql = "UPDATE BLOGS set  status= " + status + " where BLOGS.id = '" + id + "'";
         try {
             statement.executeUpdate(sql);
         } catch (SQLException se) {
@@ -95,22 +77,13 @@ public class BlogService {
     }
  public  static void deleteBlog(String idblog){
         Statement stm = DBConnect.getInstall().get();
-        String sql =  "UPDATE BLOGS set  STATUS = -1 where BLOGS.ID = '" + idblog + "'";
+        String sql = "DELETE FROM BLOGS WHERE ID = '" + idblog + "'";
      try {
          stm.executeUpdate(sql);
      } catch (SQLException se) {
          se.printStackTrace();
      }
  }
-    public  static void restoreBlog(String idblog){
-        Statement stm = DBConnect.getInstall().get();
-        String sql =  "UPDATE BLOGS set  STATUS= 0 where BLOGS.ID = '" + idblog + "'";
-        try {
-            stm.executeUpdate(sql);
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-    }
 public static  void updateImgBlog(String img,String imgnew){
     Statement stm = DBConnect.getInstall().get();
     String sql = "UPDATE BLOGS SET IMG = '" + imgnew + "' WHERE IMG = '" + img +"'";
@@ -132,7 +105,7 @@ public static void  updateTitle(String idblog, String title ){
 }
 public  static String getNewIdBlog(){
     String res ="";
-    String sql= "SELECT MAX(ID) from BLOGS";
+    String sql= "SELECT max(id) from BLOGS";
     Statement statement = DBConnect.getInstall().get();
     try {
         ResultSet rs = statement.executeQuery(sql);
@@ -153,7 +126,7 @@ public  static String getNewIdBlog(){
 }
     public  static String getMaxIdBlog(){
         String res ="";
-        String sql= "SELECT MAX(ID) from BLOGS";
+        String sql= "SELECT max(id) from BLOGS";
         Statement statement = DBConnect.getInstall().get();
         try {
             ResultSet rs = statement.executeQuery(sql);
@@ -195,6 +168,6 @@ public static void addBlog(Blog b){
     }
 }
     public static void main(String[] args) {
-        System.out.println("thanhthuy");
+//
     }
 }

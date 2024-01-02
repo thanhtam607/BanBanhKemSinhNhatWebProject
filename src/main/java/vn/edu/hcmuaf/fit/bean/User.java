@@ -107,7 +107,7 @@ public class User implements Serializable {
 
     public String getRoleName() throws UnsupportedEncodingException {
         if(this.role == 0){
-            return URLEncoder.encode("Thường", "UTF-8");
+            return URLEncoder.encode("Thuong", "UTF-8");
         }else if(this.role == 1){
             return URLEncoder.encode("Admin", "UTF-8");
         }
@@ -115,7 +115,7 @@ public class User implements Serializable {
     }
 
     public String getStatusName() throws UnsupportedEncodingException {
-        if(this.status == 0) return URLEncoder.encode("Hoạt Động", "UTF-8");
+        if(this.status == 0) return URLEncoder.encode("Hoạt dong", "UTF-8");
         return URLEncoder.encode("Khóa", "UTF-8");
     }
 

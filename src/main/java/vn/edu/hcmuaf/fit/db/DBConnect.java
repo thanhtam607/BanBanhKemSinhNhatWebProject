@@ -1,15 +1,13 @@
 package vn.edu.hcmuaf.fit.db;
 
-import vn.edu.hcmuaf.fit.bean.User;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DBConnect {
-    static String URL = "jdbc:mysql://localhost:3306/banbanhkem";
-    static String user= "root";
-    static String pass= "";
+
+//    static String URL = "jdbc:mysql://localhost:3306/banbanhkem";
+    static String URL = "jdbc:mysql://"+DBProperties.host()+":"+DBProperties.port()+"/"+DBProperties.dbName()+"";
+    static String user= DBProperties.user();
+    static String pass= DBProperties.pass();
     static Connection conn;
     static DBConnect install;
      private DBConnect(){

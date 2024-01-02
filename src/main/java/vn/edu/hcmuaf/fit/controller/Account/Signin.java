@@ -63,7 +63,7 @@ public class Signin extends HttpServlet {
 //                    response.getWriter().println(previousPageUrl);
                     response.sendRedirect(previousPageUrl);
                 } else {
-                    response.sendRedirect("/Index");
+                    response.sendRedirect("./Index");
                 }
 
                 log.setContent("Đăng nhập thành công vào trang web");

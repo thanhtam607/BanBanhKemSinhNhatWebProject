@@ -3,7 +3,6 @@ package vn.edu.hcmuaf.fit.controller.admin.Product;
 import vn.edu.hcmuaf.fit.bean.User;
 import vn.edu.hcmuaf.fit.model.Log;
 import vn.edu.hcmuaf.fit.service.LogService;
-import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +24,7 @@ public class RestoreTypeOfCake extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         String id = request.getParameter("idType");
-        ProductService.restoreType(id);
+//        ProductService.restoreType(id);
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("auth");
 

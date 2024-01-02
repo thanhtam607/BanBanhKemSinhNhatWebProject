@@ -31,14 +31,14 @@ public class LogService {
             User user;
             if (stm != null)
                 try {
-                    ResultSet rs = stm.executeQuery("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS;");
+                    ResultSet rs = stm.executeQuery("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS Order by ID DESC;");
                     while (rs.next()) {
                         userN = rs.getString(3);
                         user = UserService.findById(userN);
                         if(user != null){
                             userN = user.getName();
                         }
-                        if(rs.getInt(7) != -1) {
+                        if(rs.getInt(7)!= -1) {
                             listLog.add(new Log(rs.getInt(1), rs.getInt(2), userN, rs.getString(5), rs.getString(4).substring(1), rs.getString(6), rs.getInt(7)));
                         }
                     }
@@ -65,7 +65,7 @@ public class LogService {
             String userN;
             User user;
             try {
-                PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE year(CREATE_AT)= ? AND MONTH(CREATE_AT) =? AND DAY(CREATE_AT) = ?; ");
+                PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE year(CREATE_AT)= ? AND MONTH(CREATE_AT) =? AND DAY(CREATE_AT) = ?; Order by ID DESC");
                 stm.setString(1,d[0]);
                 stm.setString(2,d[1]);
                 stm.setString(3,d[2]);
@@ -95,7 +95,7 @@ public class LogService {
         User user;
         if(!fromDate.equals("0") && !toDate.equals("0")){
         try {
-            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE CREATE_AT BETWEEN ? AND ?");
+            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE CREATE_AT between ? and ?; Order by ID DESC");
             stm.setString(1,fromDate);
             stm.setString(2, toDate);
             ResultSet rs = stm.executeQuery();
@@ -118,7 +118,7 @@ public class LogService {
         }
         else if(!fromDate.equals("0") && toDate.equals("0")){
             try {
-                PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE CREATE_AT >= ?;");
+                PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE CREATE_AT >= ?; Order by ID DESC");
                 stm.setString(1,fromDate);
 
                 ResultSet rs = stm.executeQuery();
@@ -142,7 +142,7 @@ public class LogService {
         }
         else if(fromDate.equals("0") && !toDate.equals("0")){
             try {
-                PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE CREATE_AT <= ?;");
+                PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE CREATE_AT <= ?; Order by ID DESC");
                 stm.setString(1,toDate);
 
                 ResultSet rs = stm.executeQuery();
@@ -174,7 +174,7 @@ public class LogService {
         String userN;
         User user;
         try {
-            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE CONTENT like ?;");
+            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE CONTENT like ?; Order by ID DESC");
             stm.setString(1,"%"+content+"%");
 
             ResultSet rs = stm.executeQuery();
@@ -200,7 +200,7 @@ public class LogService {
         String userN;
         User user;
         try {
-            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE LEVEL = ?;");
+            PreparedStatement stm = con.prepareStatement("SELECT ID, LEVEL, USER, SRC, CONTENT, CREATE_AT, STATUS  FROM LOGS WHERE LEVEL = ?; Order by ID DESC");
             stm.setInt(1,level);
 
             ResultSet rs = stm.executeQuery();
@@ -246,7 +246,7 @@ public class LogService {
     public static List<String> getListContent(){
         List<String> res = new ArrayList<>();
         try {
-            PreparedStatement stm = con.prepareStatement("  SELECT DISTINCT if(CONTENT like '%:%', SUBSTRING(CONTENT,1,CHARACTER_LENGTH(CONTENT)-6), CONTENT) FROM LOGS  ");
+            PreparedStatement stm = con.prepareStatement("  SELECT DISTINCT if(content like '%:%', SUBSTRING(CONTENT,1,CHARACTER_LENGTH(CONTENT)-6), content) FROM LOGS  ");
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
                 res.add(rs.getString(1));
@@ -263,7 +263,7 @@ public class LogService {
     }
     public static void removeLog(String id){
         try{
-            PreparedStatement stm = con.prepareStatement("UPDATE LOGS set STATUS = -1 WHERE ID=?");
+            PreparedStatement stm = con.prepareStatement("UPDATE logs set STATUS = -1 WHERE id=?");
             stm.setInt(1, Integer.parseInt(id));
             stm.executeUpdate();
         }catch (SQLException e) {
