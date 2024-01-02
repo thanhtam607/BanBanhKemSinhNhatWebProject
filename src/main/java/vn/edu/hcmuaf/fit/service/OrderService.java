@@ -71,6 +71,8 @@ public class OrderService {
     public static void addGiaoHang(Order order) {
         Statement stm = DBConnect.getInstall().get();
         String sql = "";
+        if(order.getGiaohang().getXa().equals("0")) order.getGiaohang().setXa("21208");
+        if(order.getGiaohang().getNgayGiao().equals("")) order.getGiaohang().setNgayGiao("2023-01-13 00:00:00");
         if (stm != null) {
             try {
                 sql = "INSERT INTO DELIVERY VALUES('" + order.getId() + "','" + order.getGiaohang().getNgayGiao() + "','" + order.getGiaohang().getXa() + "','" + order.getGiaohang().getHuyen() + "','" + order.getGiaohang().getDiachigiao() + "','" + order.getGiaohang().getEmail() + "','" + order.getGiaohang().getPhone() + "','" + order.getGiaohang().getTenKH() + "');";

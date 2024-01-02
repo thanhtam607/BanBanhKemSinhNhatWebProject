@@ -110,13 +110,14 @@ public class ReceiptService {
 
         UserService.sendMail(adminEmail, errorAdminSubject, adminErrorMessage);
         UserService.sendMail(customerEmail, errorCusSubject, customerErrorMessage);
-//                        gửi mail báo lỗi
+
     }
 
 
     //    tạo cypherText cho từng đơn hàng
     public static String createCypherText(Receipt receipt, String privateKeyString) throws Exception {
         String hashOrder = RSA.hashObject(receipt);
+//        System.out.println("đon hàng ban đầu: "+ receipt.toString());
         return RSA.encrypt(hashOrder, RSA.getPrivateKeyFromString(privateKeyString));
     }
 
@@ -124,6 +125,7 @@ public class ReceiptService {
     public static boolean verifyOrderWhenLoad(Receipt receipt, String cypherText, List<SignUser> signUserList) throws Exception {
         String fstHash = "";
         String hashOrder = "";
+//        System.out.println("đon hàng lúc load: "+ receipt.toString());
         String publickeyString = getPbKeyString(receipt, signUserList);
         if (cypherText.isEmpty() || !RSA.areCypherText(cypherText, publickeyString)) {
             return false;
@@ -138,7 +140,7 @@ public class ReceiptService {
     public static String getPbKeyString(Receipt receipt, List<SignUser> signUserList) {
         for (SignUser s : signUserList) {
             if (s.getExpireDate() != null) {
-                if (compareDates(receipt.getExport_date(), s.getCreateDate()) > 0 && compareDates(receipt.getExport_date(), s.getExpireDate()) < 0) {
+                if (compareDates(receipt.getExport_date(), s.getCreateDate()) > 0 && compareDates(receipt.getExport_date(), s.getMissingDate()) < 0) {
                     return s.getPbkey();
                 }
             } else {
@@ -154,7 +156,6 @@ public class ReceiptService {
         try {
             Date date1 = dateFormat.parse(day1);
             Date date2 = dateFormat.parse(day2);
-
             return date1.compareTo(date2);
         } catch (ParseException e) {
             return 0; // Trả về false nếu có lỗi
@@ -430,8 +431,6 @@ public class ReceiptService {
                 if (compareDates(receiptForHash.getExport_date(), "2023-01-09 00:00:00") > 0) {
                     if (rs.getInt(7) != 4) {
                         if (!verifyOrderWhenLoad(receiptForHash, getCypherTextOfOrder(rs.getString(1)), UserService.getListKey(rs.getString(2)))) {
-//                            updateState(receiptForHash.getId(), 5);
-//                            re.setStatus(5);
                             re.setEdited(true);
 //                      Gửi mail báo lỗi
                             sendMailWhenErr(receiptForHash);
