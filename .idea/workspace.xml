@@ -11,12 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2f3ac344-cae9-4190-abda-570d9931f502" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/model/SignUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/model/SignUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/editUserProfile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/editUserProfile.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BanBanhKem.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/editUserProfile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/editUserProfile.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csdlbanbanhkem-hoanchinh.sql" beforeDir="false" afterPath="$PROJECT_DIR$/csdlbanbanhkem-hoanchinh.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +77,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "android.gradle.sync.needed": "true",
-    "git-widget-placeholder": "Thuan",
+    "git-widget-placeholder": "ThanhThuy",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/BanBanhThanhThuy/BanBanhKemSinhNhatWebProject",
     "node.js.detected.package.eslint": "true",
