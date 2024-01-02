@@ -33,11 +33,13 @@ public class ReportKey extends HttpServlet {
             KeyManager.updateMissingDateForKey(auth.getId(),missing);
             KeyManager.updateReportDateForKey(auth.getId());
             KeyManager.disableKey(auth.getId());
-            out.println(0);
-        } catch (SQLException e) {
-            if(e.getMessage().equals("Check constraint 'chk1' is violated."))
             out.println(1);
-            else throw new RuntimeException(e);
+
+        } catch (SQLException e) {
+            if(e.getMessage().contains("chk1"))
+            out.println(2);
+            else
+            out.println(3);
         }
 
     }
