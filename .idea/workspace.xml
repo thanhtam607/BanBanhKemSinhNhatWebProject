@@ -11,12 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2f3ac344-cae9-4190-abda-570d9931f502" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/model/SignUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/model/SignUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/editUserProfile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/editUserProfile.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/InforService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/InforService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BanBanhKem.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/editUserProfile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/editUserProfile.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/js/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +80,7 @@
     "android.gradle.sync.needed": "true",
     "git-widget-placeholder": "Thuan",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/BanBanhThanhThuy/BanBanhKemSinhNhatWebProject",
+    "last_opened_file_path": "D:/ATBM/Project/CuoiKy",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -103,7 +99,7 @@
       <recent name="D:\ATBM\Project\CuoiKy\target\BanBanhKem\WEB-INF\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.73">
+  <component name="RunManager">
     <configuration name="RSA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="vn.edu.hcmuaf.fit.security.RSA" />
       <module name="BanBanhKem" />
@@ -251,6 +247,9 @@
       <workItem from="1703950840028" duration="5178000" />
       <workItem from="1704021033714" duration="2765000" />
       <workItem from="1704100902627" duration="1766000" />
+      <workItem from="1704269147419" duration="295000" />
+      <workItem from="1704293726599" duration="89000" />
+      <workItem from="1704300294762" duration="1214000" />
     </task>
     <servers />
   </component>
