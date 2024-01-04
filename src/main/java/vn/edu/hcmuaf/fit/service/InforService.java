@@ -14,17 +14,17 @@ public class InforService {
         List<General_information> list = new LinkedList<>();
         Statement statement = DBConnect.getInstall().get();
 
-        if (statement != null)
+        if (statement != null) {
             try {
                 ResultSet rs = statement.executeQuery("SELECT  ID, TYPE, CONTENT from GENERAL_INFOR");
-                while(rs.next()) {
-                     General_information gi = new General_information(rs.getString(1), rs.getString(2), rs.getString(3));
+                while (rs.next()) {
+                    General_information gi = new General_information(rs.getString(1), rs.getString(2), rs.getString(3));
                     list.add(gi);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-        else {
+        } else {
             System.out.println("Không có thông tin");
         }
         return list;
@@ -91,7 +91,7 @@ public class InforService {
     }
     public static void main(String[] args) {
 //        List<General_information> list = InforService.getImgSlideShow();
-//        System.out.println(list.get(1).getContent());
+//        System.out.println(list.get(0).getContent());
 //        updateContent("GI001", "img/hero/GI001.jpg");
     }
 }

@@ -7,12 +7,12 @@
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="footer__about">
           <div class="footer__about__logo">
-            <a href="./"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt=""></a>
+            <a href="Index"><img src="img/logo_web.jpg" alt=""></a>
           </div>
           <ul class="mt-5" id="about">
-            <li><i class="fa fa-home"></i> Địa chỉ: <%=InforService.getInformation("Address").get(0).getContent()%></li>
-            <li><i class="fa fa-phone"></i> SĐT:<%=InforService.getInformation("PhoneNumber").get(0).getContent()%></li>
-            <li><i class="fa fa-send-o"></i> Mail: <%=InforService.getInformation("Email").get(0).getContent()%></li>
+            <li><i class="fa fa-home"></i> Địa chỉ: P. Linh Trung, TP. Thủ Đức, TP. HCM</li>
+            <li><i class="fa fa-phone"></i> SĐT: 0987654321</li>
+            <li><i class="fa fa-send-o"></i> Mail: tiembanhhanhphuc@gmail.com</li>
           </ul>
         </div>
       </div>
@@ -20,15 +20,15 @@
         <div class="footer__widget">
           <h6>Giờ mở cửa</h6>
           <ul>
-            <li><a href="#"><%=InforService.getInformation("TimeShop").get(0).getContent()%></a></li>
-            <li><a href="#"><%=InforService.getInformation("TimeShop").get(2).getContent()%></a></li>
+            <li><a href="#">T2 - T6</a></li>
+            <li><a href="#">T7 & CN</a></li>
           </ul>
           <ul>
-            <li><a href="#"><%=InforService.getInformation("TimeShop").get(1).getContent()%></a></li>
-            <li><a href="#"><%=InforService.getInformation("TimeShop").get(3).getContent()%></a></li>
+            <li><a href="#">8:00 sáng - 22:00 tối</a></li>
+            <li><a href="#">13:00 chiều - 18:00 tối</a></li>
           </ul><br><br>
-          <p class="cake-footer"><h5 class="freecake text-animation"><%=InforService.getInformation("SpecialOffer").get(0).getContent()%></h5><a class ="fontsize-14"><%=InforService.getInformation("SpecialOffer").get(1).getContent()%></a></p>
-          <img src = "<%=InforService.getInformation("SpecialOffer").get(2).getContent()%>">
+          <p class="cake-footer"><h5 class="freecake text-animation">Thưởng thức bánh miễn phí</h5><a class ="fontsize-14">Thứ sáu hàng tuần tại cửa hàng vào lúc 14h00-14h30</a></p>
+          <img src = "img/footer/img-footer.jpeg">
         </div>
       </div>
       <div class="col-lg-4 col-md-12">
@@ -40,9 +40,9 @@
             <button type="submit" class="site-btn">Đăng ký</button>
           </form>
           <div class="footer__widget__social">
-            <a href="<%=InforService.getInformation("SocialNetwork").get(0).getContent()%>"><i class="fa fa-facebook"></i></a>
-            <a href="<%=InforService.getInformation("SocialNetwork").get(1).getContent()%>"><i class="fa fa-comment"></i></a>
-            <a href="<%=InforService.getInformation("SocialNetwork").get(2).getContent()%>"><i class="fa fa-instagram"></i></a>
+            <a href=""><i class="fa fa-facebook"></i></a>
+            <a href=""><i class="fa fa-comment"></i></a>
+            <a href=""><i class="fa fa-instagram"></i></a>
           </div>
         </div>
       </div>

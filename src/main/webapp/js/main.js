@@ -1140,7 +1140,7 @@ function confirmGenKey(userId, hasKey) {
     const swalConfig = {
         html: `
             <div>
-                <p style="font-size: 20px; font-weight: bold">Bạn có chắc chắn muốn tạo lại khóa mới?</p>
+                <p style="font-size: 30px; font-weight: bold">Tạo khóa mới</p>
                 <p style="font-size: smaller; color: #092a79; margin-top: -10px;">Nếu bạn đã có khóa, hãy nhấn thêm để sử dụng khóa của bạn </p>
             </div>
         `,

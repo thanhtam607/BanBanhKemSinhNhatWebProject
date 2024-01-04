@@ -12,7 +12,7 @@
 
 <head>
 
-    <title> <%=InforService.getInformation("NameShop").get(0).getContent()%> | Trang chủ</title>
+    <title> Shop bánh kem | Trang chủ</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,7 +115,7 @@
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
-        <a href="#"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt=""></a>
+        <a href="#"><img src="img/logo_web.jpg" alt=""></a>
     </div>
     <div class="humberger__menu__cart">
         <ul>
@@ -148,7 +148,7 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class="active"><a href="./">Trang chủ</a></li>
+            <li class="active"><a href="Index">Trang chủ</a></li>
             <li class=""><a href="about.jsp">Giới thiệu</a></li>
             <li class=""><a href="ListProduct">Sản phẩm</a></li>
             <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -157,14 +157,14 @@
     </nav>
     <div id="mobile-menu-wrap"></div>
     <div class="header__top__right__social">
-        <a href="<%=InforService.getInformation("SocialNetwork").get(0).getContent()%>" target="blank"><i class="fa fa-facebook"></i></a>
-        <a href="<%=InforService.getInformation("SocialNetwork").get(1).getContent()%>" target="blank"><i class="fa fa-comment"></i></a>
-        <a href="<%=InforService.getInformation("SocialNetwork").get(2).getContent()%>" target="blank"><i class="fa fa-instagram"></i></a>
+        <a href="" target="blank"><i class="fa fa-facebook"></i></a>
+        <a href="" target="blank"><i class="fa fa-comment"></i></a>
+        <a href="" target="blank"><i class="fa fa-instagram"></i></a>
     </div>
     <div class="humberger__menu__contact">
         <ul>
-            <li><i class="fa fa-envelope"></i><%=InforService.getInformation("Email").get(0).getContent()%></li>
-            <li><%=InforService.getInformation("Delivery").get(0).getContent()%></li>
+            <li><i class="fa fa-envelope"></i>tiembanhhanhphuc@gmail.com</li>
+            <li>Miễn phí giao hàng nội thành TP.HCM</li>
         </ul>
     </div>
 </div>
@@ -176,7 +176,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="./"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
+                    <a href="./"><img src="img/logo_web.jpg" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
@@ -229,36 +229,35 @@
 
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
-                                <a href="tel:<%=InforService.getInformation("PhoneNumber").get(0).getContent()%>" class="fa fa-phone cursor"></a>
+                                <a href="tel:0987654321" class="fa fa-phone cursor"></a>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5><%=InforService.getInformation("PhoneNumber").get(0).getContent()%></h5>
-                                <span><%=InforService.getInformation("TimeShop").get(1).getContent()%></span>
+                                <h5>0987654321</h5>
+                                <span>8:00 sáng - 22:00 tối</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-<% List <General_information> listInfor =   InforService.getImgSlideShow(); %>
     <div class="container-fluid p-0 mb-5 pb-5">
                 <div id="header-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="w-100 rounded" src="<%=listInfor.get(0).getContent()%>" alt="Image">
+                            <img class="w-100 rounded" src="img/slideshow/GI001.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center distance">
                                 <div class="p-3" style="max-width: 900px;">
                                     <h4 class="text-white text-uppercase mb-md-3 slogun_slide">Truyền thống & hiện đại</h4>
-                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide"><%=InforService.getInformation("IndexSlogan").get(0).getContent()%></h1>
+                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide">Tận hưởng thế giới ngọt ngào của bạn.</h1>
                                     <a href="./ListProduct" class="btn btn_pink py-md-3 px-md-5 mt-2">Đặt bánh ngay <i class="fa fa-hand-o-down"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img class="w-100 rounded" src="<%=listInfor.get(1).getContent()%>" alt="Image">
+                            <img class="w-100 rounded" src="img/slideshow/GI002.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center distance">
                                 <div class="p-3" style="max-width: 900px;">
                                     <h4 class="text-white text-uppercase mb-md-3 slogun_slide">Truyền thống & hiện đại</h4>
-                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide"><%=InforService.getInformation("IndexSlogan").get(1).getContent()%></h1>
+                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide">Không chỉ là bánh ngọt, đây là sự yêu thương.</h1>
                                     <a href="./ListProduct" class="btn btn_pink py-md-3 px-md-5 mt-2">Đặt bánh ngay <i class="fa fa-hand-o-down"></i> </a>
                             </div>
                         </div>
