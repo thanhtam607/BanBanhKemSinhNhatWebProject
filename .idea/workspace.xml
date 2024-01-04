@@ -10,8 +10,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69035c2a-9afd-4c87-9a8d-2ea65fd67524" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/Google/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/Google/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/signin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/signin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csdlbanbanhkem-hoanchinh.sql" beforeDir="false" afterPath="$PROJECT_DIR$/csdlbanbanhkem-hoanchinh.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/db/DBConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/db/DBConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/Google/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/Google/Constants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/db/DBConnect.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/db/DBConnect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/service/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/about.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/about.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/blog-details.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/blog-details.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/blog-filter.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/blog-filter.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/blog.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/blog.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/contact.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/contact.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/favorites.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/favorites.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/product-Filter.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/product-Filter.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/shop-details.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/shop-details.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/shop-product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/shop-product.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/signin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/signin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/Google/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/Google/Constants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/db/DBConnect.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/db/DBConnect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/ProductService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +206,10 @@
       <updated>1704096139982</updated>
       <workItem from="1704096141111" duration="8169000" />
       <workItem from="1704155906794" duration="27000" />
-      <workItem from="1704167868540" duration="704000" />
+      <workItem from="1704167868540" duration="848000" />
+      <workItem from="1704188630394" duration="473000" />
+      <workItem from="1704202614184" duration="5283000" />
+      <workItem from="1704334809433" duration="1494000" />
     </task>
     <servers />
   </component>

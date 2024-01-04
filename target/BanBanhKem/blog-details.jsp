@@ -68,8 +68,7 @@
             showCancelButton: true,
             cancelButtonText: 'Thoát'
         }).then((result) => {
-            if (result.isConfirmed) {
-                genKey('<%=auth.getId()%>');
+            if (result.isConfirmed) { confirmGenKey('<%=auth.getId()%>', true);
             }
         });
     });
