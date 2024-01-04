@@ -40,7 +40,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <%--  admin  css --%>
     <link rel="stylesheet" href="css/admin.css">
-    <!-- index css -->
+    <!--  css -->
     <link rel="stylesheet" href="./css/style.css" >
 
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">

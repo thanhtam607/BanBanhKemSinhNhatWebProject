@@ -41,8 +41,13 @@
 <body>
 
 <% User auth = (User) session.getAttribute("auth");
+    if(session.getAttribute("userNeedsKey") != null){
     boolean userNeedsKey = (boolean) session.getAttribute("userNeedsKey");
+<<<<<<< HEAD
     if(!userNeedsKey && auth != null){
+=======
+    if(!userNeedsKey auth!= null){
+>>>>>>> 82bb8b5a87f39d3cc2f0102b6aba8370d2fac7fc
 %>
 <script>
     // Hiển thị thông báo khi người dùng cần tạo khóa
@@ -72,7 +77,7 @@
         });
     });
 </script>
-<%} session.setAttribute("userNeedsKey", true);%>
+<%} }session.setAttribute("userNeedsKey", true);%>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -113,7 +118,7 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class=""><a href="Index">Trang chủ</a></li>
+            <li class=""><a href="/">Trang chủ</a></li>
             <li class=""><a href="about.jsp">Giới thiệu</a></li>
             <li class=""><a href="ListProduct">Sản phẩm</a></li>
             <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -141,13 +146,13 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="Index"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
+                    <a href="/"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
                 <nav class="header__menu">
                     <ul>
-                        <li class=""><a href="Index">Trang chủ</a></li>
+                        <li class=""><a href="/">Trang chủ</a></li>
                         <li class=""><a href="about.jsp">Giới thiệu</a></li>
                         <li class=""><a href="ListProduct">Sản phẩm</a></li>
                         <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -216,7 +221,7 @@
                     <div class="breadcrumb__text">
                         <h2><%=b.getCategory()%></h2>
                         <div class="breadcrumb__option">
-                            <a href="./Index">Trang chủ</a>
+                            <a href="./">Trang chủ</a>
                             <a href="./ListBlog">Tin tức</a>
                             <span><%=b.getCategory()%></span>
                         </div>

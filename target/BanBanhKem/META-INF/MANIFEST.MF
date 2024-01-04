@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By: LAPTOP USA PRO
-Build-Jdk: Oracle OpenJDK version 20.0.2
+Built-By: thanh
+Build-Jdk: 19.0.2
 
