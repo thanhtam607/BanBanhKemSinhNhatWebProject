@@ -13,7 +13,9 @@ import java.security.PublicKey;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
 
 
 public class KeyManager {
@@ -28,6 +30,11 @@ public class KeyManager {
         UserService.sendMailWithPrivateKey(UserService.getEmail(userId), subject, UserService.convertMessageToXML(mess, filename));
 
     }
+    public static String getTimeNow(){
+        Date today = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return formatter.format(today);
+    }
     public static void updateStatusForKey(String userId, int status) throws SQLException {
         String sql = "UPDATE PUBLICKEY SET STATUS = ? WHERE USER_ID  = ? AND STATUS = 1";
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
@@ -36,9 +43,10 @@ public class KeyManager {
         stm.executeUpdate();
     }
     public static void updateExpireDateForKey(String userId) throws SQLException {
-        String sql = "UPDATE PUBLICKEY SET EXPIREDDATE = NOW() WHERE USER_ID  = ? AND STATUS = 1";
+        String sql = "UPDATE PUBLICKEY SET EXPIREDDATE = ? WHERE USER_ID  = ? AND STATUS = 1";
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
-        stm.setString(1, userId);
+        stm.setString(1, getTimeNow());
+        stm.setString(2, userId);
         stm.executeUpdate();
     }
     public static boolean userIsHasKey(String id) throws SQLException {
@@ -49,24 +57,26 @@ public class KeyManager {
         return rs.next();
     }
     public static void insertPublicKey(String userId, String publicKeyLink) throws SQLException {
-        String sql = "INSERT INTO PUBLICKEY(USER_ID, PUBLICKEYLINK, CREATEDATE, STATUS) VALUES (?,?,NOW(),1)";
+        String sql = "INSERT INTO PUBLICKEY(USER_ID, PUBLICKEYLINK, CREATEDATE, STATUS) VALUES (?,?,?,1)";
 
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
         stm.setString(1, userId);
         stm.setString(2, publicKeyLink);
+        stm.setString(3, getTimeNow());
         stm.executeUpdate();
     }
     public static void updateMissingDateForKey(String userId,  String date) throws SQLException {
-        String sql = "UPDATE PUBLICKEY SET MISSINGDATE = STR_TO_DATE(?, '%d/%m/%Y') WHERE USER_ID  = ? AND STATUS = 1";
+        String sql = "UPDATE PUBLICKEY SET MISSINGDATE = ? WHERE USER_ID  = ? AND STATUS = 1";
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
         stm.setString(1,date);
         stm.setString(2, userId);
         stm.executeUpdate();
     }
     public static void updateReportDateForKey(String userId) throws SQLException {
-        String sql = "UPDATE PUBLICKEY SET REPORTDATE = NOW() WHERE USER_ID  = ? AND STATUS = 1";
+        String sql = "UPDATE PUBLICKEY SET REPORTDATE = ? WHERE USER_ID  = ? AND STATUS = 1";
         PreparedStatement stm = DBConnect.getInstall().getConn().prepareStatement(sql);
-        stm.setString(1, userId);
+        stm.setString(1, getTimeNow());
+        stm.setString(2, userId);
         stm.executeUpdate();
     }
     public static void disableKey(String userId) throws SQLException {

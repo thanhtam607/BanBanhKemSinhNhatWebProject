@@ -268,7 +268,7 @@
                 <%
                 } else {
                 %>
-                <button class="button_product">Mất khóa</button>
+                <button class="button_product" onclick="reportKey('<%= auth.getId()%>')">Mất khóa</button>
                 <button class="button_product" onclick="confirmGenKey('<%=auth.getId()%>', <%=auth.hasKey()%>)">Tạo
                     khóa
                 </button>
@@ -314,40 +314,62 @@
                         Lưu Thay Đổi
                     </button>
                 </div>
+                <%
+                    List<SignUser> lu = UserService.getListKey(auth.getId());
+                %>
+
                 <div class="col-lg-6 col-md-6" style="">
                     <p style="font-weight: bold; font-size: 20px; color: black">Quản lý khóa</p>
-                    <div class="row" style="border-left: 2px solid rgba(83,81,86,0.10); border-right: 2px solid rgba(83,81,86,0.10); overflow-x: auto; max-height: 350px; overflow-y: auto;">
-                        <div style="">
-                            <table class="table" >
-                            <thead>
-                            <tr>
-                                <th colspan="3">Khóa</th>
-                                <th>Ngày tạo</th>
-                                <th>Ngày hết hạn</th>
-                                <th>Trạng Thái</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <%List<SignUser> lu = UserService.getListKey(auth.getId());
-                                for(SignUser su : lu) {%>
-                            <tr>
-                                <td colspan="3" style="overflow-x: auto; white-space: nowrap;"><%=su.getKeySecret(su.getPbkey())%></td>
-                                <td style="overflow-x: auto; white-space: nowrap;"><%=su.getCreateDate()%></td>
-                                <td style="overflow-x: auto; white-space: nowrap;"><%=su.getExpireDate()%></td>
-                                <% if (su.getStatus() == 1) {%>
-                                <td style="color: #28a745; overflow-x: auto; white-space: nowrap;"><%=su.getStatusString()%></td>
-                                <% } else if(su.getStatus() == 2){ %>
-                                <td style="overflow-x: auto; white-space: nowrap;"><%=su.getStatusString()%></td>
-                                <% } else { %>
-                                <td style="color: #bb1813; overflow-x: auto; white-space: nowrap;"><%=su.getStatusString()%></td>
-                                <% }%>
-                            </tr>
-                            <% } %>
-                            </tbody>
-                        </table>
+                    <div class="row"
+                         style="border-left: 2px solid rgba(83,81,86,0.10); border-right: 2px solid rgba(83,81,86,0.10); overflow-x: auto; max-height: 350px; overflow-y: auto;">
+                        <%if (!lu.isEmpty()) {%>
+                        <div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th colspan="3">STT</th>
+                                    <th colspan="3">Khóa</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Ngày hết hạn</th>
+                                    <th>Trạng Thái</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% int i = 1;
+                                    for (SignUser su : lu) {%>
+                                <tr>
+                                    <td colspan="3" style="overflow-x: auto; white-space: nowrap;"><%=i%>
+                                    </td>
+                                    <td colspan="3"
+                                        style="overflow-x: auto; white-space: nowrap;"><%=su.getKeySecret(su.getPbkey())%>
+                                    </td>
+                                    <td style="overflow-x: auto; white-space: nowrap;"><%=su.getCreateDate()%>
+                                    </td>
+                                    <td style="overflow-x: auto; white-space: nowrap;"><%=su.getExpireDate()%>
+                                    </td>
+                                    <% if (su.getStatus() == 1) {%>
+                                    <td style="color: #28a745; overflow-x: auto; white-space: nowrap;"><%=su.getStatusString()%>
+                                    </td>
+                                    <% } else if (su.getStatus() == 2) { %>
+                                    <td style="overflow-x: auto; white-space: nowrap;"><%=su.getStatusString()%>
+                                    </td>
+                                    <% } else { %>
+                                    <td style="color: #bb1813; overflow-x: auto; white-space: nowrap;"><%=su.getStatusString()%>
+                                    </td>
+                                    <% }%>
+                                </tr>
+                                <% i++;
+                                } %>
+                                </tbody>
+                            </table>
                         </div>
+                        <%} else {%>
+                        <div style="align-items: center; overflow: hidden;">
+                            <img src="https://thoibaonganhang.vn/stores/news_dataimages/minhvl/112021/16/20/2752_at6_Copy.jpg">
                         </div>
+                        <%}%>
                     </div>
+                </div>
             </div>
         </div>
     </div>

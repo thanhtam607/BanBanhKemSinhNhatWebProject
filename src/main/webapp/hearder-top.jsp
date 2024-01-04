@@ -15,17 +15,17 @@
       <div class="col-lg-6 col-md-6">
         <div class="header__top__left">
           <ul>
-            <li><i class="fa fa-envelope"></i><%=InforService.getInformation("Email").get(0).getContent()%></li>
-            <li><%=InforService.getInformation("Delivery").get(0).getContent()%></li>
+            <li><i class="fa fa-envelope"></i>tiembanhhanhphuc@gmail.com</li>
+            <li>Miễn phí giao hàng nội thành TP.HCM</li>
           </ul>
         </div>
       </div>
       <div class="col-lg-6 col-md-6">
         <div class="header__top__right">
           <div class="header__top__right__social">
-            <a href="<%=InforService.getInformation("SocialNetwork").get(0).getContent()%>" target="blank"><i class="fa fa-facebook"></i></a>
-            <a href="<%=InforService.getInformation("SocialNetwork").get(1).getContent()%>" target="blank"><i class="fa fa-comment"></i></a>
-            <a href="<%=InforService.getInformation("SocialNetwork").get(2).getContent()%>" target="blank"><i class="fa fa-instagram"></i></a>
+            <a href="" target="blank"><i class="fa fa-facebook"></i></a>
+            <a href="" target="blank"><i class="fa fa-comment"></i></a>
+            <a href="" target="blank"><i class="fa fa-instagram"></i></a>
           </div>
           <div class="header__top__right__auth">
             <a href="<%=auth == null ?"signin.jsp":""%>"><i class="fa fa-user"></i></i><%= auth != null ? auth.getName():"Đăng nhập"%></a>

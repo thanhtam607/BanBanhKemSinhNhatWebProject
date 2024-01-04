@@ -40,7 +40,7 @@ public class AddNewOrder extends HttpServlet {
         String ghichu = request.getParameter("ghichu");
         String totalBill = request.getParameter("totalBill");
         String fee = request.getParameter("fee");
-//        String pro_bill = request.getParameter("pro_bill");
+
         String huyen = request.getParameter("huyen");
         String xa = request.getParameter("xa");
 
@@ -52,10 +52,7 @@ public class AddNewOrder extends HttpServlet {
             ghichu += request.getParameter("haveDiskName");
             ghichu.replace(',', ' ');
         }
-//        else {
-//            ghichu = "";
-//
-//        }
+
 
         String notes = request.getParameter("note");
         String[] notesForDetail = notes.split("/,");
@@ -68,12 +65,12 @@ public class AddNewOrder extends HttpServlet {
 
         Delivery gh = new Delivery();
         gh.setDiachigiao(diachi);
+        gh.setHuyen(huyen);
+        gh.setXa(xa);
         gh.setNgayGiao(leadTime);
         gh.setEmail(email);
         gh.setPhone(phone);
         gh.setTenKH(ten);
-        gh.setHuyen(huyen);
-        gh.setXa(xa);
 
 
         Order order = new Order(auth, listItemC, todayFM, Double.parseDouble(totalBill), ghichu, gh, price_pro_bill, Double.parseDouble(fee));

@@ -6,9 +6,12 @@ import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.service.BlogService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -16,6 +19,11 @@ import java.util.List;
 public class Index extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        User auth = (User) session.getAttribute("auth");
+        if(auth == null){
+            session.setAttribute("userNeedsKey", true);
+        }
         String nameSerlet = "Index";
         request.setAttribute("nameSerlet", nameSerlet);
         Blog b = BlogService.findById(request.getParameter("id"));
@@ -26,11 +34,7 @@ public class Index extends HttpServlet {
         request.setAttribute("listBanChay", listHotProduct);
         List<Product> listNewProduct = ProductService.getNewProduct(ProductService.getListProduct());
         request.setAttribute("listNewProduct", listNewProduct);
-        HttpSession session = request.getSession(true);
-        User auth = (User) session.getAttribute("auth");
-        if(auth == null){
-            session.setAttribute("userNeedsKey", true);
-        }
+
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

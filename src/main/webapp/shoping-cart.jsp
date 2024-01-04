@@ -2,7 +2,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.CartService" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%--<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>--%>
 <%@ page import="vn.edu.hcmuaf.fit.security.KeyManager" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8" %>
@@ -15,7 +15,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> <%=InforService.getInformation("NameShop").get(0).getContent()%> | Giỏ hàng</title>
+    <title> Shop bánh kem | Giỏ hàng</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,12 +43,45 @@
 <div id="preloder">
     <div class="loader"></div>
 </div>
-
+<%if(auth != null){%>
+<div id="myModal" class="modal" onclick="closeModal()">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <h4 style="text-align: center; font-weight: bold">Cung cấp khóa công khai của bạn</h4>
+        <div style="display: flex; justify-content: center;">
+            <button id="fileButton" onclick="chooseFilePbK()"
+                    style="width: 320px; height: 30px; margin-bottom: 20px; margin-top: 20px">Nhấn vào đây để tải file
+                lên
+            </button>
+        </div>
+        <label for="fileInput" class="fileLabel">File:</label>
+        <input type="text" id="fileInput" disabled>
+        <input style="display: none" type="file" id="file" accept="*" style="display: none;">
+        <input type="text" id="filePath" style="border: none" readonly>
+        <p style="color: red; display: none" id="errorText">*Nội dung file không chứa khóa công khai, vui lòng thử
+            lại*</p>
+        <input id="idUser" style="display: none" value="<%= auth.getId() %>"/>
+        <input id="publicKey" style="display: none"/>
+        <textarea id="keyContent2" rows="10"></textarea>
+        <div class="button-container">
+            <div class="button-row">
+                <button onclick="goBack2()" class="back-btn"
+                        style="width: 30%; margin-top: 10px; background-color: #6e7881">Quay lại
+                </button>
+                <button onclick="AddNewPublicKey()"
+                        style="width: 30%; height: 40px; margin-top: 10px; background-color: #ff96b7" type="submit"
+                        class="confirm-btn">Xác nhận
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<%}%>
 <!-- Humberger Begin -->
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
-        <a href="#"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt=""></a>
+        <a href="#"><img src="img/logo_web.jpg" alt=""></a>
     </div>
     <div class="humberger__menu__cart">
         <ul>
@@ -94,14 +127,14 @@
     </nav>
     <div id="mobile-menu-wrap"></div>
     <div class="header__top__right__social">
-        <a href="<%=InforService.getInformation("SocialNetwork").get(0).getContent()%>" target="blank"><i class="fa fa-facebook"></i></a>
-        <a href="<%=InforService.getInformation("SocialNetwork").get(1).getContent()%>" target="blank"><i class="fa fa-comment"></i></a>
-        <a href="<%=InforService.getInformation("SocialNetwork").get(2).getContent()%>" target="blank"><i class="fa fa-instagram"></i></a>
+        <a href="" target="blank"><i class="fa fa-facebook"></i></a>
+        <a href="" target="blank"><i class="fa fa-comment"></i></a>
+        <a href="" target="blank"><i class="fa fa-instagram"></i></a>
     </div>
     <div class="humberger__menu__contact">
         <ul>
-            <li><i class="fa fa-envelope"></i> <%=InforService.getInformation("Email").get(0).getContent()%></li>
-            <li><%=InforService.getInformation("Delivery").get(0).getContent()%></li>
+            <li><i class="fa fa-envelope"></i>tiembanhhanhphuc@gmail.com</li>
+            <li>Miễn phí giao hàng nội thành TP.HCM</li>
         </ul>
     </div>
 </div>
@@ -114,7 +147,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="Index"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
+                    <a href="Index"><img src="img/logo_web.jpg" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
@@ -165,11 +198,11 @@
 
                     <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">
-                            <a href="tel:<%=InforService.getInformation("PhoneNumber").get(0).getContent()%>" class="fa fa-phone cursor"></a>
+                            <a href="tel:" class="fa fa-phone cursor"></a>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5><%=InforService.getInformation("PhoneNumber").get(0).getContent()%></h5>
-                            <span><%=InforService.getInformation("TimeShop").get(1).getContent()%></span>
+                            <h5><0987654321</h5>
+                            <span>8:00 sáng - 22:00 tối</span>
                         </div>
                     </div>
                 </div>
@@ -180,7 +213,7 @@
 </section>
 <!-- Hero Section End -->
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="<%=InforService.getInformation("ImageMenu").get(0).getContent()%>">
+<section class="breadcrumb-section set-bg" data-setbg="img/banner/breadcrumb.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">

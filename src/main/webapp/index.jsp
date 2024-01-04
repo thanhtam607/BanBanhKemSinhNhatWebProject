@@ -3,7 +3,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.BlogService" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%--<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>--%>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -11,7 +11,7 @@
 
 <head>
 
-    <title> <%=InforService.getInformation("NameShop").get(0).getContent()%> | Trang chủ</title>
+    <title> Shop bánh kem | Trang chủ</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +37,7 @@
 
     <% User auth = (User) session.getAttribute("auth");
         boolean userNeedsKey = (boolean) session.getAttribute("userNeedsKey");
-        if(!userNeedsKey){
+        if(!userNeedsKey && auth != null){
     %>
     <script>
         // Hiển thị thông báo khi người dùng cần tạo khóa
@@ -45,7 +45,6 @@
             // Hiển thị thông báo khi người dùng cần tạo khóa
             const Toast = Swal.mixin({
                 // toast: true,
-                position: "top",
                 timer: 6000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
@@ -64,7 +63,7 @@
                 cancelButtonText: 'Thoát'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    genKey('<%=auth.getId()%>');
+                    confirmGenKey('<%=auth.getId()%>', true);
                 }
             });
         });
@@ -74,13 +73,46 @@
 <div id="preloder">
     <div class="loader"></div>
 </div>
+<%if(auth != null){%>
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <h4 style="text-align: center; font-weight: bold">Cung cấp khóa công khai của bạn</h4>
+            <div style="display: flex; justify-content: center;">
+                <button id="fileButton" onclick="chooseFilePbK()"
+                        style="width: 320px; height: 30px; margin-bottom: 20px; margin-top: 20px">Nhấn vào đây để tải file
+                    lên
+                </button>
+            </div>
+            <label for="fileInput" class="fileLabel">File:</label>
+            <input type="text" id="fileInput" disabled>
+            <input style="display: none" type="file" id="file" accept="*" style="display: none;">
+            <input type="text" id="filePath" style="border: none" readonly>
+            <p style="color: red; display: none" id="errorText">*Nội dung file không chứa khóa công khai, vui lòng thử
+                lại*</p>
+            <input id="idUser" style="display: none" value="<%= auth.getId() %>"/>
+            <input id="publicKey" style="display: none"/>
+            <textarea id="keyContent2" rows="10"></textarea>
+            <div class="button-container">
+                <div class="button-row">
+                    <button onclick="goBack2()" class="back-btn"
+                            style="width: 30%; margin-top: 10px; background-color: #6e7881">Quay lại
+                    </button>
+                    <button onclick="AddNewPublicKey()"
+                            style="width: 30%; height: 40px; margin-top: 10px; background-color: #ff96b7" type="submit"
+                            class="confirm-btn">Xác nhận
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%}%>
 
-<!-- Humberger Begin -->
 
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
-        <a href="#"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt=""></a>
+        <a href="#"><img src="img/logo_web.jpg" alt=""></a>
     </div>
     <div class="humberger__menu__cart">
         <ul>
@@ -122,14 +154,14 @@
     </nav>
     <div id="mobile-menu-wrap"></div>
     <div class="header__top__right__social">
-        <a href="<%=InforService.getInformation("SocialNetwork").get(0).getContent()%>" target="blank"><i class="fa fa-facebook"></i></a>
-        <a href="<%=InforService.getInformation("SocialNetwork").get(1).getContent()%>" target="blank"><i class="fa fa-comment"></i></a>
-        <a href="<%=InforService.getInformation("SocialNetwork").get(2).getContent()%>" target="blank"><i class="fa fa-instagram"></i></a>
+        <a href="" target="blank"><i class="fa fa-facebook"></i></a>
+        <a href="" target="blank"><i class="fa fa-comment"></i></a>
+        <a href=" target="blank"><i class="fa fa-instagram"></i></a>
     </div>
     <div class="humberger__menu__contact">
         <ul>
-            <li><i class="fa fa-envelope"></i><%=InforService.getInformation("Email").get(0).getContent()%></li>
-            <li><%=InforService.getInformation("Delivery").get(0).getContent()%></li>
+            <li><i class="fa fa-envelope"></i>tiembanhhanhphuc@gmail.com</li>
+            <li>Miễn phí giao hàng nội thành TP.HCM</li>
         </ul>
     </div>
 </div>
@@ -141,7 +173,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="Index"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
+                    <a href="Index"><img src="img/logo_web.jpg" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
@@ -194,36 +226,35 @@
 
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
-                                <a href="tel:<%=InforService.getInformation("PhoneNumber").get(0).getContent()%>" class="fa fa-phone cursor"></a>
+                                <a href="tel:0987654321" class="fa fa-phone cursor"></a>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5><%=InforService.getInformation("PhoneNumber").get(0).getContent()%></h5>
-                                <span><%=InforService.getInformation("TimeShop").get(1).getContent()%></span>
+                                <h5>0987654321</h5>
+                                <span>8:00 sáng - 22:00 tối</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-<% List <General_information> listInfor =   InforService.getImgSlideShow(); %>
     <div class="container-fluid p-0 mb-5 pb-5">
                 <div id="header-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="w-100 rounded" src="<%=listInfor.get(0).getContent()%>" alt="Image">
+                            <img class="w-100 rounded" src="img/slideshow/GI001.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center distance">
                                 <div class="p-3" style="max-width: 900px;">
                                     <h4 class="text-white text-uppercase mb-md-3 slogun_slide">Truyền thống & hiện đại</h4>
-                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide"><%=InforService.getInformation("IndexSlogan").get(0).getContent()%></h1>
+                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide">Tận hưởng thế giới ngọt ngào của bạn.</h1>
                                     <a href="./ListProduct" class="btn btn_pink py-md-3 px-md-5 mt-2">Đặt bánh ngay <i class="fa fa-hand-o-down"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img class="w-100 rounded" src="<%=listInfor.get(1).getContent()%>" alt="Image">
+                            <img class="w-100 rounded" src="img/slideshow/GI002.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center distance">
                                 <div class="p-3" style="max-width: 900px;">
                                     <h4 class="text-white text-uppercase mb-md-3 slogun_slide">Truyền thống & hiện đại</h4>
-                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide"><%=InforService.getInformation("IndexSlogan").get(1).getContent()%></h1>
+                                    <h1 class="display-3 text-white font-weight-bold mb-md-4 slogun_slide">Không chỉ là bánh ngọt, đây là sự yêu thương.</h1>
                                     <a href="./ListProduct" class="btn btn_pink py-md-3 px-md-5 mt-2">Đặt bánh ngay <i class="fa fa-hand-o-down"></i> </a>
                             </div>
                         </div>

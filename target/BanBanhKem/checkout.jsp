@@ -7,7 +7,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.CartService" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%--<%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>--%>
 <%@ page import="vn.edu.hcmuaf.fit.model.logistic.District" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.logistic.LogisticController" %>
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><%=InforService.getInformation("NameShop").get(0).getContent()%> | Thanh Toán</title>
+    <title>Shop bánh kem | Thanh Toán</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,7 +54,7 @@
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
     <div class="humberger__menu__logo">
-        <a href="#"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt=""></a>
+        <a href="#"><img src="img/logo_web.jpg" alt=""></a>
     </div>
     <div class="humberger__menu__cart">
         <ul>
@@ -100,18 +100,18 @@
     </nav>
     <div id="mobile-menu-wrap"></div>
     <div class="header__top__right__social">
-        <a href="<%=InforService.getInformation("SocialNetwork").get(0).getContent()%>" target="blank"><i
+        <a href="" target="blank"><i
                 class="fa fa-facebook"></i></a>
-        <a href="<%=InforService.getInformation("SocialNetwork").get(1).getContent()%>" target="blank"><i
+        <a href="" target="blank"><i
                 class="fa fa-comment"></i></a>
-        <a href="<%=InforService.getInformation("SocialNetwork").get(2).getContent()%>" target="blank"><i
+        <a href="" target="blank"><i
                 class="fa fa-instagram"></i></a>
     </div>
     <div class="humberger__menu__contact">
         <ul>
-            <li><i class="fa fa-envelope"></i> <%=InforService.getInformation("Email").get(0).getContent()%>
+            <li><i class="fa fa-envelope"></i> tiembanhhanhphuc@gmail.com
             </li>
-            <li><%=InforService.getInformation("Delivery").get(0).getContent()%>
+            <li>Miễn phí giao hàng nội thành TP.HCM
             </li>
         </ul>
     </div>
@@ -124,7 +124,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="Index"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt=""
+                    <a href="Index"><img src="img/logo_web.jpg" alt=""
                                          class="header__logo_img"></a>
                 </div>
             </div>
@@ -182,13 +182,13 @@
 
                     <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">
-                            <a href="tel:<%=InforService.getInformation("PhoneNumber").get(0).getContent()%>"
+                            <a href="tel:"
                                class="fa fa-phone cursor"></a>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5><%=InforService.getInformation("PhoneNumber").get(0).getContent()%>
+                            <h5>0987654321
                             </h5>
-                            <span><%=InforService.getInformation("TimeShop").get(1).getContent()%></span>
+                            <span>8:00 sáng - 22:00 tối</span>
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg"
-         data-setbg="<%=InforService.getInformation("ImageMenu").get(0).getContent()%>">
+         data-setbg="img/banner/breadcrumb.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
