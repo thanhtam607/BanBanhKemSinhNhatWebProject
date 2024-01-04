@@ -47,7 +47,6 @@
         // Hiển thị thông báo khi người dùng cần tạo khóa
         const Toast = Swal.mixin({
             // toast: true,
-            position: "top",
             timer: 6000,
             timerProgressBar: true,
             didOpen: (toast) => {

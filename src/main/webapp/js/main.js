@@ -1041,9 +1041,7 @@ function cancelOrder(mdh) {
         confirmButtonColor: '#ff96b7'
     }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById(mdh).innerHTML = "<button onclick=\"buyAgain('" + mdh + "')\" type=\"submit\" style=\"border:1px solid #ccc;\" class=\"btn rounded-0 py-2 ml-2\" >\n" +
-                    "                                    Mua lại\n" +
-                    "                                </button>";
+                document.getElementById(mdh).innerHTML = "";
                 document.getElementById("statusName" + mdh).innerHTML = "<span>ĐÃ HỦY</span>";
                 $.ajax({
                     url: url,
