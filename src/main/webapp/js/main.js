@@ -212,7 +212,12 @@ function myFunction() {
         var oldValue = $button.parent().find('input').val();
         var newVal = parseInt(oldValue);
         if ($button.hasClass('inc')) {
-            newVal += 1;
+
+            if (oldValue <5) {
+                newVal += 1;
+            } else {
+                newVal = 5;
+            }
         } else {
             // Don't allow decrementing below zero
             if (oldValue > 1) {
@@ -221,7 +226,7 @@ function myFunction() {
                 newVal = 1;
             }
         }
-        console.log(newVal);
+        // console.log(newVal);
         $button.parent().find('input').val(newVal);
 
     });
@@ -338,9 +343,7 @@ function removeAllCart() {
    addToCart
   --------------------- */
 function addToCartI(id) {
-
     var qty = 1;
-
     var url = "AddToCart?masp=" + id + "&soluong=" + qty;
     var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
     $.ajax({
@@ -360,6 +363,8 @@ function addToCartI(id) {
             }).then((result) => {
                     if (result.isConfirmed) {
                         location.href = "shoping-cart.jsp";
+                    }else{
+                        location.reload();
                     }
 
                 }
@@ -501,7 +506,7 @@ function updateCartInc(id) {
 
 function updateCartDec(id) {
     var newQty = parseInt(document.getElementById('qty' + id).value) - 1;
-    var url = "UpdateCart?masp=" + id + "&soluong=" + newQty;
+    var url = "UpdateCartUpdateCart?masp=" + id + "&soluong=" + newQty;
     var totalPro = parseInt(document.getElementById("totalPro").innerHTML);
     var item = document.getElementsByClassName("cart-item");
 
@@ -1597,4 +1602,20 @@ async function reportKey(userId) {
 
         });
     }
+}
+function validateInput(inputElement) {
+    var enteredValue = inputElement.value;
+    var numericValue = parseInt(enteredValue);
+    if (!isNaN(numericValue) && numericValue > 5) {
+        inputElement.value = 5;
+    }
+}
+function validateQuantity(name){
+    Swal.fire({
+        title: "Số lượng quá giới hạn",
+        text: 'Số lượng '+ name+' trong giỏ hàng của bạn đã vượt quá giới hạn cho phép.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#ff96b7'
+    });
 }

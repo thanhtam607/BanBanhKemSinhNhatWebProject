@@ -7,7 +7,7 @@
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="footer__about">
           <div class="footer__about__logo">
-            <a href="Index"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt=""></a>
+            <a href="./"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt=""></a>
           </div>
           <ul class="mt-5" id="about">
             <li><i class="fa fa-home"></i> Địa chỉ: <%=InforService.getInformation("Address").get(0).getContent()%></li>

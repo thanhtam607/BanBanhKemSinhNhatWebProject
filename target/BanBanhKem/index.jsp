@@ -4,6 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.CartService" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
 <html lang="xzz">
@@ -36,8 +37,10 @@
 <body>
 
     <% User auth = (User) session.getAttribute("auth");
-        boolean userNeedsKey = (boolean) session.getAttribute("userNeedsKey");
-        if(!userNeedsKey && auth != null){
+        if(session.getAttribute("userNeedsKey") != null){
+            boolean userNeedsKey = (boolean) session.getAttribute("userNeedsKey");
+        if(userNeedsKey == false && auth != null){
+
     %>
     <script>
         // Hiển thị thông báo khi người dùng cần tạo khóa
@@ -68,7 +71,7 @@
             });
         });
     </script>
-    <%} session.setAttribute("userNeedsKey", true);%>
+    <%}} session.setAttribute("userNeedsKey", true);%>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -145,7 +148,7 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class="active"><a href="Index">Trang chủ</a></li>
+            <li class="active"><a href="./">Trang chủ</a></li>
             <li class=""><a href="about.jsp">Giới thiệu</a></li>
             <li class=""><a href="ListProduct">Sản phẩm</a></li>
             <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -173,13 +176,13 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="Index"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
+                    <a href="./"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="Index">Trang chủ</a></li>
+                        <li class="active"><a href="./">Trang chủ</a></li>
                         <li class=""><a href="about.jsp">Giới thiệu</a></li>
                         <li class=""><a href="ListProduct">Sản phẩm</a></li>
                         <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -287,7 +290,7 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
-                    <% List<Product> list1 = (List<Product>) request.getAttribute("listBanChay");
+                    <% List<Product> list1 = ProductService.getHotProduct();
                         for(int i = 0; i<10;i++){
                             Product p = list1.get(i);%>
                     <div class="col-lg-3 col-md-4 col-sm-6 mix traditional lover">
@@ -305,8 +308,12 @@
                                     <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
                                     <% } else{ %>
                                     <li><a onclick="addToFav('<%=p.getId()%>')"><i class="fa fa-heart"></i></a></li>
+                                    <%if( CartService.findItemCart(auth.getId(), p.getId()) != null && CartService.findItemCart(auth.getId(), p.getId()).getSoLgMua() >=5){%>
+                                    <li><a onclick="validateQuantity('<%=p.getName()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <%}else{%>
                                     <li><a onclick="addToCartI('<%=p.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
-                                    <%}%>
+
+                                    <%}}%>
                                 </ul>
                             </div>
                             <div class="featured__item__text">
@@ -341,7 +348,7 @@
                 </div>
             </div>
             <div class="row featured__filter">
-                <% List<Product> list = (List<Product>) request.getAttribute("listNewProduct");
+                <% List<Product> list = ProductService.getNewProduct(ProductService.getListProduct());
                     for(int i = 0; i<8;i++){
                         Product p1 = list.get(i);%>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix traditional lover">
@@ -360,8 +367,12 @@
                                 <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
                                 <% } else{ %>
                                 <li><a onclick="addToFav('<%=p1.getId()%>')"><i class="fa fa-heart"></i></a></li>
+                                <%if( CartService.findItemCart(auth.getId(), p1.getId()) != null && CartService.findItemCart(auth.getId(), p1.getId()).getSoLgMua() >=5){%>
+                                <li><a onclick="validateQuantity('<%=p1.getName()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+                                <%}else{%>
                                 <li><a onclick="addToCartI('<%=p1.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
-                                <%}%>
+
+                                <%}}%>
                             </ul>
                         </div>
                         <div class="featured__item__text">
@@ -394,7 +405,7 @@
                 </div>
             </div>
             <div class="row">
-                <% List<Blog> list2 = (List<Blog>) request.getAttribute("list");
+                <% List<Blog> list2 = BlogService.getData();
                     for(int i = 0; i<3;i++){
                         Blog b2 = list2.get(i);
                         String[] rs = b2.getCont().split("\\n");

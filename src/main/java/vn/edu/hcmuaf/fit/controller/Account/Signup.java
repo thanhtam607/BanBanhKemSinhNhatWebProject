@@ -52,7 +52,7 @@ public class Signup extends HttpServlet {
             if (request.getParameter("saveLogin").equals("true")) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("auth", newUser);
-                out.println("./Index");
+                out.println("./");
             } else {
                 out.println("signin.jsp");
             }

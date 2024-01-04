@@ -6,6 +6,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.*" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.InforService" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.CartService" %>
 
 <!DOCTYPE html>
 <%@ page contentType="text/html;charsetUTF-8" language="java" pageEncoding="utf-8"%>
@@ -37,8 +38,9 @@
 
 <body>
 <% User auth = (User) session.getAttribute("auth");
+    if(session.getAttribute("userNeedsKey") != null){
     boolean userNeedsKey = (boolean) session.getAttribute("userNeedsKey");
-    if(!userNeedsKey){
+    if(!userNeedsKey && auth != null){
 %>
 <script>
     // Hiển thị thông báo khi người dùng cần tạo khóa
@@ -69,7 +71,7 @@
         });
     });
 </script>
-<%} session.setAttribute("userNeedsKey", true);%>
+<%}} session.setAttribute("userNeedsKey", true);%>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -109,7 +111,7 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class=""><a href="Index">Trang chủ</a></li>
+            <li class=""><a href="./">Trang chủ</a></li>
             <li class=""><a href="about.jsp">Giới thiệu</a></li>
             <li class="active"><a href="ListProduct">Sản phẩm</a></li>
             <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -138,13 +140,13 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="Index"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
+                    <a href="./"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
                 <nav class="header__menu">
                     <ul>
-                        <li class=""><a href="Index">Trang chủ</a></li>
+                        <li class=""><a href="./">Trang chủ</a></li>
                         <li class=""><a href="about.jsp">Giới thiệu</a></li>
                         <li class="active"><a href="ListProduct">Sản phẩm</a></li>
                         <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -213,7 +215,7 @@
                     <div class="breadcrumb__text">
                         <h2>Sản phẩm</h2>
                         <div class="breadcrumb__option">
-                            <a href="./Index">Trang Chủ</a>
+                            <a href="./">Trang Chủ</a>
                             <span>Sản Phẩm</span>
                         </div>
                     </div>
@@ -290,7 +292,7 @@
                             <div class="latest-product__text">
                                 <h4>Top Bán Chạy</h4>
                                 <div class="latest-product__slider owl-carousel">
-                                    <% List<Product> listhotproducts = (List<Product>) request.getAttribute("listBanChay"); %>
+                                    <% List<Product> listhotproducts = ProductService.getHotProduct(); %>
                                     <div class="latest-prdouct__slider__item">
                                         <% Product productL;
                                             for(int i = 0; i<3;i++){
@@ -363,7 +365,13 @@
                                                 <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
                                                 <% } else{ %>
                                                 <li><a onclick="addToFav('<%=pd.getId()%>')"><i class="fa fa-heart"></i></a></li>
+                                                <%if(CartService.findItemCart(auth.getId(), pd.getId())!= null && CartService.findItemCart(auth.getId(), pd.getId()).getSoLgMua() >=5){%>
+                                                <li><a onclick="validateQuantity('<%=pd.getName()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <%}else{%>
                                                 <li><a onclick="addToCartI('<%=pd.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+
+                                                <%}%>
+
                                                 <%}%>
                                             </ul>
                                         </div>
@@ -434,8 +442,12 @@
                                         <li><a onclick="notLogged()"><i class="fa fa-shopping-cart"></i></a></li>
                                        <% } else{ %>
                                         <li><a onclick="addToFav('<%=p.getId()%>')"><i class="fa fa-heart"></i></a></li>
+                                        <%if( CartService.findItemCart(auth.getId(), p.getId()) != null && CartService.findItemCart(auth.getId(), p.getId()).getSoLgMua() >=5){%>
+                                        <li><a onclick="validateQuantity('<%=p.getName()%>')"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <%}else{%>
                                         <li><a onclick="addToCartI('<%=p.getId()%>')"><i class="fa fa-shopping-cart"></i></a></li>
-                                   <%}%>
+
+                                        <%}}%>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
