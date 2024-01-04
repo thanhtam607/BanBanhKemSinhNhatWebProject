@@ -15,7 +15,7 @@ public class BlogService {
         Statement statement = DBConnect.getInstall().get();
         if (statement != null)
             try {
-                ResultSet rs = statement.executeQuery("SELECT  BLOGS.ID, BLOGS.IMG,BLOGS.TITLE, BLOGS.DATE, BLOGS.CONTENT, BLOGS.CATEGORY, BLOGS.SEASON, BLOGS.STATUS from BLOGS ");
+                ResultSet rs = statement.executeQuery("SELECT BLOGS.ID, BLOGS.IMG,BLOGS.TITLE, BLOGS.DATE, BLOGS.CONTENT, BLOGS.CATEGORY, BLOGS.SEASON, BLOGS.STATUS from BLOGS ");
                 while(rs.next()) {
                     Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
                     list.add(b);

@@ -13,8 +13,8 @@ import java.util.List;
 public class ListProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> listdiscount = ProductService.getDiscountProduct();
-        request.setAttribute("listdiscount", listdiscount);
+//        List<Product> listdiscount = ProductService.getDiscountProduct();
+//        request.setAttribute("listdiscount", listdiscount);
         String numPage = request.getParameter("page");
         String sort = request.getParameter("sortValue");
         List<Product> listPro = ProductService.getListProduct();
@@ -41,8 +41,8 @@ public class ListProduct extends HttpServlet {
         request.setAttribute("endPage", endPage);
         request.setAttribute("tag", page);
         request.setAttribute("list", list);
-        List<Product> listHotProduct = ProductService.getHotProduct();
-        request.setAttribute("listBanChay", listHotProduct);
+//        List<Product> listHotProduct = ProductService.getHotProduct();
+//        request.setAttribute("listBanChay", listHotProduct);
         request.getRequestDispatcher("shop-product.jsp").forward(request,response);
 
     }

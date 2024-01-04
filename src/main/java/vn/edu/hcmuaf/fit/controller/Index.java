@@ -31,8 +31,8 @@ public class Index extends HttpServlet {
         request.setAttribute("blog", b);
         List<Blog> list = BlogService.getData();
         request.setAttribute("list", list);
-        List<Product> listHotProduct = ProductService.getHotProduct();
-        request.setAttribute("listBanChay", listHotProduct);
+//        List<Product> listHotProduct = ProductService.getHotProduct();
+//        request.setAttribute("listBanChay", listHotProduct);
         List<Product> listNewProduct = ProductService.getNewProduct(ProductService.getListProduct());
         request.setAttribute("listNewProduct", listNewProduct);
 

@@ -290,7 +290,7 @@
                             <div class="latest-product__text">
                                 <h4>Top Bán Chạy</h4>
                                 <div class="latest-product__slider owl-carousel">
-                                    <% List<Product> listhotproducts = (List<Product>) request.getAttribute("listBanChay"); %>
+                                    <% List<Product> listhotproducts = ProductService.getHotProduct(); %>
                                     <div class="latest-prdouct__slider__item">
                                         <% Product productL;
                                             for(int i = 0; i<3;i++){
@@ -344,7 +344,7 @@
                             <h2>Khuyến Mãi</h2>
                         </div>
                         <div class="row">
-                            <% List<Product> listdiscount = (List<Product>) request.getAttribute("listdiscount");%>
+                            <% List<Product> listdiscount = ProductService.getDiscountProduct();%>
                             <div class="product__discount__slider owl-carousel">
                                 <% for(Product pd : listdiscount){%>
                                 <div class="col-lg-4">
@@ -384,7 +384,7 @@
                                 <div class="filter__sort">
                                     <span>Sắp Xếp</span>
                                     <select id="sortValue" name="sortValue" >
-                                        <%List<String> listOption = new ArrayList<String>();
+                                        <%ArrayList<String> listOption = new ArrayList<String>();
                                         listOption.add("Mặc định");
                                         listOption.add("Giá từ thấp đến cao");
                                         listOption.add("Giá từ cao đến thấp");

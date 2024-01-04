@@ -626,20 +626,9 @@ public static List<Product> getData() {
             se.printStackTrace();
         }
     }
-    public static List<String> findProducts(String keyword) {
-        List<String> result = new ArrayList<>();
-        Statement stm = DBConnect.getInstall().get();
-        String sql = "SELECT products.productName FROM products \n" +
-                "WHERE idProduct like '%"+keyword+"20%' or productName LIKE '%"+keyword+"%'";
-        try {
-            ResultSet rs = stm.executeQuery(sql);
-            while (rs.next()){
-            result.add(rs.getString(1));
-            }
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-        return result;
+
+
+    public static void main(String[] args) {
     }
 
 }
