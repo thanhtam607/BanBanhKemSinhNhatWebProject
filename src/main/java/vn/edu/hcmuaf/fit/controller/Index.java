@@ -21,8 +21,9 @@ public class Index extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         User auth = (User) session.getAttribute("auth");
+        boolean userNeedsKey = true;
         if(auth == null){
-            session.setAttribute("userNeedsKey", true);
+            session.setAttribute("userNeedsKey", userNeedsKey);
         }
         String nameSerlet = "Index";
         request.setAttribute("nameSerlet", nameSerlet);

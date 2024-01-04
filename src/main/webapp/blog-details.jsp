@@ -42,7 +42,7 @@
 
 <% User auth = (User) session.getAttribute("auth");
     boolean userNeedsKey = (boolean) session.getAttribute("userNeedsKey");
-    if(!userNeedsKey){
+    if(!userNeedsKey && auth != null){
 %>
 <script>
     // Hiển thị thông báo khi người dùng cần tạo khóa
