@@ -287,7 +287,7 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
-                    <% List<Product> list1 = (List<Product>) request.getAttribute("listBanChay");
+                    <% List<Product> list1 = ProductService.getHotProduct();
                         for(int i = 0; i<10;i++){
                             Product p = list1.get(i);%>
                     <div class="col-lg-3 col-md-4 col-sm-6 mix traditional lover">

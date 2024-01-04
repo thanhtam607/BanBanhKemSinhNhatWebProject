@@ -11,11 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2f3ac344-cae9-4190-abda-570d9931f502" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/Index.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/Index.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/ListProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/controller/ListProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/BlogService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/hcmuaf/fit/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/shop-product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/shop-product.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/controller/ListProduct.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/controller/ListProduct.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/service/IDComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/service/IDComparator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/BanBanhKem/WEB-INF/classes/vn/edu/hcmuaf/fit/service/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/ListProduct.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/controller/ListProduct.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/IDComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/IDComparator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/vn/edu/hcmuaf/fit/service/ProductService.class" afterDir="false" />
     </list>
@@ -269,7 +271,7 @@
       <workItem from="1704100902627" duration="1766000" />
       <workItem from="1704191534148" duration="1375000" />
       <workItem from="1704267156363" duration="694000" />
-      <workItem from="1704345281302" duration="3356000" />
+      <workItem from="1704345281302" duration="6840000" />
     </task>
     <servers />
   </component>
