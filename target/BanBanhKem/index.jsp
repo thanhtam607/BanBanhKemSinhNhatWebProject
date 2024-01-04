@@ -148,7 +148,7 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class="active"><a href="Index">Trang chủ</a></li>
+            <li class="active"><a href="./">Trang chủ</a></li>
             <li class=""><a href="about.jsp">Giới thiệu</a></li>
             <li class=""><a href="ListProduct">Sản phẩm</a></li>
             <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -159,7 +159,7 @@
     <div class="header__top__right__social">
         <a href="" target="blank"><i class="fa fa-facebook"></i></a>
         <a href="" target="blank"><i class="fa fa-comment"></i></a>
-        <a href="" target="blank"><i class="fa fa-instagram"></i></a>
+        <a href=""target="blank"><i class="fa fa-instagram"></i></a>
     </div>
     <div class="humberger__menu__contact">
         <ul>
@@ -176,7 +176,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="./"><img src="img/logo_web.jpg" alt="" class="header__logo_img"></a>
+                    <a href="./"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">

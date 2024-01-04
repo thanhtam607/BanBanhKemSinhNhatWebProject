@@ -147,7 +147,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="./"><img src="img/logo_web.jpg%>" alt="" class="header__logo_img"></a>
+                    <a href="./"><img src="img/logo_web.jpg" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
@@ -198,7 +198,7 @@
 
                     <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">
-                            <a href="tel:" class="fa fa-phone cursor"></a>
+                            <a href="tel:"class="fa fa-phone cursor"></a>
                         </div>
                         <div class="hero__search__phone__text">
                             <h5><0987654321</h5>
@@ -220,7 +220,7 @@
                 <div class="breadcrumb__text">
                     <h2>Giỏ hàng</h2>
                     <div class="breadcrumb__option">
-                        <a href="./Index">Trang chủ</a>
+                        <a href="./">Trang chủ</a>
 
                         <span>Giỏ hàng</span>
                     </div>
