@@ -27,29 +27,34 @@ public class Verify extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         String userId = request.getParameter("userId");
+        String expire = request.getParameter("expire");
+
         HttpSession session = request.getSession(true);
         PrintWriter out = response.getWriter();
-        if (session.getAttribute("otp") == null) {
-            try {
-
-                int code = UserService.randomCode();
-
-                session.setAttribute("otp", code);
-                UserService.sendMail(UserService.getEmail(userId), "Xác minh tài khoản",
-                        "Mã xác nhận tài khoản của bạn là: " + code);
-                out.println(code);
-            } catch (MessagingException | SQLException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            try {
-                int inputOtp = Integer.parseInt(request.getParameter("otp"));
-                int otp = (int) session.getAttribute("otp");
-                if (inputOtp == otp) out.println(1);
-                else out.println(0);
-
-            } catch (Exception e) {
-                out.println(0);
+        if(expire != null && expire.equals("false")){
+            session.removeAttribute("otp");
+        }else {
+            if (session.getAttribute("otp") == null) {
+                try {
+                    int code = UserService.randomCode();
+                    session.setAttribute("otp", code);
+                    UserService.sendMail(UserService.getEmail(userId), "Xác minh tài khoản",
+                            "Mã xác nhận tài khoản của bạn là: " + code);
+                    out.println(code);
+                } catch (MessagingException | SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                try {
+                    int inputOtp = Integer.parseInt(request.getParameter("otp"));
+                    int otp = (int) session.getAttribute("otp");
+                    if (inputOtp == otp) out.println(1);
+                    else out.println(0);
+                    session.removeAttribute("otp");
+                } catch (Exception e) {
+                    out.println(0);
+                    session.removeAttribute("otp");
+                }
             }
         }
     }
