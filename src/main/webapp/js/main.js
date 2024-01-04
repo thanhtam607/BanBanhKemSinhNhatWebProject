@@ -1211,11 +1211,17 @@ function genKey(userId) {
                     } else {
                         Swal.close();
                         if (count <= 0) {
+                            $.ajax({
+                                url: "Verify",
+                                type: "POST",
+                                data: {expire: false}
+                            });
                             Swal.fire({
                                 text: 'Mã xác nhận hêt hiệu lực!',
                                 icon: 'error',
                                 confirmButtonColor: '#ff96b7'
                             });
+
                         } else {
                             Swal.fire({
                                 text: 'Mã xác nhận không đúng. Vui lòng kiểm tra lại!',
