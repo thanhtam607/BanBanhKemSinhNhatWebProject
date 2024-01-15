@@ -40,7 +40,7 @@
             <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
             <h1 class="display-1 fw-bold">404</h1>
             <h1 class="mb-4">Xin lỗi, chúng tôi không tìm thấy trang mà bạn cần!</h1>
-            <a class="btn btn_pink rounded-pill py-3 px-5" href="Index">Quay Về Trang Chủ</a>
+            <a class="btn btn_pink rounded-pill py-3 px-5" href="/">Quay Về Trang Chủ</a>
         </div>
     </div>
 </div>

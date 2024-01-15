@@ -38,6 +38,7 @@ public class ListProduct extends HttpServlet {
             endPage++;
         }
 
+
         request.setAttribute("endPage", endPage);
         request.setAttribute("tag", page);
         request.setAttribute("list", list);

@@ -74,7 +74,7 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li class=""><a href="Index">Trang chủ</a></li>
+            <li class=""><a href="./">Trang chủ</a></li>
             <li class=""><a href="about.jsp">Giới thiệu</a></li>
             <li class=""><a href="ListProduct">Sản phẩm</a></li>
             <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -102,13 +102,13 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="Index"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
+                    <a href="./"><img src="<%=InforService.getImgLogo().get(0).getContent()%>" alt="" class="header__logo_img"></a>
                 </div>
             </div>
             <div class="col-lg-7 ">
                 <nav class="header__menu">
                     <ul>
-                        <li class=""><a href="Index">Trang chủ</a></li>
+                        <li class=""><a href="./">Trang chủ</a></li>
                         <li class=""><a href="about.jsp">Giới thiệu</a></li>
                         <li class=""><a href="ListProduct">Sản phẩm</a></li>
                         <li class=""><a href="ListBlog">Tin tức</a></li>
@@ -175,7 +175,7 @@
                 <div class="breadcrumb__text">
                     <h2>Đơn hàng</h2>
                     <div class="breadcrumb__option">
-                        <a href="./Index">Trang Chủ</a>
+                        <a href="./">Trang Chủ</a>
                         <span>Đơn hàng</span>
                     </div>
                 </div>
