@@ -1,4 +1,4 @@
-**Website Bán Bánh Kem ** - là một dự án web hoàn chỉnh cho phép người dùng tìm kiếm và mua bánh kem trực tuyến. Website cung cấp các chức năng riêng biệt cho người dùng và quản trị viên nhằm nâng cao trải nghiệm mua sắm và quản lý.
+Website Bán Bánh Kem - là một dự án web hoàn chỉnh cho phép người dùng tìm kiếm và mua bánh kem trực tuyến. Website cung cấp các chức năng riêng biệt cho người dùng và quản trị viên nhằm nâng cao trải nghiệm mua sắm và quản lý.
 
 1. Chức Năng
 1.1. Chức Năng Người Dùng - User
