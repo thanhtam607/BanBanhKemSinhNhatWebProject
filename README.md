@@ -19,7 +19,7 @@ Website Bán Bánh Kem - là một dự án web hoàn chỉnh cho phép người
     - Quản Lý Người Dùng: Quản lý tài khoản người dùng, bao gồm cập nhật, khoá tài khoản và xóa người dùng. Những quyền này chỉ được cung cấp cho những tài khoản admin nhất định do admin có quyền cao nhất quyết định.
     - Quản Lý Trang Tin Tức: Cung cấp trình soạn thảo để người dùng đăng những bài blog về sản phẩm nhằm quảng cáo và giới thiệu sản phẩm.
     
-3. Công Nghệ Sử Dụng
+2. Công Nghệ Sử Dụng
 
 2.1. Frontend
 
@@ -31,7 +31,7 @@ Website Bán Bánh Kem - là một dự án web hoàn chỉnh cho phép người
     - Java Servlet: tổ chức theo mô hình MVC để xử lý các chức năng của website.
     - MySQL: Là cơ sở dữ liệu để lưu trữ thông tin người dùng, sản phẩm và đơn hàng.
     
-5. Hướng dẫn thực thi code
+3. Hướng dẫn thực thi code
 
     - JDK 1.8 trở lên, Tomcat Server 9.0 trở lên
     - Chạy file script sql trước để có dữ liệu, có thể chạy trong Navicat
